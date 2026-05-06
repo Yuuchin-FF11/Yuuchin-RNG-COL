@@ -12,12 +12,26 @@
     --glass-border: rgba(255, 255, 255, 0.15);
     --bg-gradient: linear-gradient(135deg, #051937 0%, #004d7a 50%, #008793 100%);
     --sp-color: #ffd700; /* SPアビリティ用の黄（アクセントカラーに統一） */
+    --ability-color: #4dd0e1; /* アビリティ用の水色 */
+    --ws-color: #ffb74d; /* WS用のオレンジ */
 }
 
 .sp-highlight {
     color: var(--sp-color);
     font-weight: bold;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* 黄色の発光感を強めに */
+}
+
+.ability-highlight {
+    color: var(--ability-color);
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(77, 208, 225, 0.4);
+}
+
+.ws-highlight {
+    color: var(--ws-color);
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255, 183, 77, 0.4);
 }
 
 * {

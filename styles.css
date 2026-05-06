@@ -1036,3 +1036,36 @@ nav a:hover::after {
     font-size: 0.8rem;
     opacity: 0.7;
 }
+
+/* ボス攻略セクションの囲み枠 */
+.boss-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 5px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.boss-box:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.boss-box h2 {
+    margin-top: 0 !important;
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.boss-box h3, .boss-box h4 {
+    color: #fff;
+    margin-top: 1.5rem;
+}

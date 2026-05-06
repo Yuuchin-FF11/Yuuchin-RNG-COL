@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記事 | FFXI Bismarck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- marked.js の読み込み (MarkdownをHTMLに変換するライブラリ) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* 記事用のコンテナ調整 */
+        .article-container {
+            margin-top: 120px;
+            margin-bottom: 100px;
+            max-width: 900px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .back-btn:hover {
+            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Markdown特有のスタイル調整 */
+        .markdown-body {
+            color: var(--text-light);
+            line-height: 1.8;
+            padding: 1rem;
+            font-family: 'Zen Maru Gothic', sans-serif;
+        }
+        .markdown-body h1 {
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        .markdown-body h2 {
+            color: white;
+            font-size: 1.6rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 1rem;
+        }
+        .markdown-body h3 {
+            color: #e0e0e0;
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .markdown-body p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .markdown-body ul, .markdown-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            font-size: 1.1rem;
+        }
+        .markdown-body li {
+            margin-bottom: 0.5rem;
+        }
+        .markdown-body a {
+            color: #a8e063;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+        .markdown-body a:hover {
+            color: var(--accent-color);
+        }
+        .markdown-body code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #ff9d00;
+        }
+        .markdown-body pre {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .markdown-body pre code {
+            background: transparent;
+            padding: 0;
+            color: #e0e0e0;
+        }
+        .markdown-body img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            display: block;
+        }
+        .markdown-body blockquote {
+            border-left: 4px solid var(--accent-color);
+            margin: 0 0 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 0 8px 8px 0;
+            color: #ddd;
+            font-style: italic;
+        }
+        .markdown-body hr {
+            border: 0;
+            height: 1px;
+            background: var(--glass-border);
+            margin: 2.5rem 0;
+        }
+        .markdown-body strong {
+            /* styles.css に統合したため、ここでは不要（必要に応じて個別調整可能） */
+        }
+
+        /* テーブルのスタイル（ガラスデザインに合わせる） */
+        .markdown-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .markdown-body th, .markdown-body td {
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+        .markdown-body th {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        .markdown-body tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .markdown-body tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* 折りたたみ（Details / Summary）のスタイル */
+        .markdown-body details {
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .markdown-body details[open] {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        .markdown-body summary {
+            cursor: pointer;
+            padding: 1rem 1.5rem;
+            font-weight: bold;
+            font-size: 1.15rem;
+            color: var(--accent-color);
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            border-radius: 8px;
+            list-style: none; /* デフォルトの三角を消す */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        .markdown-body summary::-webkit-details-marker {
+            display: none;
+        }
+        .markdown-body summary::after {
+            content: '\f078'; /* FontAwesomeのchevron-down */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 1rem;
+            color: #fff;
+            transition: transform 0.3s ease;
+        }
+        .markdown-body details[open] summary {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px 8px 0 0;
+        }
+        .markdown-body details[open] summary::after {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+        .markdown-body summary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景のアニメーション -->
+    <div id="particle-canvas-container">
+        <!-- Javascriptで描画する場合はここを使うが、今回は背景色のみでもOK -->
+    </div>
+
+    <!-- ヘッダー -->
+    <header class="glass-header">
+        <div class="logo">
+            <a href="index.html" style="color: inherit; text-decoration: none;">
+                FFXI Bismarck
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="container article-container">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> トップページへ戻る</a>
+        
+        <div class="glass-card" style="padding: 2rem 3rem;">
+            <!-- ここにMarkdownがHTMLに変換されて表示されます -->
+            <div id="markdown-content" class="markdown-body">
+                <div style="text-align: center; padding: 3rem 0;">
+                    <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <p>記事を読み込み中...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="glass-footer">
+        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p>
+    </footer>
+
+    <!-- Markdownを読み込むスクリプト -->
+    <script>
+        // 背景のアニメーションを動かすための最低限の処理 (script.jsがトップページ専用なので簡易的に)
+        document.getElementById('particle-canvas-container').style.background = 'var(--bg-gradient)';
+
+        // URLの ?file=〇〇 の部分を取得する
+        const urlParams = new URLSearchParams(window.location.search);
+        const file = urlParams.get('file');
+        const contentDiv = document.getElementById('markdown-content');
+
+        if (file) {
+            // 指定されたMarkdownファイルをサーバー(ローカル)から取得
+            fetch(file)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('記事が見つかりませんでした。ファイル名やパスが正しいか確認してください。');
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    // marked.js を使って Markdownテキスト を HTML に変換
+                    contentDiv.innerHTML = marked.parse(text);
+
+                    // --- 装備品の自動リンク機能 ---
+                    // 用語辞典のランダムなURLに対応するため、正確なURLが判明しているものは辞書に登録し、
+                    // それ以外はGoogle検索へフォールバックさせる。
+                    const linkMap = {
+                        "ロスタム": "http://wiki.ffo.jp/html/37235.html",
+                        "ニャメ装束": "http://wiki.ffo.jp/html/38283.html",
+                        "マリグナス装束": "http://wiki.ffo.jp/html/39726.html",
+                        "イケンガ装束": "http://wiki.ffo.jp/html/38196.html",
+                        "シャスーアタイア": "http://wiki.ffo.jp/html/33205.html",
+                        "ラヌンアタイア": "http://wiki.ffo.jp/html/30924.html",
+                        "アデマ装束": "http://wiki.ffo.jp/html/34613.html",
+                        "カコエシクリング": "http://wiki.ffo.jp/html/34650.html",
+                        "クロノブレット": "http://wiki.ffo.jp/html/35442.html",
+                        "昏黄の指輪": "http://wiki.ffo.jp/html/38369.html",
+                        "オノワイヤリング": "http://wiki.ffo.jp/html/35440.html",
+                        "ベイラピアス": "http://wiki.ffo.jp/html/37879.html",
+                        "シーリチリング": "http://wiki.ffo.jp/html/35694.html",
+                        "イフラマドリング": "http://wiki.ffo.jp/html/39089.html",
+                        "霊亀腰帯": "http://wiki.ffo.jp/html/34718.html",
+                        "ライヴブレット": "http://wiki.ffo.jp/html/35445.html",
+                        "カムラスマント": "http://wiki.ffo.jp/html/35517.html",
+                        "王将の首飾り": "http://wiki.ffo.jp/html/36145.html",
+                        "クレパスクラナイフ": "http://wiki.ffo.jp/html/38361.html",
+                        "ベヨーブレット": "http://wiki.ffo.jp/html/39083.html",
+                        "昏黄の耳飾り": "http://wiki.ffo.jp/html/38368.html",
+                        "ドミネンスピアス": "http://wiki.ffo.jp/html/34878.html",
+                        "クスタウィ": "http://wiki.ffo.jp/html/35435.html",
+                        "インパルスベルト": "http://wiki.ffo.jp/html/20373.html",
+                        "フリオミシピアス": "http://wiki.ffo.jp/html/29865.html",
+                        "胡蝶のイヤリング": "http://wiki.ffo.jp/html/22306.html",
+                        "ネイグリング": "http://wiki.ffo.jp/html/37597.html",
+                        "イシュクターバン": "http://wiki.ffo.jp/html/40007.html",
+                        "メランリング": "http://wiki.ffo.jp/html/39711.html",
+                        "コモドアチャーム": "http://wiki.ffo.jp/html/37218.html",
+                        "アルコンリング": "http://wiki.ffo.jp/html/24057.html",
+                        "エアバニピアス": "http://wiki.ffo.jp/html/34143.html",
+                        "セールフィベルト": "http://wiki.ffo.jp/html/32262.html",
+                        "共和プラチナ章": "http://wiki.ffo.jp/html/38491.html",
+                        "守りの指輪": "http://wiki.ffo.jp/html/2290.html",
+                        "フォーマルハウト": "http://wiki.ffo.jp/html/35356.html",
+                        "カフカチナベルト": "http://wiki.ffo.jp/html/35702.html",
+                        "テロスピアス": "http://wiki.ffo.jp/html/34761.html",
+                        "無の面": "http://wiki.ffo.jp/html/39387.html",
+                        "カラクトチョーカー": "http://wiki.ffo.jp/html/17288.html",
+                        "妖蟲の髪飾り": "http://wiki.ffo.jp/html/20388.html",
+                        "キャリアーサッシュ": "http://wiki.ffo.jp/html/26679.html",
+                        "イスクルゴルゲット": "http://wiki.ffo.jp/html/35917.html",
+                        "エパミノダスリング": "http://wiki.ffo.jp/html/37381.html",
+                        "グレティナイフ": "http://wiki.ffo.jp/html/38205.html",
+                        "アタクトス": "http://wiki.ffo.jp/html/25813.html",
+                        "フォシャベルト": "http://wiki.ffo.jp/html/32705.html",
+                        "ルザフリング": "http://wiki.ffo.jp/html/12946.html",
+                        "デベステトブレット": "http://wiki.ffo.jp/html/35443.html",
+                        "ディンジルリング": "http://wiki.ffo.jp/html/35914.html",
+                        "八輪の帯": "http://wiki.ffo.jp/html/32704.html",
+                        "素破の耳": "http://wiki.ffo.jp/html/317.html",
+                        "無の喉輪": "http://wiki.ffo.jp/html/39388.html",
+                        "無の外装": "http://wiki.ffo.jp/html/39389.html",
+                        "無の腰当": "http://wiki.ffo.jp/html/39390.html",
+                        "オルペウスサッシュ": "http://wiki.ffo.jp/html/37383.html",
+                        "オルフェウスサッシュ": "http://wiki.ffo.jp/html/37383.html",
+                        "シャスーピアス": "http://wiki.ffo.jp/html/38629.html",
+                        "コンペンセーター": "http://wiki.ffo.jp/html/34211.html",
+                        "国崩し": "http://wiki.ffo.jp/html/34651.html",
+                        "デスペナルティ": "http://wiki.ffo.jp/html/483.html",
+                        "アープ": "http://wiki.ffo.jp/html/38967.html",
+                        "ドゥームズデイ": "http://wiki.ffo.jp/html/31687.html",
+                        "ロリケートトルク": "http://wiki.ffo.jp/html/34648.html",
+                        "ハーティピアス": "http://wiki.ffo.jp/html/26663.html",
+                        "ハーティーピアス": "http://wiki.ffo.jp/html/26663.html",
+                        "アナーキー": "http://wiki.ffo.jp/html/20554.html",
+                        "プラチナモグベルト": "http://wiki.ffo.jp/html/39028.html",
+                        "エナベートピアス": "http://wiki.ffo.jp/html/33195.html",
+                        "ネリチックピアス": "http://wiki.ffo.jp/html/31957.html",
+                        "ハイドゥクリング": "http://wiki.ffo.jp/html/26473.html",
+                        "ポネンテサッシュ": "http://wiki.ffo.jp/html/31956.html",
+                        "アクィラインベルト": "http://wiki.ffo.jp/html/20486.html",
+                        "火輪の帯": "http://wiki.ffo.jp/html/8665.html",
+                        "闇輪の帯": "http://wiki.ffo.jp/html/8664.html",
+                        "セサンスピアス": "http://wiki.ffo.jp/html/34759.html",
+                        "イシュヴァラピアス": "http://wiki.ffo.jp/html/34141.html",
+                        "ルフェセントリング": "http://wiki.ffo.jp/html/34716.html",
+                        "コーネリアリング": "http://wiki.ffo.jp/html/39077.html",
+                        "アキュメンリング": "http://wiki.ffo.jp/html/31381.html",
+                        "オリハルブレット": "http://wiki.ffo.jp/html/25884.html",
+                        "テーオン装束": "http://wiki.ffo.jp/html/35660.html",
+                        "オショシ装束": "http://wiki.ffo.jp/html/36413.html",
+                        "ヘルクリア装束": "http://wiki.ffo.jp/html/35458.html",
+                        "ラクサマナアタイア": "http://wiki.ffo.jp/html/35766.html",
+                        "ラヌンナイフ": "http://wiki.ffo.jp/html/37235.html",
+                        "デマサルデーゲン": "http://wiki.ffo.jp/html/33879.html",
+                        "エルデションレンズ": "http://wiki.ffo.jp/html/33905.html",
+                        "フォシャゴルゲット": "http://wiki.ffo.jp/html/32703.html",
+                        "ガズブレスレット": "http://wiki.ffo.jp/html/35439.html"
+                    };
+
+                    // リストアイテム(li)のうち、プレフィックスが以下のいずれかと完全一致する行のみを対象にする
+                    const exactKeywords = ['武器メイン', 'サブ', '遠隔武器', '矢弾', '頭', '胴', '両手', '両脚', '両足', '首', '左耳', '右耳', '左手の指', '右手の指', '背', '腰'];
+                    
+                    document.querySelectorAll('#markdown-content li').forEach(li => {
+                        const textContent = li.textContent.trim();
+                        const textColonIndex = textContent.search(/[:：]/);
+                        
+                        if (textColonIndex !== -1 && textColonIndex < 15) {
+                            const prefixText = textContent.substring(0, textColonIndex).trim();
+                            
+                            // プレフィックスが正確な装備部位名と一致する場合のみ処理（解説文の巻き込み防止）
+                            if (exactKeywords.includes(prefixText)) {
+                                const colonIndex = li.innerHTML.search(/[:：]/);
+                                const prefix = li.innerHTML.substring(0, colonIndex + 1);
+                                const rest = li.innerHTML.substring(colonIndex + 1).trim();
+                                
+                                // "ロスタムA or B" のような表記をひとまとまりにするため、一時的に保護
+                                let safeRest = rest.replace(/([Ａ-ＺA-Z])\s*or\s*([Ａ-ＺA-Z])/g, '$1_OR_$2');
+                                
+                                // " or " で複数の装備が並んでいる場合、それぞれを分割して個別に処理する
+                                let parts = safeRest.split(/\s+or\s+/);
+                                
+                                let linkedParts = parts.map(part => {
+                                    // 保護していた "A or B" を戻す
+                                    let originalPartText = part.replace(/_OR_/g, ' or ').trim();
+                                    
+                                    // 個別のパーツから装備名本体とカッコ等のサフィックスを分離
+                                    let equipName = originalPartText;
+                                    let suffix = "";
+                                    const match = originalPartText.match(/^([^（(<]+)(.*)$/);
+                                    if (match) {
+                                        equipName = match[1].trim();
+                                        suffix = match[2];
+                                    }
+                                    
+                                    // 強化段階などを削除して検索用のベース名を作る
+                                    let baseName = equipName
+                                        .replace(/[Ａ-ＺA-Z]\s*or\s*[Ａ-ＺA-Z]|[Ａ-ＺA-Z]$/g, '') // A or B, あるいは末尾の A, B, C
+                                        .replace(/[＋\+][０-９0-9]/g, '') // +1, +2, +3, +4
+                                        .replace(/等$/, '') // "ロスタム等" の "等" を削除
+                                        .trim();
+                                        
+                                    // プレイヤーがよく使う略称（LA, CSなど）を正式名称の接頭辞に変換する
+                                    const abbrMap = {
+                                        'ＬＡ': 'ラヌン',
+                                        'ＣＳ': 'シャスー',
+                                        'ＬＫ': 'ラクサマナ',
+                                        'ＬＵ': 'ルザフ',
+                                        'ＨＶ': 'ヘイパス'
+                                    };
+                                    for (let key in abbrMap) {
+                                        if (baseName.startsWith(key)) {
+                                            baseName = baseName.replace(key, abbrMap[key]);
+                                        }
+                                    }
+
+                                    // 用語辞典の仕様対策：部位ごとのページが存在せず「装束」「アタイア」等にまとまっているものを変換
+                                    if (baseName.startsWith('ニャメ')) {
+                                        baseName = 'ニャメ装束';
+                                    } else if (baseName.startsWith('イケンガ')) {
+                                        baseName = 'イケンガ装束';
+                                    } else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス') && !baseName.includes('リング')) {
+                                        baseName = 'マリグナス装束';
+                                    } else if (baseName.startsWith('ラヌン') && !baseName.includes('ナイフ')) {
+                                        baseName = 'ラヌンアタイア';
+                                    } else if (baseName.startsWith('シャスー') && !baseName.includes('ピアス')) {
+                                        baseName = 'シャスーアタイア';
+                                    } else if (baseName.startsWith('ラクサマナ')) {
+                                        baseName = 'ラクサマナアタイア';
+                                    } else if (baseName.startsWith('アデマ')) {
+                                        baseName = 'アデマ装束';
+                                    } else if (baseName.startsWith('テーオン')) {
+                                        baseName = 'テーオン装束';
+                                    } else if (baseName.startsWith('オショシ')) {
+                                        baseName = 'オショシ装束';
+                                    } else if (baseName.startsWith('ヘルクリア')) {
+                                        baseName = 'ヘルクリア装束';
+                                    }
+                                    
+                                    let url = linkMap[baseName];
+                                    if (!url) {
+                                        // 「その他」などの補足説明が含まれている場合はリンク化せずそのまま表示
+                                        if (originalPartText.includes('その他')) {
+                                            return `<span style="color: #e0e0e0;">${originalPartText}</span>`;
+                                        }
+                                        // 辞書未登録のハイエンド装備等は、DuckDuckGoの「I'm Feeling Lucky(!ducky)」機能を使って
+                                        // 検索画面をスキップし、直接FF11用語辞典の該当ページへジャンプさせる
+                                        url = `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
+                                    }
+                                    
+                                    return `<a href="${url}" target="_blank" class="equip-link" style="color: #a8e063; text-decoration: none; font-weight: bold; border-bottom: 1px dashed #a8e063; padding-bottom: 1px; transition: all 0.3s;" onmouseover="this.style.color='#ff9d00'; this.style.borderBottomColor='#ff9d00';" onmouseout="this.style.color='#a8e063'; this.style.borderBottomColor='#a8e063';"><i class="fa-solid fa-magnifying-glass" style="font-size: 0.8em; margin-right: 4px;"></i>${equipName}</a><span style="color: #e0e0e0;">${suffix}</span>`;
+                                });
+                                
+                                li.innerHTML = `${prefix} ${linkedParts.join(' <span style="color: #ccc; font-weight: normal; font-size: 0.9em;">or</span> ')}`;
+                            }
+                        }
+                    // --- 指定されたアンカー（#hash）へのスクロール ---
+                    if (window.location.hash) {
+                        const targetId = decodeURIComponent(window.location.hash.substring(1));
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            setTimeout(() => {
+                                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                // ヘッダーの高さを考慮して少し上に調整
+                                window.scrollBy(0, -100);
+                            }, 500);
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                    contentDiv.innerHTML = `
+                        <h2 style="color: #ff6b6b; margin-top: 0;">エラーが発生しました</h2>
+                        <p>${error.message}</p>
+                    `;
+                });
+        } else {
+            contentDiv.innerHTML = `
+                <h2 style="color: #ff6b6b; margin-top: 0;">エラー</h2>
+                <p>表示する記事が指定されていません。</p>
+            `;
+        }
+    </script>
+</body>
+</html>

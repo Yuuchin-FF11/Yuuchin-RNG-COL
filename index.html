@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunt & Gamble | 狩人とコルセアのヴァナ・ディール生活</title>
+    <meta name="description" content="FF11で狩人とコルセアを極めるタルタルの冒険記録。エンドコンテンツから日常まで、遠隔アタッカーの視点で綴ります。">
+    <!-- OGP Settings -->
+    <meta property="og:title" content="Hunt & Gamble | 狩人とコルセアのヴァナ・ディール生活">
+    <meta property="og:description" content="FF11で狩人とコルセアを極めるタルタルの冒険記録。エンドコンテンツから日常まで、遠隔アタッカーの視点で綴ります。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:image" content="https://your-domain.com/rmeap.png">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Import Map for Gemini SDK -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="particle-canvas-container">
+        <canvas id="particle-canvas"></canvas>
+    </div>
+
+    <header class="glass-header">
+        <div class="logo">
+            FFXI Bismarck
+        </div>
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#home">ホーム</a></li>
+                <li><a href="#about">スタイル</a></li>
+                <li><a href="#jobs">メインジョブ</a></li>
+                <li><a href="#guides">攻略情報</a></li>
+                <li><a href="#diary">冒険日記</a></li>
+                <li><a href="#stream">ライブ配信</a></li>
+                <li><a href="#life">ヴァナ生活</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <a href="index_en.html" class="lang-btn"><i class="fa-solid fa-earth-americas"></i> English</a>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="#home">ホーム</a></li>
+                <li><a href="#about">スタイル</a></li>
+                <li><a href="#jobs">メインジョブ</a></li>
+                <li><a href="#guides">攻略情報</a></li>
+                <li><a href="#diary">冒険日記</a></li>
+                <li><a href="#stream">ライブ配信</a></li>
+                <li><a href="#life">ヴァナ生活</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="fade-in-up">狩人・コルセアガチ勢による<br>ヴァナディール生活</h1>
+                <p class="subtitle fade-in-up delay-1">
+                    現役プレイヤー、ビスマルクサーバーで活動中のタルタル「Yuuchin」のページです。<br>
+                    FF11に関するブログやサイトは数多くありますが、更新がかなり昔のままだったりするものも少なくありません。<br>
+                    「今」のヴァナ・ディールの最新情報を届けたい、そんな思いでこのサイトを作りました。<br>
+                    他では見つからないようなニッチな攻略情報や、妥協なき装備構成などをコツコツと更新していきます。
+                </p>
+                <div class="scroll-indicator fade-in-up delay-2">
+                    <span>Targeting...</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="updates" class="content-section">
+            <div class="container">
+                <h2 class="section-title">What's New (更新履歴)</h2>
+                <div class="card glass-card">
+                    <ul style="list-style: none; padding: 1rem 0.5rem; margin: 0;">
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.04.29</span>
+                            <a href="article.html?file=articles/corsair_equip_beginner.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">コルセア装備（ビギナー編）のクイックドロー装備などを更新しました。</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.04.27</span>
+                            <a href="article.html?file=articles/corsair_equip.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">コルセア装備（理想・ハイエンド編）を公開しました。</a>
+                        </li>
+                        <li style="display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.04.25</span>
+                            <span>エンドコンテンツ（ソーティ・オデシー等）の立ち回りに関する情報を追加しました。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2 class="section-title">プレイスタイル</h2>
+                <div class="card glass-card">
+                    <div class="card-text">
+                        <h3>ジェールV25 完全制覇</h3>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: bold;">
+                                <i class="fa-solid fa-trophy"
+                                    style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                                ジェール Veng+25 オールクリアー
+                            </li>
+                            <li style="margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: bold;">
+                                <i class="fa-solid fa-layer-group"
+                                    style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                                狩人・コルセア装備 妥協なし
+                            </li>
+                            <li style="margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: bold;">
+                                <i class="fa-solid fa-meteor"
+                                    style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                                遠隔武器 RMEAP 全種類コンプ
+                            </li>
+                        </ul>
+                        <p style="margin-top: 1.5rem;">
+                            最強を目指す過程に終わりはありません。<br>
+                            レリック、ミシック、エンピリアン、イオニック、プライム……<br>
+                            全ての究極武器を手に、タルタルは今日も戦場を支配します。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="jobs" class="content-section bg-alt">
+            <div class="container">
+                <h2 class="section-title">本気の狩人とコルセア</h2>
+                <div class="grid-3">
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image">
+                            <img src="hunter_image.jpg" alt="Hunter Tarutaru" class="hunter-zoom">
+                        </div>
+                        <h3>狩人 (Ranger)</h3>
+                        <p>出番は少ないがサベ狩も見直されて近距離、遠距離どちらにも対応できる火力が出せるようになる。</p>
+                        <a href="#" class="job-link">
+                            準備中... <i class="fa-solid fa-hourglass-half"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image">
+                            <img src="corsair_image.png" alt="Corsair Tarutaru" class="corsair-style">
+                        </div>
+                        <h3>コルセア (Corsair)</h3>
+                        <p>ファントムロールでパーティを強化し、ラストスタンドで敵を穿つ。運さえも味方につける、戦場のギャンブラー。</p>
+                        <a href="article.html?file=articles/corsair_equip.md" class="job-link">
+                            装備を見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image">
+                            <img src="rmeap.png" alt="RMEAP Weapons" class="weapon-preview-img">
+                        </div>
+                        <h3>各種遠隔武器</h3>
+                        <p>RMEAPの作成、オグメの厳選、新装備の考察。最強を目指すための果てしない探求と、散財の記録。</p>
+                        <a href="#" class="job-link">
+                            準備中... <i class="fa-solid fa-hourglass-half"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guides" class="content-section">
+            <div class="container">
+                <h2 class="section-title">コンテンツ攻略・お役立ち情報</h2>
+                <div class="grid-3">
+
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="farming_image.jpg" alt="金策と素材狩り" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>金策と素材狩り</h3>
+                        <p>遠隔アタッカーならではの強みを活かした、効率的なギル稼ぎと素材集めのルート紹介。</p>
+                        <a href="#" class="job-link">
+                            準備中... <i class="fa-solid fa-hourglass-half"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="content_image.jpg" alt="各コンテンツの攻略情報" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>各コンテンツの攻略情報</h3>
+                        <p>ジェール、ソーティ、オデシーなど、各種エンドコンテンツにおける立ち回りや攻略法へのリンク集です。</p>
+                        <a href="article.html?file=articles/content_guides.md" class="job-link">
+                            攻略記事一覧を見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="diary" class="content-section">
+            <div class="container">
+                <h2 class="section-title">冒険日記</h2>
+                <div class="diary-timeline" id="diary-timeline-container">
+                    <div style="text-align: center; padding: 2rem;">
+                        <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--accent-color); margin-bottom: 1rem;"></i>
+                        <p>日記データを読み込み中...</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn-primary">すべての日記を見る</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="stream" class="content-section bg-alt">
+            <div class="container">
+                <h2 class="section-title">YouTube ライブ配信</h2>
+                <div class="stream-container glass-card fade-in-up">
+                    <div class="stream-video">
+                        <div class="stream-preview-images">
+                            <div class="preview-box">
+                                <img src="hunter_image.jpg" alt="Hunter Preview">
+                            </div>
+                            <div class="preview-box">
+                                <img src="corsair_image.png" alt="Corsair Preview">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stream-info">
+                        <h3>ヴァナ・ディール ライブ配信</h3>
+                        <p>YouTubeにて、ジェールの攻略やオデシー、日々の冒険をライブ配信しています。タルタル遠隔アタッカーの視点での攻略動画もアーカイブ中！</p>
+                        <a href="https://www.youtube.com/@センチネル小川" target="_blank" class="btn-primary"
+                            style="background: linear-gradient(45deg, #ff0000, #cc0000);">
+                            <i class="fa-brands fa-youtube" style="margin-right: 0.5rem;"></i> チャンネル登録
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="life" class="content-section">
+            <div class="container">
+                <h2 class="section-title">ヴァナ・ディール生活</h2>
+                <div class="split-layout">
+                    <div class="split-content">
+                        <h3>ウィンダスから世界へ</h3>
+                        <p>
+                            故郷ウィンダスの星の大樹の下で矢尻を研ぎ、
+                            ある時はソーティへ、ある時はオデシーへ。
+                            タルタルならではの小ささを活かした（？）回避と、
+                            どこへでも飛んでいくフットワークの軽さ。
+                        </p>
+                        <p>
+                            LSの仲間たちとの連携や、野良募集での一期一会。
+                            今日もどこかで、銃声と弦音が響きます。
+                        </p>
+                        <a href="#guides" class="btn-primary" style="text-decoration: none; display: inline-block;">装備ガイドを見る</a>
+                    </div>
+                    <div class="split-visual">
+                        <img src="vanalife_image.jpg" alt="Yuuchin Vana'diel Life" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p>
+        <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
+        <div class="social-links">
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js" type="module"></script>
+</body>
+
+</html>

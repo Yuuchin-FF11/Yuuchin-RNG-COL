@@ -14,6 +14,7 @@
     --sp-color: #ffd700; /* SPアビリティ用の黄（アクセントカラーに統一） */
     --ability-color: #4dd0e1; /* アビリティ用の水色 */
     --ws-color: #ffb74d; /* WS用のオレンジ */
+    --magic-color: #f48fb1; /* 魔法用のピンク */
 }
 
 .sp-highlight {
@@ -32,6 +33,12 @@
     color: var(--ws-color);
     font-weight: bold;
     text-shadow: 0 0 8px rgba(255, 183, 77, 0.4);
+}
+
+.magic-highlight {
+    color: var(--magic-color);
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(244, 143, 177, 0.4);
 }
 
 * {

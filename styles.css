@@ -1182,7 +1182,6 @@ nav a:hover::after {
     height: 190px;
     object-fit: cover;
     display: block;
-    filter: sepia(10%) contrast(105%);
 }
 
 .memory-photo:nth-child(odd) {
@@ -1553,8 +1552,6 @@ nav a:hover::after {
 }
 
 /* --- 画像の鮮明化実験 (AA Photo) --- */
-#aa-photo {
     filter: brightness(1.1);
-    image-rendering: -webkit-optimize-contrast; /* ブラウザ側の補間を最適化 */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }

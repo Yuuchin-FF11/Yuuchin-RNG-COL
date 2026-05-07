@@ -1174,7 +1174,7 @@ nav a:hover::after {
     border-radius: 2px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     position: absolute;
-    z-index: 1; /* Keep it behind text if necessary, but we'll move it out */
+    z-index: -1; /* Place behind EVERYTHING including cards and text */
     transition: transform 0.3s ease, z-index 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }

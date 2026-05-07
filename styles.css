@@ -1467,3 +1467,31 @@ nav a:hover::after {
     margin-right: auto !important;
     text-align: center !important;
 }
+
+/* --- レスポンシブ修正 (スマホ対応) --- */
+@media (max-width: 1024px) {
+    .desktop-nav {
+        display: none !important; /* スマホ・タブレットでは横並びメニューを隠す */
+    }
+    
+    .menu-toggle {
+        display: flex !important; /* ハンバーガーボタンを表示 */
+    }
+    
+    .header-actions {
+        gap: 1rem;
+    }
+}
+
+/* デスクトップ用の設定を再確認 */
+@media (min-width: 1025px) {
+    .desktop-nav {
+        display: flex !important;
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .menu-toggle {
+        display: none !important; /* デスクトップではハンバーガーを隠す */
+    }
+}

@@ -47,6 +47,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px; /* 固定ヘッダーの高さ分スクロール位置を調整 */
+}
+
 body {
     font-family: 'Kiwi Maru', 'Zen Maru Gothic', sans-serif;
     color: var(--text-light);

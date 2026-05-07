@@ -1214,4 +1214,104 @@ nav a:hover::after {
         display: none; /* Hide if screen is not wide enough to avoid overlap */
     }
 }
-
+
+/* --- 記事レイアウトと目次(TOC) --- */
+.article-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    position: relative;
+}
+
+.article-main {
+    flex: 1;
+    min-width: 0; /* flexbox内ではみ出さないように */
+}
+
+.toc-sidebar {
+    display: block !important; /* JSの非表示を上書きして表示 */
+    width: 250px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 100px;
+    padding: 1.5rem;
+    background: rgba(18, 18, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.toc-sidebar h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+#toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#toc-list li {
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+#toc-list a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: block;
+}
+
+#toc-list a:hover {
+    color: var(--accent-color);
+}
+
+/* --- トップへ戻るボタン --- */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent-color);
+    color: #121214;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+    display: none; /* 初期状態は非表示（JSで制御） */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+#back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.6);
+}
+
+/* スマホ用のレスポンシブ対応（目次を非表示に） */
+@media (max-width: 900px) {
+    .article-layout {
+        flex-direction: column;
+    }
+    .toc-sidebar {
+        display: none !important; /* スマホでは非表示 */
+    }
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}

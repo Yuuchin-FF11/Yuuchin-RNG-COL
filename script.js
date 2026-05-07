@@ -126,7 +126,7 @@ function initAIChat() {
         appendMessage('user', text);
         input.value = '';
 
-        const typingMsg = appendMessage('system typing', '考え中...');
+        const typingMsg = appendMessage('system typing', '老E��中...');
 
         try {
             const result = await chatSession.sendMessage(text);
@@ -135,7 +135,7 @@ function initAIChat() {
             appendMessage('system', response.text());
         } catch (error) {
             console.error(error);
-            typingMsg.textContent = 'エラーが発生しました。APIキーを確認してください。';
+            typingMsg.textContent = 'エラーが発生しました、EPIキーを確認してください、E;
         }
     };
 
@@ -149,7 +149,7 @@ function setupAI(apiKey) {
     genAI = new GoogleGenerativeAI(apiKey);
     model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
-        systemInstruction: "あなたは『ファイナルファンタジーXI (FF11)』の世界『ヴァナ・ディール』に住むガイドの『モグボット』です。FF11に関する豊富な知識（特に狩人とコルセアのジョブ、装備、RMEAP、ジェールなどのエンドコンテンツ）を持っており、ユーザーに親身にアドバイスします。回答は簡潔かつ丁寧な日本語で行ってください。語尾に『クポ』は付けないでください。"
+        systemInstruction: "あなた�E『ファイナルファンタジーXI (FF11)』�E世界『ヴァナ�EチE��ール』に住�Eガイド�E『モグボット』です、EF11に関する豊富な知識（特に狩人とコルセアのジョブ、裁E��、RMEAP、ジェールなどのエンドコンチE��チE��を持っており、ユーザーに親身にアドバイスします。回答�E簡潔かつ丁寧な日本語で行ってください。語尾に『クポ』�E付けなぁE��ください、E
     });
     chatSession = model.startChat({
         history: [],
@@ -271,7 +271,7 @@ async function loadDiaryEntries() {
                     <div class="diary-date">${entry.date}</div>
                     <div class="diary-content">
                         <div class="diary-image-container">
-                            <img src="${entry.image}" alt="${entry.title}" onerror="this.src='hunter_image.jpg'">
+                            <img src="${entry.image}" alt="${entry.title}" onerror="this.src='assets/images/hunter_image.jpg'">
                         </div>
                         <div class="diary-text">
                             <h3>${entry.title}</h3>
@@ -305,6 +305,7 @@ async function loadDiaryEntries() {
         
     } catch (error) {
         console.error(error);
-        container.innerHTML = `<div style="text-align: center; color: #ff6b6b;"><p>日記の読み込みに失敗しました。</p></div>`;
+        container.innerHTML = `<div style="text-align: center; color: #ff6b6b;"><p>日記�E読み込みに失敗しました、E/p></div>`;
     }
 }
+

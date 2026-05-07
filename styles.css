@@ -1460,3 +1460,10 @@ nav a:hover::after {
     margin-bottom: 5px;
     letter-spacing: 1px;
 }
+
+/* --- Ğ‰î•¶‚ÌƒZƒ“ƒ^ƒŠƒ“ƒOC³ --- */
+.hero-description {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}

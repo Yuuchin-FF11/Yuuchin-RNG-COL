@@ -1315,3 +1315,57 @@ nav a:hover::after {
         font-size: 1.2rem;
     }
 }
+
+/* 記事ページ専用: コンテナを広くしてメイン記事の幅を確保 */
+.article-container {
+    max-width: 1400px !important;
+}
+
+.article-layout {
+    display: flex;
+    gap: 3rem; /* 間隔を広げて右側に寄せる */
+    align-items: flex-start;
+}
+
+.article-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.toc-sidebar {
+    width: 280px; /* 少し幅を広げる */
+    position: sticky;
+    top: 100px; /* ヘッダーの下に固定 */
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: rgba(18, 18, 20, 0.6);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* スクロールバーのデザイン（目次内） */
+.toc-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+.toc-sidebar::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 10px;
+}
+
+@media (max-width: 1200px) {
+    .article-container {
+        max-width: 95% !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .article-layout {
+        flex-direction: column;
+    }
+    .toc-sidebar {
+        display: none !important;
+    }
+}

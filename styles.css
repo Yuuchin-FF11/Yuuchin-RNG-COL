@@ -306,6 +306,7 @@ nav a:hover::after {
 .content-section {
     padding: 6rem 5%;
     position: relative;
+    scroll-margin-top: 90px;
 }
 
 .section-title {

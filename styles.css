@@ -1551,3 +1551,10 @@ nav a:hover::after {
         padding: 1.5rem !important;
     }
 }
+
+/* --- 画像の鮮明化実験 (AA Photo) --- */
+#aa-photo {
+    filter: contrast(1.2) brightness(1.1) saturate(1.2);
+    image-rendering: -webkit-optimize-contrast; /* ブラウザ側の補間を最適化 */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}

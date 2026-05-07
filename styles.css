@@ -1,26 +1,26 @@
-:root {
+﻿:root {
     --primary-color: #2e8b57;
-    /* 狩人の森の緑 (SeaGreen) */
+    /* 迢ｩ莠ｺ縺ｮ譽ｮ縺ｮ邱・(SeaGreen) */
     --secondary-color: #1a237e;
-    /* コルセアのネイビー */
+    /* 繧ｳ繝ｫ繧ｻ繧｢縺ｮ繝阪う繝薙・ */
     --accent-color: #ffd700;
-    /* ロールの金、戦利品 */
+    /* 繝ｭ繝ｼ繝ｫ縺ｮ驥代∵姶蛻ｩ蜩・*/
     --text-light: #f1f1f1;
     --text-dark: #333333;
     --glass-bg: rgba(16, 32, 48, 0.4);
-    /* 少し暗めのガラス */
+    /* 蟆代＠證励ａ縺ｮ繧ｬ繝ｩ繧ｹ */
     --glass-border: rgba(255, 255, 255, 0.15);
     --bg-gradient: linear-gradient(135deg, #051937 0%, #004d7a 50%, #008793 100%);
-    --sp-color: #ffd700; /* SPアビリティ用の黄（アクセントカラーに統一） */
-    --ability-color: #4dd0e1; /* アビリティ用の水色 */
-    --ws-color: #ffb74d; /* WS用のオレンジ */
-    --magic-color: #f48fb1; /* 魔法用のピンク */
+    --sp-color: #ffd700; /* SP繧｢繝薙Μ繝・ぅ逕ｨ縺ｮ鮟・ｼ医い繧ｯ繧ｻ繝ｳ繝医き繝ｩ繝ｼ縺ｫ邨ｱ荳・・*/
+    --ability-color: #4dd0e1; /* 繧｢繝薙Μ繝・ぅ逕ｨ縺ｮ豌ｴ濶ｲ */
+    --ws-color: #ffb74d; /* WS逕ｨ縺ｮ繧ｪ繝ｬ繝ｳ繧ｸ */
+    --magic-color: #f48fb1; /* 鬲疲ｳ慕畑縺ｮ繝斐Φ繧ｯ */
 }
 
 .sp-highlight {
     color: var(--sp-color);
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* 黄色の発光感を強めに */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* 鮟・牡縺ｮ逋ｺ蜈画─繧貞ｼｷ繧√↓ */
 }
 
 .ability-highlight {
@@ -49,7 +49,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px; /* 固定ヘッダーの高さ分スクロール位置を調整 */
+    scroll-padding-top: 90px; /* 蝗ｺ螳壹・繝・ム繝ｼ縺ｮ鬮倥＆蛻・せ繧ｯ繝ｭ繝ｼ繝ｫ菴咲ｽｮ繧定ｪｿ謨ｴ */
 }
 
 body {
@@ -776,9 +776,9 @@ nav a:hover::after {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* 画像全体を表示するように変更 */
+    /* 逕ｻ蜒丞・菴薙ｒ陦ｨ遉ｺ縺吶ｋ繧医≧縺ｫ螟画峩 */
     background: #000;
-    /* 見切れ防止の背景色 */
+    /* 隕句・繧碁亟豁｢縺ｮ閭梧勹濶ｲ */
     display: block;
     transition: transform 0.5s ease;
 }
@@ -807,7 +807,7 @@ nav a:hover::after {
 
 @media (max-width: 768px) {
     .hero-content h1 {
-        font-size: 2.8rem;
+        font-size: clamp(1.8rem, 6vw, 2.8rem);
     }
     
     .subtitle {
@@ -1064,7 +1064,7 @@ nav a:hover::after {
     opacity: 0.7;
 }
 
-/* ボス攻略セクションの囲み枠 */
+/* 繝懊せ謾ｻ逡･繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ縺ｮ蝗ｲ縺ｿ譫 */
 .boss-box {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);

@@ -1417,3 +1417,46 @@ nav a:hover::after {
     letter-spacing: 1px;
     margin-bottom: 5px;
 }
+
+/* --- レイアウト修正 --- */
+.glass-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+}
+
+.desktop-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-left: 0; /* 強制リセット */
+}
+
+.header-social-link {
+    color: var(--accent-color) !important; /* 目立つようにアクセントカラーに！ */
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.header-social-link:hover {
+    color: #fff !important;
+    transform: scale(1.1);
+}
+
+.visitor-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    opacity: 0.8;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}

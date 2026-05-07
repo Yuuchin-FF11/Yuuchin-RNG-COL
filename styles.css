@@ -1495,3 +1495,59 @@ nav a:hover::after {
         display: none !important; /* デスクトップではハンバーガーを隠す */
     }
 }
+
+/* --- 実績セクションのプレミアムレイアウト --- */
+.achievement-card {
+    padding: 3rem !important;
+    overflow: hidden;
+    position: relative;
+}
+
+.achievement-content {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.achievement-content .card-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.achievement-image {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clear-ss {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.5s ease;
+    filter: brightness(1.1);
+}
+
+.clear-ss:hover {
+    transform: scale(1.05) rotate(1deg);
+    border-color: var(--accent-color);
+    box-shadow: 0 20px 50px rgba(255, 215, 0, 0.2);
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .achievement-content {
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
+    
+    .achievement-card {
+        padding: 1.5rem !important;
+    }
+}

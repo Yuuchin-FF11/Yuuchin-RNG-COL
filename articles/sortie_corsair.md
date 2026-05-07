@@ -1,5 +1,9 @@
 # ソーティ攻略（コルセア視点：上層編 DABC）
 
+<img src="assets/images/ark_angels.jpg" class="game-screenshot" alt="Ark Angels">
+<span class="screenshot-caption">▲ 伝説の5人衆「アークエンジェル」。彼らとの激闘は冒険者の魂を揺さぶる。</span>
+
+
 > ⬅️ **[ソーティ攻略（下層編 GEFH）はこちら](article.html?file=articles/sortie_corsair_lower.md)**
 
 ## 前提となるパーティ構成
@@ -112,6 +116,10 @@
 
 ## D区画ボスの攻略（Degei）
 
+<img src="assets/images/dragon_battle.jpg" class="game-screenshot" alt="Dragon Battle">
+<span class="screenshot-caption">▲ 強大なドラゴンとの死闘。コルセアの連携追撃が勝利の鍵を握る。</span>
+
+
 ### 戦闘の準備と開幕（カットカード）
 
 Dボス部屋に到着した時点では、コルセアのファントムロールは「<span class="ability-highlight">タクティックロール</span>」と移動用の「<span class="ability-highlight">ボルターズロール</span>」の2種類がかかっている状態です。
@@ -223,6 +231,10 @@ A区画のボスは、基本的に**火属性（<span class="magic-highlight">�
 <div class="boss-box">
 
 ## B区画ボスの攻略（Leshonn）
+
+<img src="assets/images/floating_rocks.jpg" class="game-screenshot" alt="Floating Rocks">
+<span class="screenshot-caption">▲ 浮かぶ岩々、神秘的な空の風景。B区画はかつてのトゥー・リアを彷彿とさせる。</span>
+
 
 A区画ボスを討伐後、同様に<span class="ability-highlight">ボルターズロール</span>＋範囲スニークをもらってB区画のボス部屋へと移動します（以降のボス間移動もすべてこの手順です）。
 Bボス部屋に到着したら、ここでは**「<span class="ability-highlight">クルケッドカード</span> ＋ <span class="ability-highlight">ウィザーズロール</span>」**を回して魔法火力をさらに底上げします。

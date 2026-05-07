@@ -1090,3 +1090,30 @@ nav a:hover::after {
     color: #fff;
     margin-top: 1.5rem;
 }
+
+/* Game Screenshots Styling */
+.game-screenshot {
+    width: 100%;
+    max-width: 900px;
+    margin: 2.5rem auto 1rem;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.game-screenshot:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+}
+
+.screenshot-caption {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #aaa;
+    margin-bottom: 2.5rem;
+    font-style: italic;
+    display: block;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}

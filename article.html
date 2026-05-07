@@ -7,11 +7,87 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- marked.js の読み込み (MarkdownをHTMLに変換するライブラリ) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
+        /* 目次 (TOC) と トップへ戻るボタン のスタイル */
+        .article-layout {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .article-main {
+            flex: 1;
+            min-width: 0;
+        }
+        .toc-sidebar {
+            width: 250px;
+            position: sticky;
+            top: 120px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .toc-sidebar { display: block; }
+        }
+        .toc-sidebar h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+        }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+            font-family: 'Zen Maru Gothic', 'Kiwi Maru', sans-serif;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        .toc-sidebar ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc-sidebar li {
+            margin-bottom: 0.8rem;
+        }
+        .toc-sidebar a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .toc-sidebar a:hover {
+            color: var(--primary-color);
+        }
+        
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: #111;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: transform 0.3s, background 0.3s;
+        }
+        #back-to-top:hover {
+            transform: translateY(-5px);
+            background: var(--accent-color);
+        }
+
         /* 記事用のコンテナ調整 */
         .article-container {
             margin-top: 120px;
@@ -43,7 +119,10 @@
             color: var(--text-light);
             line-height: 1.8;
             padding: 1rem;
-            font-family: 'Zen Maru Gothic', sans-serif;
+            font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+        }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+            font-family: 'Zen Maru Gothic', 'Kiwi Maru', sans-serif;
         }
         .markdown-body h1 {
             color: var(--accent-color);
@@ -240,7 +319,9 @@
     <main class="container article-container">
         <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> トップページへ戻る</a>
         
-        <div class="glass-card" style="padding: 2rem 3rem;">
+        <div class="article-layout">
+            <div class="article-main">
+                <div class="glass-card" style="padding: 2rem 3rem;">
             <!-- ここにMarkdownがHTMLに変換されて表示されます -->
             <div id="markdown-content" class="markdown-body">
                 <div style="text-align: center; padding: 3rem 0;">
@@ -248,8 +329,17 @@
                     <p>記事を読み込み中...</p>
                 </div>
             </div>
+                </div>
+            </div>
+            
+            <aside class="toc-sidebar" id="toc-sidebar" style="display: none;">
+                <h4><i class="fa-solid fa-list"></i> 目次</h4>
+                <ul id="toc-list"></ul>
+            </aside>
         </div>
     </main>
+
+    <button id="back-to-top" title="トップへ戻る"><i class="fa-solid fa-arrow-up"></i></button>
 
     <!-- フッター -->
     <footer class="glass-footer">
@@ -278,6 +368,42 @@
                 .then(text => {
                     // marked.js を使って Markdownテキスト を HTML に変換
                     contentDiv.innerHTML = marked.parse(text);
+
+                    // --- 目次(TOC)の自動生成 ---
+                    const headings = contentDiv.querySelectorAll('h2, h3');
+                    const tocList = document.getElementById('toc-list');
+                    const tocSidebar = document.getElementById('toc-sidebar');
+                    if (headings.length > 0) {
+                        // デスクトップ幅以上なら表示（CSSのメディアクエリに任せるがJSで中身を入れる）
+                        headings.forEach((heading, index) => {
+                            const id = 'heading-' + index;
+                            heading.id = id;
+                            
+                            const li = document.createElement('li');
+                            li.style.marginLeft = heading.tagName === 'H3' ? '1rem' : '0';
+                            li.style.fontSize = heading.tagName === 'H3' ? '0.85rem' : '0.95rem';
+                            
+                            const a = document.createElement('a');
+                            a.href = '#' + id;
+                            a.textContent = heading.textContent;
+                            
+                            li.appendChild(a);
+                            tocList.appendChild(li);
+                        });
+                    }
+                    
+                    // --- トップへ戻るボタン ---
+                    const backToTop = document.getElementById('back-to-top');
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 300) {
+                            backToTop.style.display = 'flex';
+                        } else {
+                            backToTop.style.display = 'none';
+                        }
+                    });
+                    backToTop.addEventListener('click', () => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
 
                     // --- 装備品の自動リンク機能 ---
                     // 用語辞典のランダムなURLに対応するため、正確なURLが判明しているものは辞書に登録し、

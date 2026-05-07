@@ -319,16 +319,27 @@
     <main class="container article-container">
         <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> トップページへ戻る</a>
         
-        <div class="glass-card" style="padding: 2rem 3rem;">
-            <!-- ここにMarkdownがHTMLに変換されて表示されます -->
-            <div id="markdown-content" class="markdown-body">
-                <div style="text-align: center; padding: 3rem 0;">
-                    <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color); margin-bottom: 1rem;"></i>
-                    <p>記事を読み込み中...</p>
+        <div class="article-layout">
+            <div class="article-main">
+                <div class="glass-card" style="padding: 2rem 3rem;">
+                    <!-- ここにMarkdownがHTMLに変換されて表示されます -->
+                    <div id="markdown-content" class="markdown-body">
+                        <div style="text-align: center; padding: 3rem 0;">
+                            <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color); margin-bottom: 1rem;"></i>
+                            <p>記事を読み込み中...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <aside class="toc-sidebar" id="toc-sidebar" style="display: none;">
+                <h4><i class="fa-solid fa-list"></i> 目次</h4>
+                <ul id="toc-list"></ul>
+            </aside>
         </div>
     </main>
+
+    <button id="back-to-top" title="トップへ戻る"><i class="fa-solid fa-arrow-up"></i></button>
 
     <!-- フッター -->
     <footer class="glass-footer">

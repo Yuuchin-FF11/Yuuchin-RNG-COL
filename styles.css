@@ -1,26 +1,26 @@
 :root {
     --primary-color: #4ade80;
-    /* 迢ｩ莠ｺ縺ｮ譽ｮ縺ｮ邱� (SeaGreen) */
+    /* 迢�E�莠�E�縺�E�譽�E�縺�E�邱�E� (SeaGreen) */
     --secondary-color: #1a237e;
-    /* 繧ｳ繝ｫ繧ｻ繧｢縺ｮ繝阪う繝薙� */
+    /* 繧�E�繝ｫ繧�E�繧�E�縺�E�繝阪ぁE��薙�E� */
     --accent-color: #ffd700;
-    /* 繝ｭ繝ｼ繝ｫ縺ｮ驥代∵姶蛻ｩ蜩� */
+    /* 繝ｭ繝ｼ繝ｫ縺�E�驥代∵姶蛻�E�蜩�E� */
     --text-light: #f1f1f1;
     --text-dark: #333333;
     --glass-bg: rgba(16, 32, 48, 0.4);
-    /* 蟆代＠證励ａ縺ｮ繧ｬ繝ｩ繧ｹ */
+    /* 蟁E���E�證励�E�縺�E�繧�E�繝ｩ繧�E� */
     --glass-border: rgba(255, 255, 255, 0.15);
     --bg-gradient: linear-gradient(135deg, #051937 0%, #004d7a 50%, #008793 100%);
-    --sp-color: #ffd700; /* SP繧｢繝薙Μ繝�ぅ逕ｨ縺ｮ鮟�ｼ医い繧ｯ繧ｻ繝ｳ繝医き繝ｩ繝ｼ縺ｫ邨ｱ荳�� */
-    --ability-color: #4dd0e1; /* 繧｢繝薙Μ繝�ぅ逕ｨ縺ｮ豌ｴ濶ｲ */
-    --ws-color: #ffb74d; /* WS逕ｨ縺ｮ繧ｪ繝ｬ繝ｳ繧ｸ */
-    --magic-color: #f48fb1; /* 鬲疲ｳ慕畑縺ｮ繝斐Φ繧ｯ */
+    --sp-color: #ffd700; /* SP繧�E�繝薙Μ繝�ぁE��ｨ縺�E�鮟��E�医ぁE���E�繧�E�繝ｳ繝医き繝ｩ繝ｼ縺�E�邨�E�荳�E��E� */
+    --ability-color: #4dd0e1; /* 繧�E�繝薙Μ繝�ぁE��ｨ縺�E�豌ｴ濶�E� */
+    --ws-color: #ffb74d; /* WS逕ｨ縺�E�繧�E�繝ｬ繝ｳ繧�E� */
+    --magic-color: #f48fb1; /* 鬲疲�E�慕畑縺�E�繝斐Φ繧�E� */
 }
 
 .sp-highlight {
     color: var(--sp-color);
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* 鮟�牡縺ｮ逋ｺ蜈画─繧貞ｼｷ繧√↓ */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* 鮟�牡縺�E�逋ｺ蜈画─繧貞ｼ�E�繧√�E */
 }
 
 .ability-highlight {
@@ -49,7 +49,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px; /* 蝗ｺ螳壹�繝�ム繝ｼ縺ｮ鬮倥＆蛻�せ繧ｯ繝ｭ繝ｼ繝ｫ菴咲ｽｮ繧定ｪｿ謨ｴ */
+    scroll-padding-top: 90px; /* 蝗ｺ螳壹�E�繝�ム繝ｼ縺�E�鬮倥�E�E���E�せ繧�E�繝ｭ繝ｼ繝ｫ菴咲�E��E�繧定ｪ�E�謨�E� */
 }
 
 body {
@@ -796,9 +796,9 @@ nav a:hover::after {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* 逕ｻ蜒丞�菴薙ｒ陦ｨ遉ｺ縺吶ｋ繧医≧縺ｫ螟画峩 */
+    /* 逕ｻ蜒丞�菴薙ｒ陦�E�遉ｺ縺吶�E�繧医≧縺�E�螟画峩 */
     background: #000;
-    /* 隕句�繧碁亟豁｢縺ｮ閭梧勹濶ｲ */
+    /* 隕句�E�繧碁亟豁E��縺�E�閭梧勹濶�E� */
     display: block;
     transition: transform 0.5s ease;
 }
@@ -1084,7 +1084,7 @@ nav a:hover::after {
     opacity: 0.7;
 }
 
-/* 繝懊せ謾ｻ逡･繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ縺ｮ蝗ｲ縺ｿ譫� */
+/* 繝懊せ謾�E�逡�E�繧�E�繧�E�繧�E�繝ｧ繝ｳ縺�E�蝗ｲ縺�E�譫�E� */
 .boss-box {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1139,7 +1139,7 @@ nav a:hover::after {
     margin-bottom: 2.5rem;
     line-height: 1.8;
     max-width: 800px;
-    margin-left: auto;
+    
     margin-right: auto;
     opacity: 0.95;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -1245,7 +1245,7 @@ nav a:hover::after {
 
 .article-main {
     flex: 1;
-    min-width: 0; /* flexbox内ではみ出さないように */
+    min-width: 0; /* flexbox冁E��はみ出さなぁE��ぁE�� */
 }
 
 .toc-sidebar {
@@ -1293,7 +1293,7 @@ nav a:hover::after {
     color: var(--accent-color);
 }
 
-/* --- トップへ戻るボタン --- */
+/* --- トップへ戻る�Eタン --- */
 #back-to-top {
     position: fixed;
     bottom: 30px;
@@ -1307,7 +1307,7 @@ nav a:hover::after {
     font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
-    display: none; /* 初期状態は非表示（JSで制御） */
+    display: none; /* 初期状態�E非表示�E�ESで制御�E�E*/
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -1319,13 +1319,13 @@ nav a:hover::after {
     box-shadow: 0 6px 20px rgba(74, 222, 128, 0.6);
 }
 
-/* スマホ用のレスポンシブ対応（目次を非表示に） */
+/* スマ�E用のレスポンシブ対応（目次を非表示に�E�E*/
 @media (max-width: 900px) {
     .article-layout {
         flex-direction: column;
     }
     .toc-sidebar {
-        display: none !important; /* スマホでは非表示 */
+        display: none !important; /* スマ�Eでは非表示 */
     }
     #back-to-top {
         bottom: 20px;
@@ -1336,14 +1336,14 @@ nav a:hover::after {
     }
 }
 
-/* 記事ページ専用: コンテナを広くしてメイン記事の幅を確保 */
+/* 記事�Eージ専用: コンチE��を庁E��してメイン記事�E幁E��確俁E*/
 .article-container {
     max-width: 1400px !important;
 }
 
 .article-layout {
     display: flex;
-    gap: 3rem; /* 間隔を広げて右側に寄せる */
+    gap: 3rem; /* 間隔を庁E��て右側に寁E��めE*/
     align-items: flex-start;
 }
 
@@ -1353,9 +1353,9 @@ nav a:hover::after {
 }
 
 .toc-sidebar {
-    width: 280px; /* 少し幅を広げる */
+    width: 280px; /* 少し幁E��庁E��めE*/
     position: sticky;
-    top: 100px; /* ヘッダーの下に固定 */
+    top: 100px; /* ヘッダーの下に固宁E*/
     max-height: calc(100vh - 150px);
     overflow-y: auto;
     padding: 1.5rem;
@@ -1366,7 +1366,7 @@ nav a:hover::after {
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-/* スクロールバーのデザイン（目次内） */
+/* スクロールバ�EのチE��イン�E�目次冁E��E*/
 .toc-sidebar::-webkit-scrollbar {
     width: 4px;
 }
@@ -1392,7 +1392,7 @@ nav a:hover::after {
 
 /* --- �ǉ��̃J�X�^���X�^�C�� --- */
 .header-actions {
-    margin-left: auto;
+    
     padding-right: 1.5rem;
 }
 

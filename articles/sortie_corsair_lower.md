@@ -106,4 +106,5 @@ H区画のボスは、上層のDボス（Degei）の強化版であり、外見�
 
 
 
-> ⬅️ **[ソーティ攻略（上層編 DABC）に戻る](article.html?file=articles/sortie_corsair.md)**
+> ⬅️ **[ソーティ攻略（上層編 DABC）に戻る](article.html?file=articles/sortie_corsair.md)** ｜ 🏠 **[HPトップに戻る](index.html)** ｜ ⬆️ **[ページの一番上へ](#)**
+

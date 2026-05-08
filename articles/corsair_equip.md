@@ -204,19 +204,19 @@
 * 武器メイン：好きな武器
 * サブ：好きな武器
 * 遠隔武器：好きな武器
-* 矢弾：[ライヴブレット](http://wiki.ffo.jp/html/30018.html) or [ホクスボクブレット](http://wiki.ffo.jp/html/38150.html)
-* 頭：[ヘルクリアヘルム](http://wiki.ffo.jp/html/34164.html)（魔攻オグメ）
-* 胴：[ＬＡフラック＋３](http://wiki.ffo.jp/html/14545.html) or [＋４](http://wiki.ffo.jp/html/14545.html)
-* 両手：[カマインフィンガ＋１](http://wiki.ffo.jp/html/33890.html)（タイプＣランク１５） or [ヘルクリアグローブ](http://wiki.ffo.jp/html/34227.html)（魔攻オグメ）
-* 両脚：[ヘルクリアトラウザ](http://wiki.ffo.jp/html/34320.html)（魔攻オグメ）
-* 両足：[ＬＡブーツ＋３](http://wiki.ffo.jp/html/14569.html) or [＋４](http://wiki.ffo.jp/html/14569.html)
+* 矢弾：[ライヴブレット](http://wiki.ffo.jp/html/30018.html) or [ホクスボクブレット](http://wiki.ffo.jp/html/37839.html)
+* 頭：[ヘルクリアヘルム](http://wiki.ffo.jp/html/35175.html)（魔攻オグメ）
+* 胴：[ＬＡフラック](http://wiki.ffo.jp/html/31142.html)＋３ or ＋４
+* 両手：[カマインフィンガ＋１](http://wiki.ffo.jp/html/33890.html)（タイプＣランク１５） or [ヘルクリアグローブ](http://wiki.ffo.jp/html/35214.html)（魔攻オグメ）
+* 両脚：[ヘルクリアトラウザ](http://wiki.ffo.jp/html/35180.html)（魔攻オグメ）
+* 両足：[ＬＡブーツ](http://wiki.ffo.jp/html/30822.html)＋３ or ＋４
 * 首：[コモドアチャーム＋２](http://wiki.ffo.jp/html/37947.html)
 * 左耳：[胡蝶のイヤリング](http://wiki.ffo.jp/html/22133.html)（魔攻＋４、ＴＰボーナス＋２５０）
 * 右耳：[フリオミシピアス](http://wiki.ffo.jp/html/26048.html)
-* 左手の指：[アルビナリング＋１](http://wiki.ffo.jp/html/38392.html)
-* 右手の指：[ディンジルリング](http://wiki.ffo.jp/html/34177.html)
+* 左手の指：[アルビナリング＋１](http://wiki.ffo.jp/html/31848.html)
+* 右手の指：[ディンジルリング](http://wiki.ffo.jp/html/35914.html)
 * 背：[カムラスマント](http://wiki.ffo.jp/html/34459.html)（ＡＧＩ＋３０、魔命＋２０、魔法ダメージ＋２０、ウェポンスキルダメージ＋１０％）
-* 腰：[オルペウスサッシュ](http://wiki.ffo.jp/html/36109.html) or [八輪の帯](http://wiki.ffo.jp/html/22896.html)
+* 腰：[オルペウスサッシュ](http://wiki.ffo.jp/html/37383.html) or [八輪の帯](http://wiki.ffo.jp/html/32704.html)
 
 
 

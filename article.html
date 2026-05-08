@@ -604,8 +604,8 @@
                                     
                                     let url = linkMap[baseName];
                                     if (!url) {
-                                        // 「その他」などの補足説明が含まれている場合はリンク化せずそのまま表示
-                                        if (originalPartText.includes('その他')) {
+                                        // 「その他」や「好きな」などの記述が含まれている場合はリンク化せずそのまま表示
+                                        if (originalPartText.includes('その他') || originalPartText.includes('好きな')) {
                                             return `<span style="color: #e0e0e0;">${originalPartText}</span>`;
                                         }
                                         // 辞書未登録のハイエンド装備等は、DuckDuckGoの「I'm Feeling Lucky(!ducky)」機能を使って

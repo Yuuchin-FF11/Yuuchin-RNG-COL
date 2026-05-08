@@ -604,9 +604,9 @@
                                     
                                     let url = linkMap[baseName];
                                     if (!url) {
-                                        // 「その他」や「好きな」などの記述が含まれている場合はリンク化せずそのまま表示
+                                        // 「その他」や「好きな」などの記述が含まれている場合はリンク化せず、見た目だけ装備品の色（緑）に合わせる
                                         if (originalPartText.includes('その他') || originalPartText.includes('好きな')) {
-                                            return `<span style="color: #e0e0e0;">${originalPartText}</span>`;
+                                            return `<span style="color: #a8e063; font-weight: bold;">${originalPartText}</span>`;
                                         }
                                         // 辞書未登録のハイエンド装備等は、DuckDuckGoの「I'm Feeling Lucky(!ducky)」機能を使って
                                         // 検索画面をスキップし、直接FF11用語辞典の該当ページへジャンプさせる

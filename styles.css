@@ -1,26 +1,25 @@
-:root {
-    --primary-color: #4ade80;
-    /* 迢�E�莠�E�縺�E�譽�E�縺�E�邱�E� (SeaGreen) */
-    --secondary-color: #1a237e;
-    /* 繧�E�繝ｫ繧�E�繧�E�縺�E�繝阪ぁE��薙�E� */
-    --accent-color: #ffd700;
-    /* 繝ｭ繝ｼ繝ｫ縺�E�驥代∵姶蛻�E�蜩�E� */
+﻿:root {
+    --primary-color: #0d47a1; /* 繝｡繧､繝ｳ繧ｫ繝ｩ繝ｼ・育ｴｺ・・*/
+    --secondary-color: #1a237e; /* 繧ｻ繧ｫ繝ｳ繝繝ｪ繧ｫ繝ｩ繝ｼ */
+    --accent-color: #ffd700; /* 繧｢繧ｯ繧ｻ繝ｳ繝医き繝ｩ繝ｼ・磯≡・・*/
     --text-light: #f1f1f1;
     --text-dark: #333333;
     --glass-bg: rgba(16, 32, 48, 0.4);
-    /* 蟁E���E�證励�E�縺�E�繧�E�繝ｩ繧�E� */
     --glass-border: rgba(255, 255, 255, 0.15);
     --bg-gradient: linear-gradient(135deg, #051937 0%, #004d7a 50%, #008793 100%);
-    --sp-color: #ffd700; /* SP繧�E�繝薙Μ繝�ぁE��ｨ縺�E�鮟��E�医ぁE���E�繧�E�繝ｳ繝医き繝ｩ繝ｼ縺�E�邨�E�荳�E��E� */
-    --ability-color: #4dd0e1; /* 繧�E�繝薙Μ繝�ぁE��ｨ縺�E�豌ｴ濶�E� */
-    --ws-color: #ffb74d; /* WS逕ｨ縺�E�繧�E�繝ｬ繝ｳ繧�E� */
-    --magic-color: #f48fb1; /* 鬲疲�E�慕畑縺�E�繝斐Φ繧�E� */
+    --sp-color: #ffd700; /* SP繧｢繝薙Μ繝・ぅ・磯≡繝ｻ逋ｺ蜈会ｼ・*/
+    --ability-color: #4dd0e1; /* 繧｢繝薙Μ繝・ぅ逕ｨ・域ｰｴ濶ｲ・・*/
+    --ws-color: #ffb74d; /* WS逕ｨ・医が繝ｬ繝ｳ繧ｸ・・*/
+    --magic-color: #f48fb1; /* 鬲疲ｳ慕畑・医ヴ繝ｳ繧ｯ・・*/
+}
+
+    --magic-color: #f48fb1; /* 鬯ｲ逍ｲ・ｳ諷慕舞邵ｺ・ｮ郢晄鱒ﾎｦ郢ｧ・ｯ */
 }
 
 .sp-highlight {
     color: var(--sp-color);
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* 鮟�牡縺�E�逋ｺ蜈画─繧貞ｼ�E�繧√�E */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* 魄滂ｿｽ迚｡邵ｺ・ｮ騾具ｽｺ陷育判笏郢ｧ雋橸ｽｼ・ｷ郢ｧ竏壺・ */
 }
 
 .ability-highlight {
@@ -49,7 +48,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px; /* 蝗ｺ螳壹�E�繝�ム繝ｼ縺�E�鬮倥�E�E���E�せ繧�E�繝ｭ繝ｼ繝ｫ菴咲�E��E�繧定ｪ�E�謨�E� */
+    scroll-padding-top: 90px; /* 陜暦ｽｺ陞ｳ螢ｹ・ｽ郢晢ｿｽ繝郢晢ｽｼ邵ｺ・ｮ鬯ｮ蛟･・・崕・ｽ縺帷ｹｧ・ｯ郢晢ｽｭ郢晢ｽｼ郢晢ｽｫ闖ｴ蜥ｲ・ｽ・ｮ郢ｧ螳夲ｽｪ・ｿ隰ｨ・ｴ */
 }
 
 body {
@@ -796,9 +795,9 @@ nav a:hover::after {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* 逕ｻ蜒丞�菴薙ｒ陦�E�遉ｺ縺吶�E�繧医≧縺�E�螟画峩 */
+    /* 騾包ｽｻ陷剃ｸ橸ｿｽ闖ｴ阮呻ｽ帝勗・ｨ驕会ｽｺ邵ｺ蜷ｶ・狗ｹｧ蛹ｻ竕ｧ邵ｺ・ｫ陞溽判蟲ｩ */
     background: #000;
-    /* 隕句�E�繧碁亟豁E��縺�E�閭梧勹濶�E� */
+    /* 髫募唱・ｽ郢ｧ遒∽ｺ溯ｱ・ｽ｢邵ｺ・ｮ髢ｭ譴ｧ蜍ｹ豼ｶ・ｲ */
     display: block;
     transition: transform 0.5s ease;
 }
@@ -1084,7 +1083,7 @@ nav a:hover::after {
     opacity: 0.7;
 }
 
-/* 繝懊せ謾�E�逡�E�繧�E�繧�E�繧�E�繝ｧ繝ｳ縺�E�蝗ｲ縺�E�譫�E� */
+/* 郢晄㈱縺幄ｬｾ・ｻ騾｡・･郢ｧ・ｻ郢ｧ・ｯ郢ｧ・ｷ郢晢ｽｧ郢晢ｽｳ邵ｺ・ｮ陜暦ｽｲ邵ｺ・ｿ隴ｫ・ｽ */
 .boss-box {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1234,7 +1233,7 @@ nav a:hover::after {
     }
 }
 
-/* --- 記事レイアウトと目次(TOC) --- */
+/* --- 險倅ｺ九Ξ繧､繧｢繧ｦ繝医→逶ｮ谺｡(TOC) --- */
 .article-layout {
     display: flex;
     gap: 2rem;
@@ -1244,11 +1243,11 @@ nav a:hover::after {
 
 .article-main {
     flex: 1;
-    min-width: 0; /* flexbox冁E��はみ出さなぁE��ぁE�� */
+    min-width: 0; /* flexbox蜀・〒縺ｯ縺ｿ蜃ｺ縺輔↑縺・ｈ縺・↓ */
 }
 
 .toc-sidebar {
-    display: block !important; /* JSの非表示を上書きして表示 */
+    display: block !important; /* JS縺ｮ髱櫁｡ｨ遉ｺ繧剃ｸ頑嶌縺阪＠縺ｦ陦ｨ遉ｺ */
     width: 250px;
     flex-shrink: 0;
     position: sticky;
@@ -1292,7 +1291,7 @@ nav a:hover::after {
     color: var(--accent-color);
 }
 
-/* --- トップへ戻る�Eタン --- */
+/* --- 繝医ャ繝励∈謌ｻ繧九・繧ｿ繝ｳ --- */
 #back-to-top {
     position: fixed;
     bottom: 30px;
@@ -1306,7 +1305,7 @@ nav a:hover::after {
     font-size: 1.5rem;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
-    display: none; /* 初期状態�E非表示�E�ESで制御�E�E*/
+    display: none; /* 蛻晄悄迥ｶ諷九・髱櫁｡ｨ遉ｺ・・S縺ｧ蛻ｶ蠕｡・・*/
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -1318,13 +1317,13 @@ nav a:hover::after {
     box-shadow: 0 6px 20px rgba(74, 222, 128, 0.6);
 }
 
-/* スマ�E用のレスポンシブ対応（目次を非表示に�E�E*/
+/* 繧ｹ繝槭・逕ｨ縺ｮ繝ｬ繧ｹ繝昴Φ繧ｷ繝門ｯｾ蠢懶ｼ育岼谺｡繧帝撼陦ｨ遉ｺ縺ｫ・・*/
 @media (max-width: 900px) {
     .article-layout {
         flex-direction: column;
     }
     .toc-sidebar {
-        display: none !important; /* スマ�Eでは非表示 */
+        display: none !important; /* 繧ｹ繝槭・縺ｧ縺ｯ髱櫁｡ｨ遉ｺ */
     }
     #back-to-top {
         bottom: 20px;
@@ -1335,14 +1334,14 @@ nav a:hover::after {
     }
 }
 
-/* 記事�Eージ専用: コンチE��を庁E��してメイン記事�E幁E��確俁E*/
+/* 險倅ｺ九・繝ｼ繧ｸ蟆ら畑: 繧ｳ繝ｳ繝・リ繧貞ｺ・￥縺励※繝｡繧､繝ｳ險倅ｺ九・蟷・ｒ遒ｺ菫・*/
 .article-container {
     max-width: 1400px !important;
 }
 
 .article-layout {
     display: flex;
-    gap: 3rem; /* 間隔を庁E��て右側に寁E��めE*/
+    gap: 3rem; /* 髢馴囈繧貞ｺ・￡縺ｦ蜿ｳ蛛ｴ縺ｫ蟇・○繧・*/
     align-items: flex-start;
 }
 
@@ -1352,9 +1351,9 @@ nav a:hover::after {
 }
 
 .toc-sidebar {
-    width: 280px; /* 少し幁E��庁E��めE*/
+    width: 280px; /* 蟆代＠蟷・ｒ蠎・￡繧・*/
     position: sticky;
-    top: 100px; /* ヘッダーの下に固宁E*/
+    top: 100px; /* 繝倥ャ繝繝ｼ縺ｮ荳九↓蝗ｺ螳・*/
     max-height: calc(100vh - 150px);
     overflow-y: auto;
     padding: 1.5rem;
@@ -1365,7 +1364,7 @@ nav a:hover::after {
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-/* スクロールバ�EのチE��イン�E�目次冁E��E*/
+/* 繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ繝舌・縺ｮ繝・じ繧､繝ｳ・育岼谺｡蜀・ｼ・*/
 .toc-sidebar::-webkit-scrollbar {
     width: 4px;
 }
@@ -1389,7 +1388,7 @@ nav a:hover::after {
     }
 }
 
-/* --- �ǉ��̃J�X�^���X�^�C�� --- */
+/* --- 追加のカスタムスタイル --- */
 .header-actions {
     
     padding-right: 1.5rem;
@@ -1417,7 +1416,7 @@ nav a:hover::after {
     margin-bottom: 5px;
 }
 
-/* --- ���C�A�E�g�C�� --- */
+/* --- レイアウト修正 --- */
 .glass-header {
     display: flex;
     justify-content: space-between;
@@ -1435,11 +1434,11 @@ nav a:hover::after {
     display: flex;
     align-items: center;
     gap: 1.2rem;
-    margin-left: 0; /* �������Z�b�g */
+    margin-left: 0; /* 強制リセット */
 }
 
 .header-social-link {
-    color: var(--accent-color) !important; /* �ڗ��悤�ɃA�N�Z���g�J���[�ɁI */
+    color: var(--accent-color) !important; /* 目立つようにアクセントカラーに！ */
     font-size: 1.6rem;
     transition: all 0.3s ease;
     display: flex;
@@ -1460,21 +1459,21 @@ nav a:hover::after {
     letter-spacing: 1px;
 }
 
-/* --- �Љ�̃Z���^�����O�C�� --- */
+/* --- 紹介文のセンタリング修正 --- */
 .hero-description {
     margin-left: auto !important;
     margin-right: auto !important;
     text-align: center !important;
 }
 
-/* --- ���X�|���V�u�C�� (�X�}�z�Ή�) --- */
+/* --- レスポンシブ修正 (スマホ対応) --- */
 @media (max-width: 1024px) {
     .desktop-nav {
-        display: none !important; /* �X�}�z�E�^�u���b�g�ł͉����у��j���[���B�� */
+        display: none !important; /* スマホ・タブレットでは横並びメニューを隠す */
     }
     
     .menu-toggle {
-        display: flex !important; /* �n���o�[�K�[�{�^����\�� */
+        display: flex !important; /* ハンバーガーボタンを表示 */
     }
     
     .header-actions {
@@ -1482,7 +1481,7 @@ nav a:hover::after {
     }
 }
 
-/* �f�X�N�g�b�v�p�̐ݒ���Ċm�F */
+/* デスクトップ用の設定を再確認 */
 @media (min-width: 1025px) {
     .desktop-nav {
         display: flex !important;
@@ -1491,11 +1490,11 @@ nav a:hover::after {
     }
     
     .menu-toggle {
-        display: none !important; /* �f�X�N�g�b�v�ł̓n���o�[�K�[���B�� */
+        display: none !important; /* デスクトップではハンバーガーを隠す */
     }
 }
 
-/* --- ���уZ�N�V�����̃v���~�A�����C�A�E�g --- */
+/* --- 実績セクションのプレミアムレイアウト --- */
 .achievement-card {
     padding: 3rem !important;
     overflow: hidden;
@@ -1539,7 +1538,7 @@ nav a:hover::after {
     box-shadow: 0 20px 50px rgba(255, 215, 0, 0.2);
 }
 
-/* ���o�C���Ή� */
+/* モバイル対応 */
 @media (max-width: 768px) {
     .achievement-content {
         flex-direction: column-reverse;
@@ -1551,7 +1550,7 @@ nav a:hover::after {
     }
 }
 
-/* --- �摜�̑N�������� (AA Photo) --- */
+/* --- 画像の鮮明化実験 (AA Photo) --- */
     filter: brightness(1.1);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }

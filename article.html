@@ -515,8 +515,8 @@
                         "テーオン装束": "http://wiki.ffo.jp/html/35660.html",
                         "オショシ装束": "http://wiki.ffo.jp/html/36413.html",
                         "ヘルクリア装束": "http://wiki.ffo.jp/html/35458.html",
-                        "ラクサマナアタイア": "http://wiki.ffo.jp/html/30044.html",
-                        "ラヌンアタイア": "http://wiki.ffo.jp/html/30924.html",
+                        "ラクサマナアタイア": "https://wiki.ffo.jp/html/30044.html",
+                        "ラヌンアタイア": "https://wiki.ffo.jp/html/30924.html",
                         "ラヌンナイフ": "http://wiki.ffo.jp/html/37235.html",
                         "デマサルデーゲン": "http://wiki.ffo.jp/html/33879.html",
                         "エルデションレンズ": "http://wiki.ffo.jp/html/33905.html",
@@ -571,15 +571,16 @@
                                         
                                     // プレイヤーがよく使う略称（LA, CSなど）を正式名称の接頭辞に変換する
                                     const abbrMap = {
-                                        'ＬＡ': 'ラヌン',
-                                        'ＣＳ': 'シャスー',
-                                        'ＬＫ': 'ラクサマナ',
-                                        'ＬＵ': 'ルザフ',
-                                        'ＨＶ': 'ハーバートン'
+                                        'ＬＡ': 'ラヌン', 'LA': 'ラヌン',
+                                        'ＣＳ': 'シャスー', 'CS': 'シャスー',
+                                        'ＬＫ': 'ラクサマナ', 'LK': 'ラクサマナ',
+                                        'ＬＵ': 'ルザフ', 'LU': 'ルザフ',
+                                        'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン'
                                     };
                                     for (let key in abbrMap) {
                                         if (baseName.startsWith(key)) {
                                             baseName = baseName.replace(key, abbrMap[key]);
+                                            break; // 一致したら抜ける
                                         }
                                     }
 

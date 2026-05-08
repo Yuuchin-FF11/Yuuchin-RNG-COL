@@ -215,7 +215,7 @@
 * 右耳：[フリオミシピアス](http://wiki.ffo.jp/html/26048.html)
 * 左手の指：[アルビナリング＋１](http://wiki.ffo.jp/html/31848.html)
 * 右手の指：[ディンジルリング](http://wiki.ffo.jp/html/35914.html)
-* 背：[カムラスマント](http://wiki.ffo.jp/html/34459.html)（ＡＧＩ＋３０、魔命＋２０、魔法ダメージ＋２０、ウェポンスキルダメージ＋１０％）
+* 背：[カムラスマント](http://wiki.ffo.jp/html/34459.html)（ＡＧＩ＋３０、魔攻＋１０、魔命＋２０、魔法ダメージ＋２０）
 * 腰：[オルペウスサッシュ](http://wiki.ffo.jp/html/37383.html) or [八輪の帯](http://wiki.ffo.jp/html/32704.html)
 
 

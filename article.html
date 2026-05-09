@@ -118,16 +118,34 @@
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
                                 let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
                                 baseName = baseName.split(/[（(＜<＋+]/)[0].replace(/[Ａ-ＺA-Z]$/, '').trim();
+                                
+                                // 略称（LA, CS, LKなど）を正式名称に変換
+                                const abbrMap = {
+                                    'ＬＡ': 'ラヌン', 'LA': 'ラヌン',
+                                    'ＣＳ': 'シャスー', 'CS': 'シャスー',
+                                    'ＬＫ': 'ラクサマナ', 'LK': 'ラクサマナ',
+                                    'ＬＵ': 'ルザフ', 'LU': 'ルザフ',
+                                    'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン'
+                                };
+                                for (let key in abbrMap) {
+                                    if (baseName.startsWith(key)) {
+                                        baseName = baseName.replace(key, abbrMap[key]);
+                                        break;
+                                    }
+                                }
+
+                                // 略称や部位名の正規化
                                 if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
                                 else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス')) baseName = 'マリグナス装束';
                                 else if (baseName.startsWith('ラヌン') && !baseName.includes('ナイフ')) baseName = 'ラヌンアタイア';
                                 else if (baseName.startsWith('シャスー') && !baseName.includes('ピアス')) baseName = 'シャスーアタイア';
                                 else if (baseName.startsWith('ラクサマナ')) baseName = 'ラクサマナアタイア';
+                                else if (baseName.startsWith('ロスタム')) baseName = 'ロスタム';
                                 else if (baseName.startsWith('アデマ')) baseName = 'アデマ装束';
                                 else if (baseName.startsWith('テーオン')) baseName = 'テーオン装束';
                                 else if (baseName.startsWith('ヘルクリア')) baseName = 'ヘルクリア装束';
                                 else if (baseName.startsWith('オショシ')) baseName = 'オショシ装束';
-                                else if (baseName.startsWith('ロスタム')) baseName = 'ロスタム';
+
                                 const url = linkMap[baseName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
                                 return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${itemHtml}</a>`;
                             });

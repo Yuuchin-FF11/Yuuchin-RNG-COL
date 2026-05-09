@@ -214,7 +214,7 @@
 * 両脚：[ヘルクリアトラウザ](http://wiki.ffo.jp/html/35180.html)（魔攻オグメ）
 * 両足：[ＬＡブーツ](http://wiki.ffo.jp/html/30822.html)＋３ or ＋４
 * 首：[コモドアチャーム＋２](http://wiki.ffo.jp/html/37947.html)
-* 左耳：[胡蝶のイヤリング](http://wiki.ffo.jp/html/22133.html)（魔攻＋４、ＴＰボーナス＋２５０）
+* 左耳：[胡蝶のイヤリング](https://wiki.ffo.jp/html/22306.html)（魔攻＋４、ＴＰボーナス＋２５０）
 * 右耳：[フリオミシピアス](http://wiki.ffo.jp/html/26048.html)
 * 左手の指：[アルビナリング＋１](http://wiki.ffo.jp/html/31848.html)
 * 右手の指：[ディンジルリング](http://wiki.ffo.jp/html/35914.html)

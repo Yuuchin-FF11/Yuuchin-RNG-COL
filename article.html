@@ -98,14 +98,22 @@
                             const restHtml = liHtml.substring(colonIdx + 1).trim().replace(/<\/p>$/, '');
                             
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
-                                const cleanName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').split(/[（(<+]/)[0].trim();
-                                let base = cleanName;
-                                if (base.startsWith('ニャメ')) base = 'ニャメ装束';
-                                else if (base.startsWith('マリグナス')) base = 'マリグナス装束';
-                                else if (base.startsWith('ラヌン')) base = 'ラヌンアタイア';
-                                else if (base.startsWith('シャスー')) base = 'シャスーアタイア';
+                                // 装備名の抽出ロジック（タグとカッコを除去）
+                                let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
                                 
-                                const url = linkMap[base] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(base)}`;
+                                // 末尾のランク表記（A, B, C, R15, +1など）を削ってベース名を取り出す
+                                baseName = baseName.split(/[（(＜<＋+]/)[0] // カッコやプラス以降を削除
+                                           .replace(/[Ａ-ＺA-Z]$/, '') // 末尾のアルファベット1文字を削除
+                                           .trim();
+                                
+                                // 略称や部位名の正規化
+                                if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
+                                else if (baseName.startsWith('マリグナス')) baseName = 'マリグナス装束';
+                                else if (baseName.startsWith('ラヌン')) baseName = 'ラヌンアタイア';
+                                else if (baseName.startsWith('シャスー')) baseName = 'シャスーアタイア';
+                                else if (baseName.startsWith('ロスタム')) baseName = 'ロスタム';
+                                
+                                const url = linkMap[baseName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
                                 return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${itemHtml}</a>`;
                             });
                             li.innerHTML = prefixText + ' ' + items.join(' or ');

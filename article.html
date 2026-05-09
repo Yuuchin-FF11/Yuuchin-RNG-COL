@@ -303,6 +303,13 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
+
+        /* ブラケットハイライト */
+        .highlight-bracket {
+            color: #ffb700; /* 鮮やかなゴールド */
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 183, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -624,6 +631,9 @@
                                 li.innerHTML = `${prefix} ${linkedParts.join(' <span style="color: #ccc; font-weight: normal; font-size: 0.9em;">or</span> ')}`;
                             }
                         }
+                    // --- 「」や『』の色付け処理 ---
+                    contentDiv.innerHTML = contentDiv.innerHTML.replace(/([「『])([^」』]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
+
                     // --- 指定されたアンカー（#hash）へのスクロール ---
                     if (window.location.hash) {
                         const targetId = decodeURIComponent(window.location.hash.substring(1));

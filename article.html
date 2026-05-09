@@ -92,14 +92,16 @@
                             const prefix = txt.substring(0, colonIdx + 1) + ' ';
                             const rest = txt.substring(colonIdx + 1).trim();
                             const items = rest.split(/\s+or\s+/).map(item => {
-                                const clean = item.replace(/[「」『』]/g, '').split(/[（(<+]/)[0].trim();
-                                let base = clean;
-                                if (base.startsWith('ニャメ')) base = 'ニャメ装束';
-                                else if (base.startsWith('マリグナス') && !base.includes('ピアス')) base = 'マリグナス装束';
-                                else if (base.startsWith('ラヌン')) base = 'ラヌンアタイア';
-                                else if (base.startsWith('シャスー')) base = 'シャスーアタイア';
+                                // 装備名の抽出ロジック（タグとカッコを除去）
+                                let baseName = item.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').split(/[（(<+]/)[0].trim();
                                 
-                                const url = linkMap[base] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(base)}`;
+                                // 略称や部位名の正規化
+                                if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
+                                else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス')) baseName = 'マリグナス装束';
+                                else if (baseName.startsWith('ラヌン')) baseName = 'ラヌンアタイア';
+                                else if (baseName.startsWith('シャスー')) baseName = 'シャスーアタイア';
+                                
+                                const url = linkMap[baseName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
                                 return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${item}</a>`;
                             });
                             li.innerHTML = prefix + items.join(' or ');

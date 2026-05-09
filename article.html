@@ -117,9 +117,10 @@
                             const restHtml = li.innerHTML.substring(li.innerHTML.search(/[:：]/) + 1).trim();
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
                                 let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
-                                baseName = baseName.split(/[（(＜<＋+]/)[0].replace(/[Ａ-ＺA-Z]$/, '').trim();
-                                
-                                // 略称（LA, CS, LKなど）を正式名称に変換
+                                // まずカッコ・プラス以降を削除
+                                baseName = baseName.split(/[（(＜<＋+]/)[0].trim();
+
+                                // ★ 略称変換を先に行う（LA, CS, LK など）
                                 const abbrMap = {
                                     'ＬＡ': 'ラヌン', 'LA': 'ラヌン',
                                     'ＣＳ': 'シャスー', 'CS': 'シャスー',
@@ -134,7 +135,10 @@
                                     }
                                 }
 
-                                // 略称や部位名の正規化
+                                // 略称展開後、末尾のランク文字（ニャメA など）を削除
+                                baseName = baseName.replace(/[Ａ-ＺA-Z]$/, '').trim();
+
+                                // セット装備名の正規化
                                 if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
                                 else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス')) baseName = 'マリグナス装束';
                                 else if (baseName.startsWith('ラヌン') && !baseName.includes('ナイフ')) baseName = 'ラヌンアタイア';
@@ -145,6 +149,8 @@
                                 else if (baseName.startsWith('テーオン')) baseName = 'テーオン装束';
                                 else if (baseName.startsWith('ヘルクリア')) baseName = 'ヘルクリア装束';
                                 else if (baseName.startsWith('オショシ')) baseName = 'オショシ装束';
+                                else if (baseName.startsWith('ハーバートン')) baseName = 'ハーバートンリング';
+                                else if (baseName.startsWith('ルザフ')) baseName = 'ルザフリング';
 
                                 const url = linkMap[baseName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
                                 return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${itemHtml}</a>`;

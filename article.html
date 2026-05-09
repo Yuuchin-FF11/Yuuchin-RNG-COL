@@ -70,54 +70,48 @@
             fetch(file)
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
-                    const rawHtml = marked.parse(text);
+                    // カッコの色付けをMarkdown解析前に行う
+                    const processedText = text.replace(/([「『])([^」』\n]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
+                    const rawHtml = marked.parse(processedText);
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = rawHtml;
 
-                    // 装備リンク設定
                     const linkMap = {
                         "ロスタム": "http://wiki.ffo.jp/html/37235.html", "ニャメ装束": "http://wiki.ffo.jp/html/38283.html", "マリグナス装束": "http://wiki.ffo.jp/html/39726.html",
                         "イケンガ装束": "http://wiki.ffo.jp/html/38196.html", "シャスーアタイア": "http://wiki.ffo.jp/html/33205.html", "ラヌンアタイア": "http://wiki.ffo.jp/html/30924.html",
                         "アデマ装束": "http://wiki.ffo.jp/html/34613.html", "テーオン装束": "http://wiki.ffo.jp/html/35660.html", "ネイグリング": "http://wiki.ffo.jp/html/37597.html",
                         "トーレット": "http://wiki.ffo.jp/html/37598.html", "サンダン": "http://wiki.ffo.jp/html/34652.html", "ムンム装束": "http://wiki.ffo.jp/html/34947.html", "アヤモ装束": "http://wiki.ffo.jp/html/35165.html",
-                        "フォーマルハウト": "http://wiki.ffo.jp/html/35356.html", "デスペナルティ": "http://wiki.ffo.jp/html/483.html", "カムラスマント": "http://wiki.ffo.jp/html/35517.html"
+                        "フォーマルハウト": "http://wiki.ffo.jp/html/35356.html", "デスペナルティ": "http://wiki.ffo.jp/html/483.html", "カムラスマント": "http://wiki.ffo.jp/html/35517.html",
+                        "王将の首飾り": "http://wiki.ffo.jp/html/36145.html", "テロスピアス": "http://wiki.ffo.jp/html/34761.html", "守りの指輪": "http://wiki.ffo.jp/html/2290.html"
                     };
                     const keywords = ['武器メイン', 'サブ', '遠隔武器', '矢弾', '頭', '胴', '両手', '両脚', '両足', '首', '左耳', '右耳', '左手の指', '右手の指', '背', '腰'];
 
-                    // 裏側で一括処理
                     tempDiv.querySelectorAll('li').forEach(li => {
                         const txt = li.textContent.trim();
-                        const colonIdx = txt.indexOf(':');
-                        if (colonIdx !== -1 && keywords.includes(txt.substring(0, colonIdx))) {
-                            const prefix = txt.substring(0, colonIdx + 1) + ' ';
-                            const rest = txt.substring(colonIdx + 1).trim();
-                            const items = rest.split(/\s+or\s+/).map(item => {
-                                // 装備名の抽出ロジック（タグとカッコを除去）
-                                let baseName = item.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').split(/[（(<+]/)[0].trim();
+                        // 判定をより確実に（コロンの位置とキーワードの一致）
+                        const colonIdx = txt.search(/[:：]/);
+                        if (colonIdx !== -1 && keywords.some(k => txt.startsWith(k))) {
+                            const prefixText = txt.substring(0, colonIdx + 1);
+                            const restHtml = li.innerHTML.substring(li.innerHTML.search(/[:：]/) + 1).trim();
+                            
+                            const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
+                                const cleanName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').split(/[（(<+]/)[0].trim();
+                                let base = cleanName;
+                                if (base.startsWith('ニャメ')) base = 'ニャメ装束';
+                                else if (base.startsWith('マリグナス') && !base.includes('ピアス')) base = 'マリグナス装束';
+                                else if (base.startsWith('ラヌン')) base = 'ラヌンアタイア';
+                                else if (base.startsWith('シャスー')) base = 'シャスーアタイア';
+                                else if (base.startsWith('アデマ')) base = 'アデマ装束';
                                 
-                                // 略称や部位名の正規化
-                                if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
-                                else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス')) baseName = 'マリグナス装束';
-                                else if (baseName.startsWith('ラヌン')) baseName = 'ラヌンアタイア';
-                                else if (baseName.startsWith('シャスー')) baseName = 'シャスーアタイア';
-                                
-                                const url = linkMap[baseName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
-                                return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${item}</a>`;
+                                const url = linkMap[base] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(base)}`;
+                                return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${itemHtml}</a>`;
                             });
-                            li.innerHTML = prefix + items.join(' or ');
-                        } else {
-                            li.innerHTML = li.innerHTML.replace(/([「『])([^」』]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
+                            li.innerHTML = prefixText + ' ' + items.join(' or ');
                         }
                     });
 
-                    tempDiv.querySelectorAll('p, blockquote, h2, h3').forEach(el => {
-                        el.innerHTML = el.innerHTML.replace(/([「『])([^」』]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
-                    });
-
-                    // 最後に一回だけ画面を更新
                     contentDiv.innerHTML = tempDiv.innerHTML;
 
-                    // 目次生成
                     const tocList = document.getElementById('toc-list');
                     contentDiv.querySelectorAll('h2, h3').forEach((h, i) => {
                         h.id = 'h-' + i;

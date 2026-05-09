@@ -74,8 +74,8 @@
                     contentDiv.innerHTML = marked.parse(processedText);
 
                     const linkMap = {
-                        "ロスタム": "http://wiki.ffo.jp/html/37235.html", "ニャメ装束": "http://wiki.ffo.jp/html/38283.html", "マリグナス装束": "http://wiki.ffo.jp/html/39726.html",
-                        "イケンガ装束": "http://wiki.ffo.jp/html/38196.html", "シャスーアタイア": "http://wiki.ffo.jp/html/33205.html", "ラヌンアタイア": "http://wiki.ffo.jp/html/30924.html",
+                        "ロスタム": "https://wiki.ffo.jp/html/37235.html", "ニャメ装束": "https://wiki.ffo.jp/html/38283.html", "マリグナス装束": "https://wiki.ffo.jp/html/39726.html",
+                        "イケンガ装束": "https://wiki.ffo.jp/html/38196.html", "シャスーアタイア": "https://wiki.ffo.jp/html/33205.html", "ラヌンアタイア": "https://wiki.ffo.jp/html/30924.html",
                         "アデマ装束": "http://wiki.ffo.jp/html/34613.html", "カコエシクリング": "http://wiki.ffo.jp/html/34650.html", "クロノブレット": "http://wiki.ffo.jp/html/35442.html",
                         "昏黄の指輪": "http://wiki.ffo.jp/html/38369.html", "オノワイヤリング": "http://wiki.ffo.jp/html/35440.html", "ベイラピアス": "http://wiki.ffo.jp/html/37879.html",
                         "シーリチリング": "http://wiki.ffo.jp/html/35694.html", "イフラマドリング": "http://wiki.ffo.jp/html/39089.html", "霊亀腰帯": "http://wiki.ffo.jp/html/34718.html",
@@ -141,6 +141,7 @@
 
                                 // セット装備名の正規化
                                 if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
+                                else if (baseName.startsWith('イケンガ')) baseName = 'イケンガ装束';
                                 else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス')) baseName = 'マリグナス装束';
                                 else if (baseName.startsWith('ラヌン') && !baseName.includes('ナイフ')) baseName = 'ラヌンアタイア';
                                 else if (baseName.startsWith('シャスー') && !baseName.includes('ピアス')) baseName = 'シャスーアタイア';

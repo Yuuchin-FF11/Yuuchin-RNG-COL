@@ -631,20 +631,6 @@
                                 li.innerHTML = `${prefix} ${linkedParts.join(' <span style="color: #ccc; font-weight: normal; font-size: 0.9em;">or</span> ')}`;
                             }
 
-                    // --- 「」や『』の色付け処理 (安全なテキストノード置換版) ---
-                    const walker = document.createTreeWalker(contentDiv, NodeFilter.SHOW_TEXT, null, false);
-                    const nodes = [];
-                    let node;
-                    while (node = walker.nextNode()) nodes.push(node);
-                    nodes.forEach(textNode => {
-                        if (textNode.parentNode.tagName === 'A' || textNode.parentNode.classList.contains('highlight-bracket')) return;
-                        if (/[「『].+[」』]/.test(textNode.textContent)) {
-                            const span = document.createElement('span');
-                            span.innerHTML = textNode.textContent.replace(/([「『])([^」』]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
-                            textNode.parentNode.replaceChild(span, textNode);
-                        }
-                    });
-
                     // --- 指定されたアンカー（#hash）へのスクロール ---
                     if (window.location.hash) {
                         const targetId = decodeURIComponent(window.location.hash.substring(1));

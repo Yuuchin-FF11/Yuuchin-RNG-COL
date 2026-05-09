@@ -9,7 +9,6 @@
       gtag('js', new Date());
       gtag('config', 'G-KD054RHKQ8');
     </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>記事 | FFXI Bismarck</title>
@@ -83,39 +82,48 @@
                         tocList.appendChild(li);
                     });
 
-                    // 装備リンクと色付け
+                    // 装備辞書
                     const linkMap = {
-                        "ロスタム": "http://wiki.ffo.jp/html/37235.html", "ニャメ装束": "http://wiki.ffo.jp/html/38283.html", "マリグナス装束": "http://wiki.ffo.jp/html/39726.html",
-                        "イケンガ装束": "http://wiki.ffo.jp/html/38196.html", "シャスーアタイア": "http://wiki.ffo.jp/html/33205.html", "ラヌンアタイア": "http://wiki.ffo.jp/html/30924.html",
-                        "アデマ装束": "http://wiki.ffo.jp/html/34613.html", "テーオン装束": "http://wiki.ffo.jp/html/35660.html", "ネイグリング": "http://wiki.ffo.jp/html/37597.html"
+                        \"ロスタム\": \"http://wiki.ffo.jp/html/37235.html\", \"ニャメ装束\": \"http://wiki.ffo.jp/html/38283.html\", \"マリグナス装束\": \"http://wiki.ffo.jp/html/39726.html\",
+                        \"イケンガ装束\": \"http://wiki.ffo.jp/html/38196.html\", \"シャスーアタイア\": \"http://wiki.ffo.jp/html/33205.html\", \"ラヌンアタイア\": \"http://wiki.ffo.jp/html/30924.html\",
+                        \"アデマ装束\": \"http://wiki.ffo.jp/html/34613.html\", \"テーオン装束\": \"http://wiki.ffo.jp/html/35660.html\", \"ネイグリング\": \"http://wiki.ffo.jp/html/37597.html\",
+                        \"トーレット\": \"http://wiki.ffo.jp/html/37598.html\", \"サンダン\": \"http://wiki.ffo.jp/html/34652.html\", \"ムンム装束\": \"http://wiki.ffo.jp/html/34947.html\", \"アヤモ装束\": \"http://wiki.ffo.jp/html/35165.html\",
+                        \"カコエシクリング\": \"http://wiki.ffo.jp/html/34650.html\", \"クロノブレット\": \"http://wiki.ffo.jp/html/35442.html\", \"昏黄の指輪\": \"http://wiki.ffo.jp/html/38369.html\",
+                        \"オノワイヤリング\": \"http://wiki.ffo.jp/html/35440.html\", \"ベイラピアス\": \"http://wiki.ffo.jp/html/37879.html\", \"シーリチリング\": \"http://wiki.ffo.jp/html/35694.html\",
+                        \"カムラスマント\": \"http://wiki.ffo.jp/html/35517.html\", \"フォーマルハウト\": \"http://wiki.ffo.jp/html/35356.html\", \"デスペナルティ\": \"http://wiki.ffo.jp/html/483.html\"
                     };
                     const exactKeywords = ['武器メイン', 'サブ', '遠隔武器', '矢弾', '頭', '胴', '両手', '両脚', '両足', '首', '左耳', '右耳', '左手の指', '右手の指', '背', '腰'];
 
                     contentDiv.querySelectorAll('li').forEach(li => {
-                        const txt = li.textContent.trim();
-                        const colonIdx = txt.indexOf(':');
-                        if (colonIdx !== -1 && exactKeywords.includes(txt.substring(0, colonIdx))) {
-                            // 装備行はリンクのみ（色付けはしない）
-                            let html = li.innerHTML;
-                            const parts = html.split(/[:：]/);
-                            const prefix = parts[0] + ': ';
-                            const rest = parts.slice(1).join(':').trim();
+                        const html = li.innerHTML;
+                        const match = html.match(/^([^:：]+)[:：](.*)$/);
+                        if (match && exactKeywords.includes(match[1].trim())) {
+                            const prefix = match[1] + ': ';
+                            const rest = match[2].trim();
                             
                             const items = rest.split(/\s+or\s+/).map(item => {
-                                const cleanName = item.replace(/[「」『』]/g, '').split(/[（(<+]/)[0].trim();
-                                const url = linkMap[cleanName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(cleanName)}`;
-                                return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${item}</a>`;
+                                // 装備名の抽出ロジック（カッコやタグを除去）
+                                let baseName = item.replace(/[「」『』]/g, '').split(/[（(<+]/)[0].trim();
+                                
+                                // 略称や部位名の正規化
+                                if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
+                                else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス') && !baseName.includes('リング')) baseName = 'マリグナス装束';
+                                else if (baseName.startsWith('ラヌン') && !baseName.includes('ナイフ')) baseName = 'ラヌンアタイア';
+                                else if (baseName.startsWith('シャスー') && !baseName.includes('ピアス')) baseName = 'シャスーアタイア';
+                                
+                                const url = linkMap[baseName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
+                                return `<a href=\"${url}\" target=\"_blank\" style=\"color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;\">${item}</a>`;
                             });
                             li.innerHTML = prefix + items.join(' or ');
                         } else {
-                            // 普通の行は「」を色付け
-                            li.innerHTML = li.innerHTML.replace(/([「『])([^」』]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
+                            // 装備リンク以外の行は「」をハイライト
+                            li.innerHTML = li.innerHTML.replace(/([「『])([^」』]+)([」』])/g, '<span class=\"highlight-bracket\">$1$2$3</span>');
                         }
                     });
 
-                    // 段落なども色付け
-                    contentDiv.querySelectorAll('p, blockquote').forEach(p => {
-                        p.innerHTML = p.innerHTML.replace(/([「『])([^」』]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
+                    // 段落などの「」をハイライト
+                    contentDiv.querySelectorAll('p, blockquote, h1, h2, h3, h4').forEach(p => {
+                        p.innerHTML = p.innerHTML.replace(/([「『])([^」』]+)([」』])/g, '<span class=\"highlight-bracket\">$1$2$3</span>');
                     });
                 })
                 .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);

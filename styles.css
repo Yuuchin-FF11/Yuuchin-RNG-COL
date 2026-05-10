@@ -1679,6 +1679,13 @@ nav a:hover::after {
     visibility: visible;
 }
 
+/* スマホでは「一番上へ」を非表示にしてスッキリさせる */
+@media (max-width: 767px) {
+    .footer-top-link {
+        display: none !important;
+    }
+}
+
 .footer-top-link:hover {
     color: white;
     background: var(--accent-color);

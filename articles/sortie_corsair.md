@@ -268,4 +268,4 @@ C区画のボスは、Aボスと同じく固定で**「火属性」**が弱点�
 
 ---
 
-> ➡️ **[ソーティ攻略（下層編 GEFH）へ続く](article.html?file=articles/sortie_corsair_lower.md)**
+> ➡️ **[ソーティ攻略（下層編 GEFH）はこちら](article.html?file=articles/sortie_corsair_lower.md)** ｜ 🏠 **[HPトップに戻る](index.html)** ｜ ⬆️ **[ページの一番上へ](#)**

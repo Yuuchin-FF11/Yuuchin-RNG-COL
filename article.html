@@ -37,7 +37,8 @@
         .markdown-body h1 { color: var(--accent-color); font-size: 2.2rem; margin-bottom: 2rem; border-bottom: 2px solid var(--accent-color); }
         .markdown-body h2 { color: white; font-size: 1.6rem; margin-top: 2.5rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
         .markdown-body p, .markdown-body li { font-size: 1.1rem; margin-bottom: 1rem; }
-        .markdown-body a { color: #a8e063; text-decoration: underline; }
+        .markdown-body a { color: #a8e063; text-decoration: none; border-bottom: 1px dashed #a8e063; font-weight: 700; }
+        .auto-link { color: #a8e063; font-weight: 700; text-decoration: none; border-bottom: 1px dashed #a8e063; }
         .highlight-bracket { color: #ffb700; font-weight: bold; text-shadow: 0 0 8px rgba(255, 183, 0, 0.2); }
     </style>
 </head>
@@ -117,11 +118,22 @@
                             const prefix = txt.substring(0, colonIdx + 1) + ' ';
                             const restHtml = li.innerHTML.substring(li.innerHTML.search(/[:：]/) + 1).trim();
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
-                                let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
-                                // まずカッコ・プラス以降を削除
-                                baseName = baseName.split(/[（(＜<＋+]/)[0].trim();
+                                // すでにリンクが含まれている場合は、二重リンクを避けるためにラップしない
+                                if (itemHtml.includes('<a ')) {
+                                    return itemHtml; 
+                                }
 
-                                // ★ 略称変換を先に行う（LA, CS, LK など）
+                                let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
+                                // カッコ・プラス以降を削除して検索用ベース名を作成
+                                const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
+                                
+                                // 数値や記号のみ、または空の場合はリンクにしない
+                                if (!searchName || /^[＋+or\d\sランクRank]+$/.test(searchName)) {
+                                    return itemHtml;
+                                }
+
+                                // 略称変換（LA, CS, LK など）
+                                let normalizedName = searchName;
                                 const abbrMap = {
                                     'ＬＡ': 'ラヌン', 'LA': 'ラヌン',
                                     'ＣＳ': 'シャスー', 'CS': 'シャスー',
@@ -130,37 +142,49 @@
                                     'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン'
                                 };
                                 for (let key in abbrMap) {
-                                    if (baseName.startsWith(key)) {
-                                        baseName = baseName.replace(key, abbrMap[key]);
+                                    if (normalizedName.startsWith(key)) {
+                                        normalizedName = normalizedName.replace(key, abbrMap[key]);
                                         break;
                                     }
                                 }
 
-                                // 略称展開後、末尾のランク文字（ニャメA など）を削除
-                                baseName = baseName.replace(/[Ａ-ＺA-Z]$/, '').trim();
+                                // ランク文字の削除
+                                normalizedName = normalizedName.replace(/[Ａ-ＺA-Z]$/, '').trim();
 
                                 // セット装備名の正規化
-                                if (baseName.startsWith('ニャメ')) baseName = 'ニャメ装束';
-                                else if (baseName.startsWith('イケンガ')) baseName = 'イケンガ装束';
-                                else if (baseName.startsWith('マリグナス') && !baseName.includes('ピアス')) baseName = 'マリグナス装束';
-                                else if (baseName.startsWith('ラヌン') && !baseName.includes('ナイフ')) baseName = 'ラヌンアタイア';
-                                else if (baseName.startsWith('シャスー') && !baseName.includes('ピアス')) baseName = 'シャスーアタイア';
-                                else if (baseName.startsWith('ラクサマナ')) baseName = 'ラクサマナアタイア';
-                                else if (baseName.startsWith('ロスタム')) baseName = 'ロスタム';
-                                else if (baseName.startsWith('アデマ')) baseName = 'アデマ装束';
-                                else if (baseName.startsWith('テーオン')) baseName = 'テーオン装束';
-                                else if (baseName.startsWith('ヘルクリア')) baseName = 'ヘルクリア装束';
-                                else if (baseName.startsWith('オショシ')) baseName = 'オショシ装束';
-                                else if (baseName.startsWith('ハーバートン')) baseName = 'ハーバートンリング';
-                                else if (baseName.startsWith('ルザフ')) baseName = 'ルザフリング';
+                                if (normalizedName.startsWith('ニャメ')) normalizedName = 'ニャメ装束';
+                                else if (normalizedName.startsWith('イケンガ')) normalizedName = 'イケンガ装束';
+                                else if (normalizedName.startsWith('マリグナス') && !normalizedName.includes('ピアス')) normalizedName = 'マリグナス装束';
+                                else if (normalizedName.startsWith('ラヌン') && !normalizedName.includes('ナイフ')) normalizedName = 'ラヌンアタイア';
+                                else if (normalizedName.startsWith('シャスー') && !normalizedName.includes('ピアス')) normalizedName = 'シャスーアタイア';
+                                else if (normalizedName.startsWith('ラクサマナ')) normalizedName = 'ラクサマナアタイア';
+                                else if (normalizedName.startsWith('ロスタム')) normalizedName = 'ロスタム';
+                                else if (normalizedName.startsWith('アデマ')) normalizedName = 'アデマ装束';
+                                else if (normalizedName.startsWith('テーオン')) normalizedName = 'テーオン装束';
+                                else if (normalizedName.startsWith('ヘルクリア')) normalizedName = 'ヘルクリア装束';
+                                else if (normalizedName.startsWith('オショシ')) normalizedName = 'オショシ装束';
+                                else if (normalizedName.startsWith('ハーバートン')) normalizedName = 'ハーバートンリング';
+                                else if (normalizedName.startsWith('ルザフ')) normalizedName = 'ルザフリング';
 
-                                const url = linkMap[baseName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(baseName)}`;
-                                return `<a href="${url}" target="_blank" style="color:#a8e063;font-weight:bold;text-decoration:none;border-bottom:1px dashed #a8e063;">${itemHtml}</a>`;
+                                const url = linkMap[normalizedName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(normalizedName)}`;
+                                return `<a href="${url}" target="_blank" class="auto-link">${itemHtml}</a>`;
                             });
                             li.innerHTML = prefix + items.join(' or ');
                         }
                     });
                     contentDiv.innerHTML = tempDiv.innerHTML;
+
+                    // 全てのリンクに target="_blank" を適用し、スタイルを一括管理
+                    contentDiv.querySelectorAll('a').forEach(a => {
+                        a.setAttribute('target', '_blank');
+                        if (!a.classList.contains('auto-link')) {
+                            // Markdown由来のリンクにもスタイルを適用
+                            a.style.color = '#a8e063';
+                            a.style.fontWeight = '700'; // 太さを強調
+                            a.style.textDecoration = 'none';
+                            a.style.borderBottom = '1px dashed #a8e063';
+                        }
+                    });
 
                     const tocList = document.getElementById('toc-list');
                     contentDiv.querySelectorAll('h2, h3').forEach((h, i) => {

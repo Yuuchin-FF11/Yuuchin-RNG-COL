@@ -188,13 +188,20 @@
                     });
                     contentDiv.innerHTML = tempDiv.innerHTML;
 
-                    // 全てのリンクに target="_blank" を適用し、スタイルを一括管理
+                    // リンクの挙動を調整（外部サイトは別タブ、サイト内は同タブ）
                     contentDiv.querySelectorAll('a').forEach(a => {
-                        a.setAttribute('target', '_blank');
+                        const isExternal = a.hostname && a.hostname !== window.location.hostname;
+                        if (isExternal || (a.href.startsWith('http') && !a.href.includes(window.location.hostname))) {
+                            a.setAttribute('target', '_blank');
+                            a.rel = 'noopener noreferrer';
+                        } else {
+                            a.setAttribute('target', '_self');
+                        }
+
                         if (!a.classList.contains('auto-link')) {
                             // Markdown由来のリンクにもスタイルを適用
                             a.style.color = '#a8e063';
-                            a.style.fontWeight = '700'; // 太さを強調
+                            a.style.fontWeight = '700';
                             a.style.textDecoration = 'none';
                             a.style.borderBottom = '1px dashed #a8e063';
                         }

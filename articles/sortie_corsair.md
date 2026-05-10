@@ -34,8 +34,9 @@
 
 #### マクロ構成（5行）
 ```text
-1. /equipset [レデン用装備] echo
+1. /equipset [クイックドローSTP装備] echo
 2. /ws "レデンサリュート" <t> <wait 4>
+
 3. /ja "アイスショット" <t> <wait 1>
 4. /ja "アイスショット" <t> <wait 2>
 5. /ws "ワイルドファイア" <t>

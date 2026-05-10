@@ -26,8 +26,7 @@
 
 焦って即撃ちするのではなく、**「エフェクトを見てから一呼吸置いて撃つ」**ことを意識すると、パーティ全体の総ダメージがグッと伸びます！
 
-<a id="leaden-macro"></a>
-<div class="boss-box">
+<div class="boss-box" id="leaden-macro">
 
 ### 💡 追撃の「レデンサリュート → ワイルドファイア」一人連携マクロ
 
@@ -65,8 +64,7 @@
 
 </div>
 
-<a id="laststand-macro"></a>
-<div class="boss-box">
+<div class="boss-box" id="laststand-macro">
 
 ### 💡 究極連携「極光」用：ラストスタンド 2ポチマクロ
 

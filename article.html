@@ -215,6 +215,18 @@
                         tli.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`;
                         tocList.appendChild(tli);
                     });
+
+                    // ハッシュがある場合は、レンダリング後にその位置までスクロール
+                    if (window.location.hash) {
+                        setTimeout(() => {
+                            const id = window.location.hash.substring(1);
+                            const target = document.getElementById(id);
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }, 100);
+                    }
+
                 })
                 .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
         }

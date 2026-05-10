@@ -1600,6 +1600,57 @@ nav a:hover::after {
     100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 78, 80, 0.5); }
 }
 
+/* Footer Related Links Section */
+.footer-links-container {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-heading {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.footer-links-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-link-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.footer-link-card i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.footer-link-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: var(--accent-color);
+}
+
 /* Fixed Back to Top Text Link */
 .footer-top-link {
     position: fixed;

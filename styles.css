@@ -1600,22 +1600,39 @@ nav a:hover::after {
     100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 78, 80, 0.5); }
 }
 
-/* Footer Back to Top Link */
+/* Fixed Back to Top Text Link */
 .footer-top-link {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
     color: var(--accent-color);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: bold;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    background: rgba(13, 71, 161, 0.4);
+    backdrop-filter: blur(8px);
+    padding: 0.7rem 1.2rem;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.footer-top-link.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 .footer-top-link:hover {
     color: white;
-    transform: translateY(-2px);
-    text-shadow: 0 0 10px var(--accent-color);
+    background: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
 

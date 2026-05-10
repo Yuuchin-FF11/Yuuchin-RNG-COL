@@ -10,7 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            
+            if (href === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            
+            const target = document.querySelector(href);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth'
@@ -312,7 +319,7 @@ async function loadDiaryEntries() {
 }
 
 function initBackToTop() {
-    const backToTopBtn = document.getElementById('back-to-top');
+    const backToTopBtn = document.getElementById('fixed-back-to-top');
     if (!backToTopBtn) return;
 
     window.addEventListener('scroll', () => {
@@ -323,7 +330,8 @@ function initBackToTop() {
         }
     });
 
-    backToTopBtn.addEventListener('click', () => {
+    backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         window.scrollTo({
             top: 0,
             behavior: 'smooth'

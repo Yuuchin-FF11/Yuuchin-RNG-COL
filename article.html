@@ -61,10 +61,9 @@
             <aside class="toc-sidebar" id="toc-sidebar"><h4 style="margin-top:0;"><i class="fa-solid fa-list"></i> 目次</h4><ul id="toc-list"></ul></aside>
     <footer class="glass-footer" style="text-align: center; padding: 3rem 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
         <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p>
-        <div style="margin-top: 1rem;">
-            <a href="#" class="footer-top-link" style="display: inline-flex; justify-content: center;"><i class="fa-solid fa-chevron-up"></i> ページの一番上へ</a>
-        </div>
     </footer>
+
+    <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> ページの一番上へ</a>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -235,15 +234,22 @@
                  .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
          }
  
-         // Back to Top functionality (Footer link)
-         document.querySelectorAll('a[href="#"]').forEach(link => {
-             link.addEventListener('click', (e) => {
+         // Back to Top functionality (Fixed text link)
+         const backToTopBtn = document.getElementById('fixed-back-to-top');
+         if (backToTopBtn) {
+             window.addEventListener('scroll', () => {
+                 if (window.scrollY > 500) {
+                     backToTopBtn.classList.add('visible');
+                 } else {
+                     backToTopBtn.classList.remove('visible');
+                 }
+             });
+             backToTopBtn.addEventListener('click', (e) => {
                  e.preventDefault();
                  window.scrollTo({ top: 0, behavior: 'smooth' });
              });
-         });
+         }
      </script>
-
 
 </body>
 </html>

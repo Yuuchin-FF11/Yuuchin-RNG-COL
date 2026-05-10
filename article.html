@@ -156,7 +156,7 @@
                                 // ランク文字の削除
                                 normalizedName = normalizedName.replace(/[Ａ-ＺA-Z]$/, '').trim();
 
-                                // セット装備名の正規化
+                                // 装備品名の正規化（続き）
                                 if (normalizedName.startsWith('ニャメ')) normalizedName = 'ニャメ装束';
                                 else if (normalizedName.startsWith('イケンガ')) normalizedName = 'イケンガ装束';
                                 else if (normalizedName.startsWith('マリグナス') && !normalizedName.includes('ピアス')) normalizedName = 'マリグナス装束';
@@ -171,8 +171,17 @@
                                 else if (normalizedName.startsWith('ハーバートン')) normalizedName = 'ハーバートンリング';
                                 else if (normalizedName.startsWith('ルザフ')) normalizedName = 'ルザフリング';
 
-                                const url = linkMap[normalizedName] || `https://duckduckgo.com/?q=!ducky+site:wiki.ffo.jp+${encodeURIComponent(normalizedName)}`;
-                                return `<a href="${url}" target="_blank" class="auto-link">${itemHtml}</a>`;
+                                const url = linkMap[normalizedName];
+                                if (url) {
+                                    // 登録されている装備品のみリンクを貼る
+                                    return `<a href="${url}" target="_blank" class="auto-link">${itemHtml}</a>`;
+                                } else {
+                                    // リンクはないが、ランク表記や特定のプレースホルダなら彩色だけ行う
+                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml) || itemHtml.includes('好きな') || itemHtml.includes('その他の')) {
+                                        return `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>`;
+                                    }
+                                    return itemHtml;
+                                }
                             });
                             li.innerHTML = prefix + items.join(' or ');
                         }

@@ -1600,43 +1600,22 @@ nav a:hover::after {
     100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 78, 80, 0.5); }
 }
 
-/* Back to Top Button */
-#back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(13, 71, 161, 0.6);
-    backdrop-filter: blur(10px);
+/* Footer Back to Top Link */
+.footer-top-link {
     color: var(--accent-color);
-    border: 1px solid var(--glass-border);
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: none; /* JavaScriptで表示制御 */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-#back-to-top:hover {
-    background: var(--accent-color);
-    color: #111;
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-}
-
-#back-to-top.visible {
     display: flex;
-    animation: fadeIn 0.3s ease-out;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.footer-top-link:hover {
+    color: white;
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px var(--accent-color);
 }
 
 

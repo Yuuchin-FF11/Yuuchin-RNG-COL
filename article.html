@@ -62,6 +62,8 @@
         </div>
     </main>
 
+    <button id="back-to-top" title="Go to top"><i class="fa-solid fa-chevron-up"></i></button>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const file = urlParams.get('file');
@@ -209,27 +211,43 @@
 
                     const tocList = document.getElementById('toc-list');
                     contentDiv.querySelectorAll('h2, h3').forEach((h, i) => {
-                        h.id = 'h-' + i;
-                        const tli = document.createElement('li');
-                        tli.style.marginLeft = h.tagName === 'H3' ? '1rem' : '0';
-                        tli.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`;
-                        tocList.appendChild(tli);
-                    });
+                         h.id = 'h-' + i;
+                         const tli = document.createElement('li');
+                         tli.style.marginLeft = h.tagName === 'H3' ? '1rem' : '0';
+                         tli.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`;
+                         tocList.appendChild(tli);
+                     });
+ 
+                     // ハッシュがある場合は、レンダリング後にその位置までスクロール
+                     if (window.location.hash) {
+                         setTimeout(() => {
+                             const id = window.location.hash.substring(1);
+                             const target = document.getElementById(id);
+                             if (target) {
+                                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                             }
+                         }, 100);
+                     }
+ 
+                 })
+                 .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
+         }
+ 
+         // Back to Top functionality
+         const backToTopBtn = document.getElementById('back-to-top');
+         if (backToTopBtn) {
+             window.addEventListener('scroll', () => {
+                 if (window.scrollY > 500) {
+                     backToTopBtn.style.display = 'flex';
+                 } else {
+                     backToTopBtn.style.display = 'none';
+                 }
+             });
+             backToTopBtn.addEventListener('click', () => {
+                 window.scrollTo({ top: 0, behavior: 'smooth' });
+             });
+         }
+     </script>
 
-                    // ハッシュがある場合は、レンダリング後にその位置までスクロール
-                    if (window.location.hash) {
-                        setTimeout(() => {
-                            const id = window.location.hash.substring(1);
-                            const target = document.getElementById(id);
-                            if (target) {
-                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }
-                        }, 100);
-                    }
-
-                })
-                .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
-        }
-    </script>
 </body>
 </html>

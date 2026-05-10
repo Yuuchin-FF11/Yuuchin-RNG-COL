@@ -43,7 +43,7 @@ Gボスへ向かう道中でナラカNMを討伐する場合、以下の2パタ�
 *   **ボス部屋への「絡まれ釣り」パターン**：<span class="magic-highlight">インビジ</span>を切ってわざとナラカに絡まれ、そのままボス部屋まで走って引っ張る方法です。<span class="ability-highlight">ボルターズロール</span>で距離をとった隙に<span class="magic-highlight">インビジ</span>をかけ直すか、仲間に<span class="magic-highlight">インビジ</span>を飛ばしてもらうなどして安全を確保しましょう。
 
 #### ナラカ戦でのロールと支援
-ナラカは火属性のMBで素べく討伐します。この戦闘中にはロールを回す余裕があるため、ここで**「<span class="ability-highlight">モンクスロール</span>」**をかけておきます。NMを倒してボス部屋に到着した際に「<span class="ability-highlight">ウィザーズロール</span>」を重ねることで、理想的な状態でボス戦を開始できます。
+ナラカは火属性のMBで素早く討伐します。この戦闘中にはロールを回す余裕があるため、ここで**「<span class="ability-highlight">モンクスロール</span>」**をかけておきます。NMを倒してボス部屋に到着した際に「<span class="ability-highlight">ウィザーズロール</span>」を重ねることで、理想的な状態でボス戦を開始できます。
 
 ### Gボスの実戦
 *   **弱体魔法の維持**：黒魔道士または学者が**「<span class="magic-highlight">インパクト</span>」**を入れ、続けて黒魔道士が**「<span class="magic-highlight">バーン</span>」**を維持して敵のINTを下げるのが重要です。
@@ -72,6 +72,8 @@ F区画のボスは上層のBボス（Bitzer）の強化版です。属性が「
 *   **リソースの温存と属性変化への対応**：
     ボスの属性が土弱点の場合、学者は重力連携を作成しますが、コルセアは単独で繋ぐ手段が乏しいため、魔導剣士が繋いでくれた場合に**「<span class="ws-highlight">ワイルドファイア</span>」**で追撃する程度に留め、リソースを温存します。
     属性が氷弱点（風属性）に変化した瞬間に、温存していたTPとドローをフル活用し、**「<span class="ws-highlight">レデンサリュート</span> → <span class="ability-highlight">ドロー2発</span> → <span class="ws-highlight">ワイルドファイア</span>」**などの連携延長ルートで一気に削ります。
+    > 💡 **[この一人連携マクロの作り方・解説はこちら（上層編へ）](article.html?file=articles/sortie_corsair.md#重要連携追撃のwsを撃つタイミングについて)**
+
 
 </div>
 
@@ -81,7 +83,7 @@ F区画のボスは上層のBボス（Bitzer）の強化版です。属性が「
 ## H区画ボスの攻略（Aita）
 
 
-H区画のボスは、上層のDボス（Degei）の強化版であり、外見通り**「Hades」のギミック**を継承しています。
+H区画のボスは、上層 service のDボス（Degei）の強化版であり、外見通り**「Hades」のギミック**を継承しています。
 
 ### Aita 特殊技・弱点属性対応表
 
@@ -107,4 +109,3 @@ H区画のボスは、上層のDボス（Degei）の強化版であり、外見�
 
 
 > ⬅️ **[ソーティ攻略（上層編 DABC）に戻る](article.html?file=articles/sortie_corsair.md)** ｜ 🏠 **[HPトップに戻る](index.html)** ｜ ⬆️ **[ページの一番上へ](#)**
-

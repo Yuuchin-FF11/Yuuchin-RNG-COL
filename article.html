@@ -127,10 +127,10 @@
                                 // カッコ・プラス以降を削除して検索用ベース名を作成
                                 const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
                                 
-                                // 数値や記号のみ、または特定のキーワードの場合はリンクにしない
-                                if (!searchName || /^[＋+or\d\sランクRank]+$/.test(searchName) || searchName.includes('好きな武器')) {
-                                    // ランク表記（＋４など）には装備品と同じ色を適用する
-                                    if (/^[＋+or\d\s]+$/.test(itemHtml)) {
+                                // 数値や記号のみ、英字1文字、または特定のキーワードの場合はリンクにしない
+                                if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('好きな武器')) {
+                                    // ランク表記（＋４やＢなど）には装備品と同じ色を適用する
+                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml)) {
                                         return `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>`;
                                     }
                                     return itemHtml;

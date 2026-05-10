@@ -129,9 +129,9 @@
                                 const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
                                 
                                 // 数値や記号のみ、英字1文字、または特定のキーワードの場合はリンクにしない
-                                if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('好きな武器') || searchName.includes('好きな装備')) {
-                                    // ランク表記（＋４やＢなど）やプレースホルダには装備品と同じ色を適用する
-                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml) || itemHtml.includes('好きな武器') || itemHtml.includes('好きな装備')) {
+                                if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('好きな武器') || searchName.includes('好きな装備') || searchName.includes('その他の')) {
+                                    // ランク表記やプレースホルダには装備品と同じ色を適用する
+                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml) || itemHtml.includes('好きな武器') || itemHtml.includes('好きな装備') || itemHtml.includes('その他の')) {
                                         return `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>`;
                                     }
                                     return itemHtml;

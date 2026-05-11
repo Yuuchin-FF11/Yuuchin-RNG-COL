@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    initBackToTop();
     initParticles();
     initAIChat();
     loadDiaryEntries();
     initMobileMenu();
-    initBackToTop();
 
 
     // Smooth scrolling for anchor links

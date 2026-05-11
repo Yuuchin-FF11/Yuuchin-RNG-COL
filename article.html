@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        .article-layout { display: flex; gap: 2rem; align-items: flex-start; }
-        .article-main { flex: 1; min-width: 0; }
-        .toc-sidebar { width: 250px; position: sticky; top: 120px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; display: none; }
+        .article-layout { display: flex; gap: 2rem; align-items: flex-start; justify-content: center; }
+        .article-main { flex: 1; min-width: 0; max-width: 850px; }
+        .toc-sidebar { width: 280px; position: sticky; top: 120px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; display: none; }
         @media (min-width: 1024px) { .toc-sidebar { display: block; } }
         .toc-sidebar h4 { color: var(--accent-color); margin-bottom: 1rem; font-family: 'Noto Sans JP', sans-serif; }
         .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { font-family: 'Zen Maru Gothic', sans-serif; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
@@ -241,7 +241,7 @@
                  })
                  .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
          }
- 
+
          // Back to Top functionality (Fixed text link)
          const backToTopBtn = document.getElementById('fixed-back-to-top');
          if (backToTopBtn) {

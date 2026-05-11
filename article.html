@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        .article-layout { display: flex; gap: 2rem; align-items: flex-start; justify-content: center; }
-        .article-main { flex: 1; min-width: 0; max-width: 850px; }
+        .article-layout { display: flex; gap: 2.5rem; align-items: flex-start; justify-content: center; width: 100%; }
+        .article-main { flex: 0 1 850px; min-width: 0; width: 100%; }
         .toc-sidebar { width: 280px; position: sticky; top: 120px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; display: none; }
         @media (min-width: 1024px) { .toc-sidebar { display: block; } }
         .toc-sidebar h4 { color: var(--accent-color); margin-bottom: 1rem; font-family: 'Noto Sans JP', sans-serif; }
@@ -57,7 +57,9 @@
     </header>
 
     <main class="container article-container">
-        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> トップページへ戻る</a>
+        <div style="max-width: 850px; margin: 0 auto;">
+            <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> トップページへ戻る</a>
+        </div>
         <div class="article-layout">
             <div class="article-main">
                 <div class="glass-card" style="padding: 2rem 3rem;">

@@ -82,7 +82,7 @@ function initMobileMenu() {
 }
 
 // --- Gemini AI Chat Logic ---
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
 let genAI = null;
 let model = null;

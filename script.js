@@ -323,32 +323,20 @@ function initBackToTop() {
     if (!backToTopBtn) return;
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
+        const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrolled > 400) {
             backToTopBtn.classList.add('visible');
+            backToTopBtn.style.opacity = '1';
+            backToTopBtn.style.visibility = 'visible';
+            backToTopBtn.style.transform = 'translateY(0)';
         } else {
             backToTopBtn.classList.remove('visible');
+            backToTopBtn.style.opacity = '0';
+            backToTopBtn.style.visibility = 'hidden';
+            backToTopBtn.style.transform = 'translateY(20px)';
         }
-    });
-
-    backToTopBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
-function initBackToTop() {
-    const backToTopBtn = document.getElementById('fixed-back-to-top');
-    if (!backToTopBtn) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 500) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
+    }, {
+        passive: true
     });
 
     backToTopBtn.addEventListener('click', (e) => {

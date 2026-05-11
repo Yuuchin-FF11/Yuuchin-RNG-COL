@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        .article-layout { display: flex; gap: 2.5rem; align-items: flex-start; justify-content: center; width: 100%; }
+        .article-layout { display: flex; gap: 3rem; align-items: flex-start; justify-content: center; width: 100%; margin-top: 2rem; }
         .article-main { flex: 0 1 850px; min-width: 0; width: 100%; }
-        .toc-sidebar { width: 280px; position: sticky; top: 120px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; display: none; }
+        .toc-sidebar { width: 280px; position: sticky; top: 120px; background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; display: none; }
         @media (min-width: 1024px) { .toc-sidebar { display: block; } }
         .toc-sidebar h4 { color: var(--accent-color); margin-bottom: 1rem; font-family: 'Noto Sans JP', sans-serif; }
         .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { font-family: 'Zen Maru Gothic', sans-serif; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
@@ -244,16 +244,22 @@
                  .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
          }
 
-         // Back to Top functionality (Fixed text link)
          const backToTopBtn = document.getElementById('fixed-back-to-top');
          if (backToTopBtn) {
              window.addEventListener('scroll', () => {
-                 if (window.scrollY > 500) {
-                     backToTopBtn.classList.add('visible');
-                 } else {
-                     backToTopBtn.classList.remove('visible');
-                 }
-             });
+                const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrolled > 400) {
+                    backToTopBtn.classList.add('visible');
+                    backToTopBtn.style.opacity = '1';
+                    backToTopBtn.style.visibility = 'visible';
+                    backToTopBtn.style.transform = 'translateY(0)';
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                    backToTopBtn.style.opacity = '0';
+                    backToTopBtn.style.visibility = 'hidden';
+                    backToTopBtn.style.transform = 'translateY(20px)';
+                }
+            }, { passive: true });
              backToTopBtn.addEventListener('click', (e) => {
                  e.preventDefault();
                  window.scrollTo({ top: 0, behavior: 'smooth' });

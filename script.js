@@ -339,3 +339,24 @@ function initBackToTop() {
     });
 }
 
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('fixed-back-to-top');
+    if (!backToTopBtn) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+

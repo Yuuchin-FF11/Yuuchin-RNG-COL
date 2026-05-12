@@ -133,7 +133,8 @@
                         "Republican Platinum Medal": "https://wiki.ffo.jp/html/38491.html", "Gazu Bracelets": "https://wiki.ffo.jp/html/35439.html", "Impulse Belt": "https://wiki.ffo.jp/html/20373.html",
                         "Ifrimad Ring": "https://wiki.ffo.jp/html/39089.html", "Beyla Earring": "https://wiki.ffo.jp/html/37879.html", "Live Bullet": "https://wiki.ffo.jp/html/35445.html",
                         "Sailfi Belt": "https://wiki.ffo.jp/html/32262.html", "Mummu Mask": "https://wiki.ffo.jp/html/39387.html", "Mummu Gorget": "https://wiki.ffo.jp/html/39388.html",
-                        "Mummu Cape": "https://wiki.ffo.jp/html/39389.html", "Mummu Sash": "https://wiki.ffo.jp/html/39390.html", "Carmine Finger": "https://wiki.ffo.jp/html/34550.html"
+                        "Mummu Cape": "https://wiki.ffo.jp/html/39389.html", "Mummu Sash": "https://wiki.ffo.jp/html/39390.html", "Carmine Finger": "https://wiki.ffo.jp/html/34550.html",
+                        "Herculean": "https://wiki.ffo.jp/html/35458.html", "Arvina Ring": "https://wiki.ffo.jp/html/27236.html", "Hauksbok Bullet": "https://wiki.ffo.jp/html/37166.html"
                     };
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
@@ -174,12 +175,16 @@
                                 else if (normalizedName.startsWith('Laksamana\'s')) normalizedName = 'Laksamana\'s';
                                 else if (normalizedName.startsWith('Rostam')) normalizedName = 'Rostam';
                                 else if (normalizedName.startsWith('Adhemar')) normalizedName = 'Adhemar Jacket';
+                                else if (normalizedName.startsWith('Herculean')) normalizedName = 'Herculean';
+                                else if (normalizedName.startsWith('Arvina Ring')) normalizedName = 'Arvina Ring';
+                                else if (normalizedName.startsWith('Hauksbok Bullet')) normalizedName = 'Hauksbok Bullet';
                                 else if (normalizedName.startsWith('Mummu')) {
                                     if (normalizedName.includes('Mask')) normalizedName = 'Mummu Mask';
                                     else if (normalizedName.includes('Gorget')) normalizedName = 'Mummu Gorget';
                                     else if (normalizedName.includes('Cape')) normalizedName = 'Mummu Cape';
                                     else if (normalizedName.includes('Sash')) normalizedName = 'Mummu Sash';
                                 }
+                                else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
 
                                 const url = linkMap[normalizedName];
                                 if (url) {

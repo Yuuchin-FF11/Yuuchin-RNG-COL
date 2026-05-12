@@ -20,7 +20,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        .article-container { margin-top: 120px; margin-bottom: 100px; max-width: 1300px; margin-left: auto; margin-right: auto; padding: 0 2rem; display: flex; flex-direction: column; align-items: center; }
+        .article-container { 
+            margin-top: 120px; 
+            margin-bottom: 100px; 
+            max-width: 1300px; 
+            margin-left: auto; 
+            margin-right: auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .article-header-nav { width: 100%; max-width: 850px; margin-bottom: 2rem; text-align: left; }
         .article-layout { display: flex; gap: 3rem; align-items: flex-start; justify-content: center; width: 100%; }
         .article-main { flex: 0 1 850px; min-width: 0; width: 100%; }
@@ -79,14 +89,14 @@
                         "Yemaya Belt": "http://wiki.ffo.jp/html/34152.html", "Kawkab Belt": "http://wiki.ffo.jp/html/35702.html", "Crepuscular Ring": "http://wiki.ffo.jp/html/38154.html",
                         "Pixie Hairpin +1": "http://wiki.ffo.jp/html/20388.html", "Archon Ring": "http://wiki.ffo.jp/html/24057.html", "Suppanomimi": "http://wiki.ffo.jp/html/317.html",
                         "Epona's Ring": "http://wiki.ffo.jp/html/22464.html", "Chirich Ring": "http://wiki.ffo.jp/html/35694.html", "Sarissapho Belt": "http://wiki.ffo.jp/html/31956.html",
-                        "Herberton Ring": "http://wiki.ffo.jp/html/31110.html", "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html", "Kustawi": "http://wiki.ffo.jp/html/35435.html",
+                        "Haverton Ring": "http://wiki.ffo.jp/html/31110.html", "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html", "Kustawi": "http://wiki.ffo.jp/html/35435.html",
                         "Melanic Ring": "http://wiki.ffo.jp/html/38155.html", "Hachirin-no-Obi": "http://wiki.ffo.jp/html/32704.html", "Moonshade Earring": "http://wiki.ffo.jp/html/22306.html",
                         "Friomisi Earring": "http://wiki.ffo.jp/html/26048.html", "Karakt Choker": "http://wiki.ffo.jp/html/31102.html", "Eabani Earring": "http://wiki.ffo.jp/html/30950.html",
                         "Gleti's Knife": "http://wiki.ffo.jp/html/38202.html", "Anarchy": "http://wiki.ffo.jp/html/35315.html", "Ataktos": "http://wiki.ffo.jp/html/35316.html",
                         "Republican Platinum Medal": "http://wiki.ffo.jp/html/31046.html", "Gazu Bracelets": "http://wiki.ffo.jp/html/33190.html", "Impulse Belt": "http://wiki.ffo.jp/html/31952.html",
                         "Ifrimad Ring": "http://wiki.ffo.jp/html/38274.html", "Beyla Earring": "http://wiki.ffo.jp/html/31011.html", "Live Bullet": "http://wiki.ffo.jp/html/30018.html",
                         "Sailfi Belt": "http://wiki.ffo.jp/html/35698.html", "Mumu Mask": "http://wiki.ffo.jp/html/39387.html", "Mumu Gorget": "http://wiki.ffo.jp/html/39388.html",
-                        "Mumu Cape": "http://wiki.ffo.jp/html/39389.html", "Mumu Sash": "http://wiki.ffo.jp/html/39390.html"
+                        "Mumu Cape": "http://wiki.ffo.jp/html/39389.html", "Mumu Sash": "http://wiki.ffo.jp/html/39390.html", "Carmine Finger": "http://wiki.ffo.jp/html/33891.html"
                     };
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
@@ -102,14 +112,14 @@
                                 const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
                                 if (!searchName || /^[＋+or\d\sRank]+$/.test(searchName)) return (/^[＋+or\d\s]+$/.test(itemHtml) ? `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>` : itemHtml);
                                 let normalizedName = searchName;
-                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur', 'LK': 'Laksamana', 'LU': 'Luzaf', 'HV': 'Herberton' };
+                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur', 'LK': 'Laksamana', 'LU': 'Luzaf', 'HV': 'Haverton' };
                                 for (let key in abbrMap) { if (normalizedName.startsWith(key)) { normalizedName = normalizedName.replace(key, abbrMap[key]); break; } }
                                 if (normalizedName.startsWith('Nyame')) normalizedName = 'Nyame';
                                 else if (normalizedName.startsWith('Malignance')) normalizedName = 'Malignance';
                                 else if (normalizedName.startsWith('Ikenga')) normalizedName = 'Ikenga';
                                 else if (normalizedName.startsWith('Lanun')) normalizedName = 'Lanun';
                                 else if (normalizedName.startsWith('Chasseur')) normalizedName = 'Chasseur';
-                                else if (normalizedName.startsWith('Herberton')) normalizedName = 'Herberton Ring';
+                                else if (normalizedName.startsWith('Haverton')) normalizedName = 'Haverton Ring';
                                 else if (normalizedName.startsWith('Kustawi')) normalizedName = 'Kustawi';
                                 else if (normalizedName.startsWith('Crepuscular Ring')) normalizedName = 'Crepuscular Ring';
                                 else if (normalizedName.startsWith('Crepuscular Earring')) normalizedName = 'Crepuscular Earring';
@@ -131,6 +141,7 @@
                                 else if (normalizedName.startsWith('Mumu Gorget')) normalizedName = 'Mumu Gorget';
                                 else if (normalizedName.startsWith('Mumu Cape')) normalizedName = 'Mumu Cape';
                                 else if (normalizedName.startsWith('Mumu Sash')) normalizedName = 'Mumu Sash';
+                                else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
                                 const url = linkMap[normalizedName] || linkMap[searchName] || linkMap[baseName];
                                 return (url ? `<a href="${url}" target="_blank" class="auto-link">${itemHtml}</a>` : itemHtml);
                             });
@@ -142,11 +153,6 @@
                     contentDiv.querySelectorAll('h2, h3').forEach((h, i) => { h.id = 'h-' + i; const tli = document.createElement('li'); tli.style.marginLeft = h.tagName === 'H3' ? '1rem' : '0'; tli.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`; tocList.appendChild(tli); });
                 })
                 .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
-        }
-        const backToTopBtn = document.getElementById('fixed-back-to-top');
-        if (backToTopBtn) {
-            window.addEventListener('scroll', () => { (window.pageYOffset > 400) ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible'); }, { passive: true });
-            backToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
         }
     </script>
 </body>

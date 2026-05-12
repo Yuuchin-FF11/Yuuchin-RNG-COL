@@ -31,7 +31,7 @@
 
 <div class="boss-box">
 
-## G区画ボスの攻略（Gartell）
+## G区画ボスの攻略（Triboulex）
 
 
 G区画のボスは、上層のCボス（Skomora）の強化版です。Cボスと同様に火属性が弱点のため、<span class="magic-highlight">ファイア系</span>のマジックバースト（MB）を軸にして戦います。
@@ -54,7 +54,7 @@ Gボスへ向かう道中でナラカNMを討伐する場合、以下の2パタ�
 
 <div class="boss-box">
 
-## E区画ボスの攻略（Triboulex）
+## E区画ボスの攻略（Dhartok）
 
 
 E区画のボスは上層のAボス（Ghatjot）の強化版です。基本的な属性や連携パターンは変わりませんが、HPが大幅に増えているため、火力の最大化を意識します。学者の核熱連携に<span class="ws-highlight">エクゼンレター</span>を合わせ、<span class="ability-highlight">ファイアショット</span>でダメージ支援を行う流れは上層と同様です。
@@ -64,7 +64,7 @@ E区画のボスは上層のAボス（Ghatjot）の強化版です。基本的�
 
 <div class="boss-box">
 
-## F区画ボスの攻略（Leshath）
+## F区画ボスの攻略（Gartell）
 
 
 F区画のボスは上層のBボス（Leshonn）の強化版です。属性が「雷属性（土弱点）」または「風属性（氷弱点）」のどちらかになります。

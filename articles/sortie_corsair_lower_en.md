@@ -31,7 +31,7 @@ Since lower sector bosses have **extremely high evasion**, you must pay close at
 
 <div class="boss-box">
 
-## Sector G Boss Guide: Gartell
+## Sector G Boss Guide: Triboulex
 
 The Sector G boss is an empowered version of the upper C boss (Skomora). Like the C boss, it is weak to fire, so the strategy revolves around **Fire Magic Bursts (MB)**.
 
@@ -52,7 +52,7 @@ The Naraka is quickly defeated with Fire MBs. Since there's time during this fig
 
 <div class="boss-box">
 
-## Sector E Boss Guide: Triboulex
+## Sector E Boss Guide: Dhartok
 
 The Sector E boss is an empowered version of the upper A boss (Ghatjot). The basic elemental and skillchain patterns are the same, but since its HP is significantly increased, focus on maximizing damage. The flow of matching <span class="ws-highlight">Exenterator</span> to the SCH's Fusion and supporting with **Fire Shot** is the same as the upper sectors.
 
@@ -60,7 +60,7 @@ The Sector E boss is an empowered version of the upper A boss (Ghatjot). The bas
 
 <div class="boss-box">
 
-## Sector F Boss Guide: Leshath
+## Sector F Boss Guide: Gartell
 
 The Sector F boss is an empowered version of the upper B boss (Leshonn). Its attribute will be either **Thunder (Earth weakness)** or **Wind (Ice weakness)**.
 

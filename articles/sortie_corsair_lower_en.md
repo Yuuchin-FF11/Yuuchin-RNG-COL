@@ -33,7 +33,7 @@ Since lower sector bosses have **extremely high evasion**, you must pay close at
 
 ## Sector G Boss Guide: Gartell
 
-The Sector G boss is an empowered version of the upper C boss (Lesath). Like the C boss, it is weak to fire, so the strategy revolves around **Fire Magic Bursts (MB)**.
+The Sector G boss is an empowered version of the upper C boss (Skomora). Like the C boss, it is weak to fire, so the strategy revolves around **Fire Magic Bursts (MB)**.
 
 ### Regarding the Naraka NM (Gyvewrapped Naraka) on the way
 When defeating the Naraka NM on the way to the G boss, there are two pulling patterns:
@@ -62,7 +62,7 @@ The Sector E boss is an empowered version of the upper A boss (Ghatjot). The bas
 
 ## Sector F Boss Guide: Leshath
 
-The Sector F boss is an empowered version of the upper B boss (Bitzer). Its attribute will be either **Thunder (Earth weakness)** or **Wind (Ice weakness)**.
+The Sector F boss is an empowered version of the upper B boss (Leshonn). Its attribute will be either **Thunder (Earth weakness)** or **Wind (Ice weakness)**.
 
 *   **Resource Conservation and Attribute Adaptation**:
     If the boss is weak to Earth, the Scholar creates Gravitation. Since the Corsair has few ways to follow up solo, stick to following up with **"<span class="ws-highlight">Wildfire</span>"** only if the Rune Fencer connects it, and conserve resources.

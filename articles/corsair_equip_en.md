@@ -1,19 +1,19 @@
 # Corsair Equipment Guide
 
-This page details the equipment for Corsair.
+This guide details the recommended equipment for Corsair.
 
-> **💡 For New & Returning Players**
-> The equipment introduced on this page is focused on "ideal gear for endgame content (such as Sortie)" for highly active players.
-> For those who cannot yet prepare high-end gear like Nyame or Ikenga sets, please refer to the **[Entry-level Equipment Guide](article_en.html?file=articles/corsair_equip_beginner_en.md)**, which summarizes relatively easy-to-collect gear. Use this page as your ultimate goal.
+> **💡 For Beginners and Returning Players**
+> This page focuses on "Ideal Gear Sets" for high-end content (such as Sortie) aimed at active players.
+> For "Entry-level Gear (Uniqlo Gear)" that is easier to collect if you don't have Nyame or Ikenga yet, please refer to the **[Entry-level Gear Guide](article_en.html?file=articles/corsair_equip_beginner_en.md)**. Use this page as your ultimate goal.
 
-## Phantom Roll Equipment
-Dedicated equipment for enhancing party firepower. Sets that provide effect duration extension or bonuses.
+## Phantom Roll Set
+Dedicated equipment to boost the party's firepower. Includes gear that extends duration or provides bonuses.
 
 * Main Weapon: Rostam (Path C)
 * Sub: Kustawi +1
 * Ranged Weapon: Fomalhaut (Rank 15)
-* Ammo: Beyouv Bullet (any will do if unavailable)
-* Head: Lanun Tricorne +3 (or +1/+2)
+* Ammo: Beyouv Bullet (Anything is fine if not available)
+* Head: Lanun Tricorne +3
 * Body: Chasseur's Frac +3
 * Hands: Chasseur's Gantry +3
 * Legs: Chasseur's Culottes +3
@@ -21,9 +21,9 @@ Dedicated equipment for enhancing party firepower. Sets that provide effect dura
 * Neck: Regal Necklace
 * Left Ear: Onowai Earring +1
 * Right Ear: Chasseur's Earring +2
-* Left Ring: Gelatinous Ring +1 or Defending Ring
+* Left Ring: Melanic Ring or Defending Ring
 * Right Ring: Luzaf's Ring
-* Back: Camulus's Mantle (HP+80, Eva/MagEva+20, Enmity-10, Damage Taken -5%)
+* Back: Camulus's Mantle (HP+80, Eva/Mag.Eva+20, Enmity-10, Damage Taken-5%)
 * Waist: Carrier's Sash
 
 <details>
@@ -32,39 +32,39 @@ Dedicated equipment for enhancing party firepower. Sets that provide effect dura
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
 | **Roll Duration** | **+190s** | Rostam C(+60), Hands(+60), Head(+50), Neck(+20) |
-| **Roll Range** | **+8** | Rostam C performance (covers wide area) |
-| **Ranged/Magic Acc** | **+60 or more** | Strong accuracy correction from **Fomalhaut Rank 15** |
+| **Roll Range** | **+8** | Rostam C performance (covers a wide area) |
+| **R.Acc / M.Acc** | **+60+** | Strong accuracy correction from **Fomalhaut Rank 15** |
 | **Damage Taken** | **-50%** | Maintain cap reduction even during roll usage |
 
 </details>
 
 ### Equipment Points & Commentary
-* **Why Sub/Ranged Weapons are Fixed (Sortie Compatibility)**
-  The reason for fixing the sub weapon to "Kustawi +1" and the ranged weapon to "Fomalhaut" is primarily to handle the mechanics in the endgame content "Sortie."
-  In Sortie, the Corsair's role is to follow up on the Scholar's skillchains. If you change weapons during a swap, any accumulated TP will vanish, so you must fix the weapon slots to maintain TP.
-  While the "Compensator" is famous for "Phantom Roll Duration +20," swapping to it for every roll resets your TP to 0. Since Bolter's Roll is frequently recast for movement in Sortie, losing important TP for 20 seconds of extension is too great a disadvantage.
-  This doesn't mean you should "never use it," but if you have no better weapon, you can adopt the Compensator. In that case, be careful to "keep the Compensator equipped even when using <span class="ws-highlight">Last Stand</span>" to prevent TP loss.
-  Furthermore, if you use <span class="ws-highlight">Last Stand</span> with any weapon other than "Fomalhaut," you can create a "Light" skillchain by following up on a Scholar's "Fragmentation," but you cannot trigger the ultimate skillchain "Radiance" (only Fomalhaut has this privilege).
-  From the perspectives of "TP maintenance," "skillchain properties," and "accuracy," we ultimately fix the combination to "Kustawi +1" and "Fomalhaut."
+* **Reasons for Fixing Sub and Ranged Weapons (Sortie Compatibility and Compensator Handling)**
+  The reason for fixing the sub weapon as "Kustawi +1" and the ranged weapon as "Fomalhaut" is primarily intended for maneuvering in the endgame content "Sortie."
+  Corsairs in Sortie have the role of following up on the Scholar's skillchains with their own weapon skills. If you change weapons during gear swapping, your accumulated TP will vanish, so it's necessary to fix the weapon slots to maintain TP.
+  The "Compensator," famous as roll gear, has "Phantom Roll Duration +20," but swapping to this every time you roll resets your hard-earned TP to 0. In Sortie, since "Bolter's Roll" is frequently reapplied for movement, losing important TP for a 20-second extension is too great a disadvantage.
+  This doesn't mean you "must not use it," and if you have no better weapons, adopting the Compensator is fine. However, in that case, be careful to "stay equipped with the Compensator even when shooting <span class="ws-highlight">Last Stand</span> (do not swap)" to prevent TP loss.
+  Furthermore, as an important note, if you shoot <span class="ws-highlight">Last Stand</span> with a weapon other than "Fomalhaut," you can follow up on a Scholar's "Fragmentation" skillchain to create "Light," but you cannot shoot again to generate the ultimate skillchain "Radiance" (Radiance is a privilege of Fomalhaut).
+  From these perspectives of "TP Maintenance" and "Skillchain Properties and Accuracy," I eventually moved away from the Compensator and fixed the combination to "Kustawi +1" and "Fomalhaut" for all operations.
 
-* **Balancing Damage Taken/Enmity- and Roll Duration**
-  Armor and accessories are combined to maintain the "Damage Taken Cap (-50% or more)" even while using Phantom Roll, while ensuring performance like duration extension and range expansion.
-  Also, since Phantom Roll surprisingly generates enmity (hate), incorporating "Enmity Minus" into the gear reduces the risk of drawing the enemy's target.
+* **Balancing Damage Taken Cut, Enmity Minus, and Roll Duration**
+  For armor and accessories, the combination ensures that duration and range properties for Phantom Rolls are secured while maintaining the "Damage Taken Cut Cap (-50% or more)" even while using rolls.
+  Also, since Phantom Rolls can surprisingly generate Enmity (hate), I've consciously incorporated "Enmity Minus" into the equipment to reduce the risk of taking the enemy's target.
 
 * **Reason for Adopting Carrier's Sash (Waist)**
-  In FFXI, having even +1 in elemental resistance increases the resist rate against enemy debuff spells and special moves. Therefore, the Carrier's Sash, which raises all elemental resistances, is adopted for stability.
+  In FFXI, having even +1 in elemental resistance increases the resist rate against enemy debuffs and special attacks. Therefore, I've adopted the Carrier's Sash, which raises all elemental resistances, to enhance stability.
 
 ---
 
-## Ranged Attack Equipment
-Equipment sets for dealing damage with ranged attacks.
+## For Ranged Combat
+Equipment sets for dealing damage through ranged attacks.
 
-### Snap (Shot Preparation) Equipment
-Equipment for faster shooting posture (Snapshot, Rapid Shot, etc.).
+### Snapshot (Preparation) Set
+Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 
 * Main Weapon: Rostam (Path A or B)
 * Sub: Kustawi +1
-* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Archery
+* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Chrono Bullet
 * Head: Ikenga's Hat (Rank 30)
 * Body: Ikenga's Vest (Rank 30)
@@ -72,10 +72,10 @@ Equipment for faster shooting posture (Snapshot, Rapid Shot, etc.).
 * Legs: Ikenga's Trousers (Rank 30)
 * Feet: Ikenga's Clogs (Rank 30)
 * Neck: Commodore Charm +2
-* Left Ear: Telos Earring
-* Right Ear: Enervating Earring
-* Left Ring: Crepuscular Ring
-* Right Ring: Paqichik Ring
+* Left Ear: Crepuscular Earring
+* Right Ear: Telos Earring
+* Left Ring: Kakuiesi Ring +1
+* Right Ring: Herbary Ring +1
 * Back: Camulus's Mantle (Snapshot +10)
 * Waist: Impulse Belt
 
@@ -96,23 +96,23 @@ Equipment for faster shooting posture (Snapshot, Rapid Shot, etc.).
   The "Ikenga Set," used in multiple slots, becomes available for purchase by defeating bosses in the endgame content "Odyssey (Gaol)."
   Since the purchase flag is unlocked just by clearing the lowest difficulty "Veng+0 (V0)," it is sufficiently powerful as snap gear even at the initial enhancement stage (Rank 0). If you can solo it, do so; if not, it is recommended to clear at least V0 with the help of allies.
 
-### Ranged Impact Equipment
+### Ranged Impact (Midshot) Set
 
 * Main Weapon: Rostam (Path A or B)
 * Sub: Kustawi +1
-* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Archery
+* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Chrono Bullet
-* Head: Malignance Chapeau
+* Head: Ishkur Banner
 * Body: Ikenga's Vest (Rank 30)
 * Hands: Malignance Gloves
 * Legs: Malignance Tights
 * Feet: Ikenga's Clogs (Rank 30)
 * Neck: Iskur Gorget
-* Left Ear: Telos Earring
-* Right Ear: Enervating Earring
+* Left Ear: Crepuscular Earring
+* Right Ear: Telos Earring
 * Left Ring: Crepuscular Ring
-* Right Ring: Rajas Ring
-* Back: Camulus's Mantle (AGI+30, RngAcc+20, RngAtk+20, STP+10)
+* Right Ring: Ifrimad Ring
+* Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, STP+10)
 * Waist: Fotia Belt
 
 <details>
@@ -120,138 +120,24 @@ Equipment for faster shooting posture (Snapshot, Rapid Shot, etc.).
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Store TP** | **+70 or more** | A specialized STP configuration focused solely on maximizing TP per shot, disregarding other stats |
+| **Store TP** | **+70+** | Specialized STP configuration focusing solely on maximizing TP gain per shot, regardless of other stats. |
+| **AGI / R.Acc** | **(Ref. Value)** | Boosted stats obtained as secondary benefits during the process of assembling STP gear. |
 
 </details>
 
 ### Equipment Points & Commentary
-* **Philosophy of Maxing Store TP (STP)**
-  For Corsair, how quickly you can accumulate TP and fire the next WS is the cornerstone of total firepower. Here, other stats like Ranged Accuracy and Attack are secondary, and a configuration emphasizing TP rotation rate, prioritized on maximizing STP per shot, is explained.
+* **Philosophy of Extreme Store TP (STP) Configuration**
+  In Corsair, how quickly you can accumulate TP to fire the next WS is the cornerstone of total firepower. This section explains a configuration prioritized for TP rotation rate, maximizing "Store TP" gained per shot while placing other stats like R.Acc and R.Atk second.
 
-* **Regarding Triple Shot Gear Swaps**
-  While the "Triple Shot" ability is active, changing the hands slot to "Lanun Gantry +3" is also very effective. You can further increase damage by swapping according to whether Triple Shot is active, such as with macros.
+* **Regarding Obtaining Head Gear (Ishkur Banner)**
+  The "Ishkur Banner" adopted for the head can be easily obtained by participating in the Aht Urhgan content "Besieged" and exchanging 5,000 Imperial Standing points. If you see Besieged occurring, participate actively and save up points!
 
-### Quick Draw STP Equipment
-Equipment for accumulating TP instantly when firing <span class="ability-highlight">Quick Draw</span> (Fire Shot, Ice Shot, etc.).
-"Store TP (STP)" is maximized to the limit.
+* **Changing Gear During Triple Shot**
+  While the ability "Triple Shot" is active, swapping the hands to "Lanun Gantry +3" is also very effective. You can further increase damage by swapping gear via macros depending on whether Triple Shot is active.
 
-* Main Weapon: Rostam (Path C)
-* Sub: Kustawi +1
-* Ranged Weapon: Fomalhaut
-* Ammo: Devastating Bullet
-* Head: Malignance Chapeau
-* Body: Malignance Tabard
-* Hands: Malignance Gloves
-* Legs: Chasseur's Culottes +3
-* Feet: Malignance Boots
-* Neck: Iskur Gorget
-* Left Ear: Telos Earring
-* Right Ear: Enervating Earring
-* Left Ring: Crepuscular Ring
-* Right Ring: Rajas Ring
-* Back: Camulus's Mantle (any augments as long as it has STP+10)
-* Waist: Yemaya Belt
-
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-
-| Item | Total Value | Details/Notes |
-| :--- | :--- | :--- |
-| **Store TP** | **Variable** | Combination focused on extreme STP, disregarding other stats |
-
-</details>
-
-### Equipment Points & Commentary
-* **The Goal is "Instant TP Accumulation," Not "Damage"**
-  This is a separate set from the usual "Quick Draw Gear" intended for damage or debuff effects. This one is specifically for "obtaining TP instantly after firing Quick Draw." Since Quick Draw is a guaranteed hit and Store TP applies correctly, you can acquire a large amount of TP in a single shot by equipping STP-focused gear before firing.
-
-* **Essential Technique for Skillchain Follow-up (Magic Burst) in Sortie**
-  This equipment shines most in the endgame content "Sortie."
-  In Sortie, it is crucial for the Corsair to immediately follow up on the Scholar's skillchains with a Weapon Skill (WS) to further extend the chain and deal damage with Magic Bursts (MB).
-  To avoid missing the Scholar's skillchain window, this "Quick Draw STP Gear" plays an indispensable role as a means to instantly secure TP for the next follow-up.
-
-  **【Example 1: Aiming for Light Route (Radiance)】**
-  If a Scholar creates "Fragmentation," a Corsair can connect it to "Light" by firing "<span class="ws-highlight">Last Stand</span>" with Fomalhaut.
-  Furthermore, since firing <span class="ws-highlight">Last Stand</span> with Fomalhaut grants a unique AM (Aftermath), firing <span class="ability-highlight">Quick Draw</span> twice immediately after that Light skillchain to accumulate TP and then firing "<span class="ws-highlight">Last Stand</span>" again will trigger the ultimate skillchain "Radiance," resulting in significant damage increase.
-
-  **【Example 2: Aiming for Darkness Route (Continuous Darkness Chain)】**
-  If a Scholar creates "Distortion," a Corsair following up with "<span class="ws-highlight">Leaden Salute</span>" will result in a "Darkness" skillchain.
-  Immediately after that, firing <span class="ability-highlight">Quick Draw</span> twice to quickly replenish TP and then immediately firing "<span class="ws-highlight">Wildfire</span>" can trigger another "Darkness" skillchain.
-
-  **【Example 3: Aiming for Gravitation Route (Skillchain with Rune Fencer)】**
-  Bosses in Sortie Sectors B and F have modes where they are wreathed in Lightning or Wind attributes. In Lightning mode, it's basic for a Scholar to create "Gravitation" to aim for Earth MB, but Corsair doesn't have a WS that connects "Gravitation" to "Darkness" alone.
-  However, if the tank Rune Fencer fires a WS to connect to "Darkness," firing "<span class="ws-highlight">Wildfire</span>" immediately after that Darkness skillchain will trigger another "Darkness" skillchain. While not a frequent occurrence, it's a technique worth knowing for boosting damage.
-
-  To establish such continuous WS chains in a short time, this equipment set for immediate TP recovery via <span class="ability-highlight">Quick Draw</span> truly shines.
-
----
-
-### Quick Draw Magic Attack Equipment
-* Main Weapon: Any
-* Sub: Any
-* Ranged Weapon: Any
-* Ammo: [Living Bullet](http://wiki.ffo.jp/html/30018.html) or [Hauksbok Bullet](http://wiki.ffo.jp/html/37839.html)
-* Head: [Herculean Helm](http://wiki.ffo.jp/html/35175.html) (MAB Augments)
-* Body: [Lanun Frac +3](http://wiki.ffo.jp/html/31142.html)
-* Hands: [Carmine Finger Gauntlets +1](http://wiki.ffo.jp/html/33890.html) (Path C Rank 15) or [Herculean Gloves](http://wiki.ffo.jp/html/35214.html) (MAB Augments)
-* Legs: [Herculean Trousers](http://wiki.ffo.jp/html/35180.html) (MAB Augments)
-* Feet: [Lanun Boots +3](http://wiki.ffo.jp/html/30822.html)
-* Neck: [Commodore Charm +2](http://wiki.ffo.jp/html/37947.html)
-* Left Ear: [Friomisi Earring](http://wiki.ffo.jp/html/26048.html)
-* Right Ear: [Hecate's Earring](http://wiki.ffo.jp/html/22306.html)
-* Left Ring: [Acumen Ring](http://wiki.ffo.jp/html/31381.html)
-* Right Ring: [Dingir Ring](http://wiki.ffo.jp/html/35914.html)
-* Back: [Camulus's Mantle](http://wiki.ffo.jp/html/34459.html) (AGI+30, MAB+10, MagAcc+20, Magic Damage +20)
-* Waist: [Orpheus's Sash](http://wiki.ffo.jp/html/37383.html) or [Eschan Stone](http://wiki.ffo.jp/html/32704.html)
-
-### Equipment Points & Commentary
-* **Selection of Ranged Weapons and Ammo**
-  If you want to maximize <span class="ability-highlight">Quick Draw</span> damage, the [Death Penalty](http://wiki.ffo.jp/html/10419.html) is the most excellent ranged weapon.
-  As for ammo, the [Hauksbok Bullet](http://wiki.ffo.jp/html/37839.html) deals the highest damage, but it's a 1,000 Domain Point exchange item that can only be held one at a time. While Quick Draw doesn't consume ammo, accidentally firing a ranged attack or WS will require another exchange (the author has accidentally fired three in the past...). Therefore, for daily use and safety, we recommend adopting the [Living Bullet](http://wiki.ffo.jp/html/30018.html), which can be taken out of the Death Penalty at any time.
-
-* **Usage of Waist Gear (Sash and Belt)**
-  Use either the [Orpheus's Sash](http://wiki.ffo.jp/html/37383.html) or [Eschan Stone](http://wiki.ffo.jp/html/32704.html) for the waist slot.
-  If you have weather support from a Scholar, the belt is more stable and effective. This is because the Orpheus's Sash's effect varies depending on the distance from the enemy. Especially when you need to shoot from a distance and have weather support, prioritize the belt. In other situations, the Orpheus's Sash or other MAB gear is fine.
-
----
-
-### Physical Ranged WS Equipment (e.g., <span class="ws-highlight">Last Stand</span>)
-* Main Weapon: Rostam (Path A or B)
-* Sub: Kustawi +1
-* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Archery
-* Ammo: Chrono Bullet
-* Head: Nyame Helm (Rank 30)
-* Body: Nyame Mail (Rank 30)
-* Hands: Chasseur's Gantry +3
-* Legs: Nyame Flanchard (Rank 30)
-* Feet: Nyame Sollerets (Rank 30)
-* Neck: Iskur Gorget
-* Left Ear: Beyla Earring
-* Right Ear: Telos Earring
-* Left Ring: Epaminondas's Ring
-* Right Ring: Illyrine Ring
-* Back: Camulus's Mantle (AGI+30, RngAcc+20, RngAtk+20, WSD+10%)
-* Waist: Kawkab Belt +1
-
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-
-| Item | Total Value | Details/Notes |
-| :--- | :--- | :--- |
-| **AGI (Boosted)** | **+300 or more** | Nyame Rank 30 set + Mantle(+30) |
-| **WSD** | **+56%** | 4 Nyame pieces (approx. +41%) + Mantle(+10%) + Ring(+5%) |
-| **RngAcc** | **+500 or more** | Sum of accuracy properties from gear |
-
-</details>
-
-### Equipment Points & Commentary
-* **Balancing Ranged Accuracy and WS Damage**
-  Corsair has slightly lower base Ranged Accuracy than Ranger, so the configuration for physical ranged WS is designed with securing slightly higher accuracy in mind. Many ranged weapon skills are single-hit attacks, and single-hit WS in this game have a characteristic of being prone to missing. Since it's meaningless if it doesn't hit, the balance is set to pack in WSD while also boosting Ranged Accuracy more than a Ranger's gear.
-
----
-
-### Physical Ranged WS Equipment (<span class="ws-highlight">Last Stand</span>: Accuracy/STP Focus)
-Accuracy-focused set for reliably connecting skillchains against high-evasion bosses in Sortie, etc.
+### Quick Draw STP Set
+Equipment to instantly accumulate TP when shooting <span class="ability-highlight">Quick Draw</span> (Fire Shot, Ice Shot, etc.).
+"Store TP (STP)" is pushed to the limit.
 
 * Main Weapon: Rostam (Path C)
 * Sub: Kustawi +1
@@ -263,36 +149,182 @@ Accuracy-focused set for reliably connecting skillchains against high-evasion bo
 * Legs: Chasseur's Culottes +3
 * Feet: Malignance Boots
 * Neck: Iskur Gorget
-* Left Ear: Telos Earring
-* Right Ear: Enervating Earring
+* Left Ear: Crepuscular Earring
+* Right Ear: Telos Earring
 * Left Ring: Crepuscular Ring
-* Right Ring: Rajas Ring
-* Back: Camulus's Mantle
+* Right Ring: Herbary Ring +1
+* Back: Camulus's Mantle (Any augments as long as STP+10 is present)
 * Waist: Yemaya Belt
 
-### Equipment Points & Commentary
-* **Prioritize "Hitting" and "Securing TP" Over WSD**
-  This equipment is used for reliably extending skillchains against high-evasion enemies like those in Sortie. When connecting "Last Stand (Light) -> Last Stand (Radiance)" against a Fragmentation skillchain, missing the first Last Stand stops the chain, so we purposefully disregard WSD to maximize Ranged Accuracy.
+<details>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
-### Magic WS Equipment (Exclusively for <span class="ws-highlight">Leaden Salute</span>)
-Equipment for maximizing "<span class="ws-highlight">Leaden Salute</span>" damage.
-Adopting "Pixie Hairpin +1" and "Archon Ring" to boost Darkness attribute damage.
+| Item | Total Value | Details/Notes |
+| :--- | :--- | :--- |
+| **Store TP** | **Variable** | Combination aimed at maximizing STP to the extreme, regardless of other stats. |
+
+</details>
+
+### Equipment Points & Commentary
+* **Purpose is "Accumulating TP Instantly" rather than "Damage"**
+  This set is separate from the standard "Quick Draw gear" intended for damage or debuffing. It is specialized gear purely for the purpose of "instantly gaining TP by firing Quick Draw." Since Quick Draw is a guaranteed hit and Store TP applies fully, you can gain a large amount of TP in a single shot by equipping STP-heavy gear.
+
+* **Essential Technique for Follow-up Skillchains (Magic Burst) in Sortie**
+  This equipment shines most in endgame "Sortie" combat.
+  In Sortie, a strategy where a Corsair immediately follows up on a Scholar's skillchain with a WS (Weapon Skill) to further extend the chain for Magic Burst (MB) damage is extremely important.
+  To avoid being late to the Scholar's skillchain, this "Quick Draw STP Set" plays an indispensable role as a means of instantly securing TP for the follow-up.
+
+  **【Example 1: Aiming for Light Route (Radiance)】**
+  When a Scholar creates a "Fragmentation" skillchain, a Corsair firing "<span class="ws-highlight">Last Stand</span>" with Fomalhaut can connect it to a "Light" skillchain.
+  Furthermore, shooting <span class="ws-highlight">Last Stand</span> with Fomalhaut grants a unique AM (Aftermath). By firing two <span class="ability-highlight">Quick Draws</span> immediately after that Light skillchain to gain TP and then firing "<span class="ws-highlight">Last Stand</span>" again, you can generate the ultimate skillchain "Radiance," which promises significant damage.
+
+  **【Example 2: Aiming for Dark Route (Consecutive Darkness)】**
+  When a Scholar creates a "Distortion" skillchain, a Corsair following up with "<span class="ws-highlight">Leaden Salute</span>" results in a "Darkness" skillchain.
+  Immediately after, fire two <span class="ability-highlight">Quick Draws</span> to quickly regain TP and fire "<span class="ws-highlight">Wildfire</span>" to generate another "Darkness" skillchain.
+
+  **【Example 3: Aiming for Gravitation Route (Skillchain with Rune Fencer)】**
+  Bosses in Sortie Sector B and F have modes where they shroud themselves in Lightning or Wind attributes. In Lightning mode, the basic strategy is for the Scholar to create a "Gravitation" skillchain for Earth MB, but a Corsair alone cannot connect "Gravitation" to a "Darkness" skillchain.
+  However, if a Rune Fencer tank fires a WS to connect to a "Darkness" skillchain, a Corsair can immediately fire "<span class="ws-highlight">Wildfire</span>" after that Darkness chain to generate another "Darkness" skillchain. This isn't a frequent situation, but it's a useful technique to remember for boosting damage.
+
+  To establish such consecutive WS in a short time, this gear set for immediate TP recovery through <span class="ability-highlight">Quick Draw</span> shines.
+
+  **【Supplement 1: TP Assistance from Tactician's Roll】**
+  By rolling "<span class="ability-highlight">Tactician's Roll</span>" (Regain effect) in advance before a boss battle, you can start combat with TP already accumulated.
+  Since TP continues to accumulate gradually even after firing a WS or during <span class="ability-highlight">Quick Draw</span>, if the boss cannot be defeated in one skillchain and the Scholar creates another, it becomes easier to secure TP in time, allowing for stable consecutive follow-ups.
+
+  **【Supplement 2: Support Jobs (Ninja vs. Samurai)】**
+  The configuration in this article is basically written based on "Support Job: Ninja (Sapo Nin)."
+  If you want to make participation in skillchains easier, changing to "Sapo Samurai" is highly recommended. With Sapo Samurai, you have "<span class="ability-highlight">Meditate</span>" and "<span class="ability-highlight">Sekkanoki</span>," making TP acquisition and consecutive WS much easier.
+  *By the way, the reason the author favors Sapo Nin is that in situations where <span class="magic-highlight">Invis</span> and <span class="magic-highlight">Sneak</span> are needed during Sortie movement, it's overwhelmingly easier and more comfortable to reapply them with Ninjutsu (<span class="magic-highlight">Tonko</span>/<span class="magic-highlight">Monomi</span>) than consuming powders and oils. Choose your support job according to your own playstyle and preferences!*
+
+---
+
+### Quick Draw Magic Attack Set
+* Main Weapon: Any weapon
+* Sub: Any weapon
+* Ranged Weapon: Any weapon
+* Ammo: [Live Bullet](http://wiki.ffo.jp/html/30018.html) or [Hauksbok Bullet](http://wiki.ffo.jp/html/37839.html)
+* Head: [Herculean Helm](http://wiki.ffo.jp/html/35175.html) (M.Atk Augment)
+* Body: [Lanun Frac +3](http://wiki.ffo.jp/html/31142.html)
+* Hands: [Carmine Finger +1](http://wiki.ffo.jp/html/33890.html) (Type C Rank 15) or [Herculean Gloves](http://wiki.ffo.jp/html/35214.html) (M.Atk Augment)
+* Legs: [Herculean Trousers](http://wiki.ffo.jp/html/35180.html) (M.Atk Augment)
+* Feet: [Lanun Boots +3](http://wiki.ffo.jp/html/30822.html)
+* Neck: [Commodore Charm +2](http://wiki.ffo.jp/html/37947.html)
+* Left Ear: [Moonshade Earring](https://wiki.ffo.jp/html/22306.html) (M.Atk+4, TP Bonus+250)
+* Right Ear: [Friomisi Earring](http://wiki.ffo.jp/html/26048.html)
+* Left Ring: [Arvina Ring +1](http://wiki.ffo.jp/html/31848.html)
+* Right Ring: [Dingir Ring](http://wiki.ffo.jp/html/35914.html)
+* Back: [Camulus's Mantle](http://wiki.ffo.jp/html/34459.html) (AGI+30, M.Atk+10, M.Acc+20, Magic Damage+20)
+* Waist: [Orpheus's Sash](http://wiki.ffo.jp/html/37383.html) or [Hachirin-no-Obi](http://wiki.ffo.jp/html/32704.html)
+
+### Equipment Points & Commentary
+* **Selection of Ranged Weapons and Ammo**
+  If you want to maximize <span class="ability-highlight">Quick Draw</span> damage, [Death Penalty](http://wiki.ffo.jp/html/10419.html) is the most excellent ranged weapon.
+  Regarding ammo, [Hauksbok Bullet](http://wiki.ffo.jp/html/37839.html) deals the highest damage, but it's a 1,000 Domain Point exchange item and you can only hold one. While Quick Draw doesn't consume ammo, accidentally shooting it with a normal ranged attack or WS would require another exchange (the author has accidentally lost about three in the past...). Therefore, for daily use and safety, I recommend using [Live Bullet](http://wiki.ffo.jp/html/30018.html), which can be extracted from Death Penalty at any time.
+
+* **Usage of Waist Gear (Obi and Orpheus)**
+  Use [Orpheus's Sash](http://wiki.ffo.jp/html/37383.html) or [Hachirin-no-Obi](http://wiki.ffo.jp/html/32704.html) for the waist.
+  If you have weather support from a Scholar, the Obi promises more stable and higher effects. This is because Orpheus's Sash performance fluctuates depending on distance from the enemy. Especially when you need to shoot from a distance and have weather support, prioritize the Obi. In other situations, Orpheus's Sash or other gear that increases M.Atk is fine.
+
+---
+
+  > **📖 Related Articles**
+  > More detailed maneuvers for Corsair in Sortie and skillchain mechanics are explained in dedicated articles!
+  > 👉 **[Sortie Guide (Corsair Perspective) is here](article_en.html?file=articles/sortie_corsair_en.md)**
+
+### Physical Ranged WS Gear (<span class="ws-highlight">Last Stand</span>, etc.)
+* Main Weapon: Rostam (Path A or B)
+* Sub: Kustawi +1
+* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
+* Ammo: Chrono Bullet
+* Head: Nyame Helm (Rank 30)
+* Body: Nyame Mail (Rank 30)
+* Hands: Chasseur's Gantry +3
+* Legs: Nyame Flanchard (Rank 30)
+* Feet: Nyame Sollerets (Rank 30)
+* Neck: Iskur Gorget
+* Left Ear: Beyla Earring
+* Right Ear: Telos Earring
+* Left Ring: Herbary Ring +1
+* Right Ring: Ifrimad Ring
+* Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, WSD+10%)
+* Waist: Fotia Belt
+
+<details>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
+
+| Item | Total Value | Details/Notes |
+| :--- | :--- | :--- |
+| **AGI (Boosted)** | **+300+** | Nyame Rank 30 Set + Mantle (+30) |
+| **WSD** | **+56%** | 4 Nyame parts (~+41%) + Mantle (+10%) + Ring (+5%) |
+| **R.Acc** | **+500+** | Sum of accuracy properties from all gear |
+
+</details>
+
+### Equipment Points & Commentary
+* **Balancing R.Acc and Weapon Skill Damage**
+  Since Corsair has slightly lower base R.Acc (Ranged Accuracy) compared to Hunter, the configuration focuses on securing relatively high R.Acc even in physical ranged WS gear. Many ranged weapon skills are single-hit attacks, and in this game, single-hit WS have a characteristic of being easy to miss. Since it's meaningless if it doesn't hit, the balance is struck by stacking Weapon Skill Damage (WSD) while boosting R.Acc more than Hunter gear.
+
+<a id="last-stand-acc"></a>
+### Physical Ranged WS Gear (<span class="ws-highlight">Last Stand</span>: R.Acc/STP Focus)
+A specialized accuracy set for high-evasion bosses like in Sortie to ensure skillchains connect.
+
+* Main Weapon: Rostam (Path C)
+* Sub: Kustawi +1
+* Ranged Weapon: Fomalhaut
+* Ammo: Devastating Bullet
+* Head: Ishkur Banner
+* Body: Malignance Tabard
+* Hands: Malignance Gloves
+* Legs: Chasseur's Culottes +3
+* Feet: Malignance Boots
+* Neck: Iskur Gorget
+* Left Ear: Crepuscular Earring
+* Right Ear: Telos Earring
+* Left Ring: Crepuscular Ring
+* Right Ring: Herbary Ring +1
+* Back: Void Cape (Placeholder Name)
+* Waist: Yemaya Belt
+
+<details>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
+
+| Item | Total Value | Details/Notes |
+| :--- | :--- | :--- |
+| **R.Acc** | **+600+** | Overwhelming accuracy properties of Chasseur's +3 set |
+| **Store TP** | **+40+** | Prioritize TP acquisition for firing a second Radiance |
+
+</details>
+
+### Equipment Points & Commentary
+* **Prioritize "Hitting" and "Securing TP" even if WSD is sacrificed**
+  This gear is used against high-evasion enemies in Sortie, etc., to ensure skillchains are extended. When connecting " <span class="ws-highlight">Last Stand</span> (Light generation) → <span class="ws-highlight">Last Stand</span> (Radiance generation)" against a Fragmentation chain, if the first <span class="ws-highlight">Last Stand</span> misses, the chain stops. Thus, WSD is sacrificed to maximize R.Acc to the limit.
+
+* **Reason for R.Acc + STP Balanced Type**
+  Beyond just hitting, the configuration focuses on a balance of "R.Acc + STP" to ensure as much TP as possible is secured with one hit, allowing the second WS (Radiance) to be fired immediately.
+
+* **"Full Empy" if absolute accuracy is required**
+  If you absolutely do not want the first shot to miss and accuracy is the top priority, using Empyrean Armor (Chasseur's +3) for all five slots (Head, Body, Hands, Legs, Feet) is the most stable.
+
+### Magic WS Gear (Dedicated to <span class="ws-highlight">Leaden Salute</span>)
+Gear to maximize "<span class="ws-highlight">Leaden Salute</span>" damage.
+Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 
 * Main Weapon: Rostam (Path A or B)
 * Sub: Kustawi +1
-* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Archery
-* Ammo: Living Bullet
+* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
+* Ammo: Live Bullet
 * Head: Pixie Hairpin +1
 * Body: Lanun Frac +3
 * Hands: Nyame Gauntlets (Rank 30)
 * Legs: Nyame Flanchard (Rank 30)
 * Feet: Lanun Boots +3
 * Neck: Commodore Charm +2
-* Left Ear: Friomisi Earring
-* Right Ear: Hecate's Earring (TP Bonus +250)
+* Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
+* Right Ear: Friomisi Earring
 * Left Ring: Archon Ring
 * Right Ring: Dingir Ring
-* Back: Camulus's Mantle (AGI+30, MagAcc+20, Magic Damage +20, WSD+10%)
+* Back: Camulus's Mantle (AGI+30, M.Acc+20, Magic Damage+20, WSD+10%)
 * Waist: Orpheus's Sash
 
 <details>
@@ -300,73 +332,275 @@ Adopting "Pixie Hairpin +1" and "Archon Ring" to boost Darkness attribute damage
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **MAB** | **+330 or more** | LA Body/Feet(+104), Nyame Hands/Legs Rank 30(+140) etc. |
-| **WSD** | **+42%** | Nyame Hands/Legs(+20%), Mantle(+10%), Neck(+7%), Ear(+5%) |
-| **Dark Damage** | **+33%** | Pixie Hairpin +1(+28%), Archon Ring(+5%) |
-| **TP Bonus** | **+1250** | Fomalhaut(+1000) + Earring(+250) |
+| **M.Atk** | **+330+** | Lanun Body/Feet (+104), Nyame Hands/Legs Rank 30 (+140), etc. |
+| **WSD** | **+42%** | Nyame Hands/Legs (+20%), Mantle (+10%), Neck (+7%), Ear (+5%) |
+| **Dark Damage** | **+33%** | Pixie Hairpin +1 (+28%), Archon Ring (+5%) |
+| **TP Bonus** | **+1250** | Fomalhaut (+1000) + Moonshade Earring (+250) |
 
 </details>
 
 ### Equipment Points & Commentary (<span class="ws-highlight">Leaden Salute</span>)
-* **Essential "Darkness Magic Attack" Gear**
-  The most important pieces for dealing massive damage with <span class="ws-highlight">Leaden Salute</span> (Darkness attribute Magic WS) are the Pixie Hairpin +1, Archon Ring, and Shadow Belt. These possess a powerful special property "Darkness Magic Attack+" that is calculated separately from normal MAB, making them mandatory for <span class="ws-highlight">Leaden Salute</span>.
+* **Essential "Dark Magic Attack" Gear**
+  Three items are particularly important for dealing high damage with <span class="ws-highlight">Leaden Salute</span> (Darkness Magic WS): "Pixie Hairpin +1" (Head), "Archon Ring" (Left Ring), and "Darkness Obi" (Waist). These possess powerful unique properties "Darkness Magic Attack+" calculated separately from standard M.Atk, and are essential gear for firing <span class="ws-highlight">Leaden Salute</span>.
+
+### Magic WS Gear (Others, Wildfire, etc.)
+* Main Weapon: Rostam (Path A or B)
+* Sub: Kustawi +1
+* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
+* Ammo: Live Bullet
+* Head: Nyame Helm (Rank 30)
+* Body: Lanun Frac +3
+* Hands: Nyame Gauntlets (Rank 30)
+* Legs: Nyame Flanchard (Rank 30)
+* Feet: Lanun Boots +3
+* Neck: Commodore Charm +2
+* Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
+* Right Ear: Friomisi Earring
+* Left Ring: Epaminondas's Ring
+* Right Ring: Dingir Ring
+* Back: Camulus's Mantle (AGI+30, M.Acc+20, Magic Damage+20, WSD+10%)
+* Waist: Orpheus's Sash or Hachirin-no-Obi
+
+### Equipment Points & Commentary (Wildfire, etc.)
+* **Balance of M.Atk and WSD is Important**
+  WF (Wildfire) is a Fire-attribute magic weapon skill. Based on various verifications, a configuration balancing "M.Atk" and "Weapon Skill Damage (WSD)" tends to yield the highest damage. The trick to high WF damage is to be conscious of both equally rather than leaning too heavily into one.
+
+### Magic WS Gear (For Hot Shot)
+* Main Weapon: Rostam (Path A or B)
+* Sub: Kustawi +1
+* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
+* Ammo: Live Bullet
+* Head: Nyame Helm (Rank 30)
+* Body: Nyame Mail (Rank 30)
+* Hands: Nyame Gauntlets (Rank 30)
+* Legs: Nyame Flanchard (Rank 30)
+* Feet: Lanun Boots +3
+* Neck: Commodore Charm +2
+* Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
+* Right Ear: Friomisi Earring
+* Left Ring: Epaminondas's Ring
+* Right Ring: Dingir Ring
+* Back: Camulus's Mantle (AGI+30, M.Acc+20, Magic Damage+20, WSD+10%)
+* Waist: Orpheus's Sash or Hachirin-no-Obi
+
+### Equipment Points & Commentary (Hot Shot)
+* **Consciousness of Physical and Magic Hybrid**
+  Hot Shot is a hybrid WS combining physical and magic damage. By solidifying the body with the Nyame Set (Rank 30), both the physical part (WSD and basic stats) and the magic part (M.Atk) are balanced to the extreme, creating a configuration that can strike very high total damage.
+
+* **Balancing R.Acc, M.Atk, and WSD**
+  Since Hot Shot also has physical properties, it won't deal sufficient damage unless it hits as a ranged attack (R.Acc). If you feel R.Acc is lacking, adjust by lowering M.Atk gear slightly and swapping to R.Acc gear.
 
 ---
 
-## Melee Equipment
-Equipment sets for engaging in melee combat alongside frontliners, such as with Savage Blade.
+## For Melee Combat
+Equipment sets for performing melee combat alongside frontliners using Savage Blade, etc.
 
-### Normal Melee (TP Accumulation) Equipment — Dagger
+### Standard Melee (TP Gain) Set - Dagger
 * Main Weapon: Rostam (Path A or B)
 * Sub: Crepuscular Knife
-* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Archery
+* Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Beyouv Bullet
-* Head: Malignance Chapeau
-* Body: Adhemar Jacket +1 (Path A)
-* Hands: Adhemar Wristbands +1 (Path A)
+* Head: Void Mask (Placeholder Name)
+* Body: Adhemar Jacket +1 (Type A)
+* Hands: Adhemar Wristbands +1 (Type A)
 * Legs: Chasseur's Culottes +3
 * Feet: Malignance Boots
-* Neck: Combatant's Torque
+* Neck: Karakt Choker
 * Left Ear: Suppanomimi
 * Right Ear: Telos Earring
-* Left Ring: Epona's Ring
+* Left Ring: Melanic Ring
 * Right Ring: Chirich Ring +1
-* Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, Double Attack +10%, Physical Damage Taken -10%)
-* Waist: Sarissapho Belt +1 (Rank 15)
+* Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, Double Attack+10%, Physical Damage Taken-10%)
+* Waist: Sailfi Belt +1 (Rank 15)
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Accuracy** | **+560 or more** | Gear property(+413) + DEX correction(approx. +150) |
-| **Store TP** | **+71** | Rostam A(+25), CS Legs(+12), Crepuscular Dagger(+10) etc. |
-| **Dual Wield** | **+11** | Body(+6), Ear(+5) *Adjusted for Ninja sub |
-| **Damage Taken** | **-50% (Cap)** | DT-48% (Head-10, Ring-10, Feet-4, Legs-12, Weapons-6x2) + PDT-10% (Back-10) |
-| **Haste** | **+26%** | Reach equipment cap |
-| **Multi-Attack** | **DA+22% / TA+8%** | Mantle DA+10%, Adhemar TA+8% etc. |
+| **Accuracy** | **+560+** | Gear properties (+413) + DEX correction (~+150) |
+| **Store TP** | **+71** | Rostam A(+25), CS Legs(+12), Crepuscular Dagger(+10), etc. |
+| **Dual Wield** | **+11** | Body(+6), Ear(+5) *Adjustment for min. interval with Sapo Nin |
+| **Damage Taken** | **-50% (Cap)** | DT-48% (Head-10, Ring-10, Feet-4, Legs-12, Weapon-6x2) + PDT-10% (Back-10) |
+| **Haste** | **+26%** | Gear-frame cap reached |
+| **Multi-Attack** | **DA+22% / TA+8%** | Mantle DA+10%, Adhemar TA+8%, etc. |
 
 </details>
 
 ### Equipment Points & Commentary
 * **Adjustment of Multi-Attack and Dual Wield**
-  Adopting "Adhemar Gear +1 (Path A)" for body and hands primarily aims to increase the number of hits via multi-attack for maximum TP efficiency.
-  Assuming Ninja sub, adjusting the Dual Wield coefficient to "+11" minimizes attack delay (cap). This configuration combines the Adhemar Jacket +1 (Dual Wield +6) and the left ear Suppanomimi (Dual Wield +5) to exactly secure "+11."
+  Adopting "Adhemar +1 (Type A)" for the body and hands aims primarily to increase multi-attacks for more hits.
+  Assuming Sapo Nin, adjusting the Dual Wield coefficient to "+11" reaches the minimum (cap) attack interval. This configuration secures exactly "+11" by combining the Adhemar Jacket +1 (Dual Wield+6) and Suppanomimi (Dual Wield+5).
 
-* **Operational Cautions (Durability)**
-  While this configuration is excellent for TP efficiency and hit count, its overall "Magic Evasion" is relatively low. Caution is needed when fighting strong enemies with intense debuff spells or elemental attacks.
-  Regarding damage taken reduction, the configuration is set to nearly maintain the -50% cap, but this calculation assumes obtaining -12% reduction from the performance of the main weapon "Rostam" (Damage Taken -6% per Phantom Roll) with two rolls active. Without rolls, the reduction is insufficient and quite dangerous, so always pay attention to your roll status.
-  For weaker enemies or situations with solid support, this configuration provides the best TP accumulation speed.
+* **Operational Notes (Durability)**
+  This configuration has many hits and excellent TP efficiency, but overall "Magic Evasion" is low. Thus, caution is needed when fighting strong enemies with intense debuffs or magic.
+  Regarding damage taken cut, I've tried to keep it near the -50% cap, but this assumes the performance of the main weapon "Rostam" (Damage Taken-6% per Phantom Roll) with two rolls active (-12%). If rolls are not active, the cut is insufficient and can be dangerous, so always pay attention to roll status.
+  For lower-tier enemies or situations with solid support, this configuration provides the best TP accumulation rate.
+
+* **Regarding Damage Taken Cut Calculation**
+  In FFXI, the damage taken cut cap from gear is -50%. In this configuration, physical cut easily reaches the cap, and magic cut is secured at -48%, ensuring damage can be halved in practical combat.
+
+### Standard Melee (TP Gain) Set - Sword
+* Main Weapon: Naegling
+* Sub: Gleti's Knife (Rank 30)
+* Ranged Weapon: Anarchy +2 (TP Bonus+1000) or Ataktos (TP Bonus+1000)
+* Ammo: Beyouv Bullet
+* Head: Void Mask (Placeholder Name)
+* Body: Adhemar Jacket +1 (Type A)
+* Hands: Adhemar Wristbands +1 (Type A)
+* Legs: Chasseur's Culottes +3
+* Feet: Nyame Sollerets (Rank 30)
+* Neck: Void Throat (Placeholder Name)
+* Left Ear: Suppanomimi
+* Right Ear: Telos Earring
+* Left Ring: Melanic Ring
+* Right Ring: Chirich Ring +1
+* Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, Double Attack+10%, Physical Damage Taken-10%)
+* Waist: Sailfi Belt +1 (Rank 15)
+
+<details>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
+
+| Item | Total Value | Details/Notes |
+| :--- | :--- | :--- |
+| **Accuracy** | **+580+** | Gear properties (+428) + DEX correction (~+150) |
+| **Store TP** | **+27** | Sum of CS Legs(+12), Ear(+5), Ring(+4,+6) |
+| **Dual Wield** | **+11** | Body(+6), Ear(+5) *Adjustment for min. interval with Sapo Nin |
+| **Damage Taken** | **Phys-50%(Cap) / Mag-44%** | DT-44% (Head-10, Neck-5, Ring-10, Feet-7, Legs-12) + PDT-10% (Back-10) |
+| **Haste** | **+26%** | Gear-frame cap reached |
+| **Multi-Attack** | **DA+21% / TA+16%** | Includes Gleti's Knife (TA+6) and armor augments |
+
+</details>
+
+### Equipment Points & Commentary
+* **Configuration Centered on Savage Blade**
+  Assuming "Savage Blade" as the primary source of damage with a sword, I've adopted "Gleti's Knife" as the sub weapon. Gleti's Knife is extremely powerful at Rank 30, providing both high "Atk+" and "Subtle Blow II+25."
+
+### Melee Weapon Skill Gear (Savage Blade, etc.)
+* Main Weapon: Naegling
+* Sub: Gleti's Knife (Rank 30)
+* Ranged Weapon: Anarchy +2 (TP Bonus+1000) or Ataktos (TP Bonus+1000)
+* Ammo: Beyouv Bullet
+* Head: Nyame Helm (Rank 30)
+* Body: Nyame Mail (Rank 30)
+* Hands: Nyame Gauntlets (Rank 30)
+* Legs: Nyame Flanchard (Rank 30)
+* Feet: Nyame Sollerets (Rank 30)
+* Neck: Republican Platinum Medal
+* Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
+* Right Ear: Chasseur's Earring +2
+* Left Ring: Epaminondas's Ring
+* Right Ring: Ifrimad Ring
+* Back: Camulus's Mantle (STR+30, Acc+20, Atk+20, WSD+10%, Damage Taken-5%)
+* Waist: Sailfi Belt +1 (Rank 15)
+
+<details>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
+
+| Item | Total Value | Details/Notes |
+| :--- | :--- | :--- |
+| **STR (Boosted)** | **+341** | Nyame Rank 30 (+244), Mantle (+30), Weapon (+20), etc. |
+| **WSD** | **+43%** | Nyame Set (+28%), Mantle (+10%), Ring (+5%) |
+| **Acc / Atk** | **+500+** | Sum of Acc/Atk properties from all gear |
+| **TP Bonus** | **+1250** | Ranged Weapon (+1000) + Moonshade Earring (+250) |
+| **Damage Taken** | **-50% (Cap)** | Nyame Set (-38%) + Ring (-10%) + Mantle (-5%) *Extremely robust |
+
+</details>
+
+### Equipment Points & Commentary
+* **Stabilizing Damage through STR Boost**
+  After numerous verifications, I've arrived at this configuration as the most stable for high damage with Savage Blade. While WSD properties are important, the emphasis is on maximizing "STR," which holds significant weight in Savage Blade damage calculation.
+
+* **Adoption of Nyame Rank 30**
+  By unifying armor with Nyame (Rank 30), both overwhelming STR and high WSD are achieved. Also, high defense and damage cut are maintained even when unleashing WS, allowing for safe, high-damage strikes even during chaotic battles.
+
+<a id="exzen-acc"></a>
+### Physical Melee WS Gear (Evisceration: Accuracy Focus)
+A specialized accuracy set to ensure Light skillchains are generated against high-evasion bosses in Sortie lower sectors.
+
+* Main Weapon: Rostam (Path C)
+* Sub: Kustawi +1
+* Ranged Weapon: Fomalhaut
+* Ammo: Beyouv Bullet or Chrono Bullet
+* Head: Chasseur's Tricorne +3
+* Body: Chasseur's Frac +3
+* Hands: Gazu Bracelets +1 (Rank 15)
+* Legs: Chasseur's Culottes +3
+* Feet: Malignance Boots
+* Neck: Void Throat (Placeholder Name)
+* Left Ear: Dominance Earring +1 (Rank 15)
+* Right Ear: Telos Earring
+* Left Ring: Chirich Ring +1
+* Right Ring: Ifrimad Ring
+* Back: Void Cape (Placeholder Name)
+* Waist: Void Sash (Placeholder Name)
+
+<details>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
+
+| Item | Total Value | Details/Notes |
+| :--- | :--- | :--- |
+| **Accuracy** | **Extreme** | Accuracy boost to ensure skillchains connect |
+
+</details>
+
+### Equipment Points & Commentary
+* **Prioritize Maintaining Skillchains**
+  Since lower-sector bosses have very high evasion, this is a specialized accuracy configuration prioritizing "generating Light skillchains" over damage.
+
+* **Maintain Damage Taken Cut for Close Combat**
+  Since proximity to the boss is necessary, this gear maintains accuracy and a 50%+ Damage Taken Cut. It balances high accuracy with the robustness to withstand the boss's powerful area-of-effect attacks and special abilities.
+
+### Melee Gear (For Tough Enemies)
+Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enhance survival.
+* Main Weapon: Naegling or Rostam, etc.
+* Sub: Gleti's Knife (Rank 30)
+* Ranged Weapon: Death Penalty or Fomalhaut or Urp or Anarchy +2 or Ataktos
+* Ammo: Beyouv Bullet or Chrono Bullet
+* Head: Malignance Chapeau
+* Body: Malignance Tabard
+* Hands: Malignance Gloves
+* Legs: Malignance Tights
+* Feet: Malignance Boots
+* Neck: Karakt Choker
+* Left Ear: Eabani Earring
+* Right Ear: Telos Earring
+* Left Ring: Melanic Ring
+* Right Ring: Chirich Ring +1
+* Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, STP+10, Physical Damage Taken-10%)
+* Waist: Reiki Yotai
+
+<details>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
+
+| Item | Total Value | Details/Notes |
+| :--- | :--- | :--- |
+| **Accuracy** | **+540+** | Gear properties (+380) + DEX correction (~+160) |
+| **Store TP** | **+75** | Sum of Malignance Set (+50), Mantle (+10), etc. |
+| **Dual Wield** | **+11** | Ear (+4), Waist (+7) *Adjustment for min. interval with Sapo Nin |
+| **Damage Taken** | **Phys-50%(Cap) / Mag-41%** | DT-41% (Malignance-31, Ring-10) + PDT-10% (Back-10) |
+| **Mag. Evasion** | **+602** | Overwhelming resistance centered on Malignance set |
+| **Haste** | **+26%** | Gear-frame cap reached |
+
+</details>
+
+### Equipment Points & Commentary
+* **Balancing Survival and TP Rotation**
+  This set is used against strong enemies where standard melee (Adhemar-centric) would result in too much damage from special attacks or magic, or where debuffs cannot be resisted.
+  By using the full Malignance set, you secure the highest "Magic Evasion" and "Evasion" available to Corsair, while quickly accumulating TP for WS with high "Store TP."
+
+* **Maintaining Damage Taken Cut**
+  In addition to the Malignance set's cut (-34%), combining it with a max-rank Melanic Ring (-10%) and Camulus's Mantle (PDT-10%) ensures a stable 50% Damage Taken Cut (cap) even while performing melee attacks.
 
 ---
 
 ## Mantle (Camulus's Mantle) Augments
-* **Ranged (Physical)**: AGI+ / RngAcc+ / RngAtk+ / Weapon Skill Damage+
-* **Ranged (Magic/Leaden)**: AGI+ / MagAcc+ / Magic Damage+ / Weapon Skill Damage+
-* **Melee (Savage)**: STR+ / Acc+ / Atk+ / Weapon Skill Damage+
-* **Snap Gear**: Snapshot+
-* **Melee (TP)**: DEX+ / Acc+ / Atk+ / Double Attack+
+* **For Ranged (Physical)**: AGI+ / R.Acc+ / R.Atk+ / Weapon Skill Damage+
+* **For Ranged (Magic/Leaden)**: AGI+ / M.Acc+ / Magic Damage+ / Weapon Skill Damage+
+* **For Melee (Savage)**: STR+ / Acc+ / Atk+ / Weapon Skill Damage+
+* **For Snapshot Gear**: Snapshot+
+* **For Melee (TP Gain)**: DEX+ / Acc+ / Atk+ / Double Attack+
 
 ---
 
-> ➡️ **[Corsair Gear (Entry-level Guide) here](article_en.html?file=articles/corsair_equip_beginner_en.md)** ｜ 🏠 **[Back to Homepage](index_en.html)** ｜ ⬆️ **[Back to Top](#)**
+> ➡️ **[Entry-level Corsair Gear Guide is here](article_en.html?file=articles/corsair_equip_beginner_en.md)** ｜ 🏠 **[Back to Homepage](index_en.html)** ｜ ⬆️ **[Back to Top](#)**

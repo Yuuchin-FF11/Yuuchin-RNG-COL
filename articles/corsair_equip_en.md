@@ -325,7 +325,7 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Left Ring: Archon Ring
 * Right Ring: Dingir Ring
 * Back: Camulus's Mantle (AGI+30, M.Acc+20, Magic Damage+20, WSD+10%)
-* Waist: Orpheus's Sash
+* Waist: Orpheus's Sash or Darkness Obi
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>

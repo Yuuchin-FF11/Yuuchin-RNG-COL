@@ -1582,18 +1582,20 @@ nav a:hover::after {
 /* Update History Badge */
 .new-badge {
     display: inline-block;
-    background: linear-gradient(45deg, #ff4e50, #f9d423);
-    color: #111;
-    font-size: 0.7rem;
+    background: linear-gradient(45deg, #ff0000, #ff4e50);
+    color: #fff;
+    font-size: 0.75rem;
     font-weight: 900;
-    padding: 0.1rem 0.5rem;
+    padding: 0.15rem 0.6rem;
     border-radius: 4px;
     margin-left: 0.8rem;
     text-transform: uppercase;
-    box-shadow: 0 0 10px rgba(255, 78, 80, 0.5);
-    animation: pulse-new 2s infinite;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: pulse-new 1.5s infinite;
     vertical-align: middle;
     line-height: 1.2;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes pulse-new {

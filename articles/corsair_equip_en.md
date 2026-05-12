@@ -203,19 +203,19 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Main Weapon: Any weapon
 * Sub: Any weapon
 * Ranged Weapon: Any weapon
-* Ammo: [Live Bullet](http://wiki.ffo.jp/html/30018.html) or [Hauksbok Bullet](http://wiki.ffo.jp/html/37839.html)
-* Head: [Herculean Helm](http://wiki.ffo.jp/html/35175.html) (M.Atk Augment)
-* Body: [Lanun Frac +3](http://wiki.ffo.jp/html/31142.html)
-* Hands: [Carmine Finger +1](http://wiki.ffo.jp/html/33890.html) (Type C Rank 15) or [Herculean Gloves](http://wiki.ffo.jp/html/35214.html) (M.Atk Augment)
-* Legs: [Herculean Trousers](http://wiki.ffo.jp/html/35180.html) (M.Atk Augment)
-* Feet: [Lanun Boots +3](http://wiki.ffo.jp/html/30822.html)
-* Neck: [Commodore Charm +2](http://wiki.ffo.jp/html/37947.html)
-* Left Ear: [Moonshade Earring](https://wiki.ffo.jp/html/22306.html) (M.Atk+4, TP Bonus+250)
-* Right Ear: [Friomisi Earring](http://wiki.ffo.jp/html/26048.html)
-* Left Ring: [Arvina Ring +1](http://wiki.ffo.jp/html/31848.html)
-* Right Ring: [Dingir Ring](http://wiki.ffo.jp/html/35914.html)
-* Back: [Camulus's Mantle](http://wiki.ffo.jp/html/34459.html) (AGI+30, M.Atk+10, M.Acc+20, Magic Damage+20)
-* Waist: [Orpheus's Sash](http://wiki.ffo.jp/html/37383.html) or [Hachirin-no-Obi](http://wiki.ffo.jp/html/32704.html)
+* Ammo: Live Bullet or Hauksbok Bullet
+* Head: Herculean Helm (M.Atk Augment)
+* Body: Lanun Frac +3
+* Hands: Carmine Finger Gauntlets +1 (Type D) or Chasseur's Gantry +3
+* Legs: Herculean Trousers (M.Atk Augment)
+* Feet: Lanun Boots +3
+* Neck: Commodore Charm +2
+* Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
+* Right Ear: Friomisi Earring
+* Left Ring: Arvina Ring +1
+* Right Ring: Dingir Ring
+* Back: Camulus's Mantle (AGI+30, M.Atk+10, M.Acc+20, Magic Damage+20)
+* Waist: Orpheus's Sash or Hachirin-no-Obi
 
 ### Equipment Points & Commentary
 * **Selection of Ranged Weapons and Ammo**

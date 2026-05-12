@@ -20,17 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        .article-container { 
-            margin-top: 120px; 
-            margin-bottom: 100px; 
-            max-width: 1300px; 
-            margin-left: auto; 
-            margin-right: auto;
-            padding: 0 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .article-container { margin-top: 120px; margin-bottom: 100px; max-width: 1300px; margin-left: auto; margin-right: auto; padding: 0 2rem; display: flex; flex-direction: column; align-items: center; }
         .article-header-nav { width: 100%; max-width: 850px; margin-bottom: 2rem; text-align: left; }
         .article-layout { display: flex; gap: 3rem; align-items: flex-start; justify-content: center; width: 100%; }
         .article-main { flex: 0 1 850px; min-width: 0; width: 100%; }
@@ -76,27 +66,27 @@
                     const linkMap = {
                         "Rostam": "https://wiki.ffo.jp/html/37235.html", "Nyame": "https://wiki.ffo.jp/html/38283.html", "Malignance": "https://wiki.ffo.jp/html/39726.html",
                         "Ikenga": "https://wiki.ffo.jp/html/38196.html", "Chasseur": "https://wiki.ffo.jp/html/33205.html", "Lanun": "https://wiki.ffo.jp/html/30924.html",
-                        "Adhemar Jacket": "http://wiki.ffo.jp/html/34614.html", "Adhemar Wristbands": "http://wiki.ffo.jp/html/34615.html",
-                        "Kakuiesi Ring": "http://wiki.ffo.jp/html/34650.html", "Chrono Bullet": "http://wiki.ffo.jp/html/35442.html", "Dingir Ring": "http://wiki.ffo.jp/html/35914.html",
-                        "Camulus's Mantle": "http://wiki.ffo.jp/html/35517.html", "Fomalhaut": "http://wiki.ffo.jp/html/35356.html", "Armageddon": "http://wiki.ffo.jp/html/20384.html",
-                        "Death Penalty": "http://wiki.ffo.jp/html/483.html", "Regal Necklace": "http://wiki.ffo.jp/html/36145.html", "Crepuscular Knife": "http://wiki.ffo.jp/html/38361.html",
-                        "Beyouv Bullet": "http://wiki.ffo.jp/html/39083.html", "Telos Earring": "http://wiki.ffo.jp/html/34761.html", "Naegling": "http://wiki.ffo.jp/html/37597.html",
-                        "Ishkur Banner": "http://wiki.ffo.jp/html/40007.html", "Orpheus's Sash": "http://wiki.ffo.jp/html/37383.html", "Commodore Charm": "http://wiki.ffo.jp/html/37218.html",
-                        "Iskur Gorget": "http://wiki.ffo.jp/html/35917.html", "Epaminondas's Ring": "http://wiki.ffo.jp/html/37381.html", "Gelatinous Ring": "http://wiki.ffo.jp/html/33894.html",
-                        "Defending Ring": "http://wiki.ffo.jp/html/2290.html", "Luzaf's Ring": "http://wiki.ffo.jp/html/12946.html", "Carrier's Sash": "http://wiki.ffo.jp/html/26679.html",
-                        "Onowai Earring": "http://wiki.ffo.jp/html/35440.html", "Enervating Earring": "http://wiki.ffo.jp/html/33195.html", "Paqichik Ring": "http://wiki.ffo.jp/html/32142.html",
-                        "Rajas Ring": "http://wiki.ffo.jp/html/305.html", "Fotia Belt": "http://wiki.ffo.jp/html/32705.html", "Devastating Bullet": "http://wiki.ffo.jp/html/35443.html",
-                        "Yemaya Belt": "http://wiki.ffo.jp/html/34152.html", "Kawkab Belt": "http://wiki.ffo.jp/html/35702.html", "Crepuscular Ring": "http://wiki.ffo.jp/html/38154.html",
-                        "Pixie Hairpin +1": "http://wiki.ffo.jp/html/20388.html", "Archon Ring": "http://wiki.ffo.jp/html/24057.html", "Suppanomimi": "http://wiki.ffo.jp/html/317.html",
-                        "Epona's Ring": "http://wiki.ffo.jp/html/22464.html", "Chirich Ring": "http://wiki.ffo.jp/html/35694.html", "Sarissapho Belt": "http://wiki.ffo.jp/html/31956.html",
-                        "Herberton Ring": "http://wiki.ffo.jp/html/31110.html", "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html", "Kustawi": "http://wiki.ffo.jp/html/35435.html",
-                        "Melanic Ring": "http://wiki.ffo.jp/html/38155.html", "Hachirin-no-Obi": "http://wiki.ffo.jp/html/32704.html", "Moonshade Earring": "http://wiki.ffo.jp/html/22306.html",
-                        "Friomisi Earring": "http://wiki.ffo.jp/html/26048.html", "Karakt Choker": "http://wiki.ffo.jp/html/31102.html", "Eabani Earring": "http://wiki.ffo.jp/html/30950.html",
-                        "Gleti's Knife": "http://wiki.ffo.jp/html/38202.html", "Anarchy": "http://wiki.ffo.jp/html/35315.html", "Ataktos": "http://wiki.ffo.jp/html/35316.html",
-                        "Republican Platinum Medal": "http://wiki.ffo.jp/html/31046.html", "Gazu Bracelets": "http://wiki.ffo.jp/html/33190.html", "Impulse Belt": "http://wiki.ffo.jp/html/31952.html",
-                        "Ifrimad Ring": "http://wiki.ffo.jp/html/38274.html", "Beyla Earring": "http://wiki.ffo.jp/html/31011.html", "Live Bullet": "http://wiki.ffo.jp/html/30018.html",
-                        "Sailfi Belt": "http://wiki.ffo.jp/html/35698.html", "Mumu Mask": "http://wiki.ffo.jp/html/39387.html", "Mumu Gorget": "http://wiki.ffo.jp/html/39388.html",
-                        "Mumu Cape": "http://wiki.ffo.jp/html/39389.html", "Mumu Sash": "http://wiki.ffo.jp/html/39390.html", "Carmine Finger": "http://wiki.ffo.jp/html/33891.html"
+                        "Adhemar Jacket": "https://wiki.ffo.jp/html/34548.html", "Adhemar Wristbands": "https://wiki.ffo.jp/html/34549.html",
+                        "Kakuiesi Ring": "https://wiki.ffo.jp/html/34650.html", "Chrono Bullet": "https://wiki.ffo.jp/html/35442.html", "Dingir Ring": "https://wiki.ffo.jp/html/35914.html",
+                        "Camulus's Mantle": "https://wiki.ffo.jp/html/35517.html", "Fomalhaut": "https://wiki.ffo.jp/html/35356.html", "Armageddon": "https://wiki.ffo.jp/html/20384.html",
+                        "Death Penalty": "https://wiki.ffo.jp/html/483.html", "Regal Necklace": "https://wiki.ffo.jp/html/36145.html", "Crepuscular Knife": "https://wiki.ffo.jp/html/38361.html",
+                        "Beyouv Bullet": "https://wiki.ffo.jp/html/39083.html", "Telos Earring": "https://wiki.ffo.jp/html/34761.html", "Naegling": "https://wiki.ffo.jp/html/37597.html",
+                        "Ishkur Banner": "https://wiki.ffo.jp/html/40007.html", "Orpheus's Sash": "https://wiki.ffo.jp/html/37383.html", "Commodore Charm": "https://wiki.ffo.jp/html/37218.html",
+                        "Iskur Gorget": "https://wiki.ffo.jp/html/35917.html", "Epaminondas's Ring": "https://wiki.ffo.jp/html/37381.html", "Gelatinous Ring": "https://wiki.ffo.jp/html/33894.html",
+                        "Defending Ring": "https://wiki.ffo.jp/html/2290.html", "Luzaf's Ring": "https://wiki.ffo.jp/html/12946.html", "Carrier's Sash": "https://wiki.ffo.jp/html/26679.html",
+                        "Onowai Earring": "https://wiki.ffo.jp/html/35440.html", "Enervating Earring": "https://wiki.ffo.jp/html/33195.html", "Paqichik Ring": "https://wiki.ffo.jp/html/32142.html",
+                        "Rajas Ring": "https://wiki.ffo.jp/html/305.html", "Fotia Belt": "https://wiki.ffo.jp/html/32705.html", "Devastating Bullet": "https://wiki.ffo.jp/html/35443.html",
+                        "Yemaya Belt": "https://wiki.ffo.jp/html/34152.html", "Kawkab Belt": "https://wiki.ffo.jp/html/35702.html", "Crepuscular Ring": "https://wiki.ffo.jp/html/38369.html",
+                        "Pixie Hairpin +1": "https://wiki.ffo.jp/html/20388.html", "Archon Ring": "https://wiki.ffo.jp/html/24057.html", "Suppanomimi": "https://wiki.ffo.jp/html/317.html",
+                        "Epona's Ring": "https://wiki.ffo.jp/html/22464.html", "Chirich Ring": "https://wiki.ffo.jp/html/35694.html", "Sarissapho Belt": "https://wiki.ffo.jp/html/31956.html",
+                        "Herberton Ring": "https://wiki.ffo.jp/html/32142.html", "Crepuscular Earring": "https://wiki.ffo.jp/html/38368.html", "Kustawi": "https://wiki.ffo.jp/html/35436.html",
+                        "Melanic Ring": "https://wiki.ffo.jp/html/39711.html", "Hachirin-no-Obi": "https://wiki.ffo.jp/html/32704.html", "Moonshade Earring": "https://wiki.ffo.jp/html/22306.html",
+                        "Friomisi Earring": "https://wiki.ffo.jp/html/29865.html", "Karakt Choker": "https://wiki.ffo.jp/html/31102.html", "Eabani Earring": "https://wiki.ffo.jp/html/34143.html",
+                        "Gleti's Knife": "https://wiki.ffo.jp/html/38205.html", "Anarchy": "https://wiki.ffo.jp/html/20554.html", "Ataktos": "https://wiki.ffo.jp/html/25813.html",
+                        "Republican Platinum Medal": "https://wiki.ffo.jp/html/38491.html", "Gazu Bracelets": "https://wiki.ffo.jp/html/35439.html", "Impulse Belt": "https://wiki.ffo.jp/html/20373.html",
+                        "Ifrimad Ring": "https://wiki.ffo.jp/html/39089.html", "Beyla Earring": "https://wiki.ffo.jp/html/37879.html", "Live Bullet": "https://wiki.ffo.jp/html/35445.html",
+                        "Sailfi Belt": "https://wiki.ffo.jp/html/32262.html", "Mumu Mask": "https://wiki.ffo.jp/html/39387.html", "Mumu Gorget": "https://wiki.ffo.jp/html/39388.html",
+                        "Mumu Cape": "https://wiki.ffo.jp/html/39389.html", "Mumu Sash": "https://wiki.ffo.jp/html/39390.html", "Carmine Finger": "https://wiki.ffo.jp/html/34550.html"
                     };
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
@@ -153,6 +143,11 @@
                     contentDiv.querySelectorAll('h2, h3').forEach((h, i) => { h.id = 'h-' + i; const tli = document.createElement('li'); tli.style.marginLeft = h.tagName === 'H3' ? '1rem' : '0'; tli.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`; tocList.appendChild(tli); });
                 })
                 .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
+        }
+        const backToTopBtn = document.getElementById('fixed-back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', () => { (window.pageYOffset > 400) ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible'); }, { passive: true });
+            backToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
         }
     </script>
 </body>

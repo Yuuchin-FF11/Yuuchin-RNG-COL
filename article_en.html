@@ -89,7 +89,7 @@
                         "Yemaya Belt": "http://wiki.ffo.jp/html/34152.html", "Kawkab Belt": "http://wiki.ffo.jp/html/35702.html", "Crepuscular Ring": "http://wiki.ffo.jp/html/38154.html",
                         "Pixie Hairpin +1": "http://wiki.ffo.jp/html/20388.html", "Archon Ring": "http://wiki.ffo.jp/html/24057.html", "Suppanomimi": "http://wiki.ffo.jp/html/317.html",
                         "Epona's Ring": "http://wiki.ffo.jp/html/22464.html", "Chirich Ring": "http://wiki.ffo.jp/html/35694.html", "Sarissapho Belt": "http://wiki.ffo.jp/html/31956.html",
-                        "Haverton Ring": "http://wiki.ffo.jp/html/31110.html", "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html", "Kustawi": "http://wiki.ffo.jp/html/35435.html",
+                        "Herberton Ring": "http://wiki.ffo.jp/html/31110.html", "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html", "Kustawi": "http://wiki.ffo.jp/html/35435.html",
                         "Melanic Ring": "http://wiki.ffo.jp/html/38155.html", "Hachirin-no-Obi": "http://wiki.ffo.jp/html/32704.html", "Moonshade Earring": "http://wiki.ffo.jp/html/22306.html",
                         "Friomisi Earring": "http://wiki.ffo.jp/html/26048.html", "Karakt Choker": "http://wiki.ffo.jp/html/31102.html", "Eabani Earring": "http://wiki.ffo.jp/html/30950.html",
                         "Gleti's Knife": "http://wiki.ffo.jp/html/38202.html", "Anarchy": "http://wiki.ffo.jp/html/35315.html", "Ataktos": "http://wiki.ffo.jp/html/35316.html",
@@ -112,14 +112,14 @@
                                 const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
                                 if (!searchName || /^[＋+or\d\sRank]+$/.test(searchName)) return (/^[＋+or\d\s]+$/.test(itemHtml) ? `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>` : itemHtml);
                                 let normalizedName = searchName;
-                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur', 'LK': 'Laksamana', 'LU': 'Luzaf', 'HV': 'Haverton' };
+                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur', 'LK': 'Laksamana', 'LU': 'Luzaf', 'HV': 'Herberton' };
                                 for (let key in abbrMap) { if (normalizedName.startsWith(key)) { normalizedName = normalizedName.replace(key, abbrMap[key]); break; } }
                                 if (normalizedName.startsWith('Nyame')) normalizedName = 'Nyame';
                                 else if (normalizedName.startsWith('Malignance')) normalizedName = 'Malignance';
                                 else if (normalizedName.startsWith('Ikenga')) normalizedName = 'Ikenga';
                                 else if (normalizedName.startsWith('Lanun')) normalizedName = 'Lanun';
                                 else if (normalizedName.startsWith('Chasseur')) normalizedName = 'Chasseur';
-                                else if (normalizedName.startsWith('Haverton')) normalizedName = 'Haverton Ring';
+                                else if (normalizedName.startsWith('Herberton')) normalizedName = 'Herberton Ring';
                                 else if (normalizedName.startsWith('Kustawi')) normalizedName = 'Kustawi';
                                 else if (normalizedName.startsWith('Crepuscular Ring')) normalizedName = 'Crepuscular Ring';
                                 else if (normalizedName.startsWith('Crepuscular Earring')) normalizedName = 'Crepuscular Earring';

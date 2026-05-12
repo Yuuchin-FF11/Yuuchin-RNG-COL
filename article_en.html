@@ -106,31 +106,65 @@
             fetch(file)
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
-                    // Highlight bracket content for English too
                     const processedText = text.replace(/([「『])([^」』\n]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
                     contentDiv.innerHTML = marked.parse(processedText);
 
-                    // English labels for gear parts
+                    // Robust Linking Logic
                     const keywords = ['Main Weapon', 'Sub', 'Ranged Weapon', 'Ammo', 'Head', 'Body', 'Hands', 'Legs', 'Feet', 'Neck', 'Left Ear', 'Right Ear', 'Left Ring', 'Right Ring', 'Back', 'Waist'];
                     
                     const linkMap = {
-                        "Rostam": "https://wiki.ffo.jp/html/37235.html", "Nyame": "https://wiki.ffo.jp/html/38283.html", "Malignance": "https://wiki.ffo.jp/html/39726.html",
-                        "Ikenga": "https://wiki.ffo.jp/html/38196.html", "Chasseur": "https://wiki.ffo.jp/html/33205.html", "Lanun": "https://wiki.ffo.jp/html/30924.html",
-                        "Adhemar": "http://wiki.ffo.jp/html/34613.html", "Kakuiesi Ring": "http://wiki.ffo.jp/html/34650.html", "Chrono Bullet": "http://wiki.ffo.jp/html/35442.html",
-                        "Dingir Ring": "http://wiki.ffo.jp/html/35914.html", "Camulus's Mantle": "http://wiki.ffo.jp/html/35517.html", "Fomalhaut": "http://wiki.ffo.jp/html/35356.html",
-                        "Armageddon": "http://wiki.ffo.jp/html/20384.html", "Death Penalty": "http://wiki.ffo.jp/html/483.html", "Regal Necklace": "http://wiki.ffo.jp/html/36145.html",
-                        "Crepuscular Knife": "http://wiki.ffo.jp/html/38361.html", "Beyouv Bullet": "http://wiki.ffo.jp/html/39083.html", "Telos Earring": "http://wiki.ffo.jp/html/34761.html",
-                        "Naegling": "http://wiki.ffo.jp/html/37597.html", "Ishkur Banner": "http://wiki.ffo.jp/html/40007.html", "Orpheus's Sash": "http://wiki.ffo.jp/html/37383.html",
-                        "Commodore Charm": "http://wiki.ffo.jp/html/37218.html", "Commodore Charm +2": "http://wiki.ffo.jp/html/37218.html",
-                        "Iskur Gorget": "http://wiki.ffo.jp/html/35917.html", "Epaminondas's Ring": "http://wiki.ffo.jp/html/37381.html", "Gelatinous Ring": "http://wiki.ffo.jp/html/33894.html",
-                        "Defending Ring": "http://wiki.ffo.jp/html/2290.html", "Luzaf's Ring": "http://wiki.ffo.jp/html/12946.html", "Carrier's Sash": "http://wiki.ffo.jp/html/26679.html",
-                        "Onowai Earring": "http://wiki.ffo.jp/html/35440.html", "Enervating Earring": "http://wiki.ffo.jp/html/33195.html", "Paqichik Ring": "http://wiki.ffo.jp/html/32142.html",
-                        "Rajas Ring": "http://wiki.ffo.jp/html/305.html", "Fotia Belt": "http://wiki.ffo.jp/html/32705.html", "Devastating Bullet": "http://wiki.ffo.jp/html/35443.html",
-                        "Yemaya Belt": "http://wiki.ffo.jp/html/34152.html", "Kawkab Belt": "http://wiki.ffo.jp/html/35702.html", "Crepuscular Ring": "http://wiki.ffo.jp/html/38369.html",
-                        "Pixie Hairpin +1": "http://wiki.ffo.jp/html/20388.html", "Archon Ring": "http://wiki.ffo.jp/html/24057.html", "Suppanomimi": "http://wiki.ffo.jp/html/317.html",
-                        "Epona's Ring": "http://wiki.ffo.jp/html/22464.html", "Chirich Ring": "http://wiki.ffo.jp/html/35694.html", "Sarissapho Belt": "http://wiki.ffo.jp/html/31956.html",
-                        "Herbary Ring": "http://wiki.ffo.jp/html/35688.html", "Crepuscular Earring": "http://wiki.ffo.jp/html/38365.html",
-                        "Herculean": "http://wiki.ffo.jp/html/35458.html", "Carmine": "http://wiki.ffo.jp/html/33890.html", "Adhemar": "http://wiki.ffo.jp/html/34613.html"
+                        "Rostam": "https://wiki.ffo.jp/html/37235.html", 
+                        "Nyame": "https://wiki.ffo.jp/html/38283.html", 
+                        "Malignance": "https://wiki.ffo.jp/html/39726.html",
+                        "Ikenga": "https://wiki.ffo.jp/html/38196.html", 
+                        "Chasseur": "https://wiki.ffo.jp/html/33205.html", 
+                        "Lanun": "https://wiki.ffo.jp/html/30924.html",
+                        "Adhemar": "http://wiki.ffo.jp/html/34613.html", 
+                        "Kakuiesi Ring": "http://wiki.ffo.jp/html/34650.html", 
+                        "Chrono Bullet": "http://wiki.ffo.jp/html/35442.html",
+                        "Dingir Ring": "http://wiki.ffo.jp/html/35914.html", 
+                        "Camulus's Mantle": "http://wiki.ffo.jp/html/35517.html", 
+                        "Fomalhaut": "http://wiki.ffo.jp/html/35356.html",
+                        "Armageddon": "http://wiki.ffo.jp/html/20384.html", 
+                        "Death Penalty": "http://wiki.ffo.jp/html/483.html", 
+                        "Regal Necklace": "http://wiki.ffo.jp/html/36145.html",
+                        "Crepuscular Knife": "http://wiki.ffo.jp/html/38361.html", 
+                        "Beyouv Bullet": "http://wiki.ffo.jp/html/39083.html", 
+                        "Telos Earring": "http://wiki.ffo.jp/html/34761.html",
+                        "Naegling": "http://wiki.ffo.jp/html/37597.html", 
+                        "Ishkur Banner": "http://wiki.ffo.jp/html/40007.html", 
+                        "Orpheus's Sash": "http://wiki.ffo.jp/html/37383.html",
+                        "Commodore Charm": "http://wiki.ffo.jp/html/37218.html", 
+                        "Commodore Charm +2": "http://wiki.ffo.jp/html/37218.html",
+                        "Iskur Gorget": "http://wiki.ffo.jp/html/35917.html", 
+                        "Epaminondas's Ring": "http://wiki.ffo.jp/html/37381.html", 
+                        "Gelatinous Ring": "http://wiki.ffo.jp/html/33894.html",
+                        "Defending Ring": "http://wiki.ffo.jp/html/2290.html", 
+                        "Luzaf's Ring": "http://wiki.ffo.jp/html/12946.html", 
+                        "Carrier's Sash": "http://wiki.ffo.jp/html/26679.html",
+                        "Onowai Earring": "http://wiki.ffo.jp/html/35440.html", 
+                        "Enervating Earring": "http://wiki.ffo.jp/html/33195.html", 
+                        "Paqichik Ring": "http://wiki.ffo.jp/html/32142.html",
+                        "Rajas Ring": "http://wiki.ffo.jp/html/305.html", 
+                        "Fotia Belt": "http://wiki.ffo.jp/html/32705.html", 
+                        "Devastating Bullet": "http://wiki.ffo.jp/html/35443.html",
+                        "Yemaya Belt": "http://wiki.ffo.jp/html/34152.html", 
+                        "Kawkab Belt": "http://wiki.ffo.jp/html/35702.html", 
+                        "Crepuscular Ring": "http://wiki.ffo.jp/html/38154.html",
+                        "Pixie Hairpin +1": "http://wiki.ffo.jp/html/20388.html", 
+                        "Archon Ring": "http://wiki.ffo.jp/html/24057.html", 
+                        "Suppanomimi": "http://wiki.ffo.jp/html/317.html",
+                        "Epona's Ring": "http://wiki.ffo.jp/html/22464.html", 
+                        "Chirich Ring": "http://wiki.ffo.jp/html/35694.html", 
+                        "Sarissapho Belt": "http://wiki.ffo.jp/html/31956.html",
+                        "Herberton Ring": "http://wiki.ffo.jp/html/31110.html", 
+                        "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html",
+                        "Kustawi": "http://wiki.ffo.jp/html/35435.html",
+                        "Melanic Ring": "http://wiki.ffo.jp/html/38155.html",
+                        "Hachirin-no-Obi": "http://wiki.ffo.jp/html/32704.html",
+                        "Moonshade Earring": "http://wiki.ffo.jp/html/22306.html",
+                        "Friomisi Earring": "http://wiki.ffo.jp/html/26048.html",
+                        "Karakt Choker": "http://wiki.ffo.jp/html/31102.html"
                     };
 
                     const tempDiv = document.createElement('div');
@@ -152,9 +186,8 @@
                                     return itemHtml;
                                 }
 
-                                // Advanced Normalization Logic (English)
                                 let normalizedName = searchName;
-                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur', 'LK': 'Laksamana', 'LU': 'Luzaf', 'HV': 'Herbary' };
+                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur', 'LK': 'Laksamana', 'LU': 'Luzaf', 'HV': 'Herberton' };
                                 for (let key in abbrMap) { if (normalizedName.startsWith(key)) { normalizedName = normalizedName.replace(key, abbrMap[key]); break; } }
 
                                 if (normalizedName.startsWith('Nyame')) normalizedName = 'Nyame';
@@ -162,9 +195,11 @@
                                 else if (normalizedName.startsWith('Ikenga')) normalizedName = 'Ikenga';
                                 else if (normalizedName.startsWith('Lanun')) normalizedName = 'Lanun';
                                 else if (normalizedName.startsWith('Chasseur')) normalizedName = 'Chasseur';
-                                else if (normalizedName.startsWith('Herbary')) normalizedName = 'Herbary Ring';
+                                else if (normalizedName.startsWith('Herberton')) normalizedName = 'Herberton Ring';
+                                else if (normalizedName.startsWith('Kustawi')) normalizedName = 'Kustawi';
                                 else if (normalizedName.startsWith('Crepuscular Ring')) normalizedName = 'Crepuscular Ring';
                                 else if (normalizedName.startsWith('Crepuscular Earring')) normalizedName = 'Crepuscular Earring';
+                                else if (normalizedName.startsWith('Melanic Ring')) normalizedName = 'Melanic Ring';
 
                                 const url = linkMap[normalizedName] || linkMap[searchName] || linkMap[baseName];
                                 if (url) {

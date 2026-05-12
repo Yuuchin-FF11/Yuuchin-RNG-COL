@@ -1695,4 +1695,102 @@ nav a:hover::after {
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
+/* Beginner Banner */
+.beginner-banner-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    margin: 2rem 0;
+    padding: 2.5rem !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(13, 71, 161, 0.2) 100%);
+    border: 2px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.beginner-banner-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.beginner-banner-link:hover::before {
+    left: 100%;
+}
+
+.beginner-banner-link:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--accent-color);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(13, 71, 161, 0.3) 100%);
+}
+
+.beginner-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.beginner-banner-icon {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    animation: banner-pulse 2s infinite;
+}
+
+.beginner-banner-text {
+    flex: 1;
+}
+
+.beginner-banner-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.beginner-banner-text p {
+    font-size: 1.1rem;
+    color: #eee;
+    margin: 0;
+}
+
+.beginner-banner-arrow {
+    font-size: 2rem;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.beginner-banner-link:hover .beginner-banner-arrow {
+    transform: translateX(10px);
+}
+
+@keyframes banner-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .beginner-banner-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    .beginner-banner-arrow {
+        display: none;
+    }
+}
+
 

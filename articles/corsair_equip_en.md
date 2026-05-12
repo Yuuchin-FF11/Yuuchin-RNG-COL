@@ -75,7 +75,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Left Ear: Crepuscular Earring
 * Right Ear: Telos Earring
 * Left Ring: Kakuiesi Ring +1
-* Right Ring: Herbary Ring +1
+* Right Ring: Herberton Ring +1
 * Back: Camulus's Mantle (Snapshot +10)
 * Waist: Impulse Belt
 
@@ -152,7 +152,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Left Ear: Crepuscular Earring
 * Right Ear: Telos Earring
 * Left Ring: Crepuscular Ring
-* Right Ring: Herbary Ring +1
+* Right Ring: Herberton Ring +1
 * Back: Camulus's Mantle (Any augments as long as STP+10 is present)
 * Waist: Yemaya Belt
 
@@ -245,7 +245,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Neck: Iskur Gorget
 * Left Ear: Beyla Earring
 * Right Ear: Telos Earring
-* Left Ring: Herbary Ring +1
+* Left Ring: Herberton Ring +1
 * Right Ring: Ifrimad Ring
 * Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, WSD+10%)
 * Waist: Fotia Belt
@@ -282,8 +282,8 @@ A specialized accuracy set for high-evasion bosses like in Sortie to ensure skil
 * Left Ear: Crepuscular Earring
 * Right Ear: Telos Earring
 * Left Ring: Crepuscular Ring
-* Right Ring: Herbary Ring +1
-* Back: Void Cape (Placeholder Name)
+* Right Ring: Herberton Ring +1
+* Back: Mumu Cape
 * Waist: Yemaya Belt
 
 <details>
@@ -400,7 +400,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Sub: Crepuscular Knife
 * Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Beyouv Bullet
-* Head: Void Mask (Placeholder Name)
+* Head: Mumu Mask
 * Body: Adhemar Jacket +1 (Type A)
 * Hands: Adhemar Wristbands +1 (Type A)
 * Legs: Chasseur's Culottes +3
@@ -445,12 +445,12 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Sub: Gleti's Knife (Rank 30)
 * Ranged Weapon: Anarchy +2 (TP Bonus+1000) or Ataktos (TP Bonus+1000)
 * Ammo: Beyouv Bullet
-* Head: Void Mask (Placeholder Name)
+* Head: Mumu Mask
 * Body: Adhemar Jacket +1 (Type A)
 * Hands: Adhemar Wristbands +1 (Type A)
 * Legs: Chasseur's Culottes +3
 * Feet: Nyame Sollerets (Rank 30)
-* Neck: Void Throat (Placeholder Name)
+* Neck: Mumu Gorget
 * Left Ear: Suppanomimi
 * Right Ear: Telos Earring
 * Left Ring: Melanic Ring
@@ -527,13 +527,13 @@ A specialized accuracy set to ensure Light skillchains are generated against hig
 * Hands: Gazu Bracelets +1 (Rank 15)
 * Legs: Chasseur's Culottes +3
 * Feet: Malignance Boots
-* Neck: Void Throat (Placeholder Name)
+* Neck: Mumu Gorget
 * Left Ear: Dominance Earring +1 (Rank 15)
 * Right Ear: Telos Earring
 * Left Ring: Chirich Ring +1
 * Right Ring: Ifrimad Ring
-* Back: Void Cape (Placeholder Name)
-* Waist: Void Sash (Placeholder Name)
+* Back: Mumu Cape
+* Waist: Mumu Sash
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>

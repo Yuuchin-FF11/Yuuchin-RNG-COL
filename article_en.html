@@ -20,39 +20,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        .article-container { 
-            margin-top: 120px; 
-            margin-bottom: 100px; 
-            max-width: 1300px; 
-            margin-left: auto; 
-            margin-right: auto;
-            padding: 0 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .article-container { margin-top: 120px; margin-bottom: 100px; max-width: 1300px; margin-left: auto; margin-right: auto; padding: 0 2rem; display: flex; flex-direction: column; align-items: center; }
         .article-header-nav { width: 100%; max-width: 850px; margin-bottom: 2rem; text-align: left; }
         .article-layout { display: flex; gap: 3rem; align-items: flex-start; justify-content: center; width: 100%; }
         .article-main { flex: 0 1 850px; min-width: 0; width: 100%; }
         .article-card { padding: 3rem; }
-        .toc-sidebar { width: 280px; position: sticky; top: 120px; background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; display: none; }
+        .toc-sidebar { width: 280px; position: sticky; top: 120px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; display: none; }
         @media (min-width: 1024px) { .toc-sidebar { display: block; } }
         .toc-sidebar h4 { color: var(--accent-color); margin-bottom: 1rem; font-family: 'Noto Sans JP', sans-serif; }
-        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { font-family: 'Zen Maru Gothic', sans-serif; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
         .toc-sidebar ul { list-style: none; padding-left: 0; }
         .toc-sidebar li { margin-bottom: 0.8rem; }
         .toc-sidebar a { color: var(--text-light); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
         .toc-sidebar a:hover { color: var(--primary-color); }
-        .footer-top-link { 
-            position: fixed; bottom: 30px; right: 30px; color: var(--accent-color); text-decoration: none; 
-            font-size: 0.95rem; font-weight: bold; transition: all 0.3s ease; display: flex; align-items: center; 
-            gap: 0.5rem; background: rgba(13, 71, 161, 0.6); backdrop-filter: blur(10px); padding: 0.8rem 1.4rem; 
-            border-radius: 30px; border: 1px solid var(--glass-border); z-index: 10000; opacity: 0; visibility: hidden;
-            transform: translateY(20px);
-        }
-        .footer-top-link.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .back-btn { display: inline-block; color: var(--text-light); text-decoration: none; font-weight: bold; background: rgba(255, 255, 255, 0.1); padding: 0.8rem 1.5rem; border-radius: 30px; transition: all 0.3s ease; }
-        .back-btn:hover { background: var(--primary-color); transform: translateX(-5px); }
         .markdown-body { color: var(--text-light); line-height: 1.8; padding: 1rem; font-family: 'Noto Sans JP', sans-serif; }
         .markdown-body h1 { color: var(--accent-color); font-size: 2.2rem; margin-bottom: 2rem; border-bottom: 2px solid var(--accent-color); }
         .markdown-body h2 { color: white; font-size: 1.6rem; margin-top: 2.5rem; border-left: 5px solid var(--primary-color); padding-left: 1rem; }
@@ -63,110 +42,52 @@
     </style>
 </head>
 <body>
-    <div id="particle-canvas-container"></div>
-    <header class="glass-header">
-        <div class="logo"><a href="index_en.html" style="color: inherit; text-decoration: none;">FFXI Bismarck</a></div>
-    </header>
-
+    <header class="glass-header"><div class="logo"><a href="index_en.html" style="color: inherit; text-decoration: none;">FFXI Bismarck</a></div></header>
     <main class="article-container">
-        <div class="article-header-nav">
-            <a href="index_en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Homepage</a>
-        </div>
-        
+        <div class="article-header-nav"><a href="index_en.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Homepage</a></div>
         <div class="article-layout">
-            <article class="article-main">
-                <div class="glass-card article-card">
-                    <div id="markdown-content" class="markdown-body">
-                        <div style="text-align: center; padding: 3rem 0;"><i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color);"></i><p>Loading article...</p></div>
-                    </div>
-                </div>
-            </article>
-
-            <aside class="toc-sidebar" id="toc-sidebar">
-                <h4 style="margin-top:0;"><i class="fa-solid fa-list"></i> Table of Contents</h4>
-                <ul id="toc-list"></ul>
-            </aside>
+            <article class="article-main"><div class="glass-card article-card"><div id="markdown-content" class="markdown-body">Loading...</div></div></article>
+            <aside class="toc-sidebar" id="toc-sidebar"><h4><i class="fa-solid fa-list"></i> Table of Contents</h4><ul id="toc-list"></ul></aside>
         </div>
     </main>
-
-    <footer class="glass-footer">
-        <div class="container" style="text-align: center;">
-            <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p>
-        </div>
-    </footer>
-
+    <footer class="glass-footer"><div class="container" style="text-align: center;"><p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p></div></footer>
     <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> Back to Top</a>
-
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const file = urlParams.get('file');
         const contentDiv = document.getElementById('markdown-content');
-
         if (file) {
             fetch(file)
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
                     const processedText = text.replace(/([「『])([^」』\n]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
                     contentDiv.innerHTML = marked.parse(processedText);
-
-                    // Robust Linking Logic
                     const keywords = ['Main Weapon', 'Sub', 'Ranged Weapon', 'Ammo', 'Head', 'Body', 'Hands', 'Legs', 'Feet', 'Neck', 'Left Ear', 'Right Ear', 'Left Ring', 'Right Ring', 'Back', 'Waist'];
-                    
                     const linkMap = {
-                        "Rostam": "https://wiki.ffo.jp/html/37235.html", 
-                        "Nyame": "https://wiki.ffo.jp/html/38283.html", 
-                        "Malignance": "https://wiki.ffo.jp/html/39726.html",
-                        "Ikenga": "https://wiki.ffo.jp/html/38196.html", 
-                        "Chasseur": "https://wiki.ffo.jp/html/33205.html", 
-                        "Lanun": "https://wiki.ffo.jp/html/30924.html",
-                        "Adhemar": "http://wiki.ffo.jp/html/34613.html", 
-                        "Kakuiesi Ring": "http://wiki.ffo.jp/html/34650.html", 
-                        "Chrono Bullet": "http://wiki.ffo.jp/html/35442.html",
-                        "Dingir Ring": "http://wiki.ffo.jp/html/35914.html", 
-                        "Camulus's Mantle": "http://wiki.ffo.jp/html/35517.html", 
-                        "Fomalhaut": "http://wiki.ffo.jp/html/35356.html",
-                        "Armageddon": "http://wiki.ffo.jp/html/20384.html", 
-                        "Death Penalty": "http://wiki.ffo.jp/html/483.html", 
-                        "Regal Necklace": "http://wiki.ffo.jp/html/36145.html",
-                        "Crepuscular Knife": "http://wiki.ffo.jp/html/38361.html", 
-                        "Beyouv Bullet": "http://wiki.ffo.jp/html/39083.html", 
-                        "Telos Earring": "http://wiki.ffo.jp/html/34761.html",
-                        "Naegling": "http://wiki.ffo.jp/html/37597.html", 
-                        "Ishkur Banner": "http://wiki.ffo.jp/html/40007.html", 
-                        "Orpheus's Sash": "http://wiki.ffo.jp/html/37383.html",
-                        "Commodore Charm": "http://wiki.ffo.jp/html/37218.html", 
-                        "Commodore Charm +2": "http://wiki.ffo.jp/html/37218.html",
-                        "Iskur Gorget": "http://wiki.ffo.jp/html/35917.html", 
-                        "Epaminondas's Ring": "http://wiki.ffo.jp/html/37381.html", 
-                        "Gelatinous Ring": "http://wiki.ffo.jp/html/33894.html",
-                        "Defending Ring": "http://wiki.ffo.jp/html/2290.html", 
-                        "Luzaf's Ring": "http://wiki.ffo.jp/html/12946.html", 
-                        "Carrier's Sash": "http://wiki.ffo.jp/html/26679.html",
-                        "Onowai Earring": "http://wiki.ffo.jp/html/35440.html", 
-                        "Enervating Earring": "http://wiki.ffo.jp/html/33195.html", 
-                        "Paqichik Ring": "http://wiki.ffo.jp/html/32142.html",
-                        "Rajas Ring": "http://wiki.ffo.jp/html/305.html", 
-                        "Fotia Belt": "http://wiki.ffo.jp/html/32705.html", 
-                        "Devastating Bullet": "http://wiki.ffo.jp/html/35443.html",
-                        "Yemaya Belt": "http://wiki.ffo.jp/html/34152.html", 
-                        "Kawkab Belt": "http://wiki.ffo.jp/html/35702.html", 
-                        "Crepuscular Ring": "http://wiki.ffo.jp/html/38154.html",
-                        "Pixie Hairpin +1": "http://wiki.ffo.jp/html/20388.html", 
-                        "Archon Ring": "http://wiki.ffo.jp/html/24057.html", 
-                        "Suppanomimi": "http://wiki.ffo.jp/html/317.html",
-                        "Epona's Ring": "http://wiki.ffo.jp/html/22464.html", 
-                        "Chirich Ring": "http://wiki.ffo.jp/html/35694.html", 
-                        "Sarissapho Belt": "http://wiki.ffo.jp/html/31956.html",
-                        "Herberton Ring": "http://wiki.ffo.jp/html/31110.html", 
-                        "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html",
-                        "Kustawi": "http://wiki.ffo.jp/html/35435.html",
-                        "Melanic Ring": "http://wiki.ffo.jp/html/38155.html",
-                        "Hachirin-no-Obi": "http://wiki.ffo.jp/html/32704.html",
-                        "Moonshade Earring": "http://wiki.ffo.jp/html/22306.html",
-                        "Friomisi Earring": "http://wiki.ffo.jp/html/26048.html",
-                        "Karakt Choker": "http://wiki.ffo.jp/html/31102.html"
+                        "Rostam": "https://wiki.ffo.jp/html/37235.html", "Nyame": "https://wiki.ffo.jp/html/38283.html", "Malignance": "https://wiki.ffo.jp/html/39726.html",
+                        "Ikenga": "https://wiki.ffo.jp/html/38196.html", "Chasseur": "https://wiki.ffo.jp/html/33205.html", "Lanun": "https://wiki.ffo.jp/html/30924.html",
+                        "Adhemar Jacket": "http://wiki.ffo.jp/html/34614.html", "Adhemar Wristbands": "http://wiki.ffo.jp/html/34615.html",
+                        "Kakuiesi Ring": "http://wiki.ffo.jp/html/34650.html", "Chrono Bullet": "http://wiki.ffo.jp/html/35442.html", "Dingir Ring": "http://wiki.ffo.jp/html/35914.html",
+                        "Camulus's Mantle": "http://wiki.ffo.jp/html/35517.html", "Fomalhaut": "http://wiki.ffo.jp/html/35356.html", "Armageddon": "http://wiki.ffo.jp/html/20384.html",
+                        "Death Penalty": "http://wiki.ffo.jp/html/483.html", "Regal Necklace": "http://wiki.ffo.jp/html/36145.html", "Crepuscular Knife": "http://wiki.ffo.jp/html/38361.html",
+                        "Beyouv Bullet": "http://wiki.ffo.jp/html/39083.html", "Telos Earring": "http://wiki.ffo.jp/html/34761.html", "Naegling": "http://wiki.ffo.jp/html/37597.html",
+                        "Ishkur Banner": "http://wiki.ffo.jp/html/40007.html", "Orpheus's Sash": "http://wiki.ffo.jp/html/37383.html", "Commodore Charm": "http://wiki.ffo.jp/html/37218.html",
+                        "Iskur Gorget": "http://wiki.ffo.jp/html/35917.html", "Epaminondas's Ring": "http://wiki.ffo.jp/html/37381.html", "Gelatinous Ring": "http://wiki.ffo.jp/html/33894.html",
+                        "Defending Ring": "http://wiki.ffo.jp/html/2290.html", "Luzaf's Ring": "http://wiki.ffo.jp/html/12946.html", "Carrier's Sash": "http://wiki.ffo.jp/html/26679.html",
+                        "Onowai Earring": "http://wiki.ffo.jp/html/35440.html", "Enervating Earring": "http://wiki.ffo.jp/html/33195.html", "Paqichik Ring": "http://wiki.ffo.jp/html/32142.html",
+                        "Rajas Ring": "http://wiki.ffo.jp/html/305.html", "Fotia Belt": "http://wiki.ffo.jp/html/32705.html", "Devastating Bullet": "http://wiki.ffo.jp/html/35443.html",
+                        "Yemaya Belt": "http://wiki.ffo.jp/html/34152.html", "Kawkab Belt": "http://wiki.ffo.jp/html/35702.html", "Crepuscular Ring": "http://wiki.ffo.jp/html/38154.html",
+                        "Pixie Hairpin +1": "http://wiki.ffo.jp/html/20388.html", "Archon Ring": "http://wiki.ffo.jp/html/24057.html", "Suppanomimi": "http://wiki.ffo.jp/html/317.html",
+                        "Epona's Ring": "http://wiki.ffo.jp/html/22464.html", "Chirich Ring": "http://wiki.ffo.jp/html/35694.html", "Sarissapho Belt": "http://wiki.ffo.jp/html/31956.html",
+                        "Herberton Ring": "http://wiki.ffo.jp/html/31110.html", "Crepuscular Earring": "http://wiki.ffo.jp/html/38153.html", "Kustawi": "http://wiki.ffo.jp/html/35435.html",
+                        "Melanic Ring": "http://wiki.ffo.jp/html/38155.html", "Hachirin-no-Obi": "http://wiki.ffo.jp/html/32704.html", "Moonshade Earring": "http://wiki.ffo.jp/html/22306.html",
+                        "Friomisi Earring": "http://wiki.ffo.jp/html/26048.html", "Karakt Choker": "http://wiki.ffo.jp/html/31102.html", "Eabani Earring": "http://wiki.ffo.jp/html/30950.html",
+                        "Gleti's Knife": "http://wiki.ffo.jp/html/38202.html", "Anarchy": "http://wiki.ffo.jp/html/35315.html", "Ataktos": "http://wiki.ffo.jp/html/35316.html",
+                        "Republican Platinum Medal": "http://wiki.ffo.jp/html/31046.html", "Gazu Bracelets": "http://wiki.ffo.jp/html/33190.html", "Impulse Belt": "http://wiki.ffo.jp/html/31952.html",
+                        "Ifrimad Ring": "http://wiki.ffo.jp/html/38274.html", "Beyla Earring": "http://wiki.ffo.jp/html/31011.html", "Live Bullet": "http://wiki.ffo.jp/html/30018.html",
+                        "Sailfi Belt": "http://wiki.ffo.jp/html/35698.html", "Mumu Mask": "http://wiki.ffo.jp/html/39387.html", "Mumu Gorget": "http://wiki.ffo.jp/html/39388.html",
+                        "Mumu Cape": "http://wiki.ffo.jp/html/39389.html", "Mumu Sash": "http://wiki.ffo.jp/html/39390.html"
                     };
-
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
                     tempDiv.querySelectorAll('li').forEach(li => {
@@ -176,20 +97,13 @@
                             const prefix = txt.substring(0, colonIdx + 1) + ' ';
                             const restHtml = li.innerHTML.substring(li.innerHTML.search(/[:：]/) + 1).trim();
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
-                                if (itemHtml.includes('<a ')) return itemHtml; 
-
+                                if (itemHtml.includes('<a ')) return itemHtml;
                                 let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
                                 const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
-                                
-                                if (!searchName || /^[＋+or\d\sRank]+$/.test(searchName)) {
-                                    if (/^[＋+or\d\s]+$/.test(itemHtml)) return `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>`;
-                                    return itemHtml;
-                                }
-
+                                if (!searchName || /^[＋+or\d\sRank]+$/.test(searchName)) return (/^[＋+or\d\s]+$/.test(itemHtml) ? `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>` : itemHtml);
                                 let normalizedName = searchName;
                                 const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur', 'LK': 'Laksamana', 'LU': 'Luzaf', 'HV': 'Herberton' };
                                 for (let key in abbrMap) { if (normalizedName.startsWith(key)) { normalizedName = normalizedName.replace(key, abbrMap[key]); break; } }
-
                                 if (normalizedName.startsWith('Nyame')) normalizedName = 'Nyame';
                                 else if (normalizedName.startsWith('Malignance')) normalizedName = 'Malignance';
                                 else if (normalizedName.startsWith('Ikenga')) normalizedName = 'Ikenga';
@@ -200,43 +114,39 @@
                                 else if (normalizedName.startsWith('Crepuscular Ring')) normalizedName = 'Crepuscular Ring';
                                 else if (normalizedName.startsWith('Crepuscular Earring')) normalizedName = 'Crepuscular Earring';
                                 else if (normalizedName.startsWith('Melanic Ring')) normalizedName = 'Melanic Ring';
-
+                                else if (normalizedName.startsWith('Eabani')) normalizedName = 'Eabani Earring';
+                                else if (normalizedName.startsWith('Gleti')) normalizedName = 'Gleti\'s Knife';
+                                else if (normalizedName.startsWith('Anarchy')) normalizedName = 'Anarchy';
+                                else if (normalizedName.startsWith('Ataktos')) normalizedName = 'Ataktos';
+                                else if (normalizedName.startsWith('Republican')) normalizedName = 'Republican Platinum Medal';
+                                else if (normalizedName.startsWith('Gazu')) normalizedName = 'Gazu Bracelets';
+                                else if (normalizedName.startsWith('Impulse')) normalizedName = 'Impulse Belt';
+                                else if (normalizedName.startsWith('Ifrimad')) normalizedName = 'Ifrimad Ring';
+                                else if (normalizedName.startsWith('Beyla')) normalizedName = 'Beyla Earring';
+                                else if (normalizedName.startsWith('Live')) normalizedName = 'Live Bullet';
+                                else if (normalizedName.startsWith('Adhemar Jacket')) normalizedName = 'Adhemar Jacket';
+                                else if (normalizedName.startsWith('Adhemar Wristbands')) normalizedName = 'Adhemar Wristbands';
+                                else if (normalizedName.startsWith('Sailfi')) normalizedName = 'Sailfi Belt';
+                                else if (normalizedName.startsWith('Mumu Mask')) normalizedName = 'Mumu Mask';
+                                else if (normalizedName.startsWith('Mumu Gorget')) normalizedName = 'Mumu Gorget';
+                                else if (normalizedName.startsWith('Mumu Cape')) normalizedName = 'Mumu Cape';
+                                else if (normalizedName.startsWith('Mumu Sash')) normalizedName = 'Mumu Sash';
                                 const url = linkMap[normalizedName] || linkMap[searchName] || linkMap[baseName];
-                                if (url) {
-                                    return `<a href="${url}" target="_blank" class="auto-link">${itemHtml}</a>`;
-                                }
-                                return itemHtml;
+                                return (url ? `<a href="${url}" target="_blank" class="auto-link">${itemHtml}</a>` : itemHtml);
                             });
                             li.innerHTML = prefix + items.join(' or ');
                         }
                     });
                     contentDiv.innerHTML = tempDiv.innerHTML;
-
                     const tocList = document.getElementById('toc-list');
-                    contentDiv.querySelectorAll('h2, h3').forEach((h, i) => {
-                         h.id = 'h-' + i;
-                         const tli = document.createElement('li');
-                         tli.style.marginLeft = h.tagName === 'H3' ? '1rem' : '0';
-                         tli.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`;
-                         tocList.appendChild(tli);
-                    });
+                    contentDiv.querySelectorAll('h2, h3').forEach((h, i) => { h.id = 'h-' + i; const tli = document.createElement('li'); tli.style.marginLeft = h.tagName === 'H3' ? '1rem' : '0'; tli.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`; tocList.appendChild(tli); });
                 })
                 .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
         }
-
         const backToTopBtn = document.getElementById('fixed-back-to-top');
         if (backToTopBtn) {
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 400) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            }, { passive: true });
-            backToTopBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            window.addEventListener('scroll', () => { (window.pageYOffset > 400) ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible'); }, { passive: true });
+            backToTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
         }
     </script>
 </body>

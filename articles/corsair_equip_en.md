@@ -2,7 +2,7 @@
 
 This guide details the recommended equipment for Corsair.
 
-> **�庁 For Beginners and Returning Players**
+> **💡 For Beginners and Returning Players**
 > This page focuses on "Ideal Gear Sets" for high-end content (such as Sortie) aimed at active players.
 > For "Entry-level Gear (Uniqlo Gear)" that is easier to collect if you don't have Nyame or Ikenga yet, please refer to the **[Entry-level Gear Guide](article_en.html?file=articles/corsair_equip_beginner_en.md)**. Use this page as your ultimate goal.
 
@@ -27,7 +27,7 @@ Dedicated equipment to boost the party's firepower. Includes gear that extends d
 * Waist: Carrier's Sash
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -80,7 +80,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Waist: Impulse Belt
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -116,7 +116,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Waist: Fotia Belt
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -157,7 +157,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Waist: Yemaya Belt
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -174,25 +174,25 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
   In Sortie, a strategy where a Corsair immediately follows up on a Scholar's skillchain with a WS (Weapon Skill) to further extend the chain for Magic Burst (MB) damage is extremely important.
   To avoid being late to the Scholar's skillchain, this "Quick Draw STP Set" plays an indispensable role as a means of instantly securing TP for the follow-up.
 
-  **縲職xample 1: Aiming for Light Route (Radiance)縲・*
+  **【Example 1: Aiming for Light Route (Radiance)】**
   When a Scholar creates a "Fragmentation" skillchain, a Corsair firing "<span class="ws-highlight">Last Stand</span>" with Fomalhaut can connect it to a "Light" skillchain.
   Furthermore, shooting <span class="ws-highlight">Last Stand</span> with Fomalhaut grants a unique AM (Aftermath). By firing two <span class="ability-highlight">Quick Draws</span> immediately after that Light skillchain to gain TP and then firing "<span class="ws-highlight">Last Stand</span>" again, you can generate the ultimate skillchain "Radiance," which promises significant damage.
 
-  **縲職xample 2: Aiming for Dark Route (Consecutive Darkness)縲・*
+  **【Example 2: Aiming for Dark Route (Consecutive Darkness)】**
   When a Scholar creates a "Distortion" skillchain, a Corsair following up with "<span class="ws-highlight">Leaden Salute</span>" results in a "Darkness" skillchain.
   Immediately after, fire two <span class="ability-highlight">Quick Draws</span> to quickly regain TP and fire "<span class="ws-highlight">Wildfire</span>" to generate another "Darkness" skillchain.
 
-  **縲職xample 3: Aiming for Gravitation Route (Skillchain with Rune Fencer)縲・*
+  **【Example 3: Aiming for Gravitation Route (Skillchain with Rune Fencer)】**
   Bosses in Sortie Sector B and F have modes where they shroud themselves in Lightning or Wind attributes. In Lightning mode, the basic strategy is for the Scholar to create a "Gravitation" skillchain for Earth MB, but a Corsair alone cannot connect "Gravitation" to a "Darkness" skillchain.
   However, if a Rune Fencer tank fires a WS to connect to a "Darkness" skillchain, a Corsair can immediately fire "<span class="ws-highlight">Wildfire</span>" after that Darkness chain to generate another "Darkness" skillchain. This isn't a frequent situation, but it's a useful technique to remember for boosting damage.
 
   To establish such consecutive WS in a short time, this gear set for immediate TP recovery through <span class="ability-highlight">Quick Draw</span> shines.
 
-  **縲心upplement 1: TP Assistance from Tactician's Roll縲・*
+  **【Supplement 1: TP Assistance from Tactician's Roll】**
   By rolling "<span class="ability-highlight">Tactician's Roll</span>" (Regain effect) in advance before a boss battle, you can start combat with TP already accumulated.
   Since TP continues to accumulate gradually even after firing a WS or during <span class="ability-highlight">Quick Draw</span>, if the boss cannot be defeated in one skillchain and the Scholar creates another, it becomes easier to secure TP in time, allowing for stable consecutive follow-ups.
 
-  **縲心upplement 2: Support Jobs (Ninja vs. Samurai)縲・*
+  **【Supplement 2: Support Jobs (Ninja vs. Samurai)】**
   The configuration in this article is basically written based on "Support Job: Ninja (Sapo Nin)."
   If you want to make participation in skillchains easier, changing to "Sapo Samurai" is highly recommended. With Sapo Samurai, you have "<span class="ability-highlight">Meditate</span>" and "<span class="ability-highlight">Sekkanoki</span>," making TP acquisition and consecutive WS much easier.
   *By the way, the reason the author favors Sapo Nin is that in situations where <span class="magic-highlight">Invis</span> and <span class="magic-highlight">Sneak</span> are needed during Sortie movement, it's overwhelmingly easier and more comfortable to reapply them with Ninjutsu (<span class="magic-highlight">Tonko</span>/<span class="magic-highlight">Monomi</span>) than consuming powders and oils. Choose your support job according to your own playstyle and preferences!*
@@ -219,7 +219,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 
 ### Equipment Points & Commentary
 * **Selection of Ranged Weapons and Ammo**
-  If you want to maximize <span class="ability-highlight">Quick Draw</span> damage, [Death Penalty](http://wiki.ffo.jp/html/10419.html) is the most excellent ranged weapon.
+  If you want to maximize <span class="ability-highlight">Quick Draw</span> damage, [Death Penalty](http://wiki.ffo.jp/html/483.html) is the most excellent ranged weapon.
   Regarding ammo, [Hauksbok Bullet](http://wiki.ffo.jp/html/37839.html) deals the highest damage, but it's a 1,000 Domain Point exchange item and you can only hold one. While Quick Draw doesn't consume ammo, accidentally shooting it with a normal ranged attack or WS would require another exchange (the author has accidentally lost about three in the past...). Therefore, for daily use and safety, I recommend using [Live Bullet](http://wiki.ffo.jp/html/30018.html), which can be extracted from Death Penalty at any time.
 
 * **Usage of Waist Gear (Obi and Orpheus)**
@@ -228,9 +228,9 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 
 ---
 
-  > **�当 Related Articles**
+  > **📖 Related Articles**
   > More detailed maneuvers for Corsair in Sortie and skillchain mechanics are explained in dedicated articles!
-  > �痩 **[Sortie Guide (Corsair Perspective) is here](article_en.html?file=articles/sortie_corsair_en.md)**
+  > ➡️ **[Sortie Guide (Corsair Perspective) is here](article_en.html?file=articles/sortie_corsair_en.md)**
 
 ### Physical Ranged WS Gear (<span class="ws-highlight">Last Stand</span>, etc.)
 * Main Weapon: Rostam (Path A or B)
@@ -251,7 +251,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Waist: Fotia Belt
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -283,11 +283,11 @@ A specialized accuracy set for high-evasion bosses like in Sortie to ensure skil
 * Right Ear: Telos Earring
 * Left Ring: Crepuscular Ring
 * Right Ring: Herberton Ring +1
-* Back: Mumu Cape
+* Back: Mummu Cape
 * Waist: Yemaya Belt
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -298,7 +298,7 @@ A specialized accuracy set for high-evasion bosses like in Sortie to ensure skil
 
 ### Equipment Points & Commentary
 * **Prioritize "Hitting" and "Securing TP" even if WSD is sacrificed**
-  This gear is used against high-evasion enemies in Sortie, etc., to ensure skillchains are extended. When connecting " <span class="ws-highlight">Last Stand</span> (Light generation) 竊・<span class="ws-highlight">Last Stand</span> (Radiance generation)" against a Fragmentation chain, if the first <span class="ws-highlight">Last Stand</span> misses, the chain stops. Thus, WSD is sacrificed to maximize R.Acc to the limit.
+  This gear is used against high-evasion enemies in Sortie, etc., to ensure skillchains are extended. When connecting " <span class="ws-highlight">Last Stand</span> (Light generation) -> <span class="ws-highlight">Last Stand</span> (Radiance generation)" against a Fragmentation chain, if the first <span class="ws-highlight">Last Stand</span> misses, the chain stops. Thus, WSD is sacrificed to maximize R.Acc to the limit.
 
 * **Reason for R.Acc + STP Balanced Type**
   Beyond just hitting, the configuration focuses on a balance of "R.Acc + STP" to ensure as much TP as possible is secured with one hit, allowing the second WS (Radiance) to be fired immediately.
@@ -328,7 +328,7 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Waist: Orpheus's Sash
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -400,7 +400,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Sub: Crepuscular Knife
 * Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Beyouv Bullet
-* Head: Mumu Mask
+* Head: Mummu Mask
 * Body: Adhemar Jacket +1 (Type A)
 * Hands: Adhemar Wristbands +1 (Type A)
 * Legs: Chasseur's Culottes +3
@@ -414,7 +414,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Waist: Sailfi Belt +1 (Rank 15)
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -445,12 +445,12 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Sub: Gleti's Knife (Rank 30)
 * Ranged Weapon: Anarchy +2 (TP Bonus+1000) or Ataktos (TP Bonus+1000)
 * Ammo: Beyouv Bullet
-* Head: Mumu Mask
+* Head: Mummu Mask
 * Body: Adhemar Jacket +1 (Type A)
 * Hands: Adhemar Wristbands +1 (Type A)
 * Legs: Chasseur's Culottes +3
 * Feet: Nyame Sollerets (Rank 30)
-* Neck: Mumu Gorget
+* Neck: Mummu Gorget
 * Left Ear: Suppanomimi
 * Right Ear: Telos Earring
 * Left Ring: Melanic Ring
@@ -459,7 +459,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Waist: Sailfi Belt +1 (Rank 15)
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -495,7 +495,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Waist: Sailfi Belt +1 (Rank 15)
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -527,16 +527,16 @@ A specialized accuracy set to ensure Light skillchains are generated against hig
 * Hands: Gazu Bracelets +1 (Rank 15)
 * Legs: Chasseur's Culottes +3
 * Feet: Malignance Boots
-* Neck: Mumu Gorget
+* Neck: Mummu Gorget
 * Left Ear: Dominance Earring +1 (Rank 15)
 * Right Ear: Telos Earring
 * Left Ring: Chirich Ring +1
 * Right Ring: Ifrimad Ring
-* Back: Mumu Cape
-* Waist: Mumu Sash
+* Back: Mummu Cape
+* Waist: Mummu Sash
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -571,7 +571,7 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 * Waist: Reiki Yotai
 
 <details>
-<summary>�投 Estimated Total Stats (Click to expand)</summary>
+<summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -603,4 +603,4 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 
 ---
 
-> 筐｡・・**[Entry-level Corsair Gear Guide is here](article_en.html?file=articles/corsair_equip_beginner_en.md)** ・・�匠 **[Back to Homepage](index_en.html)** ・・筮・ｸ・**[Back to Top](#)**
+➡️ **[Entry-level Corsair Gear Guide is here](article_en.html?file=articles/corsair_equip_beginner_en.md)** | 🏠 **[Back to Homepage](index_en.html)** | 🔝 **[Back to Top](#)**

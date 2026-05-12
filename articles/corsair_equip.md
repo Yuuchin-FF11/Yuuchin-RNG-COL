@@ -209,10 +209,10 @@
 * 遠隔武器：好きな武器
 * 矢弾：[ライヴブレット](http://wiki.ffo.jp/html/30018.html) or [ホクスボクブレット](http://wiki.ffo.jp/html/37839.html)
 * 頭：[ヘルクリアヘルム](http://wiki.ffo.jp/html/35175.html)（魔攻オグメ）
-* 胴：[ＬＡフラック＋３](http://wiki.ffo.jp/html/31142.html) or ＋４
+* 胴：ＬＡフラック＋４
 * 両手：[カマインフィンガ＋１](http://wiki.ffo.jp/html/33890.html)（タイプＣランク１５） or [ヘルクリアグローブ](http://wiki.ffo.jp/html/35214.html)（魔攻オグメ）
 * 両脚：[ヘルクリアトラウザ](http://wiki.ffo.jp/html/35180.html)（魔攻オグメ）
-* 両足：[ＬＡブーツ＋３](http://wiki.ffo.jp/html/30822.html) or ＋４
+* 両足：ＬＡブーツ＋４
 * 首：[コモドアチャーム＋２](http://wiki.ffo.jp/html/37947.html)
 * 左耳：[胡蝶のイヤリング](https://wiki.ffo.jp/html/22306.html)（魔攻＋４、ＴＰボーナス＋２５０）
 * 右耳：[フリオミシピアス](http://wiki.ffo.jp/html/26048.html)

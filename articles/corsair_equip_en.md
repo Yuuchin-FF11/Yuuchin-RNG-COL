@@ -205,10 +205,10 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Ranged Weapon: Any weapon
 * Ammo: Live Bullet or Hauksbok Bullet
 * Head: Herculean Helm (M.Atk Augment)
-* Body: Lanun Frac +3
+* Body: Lanun Frac +4
 * Hands: Carmine Finger Gauntlets +1 (Type D) or Chasseur's Gantry +3
 * Legs: Herculean Trousers (M.Atk Augment)
-* Feet: Lanun Boots +3
+* Feet: Lanun Boots +4
 * Neck: Commodore Charm +2
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
 * Right Ear: Friomisi Earring
@@ -315,10 +315,10 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Live Bullet
 * Head: Pixie Hairpin +1
-* Body: Lanun Frac +3
+* Body: Lanun Frac +4
 * Hands: Nyame Gauntlets (Rank 30)
 * Legs: Nyame Flanchard (Rank 30)
-* Feet: Lanun Boots +3
+* Feet: Lanun Boots +4
 * Neck: Commodore Charm +2
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
 * Right Ear: Friomisi Earring
@@ -349,10 +349,10 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Live Bullet
 * Head: Nyame Helm (Rank 30)
-* Body: Lanun Frac +3
+* Body: Lanun Frac +4
 * Hands: Nyame Gauntlets (Rank 30)
 * Legs: Nyame Flanchard (Rank 30)
-* Feet: Lanun Boots +3
+* Feet: Lanun Boots +4
 * Neck: Commodore Charm +2
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
 * Right Ear: Friomisi Earring
@@ -374,7 +374,7 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Body: Nyame Mail (Rank 30)
 * Hands: Nyame Gauntlets (Rank 30)
 * Legs: Nyame Flanchard (Rank 30)
-* Feet: Lanun Boots +3
+* Feet: Lanun Boots +4
 * Neck: Commodore Charm +2
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
 * Right Ear: Friomisi Earring

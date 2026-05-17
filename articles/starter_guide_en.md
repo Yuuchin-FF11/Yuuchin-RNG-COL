@@ -156,7 +156,53 @@ Congratulations! You have finally unlocked your Support Job!
 
 ---
 
-## 12. Conclusion: When in doubt, use the Wiki!
+## 12. The Next Goal: Level 30 and Extra Jobs!
+Once you acquire your Support Job, speak to the Nomad Moogle in Selbina and **equip any Support Job for now**.
+Once set, head outside the city and resume leveling up.
+
+Your next major milestone is **"Level 30"**.
+Why aim for 30? Because at level 30, you can finally accept quests to unlock **"Extra Jobs"** (Advanced Jobs), which is one of the greatest joys of FFXI!
+
+---
+
+## 13. The "Level Subjob First" Strategy!
+Once you reach level 30 and unlock extra jobs, you'll want to acquire a Support Job that truly fits your playstyle.
+For melee/vanguard jobs especially, the starting 6 jobs don't provide great subjob benefits, so using an extra job as your subjob is highly recommended.
+
+* **Warrior**: Sub Samurai, Sub Dragoon, etc.
+* **Monk**: Sub Warrior, etc.
+* **Thief**: Sub Ninja, etc.
+
+### 💡 Veteran Advice: Level your Subjob to 50 First!
+Your Support Job is capped at half the level of your Main Job. (e.g., If you want your Warrior to be 99, your sub Samurai needs to be level 49 or 50).
+
+The easiest and most stress-free way to proceed is to **"level your intended Support Job to 50 first!"**
+By capping your subjob at 50 right away, you can then switch back to your main job and take it all the way to 99 without ever worrying about your subjob falling behind.
+
+---
+
+## 14. Why Start with a "Melee Job"?
+This guide primarily assumes you are leveling a melee (vanguard) job. You might be wondering, "But I want to play a mage!"
+However, I highly recommend starting with a melee job for a few reasons:
+
+1. Mage jobs defeat enemies very slowly early on (your Alter Egos will do all the work).
+2. **"Taking a melee job to 99 first makes progressing through various story missions infinitely easier."**
+
+The golden route of modern FFXI is to reach max level on a melee job, use that overwhelming strength to crush story bosses, and then level your desired mage jobs later!
+
+---
+
+## 15. Paralleling Missions for Massive EXP Bonuses!
+While leveling, you should also try to progress your **"Starting Nation Missions"** and **"Rhapsodies of Vana'diel (RoV) Missions"** as far as you can.
+
+The biggest reason for this is that progressing RoV missions rewards you with special Key Items ("Rhapsody in...") that **permanently grant massive boosts to your EXP gain!**
+Whether you want to play a melee or a mage, grabbing these EXP boosts first will drastically speed up your overall progression.
+
+(※ At first, your level is capped at 50. After that, you'll need to complete "Limit Break" quests to raise the cap by 5 levels at a time. I'll cover those in a separate article. For now, do your best to reach this point!)
+
+---
+
+## 16. Conclusion: When in doubt, use the Wiki!
 I've outlined the golden route for the early game, but you might still hit walls like "Where do I accept this quest?" or "Where is this NPC?"
 
 In those cases, try searching online for **"FFXI (Quest Name)"**.

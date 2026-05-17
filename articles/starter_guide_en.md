@@ -1,4 +1,4 @@
-# FF11 From Scratch! The Ultimate Start Dash Guide for Complete Beginners
+# FF11 From Scratch! The Ultimate Start Dash Guide for Complete Beginners (Up to Level 30)
 
 ## 1. Introduction: Why I wrote this article
 This article was born when a viewer on my YouTube channel, who had never played FFXI before, got interested and actually started playing!

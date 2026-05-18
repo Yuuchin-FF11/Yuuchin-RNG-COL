@@ -212,6 +212,11 @@ Another thing you can enjoy **regardless of your level are the "Seasonal Events.
 These events are designed so that even level 1 characters can participate, and the rewards are often cute "fashion gear" or vanity items.
 If you ever feel tired from leveling up or grinding missions, how about taking a break and trying out some of these seasonal events for a change of pace?
 
+Additionally, keep in mind that the early game primarily revolves around "leveling up" and "clearing missions." You won't truly be able to participate in strategy-based endgame content until you **reach level 99**.
+It might feel a bit tough or restrictive until then, but I highly recommend taking your time to enjoy FFXI's incredible story during the early stages. Once you hit 99, you can start building a solid foundation and gradually dive into endgame content.
+
+Whether you want to "get strong as fast as possible!" or "take it easy, enjoy the story, and grow stronger at your own pace," there are many different playstyles. However, FFXI is a game where **the sheer amount of things to do at level 99 is astronomical**. So please don't feel the need to rush—take your time and enjoy the world of Vana'diel at your own pace!
+
 ---
 
 ## 17. Conclusion: When in doubt, use the Wiki!

@@ -202,7 +202,19 @@ Whether you want to play a melee or a mage, grabbing these EXP boosts first will
 
 ---
 
-## 16. Conclusion: When in doubt, use the Wiki!
+## 16. What kind of content can completely new players participate in?
+I sometimes get asked by brand new players, "Is there any content that new players can participate in?"
+To be perfectly honest, there is no system in this game that allows you to jump straight into endgame-like content regardless of your level right from the start.
+
+However, in the past, "Nation Missions" and other storylines required a full 6-person party to clear, so **"progressing through the missions is a major piece of content in itself."** Enjoying the story and completing these missions will be your biggest focus and the primary "content" as a beginner.
+
+Another thing you can enjoy **regardless of your level are the "Seasonal Events."**
+These events are designed so that even level 1 characters can participate, and the rewards are often cute "fashion gear" or vanity items.
+If you ever feel tired from leveling up or grinding missions, how about taking a break and trying out some of these seasonal events for a change of pace?
+
+---
+
+## 17. Conclusion: When in doubt, use the Wiki!
 I've outlined the golden route for the early game, but you might still hit walls like "Where do I accept this quest?" or "Where is this NPC?"
 
 In those cases, try searching online for **"FFXI (Quest Name)"**.

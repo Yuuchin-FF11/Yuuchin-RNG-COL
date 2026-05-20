@@ -1794,4 +1794,52 @@ nav a:hover::after {
     }
 }
 
+/* ==========================================================================
+   Responsive Markdown Tables (FFXI Bismarck Style)
+   ========================================================================== */
+.markdown-body table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    background: rgba(16, 32, 48, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--glass-border);
+    text-align: left;
+    font-size: 1rem;
+}
+
+.markdown-body table th {
+    background-color: rgba(13, 71, 161, 0.6);
+    color: var(--accent-color);
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+    white-space: nowrap;
+}
+
+.markdown-body table td {
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.markdown-body table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.markdown-body table tr:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    transition: background-color 0.2s ease;
+}
+
+
 

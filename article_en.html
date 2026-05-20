@@ -199,6 +199,61 @@
                             li.innerHTML = prefix + items.join(' or ');
                         }
                     });
+
+                    // Auto-link logic for table cells (td) in English articles
+                    tempDiv.querySelectorAll('td').forEach(td => {
+                        if (td.querySelector('a')) return;
+
+                        let baseHtml = td.innerHTML.trim();
+                        let baseName = td.textContent.trim();
+                        const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
+                        
+                        if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('preferred') || searchName.includes('any')) {
+                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml) || baseHtml.includes('preferred')) {
+                                td.innerHTML = `<span style="color:#a8e063;font-weight:700;">${baseHtml}</span>`;
+                            }
+                            return;
+                        }
+
+                        let normalizedName = searchName;
+                        const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur\'s', 'LK': 'Laksamana\'s', 'LU': 'Luzaf', 'HV': 'Herberton' };
+                        for (let key in abbrMap) {
+                            if (normalizedName.startsWith(key)) {
+                                normalizedName = normalizedName.replace(key, abbrMap[key]);
+                                break;
+                            }
+                        }
+
+                        normalizedName = normalizedName.replace(/[Ａ-ＺA-Z]$/, '').trim();
+                        if (normalizedName.startsWith('Nyame')) normalizedName = 'Nyame';
+                        else if (normalizedName.startsWith('Ikenga')) normalizedName = 'Ikenga';
+                        else if (normalizedName.startsWith('Malignance')) normalizedName = 'Malignance';
+                        else if (normalizedName.startsWith('Lanun')) normalizedName = 'Lanun';
+                        else if (normalizedName.startsWith('Chasseur\'s') && !normalizedName.includes('Earring')) normalizedName = 'Chasseur\'s';
+                        else if (normalizedName.startsWith('Laksamana\'s')) normalizedName = 'Laksamana\'s';
+                        else if (normalizedName.startsWith('Rostam')) normalizedName = 'Rostam';
+                        else if (normalizedName.startsWith('Adhemar')) normalizedName = 'Adhemar Jacket';
+                        else if (normalizedName.startsWith('Herculean')) normalizedName = 'Herculean';
+                        else if (normalizedName.startsWith('Arvina Ring')) normalizedName = 'Arvina Ring';
+                        else if (normalizedName.startsWith('Hauksbok Bullet')) normalizedName = 'Hauksbok Bullet';
+                        else if (normalizedName.startsWith('Mummu')) {
+                            if (normalizedName.includes('Mask')) normalizedName = 'Mummu Mask';
+                            else if (normalizedName.includes('Gorget')) normalizedName = 'Mummu Gorget';
+                            else if (normalizedName.includes('Cape')) normalizedName = 'Mummu Cape';
+                            else if (normalizedName.includes('Sash')) normalizedName = 'Mummu Sash';
+                        }
+                        else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
+
+                        const url = linkMap[normalizedName];
+                        if (url) {
+                            td.innerHTML = `<a href="${url}" target="_blank" class="auto-link">${baseHtml}</a>`;
+                        } else {
+                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml)) {
+                                td.innerHTML = `<span style="color:#a8e063;font-weight:700;">${baseHtml}</span>`;
+                            }
+                        }
+                    });
+
                     contentDiv.innerHTML = tempDiv.innerHTML;
 
                     contentDiv.querySelectorAll('a').forEach(a => {

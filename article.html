@@ -221,6 +221,63 @@
                             li.innerHTML = prefix + items.join(' or ');
                         }
                     });
+
+                    // テーブルセル(td)内の装備名リンク化処理
+                    tempDiv.querySelectorAll('td').forEach(td => {
+                        if (td.querySelector('a')) return;
+
+                        let baseHtml = td.innerHTML.trim();
+                        let baseName = td.textContent.trim();
+                        const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
+                        
+                        if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('好きな武器') || searchName.includes('好きな装備') || searchName.includes('その他の')) {
+                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml) || baseHtml.includes('好きな') || baseHtml.includes('その他の')) {
+                                td.innerHTML = `<span style="color:#a8e063;font-weight:700;">${baseHtml}</span>`;
+                            }
+                            return;
+                        }
+
+                        let normalizedName = searchName;
+                        const abbrMap = {
+                            'ＬＡ': 'ラヌン', 'LA': 'ラヌン',
+                            'ＣＳ': 'シャスー', 'CS': 'シャスー',
+                            'ＬＫ': 'ラクサマナ', 'LK': 'ラクサマナ',
+                            'ＬＵ': 'ルザフ', 'LU': 'ルザフ',
+                            'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン'
+                        };
+                        for (let key in abbrMap) {
+                            if (normalizedName.startsWith(key)) {
+                                normalizedName = normalizedName.replace(key, abbrMap[key]);
+                                break;
+                            }
+                        }
+
+                        normalizedName = normalizedName.replace(/[Ａ-ＺA-Z]$/, '').trim();
+
+                        if (normalizedName.startsWith('ニャメ')) normalizedName = 'ニャメ装束';
+                        else if (normalizedName.startsWith('イケンガ')) normalizedName = 'イケンガ装束';
+                        else if (normalizedName.startsWith('マリグナス') && !normalizedName.includes('ピアス')) normalizedName = 'マリグナス装束';
+                        else if (normalizedName.startsWith('ラヌン') && !normalizedName.includes('ナイフ')) normalizedName = 'ラヌンアタイア';
+                        else if (normalizedName.startsWith('シャスー') && !normalizedName.includes('ピアス')) normalizedName = 'シャスーアタイア';
+                        else if (normalizedName.startsWith('ラクサマナ')) normalizedName = 'ラクサマナアタイア';
+                        else if (normalizedName.startsWith('ロスタム')) normalizedName = 'ロスタム';
+                        else if (normalizedName.startsWith('アデマ')) normalizedName = 'アデマ装束';
+                        else if (normalizedName.startsWith('テーオン')) normalizedName = 'テーオン装束';
+                        else if (normalizedName.startsWith('ヘルクリア')) normalizedName = 'ヘルクリア装束';
+                        else if (normalizedName.startsWith('オショシ')) normalizedName = 'オショシ装束';
+                        else if (normalizedName.startsWith('ハーバートン')) normalizedName = 'ハーバートンリング';
+                        else if (normalizedName.startsWith('ルザフ')) normalizedName = 'ルザフリング';
+
+                        const url = linkMap[normalizedName];
+                        if (url) {
+                            td.innerHTML = `<a href="${url}" target="_blank" class="auto-link">${baseHtml}</a>`;
+                        } else {
+                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml) || baseHtml.includes('好きな') || baseHtml.includes('その他の')) {
+                                td.innerHTML = `<span style="color:#a8e063;font-weight:700;">${baseHtml}</span>`;
+                            }
+                        }
+                    });
+
                     contentDiv.innerHTML = tempDiv.innerHTML;
 
                     // リンクの挙動を調整（外部サイトは別タブ、サイト内は同タブ）

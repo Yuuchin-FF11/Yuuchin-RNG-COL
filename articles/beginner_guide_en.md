@@ -8,6 +8,24 @@ This guide explains where to start and what to prioritize in order to challenge 
 In today's FFXI, the first major milestone is **reaching Level 99 and obtaining "IL (Item Level) Equipment."**
 Once you have a full set of IL119 gear, you will be able to progress through most missions (storylines) solo and clear simple content.
 
+### 🌟 Modern Vana'diel is All About "Warping"! Ultra-Comfortable Travel Systems
+
+One of the biggest surprises for returning players from the old days, as well as complete newcomers, is modern Vana'diel's **warp speed travel systems**!
+
+You no longer have to spend hours running for your life just to get to Jeuno (lol). Thanks to the two warp features below, travel has become incredibly smooth:
+
+*   **Home Point (HP) Warp**
+    *   These are the crystal structures (Home Points) located in towns and key areas. Once you touch and activate one, you can warp instantly from any other Home Point.
+*   **Survival Guide Warp**
+    *   These are the floating "books" found in fields and dungeon entrances. Once touched, you can warp instantly between any activated books.
+
+#### ⚠️ Ironclad Rule: "Always Touch" Them When You See Them!
+When you arrive in a new area, town, or field, **never forget to touch all the Home Points and Survival Guides in the vicinity first!**
+
+It's easy to think "I'll do it later" at first, but having these warps unlocked makes a 100x difference in efficiency when you're progressing through missions (story) or leveling up.
+
+**"Traveling leisurely on foot or by Chocobo while enjoying the scenery is definitely one of the best parts of the FFXI adventure! ✨"**... There is no doubt about that (I still feel like doing it sometimes too, haha), but make sure to unlock them so you can warp whenever you need to! 👍
+
 ### Priority: "Rhapsodies of Vana'diel" Missions!
 Among the many missions, we strongly recommend **prioritizing the "Rhapsodies of Vana'diel" (RoV) missions.** There are two main reasons for this:
 

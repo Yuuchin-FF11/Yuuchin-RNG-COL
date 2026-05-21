@@ -4,24 +4,33 @@ function Check-HtmlTags($filePath) {
         Write-Error "File not found: $filePath"
         return $false
     }
-    $content = Get-Content $filePath -Raw
+    $content = Get-Content $filePath -Encoding utf8 -Raw
+    Write-Host "Original length: $($content.Length)" -ForegroundColor Gray
     
-    # 1. Remove comments
-    $content = [regex]::Replace($content, "(?s)<!--.*?-->", "")
-    
-    # 2. Extract only valid HTML tags, but skip script/style content
-    # We do this by replacing <script>...</script> with a placeholder that has no internal < >
-    $content = [regex]::Replace($content, "(?s)<script.*?>.*?</script>", "<!--S-->")
-    $content = [regex]::Replace($content, "(?s)<style.*?>.*?</style>", "<!--T-->")
+    # 1. Remove script/style content (replace with empty string to avoid inner '<' or '>')
+    $content = $content -replace "(?s)<script[^>]*>.*?</script>", ""
+    $content = $content -replace "(?s)<style[^>]*>.*?</style>", ""
+    Write-Host "After script/style removal: $($content.Length)" -ForegroundColor Gray
+
+    # 2. Remove comments
+    $content = $content -replace "(?s)<!--.*?-->", ""
+    Write-Host "After comment removal: $($content.Length)" -ForegroundColor Gray
 
     $stack = New-Object System.Collections.Generic.Stack[string]
     $selfClosing = @('area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr', '!doctype')
     
     # Match all tags
     $matches = [regex]::Matches($content, "<([a-zA-Z0-9]+)[^>]*>|<\/([a-zA-Z0-9]+)>")
+    Write-Host "Found matches count: $($matches.Count)" -ForegroundColor Gray
+    
     $errors = 0
+    $matchIdx = 0
 
     foreach ($m in $matches) {
+        $matchIdx++
+        if ($matchIdx -le 15) {
+            Write-Host "Match $($matchIdx): $($m.Value)" -ForegroundColor Gray
+        }
         if ($m.Value.StartsWith("</")) {
             $tagName = $m.Groups[2].Value.ToLower()
             if ($selfClosing -contains $tagName) { continue }
@@ -65,7 +74,7 @@ function Check-MdLinks($dir) {
     $errors = 0
 
     foreach ($file in $files) {
-        $content = Get-Content $file.FullName -Raw
+        $content = Get-Content $file.FullName -Encoding utf8 -Raw
         $matches = [regex]::Matches($content, 'article\.html\?file=([^)\"''\s>]+)')
         foreach ($m in $matches) {
             $link = $m.Groups[1].Value.Split('#')[0]

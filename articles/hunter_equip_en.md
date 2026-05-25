@@ -80,6 +80,8 @@ Specialized "Store TP (STP)" configuration to fire ranged attacks and transition
   Key accessories (ears, rings, waist) and weapons/ammo are completely shared with the Snapshot (pre-cast) set. This minimizes the number of equipment swaps required, allowing the entire transition to easily fit within the game's 6-line macro limit for smooth, stress-free combat.
 * **AM Caban +3 (Body) Fixed for Continuous Velocity Shot**
   The body piece, "AM Caban +3," remains equipped in both the Snapshot and mid-shot sets. This ensures that the powerful "Velocity Shot effect boost" remains active without any interruption, maintaining peak ranged performance at all times.
+* **Accuracy is Paramount: Focus on Ranged Accuracy & One-Press Macros**
+  While the textbook approach might be to maximize Store TP (STP) for the mid-shot set, I believe that accuracy is paramount—after all, a shot that doesn't hit is meaningless. Therefore, I avoid using STP gear that lacks Ranged Accuracy. Additionally, because I want a single-press (one-potchi) macro for Snapshot and mid-shot, I configured this set to minimize gear swaps from the Snapshot set. For the head slot, I chose the Relic piece (AR Beret +4) to maximize the utility of the Recycle ability.
 
 ---
 

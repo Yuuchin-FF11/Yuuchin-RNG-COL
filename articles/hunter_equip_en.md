@@ -51,7 +51,7 @@ Specialized "Store TP (STP)" configuration to fire ranged attacks and transition
 
 * Main Weapon: Perun +1 (Rank 15)
 * Sub Weapon: Kustawi +1 (Rank 15)
-* Ranged Weapon: [与一の弓 (Rank 15)](#) ｏｒ [アナイアレイター (Rank 15)](#) ｏｒ [ガーンデーヴァ (Rank 15)](#) ｏｒ [アキヌフォート (Rank 15)](#) ｏｒ [フォーマルハウト (Rank 15)](#) ｏｒ ピナカ ｏｒ アープ
+* Ranged Weapon: [与一の弓 (Rank 15)](https://wiki.ffo.jp/html/3079.html) ｏｒ [アナイアレイター (Rank 15)](https://wiki.ffo.jp/html/3080.html) ｏｒ [ガーンデーヴァ (Rank 15)](https://wiki.ffo.jp/html/20383.html) ｏｒ [アキヌフォート (Rank 15)](https://wiki.ffo.jp/html/35357.html) ｏｒ [フォーマルハウト (Rank 15)](https://wiki.ffo.jp/html/35356.html) ｏｒ [ピナカ](https://wiki.ffo.jp/html/38966.html) ｏｒ [アープ](https://wiki.ffo.jp/html/38967.html)
 * Ammo: Chrono Arrow
 * Head: AR Beret +4 (Arcadian Beret +4)
 * Body: AM Caban +3 (Amini Caban +3)

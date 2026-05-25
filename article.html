@@ -144,6 +144,9 @@
                         "エルデションレンズ": "http://wiki.ffo.jp/html/33905.html", "フォシャゴルゲット": "http://wiki.ffo.jp/html/32703.html", "ガズブレスレット": "http://wiki.ffo.jp/html/35439.html",
                         "ハーバートンリング": "http://wiki.ffo.jp/html/32142.html", "イェマヤベルト": "http://wiki.ffo.jp/html/34152.html",
                         "アミニアタイア": "https://wiki.ffo.jp/html/33127.html",
+                        "アミニカバン": "https://wiki.ffo.jp/html/33155.html",
+                        "アミニガペット": "https://wiki.ffo.jp/html/33154.html",
+                        "アミニブラーグ": "https://wiki.ffo.jp/html/33153.html",
                         "オリオンアタイア": "https://wiki.ffo.jp/html/30046.html",
                         "ベレナスケープ": "https://wiki.ffo.jp/html/35511.html",
                         "スカウトゴルゲット": "https://wiki.ffo.jp/html/37226.html",
@@ -222,7 +225,7 @@
                                 else if (normalizedName.startsWith('オショシ')) normalizedName = 'オショシ装束';
                                 else if (normalizedName.startsWith('ハーバートン')) normalizedName = 'ハーバートンリング';
                                 else if (normalizedName.startsWith('ルザフ')) normalizedName = 'ルザフリング';
-                                else if (normalizedName.startsWith('アミニ')) normalizedName = 'アミニアタイア';
+                                else if (normalizedName.startsWith('アミニ') && !['アミニカバン', 'アミニガペット', 'アミニブラーグ'].includes(normalizedName)) normalizedName = 'アミニアタイア';
                                 else if (normalizedName.startsWith('オリオン')) normalizedName = 'オリオンアタイア';
                                 else if (normalizedName.startsWith('ベレナ')) normalizedName = 'ベレナスケープ';
                                 else if (normalizedName.startsWith('スカウト')) normalizedName = 'スカウトゴルゲット';
@@ -292,7 +295,7 @@
                         else if (normalizedName.startsWith('オショシ')) normalizedName = 'オショシ装束';
                         else if (normalizedName.startsWith('ハーバートン')) normalizedName = 'ハーバートンリング';
                         else if (normalizedName.startsWith('ルザフ')) normalizedName = 'ルザフリング';
-                        else if (normalizedName.startsWith('アミニ')) normalizedName = 'アミニアタイア';
+                        else if (normalizedName.startsWith('アミニ') && !['アミニカバン', 'アミニガペット', 'アミニブラーグ'].includes(normalizedName)) normalizedName = 'アミニアタイア';
                         else if (normalizedName.startsWith('オリオン')) normalizedName = 'オリオンアタイア';
                         else if (normalizedName.startsWith('ベレナ')) normalizedName = 'ベレナスケープ';
                         else if (normalizedName.startsWith('スカウト')) normalizedName = 'スカウトゴルゲット';

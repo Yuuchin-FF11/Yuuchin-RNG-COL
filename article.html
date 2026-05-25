@@ -103,7 +103,8 @@
         const contentDiv = document.getElementById('markdown-content');
 
         if (file) {
-            fetch(file)
+            const rawBase = 'https://raw.githubusercontent.com/Yuuchin-FF11/Yuuchin-RNG-COL/main/';
+            fetch(rawBase + file)
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
                     const processedText = text.replace(/([「『])([^」』\n]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');

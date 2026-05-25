@@ -15,6 +15,9 @@ try {
         $path = $path -replace '\.\.', ''
         
         $fullPath = Join-Path (Get-Location) $path
+        Write-Host "Request path: '$path', Full path: '$fullPath'"
+        $exists = Test-Path $fullPath -PathType Leaf
+        Write-Host "File exists: $exists"
         
         if (Test-Path $fullPath -PathType Leaf) {
             $bytes = [System.IO.File]::ReadAllBytes($fullPath)

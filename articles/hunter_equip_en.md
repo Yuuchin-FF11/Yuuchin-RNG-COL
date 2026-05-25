@@ -47,38 +47,43 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 ### 2. Standard Ranged (TP Gain) Set
 Specialized "Store TP (STP)" configuration to fire ranged attacks and transition to your next Weapon Skill (WS) in an instant.
 
-| Slot | Equipment Name | Augment / Notes |
-| :--- | :--- | :--- |
-| **Main Weapon** |  |  |
-| **Sub Weapon** |  |  |
-| **Ranged Weapon** |  |  |
-| **Ammo** |  |  |
-| **Head** |  |  |
-| **Body** |  |  |
-| **Hands** |  |  |
-| **Legs** |  |  |
-| **Feet** |  |  |
-| **Neck** |  |  |
-| **Left Ear** |  |  |
-| **Right Ear** |  |  |
-| **Left Ring** |  |  |
-| **Right Ring** |  |  |
-| **Back** |  |  |
-| **Waist** |  |  |
+* Main Weapon: Perun +1 (Rank 15)
+* Sub Weapon: Kustawi +1 (Rank 15)
+* Ranged Weapon: Preferred Weapon
+* Ammo: Chrono Arrow
+* Head: AR Beret +4 (Arcadian Beret +4)
+* Body: AM Caban +3 (Amini Caban +3)
+* Hands: Ikenga's Gloves (Rank 30)
+* Legs: AM Brague +3 (Amini Brague +3)
+* Feet: Ikenga's Clogs (Rank 30)
+* Neck: Scout's Gorget +2 (Rank 25)
+* Left Ear: Crepuscular Earring
+* Right Ear: Telos Earring
+* Left Ring: Crepuscular Ring
+* Right Ring: Haverton Ring +1
+* Back: Belenus's Cape (AGI+20, Ranged Accuracy+30, Ranged Attack+30, Store TP+10)
+* Waist: Yemaya Belt
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Store TP** |  |  |
-| **Damage Taken Cut** |  |  |
-| **Magic Evasion** |  |  |
+| **Store TP** | **+81** (Gear only) | Sum of AR Beret +4 (+11), AM Brague +3 (+10), Ikenga hands/feet (+9x2), etc. |
+| **Damage Taken Cut** | **Effective -29% to -39%** | -29% Damage Taken (Head-6, Body-11, Legs-12) + -10% Physical Damage Taken (Ikenga hands/feet) |
+| **Magic Evasion** | **+530 or higher** | Highly resistant to magic attacks with these 5 armor pieces |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (Please describe your ranged TP gear commentary or points here)
+* **Seamless Gear Swapping & Macro Line Limit Solution**
+  Key accessories (ears, rings, waist) and weapons/ammo are completely shared with the Snapshot (pre-cast) set. This minimizes the number of equipment swaps required, allowing the entire transition to easily fit within the game's 6-line macro limit for smooth, stress-free combat.
+* **AM Caban +3 (Body) Fixed for Continuous Velocity Shot**
+  The body piece, "AM Caban +3," remains equipped in both the Snapshot and mid-shot sets. This ensures that the powerful "Velocity Shot effect boost" remains active without any interruption, maintaining peak ranged performance at all times.
+* **Massive STP & Accuracy Boost via AR Beret +4 (Head) & AM Brague +3 (Legs)**
+  Utilizes top-tier Artifact and Relic pieces to maximize "Store TP" and "Ranged Accuracy." This significantly boosts TP generation per shot, dramatically increasing the rotation speed of your Weapon Skills.
+* **The Power of Ikenga Gear (Hands & Feet) Rank 30 Augments**
+  Features specialized Odyssey Gaol gear. With Rank 30 augments, they offer an incredible balance of Store TP (+9 each), Physical Damage Taken Cut (-5% each), high AGI, and strong Accuracy/Attack boosts.
 
 ---
 

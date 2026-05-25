@@ -141,7 +141,14 @@
                         "ヘルクリア装束": "http://wiki.ffo.jp/html/35458.html", "ラクサマナアタイア": "https://wiki.ffo.jp/html/30044.html", "デマサルデーゲン": "http://wiki.ffo.jp/html/33879.html",
                         "デディションピアス": "https://wiki.ffo.jp/html/33827.html", "シェタルストーン": "https://wiki.ffo.jp/html/31602.html",
                         "エルデションレンズ": "http://wiki.ffo.jp/html/33905.html", "フォシャゴルゲット": "http://wiki.ffo.jp/html/32703.html", "ガズブレスレット": "http://wiki.ffo.jp/html/35439.html",
-                        "ハーバートンリング": "http://wiki.ffo.jp/html/32142.html", "イェマヤベルト": "http://wiki.ffo.jp/html/34152.html"
+                        "ハーバートンリング": "http://wiki.ffo.jp/html/32142.html", "イェマヤベルト": "http://wiki.ffo.jp/html/34152.html",
+                        "アミニアタイア": "https://wiki.ffo.jp/html/33127.html",
+                        "オリオンアタイア": "https://wiki.ffo.jp/html/30046.html",
+                        "ベレナスケープ": "https://wiki.ffo.jp/html/35511.html",
+                        "スカウトゴルゲット": "https://wiki.ffo.jp/html/37226.html",
+                        "アルケアタイア": "https://wiki.ffo.jp/html/31258.html",
+                        "ペルーン": "https://wiki.ffo.jp/html/33287.html",
+                        "クロノアロー": "https://wiki.ffo.jp/html/35446.html"
                     };
                     const keywords = ['武器メイン', 'サブ', '遠隔武器', '矢弾', '頭', '胴', '両手', '両脚', '両足', '首', '左耳', '右耳', '左手の指', '右手の指', '背', '腰'];
 
@@ -179,7 +186,10 @@
                                     'ＣＳ': 'シャスー', 'CS': 'シャスー',
                                     'ＬＫ': 'ラクサマナ', 'LK': 'ラクサマナ',
                                     'ＬＵ': 'ルザフ', 'LU': 'ルザフ',
-                                    'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン'
+                                    'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン',
+                                    'ＡＭ': 'アミニ', 'AM': 'アミニ',
+                                    'ＯＲ': 'オリオン', 'OR': 'オリオン',
+                                    'ＡＲ': 'アルケ', 'AR': 'アルケ'
                                 };
                                 for (let key in abbrMap) {
                                     if (normalizedName.startsWith(key)) {
@@ -205,6 +215,11 @@
                                 else if (normalizedName.startsWith('オショシ')) normalizedName = 'オショシ装束';
                                 else if (normalizedName.startsWith('ハーバートン')) normalizedName = 'ハーバートンリング';
                                 else if (normalizedName.startsWith('ルザフ')) normalizedName = 'ルザフリング';
+                                else if (normalizedName.startsWith('アミニ')) normalizedName = 'アミニアタイア';
+                                else if (normalizedName.startsWith('オリオン')) normalizedName = 'オリオンアタイア';
+                                else if (normalizedName.startsWith('ベレナ')) normalizedName = 'ベレナスケープ';
+                                else if (normalizedName.startsWith('スカウト')) normalizedName = 'スカウトゴルゲット';
+                                else if (normalizedName.startsWith('アルケ')) normalizedName = 'アルケアタイア';
 
                                 const url = linkMap[normalizedName];
                                 if (url) {
@@ -243,7 +258,10 @@
                             'ＣＳ': 'シャスー', 'CS': 'シャスー',
                             'ＬＫ': 'ラクサマナ', 'LK': 'ラクサマナ',
                             'ＬＵ': 'ルザフ', 'LU': 'ルザフ',
-                            'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン'
+                            'ＨＶ': 'ハーバートン', 'HV': 'ハーバートン',
+                            'ＡＭ': 'アミニ', 'AM': 'アミニ',
+                            'ＯＲ': 'オリオン', 'OR': 'オリオン',
+                            'ＡＲ': 'アルケ', 'AR': 'アルケ'
                         };
                         for (let key in abbrMap) {
                             if (normalizedName.startsWith(key)) {
@@ -267,6 +285,11 @@
                         else if (normalizedName.startsWith('オショシ')) normalizedName = 'オショシ装束';
                         else if (normalizedName.startsWith('ハーバートン')) normalizedName = 'ハーバートンリング';
                         else if (normalizedName.startsWith('ルザフ')) normalizedName = 'ルザフリング';
+                        else if (normalizedName.startsWith('アミニ')) normalizedName = 'アミニアタイア';
+                        else if (normalizedName.startsWith('オリオン')) normalizedName = 'オリオンアタイア';
+                        else if (normalizedName.startsWith('ベレナ')) normalizedName = 'ベレナスケープ';
+                        else if (normalizedName.startsWith('スカウト')) normalizedName = 'スカウトゴルゲット';
+                        else if (normalizedName.startsWith('アルケ')) normalizedName = 'アルケアタイア';
 
                         const url = linkMap[normalizedName];
                         if (url) {

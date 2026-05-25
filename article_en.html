@@ -143,7 +143,13 @@
                         "アープ": "https://wiki.ffo.jp/html/38967.html", "Earp": "https://wiki.ffo.jp/html/38967.html",
                         "アミニカバン": "https://wiki.ffo.jp/html/33155.html", "Amini Caban": "https://wiki.ffo.jp/html/33155.html",
                         "アミニガペット": "https://wiki.ffo.jp/html/33154.html", "Amini Gapette": "https://wiki.ffo.jp/html/33154.html",
-                        "アミニブラーグ": "https://wiki.ffo.jp/html/33153.html", "Amini Brague": "https://wiki.ffo.jp/html/33153.html"
+                        "アミニブラーグ": "https://wiki.ffo.jp/html/33153.html", "Amini Brague": "https://wiki.ffo.jp/html/33153.html",
+                        "オリオンブラッカエ": "https://wiki.ffo.jp/html/29979.html", "Orion Braccae": "https://wiki.ffo.jp/html/29979.html",
+                        "オリオンベレー": "https://wiki.ffo.jp/html/29976.html", "Orion Beret": "https://wiki.ffo.jp/html/29976.html",
+                        "オリオンジャーキン": "https://wiki.ffo.jp/html/29977.html", "Orion Jerkin": "https://wiki.ffo.jp/html/29977.html",
+                        "オリオングローブ": "https://wiki.ffo.jp/html/29978.html", "Orion Gloves": "https://wiki.ffo.jp/html/29978.html",
+                        "オリオンソックス": "https://wiki.ffo.jp/html/29980.html", "Orion Socks": "https://wiki.ffo.jp/html/29980.html",
+                        "Amini Attire": "https://wiki.ffo.jp/html/33127.html", "Orion Attire": "https://wiki.ffo.jp/html/30046.html"
                     };
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
@@ -167,7 +173,7 @@
                                 }
 
                                 let normalizedName = searchName;
-                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur\'s', 'LK': 'Laksamana\'s', 'LU': 'Luzaf', 'HV': 'Herberton' };
+                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur\'s', 'LK': 'Laksamana\'s', 'LU': 'Luzaf', 'HV': 'Herberton', 'AM': 'Amini', 'OR': 'Orion' };
                                 for (let key in abbrMap) {
                                     if (normalizedName.startsWith(key)) {
                                         normalizedName = normalizedName.replace(key, abbrMap[key]);
@@ -194,6 +200,8 @@
                                     else if (normalizedName.includes('Sash')) normalizedName = 'Mummu Sash';
                                 }
                                 else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
+                                else if (normalizedName.startsWith('Amini') && !['Amini Caban', 'Amini Gapette', 'Amini Brague'].includes(normalizedName)) normalizedName = 'Amini Attire';
+                                else if (normalizedName.startsWith('Orion') && !['Orion Braccae', 'Orion Beret', 'Orion Jerkin', 'Orion Gloves', 'Orion Socks'].includes(normalizedName)) normalizedName = 'Orion Attire';
 
                                 const url = linkMap[normalizedName];
                                 if (url) {
@@ -225,7 +233,7 @@
                         }
 
                         let normalizedName = searchName;
-                        const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur\'s', 'LK': 'Laksamana\'s', 'LU': 'Luzaf', 'HV': 'Herberton' };
+                        const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur\'s', 'LK': 'Laksamana\'s', 'LU': 'Luzaf', 'HV': 'Herberton', 'AM': 'Amini', 'OR': 'Orion' };
                         for (let key in abbrMap) {
                             if (normalizedName.startsWith(key)) {
                                 normalizedName = normalizedName.replace(key, abbrMap[key]);
@@ -252,6 +260,8 @@
                             else if (normalizedName.includes('Sash')) normalizedName = 'Mummu Sash';
                         }
                         else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
+                        else if (normalizedName.startsWith('Amini') && !['Amini Caban', 'Amini Gapette', 'Amini Brague'].includes(normalizedName)) normalizedName = 'Amini Attire';
+                        else if (normalizedName.startsWith('Orion') && !['Orion Braccae', 'Orion Beret', 'Orion Jerkin', 'Orion Gloves', 'Orion Socks'].includes(normalizedName)) normalizedName = 'Orion Attire';
 
                         const url = linkMap[normalizedName];
                         if (url) {

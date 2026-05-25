@@ -1,5 +1,7 @@
 # Ranger Equipment Guide (High-End & Ideal)
 
+*Note: If you are using **GastraFates**, the equipment setup changes. Please refer to the separate page for details.*
+
 This page is a template for introducing and editing the high-end equipment of Ranger (Ranger) for endgame content.
 Please feel free to input and use your favorite equipment configuration!
 
@@ -49,7 +51,7 @@ Specialized "Store TP (STP)" configuration to fire ranged attacks and transition
 
 * Main Weapon: Perun +1 (Rank 15)
 * Sub Weapon: Kustawi +1 (Rank 15)
-* Ranged Weapon: Preferred Weapon
+* Ranged Weapon: [与一の弓 (Rank 15)](#) ｏｒ [アナイアレイター (Rank 15)](#) ｏｒ [ガーンデーヴァ (Rank 15)](#) ｏｒ [アキヌフォート (Rank 15)](#) ｏｒ [フォーマルハウト (Rank 15)](#) ｏｒ ピナカ ｏｒ アープ
 * Ammo: Chrono Arrow
 * Head: AR Beret +4 (Arcadian Beret +4)
 * Body: AM Caban +3 (Amini Caban +3)

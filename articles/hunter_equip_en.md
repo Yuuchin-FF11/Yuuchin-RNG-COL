@@ -80,10 +80,6 @@ Specialized "Store TP (STP)" configuration to fire ranged attacks and transition
   Key accessories (ears, rings, waist) and weapons/ammo are completely shared with the Snapshot (pre-cast) set. This minimizes the number of equipment swaps required, allowing the entire transition to easily fit within the game's 6-line macro limit for smooth, stress-free combat.
 * **AM Caban +3 (Body) Fixed for Continuous Velocity Shot**
   The body piece, "AM Caban +3," remains equipped in both the Snapshot and mid-shot sets. This ensures that the powerful "Velocity Shot effect boost" remains active without any interruption, maintaining peak ranged performance at all times.
-* **Massive STP & Accuracy Boost via AR Beret +4 (Head) & AM Brague +3 (Legs)**
-  Utilizes top-tier Artifact and Relic pieces to maximize "Store TP" and "Ranged Accuracy." This significantly boosts TP generation per shot, dramatically increasing the rotation speed of your Weapon Skills.
-* **The Power of Ikenga Gear (Hands & Feet) Rank 30 Augments**
-  Features specialized Odyssey Gaol gear. With Rank 30 augments, they offer an incredible balance of Store TP (+9 each), Physical Damage Taken Cut (-5% each), high AGI, and strong Accuracy/Attack boosts.
 
 ---
 

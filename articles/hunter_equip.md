@@ -150,7 +150,7 @@
 * 頭：ニャメヘルム（Rank30）
 * 胴：ニャメメイル（Rank30）
 * 両手：ニャメガントレ（Rank30）
-* 両脚：ニャメフランケ（Rank30）
+* 両脚：ニャメフランチャ（Rank30）
 * 両足：ニャメソルレット（Rank30）
 * 首：シビルスカーフ
 * 左耳：胡蝶のイヤリング（TPボーナス+250）
@@ -239,7 +239,7 @@
 * 頭：[ニャメヘルム](https://wiki.ffo.jp/html/38283.html)（Rank30）
 * 胴：[ニャメメイル](https://wiki.ffo.jp/html/38283.html)（Rank30）
 * 両手：[ニャメガントレ](https://wiki.ffo.jp/html/38283.html)（Rank30）
-* 両脚：[ニャメフランシズ](https://wiki.ffo.jp/html/38283.html)（Rank30）
+* 両脚：[ニャメフランチャ](https://wiki.ffo.jp/html/38283.html)（Rank30）
 * 両足：[ニャメソルレット](https://wiki.ffo.jp/html/38283.html)（Rank30）
 * 首：[フォシャゴルゲット](https://wiki.ffo.jp/html/32703.html)
 * 左耳：[胡蝶のイヤリング](https://wiki.ffo.jp/html/22306.html)

@@ -90,38 +90,44 @@ Specialized "Store TP (STP)" configuration to fire ranged attacks and transition
 ### 3-A. Ranged WS Gear (Physical: Last Stand, Jishnu's Radiance, etc.)
 Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "Jishnu's Radiance."
 
-| Slot | Equipment Name | Augment / Notes |
-| :--- | :--- | :--- |
-| **Main Weapon** |  |  |
-| **Sub Weapon** |  |  |
-| **Ranged Weapon** |  |  |
-| **Ammo** |  |  |
-| **Head** |  |  |
-| **Body** |  |  |
-| **Hands** |  |  |
-| **Legs** |  |  |
-| **Feet** |  |  |
-| **Neck** |  |  |
-| **Left Ear** |  |  |
-| **Right Ear** |  |  |
-| **Left Ring** |  |  |
-| **Right Ring** |  |  |
-| **Back** |  |  |
-| **Waist** |  |  |
+* Main Weapon: Perun +1 (Rank 15)
+* Sub Weapon: Kustawi +1 (Rank 15)
+* Ranged Weapon: [与一の弓 (Rank 15)](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター (Rank 15)](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ (Rank 15)](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート (Rank 15)](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト (Rank 15)](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
+* Ammo: Chrono Arrow
+* Head: OR Beret +4 (Orion Beret +4)
+* Body: Nyame Mail
+* Hands: Nyame Gauntlets
+* Legs: AR Braccae +4 (Arcadian Braccae +4)
+* Feet: AM Bottillon +3 (Amini Bottillon +3)
+* Neck: Scout's Gorget +2 (Rank 25)
+* Left Ear: Moonshade Earring (TP Bonus +250)
+* Right Ear: Beyla Earring
+* Left Ring: Epaminondas's Ring
+* Right Ring: Ifrimad Ring
+* Back: Belenus's Cape (AGI+30, Ranged Accuracy+20, Ranged Attack+20, WSD+10%)
+* Waist: Fotia Belt
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Weapon Skill Damage (WSD)** |  |  |
-| **TP Bonus** |  |  |
-| **AGI Boost** |  |  |
+| **Weapon Skill Damage (WSD)** | **Total +75% to +85%** | Head (+10%), Body (+10%), Hands (+10%), Legs (+10%), Feet (+10%), Neck (+10%), Back (+10%), Waist (+10%), Left Ring (+5%), etc. |
+| **Last Stand Damage** | **+15%** (Feet slot) | AM Bottillon +3 unique property (multiplicative bonus during Last Stand) |
+| **TP Bonus** | **+250** | Moonshade Earring (Augmented property) |
+| **AGI Boost** | **Total +240 or higher** | Maximizing the stat modifier for Last Stand (AGI: 73% to 85%) |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (Please describe your physical WS gear commentary or points here)
+* **Amini Bottillon +3 (Feet) for Ultimate Last Stand Optimization**:
+  Amini Bottillon +3 (AM Bottillon +3) features a staggering **+15%** damage modifier specifically for Last Stand. Combined with high WSD in other slots, this piece is the ultimate choice to skyrocket your Last Stand damage to unprecedented heights!
+* **Nyame Armor (Body/Hands) for a High-End Hybrid Setup**:
+  Equipping Nyame Mail and Nyame Gauntlets provides "WSD+10%" along with massive Ranged Accuracy/Attack. This allows you to maintain peak offensive output while benefiting from top-tier Damage Taken Cut and Magic Evasion, ensuring exceptional survivability in high-difficulty endgame content.
+* **TP Bonus +250 (Moonshade Earring) to Elevate Baseline Damage**:
+  Last Stand is a multi-hit physical WS whose damage multiplier scales heavily with TP. Using Moonshade Earring (TP Bonus +250) ensures that you consistently launch the WS with a virtual TP boost, significantly stabilizing and boosting your baseline damage.
+* **Fotia Belt & Epaminondas's Ring for All-Hit Damage Scaling**:
+  Incorporating Fotia Belt (WSD+10% / WS Accuracy+10) in the waist slot and Epaminondas's Ring (WSD+5%) in the ring slot ensures maximum overall WS scaling on all hits.
 
 ---
 

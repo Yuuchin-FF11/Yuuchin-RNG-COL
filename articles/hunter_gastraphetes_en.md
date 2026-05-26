@@ -20,7 +20,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Body: AM Kaban +3
 * Hands: Ikenga's Gloves (Rank 30)
 * Legs: Ikenga's Trousers (Rank 30)
-* Feet: Ikenga's Gaters (Rank 30)
+* Feet: Ikenga Clogs (Rank 30)
 * Neck: Scout's Gorget +2 (Rank 25)
 * Left Ear: Koko's Earring
 * Right Ear: Telos Earring

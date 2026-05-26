@@ -186,36 +186,36 @@ Dual Wield configuration to strike enemies and accumulate TP in a flash while ma
 
 | Slot | Equipment Name | Augment / Notes |
 | :--- | :--- | :--- |
-| **Main Weapon** |  |  |
-| **Sub Weapon** |  |  |
-| **Ranged Weapon** |  |  |
-| **Ammo** |  |  |
-| **Head** |  |  |
-| **Body** |  |  |
-| **Hands** |  |  |
-| **Legs** |  |  |
-| **Feet** |  |  |
-| **Neck** |  |  |
-| **Left Ear** |  |  |
-| **Right Ear** |  |  |
-| **Left Ring** |  |  |
-| **Right Ring** |  |  |
-| **Back** |  |  |
-| **Waist** |  |  |
+| **Main Weapon** | [Naegling](https://wiki.ffo.jp/html/37597.html) | |
+| **Sub Weapon** | [Gleti's Knife](https://wiki.ffo.jp/html/38205.html) | |
+| **Ranged Weapon** | [Atchipyter](https://wiki.ffo.jp/html/25808.html) | TP Bonus +1000 |
+| **Ammo** | [Beaur Arrow](https://wiki.ffo.jp/html/39082.html) | |
+| **Head** | [Mummu Mask](https://wiki.ffo.jp/html/39387.html) | |
+| **Body** | [Adhemar Jacket +1](https://wiki.ffo.jp/html/34613.html) | |
+| **Hands** | [Malignance Gloves](https://wiki.ffo.jp/html/37727.html) | |
+| **Legs** | [Amini Brague +3](https://wiki.ffo.jp/html/33153.html) | |
+| **Feet** | [Malignance Boots](https://wiki.ffo.jp/html/37728.html) | |
+| **Neck** | [Karakt Choker](https://wiki.ffo.jp/html/17288.html) | |
+| **Left Ear** | [Suppanomimi](https://wiki.ffo.jp/html/317.html) | |
+| **Right Ear** | [Sherida Earring](https://wiki.ffo.jp/html/35909.html) | |
+| **Left Ring** | [Melanic Ring](https://wiki.ffo.jp/html/39711.html) | |
+| **Right Ring** | [Chirich Ring +1](https://wiki.ffo.jp/html/35694.html) | |
+| **Back** | [Belenus's Cape](https://wiki.ffo.jp/html/35511.html) | DEX+20, Accuracy+30, Attack+20, Double Attack+10%, PDT-10% |
+| **Waist** | [Sailfi Belt +1](https://wiki.ffo.jp/html/32262.html) | |
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Dual Wield** |  |  |
-| **Damage Taken Cut** |  |  |
-| **Magic Evasion** |  |  |
+| **Dual Wield** | - | - |
+| **Damage Taken Cut** | - | - |
+| **Magic Evasion** | - | - |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (Please describe your standard melee gear commentary or points here)
+* (ご主人様、こちらの近接TP溜め装備の解説や実戦でのポイントをぜひお聞かせください！お聞きした解説を元に、こちらに美しく追記させていただきます🐾😊✨ / My Lord, please share your thoughts and commentary on this melee set, and I will write it beautifully here!)
 
 ---
 

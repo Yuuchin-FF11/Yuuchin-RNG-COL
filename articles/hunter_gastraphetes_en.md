@@ -100,36 +100,41 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
 ### 3. Ranged WS (Magic: Trueflight) Set
 Equipment configuration to maximize the magic damage of the signature Weapon Skill, "Trueflight".
 
-* Main Weapon: (Not Configured)
-* Sub Weapon: (Not Configured)
+* Main Weapon: Malevolence (Max Augments)
+* Sub Weapon: Malevolence (Max Augments)
 * Ranged Weapon: [Gastraphetes (Rank 15)](https://wiki.ffo.jp/html/15187.html)
-* Ammo: Bolt
-* Head: (Not Configured)
-* Body: (Not Configured)
-* Hands: (Not Configured)
-* Legs: (Not Configured)
-* Feet: (Not Configured)
-* Neck: (Not Configured)
-* Left Ear: (Not Configured)
-* Right Ear: (Not Configured)
-* Left Ring: (Not Configured)
-* Right Ring: (Not Configured)
-* Back: (Not Configured)
-* Waist: (Not Configured)
+* Ammo: [Quelling Bolt](https://wiki.ffo.jp/html/37443.html)
+* Head: Nyame Helm (Rank 30)
+* Body: Nyame Mail (Rank 30)
+* Hands: Nyame Gauntlets (Rank 30)
+* Legs: Nyame Flanchard (Rank 30)
+* Feet: Nyame Sollerets (Rank 30)
+* Neck: Sybil Scarf
+* Left Ear: Moonshade Earring (TP Bonus +250)
+* Right Ear: Friomisi Earring
+* Left Ring: Epaminondas's Ring
+* Right Ring: Dingir Ring
+* Back: Belenus's Cape (AGI+30, Mag.Acc.+20, Mag.Dmg.+20, WSD+10%)
+* Waist: Orpheus's Sash or Hachirin-no-Obi
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Weapon Skill Damage (WSD)** | **+0%** | (Will be automatically calculated based on your choices) |
-| **Magic Attack / Magic Accuracy** | **Extremely Strong** | (Will be automatically calculated based on your choices) |
+| **Weapon Skill Damage (WSD)** | **Total +65%** | Nyame 5-pieces (+50%), Left Ring (+5%), Back (+10%) |
+| **Magic Attack (M.Atk)** | **Total +180** (Armor & Accessories) | Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes. |
+| **Elemental Damage Multiplier** | **Swappable** | Orpheus's Sash (Up to +15% based on distance) or Hachirin-no-Obi (Weather/Day bonuses). |
+| **TP Bonus** | **+250** | Moonshade Earring (Augment property) |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Trueflight Magic Burst Potential**:
-  * (We will write about the tremendous magic damage scaling of Gastraphetes' Trueflight, including magic attack/accuracy and element-matching belts here! 🐾)
+* **Maximum Magic Attack & WSD Boosts for Ultimate Elemental Damage**:
+  * Since Trueflight is a guaranteed-hit light-elemental Weapon Skill (subject only to resist checks), there is no need to worry about physical Ranged Accuracy.
+  * Accordingly, the entire five-piece armor set is comprised of the absolute pinnacle "Nyame Armor (Rank 30)", securing a massive baseline of "+150 Magic Attack" and "+50% WSD". Coupled with a Cape customized with "AGI+30 / Magic Damage+20 / WSD+10%", this setup unleashes an unparalleled magic damage potential.
+* **Smart Swapping of Ranged Elemental Boosters via Sash and Obi**:
+  * For the waist slot, you can dynamically swap between "Orpheus's Sash" (providing up to +15% multiplicative damage depending on the distance to the enemy) and "Hachirin-no-Obi" (harnessing the maximum potential of weather and day bonuses), showing a brilliant and flexible endgame tactical choice. 🐾
 
 ---
 

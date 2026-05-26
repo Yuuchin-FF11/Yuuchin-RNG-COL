@@ -90,8 +90,10 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
   * Back: Belenus's Cape (+10)
   * Waist: Yemaya Belt (+4)
   * **Total Store TP: +65 (Equipment Frame)**
-* **Operational Strategy Commentary**:
-  * (We will write about your specific operational thoughts and design intents for this Gastraphetes standard STP set here, exactly as you instruct us! 🐾)
+* **Ranged Accuracy Compensation & Food Selection under Malevolence Dual Wield**:
+  * While this setup is fundamentally similar to other landing sets, because the main and sub weapons are both Malevolence, it provides absolutely no Ranged Accuracy. Therefore, when using food, it is highly recommended to select food that boosts both **Ranged Accuracy (飛命)** and **Ranged Attack (飛攻)** to maintain stable hit rates.
+* **Formidable Ranged Damage via Gastraphetes' Aftermath (AM)**:
+  * Firing the signature Weapon Skill **Trueflight** with Gastraphetes activates its Aftermath (AM), which grants a chance of dealing double or triple damage. This allows you to secure highly formidable damage outputs even with standard ranged auto-attacks! 🐾
 
 ---
 

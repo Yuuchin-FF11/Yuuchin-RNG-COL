@@ -34,20 +34,17 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Snapshot** | **+38%** (Equipment Frame) | AM Ggapit (+15%), Scout's Gorget (+7%), HV Ring (+6%), Belenus's Cape (+10%) |
+| **Snapshot** | **+63%** (Equipment Frame) | Total including native Gastraphetes (+10%), armor, and accessories. (Slight +3% overflow) |
 | **Rapid Shot** | **+5%** | Yemaya Belt (+5%), etc. |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Snapshot Equipment Frame Breakdown (Objective Facts)**:
-  * Head: AM Ggapit +3 (+15%)
-  * Neck: Scout's Gorget +2 (+7%)
-  * Right Ring: HV Ring +1 (+6%)
-  * Back: Belenus's Cape (+10%)
-  * **Total Snapshot: +38% (Equipment Frame)**
-* **Operational Strategy Commentary**:
-  * (We will write about your specific operational thoughts and design intents for this Gastraphetes snapshot set here, exactly as you instruct us! 🐾)
+* **Strong Build Support via Gastraphetes' Native "Snapshot +10"**:
+  Having **"Snapshot+10"** standard on the ultimate weapon Gastraphetes itself is a massive benefit! It greatly eases the demand for Snapshot properties on other slots, making the overall snapshot setup much more accessible and flexible.
+* **Smart "Total 63%" Frame & the Practical Choice of 3% Overflow**:
+  This setup achieves a **total of 63% in the equipment frame** by combining Gastraphetes' native property with the armor and accessories.
+  Rangers can secure Snapshot+10% from Merit Points, making the required cap in the equipment frame +60%. While this setup overflows that target by 3%, reducing this 3% to fit another piece of gear proved highly difficult. Thus, based on your practical design, **"a slight overflow is perfectly fine"**—prioritizing ease of building and immediate transition to magical Weapon Skills. 🐾
 
 ---
 

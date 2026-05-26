@@ -240,7 +240,7 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 | **Hands** | [Nyame Gauntlets](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
 | **Legs** | [Nyame Flanchard](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
 | **Feet** | [Nyame Sollerets](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
-| **Neck** | [Fotia Gorget](https://wiki.ffo.jp/html/32703.html) | |
+| **Neck** | [Republican Platinum Medal](https://wiki.ffo.jp/html/38491.html) | |
 | **Left Ear** | [Moonshade Earring](https://wiki.ffo.jp/html/22306.html) | |
 | **Right Ear** | [Hoxni Earring](https://wiki.ffo.jp/html/39737.html) | |
 | **Left Ring** | [Regal Ring](https://wiki.ffo.jp/html/36142.html) | |

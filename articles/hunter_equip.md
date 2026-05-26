@@ -241,7 +241,7 @@
 * 両手：[ニャメガントレ](https://wiki.ffo.jp/html/38283.html)（Rank30）
 * 両脚：[ニャメフランチャ](https://wiki.ffo.jp/html/38283.html)（Rank30）
 * 両足：[ニャメソルレット](https://wiki.ffo.jp/html/38283.html)（Rank30）
-* 首：[フォシャゴルゲット](https://wiki.ffo.jp/html/32703.html)
+* 首：[共和プラチナ章](http://wiki.ffo.jp/html/38491.html)
 * 左耳：[胡蝶のイヤリング](https://wiki.ffo.jp/html/22306.html)
 * 右耳：[ホクスニピアス](https://wiki.ffo.jp/html/39737.html)
 * 左手の指：[王将の指輪](https://wiki.ffo.jp/html/36142.html)

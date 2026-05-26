@@ -272,21 +272,4 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 
 ---
 
-## Recommended Augments for Beleriand's Cape
-
-1. **Ranged (Standard / STP)**
-   * 
-2. **Ranged (Physical WS - Last Stand, etc.)**
-   * 
-3. **Ranged (Magic WS - Trueflight, etc.)**
-   * 
-4. **Snapshot Gear**
-   * 
-5. **Melee (Standard Melee)**
-   * 
-6. **Melee (WS - Savage Blade)**
-   * 
-
----
-
 🏠 **[Back to Homepage](index_en.html)** ｜ ⬆ * [Back to Top](#)

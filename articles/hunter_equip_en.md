@@ -169,7 +169,7 @@ Optimized set to maximize magic damage from "Trueflight" (Light elemental magic 
 
 #### 💡 Equipment Points & Commentary
 * **The True Role of This Set: The Ultimate "Wildfire (WF) Specialized" Configuration**:
-  In high-end play, this equipment set functions as a dedicated **"Wildfire (WF) specialized"** configuration. Launching Trueflight requires shifting to the Mythic weapon "GastraFates" as your ranged weapon, along with completely different main/sub weapons (such as clubs tailored for magic damage/accuracy). Thus, this set is optimized to push gun-fired Wildfire to its absolute limit.
+  In high-end play, this equipment set functions as a dedicated **"Wildfire (WF) specialized"** configuration. Launching Trueflight requires shifting to the Mythic weapon "GastraFates" as your ranged weapon, along with completely different dedicated weapons. Thus, this set is optimized to push gun-fired Wildfire to its absolute limit.
 * **Capitalizing on "Never-Miss" Magic WS: Maximizing Magic Attack & WSD to the Limit**:
   Unlike physical Weapon Skills, elemental magic WS like Wildfire and Trueflight are "never-miss" attacks (subject only to magic resistance). Since physical Ranged Accuracy is entirely irrelevant, we completely omit accuracy considerations. By equipping "Nyame Armor (Rank 30)" across all 5 slots to secure "+310 Magic Attack" and "+50% WSD," this set focuses solely on **stacking Magic Attack and WSD as high as humanly possible** for sheer, overwhelming damage.
 * **Strategic Ammo Choice: Practical "Devastating Bullet" from Armageddon**:

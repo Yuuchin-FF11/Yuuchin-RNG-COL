@@ -231,36 +231,36 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 
 | Slot | Equipment Name | Augment / Notes |
 | :--- | :--- | :--- |
-| **Main Weapon** |  |  |
-| **Sub Weapon** |  |  |
-| **Ranged Weapon** |  |  |
-| **Ammo** |  |  |
-| **Head** |  |  |
-| **Body** |  |  |
-| **Hands** |  |  |
-| **Legs** |  |  |
-| **Feet** |  |  |
-| **Neck** |  |  |
-| **Left Ear** |  |  |
-| **Right Ear** |  |  |
-| **Left Ring** |  |  |
-| **Right Ring** |  |  |
-| **Back** |  |  |
-| **Waist** |  |  |
+| **Main Weapon** | [Naegling](https://wiki.ffo.jp/html/37597.html) | |
+| **Sub Weapon** | [Gleti's Knife](https://wiki.ffo.jp/html/38205.html) | |
+| **Ranged Weapon** | [Atchipyter](https://wiki.ffo.jp/html/25808.html) | TP Bonus +1000 |
+| **Ammo** | [Hauksbok Arrow](https://wiki.ffo.jp/html/37837.html) | |
+| **Head** | [Nyame Helm](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
+| **Body** | [Nyame Mail](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
+| **Hands** | [Nyame Gauntlets](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
+| **Legs** | [Nyame Flanchard](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
+| **Feet** | [Nyame Sollerets](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
+| **Neck** | [Fotia Gorget](https://wiki.ffo.jp/html/32703.html) | |
+| **Left Ear** | [Moonshade Earring](https://wiki.ffo.jp/html/22306.html) | |
+| **Right Ear** | [Hoxni Earring](https://wiki.ffo.jp/html/39737.html) | |
+| **Left Ring** | [Regal Ring](https://wiki.ffo.jp/html/36142.html) | |
+| **Right Ring** | [Ifrimad Ring](https://wiki.ffo.jp/html/39089.html) | |
+| **Back** | [Belenus's Cape](https://wiki.ffo.jp/html/35511.html) | STR+30, Accuracy+20, Attack+20, WSD+10% |
+| **Waist** | [Sailfi Belt +1](https://wiki.ffo.jp/html/32262.html) | Rank 15 |
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Weapon Skill Damage (WSD)** |  |  |
-| **STR / MND Boost** |  |  |
-| **Damage Taken Cut** |  |  |
+| **Weapon Skill Damage (WSD)** | - | - |
+| **STR / MND Boost** | - | - |
+| **Damage Taken Cut** | - | - |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (Please describe your melee WS gear commentary or points here)
+* (ご主人様、こちらの近接WS（サベッジ）装備の解説や実戦でのポイントをぜひお聞かせください！お聞きした解説を元に、こちらに美しく追記させていただきます🐾😊✨ / My Lord, please share your thoughts and commentary on this melee WS (Savage) set, and I will write it beautifully here!)
 
 ---
 

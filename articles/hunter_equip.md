@@ -100,8 +100,8 @@
 * 遠隔武器：[与一の弓（ランク15）](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター（ランク15）](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ（ランク15）](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート（ランク15）](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト（ランク15）](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
 * 矢弾：クロノアロー
 * 頭：ＯＲベレー+4
-* 胴：ニャメメイル
-* 両手：ニャメガントレ
+* 胴：ニャメメイル（ランク３０）
+* 両手：ニャメガントレ（ランク３０）
 * 両脚：ＡＲブラッカエ+4
 * 両足：ＡＭボティヨン+3
 * 首：スカウトゴルゲ+2（ランク25）

@@ -95,8 +95,8 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
 * Ranged Weapon: [与一の弓 (Rank 15)](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター (Rank 15)](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ (Rank 15)](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート (Rank 15)](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト (Rank 15)](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
 * Ammo: Chrono Arrow
 * Head: OR Beret +4 (Orion Beret +4)
-* Body: Nyame Mail
-* Hands: Nyame Gauntlets
+* Body: Nyame Mail (Rank 30)
+* Hands: Nyame Gauntlets (Rank 30)
 * Legs: AR Braccae +4 (Arcadian Braccae +4)
 * Feet: AM Bottillon +3 (Amini Bottillon +3)
 * Neck: Scout's Gorget +2 (Rank 25)

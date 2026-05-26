@@ -253,14 +253,22 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Weapon Skill Damage (WSD)** | - | - |
-| **STR / MND Boost** | - | - |
-| **Damage Taken Cut** | - | - |
+| **Weapon Skill Damage (WSD)** | **Total +80%** | Hauksbok Arrow (+20%), Nyame 5-pieces (+50%), Belenus's Cape (+10%) |
+| **STR / MND Boost** | **Extremely Strong** | Maximum attribute tier secured via full Nyame set (Rank 30) |
+| **Damage Taken Cut** | **-43%** | Nyame set (-38%), Regal Ring (-5%) for high defense and security |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (ご主人様、こちらの近接WS（サベッジ）装備の解説や実戦でのポイントをぜひお聞かせください！お聞きした解説を元に、こちらに美しく追記させていただきます🐾😊✨ / My Lord, please share your thoughts and commentary on this melee WS (Savage) set, and I will write it beautifully here!)
+* **Rivaling Frontline Attacker Jobs: The Mind-Blowing Power of Ranger's Savage Blade**:
+  Savage Blade performed by a Ranger in close-quarters combat is incredibly powerful, capable of **rivaling or even outdamaging dedicated frontline melee jobs**. This set maximizes the Ranger's hidden melee potential, perfectly combining dream-like burst damage with practical reliability.
+* **Flawless Balance Between STR Boost & WSD**:
+  To skyrocket the damage of Savage Blade, this set places the **utmost importance on the balance between WSD (Weapon Skill Damage +) and STR/MND attributes**. By encasing all 5 slots in "Nyame Armor (Rank 30)" and equipping a back cape with "STR+30 / WSD+10%," this configuration delivers stable, colossal strikes.
+* **The Star of This Build: The Marvelous "Hauksbok Arrow" with WSD +20%**:
+  The ultimate secret weapon and the absolute star of this set is the ammo slot's **"Hauksbok Arrow."** This single arrow holds a massive **"WSD+20%"** property! Because it can be easily exchanged by anyone via Domain Points (Domain Invasion), **it is an absolute "must-have, non-negotiable lifeline" item for any Ranger attempting to execute Savage Blade**.
+* **【CRITICAL MELEE WARNING】Absolutely Avoid Accidental Ranged WS Shooting!**:
+  Please note that the Hauksbok Arrow is a **"one-time consumable arrow"** (lol). If you accidentally equip and fire it during a ranged physical/magic WS (like Last Stand or Trueflight), this incredibly precious arrow will be shot and lost instantly!
+  To prevent firing this arrow in error and crying over the loss, please double-check your macro settings and ammo swap controls with absolute caution.
 
 ---
 

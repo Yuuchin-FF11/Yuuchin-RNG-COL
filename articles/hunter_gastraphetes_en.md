@@ -74,7 +74,7 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
 | **Store TP (STP)** | **+65** (Equipment Frame) | Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4) |
-| **Damage Taken Cut** | **-0%** | (Will be automatically calculated based on your choices) |
+| **Damage Taken Cut** | **Effective -29% to -39%** | DT-29% (Head-6%, Body-11%, Legs-12%) + PDT-10% (Ikenga Hands/Feet) |
 
 </details>
 
@@ -125,6 +125,7 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 | **Weapon Skill Damage (WSD)** | **Total +65%** | Nyame 5-pieces (+50%), Left Ring (+5%), Back (+10%) |
 | **Magic Attack (M.Atk)** | **Total +180** (Armor & Accessories) | Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes. |
 | **Elemental Damage Multiplier** | **Swappable** | Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses). |
+| **Damage Taken Cut** | **-37%** | Total of Nyame 5-pieces (Highly durable and safe) |
 | **TP Bonus** | **+250** | Moonshade Earring (Augment property) |
 
 </details>

@@ -147,7 +147,7 @@ Optimized set to maximize magic damage from "Trueflight" (Light elemental magic 
 * Hands: Nyame Gauntlets (Rank 30)
 * Legs: Nyame Flanchard (Rank 30)
 * Feet: Nyame Sollerets (Rank 30)
-* Neck: Sibilant Scarf
+* Neck: Sibyl Scarf
 * Left Ear: Moonshade Earring (TP Bonus +250)
 * Right Ear: Friomisi Earring
 * Left Ring: Epaminondas's Ring
@@ -160,7 +160,7 @@ Optimized set to maximize magic damage from "Trueflight" (Light elemental magic 
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Magic Attack (M.Atk)** | **Total +340 or higher** | Nyame 5-pieces (+310), Sibilant Scarf (+10), Friomisi Earring (+10), Dingir Ring (+10), etc. |
+| **Magic Attack (M.Atk)** | **Total +340 or higher** | Nyame 5-pieces (+310), Sibyl Scarf (+10), Friomisi Earring (+10), Dingir Ring (+10), etc. |
 | **Weapon Skill Damage (WSD)** | **Total +65%** | Nyame 5-pieces (+50%), Epaminondas's Ring (+5%), Belenus's Cape (+10%) |
 | **Elemental Damage Multiplier** | **Up to +15%** | Orpheus's Sash (damage scaling based on distance to target) |
 | **TP Bonus** | **+250** | Moonshade Earring (Augmented property) |

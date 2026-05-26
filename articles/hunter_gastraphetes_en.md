@@ -130,11 +130,8 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Maximum Magic Attack & WSD Boosts for Ultimate Elemental Damage**:
-  * Since Trueflight is a guaranteed-hit light-elemental Weapon Skill (subject only to resist checks), there is no need to worry about physical Ranged Accuracy.
-  * Accordingly, the entire five-piece armor set is comprised of the absolute pinnacle "Nyame Armor (Rank 30)", securing a massive baseline of "+150 Magic Attack" and "+50% WSD". Coupled with a Cape customized with "AGI+30 / Magic Damage+20 / WSD+10%", this setup unleashes an unparalleled magic damage potential.
-* **Smart Swapping of Ranged Elemental Boosters via Sash and Obi**:
-  * For the waist slot, you can dynamically swap between "Orpheus's Sash" (providing up to +15% multiplicative damage depending on the distance to the enemy) and "Korin Obi" (harnessing the maximum potential of weather and day bonuses), showing a brilliant and flexible endgame tactical choice. 🐾
+* **Trueflight Equipment Commentary**:
+  * (We will write about your specific operational thoughts and design intents for this Gastraphetes Trueflight set here, exactly as you instruct us! 🐾)
 
 ---
 

@@ -174,7 +174,9 @@
                             const prefix = txt.substring(0, colonIdx + 1) + ' ';
                             const restHtml = li.innerHTML.substring(li.innerHTML.search(/[:：]/) + 1).trim();
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
-                                if (itemHtml.includes('<a ')) return itemHtml; 
+                                if (itemHtml.includes('<a ')) {
+                                    return itemHtml.replace(/(<\/a>)\s*([（(][^）)]+[）)])/g, '$1<span style="color:#a8e063;font-weight:700;">$2</span>');
+                                } 
 
                                 let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
                                 const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
@@ -234,7 +236,20 @@
 
                     // Auto-link logic for table cells (td) in English articles
                     tempDiv.querySelectorAll('td').forEach(td => {
-                        if (td.querySelector('a')) return;
+                        if (td.querySelector('a')) {
+                            let html = td.innerHTML.trim();
+                            let updatedHtml = html.replace(/(<\/a>)\s*([（(]?[^<]+[）)]?)/g, (match, p1, p2) => {
+                                let suffix = p2.trim();
+                                if (suffix && !suffix.startsWith('<')) {
+                                    return `${p1} <span style="color:#a8e063;font-weight:700;">${suffix}</span>`;
+                                }
+                                return match;
+                            });
+                            if (html !== updatedHtml) {
+                                td.innerHTML = updatedHtml;
+                            }
+                            return;
+                        }
 
                         let baseHtml = td.innerHTML.trim();
                         let baseName = td.textContent.trim();

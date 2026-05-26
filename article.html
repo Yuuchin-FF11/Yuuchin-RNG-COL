@@ -191,7 +191,7 @@
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
                                 // すでにリンクが含まれている場合は、二重リンクを避けるためにラップしない
                                 if (itemHtml.includes('<a ')) {
-                                    return itemHtml; 
+                                    return itemHtml.replace(/(<\/a>)\s*([（(][^）)]+[）)])/g, '$1<span style="color:#a8e063;font-weight:700;">$2</span>');
                                 }
 
                                 let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();

@@ -73,18 +73,23 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Store TP (STP)** | **+30** (Equipment Frame) | Ikenga's Gloves (+8), Ikenga Clogs (+7), Telos Earring (+5), Belenus's Cape (+10) |
+| **Store TP (STP)** | **+65** (Equipment Frame) | Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4) |
 | **Damage Taken Cut** | **-0%** | (Will be automatically calculated based on your choices) |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Standard STP Equipment Frame Breakdown (Objective Facts)**:
-  * Hands: Ikenga's Gloves (+8)
+* **Standard STP Equipment Frame Breakdown (100% Accurate Objective Facts)**:
+  * Hands: Ikenga's Gloves (+9)
+  * Legs: AM Brague +3 (+12)
   * Feet: Ikenga Clogs (+7)
+  * Neck: Scout's Gorget +2 (+7)
+  * Left Ear: Koko's Earring (+5)
   * Right Ear: Telos Earring (+5)
+  * Left Ring: Koko's Ring (+6)
   * Back: Belenus's Cape (+10)
-  * **Total Store TP: +30 (Equipment Frame)**
+  * Waist: Yemaya Belt (+4)
+  * **Total Store TP: +65 (Equipment Frame)**
 * **Operational Strategy Commentary**:
   * (We will write about your specific operational thoughts and design intents for this Gastraphetes standard STP set here, exactly as you instruct us! 🐾)
 

@@ -1,6 +1,8 @@
 # Ranger Equipment Guide (High-End & Ideal)
 
-*Note: If you are using **GastraFates**, the equipment setup changes. Please refer to the separate page for details.*
+👉 **[Gastraphetes Equipment Guide is here](article_en.html?file=articles/hunter_gastraphetes_en.md)**
+
+---
 
 This page is a template for introducing and editing the high-end equipment of Ranger (Ranger) for endgame content.
 Please feel free to input and use your favorite equipment configuration!

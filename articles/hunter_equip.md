@@ -194,7 +194,7 @@
 * 遠隔武器：[アチピテール](https://wiki.ffo.jp/html/25808.html)（TPボーナス+1000）
 * 矢弾：[ベヨーアロー](https://wiki.ffo.jp/html/39082.html)
 * 頭：[無の面](https://wiki.ffo.jp/html/39387.html)
-* 胴：[アデマジャケット+1](http://wiki.ffo.jp/html/34613.html)
+* 胴：[アデマジャケット+1](http://wiki.ffo.jp/html/34613.html)（タイプA）
 * 両手：[マリグナスグローブ](https://wiki.ffo.jp/html/37727.html)
 * 両脚：[ＡＭブラーグ+3](https://wiki.ffo.jp/html/33153.html)
 * 両足：[マリグナスブーツ](https://wiki.ffo.jp/html/37728.html)
@@ -204,7 +204,7 @@
 * 左手の指：[メランリング](http://wiki.ffo.jp/html/39711.html)
 * 右手の指：[シーリチリング+1](http://wiki.ffo.jp/html/35694.html)
 * 背：[ベレナスケープ](https://wiki.ffo.jp/html/35511.html)（DEX+20、命中+30、攻+20、ダブルアタック+10%、被物理-10%）
-* 腰：[セールフィベルト+1](http://wiki.ffo.jp/html/32262.html)
+* 腰：[セールフィベルト+1](http://wiki.ffo.jp/html/32262.html)（Rank15）
 
 <details>
 <summary>📊 合計ステータス目安（クリックで開閉）</summary>

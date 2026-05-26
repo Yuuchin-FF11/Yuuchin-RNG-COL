@@ -191,7 +191,7 @@ Dual Wield configuration to strike enemies and accumulate TP in a flash while ma
 | **Ranged Weapon** | [Atchipyter](https://wiki.ffo.jp/html/25808.html) | TP Bonus +1000 |
 | **Ammo** | [Beaur Arrow](https://wiki.ffo.jp/html/39082.html) | |
 | **Head** | [Mummu Mask](https://wiki.ffo.jp/html/39387.html) | |
-| **Body** | [Adhemar Jacket +1](https://wiki.ffo.jp/html/34613.html) | |
+| **Body** | [Adhemar Jacket +1](https://wiki.ffo.jp/html/34613.html) | Type A |
 | **Hands** | [Malignance Gloves](https://wiki.ffo.jp/html/37727.html) | |
 | **Legs** | [Amini Brague +3](https://wiki.ffo.jp/html/33153.html) | |
 | **Feet** | [Malignance Boots](https://wiki.ffo.jp/html/37728.html) | |
@@ -201,7 +201,7 @@ Dual Wield configuration to strike enemies and accumulate TP in a flash while ma
 | **Left Ring** | [Melanic Ring](https://wiki.ffo.jp/html/39711.html) | |
 | **Right Ring** | [Chirich Ring +1](https://wiki.ffo.jp/html/35694.html) | |
 | **Back** | [Belenus's Cape](https://wiki.ffo.jp/html/35511.html) | DEX+20, Accuracy+30, Attack+20, Double Attack+10%, PDT-10% |
-| **Waist** | [Sailfi Belt +1](https://wiki.ffo.jp/html/32262.html) | |
+| **Waist** | [Sailfi Belt +1](https://wiki.ffo.jp/html/32262.html) | Rank 15 |
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>

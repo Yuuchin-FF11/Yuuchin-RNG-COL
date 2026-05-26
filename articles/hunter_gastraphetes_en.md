@@ -40,12 +40,14 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Solidifying Magical & WS Performance via Dual-Wield "Malevolence (Max Augments)"**:
-  This set dual-wields "Malevolence (Max Augments)" in both hands—the absolute pinnacle of magical performance for Ranger weapons. By fixing these daggers in place, this configuration completely eliminates unnecessary weapon swaps from the Snapshot phase, maintaining maximum Magic Accuracy and Attack for "Trueflight" execution in real-time.
-* **Preserving Attributes & Magic Power with Full Hand/Leg/Foot "Ikenga (Rank 30)"**:
-  By equipping the "Ikenga" armor pieces (Rank 30) on hands, legs, and feet, the setup maintains extremely high baseline magic stats and AGI during the snapshot phase and general movement, leading to a seamless transition to combat actions.
-* **Smart Setup Securing Snapshot +38%**:
-  Using AM Ggapit +3 (SS+15%), Scout's Gorget +2 (SS+7%), HV Ring +1 (SS+6%), and Belenus's Cape (SS+10%), this build secures a highly practical **+38%** Snapshot. Minimizing swap items keeps macro lines (limited to 6) clean and allows a smooth, immediate transition to magical Weapon Skills. 🐾
+* **Snapshot Equipment Frame Breakdown (Objective Facts)**:
+  * Head: AM Ggapit +3 (+15%)
+  * Neck: Scout's Gorget +2 (+7%)
+  * Right Ring: HV Ring +1 (+6%)
+  * Back: Belenus's Cape (+10%)
+  * **Total Snapshot: +38% (Equipment Frame)**
+* **Operational Strategy Commentary**:
+  * (We will write about your specific operational thoughts and design intents for this Gastraphetes snapshot set here, exactly as you instruct us! 🐾)
 
 ---
 

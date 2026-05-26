@@ -168,14 +168,14 @@ Optimized set to maximize magic damage from "Trueflight" (Light elemental magic 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Full "Nyame (Rank 30)" for the Ultimate Magic Attack / WSD Hybrid**:
-  To push elemental (magic) Weapon Skills like Trueflight and Wildfire to their absolute limits, this set equips "Nyame Armor (Rank 30)" across all 5 armor slots. This delivers an incredible base of "+310 Magic Attack" and "+50% WSD," while maintaining superb Magic Evasion and Damage Taken Cut as the ultimate high-end baseline.
-* **Orpheus's Sash for Extreme Elemental Multipliers**:
-  Equipping "Orpheus's Sash" provides a massive multiplicative boost to elemental damage (up to +15% at close range). This is an essential piece for maximizing the burst damage of your elemental Weapon Skills.
-* **Devastating Bullet & Accessory Magical Spec Optimization**:
-  Adopting "Devastating Bullet" (Magic Damage+25 / Magic Accuracy+35), "Sibilant Scarf" (M.Atk+10), "Friomisi Earring" (M.Atk+10), and "Dingir Ring" (M.Atk+10) fine-tunes your magic specifications to the absolute peak.
-* **TP Bonus +250 to Massively Boost WS Multiplier Scaling**:
-  Using "Moonshade Earring (TP Bonus +250)" ensures that your elemental WS (particularly Trueflight, which scales dramatically with TP) launches with a massive damage multiplier boost, significantly raising your baseline burst potential.
+* **The True Role of This Set: The Ultimate "Wildfire (WF) Specialized" Configuration**:
+  In high-end play, this equipment set functions as a dedicated **"Wildfire (WF) specialized"** configuration. Launching Trueflight requires shifting to the Mythic weapon "GastraFates" as your ranged weapon, along with completely different main/sub weapons (such as clubs tailored for magic damage/accuracy). Thus, this set is optimized to push gun-fired Wildfire to its absolute limit.
+* **Capitalizing on "Never-Miss" Magic WS: Maximizing Magic Attack & WSD to the Limit**:
+  Unlike physical Weapon Skills, elemental magic WS like Wildfire and Trueflight are "never-miss" attacks (subject only to magic resistance). Since physical Ranged Accuracy is entirely irrelevant, we completely omit accuracy considerations. By equipping "Nyame Armor (Rank 30)" across all 5 slots to secure "+310 Magic Attack" and "+50% WSD," this set focuses solely on **stacking Magic Attack and WSD as high as humanly possible** for sheer, overwhelming damage.
+* **Strategic Ammo Choice: Practical "Devastating Bullet" from Armageddon**:
+  While Magic Attack-boosting ammunition exists for Rangers, they are often consumable "one-time bullets," making them highly impractical for continuous combat. To solve this, this set adopts **"Devastating Bullet"**—which can be extracted infinitely from the Relic weapon "Armageddon." This practical and realistic choice heavily boosts Magic Accuracy and Magic Damage while keeping your inventory sustainable.
+* **Ultimate Boost with Orpheus's Sash & Moonshade Earring**:
+  Equipping "Orpheus's Sash" (up to +15% elemental damage based on proximity) and "Moonshade Earring (TP Bonus +250)" establishes a formidable setup to skyrocket the burst damage of your magical Weapon Skills.
 
 ---
 

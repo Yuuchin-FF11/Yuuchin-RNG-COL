@@ -138,38 +138,44 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
 ### 3-B. Ranged WS Gear (Magic: Trueflight, Wildfire)
 Optimized set to maximize magic damage from "Trueflight" (Light elemental magic WS) and "Wildfire" (Fire elemental magic WS).
 
-| Slot | Equipment Name | Augment / Notes |
-| :--- | :--- | :--- |
-| **Main Weapon** |  |  |
-| **Sub Weapon** |  |  |
-| **Ranged Weapon** |  |  |
-| **Ammo** |  |  |
-| **Head** |  |  |
-| **Body** |  |  |
-| **Hands** |  |  |
-| **Legs** |  |  |
-| **Feet** |  |  |
-| **Neck** |  |  |
-| **Left Ear** |  |  |
-| **Right Ear** |  |  |
-| **Left Ring** |  |  |
-| **Right Ring** |  |  |
-| **Back** |  |  |
-| **Waist** |  |  |
+* Main Weapon: Perun +1 (Rank 15)
+* Sub Weapon: Kustawi +1 (Rank 15)
+* Ranged Weapon: [与一の弓 (Rank 15)](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター (Rank 15)](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ (Rank 15)](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート (Rank 15)](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト (Rank 15)](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
+* Ammo: Devastating Bullet
+* Head: Nyame Helm (Rank 30)
+* Body: Nyame Mail (Rank 30)
+* Hands: Nyame Gauntlets (Rank 30)
+* Legs: Nyame Flanchard (Rank 30)
+* Feet: Nyame Sollerets (Rank 30)
+* Neck: Sibilant Scarf
+* Left Ear: Moonshade Earring (TP Bonus +250)
+* Right Ear: Friomisi Earring
+* Left Ring: Epaminondas's Ring
+* Right Ring: Dingir Ring
+* Back: Belenus's Cape (AGI+30, Magic Accuracy+20, Magic Damage+20, WSD+10%)
+* Waist: Orpheus's Sash
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Magic Attack (M.Atk)** |  |  |
-| **WSD** |  |  |
-| **TP Bonus** |  |  |
+| **Magic Attack (M.Atk)** | **Total +340 or higher** | Nyame 5-pieces (+310), Sibilant Scarf (+10), Friomisi Earring (+10), Dingir Ring (+10), etc. |
+| **Weapon Skill Damage (WSD)** | **Total +65%** | Nyame 5-pieces (+50%), Epaminondas's Ring (+5%), Belenus's Cape (+10%) |
+| **Elemental Damage Multiplier** | **Up to +15%** | Orpheus's Sash (damage scaling based on distance to target) |
+| **TP Bonus** | **+250** | Moonshade Earring (Augmented property) |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (Please describe your magic WS gear commentary or points here)
+* **Full "Nyame (Rank 30)" for the Ultimate Magic Attack / WSD Hybrid**:
+  To push elemental (magic) Weapon Skills like Trueflight and Wildfire to their absolute limits, this set equips "Nyame Armor (Rank 30)" across all 5 armor slots. This delivers an incredible base of "+310 Magic Attack" and "+50% WSD," while maintaining superb Magic Evasion and Damage Taken Cut as the ultimate high-end baseline.
+* **Orpheus's Sash for Extreme Elemental Multipliers**:
+  Equipping "Orpheus's Sash" provides a massive multiplicative boost to elemental damage (up to +15% at close range). This is an essential piece for maximizing the burst damage of your elemental Weapon Skills.
+* **Devastating Bullet & Accessory Magical Spec Optimization**:
+  Adopting "Devastating Bullet" (Magic Damage+25 / Magic Accuracy+35), "Sibilant Scarf" (M.Atk+10), "Friomisi Earring" (M.Atk+10), and "Dingir Ring" (M.Atk+10) fine-tunes your magic specifications to the absolute peak.
+* **TP Bonus +250 to Massively Boost WS Multiplier Scaling**:
+  Using "Moonshade Earring (TP Bonus +250)" ensures that your elemental WS (particularly Trueflight, which scales dramatically with TP) launches with a massive damage multiplier boost, significantly raising your baseline burst potential.
 
 ---
 

@@ -120,14 +120,18 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Amini Bottillon +3 (Feet) for Ultimate Last Stand Optimization**:
-  Amini Bottillon +3 (AM Bottillon +3) features a staggering **+15%** damage modifier specifically for Last Stand. Combined with high WSD in other slots, this piece is the ultimate choice to skyrocket your Last Stand damage to unprecedented heights!
-* **Nyame Armor (Body/Hands) for a High-End Hybrid Setup**:
-  Equipping Nyame Mail and Nyame Gauntlets provides "WSD+10%" along with massive Ranged Accuracy/Attack. This allows you to maintain peak offensive output while benefiting from top-tier Damage Taken Cut and Magic Evasion, ensuring exceptional survivability in high-difficulty endgame content.
-* **TP Bonus +250 (Moonshade Earring) to Elevate Baseline Damage**:
-  Last Stand is a multi-hit physical WS whose damage multiplier scales heavily with TP. Using Moonshade Earring (TP Bonus +250) ensures that you consistently launch the WS with a virtual TP boost, significantly stabilizing and boosting your baseline damage.
-* **Fotia Belt & Epaminondas's Ring for All-Hit Damage Scaling**:
-  Incorporating Fotia Belt (WSD+10% / WS Accuracy+10) in the waist slot and Epaminondas's Ring (WSD+5%) in the ring slot ensures maximum overall WS scaling on all hits.
+* **The Golden Balance of Ranged Accuracy and WSD in Physical WS**:
+  In physical ranged Weapon Skills, "Accuracy is paramount—if a shot doesn't hit, it's meaningless." Because missing a physical WS leads to a devastating loss (complete waste of TP and a massive drop in damage), this set is strategically configured to perfectly balance high Ranged Accuracy with high Weapon Skill Damage (WSD) to minimize any chance of missing.
+* **Complementary Accessory Pairing (Moonshade & Beyla, Epaminondas & Ifrimad)**:
+  By pairing accessories that lack accuracy but offer massive specialized stats with pieces that heavily boost Ranged Accuracy and core stats, this set achieves an incredible equilibrium.
+  * **Ears (Moonshade Earring × Beyla Earring)**:
+    Since the left ear "Moonshade Earring" is dedicated entirely to "TP Bonus" and lacks Ranged Accuracy, the right ear features the "Beyla Earring" to aggressively boost Ranged Accuracy on the right side.
+  * **Rings (Epaminondas's Ring × Ifrimad Ring)**:
+    Since the left ring "Epaminondas's Ring" is a pure "WSD boost" that lacks Ranged Accuracy and even reduces AGI by 10, the right ring slot is equipped with the "Ifrimad Ring" to heavily compensate by pumping up core stats and Ranged Accuracy on the right side.
+* **Ranger's Advantage and Uncompromising Focus on Physical WS Stability**:
+  Although Rangers naturally possess higher default Ranged Accuracy compared to Corsairs, missing a physical WS is still too costly to ignore. This hybrid golden ratio ensures that you never suffer the painful sting of a missed Last Stand.
+* **Solid Foundation with "Amini Bottillon +3" and "Nyame (Rank 30)"**:
+  While maximizing your Last Stand output with "Amini Bottillon +3" (Last Stand Damage +15%), adopting top-tier "Nyame Mail (Rank 30)" and "Nyame Gauntlets (Rank 30)" establishes a formidable foundation that delivers top-class Ranged Accuracy, WSD, and Damage Taken Cut.
 
 ---
 

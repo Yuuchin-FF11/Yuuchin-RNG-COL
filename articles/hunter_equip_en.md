@@ -208,14 +208,21 @@ Dual Wield configuration to strike enemies and accumulate TP in a flash while ma
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Dual Wield** | - | - |
-| **Damage Taken Cut** | - | - |
-| **Magic Evasion** | - | - |
+| **Dual Wield** | **+11%** | Suppanomimi (+5%), Adhemar Jacket +1 (+6%) perfectly hitting the Dual Wield cap |
+| **Damage Taken Cut** | **-50% or more** | Ironclad safety in close-quarters combat |
+| **Attack Speed & TP Gain** | **Ultra-Fast** | Perfect hybrid of Multi-Attack boost and Store TP (STP) |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (ご主人様、こちらの近接TP溜め装備の解説や実戦でのポイントをぜひお聞かせください！お聞きした解説を元に、こちらに美しく追記させていただきます🐾😊✨ / My Lord, please share your thoughts and commentary on this melee set, and I will write it beautifully here!)
+* **Safety First: Ironclad Close-Quarters Survival with PDT/DT -50% Cap**:
+  The greatest highlight of this equipment set is the ability to maintain the **DT -50% cap** at all times while performing rapid, multi-hit melee attacks. This safely compensates for the Ranger's natural fragility, offering absolute security against unexpected hits and high-damage area-of-effect special attacks from bosses.
+* **Perfect "Dual Wield +11" Adjustment for Minimum Attack Interval**:
+  To maximize TP accumulation speed as a sub-ninja Dual Wield attacker, this set secures exactly the **Dual Wield +11** needed to hit the interval cap, utilizing the golden synergy of "Adhemar Jacket +1 (Dual Wield +6)" on the body and "Suppanomimi (Dual Wield +5)" on the left ear. This eliminates redundant gear slots and maximizes customization freedom elsewhere.
+* **Superb Synergy of Multi-Attack & Store TP (STP)**:
+  This configuration high-brids aggressive Multi-Attack boosts from "Adhemar Jacket +1 (Type A)," "Sailfi Belt +1 (Rank 15)," and "Sherida Earring" with robust Store TP stats from "Melanic Ring," "Chirich Ring +1," and the back cape. By increasing both the hit count and the TP gained per swing, you can accumulate TP at an unprecedented, blazing speed.
+* **Tactical Application & Targets: Absolute Comfort in Odyssey Sheol C**:
+  While a "Full Malignance" setup prioritizing raw Magic Evasion and DT remains the preferred option for high-end bosses that spam dangerous magic and special attacks, **this configuration is more than capable of handling "Odyssey Sheol C" farming and standard content**, shredding enemies incredibly fast with zero safety concerns!
 
 ---
 

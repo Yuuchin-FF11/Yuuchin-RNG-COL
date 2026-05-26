@@ -115,7 +115,7 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 * Left Ring: Epaminondas's Ring
 * Right Ring: Dingir Ring
 * Back: Belenus's Cape (AGI+30, Mag.Acc.+20, Mag.Dmg.+20, WSD+10%)
-* Waist: Orpheus's Sash or Hachirin-no-Obi
+* Waist: Orpheus's Sash or Korin Obi
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
@@ -124,7 +124,7 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 | :--- | :--- | :--- |
 | **Weapon Skill Damage (WSD)** | **Total +65%** | Nyame 5-pieces (+50%), Left Ring (+5%), Back (+10%) |
 | **Magic Attack (M.Atk)** | **Total +180** (Armor & Accessories) | Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes. |
-| **Elemental Damage Multiplier** | **Swappable** | Orpheus's Sash (Up to +15% based on distance) or Hachirin-no-Obi (Weather/Day bonuses). |
+| **Elemental Damage Multiplier** | **Swappable** | Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses). |
 | **TP Bonus** | **+250** | Moonshade Earring (Augment property) |
 
 </details>
@@ -134,7 +134,7 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
   * Since Trueflight is a guaranteed-hit light-elemental Weapon Skill (subject only to resist checks), there is no need to worry about physical Ranged Accuracy.
   * Accordingly, the entire five-piece armor set is comprised of the absolute pinnacle "Nyame Armor (Rank 30)", securing a massive baseline of "+150 Magic Attack" and "+50% WSD". Coupled with a Cape customized with "AGI+30 / Magic Damage+20 / WSD+10%", this setup unleashes an unparalleled magic damage potential.
 * **Smart Swapping of Ranged Elemental Boosters via Sash and Obi**:
-  * For the waist slot, you can dynamically swap between "Orpheus's Sash" (providing up to +15% multiplicative damage depending on the distance to the enemy) and "Hachirin-no-Obi" (harnessing the maximum potential of weather and day bonuses), showing a brilliant and flexible endgame tactical choice. 🐾
+  * For the waist slot, you can dynamically swap between "Orpheus's Sash" (providing up to +15% multiplicative damage depending on the distance to the enemy) and "Korin Obi" (harnessing the maximum potential of weather and day bonuses), showing a brilliant and flexible endgame tactical choice. 🐾
 
 ---
 

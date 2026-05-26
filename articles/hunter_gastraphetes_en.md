@@ -51,36 +51,42 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 ### 2. Standard STP (TP Build) Set
 Store TP (STP) focused equipment configuration to gather TP efficiently with normal shots.
 
-* Main Weapon: (Not Configured)
-* Sub Weapon: (Not Configured)
+* Main Weapon: Malevolence (Max Augments)
+* Sub Weapon: Malevolence (Max Augments)
 * Ranged Weapon: [Gastraphetes (Rank 15)](https://wiki.ffo.jp/html/15187.html)
-* Ammo: Bolt
-* Head: (Not Configured)
-* Body: (Not Configured)
-* Hands: (Not Configured)
-* Legs: (Not Configured)
-* Feet: (Not Configured)
-* Neck: (Not Configured)
-* Left Ear: (Not Configured)
-* Right Ear: (Not Configured)
-* Left Ring: (Not Configured)
-* Right Ring: (Not Configured)
-* Back: (Not Configured)
-* Waist: (Not Configured)
+* Ammo: [Quelling Bolt](https://wiki.ffo.jp/html/37443.html)
+* Head: AR Beret +4
+* Body: AM Kaban +3
+* Hands: Ikenga's Gloves (Rank 30)
+* Legs: AM Brague +3
+* Feet: Ikenga Clogs (Rank 30)
+* Neck: Scout's Gorget +2 (Rank 25)
+* Left Ear: Koko's Earring
+* Right Ear: Telos Earring
+* Left Ring: Koko's Ring
+* Right Ring: HV Ring +1
+* Back: Belenus's Cape (AGI+20, Rng.Acc.+30, Rng.Atk.+20, "Store TP"+10)
+* Waist: Yemaya Belt
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Store TP (STP)** | **+0** | (Will be automatically calculated based on your choices) |
+| **Store TP (STP)** | **+30** (Equipment Frame) | Ikenga's Gloves (+8), Ikenga Clogs (+7), Telos Earring (+5), Belenus's Cape (+10) |
 | **Damage Taken Cut** | **-0%** | (Will be automatically calculated based on your choices) |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Rapid TP Build with Gastraphetes**:
-  * (We will write about your Store TP balancing and defensive setup details here! 🐾)
+* **Standard STP Equipment Frame Breakdown (Objective Facts)**:
+  * Hands: Ikenga's Gloves (+8)
+  * Feet: Ikenga Clogs (+7)
+  * Right Ear: Telos Earring (+5)
+  * Back: Belenus's Cape (+10)
+  * **Total Store TP: +30 (Equipment Frame)**
+* **Operational Strategy Commentary**:
+  * (We will write about your specific operational thoughts and design intents for this Gastraphetes standard STP set here, exactly as you instruct us! 🐾)
 
 ---
 

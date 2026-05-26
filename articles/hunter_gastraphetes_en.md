@@ -130,8 +130,15 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 </details>
 
 #### 💡 Equipment Points & Commentary
-* **Trueflight Equipment Commentary**:
-  * (We will write about your specific operational thoughts and design intents for this Gastraphetes Trueflight set here, exactly as you instruct us! 🐾)
+* **The Perfect Balance of WSD and Magic Attack (Why Choose Nyame)**:
+  * Just like Corsair's Leaden Salute, the key to maximizing damage is the perfect balance between **Weapon Skill Damage (WSD)** and **Magic Attack (M.Atk)**.
+  * While other Ranger gear offers higher WSD values (such as certain WSD+12% pieces), they lack Magic Attack. Therefore, the **Nyame Armor set (Rank 30)**, which provides exceptionally high amounts of both WSD and Magic Attack simultaneously, is the absolute best choice for this light-elemental Weapon Skill.
+* **The Immense Power of Dual-Wielded Malevolence (Max Augments) & Acquisition Tips**:
+  * Dual-wielding **Malevolence** with Max Augments provides an incredible boost to your magic Weapon Skills, drastically magnifying Trueflight's damage output.
+  * Acquiring the maximum augments on Malevolence is an extremely challenging journey that requires relentless effort, but the devastating damage output is well worth the struggle! Never give up and keep pushing!
+  * **💡 Strategy Tip for Simplicity**: When farming for the Malevolence Max Augments, instead of the 1-on-1 Sinister Rain fight, keep challenging the standard **3-battle consecutive version** repeatedly to secure the best rolls.
+* **Smart Swapping between Korin Obi and Orpheus's Sash depending on Buffs**:
+  * For the waist slot, if you have a Scholar in your party who can grant you light-element storm weather spells (Aurorastorm / 極光の陣), equip the **Korin Obi (光輪の帯)**. If you do not have weather support (such as during solo play), **Orpheus's Sash (オルペウスサッシュ)** is the preferred choice to leverage the distance-based damage multiplier. 🐾
 
 ---
 

@@ -32,14 +32,16 @@ There is a **"secret time window"** to maximize and exponentially earn both Emin
 
 Make full use of the **Time-Limited Objective "Gain Experience"**, which is accepted during specific days and hours🐾💖
 
-### 📅 Recommended Active Window (Japan Standard Time - JST)
-* **Every Sunday: 20:00 to 23:59 (JST)**
+### 📅 Active Windows (Japan Standard Time - JST / 3 Times a Week)
+* **Every Sunday: 20:00 to 23:59 (JST)** (★Highly Recommended! Most active players are online, making it the easiest time to earn!)
+* **Every Tuesday: 12:00 to 15:59 (JST)**
+* **Every Thursday: 04:00 to 07:59 (JST)**
 
 During this period, you will receive massive amounts of Eminence and Unity Points **for every 5,000 Experience Points you earn**! This is an incredibly lucrative bonus time!
 
 > [!TIP]
-> **Combine Leveling and Gil-Making on Sunday Nights!**
-> If you are a beginner or returnee planning to level up or earn Job Points, try to schedule your sessions during this "Sunday 20:00 to 23:59 JST" window!
+> **Schedule Your Activities Around Time-Limited Objectives!**
+> If you are a beginner or returnee planning to level up or earn Job Points, try to schedule your sessions during these active windows (especially the Sunday night slot)!
 > While your level goes up, both your Eminence and Unity Points will pile up at an astonishing speed🐾
 
 ---

@@ -101,7 +101,7 @@
 * 背：ベレナスケープ（AGI+30、魔命+20、魔法ダメージ+20、WSD+10%）
 * 腰：オルペウスサッシュ or 光輪の帯
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)</strong></td><td><strong>合計+75%</strong></td><td>ニャメ5部位(+60%), 左指(+5%), 背(+10%)</td></tr><tr><td><strong>魔法攻撃力 (魔攻)</strong></td><td><strong>合計+180</strong> (防具+アクセ枠)</td><td>ニャメ5部位(+150), 首(+10), 右耳(+10), 右指(+10) の加算値 ※さらにマレヴォ2本で+110、ガストラで+40加算</td></tr><tr><td><strong>属性ダメージ乗算アップ</strong></td><td><strong>状況に応じて使い分け</strong></td><td>オルペウスサッシュ（距離による乗算最大+15%）または光輪の帯（天候・曜日効果）</td></tr><tr><td><strong>被ダメージカット</strong></td><td><strong>-37%</strong></td><td>ニャメ装束5部位の合計値（非常に頑丈で安全）</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+250</strong></td><td>胡蝶 of イヤリング（オーグメント性能）</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)</strong></td><td><strong>合計+73%</strong></td><td>ニャメ5部位(+58%), 左指(+5%), 背(+10%)</td></tr><tr><td><strong>魔法攻撃力 (魔攻)</strong></td><td><strong>合計+180</strong> (防具+アクセ枠)</td><td>ニャメ5部位(+150), 首(+10), 右耳(+10), 右指(+10) の加算値 ※さらにマレヴォ2本で+110、ガストラで+40加算</td></tr><tr><td><strong>属性ダメージ乗算アップ</strong></td><td><strong>状況に応じて使い分け</strong></td><td>オルペウスサッシュ（距離による乗算最大+15%）または光輪の帯（天候・曜日効果）</td></tr><tr><td><strong>被ダメージカット</strong></td><td><strong>-37%</strong></td><td>ニャメ装束5部位の合計値（非常に頑丈で安全）</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+250</strong></td><td>胡蝶 of イヤリング（オーグメント性能）</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **WSDと魔攻の完璧なバランス（ニャメ一式の採用理由）**:

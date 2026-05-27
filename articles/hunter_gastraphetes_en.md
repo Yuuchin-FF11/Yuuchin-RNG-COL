@@ -101,7 +101,11 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 * Back: Belenus's Cape (AGI+30, Mag.Acc.+20, Mag.Dmg.+20, WSD+10%)
 * Waist: Orpheus's Sash or Korin Obi
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +75%</strong></td><td>Nyame 5-pieces (+60%), Left Ring (+5%), Back (+10%)</td></tr><tr><td><strong>Magic Attack (M.Atk)</strong></td><td><strong>Total +180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes.</td></tr><tr><td><strong>Elemental Damage Multiplier</strong></td><td><strong>Swappable</strong></td><td>Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses).</td></tr><tr><td><strong>Damage Taken Cut</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+250</strong></td><td>Moonshade Earring (Augment property)</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +73%</strong></td><td>Nyame 5-pieces (+58%), Left Ring (+5%), Back (+10%)</td></tr>
+<tr><td><strong>Magic Attack (M.Atk)</strong></td><td><strong>Total +180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes.</td></tr>
+<tr><td><strong>Elemental Damage Multiplier</strong></td><td><strong>Swappable</strong></td><td>Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses).</td></tr>
+<tr><td><strong>Damage Taken Cut</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr>
+<tr><td><strong>TP Bonus</strong></td><td><strong>+250</strong></td><td>Moonshade Earring (Augment property)</td></tr></tbody></table></details>
 
 #### 💡 Equipment Points & Commentary
 * **The Perfect Balance of WSD and Magic Attack (Why Choose Nyame)**:

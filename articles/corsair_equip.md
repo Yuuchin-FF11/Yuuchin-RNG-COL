@@ -226,7 +226,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、飛命＋２０、飛攻＋２０、ウェポンスキルダメージ＋１０％）
 * 腰：カフカチナベルト＋１
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>AGI（ブースト分）</strong></td><td><strong>+300以上</strong></td><td>ニャメRank30一式 ＋ マント(+30)</td></tr><tr><td><strong>WSD</strong></td><td><strong>+63%</strong></td><td>ニャメ4部位(+48%) ＋ マント(+10%) ＋ 指(+5%)</td></tr><tr><td><strong>飛命</strong></td><td><strong>+500以上</strong></td><td>装備の命中プロパティの合算</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>AGI（ブースト分）</strong></td><td><strong>+300以上</strong></td><td>ニャメRank30一式 ＋ マント(+30)</td></tr><tr><td><strong>WSD</strong></td><td><strong>+62%</strong></td><td>ニャメ4部位(+47%) ＋ マント(+10%) ＋ 指(+5%)</td></tr><tr><td><strong>飛命</strong></td><td><strong>+500以上</strong></td><td>装備の命中プロパティの合算</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **飛命とウェポンスキルダメージのバランス調整**
@@ -287,7 +287,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、魔命＋２０、魔法ダメージ＋２０、ウェポンスキルダメージ＋１０％）
 * 腰：オルペウスサッシュ or 闇輪の帯
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>魔攻</strong></td><td><strong>+330以上</strong></td><td>LA胴・足(+104), ニャメ手・脚Rank30(+140)等</td></tr><tr><td><strong>WSD</strong></td><td><strong>+46%</strong></td><td>ニャメ手・脚(+24%), マント(+10%), 首(+7%), 耳(+5%)</td></tr><tr><td><strong>闇属性ダメージ</strong></td><td><strong>+33%</strong></td><td>妖蟲の髪飾り+1(+28%), アルコンリング(+5%)</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+1250</strong></td><td>フォーマルハウト(+1000) ＋ 胡蝶 of イヤリング(+250)</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>魔攻</strong></td><td><strong>+330以上</strong></td><td>LA胴・足(+104), ニャメ手・脚Rank30(+140)等</td></tr><tr><td><strong>WSD</strong></td><td><strong>+45%</strong></td><td>ニャメ手・脚(+23%), マント(+10%), 首(+7%), 耳(+5%)</td></tr><tr><td><strong>闇属性ダメージ</strong></td><td><strong>+33%</strong></td><td>妖蟲の髪飾り+1(+28%), アルコンリング(+5%)</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+1250</strong></td><td>フォーマルハウト(+1000) ＋ 胡蝶 of イヤリング(+250)</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説（<span class="ws-highlight">レデンサリュート</span>）
 * **必須となる「闇属性魔攻」装備について**
@@ -423,7 +423,7 @@
 * 背：カムラスマント（ＳＴＲ＋３０、命中＋２０、攻＋２０、ＷＳＤ＋１０％、被ダメージ－５％）
 * 腰：セールフィベルト＋１（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>STR（ブースト分）</strong></td><td><strong>+341</strong></td><td>ニャメ一式 タイプB Rank30(+244)、マント(+30)、武器(+20)等</td></tr><tr><td><strong>WSD</strong></td><td><strong>+75%</strong></td><td>ニャメ一式(+60%)、マント(+10%)、指(+5%)</td></tr><tr><td><strong>命中 / 攻撃</strong></td><td><strong>+500以上</strong></td><td>全部位の命中・攻撃プロパティの合算</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+1250</strong></td><td>遠隔武器(+1000) ＋ 胡蝶 of イヤリング(+250)</td></tr><tr><td><strong>被ダメージ合計</strong></td><td><strong>実質-50% (上限)</strong></td><td>ニャメ一式（-38%）＋ 指(-10%) ＋ マント(-5%) ※上限超過で非常に堅牢</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>STR（ブースト分）</strong></td><td><strong>+341</strong></td><td>ニャメ一式 タイプB Rank30(+244)、マント(+30)、武器(+20)等</td></tr><tr><td><strong>WSD</strong></td><td><strong>+73%</strong></td><td>ニャメ一式(+58%)、マント(+10%)、指(+5%)</td></tr><tr><td><strong>命中 / 攻撃</strong></td><td><strong>+500以上</strong></td><td>全部位の命中・攻撃プロパティの合算</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+1250</strong></td><td>遠隔武器(+1000) ＋ 胡蝶 of イヤリング(+250)</td></tr><tr><td><strong>被ダメージ合計</strong></td><td><strong>実質-50% (上限)</strong></td><td>ニャメ一式（-38%）＋ 指(-10%) ＋ マント(-5%) ※上限超過で非常に堅牢</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **STRブーストによるダメージの安定化**

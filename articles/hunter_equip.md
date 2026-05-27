@@ -31,30 +31,7 @@
 * 背：ベレナスケープ（AGI+20、飛命+20、飛攻+20、スナップ+10）
 * 腰：イェマヤベルト
 
-<details>
-<summary>📊 合計ステータス目安（クリックで開閉）</summary>
-<table>
-  <thead>
-    <tr>
-      <th>項目</th>
-      <th>合計値</th>
-      <th>内訳・備考</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>スナップショット</strong></td>
-      <td><strong>+69%</strong> (装備枠)</td>
-      <td>上限70%（メリポ+10%込みで完全キャップ）</td>
-    </tr>
-    <tr>
-      <td><strong>ラピッドショット</strong></td>
-      <td><strong>+5%</strong></td>
-      <td>イェマヤベルト(+5%) など</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット</strong></td><td><strong>+69%</strong> (装備枠)</td><td>上限70%（メリポ+10%込みで完全キャップ）</td></tr><tr><td><strong>ラピッドショット</strong></td><td><strong>+5%</strong></td><td>イェマヤベルト(+5%) など</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **スナップショットのキャップ（上限70%）達成の仕組み**:
@@ -88,35 +65,7 @@
 * 背：ベレナスケープ（AGI+20、飛命+30、飛攻+30、STP+10）
 * 腰：イェマヤベルト
 
-<details>
-<summary>📊 合計ステータス目安（クリックで開閉）</summary>
-<table>
-  <thead>
-    <tr>
-      <th>項目</th>
-      <th>合計値</th>
-      <th>内訳・備考</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>ストアTP</strong></td>
-      <td><strong>+81</strong> (装備枠)</td>
-      <td>ARベレー+4(+11), AMブラーグ+3(+10), イケンガ両手・両足(+9x2) 等の合計値</td>
-    </tr>
-    <tr>
-      <td><strong>被ダメージカット</strong></td>
-      <td><strong>実質-29%〜-39%</strong></td>
-      <td>被ダメ合計-29%（頭-6, 胴-11, 脚-12） ＋ 被物理-10%（イケンガ手・足）</td>
-    </tr>
-    <tr>
-      <td><strong>魔回避</strong></td>
-      <td><strong>+530以上</strong></td>
-      <td>防具5部位合計で高い魔法耐性を確保</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP</strong></td><td><strong>+81</strong> (装備枠)</td><td>ARベレー+4(+11), AMブラーグ+3(+10), イケンガ両手・両足(+9x2) 等の合計値</td></tr><tr><td><strong>被ダメージカット</strong></td><td><strong>実質-29%〜-39%</strong></td><td>被ダメ合計-29%（頭-6, 胴-11, 脚-12） ＋ 被物理-10%（イケンガ手・足）</td></tr><tr><td><strong>魔回避</strong></td><td><strong>+530以上</strong></td><td>防具5部位合計で高い魔法耐性を確保</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **スナップ装備からのスムーズな着替えとマクロ行数対策**
@@ -148,40 +97,7 @@
 * 背：ベレナスケープ（AGI+30、飛命+20、飛攻+20、WSD+10%）
 * 腰：フォシャベルト
 
-<details>
-<summary>📊 合計ステータス目安（クリックで開閉）</summary>
-<table>
-  <thead>
-    <tr>
-      <th>項目</th>
-      <th>合計値</th>
-      <th>内訳・備考</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>ウェポンスキルダメージ (WSD)</strong></td>
-      <td><strong>合計+75%〜+85%</strong></td>
-      <td>頭(+10%), 胴(+10%), 手(+10%), 脚(+10%), 足(+10%), 首(+10%), 背(+10%), 腰(+10%), 左指(+5%) など</td>
-    </tr>
-    <tr>
-      <td><strong>ラストスタンド ダメージ</strong></td>
-      <td><strong>+15%</strong> (足枠)</td>
-      <td>AMボティヨン+3の固有プロパティ（ラストスタンド時のみ乗算）</td>
-    </tr>
-    <tr>
-      <td><strong>TPボーナス</strong></td>
-      <td><strong>+250</strong></td>
-      <td>胡蝶のイヤリング（オーグメント性能）</td>
-    </tr>
-    <tr>
-      <td><strong>AGIブースト</strong></td>
-      <td><strong>合計+240以上</strong></td>
-      <td>ラストスタンドのダメージ修正項目（AGI: 73%〜85%）を極限まで底上げ</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)</strong></td><td><strong>合計+75%〜+85%</strong></td><td>頭(+10%), 胴(+10%), 手(+10%), 脚(+10%), 足(+10%), 首(+10%), 背(+10%), 腰(+10%), 左指(+5%) など</td></tr><tr><td><strong>ラストスタンド ダメージ</strong></td><td><strong>+15%</strong> (足枠)</td><td>AMボティヨン+3の固有プロパティ（ラストスタンド時のみ乗算）</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+250</strong></td><td>胡蝶のイヤリング（オーグメント性能）</td></tr><tr><td><strong>AGIブースト</strong></td><td><strong>合計+240以上</strong></td><td>ラストスタンドのダメージ修正項目（AGI: 73%〜85%）を極限まで底上げ</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **物理WS（ラストスタンド）における「飛命」と「WSD」の妥協なき黄金バランス**:
@@ -219,40 +135,7 @@
 * 背：ベレナスケープ（AGI+30、魔命+20、魔法ダメージ+20、WSD+10%）
 * 腰：オルペウスサッシュ
 
-<details>
-<summary>📊 合計ステータス目安（クリックで開閉）</summary>
-<table>
-  <thead>
-    <tr>
-      <th>項目</th>
-      <th>合計値</th>
-      <th>内訳・備考</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>魔法攻撃力 (魔攻)</strong></td>
-      <td><strong>合計+340以上</strong></td>
-      <td>防具5部位(+310), 首(+10), 右耳(+10), 右指(+10) 等のオグメ合算値</td>
-    </tr>
-    <tr>
-      <td><strong>ウェポンスキルダメージ (WSD)</strong></td>
-      <td><strong>合計+65%</strong></td>
-      <td>防具5部位(+50%), 左指(+5%), 背(+10%)</td>
-    </tr>
-    <tr>
-      <td><strong>属性ダメージ乗算アップ</strong></td>
-      <td><strong>最大+15%</strong></td>
-      <td>オルペウスサッシュ（敵との距離が近いほどダメージ上昇）</td>
-    </tr>
-    <tr>
-      <td><strong>TPボーナス</strong></td>
-      <td><strong>+250</strong></td>
-      <td>胡蝶 of イヤリング（オーグメント性能）</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>魔法攻撃力 (魔攻)</strong></td><td><strong>合計+340以上</strong></td><td>防具5部位(+310), 首(+10), 右耳(+10), 右指(+10) 等のオグメ合算値</td></tr><tr><td><strong>ウェポンスキルダメージ (WSD)</strong></td><td><strong>合計+65%</strong></td><td>防具5部位(+50%), 左指(+5%), 背(+10%)</td></tr><tr><td><strong>属性ダメージ乗算アップ</strong></td><td><strong>最大+15%</strong></td><td>オルペウスサッシュ（敵との距離が近いほどダメージ上昇）</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+250</strong></td><td>胡蝶 of イヤリング（オーグメント性能）</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **本構成の真の役割：実質的な「ワイルドファイア（WF）専用」極限火力セット**:
@@ -288,35 +171,7 @@
 * 背：[ベレナスケープ](https://wiki.ffo.jp/html/35511.html)（DEX+20、命中+30、攻+20、ダブルアタック+10%、被物理-10%）
 * 腰：[セールフィベルト+1](http://wiki.ffo.jp/html/32262.html)（Rank15）
 
-<details>
-<summary>📊 合計ステータス目安（クリックで開閉）</summary>
-<table>
-  <thead>
-    <tr>
-      <th>項目</th>
-      <th>合計値</th>
-      <th>内訳・備考</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>二刀流</strong></td>
-      <td><strong>+11%</strong></td>
-      <td>素破の耳(+5%)、アデマジャケット+1(+6%) で二刀流キャップにジャスト調整</td>
-    </tr>
-    <tr>
-      <td><strong>被ダメージカット</strong></td>
-      <td><strong>-50%以上</strong></td>
-      <td>接近戦での安全性を極限まで高めた鉄壁のカット維持</td>
-    </tr>
-    <tr>
-      <td><strong>攻撃手数・TP蓄積</strong></td>
-      <td><strong>超高速</strong></td>
-      <td>マルチアタック性能とストアTP（STP）の完璧なハイブリッド構成</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>二刀流</strong></td><td><strong>+11%</strong></td><td>素破の耳(+5%)、アデマジャケット+1(+6%) で二刀流キャップにジャスト調整</td></tr><tr><td><strong>被ダメージカット</strong></td><td><strong>-50%以上</strong></td><td>接近戦での安全性を極限まで高めた鉄壁のカット維持</td></tr><tr><td><strong>攻撃手数・TP蓄積</strong></td><td><strong>超高速</strong></td><td>マルチアタック性能とストアTP（STP）の完璧なハイブリッド構成</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **安全第一：被ダメージカット50%以上を常時キープする鉄壁の接近戦仕様**:
@@ -350,35 +205,7 @@
 * 背：[ベレナスケープ](https://wiki.ffo.jp/html/35511.html)（STR+30、命中+20、攻+20、WSD+10%）
 * 腰：[セールフィベルト+1](http://wiki.ffo.jp/html/32262.html)（Rank15）
 
-<details>
-<summary>📊 合計ステータス目安（クリックで開閉）</summary>
-<table>
-  <thead>
-    <tr>
-      <th>項目</th>
-      <th>合計値</th>
-      <th>内訳・備考</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>ウェポンスキルダメージ (WSD)</strong></td>
-      <td><strong>合計+80%</strong></td>
-      <td>ホクスボクアロー(+20%), ニャメ5部位(+50%), 背ベレナスケープ(+10%)</td>
-    </tr>
-    <tr>
-      <td><strong>STR / MND ブースト</strong></td>
-      <td><strong>極めて強力</strong></td>
-      <td>ニャメ一式（Rank30）による最高水準のステータス上昇</td>
-    </tr>
-    <tr>
-      <td><strong>被ダメージカット</strong></td>
-      <td><strong>実質-43%</strong></td>
-      <td>ニャメ一式(-38%)、王将の指輪(-5%) ※非常に頑丈で安全</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)</strong></td><td><strong>合計+80%</strong></td><td>ホクスボクアロー(+20%), ニャメ5部位(+50%), 背ベレナスケープ(+10%)</td></tr><tr><td><strong>STR / MND ブースト</strong></td><td><strong>極めて強力</strong></td><td>ニャメ一式（Rank30）による最高水準のステータス上昇</td></tr><tr><td><strong>被ダメージカット</strong></td><td><strong>実質-43%</strong></td><td>ニャメ一式(-38%)、王将の指輪(-5%) ※非常に頑丈で安全</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **前衛職（純アタッカー）を脅かす、狩人サベッジブレードの圧倒的超火力**:

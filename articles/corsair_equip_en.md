@@ -26,40 +26,7 @@ Dedicated equipment to boost the party's firepower. Includes gear that extends d
 * Back: Camulus's Mantle (HP+80, Eva/Mag.Eva+20, Enmity-10, Damage Taken-5%)
 * Waist: Carrier's Sash
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Roll Duration</strong></td>
-      <td><strong>+190s</strong></td>
-      <td>Rostam C(+60), Hands(+60), Head(+50), Neck(+20)</td>
-    </tr>
-    <tr>
-      <td><strong>Roll Range</strong></td>
-      <td><strong>+8</strong></td>
-      <td>Rostam C performance (covers a wide area)</td>
-    </tr>
-    <tr>
-      <td><strong>R.Acc / M.Acc</strong></td>
-      <td><strong>+60+</strong></td>
-      <td>Strong accuracy correction from <strong>Fomalhaut Rank 15</strong></td>
-    </tr>
-    <tr>
-      <td><strong>Damage Taken</strong></td>
-      <td><strong>-50%</strong></td>
-      <td>Maintain cap reduction even during roll usage</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Roll Duration</strong></td><td><strong>+190s</strong></td><td>Rostam C(+60), Hands(+60), Head(+50), Neck(+20)</td></tr><tr><td><strong>Roll Range</strong></td><td><strong>+8</strong></td><td>Rostam C performance (covers a wide area)</td></tr><tr><td><strong>R.Acc / M.Acc</strong></td><td><strong>+60+</strong></td><td>Strong accuracy correction from <strong>Fomalhaut Rank 15</strong></td></tr><tr><td><strong>Damage Taken</strong></td><td><strong>-50%</strong></td><td>Maintain cap reduction even during roll usage</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Reasons for Fixing Sub and Ranged Weapons (Sortie Compatibility and Compensator Handling)**
@@ -102,25 +69,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Back: Camulus's Mantle (Snapshot +10)
 * Waist: Impulse Belt
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Snapshot</strong></td>
-      <td><strong>+70</strong></td>
-      <td>Reach cap (+70) with equipment only</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot</strong></td><td><strong>+70</strong></td><td>Reach cap (+70) with equipment only</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Regarding Snapshot Value Adjustment**
@@ -149,30 +98,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, STP+10)
 * Waist: Fotia Belt
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Store TP</strong></td>
-      <td><strong>+70+</strong></td>
-      <td>Specialized STP configuration focusing solely on maximizing TP gain per shot, regardless of other stats.</td>
-    </tr>
-    <tr>
-      <td><strong>AGI / R.Acc</strong></td>
-      <td><strong>(Ref. Value)</strong></td>
-      <td>Boosted stats obtained as secondary benefits during the process of assembling STP gear.</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP</strong></td><td><strong>+70+</strong></td><td>Specialized STP configuration focusing solely on maximizing TP gain per shot, regardless of other stats.</td></tr><tr><td><strong>AGI / R.Acc</strong></td><td><strong>(Ref. Value)</strong></td><td>Boosted stats obtained as secondary benefits during the process of assembling STP gear.</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Philosophy of Extreme Store TP (STP) Configuration**
@@ -205,25 +131,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Back: Camulus's Mantle (Any augments as long as STP+10 is present)
 * Waist: Yemaya Belt
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Store TP</strong></td>
-      <td><strong>Variable</strong></td>
-      <td>Combination aimed at maximizing STP to the extreme, regardless of other stats.</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP</strong></td><td><strong>Variable</strong></td><td>Combination aimed at maximizing STP to the extreme, regardless of other stats.</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Purpose is "Accumulating TP Instantly" rather than "Damage"**
@@ -310,35 +218,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, WSD+10%)
 * Waist: Fotia Belt
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>AGI (Boosted)</strong></td>
-      <td><strong>+300+</strong></td>
-      <td>Nyame Rank 30 Set + Mantle (+30)</td>
-    </tr>
-    <tr>
-      <td><strong>WSD</strong></td>
-      <td><strong>+56%</strong></td>
-      <td>4 Nyame parts (~+41%) + Mantle (+10%) + Ring (+5%)</td>
-    </tr>
-    <tr>
-      <td><strong>R.Acc</strong></td>
-      <td><strong>+500+</strong></td>
-      <td>Sum of accuracy properties from all gear</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>AGI (Boosted)</strong></td><td><strong>+300+</strong></td><td>Nyame Rank 30 Set + Mantle (+30)</td></tr><tr><td><strong>WSD</strong></td><td><strong>+56%</strong></td><td>4 Nyame parts (~+41%) + Mantle (+10%) + Ring (+5%)</td></tr><tr><td><strong>R.Acc</strong></td><td><strong>+500+</strong></td><td>Sum of accuracy properties from all gear</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Balancing R.Acc and Weapon Skill Damage**
@@ -365,30 +245,7 @@ A specialized accuracy set for high-evasion bosses like in Sortie to ensure skil
 * Back: Mummu Cape
 * Waist: Yemaya Belt
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>R.Acc</strong></td>
-      <td><strong>+600+</strong></td>
-      <td>Overwhelming accuracy properties of Chasseur's +3 set</td>
-    </tr>
-    <tr>
-      <td><strong>Store TP</strong></td>
-      <td><strong>+40+</strong></td>
-      <td>Prioritize TP acquisition for firing a second Radiance</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>R.Acc</strong></td><td><strong>+600+</strong></td><td>Overwhelming accuracy properties of Chasseur's +3 set</td></tr><tr><td><strong>Store TP</strong></td><td><strong>+40+</strong></td><td>Prioritize TP acquisition for firing a second Radiance</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Prioritize "Hitting" and "Securing TP" even if WSD is sacrificed**
@@ -421,40 +278,7 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Back: Camulus's Mantle (AGI+30, M.Acc+20, Magic Damage+20, WSD+10%)
 * Waist: Orpheus's Sash or Darkness Obi
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>M.Atk</strong></td>
-      <td><strong>+330+</strong></td>
-      <td>Lanun Body/Feet (+104), Nyame Hands/Legs Rank 30 (+140), etc.</td>
-    </tr>
-    <tr>
-      <td><strong>WSD</strong></td>
-      <td><strong>+42%</strong></td>
-      <td>Nyame Hands/Legs (+20%), Mantle (+10%), Neck (+7%), Ear (+5%)</td>
-    </tr>
-    <tr>
-      <td><strong>Dark Damage</strong></td>
-      <td><strong>+33%</strong></td>
-      <td>Pixie Hairpin +1 (+28%), Archon Ring (+5%)</td>
-    </tr>
-    <tr>
-      <td><strong>TP Bonus</strong></td>
-      <td><strong>+1250</strong></td>
-      <td>Fomalhaut (+1000) + Moonshade Earring (+250)</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>M.Atk</strong></td><td><strong>+330+</strong></td><td>Lanun Body/Feet (+104), Nyame Hands/Legs Rank 30 (+140), etc.</td></tr><tr><td><strong>WSD</strong></td><td><strong>+42%</strong></td><td>Nyame Hands/Legs (+20%), Mantle (+10%), Neck (+7%), Ear (+5%)</td></tr><tr><td><strong>Dark Damage</strong></td><td><strong>+33%</strong></td><td>Pixie Hairpin +1 (+28%), Archon Ring (+5%)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+1250</strong></td><td>Fomalhaut (+1000) + Moonshade Earring (+250)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary (<span class="ws-highlight">Leaden Salute</span>)
 * **Essential "Dark Magic Attack" Gear**
@@ -530,50 +354,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, Double Attack+10%, Physical Damage Taken-10%)
 * Waist: Sailfi Belt +1 (Rank 15)
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Accuracy</strong></td>
-      <td><strong>+560+</strong></td>
-      <td>Gear properties (+413) + DEX correction (~+150)</td>
-    </tr>
-    <tr>
-      <td><strong>Store TP</strong></td>
-      <td><strong>+71</strong></td>
-      <td>Rostam A(+25), CS Legs(+12), Crepuscular Dagger(+10), etc.</td>
-    </tr>
-    <tr>
-      <td><strong>Dual Wield</strong></td>
-      <td><strong>+11</strong></td>
-      <td>Body(+6), Ear(+5) *Adjustment for min. interval with Sapo Nin</td>
-    </tr>
-    <tr>
-      <td><strong>Damage Taken</strong></td>
-      <td><strong>-50% (Cap)</strong></td>
-      <td>DT-48% (Head-10, Ring-10, Feet-4, Legs-12, Weapon-6x2) + PDT-10% (Back-10)</td>
-    </tr>
-    <tr>
-      <td><strong>Haste</strong></td>
-      <td><strong>+26%</strong></td>
-      <td>Gear-frame cap reached</td>
-    </tr>
-    <tr>
-      <td><strong>Multi-Attack</strong></td>
-      <td><strong>DA+22% / TA+8%</strong></td>
-      <td>Mantle DA+10%, Adhemar TA+8%, etc.</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Accuracy</strong></td><td><strong>+560+</strong></td><td>Gear properties (+413) + DEX correction (~+150)</td></tr><tr><td><strong>Store TP</strong></td><td><strong>+71</strong></td><td>Rostam A(+25), CS Legs(+12), Crepuscular Dagger(+10), etc.</td></tr><tr><td><strong>Dual Wield</strong></td><td><strong>+11</strong></td><td>Body(+6), Ear(+5) *Adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>Damage Taken</strong></td><td><strong>-50% (Cap)</strong></td><td>DT-48% (Head-10, Ring-10, Feet-4, Legs-12, Weapon-6x2) + PDT-10% (Back-10)</td></tr><tr><td><strong>Haste</strong></td><td><strong>+26%</strong></td><td>Gear-frame cap reached</td></tr><tr><td><strong>Multi-Attack</strong></td><td><strong>DA+22% / TA+8%</strong></td><td>Mantle DA+10%, Adhemar TA+8%, etc.</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Adjustment of Multi-Attack and Dual Wield**
@@ -606,50 +387,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, Double Attack+10%, Physical Damage Taken-10%)
 * Waist: Sailfi Belt +1 (Rank 15)
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Accuracy</strong></td>
-      <td><strong>+580+</strong></td>
-      <td>Gear properties (+428) + DEX correction (~+150)</td>
-    </tr>
-    <tr>
-      <td><strong>Store TP</strong></td>
-      <td><strong>+27</strong></td>
-      <td>Sum of CS Legs(+12), Ear(+5), Ring(+4,+6)</td>
-    </tr>
-    <tr>
-      <td><strong>Dual Wield</strong></td>
-      <td><strong>+11</strong></td>
-      <td>Body(+6), Ear(+5) *Adjustment for min. interval with Sapo Nin</td>
-    </tr>
-    <tr>
-      <td><strong>Damage Taken</strong></td>
-      <td><strong>Phys-50%(Cap) / Mag-44%</strong></td>
-      <td>DT-44% (Head-10, Neck-5, Ring-10, Feet-7, Legs-12) + PDT-10% (Back-10)</td>
-    </tr>
-    <tr>
-      <td><strong>Haste</strong></td>
-      <td><strong>+26%</strong></td>
-      <td>Gear-frame cap reached</td>
-    </tr>
-    <tr>
-      <td><strong>Multi-Attack</strong></td>
-      <td><strong>DA+21% / TA+16%</strong></td>
-      <td>Includes Gleti's Knife (TA+6) and armor augments</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Accuracy</strong></td><td><strong>+580+</strong></td><td>Gear properties (+428) + DEX correction (~+150)</td></tr><tr><td><strong>Store TP</strong></td><td><strong>+27</strong></td><td>Sum of CS Legs(+12), Ear(+5), Ring(+4,+6)</td></tr><tr><td><strong>Dual Wield</strong></td><td><strong>+11</strong></td><td>Body(+6), Ear(+5) *Adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>Damage Taken</strong></td><td><strong>Phys-50%(Cap) / Mag-44%</strong></td><td>DT-44% (Head-10, Neck-5, Ring-10, Feet-7, Legs-12) + PDT-10% (Back-10)</td></tr><tr><td><strong>Haste</strong></td><td><strong>+26%</strong></td><td>Gear-frame cap reached</td></tr><tr><td><strong>Multi-Attack</strong></td><td><strong>DA+21% / TA+16%</strong></td><td>Includes Gleti's Knife (TA+6) and armor augments</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Configuration Centered on Savage Blade**
@@ -673,45 +411,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Back: Camulus's Mantle (STR+30, Acc+20, Atk+20, WSD+10%, Damage Taken-5%)
 * Waist: Sailfi Belt +1 (Rank 15)
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>STR (Boosted)</strong></td>
-      <td><strong>+341</strong></td>
-      <td>Nyame Rank 30 (+244), Mantle (+30), Weapon (+20), etc.</td>
-    </tr>
-    <tr>
-      <td><strong>WSD</strong></td>
-      <td><strong>+43%</strong></td>
-      <td>Nyame Set (+28%), Mantle (+10%), Ring (+5%)</td>
-    </tr>
-    <tr>
-      <td><strong>Acc / Atk</strong></td>
-      <td><strong>+500+</strong></td>
-      <td>Sum of Acc/Atk properties from all gear</td>
-    </tr>
-    <tr>
-      <td><strong>TP Bonus</strong></td>
-      <td><strong>+1250</strong></td>
-      <td>Ranged Weapon (+1000) + Moonshade Earring (+250)</td>
-    </tr>
-    <tr>
-      <td><strong>Damage Taken</strong></td>
-      <td><strong>-50% (Cap)</strong></td>
-      <td>Nyame Set (-38%) + Ring (-10%) + Mantle (-5%) *Extremely robust</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>STR (Boosted)</strong></td><td><strong>+341</strong></td><td>Nyame Rank 30 (+244), Mantle (+30), Weapon (+20), etc.</td></tr><tr><td><strong>WSD</strong></td><td><strong>+43%</strong></td><td>Nyame Set (+28%), Mantle (+10%), Ring (+5%)</td></tr><tr><td><strong>Acc / Atk</strong></td><td><strong>+500+</strong></td><td>Sum of Acc/Atk properties from all gear</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+1250</strong></td><td>Ranged Weapon (+1000) + Moonshade Earring (+250)</td></tr><tr><td><strong>Damage Taken</strong></td><td><strong>-50% (Cap)</strong></td><td>Nyame Set (-38%) + Ring (-10%) + Mantle (-5%) *Extremely robust</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Stabilizing Damage through STR Boost**
@@ -741,25 +441,7 @@ A specialized accuracy set to ensure Light skillchains are generated against hig
 * Back: Mummu Cape
 * Waist: Mummu Sash
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Accuracy</strong></td>
-      <td><strong>Extreme</strong></td>
-      <td>Accuracy boost to ensure skillchains connect</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Accuracy</strong></td><td><strong>Extreme</strong></td><td>Accuracy boost to ensure skillchains connect</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Prioritize Maintaining Skillchains**
@@ -787,50 +469,7 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 * Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, STP+10, Physical Damage Taken-10%)
 * Waist: Reiki Yotai
 
-<details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Total Value</th>
-      <th>Details/Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Accuracy</strong></td>
-      <td><strong>+540+</strong></td>
-      <td>Gear properties (+380) + DEX correction (~+160)</td>
-    </tr>
-    <tr>
-      <td><strong>Store TP</strong></td>
-      <td><strong>+75</strong></td>
-      <td>Sum of Malignance Set (+50), Mantle (+10), etc.</td>
-    </tr>
-    <tr>
-      <td><strong>Dual Wield</strong></td>
-      <td><strong>+11</strong></td>
-      <td>Ear (+4), Waist (+7) *Adjustment for min. interval with Sapo Nin</td>
-    </tr>
-    <tr>
-      <td><strong>Damage Taken</strong></td>
-      <td><strong>Phys-50%(Cap) / Mag-41%</strong></td>
-      <td>DT-41% (Malignance-31, Ring-10) + PDT-10% (Back-10)</td>
-    </tr>
-    <tr>
-      <td><strong>Mag. Evasion</strong></td>
-      <td><strong>+602</strong></td>
-      <td>Overwhelming resistance centered on Malignance set</td>
-    </tr>
-    <tr>
-      <td><strong>Haste</strong></td>
-      <td><strong>+26%</strong></td>
-      <td>Gear-frame cap reached</td>
-    </tr>
-  </tbody>
-</table>
-</details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Accuracy</strong></td><td><strong>+540+</strong></td><td>Gear properties (+380) + DEX correction (~+160)</td></tr><tr><td><strong>Store TP</strong></td><td><strong>+75</strong></td><td>Sum of Malignance Set (+50), Mantle (+10), etc.</td></tr><tr><td><strong>Dual Wield</strong></td><td><strong>+11</strong></td><td>Ear (+4), Waist (+7) *Adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>Damage Taken</strong></td><td><strong>Phys-50%(Cap) / Mag-41%</strong></td><td>DT-41% (Malignance-31, Ring-10) + PDT-10% (Back-10)</td></tr><tr><td><strong>Mag. Evasion</strong></td><td><strong>+602</strong></td><td>Overwhelming resistance centered on Malignance set</td></tr><tr><td><strong>Haste</strong></td><td><strong>+26%</strong></td><td>Gear-frame cap reached</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Balancing Survival and TP Rotation**

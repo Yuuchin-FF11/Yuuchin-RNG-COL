@@ -31,12 +31,27 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
-
-| Item | Total Value | Details/Notes |
-| :--- | :--- | :--- |
-| **Snapshot** | **+63%** (Equipment Frame) | Total including native Gastraphetes (+10%), armor, and accessories. (Slight +3% overflow) |
-| **Rapid Shot** | **+5%** | Yemaya Belt (+5%), etc. |
-
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Total Value</th>
+      <th>Details/Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Snapshot</strong></td>
+      <td><strong>+63%</strong> (Equipment Frame)</td>
+      <td>Total including native Gastraphetes (+10%), armor, and accessories. (Slight +3% overflow)</td>
+    </tr>
+    <tr>
+      <td><strong>Rapid Shot</strong></td>
+      <td><strong>+5%</strong></td>
+      <td>Yemaya Belt (+5%), etc.</td>
+    </tr>
+  </tbody>
+</table>
 </details>
 
 #### 💡 Equipment Points & Commentary
@@ -70,12 +85,27 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
-
-| Item | Total Value | Details/Notes |
-| :--- | :--- | :--- |
-| **Store TP (STP)** | **+65** (Equipment Frame) | Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4) |
-| **Damage Taken Cut** | **Effective -29% to -39%** | DT-29% (Head-6%, Body-11%, Legs-12%) + PDT-10% (Ikenga Hands/Feet) |
-
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Total Value</th>
+      <th>Details/Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Store TP (STP)</strong></td>
+      <td><strong>+65</strong> (Equipment Frame)</td>
+      <td>Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4)</td>
+    </tr>
+    <tr>
+      <td><strong>Damage Taken Cut</strong></td>
+      <td><strong>Effective -29% to -39%</strong></td>
+      <td>DT-29% (Head-6%, Body-11%, Legs-12%) + PDT-10% (Ikenga Hands/Feet)</td>
+    </tr>
+  </tbody>
+</table>
 </details>
 
 #### 💡 Equipment Points & Commentary
@@ -119,15 +149,42 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
-
-| Item | Total Value | Details/Notes |
-| :--- | :--- | :--- |
-| **Weapon Skill Damage (WSD)** | **Total +65%** | Nyame 5-pieces (+50%), Left Ring (+5%), Back (+10%) |
-| **Magic Attack (M.Atk)** | **Total +180** (Armor & Accessories) | Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes. |
-| **Elemental Damage Multiplier** | **Swappable** | Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses). |
-| **Damage Taken Cut** | **-37%** | Total of Nyame 5-pieces (Highly durable and safe) |
-| **TP Bonus** | **+250** | Moonshade Earring (Augment property) |
-
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Total Value</th>
+      <th>Details/Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Weapon Skill Damage (WSD)</strong></td>
+      <td><strong>Total +65%</strong></td>
+      <td>Nyame 5-pieces (+50%), Left Ring (+5%), Back (+10%)</td>
+    </tr>
+    <tr>
+      <td><strong>Magic Attack (M.Atk)</strong></td>
+      <td><strong>Total +180</strong> (Armor & Accessories)</td>
+      <td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes.</td>
+    </tr>
+    <tr>
+      <td><strong>Elemental Damage Multiplier</strong></td>
+      <td><strong>Swappable</strong></td>
+      <td>Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses).</td>
+    </tr>
+    <tr>
+      <td><strong>Damage Taken Cut</strong></td>
+      <td><strong>-37%</strong></td>
+      <td>Total of Nyame 5-pieces (Highly durable and safe)</td>
+    </tr>
+    <tr>
+      <td><strong>TP Bonus</strong></td>
+      <td><strong>+250</strong></td>
+      <td>Moonshade Earring (Augment property)</td>
+    </tr>
+  </tbody>
+</table>
 </details>
 
 #### 💡 Equipment Points & Commentary

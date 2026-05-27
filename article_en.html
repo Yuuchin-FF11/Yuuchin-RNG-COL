@@ -104,7 +104,8 @@
         const contentDiv = document.getElementById('markdown-content');
 
         if (file) {
-            fetch(file)
+            // キャッシュバスターを追加して常に最新のファイルをフェッチ
+            fetch(file + '?t=' + new Date().getTime())
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
                     const processedText = text.replace(/([「『])([^」』\n]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');

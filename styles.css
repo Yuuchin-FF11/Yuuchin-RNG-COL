@@ -1841,5 +1841,93 @@ nav a:hover::after {
     transition: background-color 0.2s ease;
 }
 
+/* ==========================================================================
+   Interactive Details & Accordion Styles (FFXI Bismarck Style)
+   ========================================================================== */
+.markdown-body details {
+    margin: 1.5rem 0;
+    background: rgba(16, 32, 48, 0.15);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    overflow: hidden; /* 子要素の角丸はみ出しを防止 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.markdown-body details[open] {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 215, 0, 0.15); /* 開いた時は少し金色を意識した枠に */
+}
+
+.markdown-body details summary {
+    position: relative;
+    padding: 1rem 3.5rem 1rem 1.5rem; /* 右側に矢印スペースを確保 */
+    background: rgba(13, 71, 161, 0.25); /* 深い紺色の半透明 */
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    list-style: none; /* デフォルトの三角形を非表示 */
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid transparent;
+}
+
+/* Chrome/Safari用のデフォルトマーカー非表示設定 */
+.markdown-body details summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ホバー時の美しいマイクロインタラクション */
+.markdown-body details summary:hover {
+    background: rgba(13, 71, 161, 0.45);
+    color: var(--accent-color); /* 文字がゴールドに輝く */
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+    box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.05);
+}
+
+/* 右側に表示する美麗なカスタム回転矢印 */
+.markdown-body details summary::after {
+    content: '▼';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.markdown-body details summary:hover::after {
+    color: var(--accent-color);
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* アコーディオンが開いた状態でのsummaryスタイル */
+.markdown-body details[open] summary {
+    background: rgba(13, 71, 161, 0.55); /* 少し深めの色合いにしてヘッダーらしさを強調 */
+    color: var(--accent-color);
+    border-bottom: 2px solid rgba(255, 215, 0, 0.35); /* ゴールドのシャープな下線 */
+}
+
+/* 開いた際に矢印がクルッと回転 */
+.markdown-body details[open] summary::after {
+    transform: translateY(-50%) rotate(180deg);
+    color: var(--accent-color);
+}
+
+/* アコーディオン内部のテーブルに対する一体化スタイリング */
+.markdown-body details table {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: rgba(16, 32, 48, 0.1) !important;
+}
+
+/* 開閉時のスムーズな中身の表示 */
+.markdown-body details table th {
+    border-top: none; /* summaryの下線と被るのを防ぐ */
+}
+
 
 

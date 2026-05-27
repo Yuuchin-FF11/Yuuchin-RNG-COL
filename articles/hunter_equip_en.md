@@ -16,35 +16,42 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 
 | Slot | Equipment Name | Augment / Notes |
 | :--- | :--- | :--- |
-| **Main Weapon** |  |  |
-| **Sub Weapon** |  |  |
-| **Ranged Weapon** |  |  |
-| **Ammo** |  |  |
-| **Head** |  |  |
-| **Body** |  |  |
-| **Hands** |  |  |
-| **Legs** |  |  |
-| **Feet** |  |  |
-| **Neck** |  |  |
-| **Left Ear** |  |  |
-| **Right Ear** |  |  |
-| **Left Ring** |  |  |
-| **Right Ring** |  |  |
-| **Back** |  |  |
-| **Waist** |  |  |
+| **Main Weapon** | Perun +1 | Rank 15 |
+| **Sub Weapon** | Kustawi +1 | Rank 15 |
+| **Ranged Weapon** | [Yoichi's Bow (Rank 15)](https://wiki.ffo.jp/html/3079.html) or [Annihilator (Rank 15)](https://wiki.ffo.jp/html/3080.html) or [Gandiva (Rank 15)](https://wiki.ffo.jp/html/20383.html) or [Akinake +1 (Rank 15)](https://wiki.ffo.jp/html/35357.html) or [Fomalhaut (Rank 15)](https://wiki.ffo.jp/html/35356.html) or [Pinaka](https://wiki.ffo.jp/html/38966.html) or [Harp](https://wiki.ffo.jp/html/38967.html) | |
+| **Ammo** | Chrono Arrow | |
+| **Head** | AM Ggapit +3 | |
+| **Body** | AM Caban +3 | |
+| **Hands** | Ikenga's Gloves (Rank 30) | |
+| **Legs** | OR Braccae +4 | |
+| **Feet** | Adhemar Gamashes +1 | Type D, Rank 15 |
+| **Neck** | Scout's Gorget +2 (Rank 25) | |
+| **Left Ear** | Koko's Earring | |
+| **Right Ear** | Telos Earring | |
+| **Left Ring** | Koko's Ring | |
+| **Right Ring** | HV Ring +1 | |
+| **Back** | Belenus's Cape | AGI+20, Rng.Acc.+20, Rng.Atk.+20, "Snapshot"+10 |
+| **Waist** | Yemaya Belt | |
 
 <details>
 <summary>📊 Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
-| **Snapshot** |  |  |
-| **Rapid Shot** |  |  |
+| **Snapshot** | **+69%** (Equipment Frame) | Cap target is 70% (Perfectly capped including +10% from Merit Points) |
+| **Rapid Shot** | **+5%** | Yemaya Belt (+5%), etc. |
 
 </details>
 
 #### 💡 Equipment Points & Commentary
-* (Please describe your snapshot gear commentary or points here)
+* **Mechanism to Reach the Snapshot Cap (70% Cap)**:
+  * The maximum Snapshot cap for Ranger is **70%**.
+  * Rangers secure **+10%** from Merit Points, meaning the required amount in the equipment frame is **+60%**.
+  * In this configuration, the equipment frame achieves a total of **+69%** (Perun +1: +5, AM Ggapit +3: +15, OR Braccae +4: +16, Adhemar +1: +10, Scout's Gorget +2: +7, HV Ring +1: +6, Belenus's Cape: +10). This easily clears the required +60% within the equipment frame alone, completely capping the overall effect at the maximum 70%!
+* **Crucial Role of Body Gear (AM Caban +3)**:
+  * The body slot "AM Caban +3 (Amini Caban +3)" features the powerful "Velocity Shot effect boost" (Velocity frame). By utilizing other slots to cover Snapshot requirements, keeping this body gear fixed (no swap) is extremely effective.
+* **Regarding the Augments on Belenus's Cape**:
+  * While various properties like Ranged Accuracy or Ranged Attack can be augmented on the back cape, Snapshot gear is only worn for a split second during the "pre-cast" shooting preparation stance. Therefore, as long as the cape has "Snapshot +10," it is practically flawless even without any other stats (like Rng.Acc. or Rng.Atk.).
 
 ---
 

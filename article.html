@@ -182,7 +182,12 @@
                         "ホクスニピアス": "https://wiki.ffo.jp/html/39737.html",
                         "王将の指輪": "https://wiki.ffo.jp/html/36142.html",
                         "マレヴォレンス": "https://wiki.ffo.jp/html/34210.html",
-                        "クェリングボルト": "https://wiki.ffo.jp/html/37443.html"
+                        "クェリングボルト": "https://wiki.ffo.jp/html/37443.html",
+                        "アケロンシールド": "https://wiki.ffo.jp/html/7586.html",
+                        "プライズパウダー": "https://wiki.ffo.jp/html/24571.html",
+                        "エミネンス・レコード": "https://wiki.ffo.jp/html/29660.html",
+                        "ユニティ・コンコード": "https://wiki.ffo.jp/html/32030.html",
+                        "クリスタル": "https://wiki.ffo.jp/html/591.html"
                     };
                     const keywords = ['武器メイン', 'サブ', '遠隔武器', '矢弾', '頭', '胴', '両手', '両脚', '両足', '首', '左耳', '右耳', '左手の指', '右手の指', '左指', '右指', '背', '腰', '手', '脚', '足'];
 
@@ -335,6 +340,47 @@
                             }
                         }
                     });
+
+                    // プレミアム拡張：通常の文章内のキーワードを用語辞典へ自動リンク化
+                    const autoLinkTextNodes = (node) => {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            let text = node.nodeValue;
+                            const sortedKeys = Object.keys(linkMap).sort((a, b) => b.length - a.length);
+
+                            for (const keyword of sortedKeys) {
+                                const idx = text.indexOf(keyword);
+                                if (idx !== -1) {
+                                    const beforeText = text.substring(0, idx);
+                                    const matchedText = text.substring(idx, idx + keyword.length);
+                                    const afterText = text.substring(idx + keyword.length);
+
+                                    const beforeNode = document.createTextNode(beforeText);
+                                    const linkNode = document.createElement('a');
+                                    linkNode.href = linkMap[keyword];
+                                    linkNode.target = '_blank';
+                                    linkNode.className = 'auto-link';
+                                    linkNode.textContent = matchedText;
+                                    
+                                    const afterNode = document.createTextNode(afterText);
+
+                                    const parent = node.parentNode;
+                                    parent.insertBefore(beforeNode, node);
+                                    parent.insertBefore(linkNode, node);
+                                    parent.insertBefore(afterNode, node);
+                                    parent.removeChild(node);
+
+                                    autoLinkTextNodes(afterNode);
+                                    return;
+                                }
+                            }
+                        } else if (node.nodeType === Node.ELEMENT_NODE) {
+                            if (node.tagName !== 'A' && node.tagName !== 'PRE' && node.tagName !== 'CODE' && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                                const children = Array.from(node.childNodes);
+                                children.forEach(child => autoLinkTextNodes(child));
+                            }
+                        }
+                    };
+                    autoLinkTextNodes(tempDiv);
 
                     contentDiv.innerHTML = tempDiv.innerHTML;
 

@@ -169,7 +169,13 @@
                         "Hoxni Earring": "https://wiki.ffo.jp/html/39737.html",
                         "Regal Ring": "https://wiki.ffo.jp/html/36142.html",
                         "Malevolence": "https://wiki.ffo.jp/html/34210.html",
-                        "Quelling Bolt": "https://wiki.ffo.jp/html/37443.html"
+                        "Quelling Bolt": "https://wiki.ffo.jp/html/37443.html",
+                        "Acheron Shield": "https://wiki.ffo.jp/html/7586.html",
+                        "Prize Powder": "https://wiki.ffo.jp/html/24571.html",
+                        "Eminence Records": "https://wiki.ffo.jp/html/29660.html",
+                        "Unity Concord": "https://wiki.ffo.jp/html/32030.html",
+                        "Crystal": "https://wiki.ffo.jp/html/591.html",
+                        "Crystals": "https://wiki.ffo.jp/html/591.html"
                     };
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
@@ -309,6 +315,47 @@
                             }
                         }
                     });
+
+                    // プレミアム拡張：通常の文章内のキーワードを用語辞典へ自動リンク化
+                    const autoLinkTextNodes = (node) => {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            let text = node.nodeValue;
+                            const sortedKeys = Object.keys(linkMap).sort((a, b) => b.length - a.length);
+
+                            for (const keyword of sortedKeys) {
+                                const idx = text.indexOf(keyword);
+                                if (idx !== -1) {
+                                    const beforeText = text.substring(0, idx);
+                                    const matchedText = text.substring(idx, idx + keyword.length);
+                                    const afterText = text.substring(idx + keyword.length);
+
+                                    const beforeNode = document.createTextNode(beforeText);
+                                    const linkNode = document.createElement('a');
+                                    linkNode.href = linkMap[keyword];
+                                    linkNode.target = '_blank';
+                                    linkNode.className = 'auto-link';
+                                    linkNode.textContent = matchedText;
+                                    
+                                    const afterNode = document.createTextNode(afterText);
+
+                                    const parent = node.parentNode;
+                                    parent.insertBefore(beforeNode, node);
+                                    parent.insertBefore(linkNode, node);
+                                    parent.insertBefore(afterNode, node);
+                                    parent.removeChild(node);
+
+                                    autoLinkTextNodes(afterNode);
+                                    return;
+                                }
+                            }
+                        } else if (node.nodeType === Node.ELEMENT_NODE) {
+                            if (node.tagName !== 'A' && node.tagName !== 'PRE' && node.tagName !== 'CODE' && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                                const children = Array.from(node.childNodes);
+                                children.forEach(child => autoLinkTextNodes(child));
+                            }
+                        }
+                    };
+                    autoLinkTextNodes(tempDiv);
 
                     contentDiv.innerHTML = tempDiv.innerHTML;
 

@@ -1929,5 +1929,11 @@ nav a:hover::after {
     border-top: none; /* summaryの下線と被るのを防ぐ */
 }
 
+/* アコーディオン内部のセルの自動折り返し（横スクロール廃止） */
+.markdown-body details table td {
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+
 
 

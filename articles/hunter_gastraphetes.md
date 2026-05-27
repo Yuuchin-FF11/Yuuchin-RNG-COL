@@ -29,7 +29,7 @@
 * 背：ベレナスケープ（AGI+20、飛命+20、飛攻+20、スナップ+10）
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット</strong></td><td><strong>+63%</strong> (装備枠)</td><td>ガストラ本体(+10%)や防具・アクセ等の合計 ※必要枠+60%に対し+3%の微オーバー調整</td></tr><tr><td><strong>ラピッドショット</strong></td><td><strong>+5%</strong></td><td>イェマヤベルト(+5%) など</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット合計</strong></td><td><strong>+63%</strong> (装備枠)</td><td>ガストラ本体(+10%)や防具・アクセ等の合計 ※必要枠+60%に対し+3%の微オーバー調整</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>なし</strong></td><td>射撃準備の一瞬のみのため</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>射撃準備のため</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **ガストラ本体の「スナップショット+10」による強力なビルドサポート**:
@@ -60,7 +60,7 @@
 * 背：ベレナスケープ（AGI+20、飛命+30、飛攻+20、STP+10）
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP (STP)</strong></td><td><strong>+65</strong> (装備枠)</td><td>手(+9), 脚(+12), 足(+7), 首(+7), 左耳(+5), 右耳(+5), 左指(+6), 背(+10), 腰(+4)</td></tr><tr><td><strong>被ダメージカット</strong></td><td><strong>実質-29%〜-39%</strong></td><td>被ダメ合計-29%（頭-6, 胴-11, 脚-12） ＋ 被物理-10%（イケンガ手・足）</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+65</strong></td><td>手(+9), 脚(+12), 足(+7), 首(+7), 左耳(+5), 右耳(+5), 左指(+6), 背(+10), 腰(+4)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-29%〜-39%</strong></td><td>被ダメ合計-29%（頭-6, 胴-11, 脚-12） ＋ 被物理-10%（イケンガ手・足）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **通常STP装備の装備枠ストアTP内訳（100%正確な客観的事実）**:
@@ -101,7 +101,7 @@
 * 背：ベレナスケープ（AGI+30、魔命+20、魔法ダメージ+20、WSD+10%）
 * 腰：オルペウスサッシュ or 光輪の帯
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)</strong></td><td><strong>合計+73%</strong></td><td>ニャメ5部位(+58%), 左指(+5%), 背(+10%)</td></tr><tr><td><strong>魔法攻撃力 (魔攻)</strong></td><td><strong>合計+180</strong> (防具+アクセ枠)</td><td>ニャメ5部位(+150), 首(+10), 右耳(+10), 右指(+10) の加算値 ※さらにマレヴォ2本で+110、ガストラで+40加算</td></tr><tr><td><strong>属性ダメージ乗算アップ</strong></td><td><strong>状況に応じて使い分け</strong></td><td>オルペウスサッシュ（距離による乗算最大+15%）または光輪の帯（天候・曜日効果）</td></tr><tr><td><strong>被ダメージカット</strong></td><td><strong>-37%</strong></td><td>ニャメ装束5部位の合計値（非常に頑丈で安全）</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+250</strong></td><td>胡蝶 of イヤリング（オーグメント性能）</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+73%</strong></td><td>ニャメ5部位(+58%), 左指(+5%), 背(+10%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-37%</strong></td><td>ニャメ装束5部位の合計値（非常に頑丈で安全）</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr><tr><td><strong>魔法攻撃力 (魔攻)合計</strong></td><td><strong>+180</strong> (防具+アクセ枠)</td><td>ニャメ5部位(+150), 首(+10), 右耳(+10), 右指(+10) の加算値 ※さらにマレヴォ2本で+110、ガストラで+40加算（魔法WS of 威力直結）</td></tr></tbody></table></details>
 
 #### 💡 装備のポイント・解説
 * **WSDと魔攻の完璧なバランス（ニャメ一式の採用理由）**:

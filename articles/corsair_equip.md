@@ -27,7 +27,7 @@
 * 腰：キャリアーサッシュ
 
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ロール効果時間</strong></td><td><strong>+190秒</strong></td><td>ロスタムC(+60), 手(+60), 頭(+50), 首(+20)</td></tr><tr><td><strong>ロール範囲</strong></td><td><strong>+8</strong></td><td>ロスタムCの性能（広範囲をカバー）</td></tr><tr><td><strong>飛命・魔命</strong></td><td><strong>+60以上</strong></td><td><strong>フォーマルハウトRank15</strong>による強力な命中補正</td></tr><tr><td><strong>被ダメージ合計</strong></td><td><strong>実質-50%</strong></td><td>ロール使用中も上限カットを維持</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ロール効果時間合計</strong></td><td><strong>+190秒</strong></td><td>ロスタムC(+60), 手(+60), 頭(+50), 首(+20)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>ロール使用中も上限カットを維持</td></tr><tr><td><strong>ストアTP/WSD合計</strong></td><td><strong>なし</strong></td><td>ロール用の目的外のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **サブ・遠隔武器を固定する理由（ソーティ対応とコンペンセーターの扱い）**
@@ -71,7 +71,7 @@
 * 背：カムラスマント（スナップショット＋１０）
 * 腰：インパルスベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット</strong></td><td><strong>+70</strong></td><td>装備枠のみで上限キャップ(+70)到達</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット合計</strong></td><td><strong>+70%</strong></td><td>装備枠のみで上限キャップ到達</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>なし</strong></td><td>射撃準備の一瞬のみのため</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>射撃準備のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 
@@ -101,7 +101,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、飛命＋２０、飛攻＋２０、ＳＴＰ＋１０）
 * 腰：フォシャベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP</strong></td><td><strong>+70以上</strong></td><td>他のステータスを度外視し、とにかく1射の得TPを増やすことだけに特化したSTP特化構成</td></tr><tr><td><strong>AGI / 飛命</strong></td><td><strong>（参考値）</strong></td><td>STP装備を揃える過程で、副次的に確保されるブーストステータス</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+70以上</strong></td><td>イシュクターバン、イケンガ胴足、マリグナス手脚等の合算</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>被ダメ合計-35%（マリグナス手脚-18%, イケンガ胴足-17%）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **ストアTP（STP）極振りの構成思想**
@@ -134,7 +134,7 @@
 * 背：カムラスマント（ＳＴＰ＋１０が付いていれば他のオグメはなんでも）
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP</strong></td><td><strong>変動</strong></td><td>とにかく他のステータスを度外視し、STPのみを極限まで盛るための組み合わせ</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+80以上</strong></td><td>マリグナス頭胴手足-50%, CS脚-12%, アクセサリー類等の合算</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-41%</strong></td><td>被ダメ合計-41%（マリグナス頭胴手足-31% ＋ 守り/昏黄指-10%）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>クイックドロー（TP蓄積用）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 
@@ -226,7 +226,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、飛命＋２０、飛攻＋２０、ウェポンスキルダメージ＋１０％）
 * 腰：カフカチナベルト＋１
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>AGI（ブースト分）</strong></td><td><strong>+300以上</strong></td><td>ニャメRank30一式 ＋ マント(+30)</td></tr><tr><td><strong>WSD</strong></td><td><strong>+62%</strong></td><td>ニャメ4部位(+47%) ＋ マント(+10%) ＋ 指(+5%)</td></tr><tr><td><strong>飛命</strong></td><td><strong>+500以上</strong></td><td>装備の命中プロパティの合算</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+62%</strong></td><td>ニャメ4部位(+47%) ＋ マント(+10%) ＋ 左指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>ニャメ頭胴脚足-31% ＋ マント-4%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **飛命とウェポンスキルダメージのバランス調整**
@@ -254,7 +254,7 @@
 * 背：無の外装
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>飛命</strong></td><td><strong>+600以上</strong></td><td>ＣＳ＋３一式の圧倒的な命中プロパティ</td></tr><tr><td><strong>ストアTP</strong></td><td><strong>+40以上</strong></td><td>2射目の極光を出すためのTP確保を優先</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+40以上</strong></td><td>2射目の極光を出すためのTP確保を最優先</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>マリグナス胴手足-23% ＋ CS脚-12%</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>WSDを完全に捨てて当てるための特化構成</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **WSDを捨ててでも「当てること」と「TP確保」を最優先**
@@ -287,7 +287,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、魔命＋２０、魔法ダメージ＋２０、ウェポンスキルダメージ＋１０％）
 * 腰：オルペウスサッシュ or 闇輪の帯
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>魔攻</strong></td><td><strong>+330以上</strong></td><td>LA胴・足(+104), ニャメ手・脚Rank30(+140)等</td></tr><tr><td><strong>WSD</strong></td><td><strong>+45%</strong></td><td>ニャメ手・脚(+23%), マント(+10%), 首(+7%), 耳(+5%)</td></tr><tr><td><strong>闇属性ダメージ</strong></td><td><strong>+33%</strong></td><td>妖蟲の髪飾り+1(+28%), アルコンリング(+5%)</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+1250</strong></td><td>フォーマルハウト(+1000) ＋ 胡蝶 of イヤリング(+250)</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+45%</strong></td><td>ニャメ手・脚(+23%), マント(+10%), 首(+7%), 耳(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-20%</strong></td><td>ニャメ手・脚-15% ＋ マント-5%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr><tr><td><strong>闇属性ダメージ合計</strong></td><td><strong>+33%</strong></td><td>妖蟲の髪飾り+1(+28%), アルコンリング(+5%) (闇属性WSの極限威力直結)</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説（<span class="ws-highlight">レデンサリュート</span>）
 * **必須となる「闇属性魔攻」装備について**
@@ -363,7 +363,7 @@
 * 背：カムラスマント（ＤＥＸ＋２０、命中＋３０、攻＋２０、ダブルアタック＋１０％、被物理ダメージ－１０％）
 * 腰：セールフィベルト＋１（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>命中</strong></td><td><strong>+560以上</strong></td><td>装備プロパティ(+413) ＋ DEX補正(約+150)</td></tr><tr><td><strong>ストアTP</strong></td><td><strong>+71</strong></td><td>ロスタムA(+25)、CS脚(+12)、クレパス短剣(+10)等</td></tr><tr><td><strong>二刀流</strong></td><td><strong>+11</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>被ダメージ合計</strong></td><td><strong>実質-50% (上限)</strong></td><td>被ダメ-48% (頭-10,指-10,足-4,脚-12,武器-6x2) ＋ 被物理-10% (背-10)</td></tr><tr><td><strong>ヘイスト</strong></td><td><strong>+26%</strong></td><td>装備枠の上限キャップ到達</td></tr><tr><td><strong>マルチアタック</strong></td><td><strong>DA+22% / TA+8%</strong></td><td>マントDA+10%、アデマTA+8%等</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+71</strong></td><td>ロスタムA(+25)、CS脚(+12)、クレパス短剣(+10)等</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>被ダメ-48% ＋ 被物理-10% (上限キャップ到達)</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **マルチアタックと二刀流の調整**
@@ -396,7 +396,7 @@
 * 背：カムラスマント（ＤＥＸ＋２０、命中＋３０、攻＋２０、ダブルアタック＋１０％、被物理ダメージ－１０％）
 * 腰：セールフィベルト＋１（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>命中</strong></td><td><strong>+580以上</strong></td><td>装備プロパティ(+428) ＋ DEX補正(約+150)</td></tr><tr><td><strong>ストアTP</strong></td><td><strong>+27</strong></td><td>CS脚(+12)、耳(+5)、指(+4,+6)の合計</td></tr><tr><td><strong>二刀流</strong></td><td><strong>+11</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>被ダメージ合計</strong></td><td><strong>物理-50%(上限) / 魔法-44%</strong></td><td>被ダメ-44% (頭-10,首-5,指-10,足-7,脚-12) ＋ 被物理-10% (背-10)</td></tr><tr><td><strong>ヘイスト</strong></td><td><strong>+26%</strong></td><td>装備枠の上限キャップ到達</td></tr><tr><td><strong>マルチアタック</strong></td><td><strong>DA+21% / TA+16%</strong></td><td>グレティナイフ(TA+6)や各防具オグメ込</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+27</strong></td><td>CS脚(+12)、耳(+5)、指(+4,+6)の合計</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>物理-50%(上限) / 魔法-44%</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **サベッジブレードを主軸とした構成**
@@ -423,7 +423,7 @@
 * 背：カムラスマント（ＳＴＲ＋３０、命中＋２０、攻＋２０、ＷＳＤ＋１０％、被ダメージ－５％）
 * 腰：セールフィベルト＋１（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>STR（ブースト分）</strong></td><td><strong>+341</strong></td><td>ニャメ一式 タイプB Rank30(+244)、マント(+30)、武器(+20)等</td></tr><tr><td><strong>WSD</strong></td><td><strong>+73%</strong></td><td>ニャメ一式(+58%)、マント(+10%)、指(+5%)</td></tr><tr><td><strong>命中 / 攻撃</strong></td><td><strong>+500以上</strong></td><td>全部位の命中・攻撃プロパティの合算</td></tr><tr><td><strong>TPボーナス</strong></td><td><strong>+1250</strong></td><td>遠隔武器(+1000) ＋ 胡蝶 of イヤリング(+250)</td></tr><tr><td><strong>被ダメージ合計</strong></td><td><strong>実質-50% (上限)</strong></td><td>ニャメ一式（-38%）＋ 指(-10%) ＋ マント(-5%) ※上限超過で非常に堅牢</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+73%</strong></td><td>ニャメ一式(+58%)、マント(+10%)、指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>ニャメ一式（-38%）＋ 指(-10%) ＋ マント(-5%) ※上限超過で非常に堅牢</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **STRブーストによるダメージの安定化**
@@ -453,7 +453,7 @@
 * 背：無の外装
 * 腰：無の腰当
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>命中</strong></td><td><strong>極限</strong></td><td>確実に連携を繋げるための命中ブースト</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>連携命中のための特化構成（WSD/STP度外視）</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>接近戦での安全性を最優先した堅牢な命中特化装備</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>確実に命中させ連携を繋げるための特化構成</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **連携の維持を最優先とした構成思想**
@@ -481,7 +481,7 @@
 * 背：カムラスマント（ＤＥＸ＋２０、命中＋３０、攻＋２０、ＳＴＰ＋１０、被物理ダメージ－１０％）
 * 腰：霊亀腰帯
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>命中</strong></td><td><strong>+540以上</strong></td><td>装備プロパティ(+380) ＋ DEX補正(約+160)</td></tr><tr><td><strong>ストアTP</strong></td><td><strong>+75</strong></td><td>マリグナス一式(+50)、マント(+10)等の合計</td></tr><tr><td><strong>二刀流</strong></td><td><strong>+11</strong></td><td>耳(+4)、腰(+7) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>被ダメージ合計</strong></td><td><strong>物理-50%(上限) / 魔法-41%</strong></td><td>被ダメ-41% (マリグナス-31,指-10) ＋ 被物理-10% (背-10)</td></tr><tr><td><strong>魔回避</strong></td><td><strong>+602</strong></td><td>マリグナス一式を主軸とした圧倒的な耐性</td></tr><tr><td><strong>ヘイスト</strong></td><td><strong>+26%</strong></td><td>装備枠の上限キャップ到達</td></tr></tbody></table></details>
+<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+75</strong></td><td>マリグナス一式(+50)、マント(+10)等の合計</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>物理-50%(上限) / 魔法-41%</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>耳(+4)、腰(+7) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **生存力とTP回転率の両立**

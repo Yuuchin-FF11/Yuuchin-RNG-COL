@@ -29,7 +29,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Back: Belenus's Cape (AGI+20, Rng.Acc.+20, Rng.Atk.+20, "Snapshot"+10)
 * Waist: Yemaya Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot</strong></td><td><strong>+63%</strong> (Equipment Frame)</td><td>Total including native Gastraphetes (+10%), armor, and accessories. (Slight +3% overflow)</td></tr><tr><td><strong>Rapid Shot</strong></td><td><strong>+5%</strong></td><td>Yemaya Belt (+5%), etc.</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot Total</strong></td><td><strong>+63%</strong> (Equipment Frame)</td><td>Total including native Gastraphetes (+10%), armor, and accessories (Slight +3% overflow)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>None</strong></td><td>Only equipped for a split second during pre-cast</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Only for shooting preparation stance</td></tr></tbody></table></details>
 
 #### 💡 Equipment Points & Commentary
 * **Strong Build Support via Gastraphetes' Native "Snapshot +10"**:
@@ -60,7 +60,7 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
 * Back: Belenus's Cape (AGI+20, Rng.Acc.+30, Rng.Atk.+20, "Store TP"+10)
 * Waist: Yemaya Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP (STP)</strong></td><td><strong>+65</strong> (Equipment Frame)</td><td>Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4)</td></tr><tr><td><strong>Damage Taken Cut</strong></td><td><strong>Effective -29% to -39%</strong></td><td>DT-29% (Head-6%, Body-11%, Legs-12%) + PDT-10% (Ikenga Hands/Feet)</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+65</strong></td><td>Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -29% to -39%</strong></td><td>DT-29% (Head-6%, Body-11%, Legs-12%) + PDT-10% (Ikenga Hands/Feet)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard ranged combat (TP accumulation only)</td></tr></tbody></table></details>
 
 #### 💡 Equipment Points & Commentary
 * **Standard STP Equipment Frame Breakdown (100% Accurate Objective Facts)**:
@@ -101,11 +101,7 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 * Back: Belenus's Cape (AGI+30, Mag.Acc.+20, Mag.Dmg.+20, WSD+10%)
 * Waist: Orpheus's Sash or Korin Obi
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +73%</strong></td><td>Nyame 5-pieces (+58%), Left Ring (+5%), Back (+10%)</td></tr>
-<tr><td><strong>Magic Attack (M.Atk)</strong></td><td><strong>Total +180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes.</td></tr>
-<tr><td><strong>Elemental Damage Multiplier</strong></td><td><strong>Swappable</strong></td><td>Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses).</td></tr>
-<tr><td><strong>Damage Taken Cut</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr>
-<tr><td><strong>TP Bonus</strong></td><td><strong>+250</strong></td><td>Moonshade Earring (Augment property)</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+73%</strong></td><td>Nyame 5-pieces (+58%), Left Ring (+5%), Back (+10%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr><tr><td><strong>Magic Attack (M.Atk) Total</strong></td><td><strong>+180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes (directly boosts magic WS).</td></tr></tbody></table></details>
 
 #### 💡 Equipment Points & Commentary
 * **The Perfect Balance of WSD and Magic Attack (Why Choose Nyame)**:

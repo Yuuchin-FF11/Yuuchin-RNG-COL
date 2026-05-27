@@ -88,11 +88,11 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 * Sub Weapon: Malevolence (Max Augments)
 * Ranged Weapon: [Gastraphetes (Rank 15)](https://wiki.ffo.jp/html/15187.html)
 * Ammo: [Quelling Bolt](https://wiki.ffo.jp/html/37443.html)
-* Head: Nyame Helm (Rank 30)
-* Body: Nyame Mail (Rank 30)
-* Hands: Nyame Gauntlets (Rank 30)
-* Legs: Nyame Flanchard (Rank 30)
-* Feet: Nyame Sollerets (Rank 30)
+* Head: Nyame Helm (Path B Rank 30)
+* Body: Nyame Mail (Path B Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30)
+* Legs: Nyame Flanchard (Path B Rank 30)
+* Feet: Nyame Sollerets (Path B Rank 30)
 * Neck: Sybil Scarf
 * Left Ear: Moonshade Earring (TP Bonus +250)
 * Right Ear: Friomisi Earring
@@ -101,12 +101,12 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 * Back: Belenus's Cape (AGI+30, Mag.Acc.+20, Mag.Dmg.+20, WSD+10%)
 * Waist: Orpheus's Sash or Korin Obi
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +65%</strong></td><td>Nyame 5-pieces (+50%), Left Ring (+5%), Back (+10%)</td></tr><tr><td><strong>Magic Attack (M.Atk)</strong></td><td><strong>Total +180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes.</td></tr><tr><td><strong>Elemental Damage Multiplier</strong></td><td><strong>Swappable</strong></td><td>Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses).</td></tr><tr><td><strong>Damage Taken Cut</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+250</strong></td><td>Moonshade Earring (Augment property)</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +75%</strong></td><td>Nyame 5-pieces (+60%), Left Ring (+5%), Back (+10%)</td></tr><tr><td><strong>Magic Attack (M.Atk)</strong></td><td><strong>Total +180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes.</td></tr><tr><td><strong>Elemental Damage Multiplier</strong></td><td><strong>Swappable</strong></td><td>Orpheus's Sash (Up to +15% based on distance) or Korin Obi (Weather/Day bonuses).</td></tr><tr><td><strong>Damage Taken Cut</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+250</strong></td><td>Moonshade Earring (Augment property)</td></tr></tbody></table></details>
 
 #### 💡 Equipment Points & Commentary
 * **The Perfect Balance of WSD and Magic Attack (Why Choose Nyame)**:
   * Just like Corsair's Leaden Salute, the key to maximizing damage is the perfect balance between **Weapon Skill Damage (WSD)** and **Magic Attack (M.Atk)**.
-  * While other Ranger gear offers higher WSD values (such as certain WSD+12% pieces), they lack Magic Attack. Therefore, the **Nyame Armor set (Rank 30)**, which provides exceptionally high amounts of both WSD and Magic Attack simultaneously, is the absolute best choice for this light-elemental Weapon Skill.
+  * While other Ranger gear offers higher WSD values (such as certain WSD+12% pieces), they lack Magic Attack. Therefore, the **Nyame Armor set (Path B Rank 30)**, which provides exceptionally high amounts of both WSD and Magic Attack simultaneously, is the absolute best choice for this light-elemental Weapon Skill.
 * **The Immense Power of Dual-Wielded Malevolence (Max Augments) & Acquisition Tips**:
   * Dual-wielding **Malevolence** with Max Augments provides an incredible boost to your magic Weapon Skills, drastically magnifying Trueflight's damage output.
   * Acquiring the maximum augments on Malevolence is an extremely challenging journey that requires relentless effort, but the devastating damage output is well worth the struggle! Never give up and keep pushing!

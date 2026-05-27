@@ -87,8 +87,8 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
 * Ranged Weapon: [与一の弓 (Rank 15)](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター (Rank 15)](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ (Rank 15)](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート (Rank 15)](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト (Rank 15)](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
 * Ammo: Chrono Arrow
 * Head: OR Beret +4 (Orion Beret +4)
-* Body: Nyame Mail (Rank 30)
-* Hands: Nyame Gauntlets (Rank 30)
+* Body: Nyame Mail (Path B Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30)
 * Legs: AR Braccae +4 (Arcadian Braccae +4)
 * Feet: AM Bottillon +3 (Amini Bottillon +3)
 * Neck: Scout's Gorget +2 (Rank 25)
@@ -112,8 +112,8 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
     Since the left ring "Epaminondas's Ring" is a pure "WSD boost" that lacks Ranged Accuracy and even reduces AGI by 10, the right ring slot is equipped with the "Ifrimad Ring" to heavily compensate by pumping up core stats and Ranged Accuracy on the right side.
 * **Ranger's Advantage and Uncompromising Focus on Physical WS Stability**:
   Although Rangers naturally possess higher default Ranged Accuracy compared to Corsairs, missing a physical WS is still too costly to ignore. This hybrid golden ratio ensures that you never suffer the painful sting of a missed Last Stand.
-* **Solid Foundation with "Amini Bottillon +3" and "Nyame (Rank 30)"**:
-  While maximizing your Last Stand output with "Amini Bottillon +3" (Last Stand Damage +15%), adopting top-tier "Nyame Mail (Rank 30)" and "Nyame Gauntlets (Rank 30)" establishes a formidable foundation that delivers top-class Ranged Accuracy, WSD, and Damage Taken Cut.
+* **Solid Foundation with "Amini Bottillon +3" and "Nyame (Path B Rank 30)"**:
+  While maximizing your Last Stand output with "Amini Bottillon +3" (Last Stand Damage +15%), adopting top-tier "Nyame Mail (Path B Rank 30)" and "Nyame Gauntlets (Path B Rank 30)" establishes a formidable foundation that delivers top-class Ranged Accuracy, WSD, and Damage Taken Cut.
 
 ---
 
@@ -124,11 +124,11 @@ Optimized set to maximize magic damage from "Trueflight" (Light elemental magic 
 * Sub Weapon: Kustawi +1 (Rank 15)
 * Ranged Weapon: [与一の弓 (Rank 15)](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター (Rank 15)](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ (Rank 15)](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート (Rank 15)](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト (Rank 15)](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
 * Ammo: Devastating Bullet
-* Head: Nyame Helm (Rank 30)
-* Body: Nyame Mail (Rank 30)
-* Hands: Nyame Gauntlets (Rank 30)
-* Legs: Nyame Flanchard (Rank 30)
-* Feet: Nyame Sollerets (Rank 30)
+* Head: Nyame Helm (Path B Rank 30)
+* Body: Nyame Mail (Path B Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30)
+* Legs: Nyame Flanchard (Path B Rank 30)
+* Feet: Nyame Sollerets (Path B Rank 30)
 * Neck: Sibyl Scarf
 * Left Ear: Moonshade Earring (TP Bonus +250)
 * Right Ear: Friomisi Earring
@@ -137,13 +137,13 @@ Optimized set to maximize magic damage from "Trueflight" (Light elemental magic 
 * Back: Belenus's Cape (AGI+30, Magic Accuracy+20, Magic Damage+20, WSD+10%)
 * Waist: Orpheus's Sash
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Magic Attack (M.Atk)</strong></td><td><strong>Total +340 or higher</strong></td><td>Nyame 5-pieces (+310), Sibyl Scarf (+10), Friomisi Earring (+10), Dingir Ring (+10), etc.</td></tr><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +65%</strong></td><td>Nyame 5-pieces (+50%), Epaminondas's Ring (+5%), Belenus's Cape (+10%)</td></tr><tr><td><strong>Elemental Damage Multiplier</strong></td><td><strong>Up to +15%</strong></td><td>Orpheus's Sash (damage scaling based on distance to target)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+250</strong></td><td>Moonshade Earring (Augmented property)</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Magic Attack (M.Atk)</strong></td><td><strong>Total +340 or higher</strong></td><td>Nyame 5-pieces (+310), Sibyl Scarf (+10), Friomisi Earring (+10), Dingir Ring (+10), etc.</td></tr><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +75%</strong></td><td>Nyame 5-pieces (+60%), Epaminondas's Ring (+5%), Belenus's Cape (+10%)</td></tr><tr><td><strong>Elemental Damage Multiplier</strong></td><td><strong>Up to +15%</strong></td><td>Orpheus's Sash (damage scaling based on distance to target)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+250</strong></td><td>Moonshade Earring (Augmented property)</td></tr></tbody></table></details>
 
 #### 💡 Equipment Points & Commentary
 * **The True Role of This Set: The Ultimate "Wildfire (WF) Specialized" Configuration**:
   In high-end play, this equipment set functions as a dedicated **"Wildfire (WF) specialized"** configuration. Launching Trueflight requires shifting to the Mythic weapon "GastraFates" as your ranged weapon, along with completely different dedicated weapons. Thus, this set is optimized to push gun-fired Wildfire to its absolute limit.
 * **Capitalizing on "Never-Miss" Magic WS: Maximizing Magic Attack & WSD to the Limit**:
-  Unlike physical Weapon Skills, elemental magic WS like Wildfire and Trueflight are "never-miss" attacks (subject only to magic resistance). Since physical Ranged Accuracy is entirely irrelevant, we completely omit accuracy considerations. By equipping "Nyame Armor (Rank 30)" across all 5 slots to secure "+310 Magic Attack" and "+50% WSD," this set focuses solely on **stacking Magic Attack and WSD as high as humanly possible** for sheer, overwhelming damage.
+  Unlike physical Weapon Skills, elemental magic WS like Wildfire and Trueflight are "never-miss" attacks (subject only to magic resistance). Since physical Ranged Accuracy is entirely irrelevant, we completely omit accuracy considerations. By equipping "Nyame Armor (Path B Rank 30)" across all 5 slots to secure "+310 Magic Attack" and "+60% WSD," this set focuses solely on **stacking Magic Attack and WSD as high as humanly possible** for sheer, overwhelming damage.
 * **Strategic Ammo Choice: Practical "Devastating Bullet" from Armageddon**:
   While Magic Attack-boosting ammunition exists for Rangers, they are often consumable "one-time bullets," making them highly impractical for continuous combat. To solve this, this set adopts **"Devastating Bullet"**—which can be extracted infinitely from the Relic weapon "Armageddon." This practical and realistic choice heavily boosts Magic Accuracy and Magic Damage while keeping your inventory sustainable.
 * **Ultimate Boost with Orpheus's Sash & Moonshade Earring**:
@@ -198,11 +198,11 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 | **Sub Weapon** | [Gleti's Knife](https://wiki.ffo.jp/html/38205.html) | |
 | **Ranged Weapon** | [Atchipyter](https://wiki.ffo.jp/html/25808.html) | TP Bonus +1000 |
 | **Ammo** | [Hauksbok Arrow](https://wiki.ffo.jp/html/37837.html) | |
-| **Head** | [Nyame Helm](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
-| **Body** | [Nyame Mail](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
-| **Hands** | [Nyame Gauntlets](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
-| **Legs** | [Nyame Flanchard](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
-| **Feet** | [Nyame Sollerets](https://wiki.ffo.jp/html/38283.html) | Rank 30 |
+| **Head** | [Nyame Helm](https://wiki.ffo.jp/html/38283.html) | Path B Rank 30 |
+| **Body** | [Nyame Mail](https://wiki.ffo.jp/html/38283.html) | Path B Rank 30 |
+| **Hands** | [Nyame Gauntlets](https://wiki.ffo.jp/html/38283.html) | Path B Rank 30 |
+| **Legs** | [Nyame Flanchard](https://wiki.ffo.jp/html/38283.html) | Path B Rank 30 |
+| **Feet** | [Nyame Sollerets](https://wiki.ffo.jp/html/38283.html) | Path B Rank 30 |
 | **Neck** | [Republican Platinum Medal](https://wiki.ffo.jp/html/38491.html) | |
 | **Left Ear** | [Moonshade Earring](https://wiki.ffo.jp/html/22306.html) | |
 | **Right Ear** | [Hoxni Earring](https://wiki.ffo.jp/html/39737.html) | |
@@ -211,13 +211,13 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 | **Back** | [Belenus's Cape](https://wiki.ffo.jp/html/35511.html) | STR+30, Accuracy+20, Attack+20, WSD+10% |
 | **Waist** | [Sailfi Belt +1](https://wiki.ffo.jp/html/32262.html) | Rank 15 |
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +80%</strong></td><td>Hauksbok Arrow (+20%), Nyame 5-pieces (+50%), Belenus's Cape (+10%)</td></tr><tr><td><strong>STR / MND Boost</strong></td><td><strong>Extremely Strong</strong></td><td>Maximum attribute tier secured via full Nyame set (Rank 30)</td></tr><tr><td><strong>Damage Taken Cut</strong></td><td><strong>-43%</strong></td><td>Nyame set (-38%), Regal Ring (-5%) for high defense and security</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD)</strong></td><td><strong>Total +90%</strong></td><td>Hauksbok Arrow (+20%), Nyame 5-pieces (+60%), Belenus's Cape (+10%)</td></tr><tr><td><strong>STR / MND Boost</strong></td><td><strong>Extremely Strong</strong></td><td>Maximum attribute tier secured via full Nyame set (Path B Rank 30)</td></tr><tr><td><strong>Damage Taken Cut</strong></td><td><strong>-43%</strong></td><td>Nyame set (-38%), Regal Ring (-5%) for high defense and security</td></tr></tbody></table></details>
 
 #### 💡 Equipment Points & Commentary
 * **Rivaling Frontline Attacker Jobs: The Mind-Blowing Power of Ranger's Savage Blade**:
   Savage Blade performed by a Ranger in close-quarters combat is incredibly powerful, capable of **rivaling or even outdamaging dedicated frontline melee jobs**. This set maximizes the Ranger's hidden melee potential, perfectly combining dream-like burst damage with practical reliability.
 * **Flawless Balance Between STR Boost & WSD**:
-  To skyrocket the damage of Savage Blade, this set places the **utmost importance on the balance between WSD (Weapon Skill Damage +) and STR/MND attributes**. By encasing all 5 slots in "Nyame Armor (Rank 30)" and equipping a back cape with "STR+30 / WSD+10%," this configuration delivers stable, colossal strikes.
+  To skyrocket the damage of Savage Blade, this set places the **utmost importance on the balance between WSD (Weapon Skill Damage +) and STR/MND attributes**. By encasing all 5 slots in "Nyame Armor (Path B Rank 30)" and equipping a back cape with "STR+30 / WSD+10%," this configuration delivers stable, colossal strikes.
 * **The Star of This Build: The Marvelous "Hauksbok Arrow" with WSD +20%**:
   The ultimate secret weapon and the absolute star of this set is the ammo slot's **"Hauksbok Arrow."** This single arrow holds a massive **"WSD+20%"** property! Because it can be easily exchanged by anyone via Domain Points (Domain Invasion), **it is an absolute "must-have, non-negotiable lifeline" item for any Ranger attempting to execute Savage Blade**.
 * **【CRITICAL MELEE WARNING】Absolutely Avoid Accidental Ranged WS Shooting!**:

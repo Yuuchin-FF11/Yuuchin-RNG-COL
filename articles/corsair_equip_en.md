@@ -17,7 +17,7 @@ Dedicated equipment to boost the party's firepower. Includes gear that extends d
 * Body: Chasseur's Frac +3
 * Hands: Chasseur's Gantry +3
 * Legs: Chasseur's Culottes +3
-* Feet: Nyame Sollerets (Rank 30)
+* Feet: Nyame Sollerets (Path B Rank 30)
 * Neck: Regal Necklace
 * Left Ear: Onowai Earring +1
 * Right Ear: Chasseur's Earring +2
@@ -205,11 +205,11 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Sub: Kustawi +1
 * Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Chrono Bullet
-* Head: Nyame Helm (Rank 30)
-* Body: Nyame Mail (Rank 30)
+* Head: Nyame Helm (Path B Rank 30)
+* Body: Nyame Mail (Path B Rank 30)
 * Hands: Chasseur's Gantry +3
-* Legs: Nyame Flanchard (Rank 30)
-* Feet: Nyame Sollerets (Rank 30)
+* Legs: Nyame Flanchard (Path B Rank 30)
+* Feet: Nyame Sollerets (Path B Rank 30)
 * Neck: Iskur Gorget
 * Left Ear: Beyla Earring
 * Right Ear: Telos Earring
@@ -218,7 +218,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, WSD+10%)
 * Waist: Fotia Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>AGI (Boosted)</strong></td><td><strong>+300+</strong></td><td>Nyame Rank 30 Set + Mantle (+30)</td></tr><tr><td><strong>WSD</strong></td><td><strong>+56%</strong></td><td>4 Nyame parts (~+41%) + Mantle (+10%) + Ring (+5%)</td></tr><tr><td><strong>R.Acc</strong></td><td><strong>+500+</strong></td><td>Sum of accuracy properties from all gear</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>AGI (Boosted)</strong></td><td><strong>+300+</strong></td><td>Nyame Rank 30 Set + Mantle (+30)</td></tr><tr><td><strong>WSD</strong></td><td><strong>+63%</strong></td><td>4 Nyame parts (+48%) + Mantle (+10%) + Ring (+5%)</td></tr><tr><td><strong>R.Acc</strong></td><td><strong>+500+</strong></td><td>Sum of accuracy properties from all gear</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Balancing R.Acc and Weapon Skill Damage**
@@ -267,8 +267,8 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Ammo: Live Bullet
 * Head: Pixie Hairpin +1
 * Body: Lanun Frac +4
-* Hands: Nyame Gauntlets (Rank 30)
-* Legs: Nyame Flanchard (Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30)
+* Legs: Nyame Flanchard (Path B Rank 30)
 * Feet: Lanun Boots +4
 * Neck: Commodore Charm +2
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
@@ -278,7 +278,7 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Back: Camulus's Mantle (AGI+30, M.Acc+20, Magic Damage+20, WSD+10%)
 * Waist: Orpheus's Sash or Darkness Obi
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>M.Atk</strong></td><td><strong>+330+</strong></td><td>Lanun Body/Feet (+104), Nyame Hands/Legs Rank 30 (+140), etc.</td></tr><tr><td><strong>WSD</strong></td><td><strong>+42%</strong></td><td>Nyame Hands/Legs (+20%), Mantle (+10%), Neck (+7%), Ear (+5%)</td></tr><tr><td><strong>Dark Damage</strong></td><td><strong>+33%</strong></td><td>Pixie Hairpin +1 (+28%), Archon Ring (+5%)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+1250</strong></td><td>Fomalhaut (+1000) + Moonshade Earring (+250)</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>M.Atk</strong></td><td><strong>+330+</strong></td><td>Lanun Body/Feet (+104), Nyame Hands/Legs Rank 30 (+140), etc.</td></tr><tr><td><strong>WSD</strong></td><td><strong>+46%</strong></td><td>Nyame Hands/Legs (+24%), Mantle (+10%), Neck (+7%), Ear (+5%)</td></tr><tr><td><strong>Dark Damage</strong></td><td><strong>+33%</strong></td><td>Pixie Hairpin +1 (+28%), Archon Ring (+5%)</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+1250</strong></td><td>Fomalhaut (+1000) + Moonshade Earring (+250)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary (<span class="ws-highlight">Leaden Salute</span>)
 * **Essential "Dark Magic Attack" Gear**
@@ -289,10 +289,10 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Sub: Kustawi +1
 * Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Live Bullet
-* Head: Nyame Helm (Rank 30)
+* Head: Nyame Helm (Path B Rank 30)
 * Body: Lanun Frac +4
-* Hands: Nyame Gauntlets (Rank 30)
-* Legs: Nyame Flanchard (Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30)
+* Legs: Nyame Flanchard (Path B Rank 30)
 * Feet: Lanun Boots +4
 * Neck: Commodore Charm +2
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
@@ -311,10 +311,10 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Sub: Kustawi +1
 * Ranged Weapon: Death Penalty or Armageddon or Fomalhaut or Urp
 * Ammo: Live Bullet
-* Head: Nyame Helm (Rank 30)
-* Body: Nyame Mail (Rank 30)
-* Hands: Nyame Gauntlets (Rank 30)
-* Legs: Nyame Flanchard (Rank 30)
+* Head: Nyame Helm (Path B Rank 30)
+* Body: Nyame Mail (Path B Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30)
+* Legs: Nyame Flanchard (Path B Rank 30)
 * Feet: Lanun Boots +4
 * Neck: Commodore Charm +2
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
@@ -326,7 +326,7 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 
 ### Equipment Points & Commentary (Hot Shot)
 * **Consciousness of Physical and Magic Hybrid**
-  Hot Shot is a hybrid WS combining physical and magic damage. By solidifying the body with the Nyame Set (Rank 30), both the physical part (WSD and basic stats) and the magic part (M.Atk) are balanced to the extreme, creating a configuration that can strike very high total damage.
+  Hot Shot is a hybrid WS combining physical and magic damage. By solidifying the body with the Nyame Set (Path B Rank 30), both the physical part (WSD and basic stats) and the magic part (M.Atk) are balanced to the extreme, creating a configuration that can strike very high total damage.
 
 * **Balancing R.Acc, M.Atk, and WSD**
   Since Hot Shot also has physical properties, it won't deal sufficient damage unless it hits as a ranged attack (R.Acc). If you feel R.Acc is lacking, adjust by lowering M.Atk gear slightly and swapping to R.Acc gear.
@@ -378,7 +378,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Body: Adhemar Jacket +1 (Type A)
 * Hands: Adhemar Wristbands +1 (Type A)
 * Legs: Chasseur's Culottes +3
-* Feet: Nyame Sollerets (Rank 30)
+* Feet: Nyame Sollerets (Path B Rank 30)
 * Neck: Mummu Gorget
 * Left Ear: Suppanomimi
 * Right Ear: Telos Earring
@@ -398,11 +398,11 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Sub: Gleti's Knife (Rank 30)
 * Ranged Weapon: Anarchy +2 (TP Bonus+1000) or Ataktos (TP Bonus+1000)
 * Ammo: Beyouv Bullet
-* Head: Nyame Helm (Rank 30)
-* Body: Nyame Mail (Rank 30)
-* Hands: Nyame Gauntlets (Rank 30)
-* Legs: Nyame Flanchard (Rank 30)
-* Feet: Nyame Sollerets (Rank 30)
+* Head: Nyame Helm (Path B Rank 30)
+* Body: Nyame Mail (Path B Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30)
+* Legs: Nyame Flanchard (Path B Rank 30)
+* Feet: Nyame Sollerets (Path B Rank 30)
 * Neck: Republican Platinum Medal
 * Left Ear: Moonshade Earring (M.Atk+4, TP Bonus+250)
 * Right Ear: Chasseur's Earring +2
@@ -411,14 +411,14 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Back: Camulus's Mantle (STR+30, Acc+20, Atk+20, WSD+10%, Damage Taken-5%)
 * Waist: Sailfi Belt +1 (Rank 15)
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>STR (Boosted)</strong></td><td><strong>+341</strong></td><td>Nyame Rank 30 (+244), Mantle (+30), Weapon (+20), etc.</td></tr><tr><td><strong>WSD</strong></td><td><strong>+43%</strong></td><td>Nyame Set (+28%), Mantle (+10%), Ring (+5%)</td></tr><tr><td><strong>Acc / Atk</strong></td><td><strong>+500+</strong></td><td>Sum of Acc/Atk properties from all gear</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+1250</strong></td><td>Ranged Weapon (+1000) + Moonshade Earring (+250)</td></tr><tr><td><strong>Damage Taken</strong></td><td><strong>-50% (Cap)</strong></td><td>Nyame Set (-38%) + Ring (-10%) + Mantle (-5%) *Extremely robust</td></tr></tbody></table></details>
+<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>STR (Boosted)</strong></td><td><strong>+341</strong></td><td>Nyame Path B Rank 30 (+244), Mantle (+30), Weapon (+20), etc.</td></tr><tr><td><strong>WSD</strong></td><td><strong>+75%</strong></td><td>Nyame Set (+60%), Mantle (+10%), Ring (+5%)</td></tr><tr><td><strong>Acc / Atk</strong></td><td><strong>+500+</strong></td><td>Sum of Acc/Atk properties from all gear</td></tr><tr><td><strong>TP Bonus</strong></td><td><strong>+1250</strong></td><td>Ranged Weapon (+1000) + Moonshade Earring (+250)</td></tr><tr><td><strong>Damage Taken</strong></td><td><strong>-50% (Cap)</strong></td><td>Nyame Set (-38%) + Ring (-10%) + Mantle (-5%) *Extremely robust</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Stabilizing Damage through STR Boost**
   After numerous verifications, I've arrived at this configuration as the most stable for high damage with Savage Blade. While WSD properties are important, the emphasis is on maximizing "STR," which holds significant weight in Savage Blade damage calculation.
 
-* **Adoption of Nyame Rank 30**
-  By unifying armor with Nyame (Rank 30), both overwhelming STR and high WSD are achieved. Also, high defense and damage cut are maintained even when unleashing WS, allowing for safe, high-damage strikes even during chaotic battles.
+* **Adoption of Nyame Path B Rank 30**
+  By unifying armor with Nyame (Path B Rank 30), both overwhelming STR and high WSD are achieved. Also, high defense and damage cut are maintained even when unleashing WS, allowing for safe, high-damage strikes even during chaotic battles.
 
 <a id="exzen-acc"></a>
 ### Physical Melee WS Gear (Evisceration: Accuracy Focus)

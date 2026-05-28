@@ -36,7 +36,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
   Having **"Snapshot+10"** standard on the ultimate weapon Gastraphetes itself is a massive benefit! It greatly eases the demand for Snapshot properties on other slots, making the overall snapshot setup much more accessible and flexible.
 * **Smart "Total 63%" Frame & the Practical Choice of 3% Overflow**:
   This setup achieves a **total of 63% in the equipment frame** by combining Gastraphetes' native property with the armor and accessories.
-  Rangers can secure Snapshot+10% from Merit Points, making the required cap in the equipment frame +60%. While this setup overflows that target by 3%, reducing this 3% to fit another piece of gear proved highly difficult. Thus, based on your practical design, **"a slight overflow is perfectly fine"**—prioritizing ease of building and immediate transition to magical Weapon Skills. 🐾
+  Rangers can secure Snapshot+10% from Merit Points, making the required cap in the equipment frame +60%. While this setup overflows that target by 3%, reducing this 3% to fit another piece of gear proved highly difficult. Thus, based on your practical design, **"a slight overflow is perfectly fine"**—prioritizing ease of building and immediate transition to magical Weapon Skills. 
 
 ---
 
@@ -77,7 +77,7 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
 * **Ranged Accuracy Compensation & Food Selection under Malevolence Dual Wield**:
   * While this setup is fundamentally similar to other landing sets, because the main and sub weapons are both Malevolence, it provides absolutely no Ranged Accuracy. Therefore, when using food, it is highly recommended to select food that boosts both **Ranged Accuracy (飛命)** and **Ranged Attack (飛攻)** to maintain stable hit rates.
 * **Formidable Ranged Damage via Gastraphetes' Aftermath (AM)**:
-  * Firing the signature Weapon Skill **Trueflight** with Gastraphetes activates its Aftermath (AM), which grants a chance of dealing double or triple damage. This allows you to secure highly formidable damage outputs even with standard ranged auto-attacks! 🐾
+  * Firing the signature Weapon Skill **Trueflight** with Gastraphetes activates its Aftermath (AM), which grants a chance of dealing double or triple damage. This allows you to secure highly formidable damage outputs even with standard ranged auto-attacks! 
 
 ---
 
@@ -112,7 +112,7 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
   * Acquiring the maximum augments on Malevolence is an extremely challenging journey that requires relentless effort, but the devastating damage output is well worth the struggle! Never give up and keep pushing!
   * **💡 Strategy Tip for Simplicity**: When farming for the Malevolence Max Augments, instead of the 1-on-1 Sinister Rain fight, keep challenging the standard **3-battle consecutive version** repeatedly to secure the best rolls.
 * **Smart Swapping between Korin Obi and Orpheus's Sash depending on Buffs**:
-  * For the waist slot, if you have a Scholar in your party who can grant you light-element storm weather spells (Aurorastorm / 極光の陣), equip the **Korin Obi (光輪の帯)**. If you do not have weather support (such as during solo play), **Orpheus's Sash (オルペウスサッシュ)** is the preferred choice to leverage the distance-based damage multiplier. 🐾
+  * For the waist slot, if you have a Scholar in your party who can grant you light-element storm weather spells (Aurorastorm / 極光の陣), equip the **Korin Obi (光輪の帯)**. If you do not have weather support (such as during solo play), **Orpheus's Sash (オルペウスサッシュ)** is the preferred choice to leverage the distance-based damage multiplier. 
 
 ---
 

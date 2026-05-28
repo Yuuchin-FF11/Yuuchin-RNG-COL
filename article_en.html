@@ -98,10 +98,17 @@
 
     <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> Back to Top</a>
 
-    <script>
+    <script type="module">
+        import { linkMap, keywordsEn, normalizeEquipmentName } from './assets/js/link_map.js';
+
         const urlParams = new URLSearchParams(window.location.search);
         const file = urlParams.get('file');
         const contentDiv = document.getElementById('markdown-content');
+
+        // 全キーワードを長さ順にソートし、一括検索用の正規表現を作成（高速化）
+        const sortedKeys = Object.keys(linkMap).sort((a, b) => b.length - a.length);
+        const escapedKeys = sortedKeys.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+        const autoLinkRegex = new RegExp(`(${escapedKeys.join('|')})`, 'g');
 
         if (file) {
             // キャッシュバスターを追加して常に最新のファイルをフェッチ
@@ -110,143 +117,39 @@
                 .then(text => {
                     const processedText = text.replace(/([「『])([^」』\n]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
                     contentDiv.innerHTML = marked.parse(processedText);
-                    const keywords = ['Main Weapon', 'Sub', 'Ranged Weapon', 'Ammo', 'Head', 'Body', 'Hands', 'Legs', 'Feet', 'Neck', 'Left Ear', 'Right Ear', 'Left Ring', 'Right Ring', 'Back', 'Waist'];
-                    const linkMap = {
-                        "Rostam": "https://wiki.ffo.jp/html/37235.html", "Nyame": "https://wiki.ffo.jp/html/38283.html", "Malignance": "https://wiki.ffo.jp/html/39726.html",
-                        "Ikenga": "https://wiki.ffo.jp/html/38196.html", "Chasseur's": "https://wiki.ffo.jp/html/33205.html", "Lanun": "https://wiki.ffo.jp/html/30924.html",
-                        "Chasseur's Earring": "https://wiki.ffo.jp/html/38629.html", "Laksamana's": "https://wiki.ffo.jp/html/30044.html",
-                        "Adhemar Jacket": "https://wiki.ffo.jp/html/34613.html", "Adhemar Wristbands": "https://wiki.ffo.jp/html/34613.html",
-                        "Kakuiesi Ring": "https://wiki.ffo.jp/html/34650.html", "Chrono Bullet": "https://wiki.ffo.jp/html/35442.html", "Dingir Ring": "https://wiki.ffo.jp/html/35914.html",
-                        "Camulus's Mantle": "https://wiki.ffo.jp/html/35517.html", "Fomalhaut": "https://wiki.ffo.jp/html/35356.html", "Armageddon": "https://wiki.ffo.jp/html/20384.html",
-                        "Death Penalty": "https://wiki.ffo.jp/html/483.html", "Regal Necklace": "https://wiki.ffo.jp/html/36145.html", "Crepuscular Knife": "https://wiki.ffo.jp/html/38361.html",
-                        "Beyouv Bullet": "https://wiki.ffo.jp/html/39083.html", "Telos Earring": "https://wiki.ffo.jp/html/34761.html", "Naegling": "https://wiki.ffo.jp/html/37597.html",
-                        "Ishkur Banner": "https://wiki.ffo.jp/html/40007.html", "Orpheus's Sash": "https://wiki.ffo.jp/html/37383.html", "Commodore Charm": "https://wiki.ffo.jp/html/37218.html",
-                        "Iskur Gorget": "https://wiki.ffo.jp/html/35917.html", "Epaminondas's Ring": "https://wiki.ffo.jp/html/37381.html", "Gelatinous Ring": "https://wiki.ffo.jp/html/33894.html",
-                        "Defending Ring": "https://wiki.ffo.jp/html/2290.html", "Luzaf's Ring": "https://wiki.ffo.jp/html/12946.html", "Carrier's Sash": "https://wiki.ffo.jp/html/26679.html",
-                        "Onowai Earring": "https://wiki.ffo.jp/html/35440.html", "Enervating Earring": "https://wiki.ffo.jp/html/33195.html",
-                        "Rajas Ring": "https://wiki.ffo.jp/html/305.html", "Fotia Belt": "https://wiki.ffo.jp/html/32705.html", "Devastating Bullet": "https://wiki.ffo.jp/html/35443.html",
-                        "Yemaya Belt": "https://wiki.ffo.jp/html/34152.html", "Kawkab Belt": "https://wiki.ffo.jp/html/35702.html", "Crepuscular Ring": "https://wiki.ffo.jp/html/38369.html", "Koko's Ring": "https://wiki.ffo.jp/html/38369.html",
-                        "Pixie Hairpin": "https://wiki.ffo.jp/html/31777.html", "Archon Ring": "https://wiki.ffo.jp/html/24057.html", "Suppanomimi": "https://wiki.ffo.jp/html/317.html",
-                        "Epona's Ring": "https://wiki.ffo.jp/html/22464.html", "Chirich Ring": "https://wiki.ffo.jp/html/35694.html", "Sarissapho Belt": "https://wiki.ffo.jp/html/31956.html",
-                        "Herberton Ring": "https://wiki.ffo.jp/html/32142.html", "Crepuscular Earring": "https://wiki.ffo.jp/html/38368.html", "Koko's Earring": "https://wiki.ffo.jp/html/38368.html", "Kustawi": "https://wiki.ffo.jp/html/35435.html",
-                        "Melanic Ring": "https://wiki.ffo.jp/html/39711.html", "Hachirin-no-Obi": "https://wiki.ffo.jp/html/32704.html", "Korin Obi": "https://wiki.ffo.jp/html/8666.html", "Moonshade Earring": "https://wiki.ffo.jp/html/22306.html",
-                        "Friomisi Earring": "https://wiki.ffo.jp/html/29865.html", "Karakt Choker": "https://wiki.ffo.jp/html/17288.html", "Eabani Earring": "https://wiki.ffo.jp/html/34143.html",
-                        "Gleti's Knife": "https://wiki.ffo.jp/html/38205.html", "Anarchy": "https://wiki.ffo.jp/html/20554.html", "Ataktos": "https://wiki.ffo.jp/html/25813.html",
-                        "Republican Platinum Medal": "https://wiki.ffo.jp/html/38491.html", "Gazu Bracelets": "https://wiki.ffo.jp/html/35439.html", "Impulse Belt": "https://wiki.ffo.jp/html/20373.html",
-                        "Ifrimad Ring": "https://wiki.ffo.jp/html/39089.html", "Beyla Earring": "https://wiki.ffo.jp/html/37879.html", "Live Bullet": "https://wiki.ffo.jp/html/35445.html",
-                        "Sailfi Belt": "https://wiki.ffo.jp/html/32262.html", "Mummu Mask": "https://wiki.ffo.jp/html/39387.html", "Mummu Gorget": "https://wiki.ffo.jp/html/39388.html",
-                        "Mummu Cape": "https://wiki.ffo.jp/html/39389.html", "Mummu Sash": "https://wiki.ffo.jp/html/39390.html", "Carmine Finger": "https://wiki.ffo.jp/html/34550.html",
-                        "Herculean": "https://wiki.ffo.jp/html/35458.html", "Arvina Ring": "https://wiki.ffo.jp/html/31848.html", "Hauksbok Bullet": "https://wiki.ffo.jp/html/37839.html",
-                        "与一の弓": "https://wiki.ffo.jp/html/3079.html", "Yoichi's Bow": "https://wiki.ffo.jp/html/3079.html",
-                        "アナイアレイター": "https://wiki.ffo.jp/html/3080.html", "Annihilator": "https://wiki.ffo.jp/html/3080.html",
-                        "ガーンデーヴァ": "https://wiki.ffo.jp/html/20383.html", "Gandiva": "https://wiki.ffo.jp/html/20383.html",
-                        "アキヌフォート": "https://wiki.ffo.jp/html/35357.html", "Acinaces": "https://wiki.ffo.jp/html/35357.html",
-                        "ピナカ": "https://wiki.ffo.jp/html/38966.html", "Pinaka": "https://wiki.ffo.jp/html/38966.html",
-                        "アープ": "https://wiki.ffo.jp/html/38967.html", "Earp": "https://wiki.ffo.jp/html/38967.html",
-                        "アミニカバン": "https://wiki.ffo.jp/html/33155.html", "Amini Caban": "https://wiki.ffo.jp/html/33155.html",
-                        "アミニガペット": "https://wiki.ffo.jp/html/33154.html", "Amini Gapette": "https://wiki.ffo.jp/html/33154.html",
-                        "アミニブラーグ": "https://wiki.ffo.jp/html/33153.html", "Amini Brague": "https://wiki.ffo.jp/html/33153.html",
-                        "アミニボティヨン": "https://wiki.ffo.jp/html/33156.html", "Amini Bottillon": "https://wiki.ffo.jp/html/33156.html", "Amini Bottillons": "https://wiki.ffo.jp/html/33156.html",
-                        "オリオンブラッカエ": "https://wiki.ffo.jp/html/29979.html", "Orion Braccae": "https://wiki.ffo.jp/html/29979.html",
-                        "オリオンベレー": "https://wiki.ffo.jp/html/29976.html", "Orion Beret": "https://wiki.ffo.jp/html/29976.html",
-                        "オリオンジャーキン": "https://wiki.ffo.jp/html/29977.html", "Orion Jerkin": "https://wiki.ffo.jp/html/29977.html",
-                        "オリオングローブ": "https://wiki.ffo.jp/html/29978.html", "Orion Gloves": "https://wiki.ffo.jp/html/29978.html",
-                        "オリオンソックス": "https://wiki.ffo.jp/html/29980.html", "Orion Socks": "https://wiki.ffo.jp/html/29980.html",
-                        "Amini Attire": "https://wiki.ffo.jp/html/33127.html", "Orion Attire": "https://wiki.ffo.jp/html/30046.html",
-                        "アルケベレー": "https://wiki.ffo.jp/html/30927.html", "Arcadian Beret": "https://wiki.ffo.jp/html/30927.html",
-                        "アルケジャーキン": "https://wiki.ffo.jp/html/30930.html", "Arcadian Jerkin": "https://wiki.ffo.jp/html/30930.html",
-                        "アルケブレーサー": "https://wiki.ffo.jp/html/30931.html", "Arcadian Bracers": "https://wiki.ffo.jp/html/30931.html",
-                        "アルケブラッカエ": "https://wiki.ffo.jp/html/30933.html", "Arcadian Braccae": "https://wiki.ffo.jp/html/30933.html",
-                        "アルケソックス": "https://wiki.ffo.jp/html/30934.html", "Arcadian Socks": "https://wiki.ffo.jp/html/30934.html",
-                        "Arcadian Attire": "https://wiki.ffo.jp/html/31258.html",
-                        "シビルスカーフ": "https://wiki.ffo.jp/html/38516.html", "Sibyl Scarf": "https://wiki.ffo.jp/html/38516.html",
-                        "Atchipyter": "https://wiki.ffo.jp/html/25808.html",
-                        "Beaur Arrow": "https://wiki.ffo.jp/html/39082.html",
-                        "Malignance Gloves": "https://wiki.ffo.jp/html/37727.html",
-                        "Malignance Boots": "https://wiki.ffo.jp/html/37728.html",
-                        "Sherida Earring": "https://wiki.ffo.jp/html/35909.html",
-                        "Hauksbok Arrow": "https://wiki.ffo.jp/html/37837.html",
-                        "Hoxni Earring": "https://wiki.ffo.jp/html/39737.html",
-                        "Regal Ring": "https://wiki.ffo.jp/html/36142.html",
-                        "Malevolence": "https://wiki.ffo.jp/html/34210.html",
-                        "Quelling Bolt": "https://wiki.ffo.jp/html/37443.html",
-                        "Acheron Shield": "https://wiki.ffo.jp/html/7586.html",
-                        "Prize Powder": "https://wiki.ffo.jp/html/27599.html",
-                        "Eminence Records": "https://wiki.ffo.jp/html/29660.html",
-                        "Unity Concord": "https://wiki.ffo.jp/html/32030.html",
-                        "Crystal": "https://wiki.ffo.jp/html/591.html",
-                        "Crystals": "https://wiki.ffo.jp/html/591.html",
-                        "Odyssey": "https://wiki.ffo.jp/html/37953.html",
-                        "Lustrous Scale": "https://wiki.ffo.jp/html/37950.html",
-                        "Lustrous Hide": "https://wiki.ffo.jp/html/37989.html",
-                        "Lustrous Feather": "https://wiki.ffo.jp/html/38041.html",
-                        "Living Key": "https://wiki.ffo.jp/html/3831.html",
-                        "Skeleton Key": "https://wiki.ffo.jp/html/3830.html",
-                        "Mimic": "https://wiki.ffo.jp/html/537.html",
-                        "Mimics": "https://wiki.ffo.jp/html/537.html",
-                        "Omen": "https://wiki.ffo.jp/html/35829.html",
-                        "Swart Astral Detritus": "https://wiki.ffo.jp/html/37427.html"
-                    };
+
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
+                    
+                    // リスト(li)内の装備名リンク化処理
                     tempDiv.querySelectorAll('li').forEach(li => {
                         const txt = li.textContent.trim();
                         const colonIdx = txt.search(/[:：]/);
-                        if (colonIdx !== -1 && keywords.some(k => txt.startsWith(k))) {
+                        if (colonIdx !== -1 && keywordsEn.some(k => txt.startsWith(k))) {
                             const prefix = txt.substring(0, colonIdx + 1) + ' ';
                             const restHtml = li.innerHTML.substring(li.innerHTML.search(/[:：]/) + 1).trim();
                             const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
+                                // すでにリンクが含まれている場合は、二重リンクを避けるためにラップしない
                                 if (itemHtml.includes('<a ')) {
                                     return itemHtml.replace(/(<\/a>)\s*([（(][^）)]+[）)])/g, '$1<span style="color:#a8e063;font-weight:700;">$2</span>');
-                                } 
+                                }
 
                                 let baseName = itemHtml.replace(/<[^>]+>/g, '').replace(/[「」『』]/g, '').trim();
                                 const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
                                 
-                                if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('preferred') || searchName.includes('any')) {
-                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml) || itemHtml.includes('preferred')) {
+                                if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('preferred') || searchName.includes('any') || searchName.includes('other')) {
+                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml) || itemHtml.includes('preferred') || itemHtml.includes('any')) {
                                         return `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>`;
                                     }
                                     return itemHtml;
                                 }
 
-                                let normalizedName = searchName;
-                                const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur\'s', 'LK': 'Laksamana\'s', 'LU': 'Luzaf', 'HV': 'Herberton', 'AM': 'Amini', 'OR': 'Orion', 'AR': 'Arcadian' };
-                                for (let key in abbrMap) {
-                                    if (normalizedName.startsWith(key)) {
-                                        normalizedName = normalizedName.replace(key, abbrMap[key]);
-                                        break;
-                                    }
-                                }
-
-                                normalizedName = normalizedName.replace(/[Ａ-ＺA-Z]$/, '').trim();
-                                if (normalizedName.startsWith('Nyame')) normalizedName = 'Nyame';
-                                else if (normalizedName.startsWith('Ikenga')) normalizedName = 'Ikenga';
-                                else if (normalizedName.startsWith('Malignance')) normalizedName = 'Malignance';
-                                else if (normalizedName.startsWith('Lanun')) normalizedName = 'Lanun';
-                                else if (normalizedName.startsWith('Chasseur\'s') && !normalizedName.includes('Earring')) normalizedName = 'Chasseur\'s';
-                                else if (normalizedName.startsWith('Laksamana\'s')) normalizedName = 'Laksamana\'s';
-                                else if (normalizedName.startsWith('Rostam')) normalizedName = 'Rostam';
-                                else if (normalizedName.startsWith('Adhemar')) normalizedName = 'Adhemar Jacket';
-                                else if (normalizedName.startsWith('Herculean')) normalizedName = 'Herculean';
-                                else if (normalizedName.startsWith('Arvina Ring')) normalizedName = 'Arvina Ring';
-                                else if (normalizedName.startsWith('Hauksbok Bullet')) normalizedName = 'Hauksbok Bullet';
-                                else if (normalizedName.startsWith('Mummu')) {
-                                    if (normalizedName.includes('Mask')) normalizedName = 'Mummu Mask';
-                                    else if (normalizedName.includes('Gorget')) normalizedName = 'Mummu Gorget';
-                                    else if (normalizedName.includes('Cape')) normalizedName = 'Mummu Cape';
-                                    else if (normalizedName.includes('Sash')) normalizedName = 'Mummu Sash';
-                                }
-                                else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
-                                else if (normalizedName.startsWith('Amini') && !['Amini Caban', 'Amini Gapette', 'Amini Brague', 'Amini Bottillon', 'Amini Bottillons'].includes(normalizedName)) normalizedName = 'Amini Attire';
-                                else if (normalizedName.startsWith('Orion') && !['Orion Braccae', 'Orion Beret', 'Orion Jerkin', 'Orion Gloves', 'Orion Socks'].includes(normalizedName)) normalizedName = 'Orion Attire';
-                                else if (normalizedName.startsWith('Arcadian') && !['Arcadian Beret', 'Arcadian Jerkin', 'Arcadian Bracers', 'Arcadian Braccae', 'Arcadian Socks'].includes(normalizedName)) normalizedName = 'Arcadian Attire';
-
+                                const normalizedName = normalizeEquipmentName(searchName, true);
                                 const url = linkMap[normalizedName];
                                 if (url) {
                                     return `<a href="${url}" target="_blank" class="auto-link">${itemHtml}</a>`;
                                 } else {
-                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml)) {
+                                    if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(itemHtml) || itemHtml.includes('preferred') || itemHtml.includes('any')) {
                                         return `<span style="color:#a8e063;font-weight:700;">${itemHtml}</span>`;
                                     }
                                     return itemHtml;
@@ -256,7 +159,7 @@
                         }
                     });
 
-                    // Auto-link logic for table cells (td) in English articles
+                    // テーブルセル(td)内の装備名リンク化処理
                     tempDiv.querySelectorAll('td').forEach(td => {
                         if (td.querySelector('a')) {
                             let html = td.innerHTML.trim();
@@ -277,86 +180,46 @@
                         let baseName = td.textContent.trim();
                         const searchName = baseName.split(/[（(＜<＋+]/)[0].trim();
                         
-                        if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('preferred') || searchName.includes('any')) {
-                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml) || baseHtml.includes('preferred')) {
+                        if (!searchName || /^[＋+or\d\sランクRankＡ-ＺA-Z]+$/.test(searchName) || searchName.includes('preferred') || searchName.includes('any') || searchName.includes('other')) {
+                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml) || baseHtml.includes('preferred') || baseHtml.includes('any')) {
                                 td.innerHTML = `<span style="color:#a8e063;font-weight:700;">${baseHtml}</span>`;
                             }
                             return;
                         }
 
-                        let normalizedName = searchName;
-                        const abbrMap = { 'LA': 'Lanun', 'CS': 'Chasseur\'s', 'LK': 'Laksamana\'s', 'LU': 'Luzaf', 'HV': 'Herberton', 'AM': 'Amini', 'OR': 'Orion', 'AR': 'Arcadian' };
-                        for (let key in abbrMap) {
-                            if (normalizedName.startsWith(key)) {
-                                normalizedName = normalizedName.replace(key, abbrMap[key]);
-                                break;
-                            }
-                        }
-
-                        normalizedName = normalizedName.replace(/[Ａ-ＺA-Z]$/, '').trim();
-                        if (normalizedName.startsWith('Nyame')) normalizedName = 'Nyame';
-                        else if (normalizedName.startsWith('Ikenga')) normalizedName = 'Ikenga';
-                        else if (normalizedName.startsWith('Malignance')) normalizedName = 'Malignance';
-                        else if (normalizedName.startsWith('Lanun')) normalizedName = 'Lanun';
-                        else if (normalizedName.startsWith('Chasseur\'s') && !normalizedName.includes('Earring')) normalizedName = 'Chasseur\'s';
-                        else if (normalizedName.startsWith('Laksamana\'s')) normalizedName = 'Laksamana\'s';
-                        else if (normalizedName.startsWith('Rostam')) normalizedName = 'Rostam';
-                        else if (normalizedName.startsWith('Adhemar')) normalizedName = 'Adhemar Jacket';
-                        else if (normalizedName.startsWith('Herculean')) normalizedName = 'Herculean';
-                        else if (normalizedName.startsWith('Arvina Ring')) normalizedName = 'Arvina Ring';
-                        else if (normalizedName.startsWith('Hauksbok Bullet')) normalizedName = 'Hauksbok Bullet';
-                        else if (normalizedName.startsWith('Mummu')) {
-                            if (normalizedName.includes('Mask')) normalizedName = 'Mummu Mask';
-                            else if (normalizedName.includes('Gorget')) normalizedName = 'Mummu Gorget';
-                            else if (normalizedName.includes('Cape')) normalizedName = 'Mummu Cape';
-                            else if (normalizedName.includes('Sash')) normalizedName = 'Mummu Sash';
-                        }
-                        else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
-                        else if (normalizedName.startsWith('Amini') && !['Amini Caban', 'Amini Gapette', 'Amini Brague', 'Amini Bottillon', 'Amini Bottillons'].includes(normalizedName)) normalizedName = 'Amini Attire';
-                        else if (normalizedName.startsWith('Orion') && !['Orion Braccae', 'Orion Beret', 'Orion Jerkin', 'Orion Gloves', 'Orion Socks'].includes(normalizedName)) normalizedName = 'Orion Attire';
-                        else if (normalizedName.startsWith('Arcadian') && !['Arcadian Beret', 'Arcadian Jerkin', 'Arcadian Bracers', 'Arcadian Braccae', 'Arcadian Socks'].includes(normalizedName)) normalizedName = 'Arcadian Attire';
-
+                        const normalizedName = normalizeEquipmentName(searchName, true);
                         const url = linkMap[normalizedName];
                         if (url) {
                             td.innerHTML = `<a href="${url}" target="_blank" class="auto-link">${baseHtml}</a>`;
                         } else {
-                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml)) {
+                            if (/^[＋+or\d\sＡ-ＺA-Z]+$/.test(baseHtml) || baseHtml.includes('preferred') || baseHtml.includes('any')) {
                                 td.innerHTML = `<span style="color:#a8e063;font-weight:700;">${baseHtml}</span>`;
                             }
                         }
                     });
 
-                    // プレミアム拡張：通常の文章内のキーワードを用語辞典へ自動リンク化
+                    // プレミアム拡張：通常の文章内のキーワードを用語辞典へ自動リンク化（正規表現による超高速置換）
                     const autoLinkTextNodes = (node) => {
                         if (node.nodeType === Node.TEXT_NODE) {
-                            let text = node.nodeValue;
-                            const sortedKeys = Object.keys(linkMap).sort((a, b) => b.length - a.length);
-
-                            for (const keyword of sortedKeys) {
-                                const idx = text.indexOf(keyword);
-                                if (idx !== -1) {
-                                    const beforeText = text.substring(0, idx);
-                                    const matchedText = text.substring(idx, idx + keyword.length);
-                                    const afterText = text.substring(idx + keyword.length);
-
-                                    const beforeNode = document.createTextNode(beforeText);
-                                    const linkNode = document.createElement('a');
-                                    linkNode.href = linkMap[keyword];
-                                    linkNode.target = '_blank';
-                                    linkNode.className = 'auto-link';
-                                    linkNode.textContent = matchedText;
-                                    
-                                    const afterNode = document.createTextNode(afterText);
-
-                                    const parent = node.parentNode;
-                                    parent.insertBefore(beforeNode, node);
-                                    parent.insertBefore(linkNode, node);
-                                    parent.insertBefore(afterNode, node);
-                                    parent.removeChild(node);
-
-                                    autoLinkTextNodes(afterNode);
-                                    return;
+                            const text = node.textContent;
+                            if (autoLinkRegex.test(text)) {
+                                autoLinkRegex.lastIndex = 0; // RegExpのインデックスをリセット
+                                const parent = node.parentNode;
+                                const tempSpan = document.createElement('span');
+                                tempSpan.innerHTML = text.replace(autoLinkRegex, (match) => {
+                                    const normalizedName = normalizeEquipmentName(match, true);
+                                    const url = linkMap[normalizedName];
+                                    if (url) {
+                                        return `<a href="${url}" target="_blank" class="auto-link">${match}</a>`;
+                                    }
+                                    return match;
+                                });
+                                
+                                // tempSpan の子ノードを元のテキストノードの場所に挿入
+                                while (tempSpan.firstChild) {
+                                    parent.insertBefore(tempSpan.firstChild, node);
                                 }
+                                parent.removeChild(node);
                             }
                         } else if (node.nodeType === Node.ELEMENT_NODE) {
                             if (node.tagName !== 'A' && node.tagName !== 'PRE' && node.tagName !== 'CODE' && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {

@@ -111,12 +111,14 @@
         const autoLinkRegex = new RegExp(`(${escapedKeys.join('|')})`, 'g');
 
         if (file) {
-            // キャッシュバスターを追加して常に最新のファイルをフェッチ
             fetch(file + '?t=' + new Date().getTime())
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
-                    const processedText = text.replace(/([「『])([^」』\n]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
-                    contentDiv.innerHTML = marked.parse(processedText);
+                    // 先にMarkdownをパースすることで**太字**を確定させ、生の**マークの露出を防ぎます！
+                    const parsedHtml = marked.parse(text);
+                    // HTMLタグを破壊しないように配慮しながら「」『』のイエローゴールド強調置換を実行
+                    const processedText = parsedHtml.replace(/([「『])([^」』\n<>]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
+                    contentDiv.innerHTML = processedText;
 
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;

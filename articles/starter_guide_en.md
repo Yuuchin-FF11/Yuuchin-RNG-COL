@@ -105,7 +105,9 @@ Monsters right near the city are weak, and they get stronger the further you go.
 
 Before you start hunting, **always summon 3 Alter Egos first!**
 * **Recommended Setup**: Valaineral (Tank), Tenzen (Attacker), Adelheid (Attacker/Support)
-* *※ You can also use Alter Egos obtained from login campaigns. If you have "Shantotto II", available only during specific periods, she is incredibly strong and highly recommended.*
+* You can also use Alter Egos obtained from login campaigns.
+  If you have "Shantotto II", available only during specific periods,
+  she is incredibly strong and highly recommended.
 
 At first, your Alter Egos (especially Valaineral) will defeat enemies in almost one hit, so you'll breeze to around level 10 in just a few minutes.
 
@@ -135,7 +137,10 @@ Upon entering Upper Jeuno, walk straight ahead, take the stairs down on your lef
 
 * *💡 Caution: The first time you speak to him, a different quest called "Runaway Chocobo" might appear. Keep talking to him until "Wounded Chocobo" triggers.*
 
-For this quest, you nurse a chocobo using an item called "Gausebit Wildgrass". (※ This is now a very friendly feature where you **only have to wait 1 minute** to hand over the next grass, instead of waiting past Earth time midnight!)
+For this quest, you nurse a chocobo using an item called "Gausebit Wildgrass".
+(This is now a very friendly feature where you
+**only have to wait 1 minute** to hand over the next grass,
+instead of waiting past Earth time midnight!)
 
 ### ⚠️ Advice for Solo Players
 If a beginner tries to buy "Gausebit Wildgrass" at the Auction House, it's way too expensive. Attempting to farm it yourself is dangerous because the monsters that drop it are a bit too strong for a level 20 character.
@@ -219,7 +224,12 @@ While leveling, you should also try to progress your **"Starting Nation Missions
 The biggest reason for this is that progressing RoV missions rewards you with special Key Items ("Rhapsody in...") that **permanently grant massive boosts to your EXP gain!**
 Whether you want to play a melee or a mage, grabbing these EXP boosts first will drastically speed up your overall progression.
 
-(※ At first, your level is capped at 50. After that, you'll need to complete "Limit Break" quests to raise the cap by 5 levels at a time. I'll cover those in a separate article. For now, do your best to reach this point!)
+(At first, your level is capped at 50.
+After that, you'll need to complete "Limit Break" quests
+to raise the cap by 5 levels at a time.
+
+I'll cover those in a separate article.
+For now, do your best to reach this point!)
 
 ---
 

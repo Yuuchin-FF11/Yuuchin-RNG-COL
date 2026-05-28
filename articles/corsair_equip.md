@@ -167,7 +167,14 @@
   **【補足②：サポートジョブ（サポ忍 vs サポ侍）について】**
   この記事の構成は基本的に「サポートジョブ：忍者（サポ忍）」を元にして記載しています。
   もし連携への参加をより楽にしたい場合は、「サポ侍」に変更するのも非常におすすめです。サポ侍であれば「<span class="ability-highlight">黙想</span>」や「<span class="ability-highlight">石火之機</span>」があるため、TPの確保や連続WSがかなり楽になります。
-  ※ちなみに筆者がサポ忍を愛用している理由は、ソーティの道中で<span class="magic-highlight">インビジ</span>・<span class="magic-highlight">スニーク</span>が必要な場面において、パウダーやオイルを消費するよりも忍術（<span class="magic-highlight">遁甲の術</span>・<span class="magic-highlight">物見の術</span>）でかけ直す方が圧倒的に楽で快適だからです。ご自身のプレイスタイルやお好みに合わせてサポジョブを選択してみてください！
+  ちなみに筆者がサポ忍を愛用している理由は、
+  ソーティの道中で<span class="magic-highlight">インビジ</span>・<span class="magic-highlight">スニーク</span>が必要な場面において、
+  パウダーやオイルを消費するよりも、
+  忍術（<span class="magic-highlight">遁甲の術</span>・<span class="magic-highlight">物見の術</span>）でかけ直す方が
+  圧倒的に楽で快適だからです。
+
+  ご自身のプレイスタイルやお好みに合わせて、
+  サポジョブを選択してみてください！
 
   ---
 

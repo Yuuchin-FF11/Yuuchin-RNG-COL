@@ -22,7 +22,11 @@ When exchanging your Eminence Points for equipment, make sure to choose **[Acher
 > **Important Notes on Eminence Vendor Method**
 > Equipment from Eminence exchanges can generally be sold to vendors at a conversion rate of "1 point = 10 Gil."
 > Since the Acheron Shield requires a high amount of points per item, it minimizes the effort (number of times you have to click/mash buttons to exchange) and allows you to sell efficiently. It is by far the most recommended item!
-> ※Note that there is a weekly cap of **"100,000 Eminence Points"** for equipment exchanges. By selling Acheron Shields up to this limit every week, you can reliably earn **approx. 1,000,000 Gil per week**!
+> Note that there is a weekly cap of
+> **"100,000 Eminence Points"** for equipment exchanges.
+> 
+> By selling Acheron Shields up to this limit every week,
+> you can reliably earn **approx. 1,000,000 Gil per week**!
 
 ---
 
@@ -91,7 +95,10 @@ In Sheol A and B, a solo strategy called **"Chest Opening"** (opening Chests and
 * **Dropped Materials**:
   * **Sheol A**: **[Lustrous Scale]** (Sells on the Auction House)
   * **Sheol B**: **[Lustrous Hide]** (Sells on the Auction House)
-  * ※Auction House prices for these materials fluctuate depending on server supply. Check the transaction prices beforehand and choose the area (A or B) with the higher profit margin🐾
+  * Auction House prices for these materials fluctuate
+    depending on server supply.
+    Check the transaction prices beforehand and
+    choose the area (A or B) with the higher profit margin🐾
 
 #### ⚠️ Essential Rules and Preparation
 * **Main Job is "Thief" Only!**: To open chests, you must have Thief's "Pickpocket/Thief's Tools" traits and specific key items.

@@ -1487,7 +1487,7 @@ nav a:hover::after {
 .hero-description {
     margin-left: auto !important;
     margin-right: auto !important;
-    text-align: center !important;
+    text-align: left !important;
 }
 
 /* --- レスポンシブ修正 (スマホ対応) --- */

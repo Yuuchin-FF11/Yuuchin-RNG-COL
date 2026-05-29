@@ -34,7 +34,7 @@ There is an incredibly powerful trick to secure a solid amount of starter cash (
 * **Required Item**: **[Mog Pell (Green)]** (Occasionally distributed as a login campaign bonus)
 * **Step-by-Step Procedure**:
   1. Prepare a **Mog Pell (Green)** obtained from login campaigns.
-  2. Trade it to any Festive Moogle NPC (located in Jeuno, etc.) and exchange it for **10 "Copper A.M.A.N. Vouchers"** (互助会引換券・銅).
+  2. Trade it to the Festive Moogle NPC (located in Port San d'Oria J-9, Port Bastok J-13, or Windurst Waters C-14) and exchange it for **10 "Copper A.M.A.N. Vouchers"** (互助会引換券・銅).
   3. Talk to any Eminence Records Broker NPC and exchange your Copper A.M.A.N. Vouchers for Eminence Points (**1 voucher = 1,000 Eminence Points**).
   4. With this, 1 Mog Pell (Green) instantly converts into **10,000 Eminence Points**!
   5. Use these Eminence Points to exchange for **"Acheron Shield"** as described above, and sell it to a vendor NPC.

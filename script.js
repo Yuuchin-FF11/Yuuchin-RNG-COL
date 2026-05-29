@@ -60,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(styleSheet);
+
+    // 管理者用ロガーおよびシステムの初期化
+    logAccess();
+    initAdminSystem();
 });
 
 function initMobileMenu() {
@@ -346,5 +350,203 @@ function initBackToTop() {
             behavior: 'smooth'
         });
     });
+}
+
+// --- 管理者専用・アクセス履歴閲覧システム ---
+const GAS_API_URL = "https://script.google.com/macros/s/AKfycbx3tcuuAdd0KlOq35qv1lPbqUx3kI064F2_VBohfRdg9OZUYUwT-q6tdqgiPfe-K3dCQw/exec";
+
+/**
+ * ページ訪問時のアクセスログを非同期で送信
+ */
+async function logAccess() {
+    try {
+        const params = new URLSearchParams({
+            action: 'log',
+            pageTitle: document.title,
+            pageUrl: window.location.href,
+            referrer: document.referrer || "直接入力/ブックマーク",
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+            screenResolution: `${window.screen.width}x${window.screen.height}`
+        });
+
+        // GETリクエストでログを送信（プレフライトを回避し、CORSエラーを完全に防ぐ）
+        await fetch(`${GAS_API_URL}?${params.toString()}`, {
+            method: 'GET',
+            mode: 'cors'
+        });
+    } catch (error) {
+        // メインサイトの表示や機能に一切影響を与えないよう、エラーは静かに無視します
+        console.warn("Logger connection skipped:", error);
+    }
+}
+
+/**
+ * 管理者システムの初期化（モーダル操作、パスワード送信など）
+ */
+function initAdminSystem() {
+    const trigger = document.getElementById('admin-trigger');
+    const passwordModal = document.getElementById('admin-password-modal');
+    const dashboardModal = document.getElementById('admin-dashboard-modal');
+    
+    const passwordClose = document.getElementById('password-modal-close');
+    const dashboardClose = document.getElementById('dashboard-modal-close');
+    
+    const passwordForm = document.getElementById('admin-password-form');
+    const passwordInput = document.getElementById('admin-password-input');
+    const errorMsg = document.getElementById('password-error-msg');
+    
+    const refreshBtn = document.getElementById('admin-refresh-btn');
+    const tableBody = document.getElementById('dashboard-table-body');
+    const loadingDiv = document.getElementById('dashboard-loading');
+    const emptyDiv = document.getElementById('dashboard-empty');
+
+    if (!trigger || !passwordModal || !dashboardModal) return;
+
+    let savedPassword = ''; // セッション内でのパスワード一時保持
+
+    // 隠しトリガーをクリックした時
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        passwordInput.value = '';
+        errorMsg.style.display = 'none';
+        passwordModal.classList.add('active');
+        passwordInput.focus();
+    });
+
+    // 閉じるボタン
+    passwordClose.addEventListener('click', () => {
+        passwordModal.classList.remove('active');
+    });
+
+    dashboardClose.addEventListener('click', () => {
+        dashboardModal.classList.remove('active');
+    });
+
+    // モーダルの外側をクリックしたら閉じる
+    window.addEventListener('click', (e) => {
+        if (e.target === passwordModal) {
+            passwordModal.classList.remove('active');
+        }
+        if (e.target === dashboardModal) {
+            dashboardModal.classList.remove('active');
+        }
+    });
+
+    // パスワード送信時
+    passwordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const password = passwordInput.value.trim();
+        if (!password) return;
+
+        errorMsg.style.display = 'none';
+        passwordInput.disabled = true;
+        const submitBtn = passwordForm.querySelector('button[type="submit"]');
+        const origBtnText = submitBtn.textContent;
+        submitBtn.textContent = '認証中...';
+        submitBtn.disabled = true;
+
+        try {
+            const result = await fetchHistory(password);
+            
+            if (result.status === 'success') {
+                savedPassword = password; // 成功したパスワードを保持
+                passwordModal.classList.remove('active');
+                dashboardModal.classList.add('active');
+                renderDashboard(result.data);
+            } else {
+                errorMsg.textContent = result.message || 'パスワードが正しくありません。';
+                errorMsg.style.display = 'block';
+            }
+        } catch (err) {
+            errorMsg.textContent = 'サーバーとの通信に失敗しました。';
+            errorMsg.style.display = 'block';
+        } finally {
+            passwordInput.disabled = false;
+            submitBtn.textContent = origBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // 更新ボタン押下時
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', async () => {
+            if (!savedPassword) return;
+            tableBody.innerHTML = '';
+            loadingDiv.style.display = 'block';
+            emptyDiv.style.display = 'none';
+
+            try {
+                const result = await fetchHistory(savedPassword);
+                if (result.status === 'success') {
+                    renderDashboard(result.data);
+                } else {
+                    alert('セッションが切れました。再度パスワードを入力してください。');
+                    dashboardModal.classList.remove('active');
+                }
+            } catch (err) {
+                alert('データの取得に失敗しました。');
+            }
+        });
+    }
+
+    /**
+     * GASから閲覧履歴データを取得
+     */
+    async function fetchHistory(password) {
+        const params = new URLSearchParams({
+            action: 'get_history',
+            password: password
+        });
+
+        const response = await fetch(`${GAS_API_URL}?${params.toString()}`, {
+            method: 'GET',
+            mode: 'cors'
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    }
+
+    /**
+     * ダッシュボードテーブルを描画
+     */
+    function renderDashboard(data) {
+        loadingDiv.style.display = 'none';
+        tableBody.innerHTML = '';
+
+        if (!data || data.length === 0) {
+            emptyDiv.style.display = 'block';
+            return;
+        }
+
+        emptyDiv.style.display = 'none';
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            
+            // 簡素化されたOS/ブラウザ判定 (長いUAをすっきりさせる)
+            const ua = row['使用ブラウザ/OS'] || '不明';
+            let simpleUA = 'その他';
+            if (ua.includes('iPhone')) simpleUA = 'iPhone';
+            else if (ua.includes('Android')) simpleUA = 'Android';
+            else if (ua.includes('Windows')) simpleUA = 'Windows';
+            else if (ua.includes('Macintosh')) simpleUA = 'Mac';
+            
+            if (ua.includes('Firefox')) simpleUA += ' (Firefox)';
+            else if (ua.includes('Chrome')) simpleUA += ' (Chrome)';
+            else if (ua.includes('Safari')) simpleUA += ' (Safari)';
+            else if (ua.includes('Edge')) simpleUA += ' (Edge)';
+
+            tr.innerHTML = `
+                <td><strong>${row['日時'] || '不明'}</strong></td>
+                <td><span style="color: var(--accent-color);">${row['アクセスしたページ'] || '不明'}</span></td>
+                <td><span style="font-size: 0.85rem; opacity: 0.8;">${row['リンク元 (リファラ)'] || '直接入力'}</span></td>
+                <td><span title="${ua}">${simpleUA}</span></td>
+                <td>${row['使用言語'] || '不明'}</td>
+                <td><span style="font-family: monospace;">${row['画面サイズ'] || '不明'}</span></td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
 }
 

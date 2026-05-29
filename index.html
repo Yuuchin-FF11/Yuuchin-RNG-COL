@@ -462,7 +462,7 @@
                 </a>
             </div>
         </div>
-        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p>
+        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.<span id="admin-trigger" style="opacity: 0.15; cursor: default; margin-left: 4px; font-size: 0.6rem;">.</span></p>
         <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">※当サイトはAIアシスタントを活用して共同で作成しているため、情報に一部誤りや古い内容が含まれている可能性があります。最新の正確な仕様については、ゲーム内や公式用語辞典をあわせてご確認ください。</p>
         <div class="social-links">
@@ -478,6 +478,59 @@
 <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> ページの一番上へ</a>
  
     <script src="script.js" type="module"></script>
+    <!-- ======================================================== -->
+    <!-- 🛡️ 管理者専用・アクセス履歴閲覧モーダル (ガラスモーフィズムUI) -->
+    <!-- ======================================================== -->
+    <!-- 1. パスワード入力画面 -->
+    <div id="admin-password-modal" class="admin-modal">
+        <div class="admin-modal-content">
+            <button class="admin-modal-close" id="password-modal-close">&times;</button>
+            <h3 class="admin-modal-title"><i class="fa-solid fa-lock"></i> 管理者認証</h3>
+            <p class="admin-modal-desc">閲覧履歴を表示するには、秘密のパスワードを入力してください。</p>
+            <form id="admin-password-form">
+                <input type="password" id="admin-password-input" class="admin-input" placeholder="パスワードを入力..." required autofocus>
+                <button type="submit" class="admin-btn">認証する</button>
+            </form>
+            <p id="password-error-msg" class="admin-error-text" style="display: none;"></p>
+        </div>
+    </div>
+
+    <!-- 2. 閲覧履歴ダッシュボード画面 -->
+    <div id="admin-dashboard-modal" class="admin-modal">
+        <div class="admin-modal-content dashboard-content">
+            <button class="admin-modal-close" id="dashboard-modal-close">&times;</button>
+            <div class="dashboard-header">
+                <h3 class="admin-modal-title"><i class="fa-solid fa-chart-line"></i> 閲覧履歴ダッシュボード</h3>
+                <button id="admin-refresh-btn" class="admin-btn-secondary"><i class="fa-solid fa-rotate"></i> 更新</button>
+            </div>
+            <p class="admin-modal-desc">直近100件のアクセスログを表示しています。</p>
+            
+            <div class="dashboard-table-container">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>日時</th>
+                            <th>アクセスしたページ</th>
+                            <th>リンク元 (リファラ)</th>
+                            <th>ブラウザ/OS</th>
+                            <th>言語</th>
+                            <th>画面サイズ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboard-table-body">
+                        <!-- ここにJavaScriptで動的に履歴が挿入されます -->
+                    </tbody>
+                </table>
+                <div id="dashboard-loading" class="dashboard-loading">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> データを取得中...
+                </div>
+                <div id="dashboard-empty" class="dashboard-empty" style="display: none;">
+                    閲覧履歴データがまだありません。
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

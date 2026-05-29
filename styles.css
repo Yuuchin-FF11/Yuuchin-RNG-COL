@@ -523,7 +523,8 @@ nav a:hover::after {
 /* Job Link */
 .job-link {
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: auto; /* 文章量の差を吸収し、常に最下部で高さを揃えます */
+    align-self: center; /* 横方向の中央揃えを保証します */
     color: var(--accent-color);
     text-decoration: none;
     font-weight: bold;

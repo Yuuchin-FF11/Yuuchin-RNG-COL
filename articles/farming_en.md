@@ -28,6 +28,20 @@ When exchanging your Eminence Points for equipment, make sure to choose **[Acher
 > By selling Acheron Shields up to this limit every week,
 > you can reliably earn **approx. 1,000,000 Gil per week**!
 
+### 💡 [Pro-Tip] Instant Starter Cash via "Mog Pell (Green)"
+There is an incredibly powerful trick to secure a solid amount of starter cash (Gil) instantly, even on newly created characters or alternative storage characters ("mules") that have not progressed through any missions or combat.
+
+* **Required Item**: **[Mog Pell (Green)]** (Occasionally distributed as a login campaign bonus)
+* **Step-by-Step Procedure**:
+  1. Prepare a **Mog Pell (Green)** obtained from login campaigns.
+  2. Trade it to any Festive Moogle NPC (located in Jeuno, etc.) and exchange it for **10 "Copper A.M.A.N. Vouchers"** (互助会引換券・銅).
+  3. Talk to any Eminence Records Broker NPC and exchange your Copper A.M.A.N. Vouchers for Eminence Points (**1 voucher = 1,000 Eminence Points**).
+  4. With this, 1 Mog Pell (Green) instantly converts into **10,000 Eminence Points**!
+  5. Use these Eminence Points to exchange for **"Acheron Shield"** as described above, and sell it to a vendor NPC.
+
+This allows even newly created characters or low-level storage characters to instantly secure approx. 100,000 Gil of initial capital without engaging in any combat.
+If you have any unused "Mog Pell (Green)" lying around in your characters' inventory or delivery boxes, make sure to try this method to boost your starting Gil!
+
 ---
 
 ## ⚡ 2. Maximize Points! Time-Limited "Gain Experience" Objectives

@@ -4,6 +4,42 @@ This is a dedicated, highly practical guide detailing the exact role, rotation, 
 
 ---
 
+## 🛡️ Recommended Party Composition
+
+This Aminon (Hard Mode) strategy is built upon the following **Physical DPS & Absorb-TP Management Setup**:
+
+| Job | Primary Role | Recommended Support Job | Reason & Strategy |
+| :--- | :--- | :--- | :--- |
+| 🛡️ **Paladin (PLD)** | Main Tank (Fixed) | Any sub that can cast Stoneskin | Maximizes knockback prevention and self-defense. |
+| 💃 **Dancer (DNC)** | Main DPS / Steps & Debuffs | **Sub DRG (Dragoon)** | Boosts TP generation via jumps, maximizing physical DPS while managing enmity. |
+| 🎲 **Corsair (COR)** | Physical DPS / Roll Support | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+| 🔴 **Red Mage (RDM)** | Enfeebling Spells / Healing | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+| 🎵 **Bard (BRD)** | Song Support / Sub-DPS | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+| 🌀 **Geomancer (GEO)** | Geo-Colure Support | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+
+### ⚠️ Why COR, RDM, BRD, and GEO Must Sub Dark Knight (/DRK)
+If Aminon is allowed to use even **one** special move (Weapon Skill), it will instantly lead to a party wipe.
+Therefore, all support and backline members (**COR, RDM, BRD, and GEO**) must sub Dark Knight to **rotate Absorb-TP continuously throughout the entire fight**, keeping Aminon's TP locked at absolute zero. 🐾
+
+---
+
+## 📐 Positioning & Knockback Countermeasures
+
+Since Aminon frequently uses high-impact knockback moves, correct positioning is vital for survival.
+
+### 1. Paladin (Tank) Positioning
+*   The Tank must stand with their back against the **corner of the entrance door (closed)**.
+*   This specific door corner has a slight indentation (recess) that perfectly "catches" the character model, 100% neutralizing Aminon's knockback and preventing any shift in positioning.
+
+### 2. Other Party Members Positioning
+*   Generally, other party members group up near the **opposite corner of the entrance door** (diagonally across from the Tank).
+*   **Corsair's (Master's) Tactical Philosophy**:
+    *   Hugging the corner completely can limit your field of view. To maintain optimal awareness of the battle state (Absorb-TP rotations, debuff status, party HP, etc.), the Corsair deliberately stands slightly away from the corner, accepting the knockbacks in exchange for full visual command of the fight.
+*   **Dancer (DNC) Movement**:
+    *   The Dancer fights through the knockbacks while staying glued to Aminon. In order to apply steps (crucial debuffs), the Dancer **must remain in a drawn-weapon (melee-combat) state**, meaning they must constantly run back in and stick close to the boss.
+
+---
+
 ## 🧭 Opening: Pre-battle Roll Rotation
 
 Upon arriving in Aminon's chamber and before engaging in battle, there are **two main roll rotation patterns** depending on your party composition and strategy:

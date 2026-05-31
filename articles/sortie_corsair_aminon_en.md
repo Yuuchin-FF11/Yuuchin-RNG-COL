@@ -249,7 +249,7 @@ This set is dedicated to ensuring Absorb-TP lands with 100% certainty, bypassing
 * Back: Crepuscular Cape
 * Waist: Crepuscular Sash
 
-<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Magic Accuracy (M.Acc)</td><td><strong>+650 or more</strong></td><td>A combination of CS+3 armor pieces (+300), Mu's series (+90+), double Stikini+1 (+22), Crepuscular & Chasseur+2 (+30), etc.</td></tr><tr><td>Dark Magic Skill</td><td><strong>+16</strong></td><td>Boosted by double Stikini Ring +1, significantly improving the base M.Acc and drain capacity of Absorb-TP.</td></tr><tr><td>Damage Taken (DT)</td><td><strong>-30% or more</strong></td><td>Combines DT properties from CS+3 armor (Body -11%, Feet -6%), Nusku Shield (-5%), and Chasseur's Earring +2 (-5%) to survive unexpected AoE attacks.</td></tr></tbody></table></details>
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Magic Accuracy (M.Acc)</td><td><strong>+650 or more</strong></td><td>A combination of CS+3 armor pieces, Crepuscular series, double Stikini+1 (+22), Crepuscular & Chasseur+2 (+30), etc.</td></tr><tr><td>Dark Magic Skill</td><td><strong>+16</strong></td><td>Boosted by double Stikini Ring +1, significantly improving the base M.Acc and drain capacity of Absorb-TP.</td></tr><tr><td>Damage Taken (DT)</td><td><strong>-30% or more</strong></td><td>Combines DT properties from CS+3 armor (Body -11%, Feet -6%), Nusku Shield (-5%), and Chasseur's Earring +2 (-5%) to survive unexpected AoE attacks.</td></tr></tbody></table></details>
 
 #### Absorb-TP Gear Spec Commentary 🐾
 
@@ -257,8 +257,8 @@ This is the Master's highly optimized, specialized build dedicated entirely to s
 
 *   **Pushing the Frontline Limits for sub-DRK Absorb-TP**
     Landing Absorb-TP while actively fighting on the frontline as a main DPS—especially under the extremely tight constraints of sub-DRK (which heavily limits Dark Magic skill and Magic Accuracy options)—is one of the most demanding tasks in FF11. This build represents the **theoretical peak of Magic Accuracy**, packing every single point of M.Acc gear currently available to a Corsair.
-*   **colossus Magic Accuracy via Full Empyrean +3 "Chasseur's Set"**
-    By equipping **Chasseur's Set +3 (CS+3)** across all 5 armor slots (Head, Body, Hands, Legs, Feet), COR secures a baseline of **M.Acc +300** (+60 per piece). This massive foundation pierces through Aminon's extremely high Magic Evasion with ease.
+*   **Colossus Magic Accuracy via Full Empyrean +3 "Chasseur's Set"**
+    By equipping **Chasseur's Set +3 (CS+3)** across all 5 armor slots (Head, Body, Hands, Legs, Feet), COR secures an exceptionally high Magic Accuracy foundation that pierces through Aminon's extremely high Magic Evasion with ease.
 *   **The Power of the 3-Piece "Crepuscular Series" (Gorget, Cape, Sash)**
     Filling the Neck, Back, and Waist slots with **Crepuscular Gorget**, **Crepuscular Cape**, and **Crepuscular Sash** grants unparalleled M.Acc additions. Boasting over +30 M.Acc per slot, this synergy leaves other gear combinations far behind.
 *   **Highly Effective Accessory Synergy with Stikini Rings & Custom Earrings**

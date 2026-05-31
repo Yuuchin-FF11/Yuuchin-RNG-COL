@@ -224,7 +224,8 @@ This is the physical Savage Blade damage set designed to maximize output during 
 
 Fundamentally, this set is identical to the standard Savage Blade equipment setup. However, because the battle against Aminon requires higher accuracy, it has been slightly adjusted to prioritize accuracy. Through extensive real combat experience, this configuration has proven to be the most stable and reliable setup for delivering physical damage.
 
-Alternative options, such as Gazu Bracelet +1 (Rank 15) for hands, Fotia Gorget for neck, and Kentarch Belt +1 (Rank 15) for waist, are also fully integrated. This allows flexible customization to further boost accuracy and multi-attacks based on your individual progression🐾
+Specifically, when prioritizing maximum accuracy for the ultimate stable configuration, equipping the "Crepuscular Gorget" (neck) and "Crepuscular Sash" (waist) is highly recommended.
+Alternative options, such as "Gazu Bracelet +1 (Rank 15)" for hands, "Fotia Gorget" for neck, and "Kentarch Belt +1 (Rank 15)" for waist, serve as excellent substitutes if you have not yet prepared the top-tier "Crepuscular" series or "Nyame Gauntlets." This allows flexible customization based on your individual progression🐾
 
 
 

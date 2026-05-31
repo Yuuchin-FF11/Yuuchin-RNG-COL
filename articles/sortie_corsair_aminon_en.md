@@ -267,8 +267,8 @@ This is the Master's highly optimized, specialized build dedicated entirely to s
     Filling the Neck, Back, and Waist slots with **Crepuscular Gorget**, **Crepuscular Cape**, and **Crepuscular Sash** grants unparalleled M.Acc additions. Boasting over +30 M.Acc per slot, this synergy leaves other gear combinations far behind.
 *   **Highly Effective Accessory Synergy with Stikini Rings & Custom Earrings**
     By pairing **Crepuscular Earring** and **Chasseur's Earring +2** in the ear slots and double-stacking **Stikini Ring +1** in the ring slots, the build gains M.Acc +22 and Magic Skill +16. Boosting Dark Magic skill directly increases the base success rate and absorption of Absorb-TP, making this a highly logical, elite choice.🐾
-*   **⚠️ Crucial Party Coordination in Actual Combat (Real Battle Warning)**
-    Even with this absolute best-in-slot M.Acc setup, landing Absorb-TP on Aminon's monstrous Magic Evasion is impossible for a Corsair acting alone. Full landing (zero resists) can only be achieved through perfect synergy with your party: specifically, the Red Mage's **Frazzle III** (for Magic Evasion down) and the Bard's **Dark Threnody II** (for Dark Resistance down). This extreme setup is a true testament to flawless party coordination and the absolute limits of frontline Corsair play.
+*   **⚠️ Crucial Party Coordination in Actual Combat**
+    Even with this absolute best-in-slot M.Acc setup, landing Absorb-TP on Aminon's extremely high Magic Evasion is impossible for a Corsair acting alone. Reliable landing can only be achieved through perfect synergy with your party: specifically, the Red Mage's **Frazzle III** (for Magic Evasion down) and the Bard's **Dark Threnody II** (for Dark Resistance down) to allow the Absorb-TP rotation to succeed.
 
 ---
 🐾 *This is an exceptionally refined tactical flow born directly from the Master's real combat experience!* 🐾

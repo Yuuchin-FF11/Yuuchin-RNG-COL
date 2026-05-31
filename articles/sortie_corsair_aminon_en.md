@@ -31,12 +31,55 @@ Since Aminon frequently uses high-impact knockback moves, correct positioning is
 *   The Tank must stand with their back against the **corner of the entrance door (closed)**.
 *   This specific door corner has a slight indentation (recess) that perfectly "catches" the character model, 100% neutralizing Aminon's knockback and preventing any shift in positioning.
 
-### 2. Other Party Members Positioning
+### 2. Other Party Members Positioning & Distance
 *   Generally, other party members group up near the **opposite corner of the entrance door** (diagonally across from the Tank).
+*   **Ideal Sub-Target Distance**:
+    *   It is highly recommended to stand at the **absolute limit of close-range Weapon Skill (Savage Blade) range**. Specifically, target the boss and adjust your distance so the sub-target selection cursor is right on the **boundary between "Yellow" (in range) and "Blue" (out of range)**.
 *   **Corsair's (Master's) Tactical Philosophy**:
     *   Hugging the corner completely can limit your field of view. To maintain optimal awareness of the battle state (Absorb-TP rotations, debuff status, party HP, etc.), the Corsair deliberately stands slightly away from the corner, accepting the knockbacks in exchange for full visual command of the fight.
-*   **Dancer (DNC) Movement**:
-    *   The Dancer fights through the knockbacks while staying glued to Aminon. In order to apply steps (crucial debuffs), the Dancer **must remain in a drawn-weapon (melee-combat) state**, meaning they must constantly run back in and stick close to the boss.
+*   **Dancer (DNC) Movement & Hidden Mechanics**:
+    *   The Dancer fights through the knockbacks while staying glued to Aminon. While the Dancer's primary role is maintaining Steps (critical debuffs), there is a crucial hidden mechanic: **Steps can be executed even while facing backward, as long as your weapon is drawn (melee-combat state).** Thus, the Dancer maintains melee status and applies Steps constantly while absorbing knockbacks.
+
+---
+
+## 🔮 Absolute Prerequisites for Sub-DRK "Absorb-TP" Success
+
+While support and backline members rotate Absorb-TP, **Aminon's exceptionally high Magic Evasion means Absorb-TP is highly prone to resists (failures) under normal conditions.**
+
+Since a single resist can lead to an immediate party wipe if Aminon executes a Weapon Skill, maintaining the following Magic Accuracy (M.Acc) debuffs is absolutely mandatory:
+
+### 1. RDM and BRD "Magic Evasion Down" Support
+Absorb-TP will **not** land reliably unless these two key debuffs are permanently active:
+*   🔴 **Red Mage**: Maintain **Frazzle** on the boss at all times.
+*   🎵 **Bard**: Maintain **Dark Threnody (Dark Threnody / 闇スレ)** on the boss at all times.
+*   *※ Without Frazzle and Dark Threnody, Corsair's Absorb-TP will almost certainly resist.* 🐾
+
+### 2. Corsair's Gear Specifications
+*   When casting Absorb-TP, you must switch out of physical DPS/Ranged Acc gear and equip a **maximum Magic Accuracy (M.Acc) focused gear set**. Any compromise in gear will lead directly to a resist and a party wipe.
+
+---
+
+## 🔄 Battle Flow & Specific Job Roles
+
+### 🛡️ Paladin (Tank) Role
+*   Maintain and reapply **Stoneskin** constantly while assisting with self-healing, ensuring absolute control and enmity of the boss.
+
+### 💃 Dancer (Main DPS) Role
+*   Maintain Steps (facing backward is fine as long as weapon is drawn) and actively use job abilities to quickly generate TP.
+*   Utilize **Climactic Flourish** and massive Weapon Skills to serve as the party's primary source of DPS.
+
+### 🎲 Support/Backline Roles (COR, RDM, BRD, GEO)
+*   **TP Generation**: Rely on **Tactician's Roll** Regain + **Absorb-TP** (which returns the drained TP to you via Magic Acumen, etc.) to rapidly accumulate TP.
+*   **DPS**: As soon as TP is secured, fire off Weapon Skills (Savage Blade, etc.) to actively assist in chipping down Aminon.
+
+### 🔴 【The MVP of this Battle】 The Overwhelming Red Mage Role
+In this physical / Absorb-TP setup, **the Red Mage holds by far the most challenging and high-pressure role in the entire run.** The RDM must execute an immense list of tasks solo:
+1.  **Non-stop Buff Management**: Maintain and cast **Haste II**, **Phalanx II**, and **Refresh III** on all 6 party members constantly.
+2.  **Flawless Debuff Maintenance**: Instantly re-apply Frazzle and other crucial enfeebling spells the second they wear off.
+3.  **Absorb-TP Rotation**: Participate actively in the Absorb-TP rotation alongside the Corsair and others.
+4.  **Flawless Utility**: Cast **Impact** during windows of opportunity to shred boss stats while rapidly regenerating RDM's own TP via Magic Acumen.
+
+The Red Mage's god-tier multi-tasking is the absolute pillar of survival and the key to defeating Aminon! 🐾
 
 ---
 

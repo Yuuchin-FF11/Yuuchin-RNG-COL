@@ -170,11 +170,8 @@ By utilizing the sub-job Dark Knight (/DRK) advantage, it adopts a "One-Handed S
 <details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Damage Taken (DT)</td><td>-50% (Capped)</td><td>Gear totals -67%, easily exceeding the 50% cap for rock-solid tank-like mitigation.</td></tr><tr><td>Magic Evasion</td><td>+600 or more</td><td>colossal defense led by Nyame Feet R30 (+150), CS Legs +3 (+130), Mu's Mask, and Regal.</td></tr><tr><td>All Status Resistance</td><td>+30% or more</td><td>Ironclad ailment resistance via Regal Gloves (+15%), Mu's Mask (+10%), and Melanic Ring (+5%).</td></tr></tbody></table></details>
 
 #### Idle Gear Spec Commentary 🐾
-This is a "diamond-hard" idle set designed to minimize incoming damage during Absorb-TP cast recovery windows or Aminon's fierce AoE physical/magic assaults.
+*(※Under construction by the Master)*
 
-By employing the Paladin-like "One-Handed Sword + Shield" setup (Naegling + Nusku Shield), it forfeits dual-wielding in exchange for overwhelming damage reduction and shield block rate.
-Integrating the latest rewards like "Mu's Mask" and "Mu's Sash" with highly potent status-resisting classics such as "Adaman Armor," "Regal Gloves," and "Melanic Ring" ensures a very high probability of completely resisting Aminon's deadly status ailments.
-Damage Taken reduction reaches a staggering "-67%" from gear alone, far exceeding the active cap of "-50%". This meticulous high-end design ensures that even if you swap a slot for more Magic Accuracy or HP, you will permanently maintain capped damage mitigation. 🐾
 
 ---
 🐾 *This is an exceptionally refined tactical flow born directly from the Master's real combat experience!* 🐾

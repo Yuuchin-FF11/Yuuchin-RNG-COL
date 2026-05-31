@@ -1,6 +1,6 @@
 # Sortie Corsair Strategy Guide (Upper Sectors: DABC)
 
-> ⬅️ **[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=articles/sortie_corsair_lower_en.md)**
+> ⬅**[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=articles/sortie_corsair_lower_en.md)**
 
 ## Premise: Party Composition
 The strategy described in this article assumes the following party composition:
@@ -10,7 +10,7 @@ The strategy described in this article assumes the following party composition:
 
 The core strategy focuses on using **two Scholars** to create skillchains and dealing massive damage through Magic Bursts (MB).
 
-> **💡 Note on GEO's Indi-Spells**
+> **Note on GEO's Indi-Spells**
 > In boss battles, the Geomancer basically uses **"Indi-Acumen"** to boost the party's overall magic power. However, depending on the setup, they may choose **"Indi-Haste."** This is used not so much for attack speed but to **speed up the recast of spells like elemental magic to increase rotation speed.** It's key to switch flexibly according to the situation.
 
 <a id="timing-of-skillchain-follow-up-ws"></a>
@@ -27,7 +27,7 @@ Instead of firing immediately in a hurry, keep in mind to **"wait a breath after
 
 <div class="boss-box" id="leaden-macro">
 
-### 💡 Solo Skillchain Macro: "Leaden Salute → Wildfire"
+### Solo Skillchain Macro: "Leaden Salute → Wildfire"
 
 A 5-line macro to further extend the Scholar's Distortion skillchain (for Ice/Water MB) and maximize MB time.
 
@@ -46,7 +46,7 @@ A 5-line macro to further extend the Scholar's Distortion skillchain (for Ice/Wa
 *   **Choice of Shots (Important)**:
     This macro includes two "<span class="ability-highlight">Ice Shots</span>" between WS. This is to instantly secure the TP needed for the next WS by utilizing effects like **Rostam (Path B)**'s "Quick Draw: TP+250."
     *Note: Shots like Light Shot do not grant TP, so it's key to choose an effective shot.*
-    > 💡 **Regarding Elemental Attributes**
+    > **Regarding Elemental Attributes**
     > The above example assumes "Ice weakness (Ice MB)." If the enemy is weak to Water (Water MB), swap to "Water Shot" flexibly according to the boss's weakness.
 
 *   **Exquisite Wait Settings (The Golden Ratio)**:
@@ -62,7 +62,7 @@ A 5-line macro to further extend the Scholar's Distortion skillchain (for Ice/Wa
 
 <div class="boss-box" id="laststand-macro">
 
-### 💡 For Ultimate Skillchain "Radiance": Last Stand 2-Button Macro
+### For Ultimate Skillchain "Radiance": Last Stand 2-Button Macro
 
 Explanation of the "Two-button (Split)" macro technique used to generate the ultimate skillchain "Radiance" solo from a Scholar's Fragmentation skillchain.
 
@@ -97,7 +97,7 @@ In this strategy route, we kill bosses in the following order, considering trigg
 * **Upper Sectors (Lower Bosses)**: **D** → **A** → **B** → **C**
 * **Lower Sectors (Higher Bosses)**: **G** → **E** → **F** → **H**
 
-> **💡 Advantage of this Route (Follow the Left Wall)**
+> **Advantage of this Route (Follow the Left Wall)**
 > The biggest advantage of rotating the upper sectors in the "D→A→B→C" order is that **after defeating the first D boss, you can reach the final C boss without getting lost just by following the "left wall."** This is a highly recommended route even for those unfamiliar with Sortie maps.
 
 ## Initial Buffing (In front of the Device)
@@ -128,7 +128,7 @@ In addition to the interaction with the GEO, always make sure to get **"Haste"**
 Getting these provides the following major benefits:
 
 * **Haste**: Reduces attack interval, allowing even a Corsair with **Budget Gear** to successfully pull off a solo skillchain in time.
-  > 💡 **Note on Aura**
+  > **Note on Aura**
   > In a "Two Scholars" setup, one Scholar typically uses the SP ability "Tabula Rasa" to spread a powerful **"Aura"** during initial buffs. Therefore, the Haste slot (interval reduction) is usually not an issue in the early stages.
 * **Darkness Storm**: Significantly increases the damage of <span class="ws-highlight">Leaden Salute</span> (Darkness attribute), which is the Corsair's main magic WS. (Crucial for utilizing elemental obis).
 
@@ -148,7 +148,7 @@ After initial buffs, the party splits into three groups to handle gimmicks (ches
 * **Corsair (Sector B)**
   The Corsair goes solo to Sector B to defeat 6 Elementals to spawn a chest.
 
-> **💡 Efficiency Note**
+> **Efficiency Note**
 > By splitting into three groups from the start, you can **collect triggers for all Upper NM bosses (A-D) simultaneously**, allowing for extremely efficient progress in the time-limited Sortie.
 
 ### How to Kill Elementals (Solo Skillchain)
@@ -196,25 +196,25 @@ The Sector D boss (Degei) has a gimmick where its weakness attribute changes ran
   2. After generating Light, immediately fire a **"Fire Shot" with CS Boots (Empyrean feet)** equipped to amplify the damage of the SCH's subsequent Magic Burst (MB).
   3. **(Additional follow-up)**: If the boss still stands, the **RUN can follow up with "<span class="ws-highlight">Dimidiation</span>"** to generate another **Light** skillchain.
 
-> **💡 Tip (Accuracy Gear)**
+> **Tip (Accuracy Gear)**
 > <span class="ws-highlight">Exenterator</span> is a physical WS; it must hit to connect the skillchain. Once fire weakness is confirmed, swap to **"Accuracy (Melee TP) gear"** and stand by.
 
 #### ② Weak to Thunder or Wind (Fragmentation → Light → Radiance)
 * **SCH Action**: Create a "Fragmentation" skillchain (A single Fragmentation using a book, not a 2-step SC).
 * **COR Action**:
     1. Timed with the SCH's "Fragmentation," the COR fires **"<span class="ws-highlight">Last Stand</span>"** to extend it to a **"Light"** skillchain.
-    > 💡 **[See the Radiance macro explanation here](#laststand-macro)**
+    > **[See the Radiance macro explanation here](#laststand-macro)**
     2. Immediately after the Light SC, **fire 2 "<span class="ability-highlight">Quick Draws</span> (STP Gear)" to instantly regain TP.**
     3. Firing another **"<span class="ws-highlight">Last Stand</span>"** immediately will generate the ultimate skillchain **"Radiance."**
 
-> **💡 Tip (R.Acc Focus)**
+> **Tip (R.Acc Focus)**
 > The goal of <span class="ws-highlight">Last Stand</span> here is not damage but "ensuring it hits to connect/extend the skillchain." Use **"R.Acc-focused gear."**
 
 #### ③ Weak to Ice or Water (Distortion → Darkness → Darkness)
 * **SCH Action**: Create a "Distortion" skillchain.
 * **COR Action**:
   1. Timed with the SCH's "Distortion," the COR fires **"<span class="ws-highlight">Leaden Salute</span>"** to extend it to a **"Darkness"** skillchain.
-    > 💡 **[See the follow-up macro explanation here](#leaden-macro)**
+    > **[See the follow-up macro explanation here](#leaden-macro)**
   2. Immediately after the Darkness SC, fire **2 "<span class="ability-highlight">Quick Draws</span> (STP Gear)" to instantly regain TP.**
   3. Firing **"<span class="ws-highlight">Wildfire</span>"** immediately with the regained TP will generate **another "Darkness"** skillchain.
 
@@ -237,7 +237,7 @@ After defeating a boss like Degei, immediately move to the next destination (Sec
    As soon as the boss dies, the COR uses **"Bolter's Roll"** to increase the party's movement speed.
 2. **TP Security with Tactician's Roll**
    If you don't have enough TP after the battle, also use **"Tactician's Roll"** while moving. This ensures you have the TP needed for follow-ups at the next boss.
-    > **💡 Tip**: Try to ensure the **RUN (Tank)** also gets this roll, as they need TP for hate-generating actions at the start of the next boss battle.
+    > **Tip**: Try to ensure the **RUN (Tank)** also gets this roll, as they need TP for hate-generating actions at the start of the next boss battle.
     > **【Arrival Switch】**: When you arrive, you'll have "Tactician + Bolter." Just overwrite Bolter with **"Wizard's Roll"** to enter combat with "Tactician + Wizard." (Folding is only necessary for the first D boss).
 3. **Sneak & Invisible**
    While moving, the party usually gets **"AoE Sneak"** from the SCHs or GEO (sub-SCH). The COR should focus on distributing **Bolter's Roll** first, then move once everyone has Sneak.
@@ -246,7 +246,7 @@ After defeating a boss like Degei, immediately move to the next destination (Sec
 
 If the **NM in Sector A** is up on the way to the boss, kill it. There is a crucial habit for the COR here:
 
-> **💡 Important: Bolter's Roll loss and Re-application**
+> **Important: Bolter's Roll loss and Re-application**
 > <span class="ability-highlight">Bolter's Roll</span> is lost if a character enters "Combat Status" (attacking or being attacked). After fighting an NM or if someone is aggroed, you must re-apply Bolter's Roll.
 >
 > However, **if the COR themselves was not attacked (did not enter combat status), the Bolter's Roll remains on them.** If you try to use it again in this state, it will say "no effect (cannot overwrite)," and you cannot give it to your allies.
@@ -286,7 +286,7 @@ Once the attribute is known, the Scholar creates a skillchain. The COR's follow-
   SCH creates "Gravitation" for <span class="magic-highlight">Stone MB</span>. COR basically stands by, but can follow up with "<span class="ws-highlight">Wildfire</span>" if the RUN creates a Darkness SC.
 * **Wind Boss (Ice Weakness): Distortion**
   SCH creates "Distortion" for <span class="magic-highlight">Blizzard MB</span>. COR follows the **Leaden (Darkness) → Shots → Wildfire (Darkness)** route.
-    > 💡 **[See follow-up macro here](#leaden-macro)**
+    > **[See follow-up macro here](#leaden-macro)**
 
 </div>
 
@@ -311,4 +311,4 @@ Skomora is fixed to **Fire Weakness**, just like Ghatjot.
 
 ---
 
-> ➡️ **[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=articles/sortie_corsair_lower_en.md)** ｜ 🏠 **[Back to Homepage](index_en.html)** ｜ ⬆️ **[Back to Top](#)**
+> **[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=articles/sortie_corsair_lower_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**

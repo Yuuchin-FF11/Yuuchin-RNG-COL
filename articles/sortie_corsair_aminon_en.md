@@ -51,7 +51,7 @@ Since a single resist can lead to an immediate party wipe if Aminon executes a W
 ### 1. RDM and BRD "Magic Evasion Down" Support
 Absorb-TP will **not** land reliably unless these two key debuffs are permanently active:
 *   🔴 **Red Mage**: Maintain **Frazzle** on the boss at all times.
-*   🎵 **Bard**: Maintain **Dark Threnody (Dark Threnody / 闇スレ)** on the boss at all times.
+*   🎵 **Bard**: Maintain **Dark Threnody** on the boss at all times.
 *   *※ Without Frazzle and Dark Threnody, Corsair's Absorb-TP will almost certainly resist.* 🐾
 
 ### 2. Corsair's Gear Specifications
@@ -75,8 +75,10 @@ Absorb-TP will **not** land reliably unless these two key debuffs are permanentl
     *   Therefore, after dealing a significant chunk of damage, the Dancer must execute **Super Jump** to shed their enmity, safely handing the boss's attention back to the Tank.
 
 ### 🎲 Support/Backline Roles (COR, RDM, BRD, GEO)
-*   **TP Generation**: Rely on **Tactician's Roll** Regain + **Absorb-TP** (which returns the drained TP to you via Magic Acumen, etc.) to rapidly accumulate TP.
-*   **DPS**: As soon as TP is secured, fire off Weapon Skills (Savage Blade, etc.) to actively assist in chipping down Aminon.
+*   **⚠️ STRICT PROHIBITION of Auto-Attacks (Melee Attacks)!**:
+    *   **Support and backline members (COR, RDM, BRD, GEO) must absolutely NEVER auto-attack (physically swing at) Aminon.** Auto-attacks generate immense TP for the boss, easily overwhelming your Absorb-TP rotation and triggering fatal party-wipe special moves.
+*   **TP Generation**: Rely on **Tactician's Roll** Regain + **Absorb-TP** (which returns the drained TP to you via Magic Acumen, etc.) + **Quick Draw** to safely accumulate TP without feeding the boss.
+*   **DPS**: As soon as TP is secured, step in for a split second, fire off a single Weapon Skill (Savage Blade, etc.), and immediately disengage (ensuring you do not land a single auto-attack by accident).
 
 ### 🔴 【The MVP of this Battle】 The Overwhelming Red Mage Role
 In this physical / Absorb-TP setup, **the Red Mage holds by far the most challenging and high-pressure role in the entire run.** The RDM must execute an immense list of tasks solo:
@@ -114,9 +116,23 @@ Once the battle begins, generate TP as quickly as possible using:
 *   The passive Regain effect from the pre-applied **Tactician's Roll**.
 *   Firing **Quick Draw** shots to actively and instantly generate TP.
 
-### 2. Savage Blade Spam for Precise DPS
-*   Spam the physical sword Weapon Skill **Savage Blade** as soon as you have enough TP to chip down Aminon's health.
-*   *※ Due to Aminon's special mechanics (such as elemental damage absorption), using the non-elemental physical WS Savage Blade provides a highly stable, safe, and powerful source of DPS.*
+### 2. ⚠️ Same Weapon Skill Cumulative Resistance & Party WS Rotation
+Aminon (Hard Mode) possesses an extremely punishing mechanic: **using the exact same Weapon Skill (WS) repeatedly builds a massive cumulative resistance, causing subsequent WS damage of that type to drop drastically.**
+Therefore, having the entire party spam only one WS (such as Savage Blade) is strictly forbidden! To maintain optimal damage output, the party must **rotate different types of WS to distribute and bypass the cumulative resistance.**
+
+#### Recommended WS Rotation by Job
+To safely mitigate Aminon's resistance while maintaining maximum DPS, the party should deploy the following diverse WS rotation:
+
+| Job | Recommended WS | Tactical Execution & Role |
+| :--- | :--- | :--- |
+| 🛡️ **Paladin (PLD)** | **Atonement** | The Tank's primary focus is maintaining enmity, Stoneskin, and self-healing. **The Tank does not need to use WS.** However, if there is a surplus of resources, using Atonement helps disperse the boss's WS resistance even further. |
+| 🎲 **Corsair (COR)** | **Savage Blade** | Firing single, heavy physical Savage Blade casts when safe, COR focuses on physical slashing damage. |
+| 💃 **Dancer (DNC)** | **Ruthless Stroke**<br>**Rudra's Storm** | As the primary DPS, the Dancer rotates between Ruthless Stroke and Rudra's Storm, beautifully dispersing their own cumulative resistance while keeping damage at absolute peak. |
+| 🔴 **Red Mage (RDM)** | **Black Halo** | Between high-pressure enfeebling and buffing duties, RDM gathers TP and strikes with the powerful club WS Black Halo. |
+| 🎵 **Bard (BRD)** | **Mordant Rime** | In between song maintenance, Dark Threnody, and Absorb-TP, the Bard uses their dedicated dagger WS Mordant Rime to assist in damage output. |
+| 🌀 **Geomancer (GEO)** | **Judgment**<br>**Flash Nova** | Between bubble maintenance and Absorb-TP, GEO casts the club WS Judgment or Flash Nova.<br>*※ While Flash Nova is a Light-elemental magic WS, as long as the Absorb-TP rotation perfectly locks the boss's TP at zero, Aminon's absorption aura will NEVER activate, allowing Flash Nova to land safely and deal immense damage! Rotation between physical Judgment and Flash Nova is highly effective.* |
+
+By rotating these diverse Weapon Skills, the party completely neutralizes Aminon's cumulative resistance, maintaining maximum damage efficiency until the very end of the battle!
 
 ---
 
@@ -134,7 +150,7 @@ Keep a close eye on the Red Mage's debuff casts and shoot the corresponding shot
 | 🔵 **Paralyze** | ➡️ **Ice Shot** | Greatly increases the paralysis activation rate and depth, heavily restricting the boss's actions. |
 
 ### ⚠️ Absolute Gear Rule for Quick Draw Support
-*   When executing these debuff enhancement shots, **you MUST equip Empyrean Feet armor (LA Bottes +3 / Lanun Bottes +3, etc.)**!
+*   When executing these debuff enhancement shots, **you MUST equip Empyrean Feet armor (CS Sollerets +3 / Chasseur's Sollerets +3, etc.)**!
 *   **Critical Specs of Empyrean Feet**:
     *   This gear piece houses the unique property "Enhances Quick Draw" (increases debuff effectiveness by +20% and extends duration). Paired with its exceptionally high Magic Accuracy (M.Acc), it ensures you bypass Aminon's extremely high Magic Evasion to successfully land and maximize the debuff enhancements. 🐾
 
@@ -149,30 +165,110 @@ This set is engineered to safely idle between Absorb-TP casts, completely resist
 
 By utilizing the sub-job Dark Knight (/DRK) advantage, it adopts a "One-Handed Sword + Shield" style, trading dual-wielding for absolute shield defense and massive damage reduction.
 
-| Slot | Equipment Name | Primary Stats & Tactical Role |
-| :--- | :--- | :--- |
-| Main | **Naegling** | Core weapon for Savage Blade DPS. |
-| Sub Shield | **Nusku Shield** | Sub-DRK privilege. Drastically increases survivability and defense. |
-| Ranged | **Anarchy** or **Ataktos** | TP Bonus +1000 to push Savage Blade damage to the limit. |
-| Head | **Mu's Mask** | Latest god-tier piece providing stats, Magic Evasion, DT-10%, and all status resistance +10%. |
-| Body | **Adaman Armor** | Legendary armor hosting DT-10% and enhances resistance to all status ailments. |
-| Hands | **Regal Gloves** | Overwhelming status resistance: Magic Evasion +80, DT-4%, all status resistance +15%. |
-| Legs | **CS Trousers +3** | Empyrean +3 legs. Incredible defensive stats: Magic Evasion +130, DT-13%. |
-| Feet | **Nyame Sollerets** | Path B Rank 30: colossal stat boosts, Magic Evasion +150, DT-7%. |
-| Neck | **Loricate Torque +1** | Steady physical damage reduction and DT-6%. |
-| Left Ear | **Sanare Earring** | Valuable Magic Evasion +6 and Magic Defense +4. |
-| Right Ear | **Onowai Earring +1** | Massive HP boost and DT-5% (effectively -8%). |
-| Left Ring | **Melanic Ring** | Ultra-rare ring: all status resistance +5%, DT-4%. |
-| Right Ring | **Vexer Ring +1** | Excellent utility ring: Magic Evasion +10, MDT-4%, DT-3%. |
-| Back | **Camulus's Mantle** | Dedicated cape: HP+80, Evasion/Magic Evasion+20, Enmity-10, DT-5%. |
-| Waist | **Mu's Sash** | Latest content reward: high-spec Magic Accuracy/Evasion/Magic Evasion +30. |
+* Main Weapon: Naegling
+* Sub Shield: Nusku Shield
+* Ranged: Anarchy
+* Ammo: Devastating Bullet or Live Bullet
+* Head: Crepuscular Mask
+* Body: Adaman Armor
+* Hands: Regal Gloves
+* Legs: CS Trousers +3
+* Feet: Nyame Sollerets (Path B Rank 30)
+* Neck: Loricate Torque +1
+* Left Ear: Sanare Earring
+* Right Ear: Onowai Earring +1
+* Left Ring: Melanic Ring
+* Right Ring: Vexer Ring +1
+* Back: Camulus's Mantle (HP+80, Evasion/Magic Evasion+20, Enmity-10, DT-5%)
+* Waist: Crepuscular Sash
 
-<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Damage Taken (DT)</td><td>-50% (Capped)</td><td>Gear totals -67%, easily exceeding the 50% cap for rock-solid tank-like mitigation.</td></tr><tr><td>Magic Evasion</td><td>+600 or more</td><td>colossal defense led by Nyame Feet R30 (+150), CS Legs +3 (+130), Mu's Mask, and Regal.</td></tr><tr><td>All Status Resistance</td><td>+30% or more</td><td>Ironclad ailment resistance via Regal Gloves (+15%), Mu's Mask (+10%), and Melanic Ring (+5%).</td></tr></tbody></table></details>
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Damage Taken (DT)</td><td>-50% (Capped)</td><td>Gear totals -74% (effectively -54% including the +20% DT from Regal Gloves), easily exceeding the 50% cap for rock-solid tank-like mitigation.</td></tr><tr><td>Magic Evasion</td><td>+600 or more</td><td>colossal defense led by Nyame Feet R30 (+150), CS Legs +3 (+130), Crepuscular Mask, and Regal.</td></tr><tr><td>All Status Resistance</td><td>+30% or more</td><td>Ironclad ailment resistance via Regal Gloves (+15%), Crepuscular Mask (+10%), and Melanic Ring (+5%).</td></tr></tbody></table></details>
 
 #### Idle Gear Spec Commentary 🐾
-*(※Under construction by the Master)*
 
+This idle gear set embodies a highly sophisticated logic of "durability and efficiency" born from extensive real combat experience against Aminon.
+
+*   **Countering the Penalty of "Regal Gloves" with Excessive DT Over-capping**
+    By default, the raw sum of Damage Taken (DT) across the gear pieces reaches a colossal **DT -74%**. This excessive over-capping is a deliberate choice to accommodate the **Regal Gloves** (Convert damage taken to TP +20 / Damage Taken +20%).
+    Due to the massive drawback of "Damage Taken +20%" hidden in the gloves' unique properties, the net damage reduction drops to **DT -54%**, which still **easily maintains the absolute hard cap of 50% DT reduction**.
+*   **Converting Even the Slightest Damage into TP**
+    The Regal Gloves are equipped because of their "Convert damage taken to TP +20" property. This ensures that every single tick of the boss's fierce AoE damage is actively converted into TP, accelerating the COR's TP recovery cycle between Absorb-TP casts and physical Weapon Skills (Savage Blade). While the visual difference may feel subtle, it represents an ultimate optimization for maximum battle efficiency.
+*   **Highly Optimized "Magic Defense" Accessories**
+    Since the DT reduction is already capped to the maximum 50% threshold with room to spare, accessories in slots that do not affect the DT cap have been replaced with high-value **Magic Defense (MDB) gear**. This beautifully converts the redundant DT overflow into hard elemental/magic mitigation to survive Aminon's devastating magic AoE spells. 🐾
+
+
+
+### 2. Savage Blade WS (Damage) Gear Set
+This is the physical Savage Blade damage set designed to maximize output during the few precious windows of TP accumulation (Regain, Absorb-TP, Quick Draw) during the Aminon fight.
+
+* Main Weapon: Naegling
+* Sub Shield: Nusku Shield
+* Ranged: Anarchy
+* Ammo: Bayeux Bullet
+* Head: Nyame Helm (Path B Rank 30)
+* Body: Nyame Mail (Path B Rank 30)
+* Hands: Nyame Gauntlets (Path B Rank 30) or Gazu Bracelet +1 (Rank 15)
+* Legs: Nyame Flanchards (Path B Rank 30)
+* Feet: Nyame Sollerets (Path B Rank 30)
+* Neck: Crepuscular Gorget or Fotia Gorget
+* Left Ear: Moonshade Earring (TP Bonus +250)
+* Right Ear: Chasseur's Earring +2
+* Left Ring: Epaminondas's Ring
+* Right Ring: Ifrimad Ring
+* Back: Camulus's Mantle (STR+30, Accuracy/Attack+20, WSD+10%, DT-5%)
+* Waist: Crepuscular Sash or Kentarch Belt +1 (Rank 15)
+
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>WS Damage (WSD)</td><td>+78% or more</td><td>colossus WSD (+43%) via 5-piece Nyame, stacked with Epaminondas (+5%), Ifrimad (+10%), Camulus's Mantle (+10%), and Mu's Collar (+10%). *Adjusts based on alternative gear choices.*</td></tr><tr><td>TP Bonus</td><td>+1250</td><td>Combined TP Bonus +1000 from Anarchy and +250 from Moonshade Earring for immense low-TP execution damage.</td></tr><tr><td>Damage Taken (DT)</td><td>-40% or more</td><td>Highly safe build even during active DPS, combining Nyame's passive DT (-30%), Nusku Shield (-5%), and Camulus's Mantle (-5%).</td></tr></tbody></table></details>
+
+#### Savage Blade WS Gear Spec Commentary 🐾
+
+This set is designed for the Corsair to output maximum damage in single Savage Blade casts from limited TP resources (automatic Regain, Absorb-TP, and Quick Draw).
+
+*   **Nyame 5-Piece Full Adoption for Massive Base Stats and WSD**
+    Adopting the Nyame set across all five armor slots maximizes the critical "STR" and "DEX" stats essential for Savage Blade calculations. With each piece contributing significant WS Damage (WSD+), the cumulative WSD of the gear reaches an astronomical **+78%**, unleashing devastating physical force in every swing.
+*   **TP Bonus +1250 for Low-TP Execution Optimization**
+    By stacking the TP Bonus +1000 from the ranged weapon **Anarchy** and the TP Bonus +250 from the left ear **Moonshade Earring**, COR gains a persistent **TP Bonus of +1250**. Since COR must immediately execute Savage Blade at 1000 TP to minimize boss TP accumulation, this +1250 bonus allows COR to consistently fire Savage Blade at a "2250 TP equivalent multiplier."
+*   **Powerhouse Augmentation from the Latest Content Rewards and Practical Alternatives**
+    The inclusion of **Crepuscular Gorget** in the neck, **Ifrimad Ring** in the right ring, and **Crepuscular Sash** in the waist slot represents the absolute pinnacle of rewards in the modern Vana'diel. However, the set also perfectly accommodates practical alternatives: **Gazu Bracelet +1 (Rank 15)** for massive DEX and Accuracy boost, **Fotia Gorget** for reliable Savage Blade enhancement, and **Kentarch Belt +1 (Rank 15)** for Double Attack reinforcement. This allows flexible customization based on your gear progression🐾
+
+
+
+### 3. Absorb-TP (Extreme M.Acc) Gear Set
+This set is dedicated to ensuring Absorb-TP lands with 100% certainty, bypassing Aminon's extremely high Magic Evasion.
+
+* Main Weapon: Naegling
+* Sub Shield: Nusku Shield
+* Ranged: Anarchy
+* Ammo: Devastating Bullet or Live Bullet
+* Head: Chasseur's Tricorne +3
+* Body: Chasseur's Frac +3
+* Hands: Chasseur's Gantry +3
+* Legs: Chasseur's Trousers +3
+* Feet: Chasseur's Sollerets +3
+* Neck: Crepuscular Gorget
+* Left Ear: Crepuscular Earring
+* Right Ear: Chasseur's Earring +2
+* Left Ring: Stikini Ring +1
+* Right Ring: Stikini Ring +1
+* Back: Crepuscular Cape
+* Waist: Crepuscular Sash
+
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Magic Accuracy (M.Acc)</td><td><strong>+650 or more</strong></td><td>A combination of CS+3 armor pieces (+300), Mu's series (+90+), double Stikini+1 (+22), Crepuscular & Chasseur+2 (+30), etc.</td></tr><tr><td>Dark Magic Skill</td><td><strong>+16</strong></td><td>Boosted by double Stikini Ring +1, significantly improving the base M.Acc and drain capacity of Absorb-TP.</td></tr><tr><td>Damage Taken (DT)</td><td><strong>-30% or more</strong></td><td>Combines DT properties from CS+3 armor (Body -11%, Feet -6%), Nusku Shield (-5%), and Chasseur's Earring +2 (-5%) to survive unexpected AoE attacks.</td></tr></tbody></table></details>
+
+#### Absorb-TP Gear Spec Commentary 🐾
+
+This is the Master's highly optimized, specialized build dedicated entirely to securing a 100% landing rate for **Absorb-TP** (via sub DRK) to fully suppress Aminon's TP.
+
+*   **Pushing the Frontline Limits for sub-DRK Absorb-TP**
+    Landing Absorb-TP while actively fighting on the frontline as a main DPS—especially under the extremely tight constraints of sub-DRK (which heavily limits Dark Magic skill and Magic Accuracy options)—is one of the most demanding tasks in FF11. This build represents the **theoretical peak of Magic Accuracy**, packing every single point of M.Acc gear currently available to a Corsair.
+*   **colossus Magic Accuracy via Full Empyrean +3 "Chasseur's Set"**
+    By equipping **Chasseur's Set +3 (CS+3)** across all 5 armor slots (Head, Body, Hands, Legs, Feet), COR secures a baseline of **M.Acc +300** (+60 per piece). This massive foundation pierces through Aminon's extremely high Magic Evasion with ease.
+*   **The Power of the 3-Piece "Crepuscular Series" (Gorget, Cape, Sash)**
+    Filling the Neck, Back, and Waist slots with **Crepuscular Gorget**, **Crepuscular Cape**, and **Crepuscular Sash** grants unparalleled M.Acc additions. Boasting over +30 M.Acc per slot, this synergy leaves other gear combinations far behind.
+*   **Highly Effective Accessory Synergy with Stikini Rings & Custom Earrings**
+    By pairing **Crepuscular Earring** and **Chasseur's Earring +2** in the ear slots and double-stacking **Stikini Ring +1** in the ring slots, the build gains M.Acc +22 and Magic Skill +16. Boosting Dark Magic skill directly increases the base success rate and absorption of Absorb-TP, making this a highly logical, elite choice.🐾
+*   **⚠️ Crucial Party Coordination in Actual Combat (Real Battle Warning)**
+    Even with this absolute best-in-slot M.Acc setup, landing Absorb-TP on Aminon's monstrous Magic Evasion is impossible for a Corsair acting alone. Full landing (zero resists) can only be achieved through perfect synergy with your party: specifically, the Red Mage's **Frazzle III** (for Magic Evasion down) and the Bard's **Dark Threnody II** (for Dark Resistance down). This extreme setup is a true testament to flawless party coordination and the absolute limits of frontline Corsair play.
 
 ---
 🐾 *This is an exceptionally refined tactical flow born directly from the Master's real combat experience!* 🐾
-

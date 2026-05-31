@@ -130,7 +130,7 @@
                         if (colonIdx !== -1 && keywordsJa.some(k => txt.startsWith(k))) {
                             const prefix = txt.substring(0, colonIdx + 1) + ' ';
                             const restHtml = li.innerHTML.substring(li.innerHTML.search(/[:：]/) + 1).trim();
-                            const items = restHtml.split(/\s+or\s+/).map(itemHtml => {
+                            const items = restHtml.split(/\s+(?:or|または)\s+/).map(itemHtml => {
                                 // すでにリンクが含まれている場合は、二重リンクを避けるためにラップしない
                                 if (itemHtml.includes('<a ')) {
                                     return itemHtml.replace(/(<\/a>)\s*([（(][^）)]+[）)])/g, '$1<span style="color:#a8e063;font-weight:700;">$2</span>');

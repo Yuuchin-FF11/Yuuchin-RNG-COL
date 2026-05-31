@@ -11,7 +11,7 @@ So, in this article, I've compiled the "modern, true tutorial" to help anyone st
 
 ---
 
-## 🌟 Modern Vana'diel is All About "Warping"! Ultra-Comfortable Travel Systems
+## Modern Vana'diel is All About "Warping"! Ultra-Comfortable Travel Systems
 
 One of the biggest surprises for returning players from the old days, as well as complete newcomers, is modern Vana'diel's **warp speed travel systems**!
 
@@ -22,14 +22,12 @@ You no longer have to spend hours running for your life just to get to Jeuno (lo
 *   **Survival Guide Warp**
     *   These are the floating "books" found in fields and dungeon entrances. Once touched, you can warp instantly between any activated books.
 
-### ⚠️ Ironclad Rule: "Always Touch" Them When You See Them!
+### Ironclad Rule: "Always Touch" Them When You See Them!
 When you arrive in a new area, town, or field, **never forget to touch all the Home Points and Survival Guides in the vicinity first!**
 
 It's easy to think "I'll do it later" at first, but having these warps unlocked makes a 100x difference in efficiency when you're progressing through missions (story) or leveling up.
 
-**"Traveling leisurely on foot or by Chocobo while enjoying the scenery is definitely one of the best parts of the FFXI adventure! ✨"**... There is no doubt about that (I still feel like doing it sometimes too, haha), but make sure to unlock them so you can warp whenever you need to! 👍
-
----
+**"Traveling leisurely on foot or by Chocobo while enjoying the scenery is definitely one of the best parts of the FFXI adventure! "**... There is no doubt about that (I still feel like doing it sometimes too, haha), but make sure to unlock them so you can warp whenever you need to! ---
 
 ## 2. The First Big Trap: You must accept "Eminence Record" objectives yourself!
 The very first thing you must do when you land in the city: Set your **"Eminence Record (Objectives)"**.
@@ -52,7 +50,7 @@ Accept the following 5 from the "Basics" tutorial section:
 3. **Heal Without Using Magic**
 4. **Call for Help**
 5. **Undertake a Fields of Valor Training Regime**
-   * *💡 What is FoV?: It refers to the "Field Manual" book placed just outside the city. Just touch the book and accept any training regime to clear it.*
+   * *What is FoV?: It refers to the "Field Manual" book placed just outside the city. Just touch the book and accept any training regime to clear it.*
 
 ### [The Alter Ego Chain (Crucial!)]
 In addition to the above, accept the objective to call an "Alter Ego (Trust NPC)". Clearing this will trigger the next objective in a chain. By simply **clearing them in the order they appear**, you'll reach 10 clears in no time. Plus, you'll instantly gather powerful allies—hitting two birds with one stone.
@@ -74,7 +72,7 @@ In addition to the above, accept the objective to call an "Alter Ego (Trust NPC)
 Once you clear 10 Eminence Records, a new objective called **"All for One"** will be added.
 Accept this, speak to the **"Unity NPC (A.M.A.N. Registration)"** located near the city exits, and join a Unity (similar to an NPC clan).
 
-* *💡 Don't know where the NPC is?: The coordinates and name are written in the description of the "All for One" objective!*
+* *Don't know where the NPC is?: The coordinates and name are written in the description of the "All for One" objective!*
 
 ### Recommended Starting Unity: "Apururu" or "Yoran-Oran"
 By joining a Unity, completing tasks, and accumulating points, you can call your Unity leader as an exclusive Alter Ego.
@@ -111,7 +109,7 @@ Before you start hunting, **always summon 3 Alter Egos first!**
 
 At first, your Alter Egos (especially Valaineral) will defeat enemies in almost one hit, so you'll breeze to around level 10 in just a few minutes.
 
-### ⚠️ The Biggest Trap: "Re-call" your Alter Egos when you level up!
+### The Biggest Trap: "Re-call" your Alter Egos when you level up!
 The strength of an Alter Ego depends on the player's level *at the time they were summoned*.
 This means that **even if you reach level 10, an Alter Ego summoned when you were level 1 remains at level 1 strength!**
 
@@ -135,14 +133,14 @@ Once you hit level 20, return to the city and head to the grand metropolis "Jeun
 ## 8. Chocobo License on Hold? The Smart Way for Solo Players
 Upon entering Upper Jeuno, walk straight ahead, take the stairs down on your left, and head to the "Chocobo Stables". Talk to the old man (Brutus) there to accept the quest **"Wounded Chocobo"**.
 
-* *💡 Caution: The first time you speak to him, a different quest called "Runaway Chocobo" might appear. Keep talking to him until "Wounded Chocobo" triggers.*
+* *Caution: The first time you speak to him, a different quest called "Runaway Chocobo" might appear. Keep talking to him until "Wounded Chocobo" triggers.*
 
 For this quest, you nurse a chocobo using an item called "Gausebit Wildgrass".
 (This is now a very friendly feature where you
 **only have to wait 1 minute** to hand over the next grass,
 instead of waiting past Earth time midnight!)
 
-### ⚠️ Advice for Solo Players
+### Advice for Solo Players
 If a beginner tries to buy "Gausebit Wildgrass" at the Auction House, it's way too expensive. Attempting to farm it yourself is dangerous because the monsters that drop it are a bit too strong for a level 20 character.
 Therefore, if you're completely solo, the safest and most recommended approach is to **"just accept the quest for now, and go collect the grass later when you've leveled up and gotten stronger."**
 
@@ -199,7 +197,7 @@ For melee/vanguard jobs especially, the starting 6 jobs don't provide great subj
 * **Monk**: Sub Warrior, etc.
 * **Thief**: Sub Ninja, etc.
 
-### 💡 Veteran Advice: Level your Subjob to 50 First!
+### Veteran Advice: Level your Subjob to 50 First!
 Your Support Job is capped at half the level of your Main Job. (e.g., If you want your Warrior to be 99, your sub Samurai needs to be level 49 or 50).
 
 The easiest and most stress-free way to proceed is to **"level your intended Support Job to 50 first!"**

@@ -2,7 +2,7 @@
 
 ここにコルセアの装備について書いていきます。
 
-> **💡 初心者・復帰者の方へ（装備の前提について）**
+> **初心者・復帰者の方へ（装備の前提について）**
 > このページで紹介しているのは、現役でかなりやり込んでいる人向けの「エンドコンテンツ（ソーティなど）を見据えた理想装備」が中心となっています。
 > 「まだニャメやイケンガ装束などのハイエンド装備を用意できないよ！」という方向けの、比較的集めやすい**「ユニクロ装備（入門用）編」については、[こちら（ユニクロ装備編）](article.html?file=articles/corsair_equip_beginner.md)にてまとめて紹介**しますので、まずは最終目標として参考にしてみてください。
 
@@ -27,7 +27,7 @@
 * 腰：キャリアーサッシュ
 
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ロール効果時間合計</strong></td><td><strong>+190秒</strong></td><td>ロスタムC(+60), 手(+60), 頭(+50), 首(+20)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>ロール使用中も上限カットを維持</td></tr><tr><td><strong>ストアTP/WSD合計</strong></td><td><strong>なし</strong></td><td>ロール用の目的外のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ロール効果時間合計</strong></td><td><strong>+190秒</strong></td><td>ロスタムC(+60), 手(+60), 頭(+50), 首(+20)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>ロール使用中も上限カットを維持</td></tr><tr><td><strong>ストアTP/WSD合計</strong></td><td><strong>なし</strong></td><td>ロール用の目的外のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **サブ・遠隔武器を固定する理由（ソーティ対応とコンペンセーターの扱い）**
@@ -71,7 +71,7 @@
 * 背：カムラスマント（スナップショット＋１０）
 * 腰：インパルスベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット合計</strong></td><td><strong>+70%</strong></td><td>装備枠のみで上限キャップ到達</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>なし</strong></td><td>射撃準備の一瞬のみのため</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>射撃準備のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット合計</strong></td><td><strong>+70%</strong></td><td>装備枠のみで上限キャップ到達</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>なし</strong></td><td>射撃準備の一瞬のみのため</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>射撃準備のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 
@@ -101,7 +101,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、飛命＋２０、飛攻＋２０、ＳＴＰ＋１０）
 * 腰：フォシャベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+70以上</strong></td><td>イシュクターバン、イケンガ胴足、マリグナス手脚等の合算</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>被ダメ合計-35%（マリグナス手脚-18%, イケンガ胴足-17%）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+70以上</strong></td><td>イシュクターバン、イケンガ胴足、マリグナス手脚等の合算</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>被ダメ合計-35%（マリグナス手脚-18%, イケンガ胴足-17%）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **ストアTP（STP）極振りの構成思想**
@@ -134,7 +134,7 @@
 * 背：カムラスマント（ＳＴＰ＋１０が付いていれば他のオグメはなんでも）
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+80以上</strong></td><td>マリグナス頭胴手足-50%, CS脚-12%, アクセサリー類等の合算</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-41%</strong></td><td>被ダメ合計-41%（マリグナス頭胴手足-31% ＋ 守り/昏黄指-10%）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>クイックドロー（TP蓄積用）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+80以上</strong></td><td>マリグナス頭胴手足-50%, CS脚-12%, アクセサリー類等の合算</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-41%</strong></td><td>被ダメ合計-41%（マリグナス頭胴手足-31% ＋ 守り/昏黄指-10%）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>クイックドロー（TP蓄積用）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 
@@ -210,9 +210,9 @@
 
 ---
 
-  > **📖 関連記事**
+  > **関連記事**
   > ソーティにおけるコルセアのより詳しい立ち回りや、連携の仕組みについては専用記事で解説しています！
-  > 👉 **[ソーティ攻略（コルセア視点）はこちら](article.html?file=articles/sortie_corsair.md)**
+  > **[ソーティ攻略（コルセア視点）はこちら](article.html?file=articles/sortie_corsair.md)**
 
 
 ### 物理遠隔ＷＳ装備（<span class="ws-highlight">ラストスタンド</span>など）
@@ -233,7 +233,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、飛命＋２０、飛攻＋２０、ウェポンスキルダメージ＋１０％）
 * 腰：カフカチナベルト＋１
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+62%</strong></td><td>ニャメ4部位(+47%) ＋ マント(+10%) ＋ 左指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>ニャメ頭胴脚足-31% ＋ マント-4%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+62%</strong></td><td>ニャメ4部位(+47%) ＋ マント(+10%) ＋ 左指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>ニャメ頭胴脚足-31% ＋ マント-4%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **飛命とウェポンスキルダメージのバランス調整**
@@ -261,7 +261,7 @@
 * 背：無の外装
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+40以上</strong></td><td>2射目の極光を出すためのTP確保を最優先</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>マリグナス胴手足-23% ＋ CS脚-12%</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>WSDを完全に捨てて当てるための特化構成</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+40以上</strong></td><td>2射目の極光を出すためのTP確保を最優先</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-35%</strong></td><td>マリグナス胴手足-23% ＋ CS脚-12%</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>WSDを完全に捨てて当てるための特化構成</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **WSDを捨ててでも「当てること」と「TP確保」を最優先**
@@ -294,7 +294,7 @@
 * 背：カムラスマント（ＡＧＩ＋３０、魔命＋２０、魔法ダメージ＋２０、ウェポンスキルダメージ＋１０％）
 * 腰：オルペウスサッシュ or 闇輪の帯
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+45%</strong></td><td>ニャメ手・脚(+23%), マント(+10%), 首(+7%), 耳(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-20%</strong></td><td>ニャメ手・脚-15% ＋ マント-5%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr><tr><td><strong>闇属性ダメージ合計</strong></td><td><strong>+33%</strong></td><td>妖蟲の髪飾り+1(+28%), アルコンリング(+5%) (闇属性WSの極限威力直結)</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+45%</strong></td><td>ニャメ手・脚(+23%), マント(+10%), 首(+7%), 耳(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-20%</strong></td><td>ニャメ手・脚-15% ＋ マント-5%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr><tr><td><strong>闇属性ダメージ合計</strong></td><td><strong>+33%</strong></td><td>妖蟲の髪飾り+1(+28%), アルコンリング(+5%) (闇属性WSの極限威力直結)</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説（<span class="ws-highlight">レデンサリュート</span>）
 * **必須となる「闇属性魔攻」装備について**
@@ -370,7 +370,7 @@
 * 背：カムラスマント（ＤＥＸ＋２０、命中＋３０、攻＋２０、ダブルアタック＋１０％、被物理ダメージ－１０％）
 * 腰：セールフィベルト＋１（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+71</strong></td><td>ロスタムA(+25)、CS脚(+12)、クレパス短剣(+10)等</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>被ダメ-48% ＋ 被物理-10% (上限キャップ到達)</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+71</strong></td><td>ロスタムA(+25)、CS脚(+12)、クレパス短剣(+10)等</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>被ダメ-48% ＋ 被物理-10% (上限キャップ到達)</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **マルチアタックと二刀流の調整**
@@ -403,7 +403,7 @@
 * 背：カムラスマント（ＤＥＸ＋２０、命中＋３０、攻＋２０、ダブルアタック＋１０％、被物理ダメージ－１０％）
 * 腰：セールフィベルト＋１（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+27</strong></td><td>CS脚(+12)、耳(+5)、指(+4,+6)の合計</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>物理-50%(上限) / 魔法-44%</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+27</strong></td><td>CS脚(+12)、耳(+5)、指(+4,+6)の合計</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>物理-50%(上限) / 魔法-44%</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>胴(+6)、耳(+5) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **サベッジブレードを主軸とした構成**
@@ -430,7 +430,7 @@
 * 背：カムラスマント（ＳＴＲ＋３０、命中＋２０、攻＋２０、ＷＳＤ＋１０％、被ダメージ－５％）
 * 腰：セールフィベルト＋１（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+73%</strong></td><td>ニャメ一式(+58%)、マント(+10%)、指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>ニャメ一式（-38%）＋ 指(-10%) ＋ マント(-5%) ※上限超過で非常に堅牢</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+73%</strong></td><td>ニャメ一式(+58%)、マント(+10%)、指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>ニャメ一式（-38%）＋ 指(-10%) ＋ マント(-5%) ※上限超過で非常に堅牢</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **STRブーストによるダメージの安定化**
@@ -460,7 +460,7 @@
 * 背：無の外装
 * 腰：無の腰当
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>連携命中のための特化構成（WSD/STP度外視）</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>接近戦での安全性を最優先した堅牢な命中特化装備</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>確実に命中させ連携を繋げるための特化構成</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>連携命中のための特化構成（WSD/STP度外視）</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>接近戦での安全性を最優先した堅牢な命中特化装備</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>確実に命中させ連携を繋げるための特化構成</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **連携の維持を最優先とした構成思想**
@@ -488,7 +488,7 @@
 * 背：カムラスマント（ＤＥＸ＋２０、命中＋３０、攻＋２０、ＳＴＰ＋１０、被物理ダメージ－１０％）
 * 腰：霊亀腰帯
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+75</strong></td><td>マリグナス一式(+50)、マント(+10)等の合計</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>物理-50%(上限) / 魔法-41%</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>耳(+4)、腰(+7) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+75</strong></td><td>マリグナス一式(+50)、マント(+10)等の合計</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-50%</strong> (上限キャップ)</td><td>物理-50%(上限) / 魔法-41%</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>耳(+4)、腰(+7) ※サポ忍の最短間隔調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
 ### 装備のポイント・解説
 * **生存力とTP回転率の両立**
@@ -512,4 +512,4 @@
 
 ---
 
-> ➡️ **[コルセア装備（ユニクロ・入門編）はこちら](article.html?file=articles/corsair_equip_beginner.md)** ｜ 🏠 **[HPトップに戻る](index.html)** ｜ ⬆️ **[ページの一番上へ](#)**
+> **[コルセア装備（ユニクロ・入門編）はこちら](article.html?file=articles/corsair_equip_beginner.md)** ｜ **[HPトップに戻る](index.html)** ｜ ⬆**[ページの一番上へ](#)**

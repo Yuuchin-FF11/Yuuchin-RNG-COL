@@ -1,6 +1,6 @@
 # 狩人 装備紹介（ハイエンド・理想編）
 
-👉 **[ガストラフェテス装備はこちら](article.html?file=articles/hunter_gastraphetes.md)**
+**[ガストラフェテス装備はこちら](article.html?file=articles/hunter_gastraphetes.md)**
 
 ---
 
@@ -31,9 +31,9 @@
 * 背：ベレナスケープ（AGI+20、飛命+20、飛攻+20、スナップ+10）
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット合計</strong></td><td><strong>+69%</strong> (装備枠)</td><td>上限70%（メリポ+10%込みで完全キャップ）</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>なし</strong></td><td>射撃準備の一瞬のみのため</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>射撃準備のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>スナップショット合計</strong></td><td><strong>+69%</strong> (装備枠)</td><td>上限70%（メリポ+10%込みで完全キャップ）</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>なし</strong></td><td>射撃準備の一瞬のみのため</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>射撃準備のため</td></tr></tbody></table></details>
 
-#### 💡 装備のポイント・解説
+#### 装備のポイント・解説
 * **スナップショットのキャップ（上限70%）達成の仕組み**:
   * 狩人のスナップショット上限値は **70%** です。
   * 狩人はメリットポイント（メリポ）で **+10%** を確保できるため、装備枠で必要なスナップショットは **+60%** となります。
@@ -65,9 +65,9 @@
 * 背：ベレナスケープ（AGI+20、飛命+30、飛攻+30、STP+10）
 * 腰：イェマヤベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+81</strong></td><td>ARベレー+4(+11), AMブラーグ+3(+10), イケンガ両手・両足(+9x2) 等の合計値</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-29%〜-39%</strong></td><td>被ダメ合計-29%（頭-6, 胴-11, 脚-12） ＋ 被物理-10%（イケンガ手・足）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+81</strong></td><td>ARベレー+4(+11), AMブラーグ+3(+10), イケンガ両手・両足(+9x2) 等の合計値</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>実質-29%〜-39%</strong></td><td>被ダメ合計-29%（頭-6, 胴-11, 脚-12） ＋ 被物理-10%（イケンガ手・足）</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
-#### 💡 装備のポイント・解説
+#### 装備のポイント・解説
 * **スナップ装備からのスムーズな着替えとマクロ行数対策**
   メイン・サブ武器、遠隔、矢弾に加え、耳・指・腰といったアクセサリー類をスナップ（射撃準備）装備と完全に共通化しています。これにより、着替えに必要な点数を最小限に抑え、マクロの行数制限（6行）にも余裕を持って収められる、実戦的でストレスのないマクロ設計が可能になっています。
 * **ＡＭカバン+3（胴）の常時固定によるベロシティ効果維持**
@@ -97,9 +97,9 @@
 * 背：ベレナスケープ（AGI+30、飛命+20、飛攻+20、WSD+10%）
 * 腰：フォシャベルト
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+81%</strong></td><td>頭(+10%), 胴ニャメ(+13%), 手ニャメ(+11%), 脚(+10%), 足AM(+12%), 背(+10%), 腰(+10%), 左指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-24%</strong></td><td>胴ニャメ-9%, 手ニャメ-7%, 足AM-8%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+81%</strong></td><td>頭(+10%), 胴ニャメ(+13%), 手ニャメ(+11%), 脚(+10%), 足AM(+12%), 背(+10%), 腰(+10%), 左指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-24%</strong></td><td>胴ニャメ-9%, 手ニャメ-7%, 足AM-8%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
 
-#### 💡 装備のポイント・解説
+#### 装備のポイント・解説
 * **物理WS（ラストスタンド）における「飛命」と「WSD」の妥協なき黄金バランス**:
   物理遠隔WSは「当たらなければ意味がない」という絶対的な真理があります。特にラストスタンドなどの物理WSは外した際のロス（TPの完全消失と致命的な火力ダウン）が極めて大きいため、なるべくミスを回避できるよう、高い飛命とWSDを完璧なバランスで両立させています。
 * **アクセサリーの相補的・機能的ペアリング（胡蝶×ベイラ、エパミノダス×イフラマド）**:
@@ -135,9 +135,9 @@
 * 背：ベレナスケープ（AGI+30、魔命+20、魔法ダメージ+20、WSD+10%）
 * 腰：オルペウスサッシュ
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+73%</strong></td><td>防具5部位(+58%), 左指(+5%), 背(+10%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-37%</strong></td><td>ニャメ5部位一式による強固なダメージカット</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr><tr><td><strong>魔法攻撃力 (魔攻)合計</strong></td><td><strong>+340以上</strong></td><td>防具5部位(+310), 首(+10), 右耳(+10), 右指(+10) 等のオグメ合算値（魔法WSの威力直結）</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+73%</strong></td><td>防具5部位(+58%), 左指(+5%), 背(+10%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-37%</strong></td><td>ニャメ5部位一式による強固なダメージカット</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr><tr><td><strong>魔法攻撃力 (魔攻)合計</strong></td><td><strong>+340以上</strong></td><td>防具5部位(+310), 首(+10), 右耳(+10), 右指(+10) 等のオグメ合算値（魔法WSの威力直結）</td></tr></tbody></table></details>
 
-#### 💡 装備のポイント・解説
+#### 装備のポイント・解説
 * **本構成の真の役割：実質的な「ワイルドファイア（WF）専用」極限火力セット**:
   この装備セットは、実戦上は基本的に**「ワイルドファイア（WF）専用」**の構成となります。トゥルーフライトを本気で撃つ場合は、遠隔武器がミシックウェポン「ガストラフェテス」となり、それに伴ってメイン武器やサブ武器もまた別の専用装備にシフトするため、本構成は銃から放つワイルドファイアを主眼とした極限火力セットとして設計されています。
 * **属性魔法WSの「必中」特性を活かした、魔攻・WSDの限界突破ブースト**:
@@ -171,9 +171,9 @@
 * 背：[ベレナスケープ](https://wiki.ffo.jp/html/35511.html)（DEX+20、命中+30、攻+20、ダブルアタック+10%、被物理-10%）
 * 腰：[セールフィベルト+1](http://wiki.ffo.jp/html/32262.html)（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+32</strong></td><td>脚AMブラーグ+10, 指シーリチ+6/メラン+4, 首+5, 耳テロス+5/シェリダ+2</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-50%以上</strong> (上限キャップ)</td><td>接近戦での安全性を極限まで高めた鉄壁のカット維持</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>素破の耳(+5%)、アデマジャケット+1(+6%) で二刀流キャップにジャスト調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ストアTP合計</strong></td><td><strong>+32</strong></td><td>脚AMブラーグ+10, 指シーリチ+6/メラン+4, 首+5, 耳テロス+5/シェリダ+2</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-50%以上</strong> (上限キャップ)</td><td>接近戦での安全性を極限まで高めた鉄壁のカット維持</td></tr><tr><td><strong>二刀流合計</strong></td><td><strong>+11%</strong></td><td>素破の耳(+5%)、アデマジャケット+1(+6%) で二刀流キャップにジャスト調整</td></tr><tr><td><strong>WSD合計</strong></td><td><strong>なし</strong></td><td>通常攻撃（TP溜め）のため</td></tr></tbody></table></details>
 
-#### 💡 装備のポイント・解説
+#### 装備のポイント・解説
 * **安全第一：被ダメージカット50%以上を常時キープする鉄壁の接近戦仕様**:
   この装備セットの最大の強みは、手数の多い近接攻撃を行いながらも、**常時「被ダメージカット50%以上」のキャップ状態を維持**できている点にあります。接近戦での不意の被弾やボスの特殊技に対しても、狩人本来の打たれ弱さを完全にカバーする極めて安全な攻防一体の構成です。
 * **二刀流係数「+11」をジャスト確保した、攻撃間隔の最短化（キャップ）**:
@@ -205,9 +205,9 @@
 * 背：[ベレナスケープ](https://wiki.ffo.jp/html/35511.html)（STR+30、命中+20、攻+20、WSD+10%）
 * 腰：[セールフィベルト+1](http://wiki.ffo.jp/html/32262.html)（Rank15）
 
-<details><summary>📊 合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+88%</strong></td><td>ホクスボクアロー(+20%), ニャメ5部位(+58%), 背ベレナスケープ(+10%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-43%</strong></td><td>ニャメ一式-38% ＋ 王将の指輪-5%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+88%</strong></td><td>ホクスボクアロー(+20%), ニャメ5部位(+58%), 背ベレナスケープ(+10%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-43%</strong></td><td>ニャメ一式-38% ＋ 王将の指輪-5%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
 
-#### 💡 装備のポイント・解説
+#### 装備のポイント・解説
 * **前衛職（純アタッカー）を脅かす、狩人サベッジブレードの圧倒的超火力**:
   狩人が接近戦で放つサベッジブレードは非常に強力で、**本職の純粋な前衛アタッカー職にも一切負けないほどの凄まじいダメージ**を叩き出すことができます。「遠隔だけではない」狩人の秘められた近接超火力を極限まで高める、ロマンと強さを両立した最強 of セットです。
 * **STRブーストとWSDの完璧なステータスバランス**:
@@ -220,4 +220,4 @@
 
 ---
 
-> 🏠 **[HPトップに戻る](index.html)** ｜ ⬆️ **[ページの一番上へ](#)**
+> **[HPトップに戻る](index.html)** ｜ ⬆**[ページの一番上へ](#)**

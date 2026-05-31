@@ -2,7 +2,7 @@
 
 This guide details the recommended equipment for Corsair.
 
-> **💡 For Beginners and Returning Players**
+> **For Beginners and Returning Players**
 > This page focuses on "Ideal Gear Sets" for high-end content (such as Sortie) aimed at active players.
 > For "Entry-level Gear (Uniqlo Gear)" that is easier to collect if you don't have Nyame or Ikenga yet, please refer to the **[Entry-level Gear Guide](article_en.html?file=articles/corsair_equip_beginner_en.md)**. Use this page as your ultimate goal.
 
@@ -26,7 +26,7 @@ Dedicated equipment to boost the party's firepower. Includes gear that extends d
 * Back: Camulus's Mantle (HP+80, Eva/Mag.Eva+20, Enmity-10, Damage Taken-5%)
 * Waist: Carrier's Sash
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Roll Duration Total</strong></td><td><strong>+190s</strong></td><td>Rostam C(+60), Hands(+60), Head(+50), Neck(+20)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Maintain cap reduction even during roll usage</td></tr><tr><td><strong>Store TP/WSD Total</strong></td><td><strong>None</strong></td><td>Not intended for rolling stance</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Roll Duration Total</strong></td><td><strong>+190s</strong></td><td>Rostam C(+60), Hands(+60), Head(+50), Neck(+20)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Maintain cap reduction even during roll usage</td></tr><tr><td><strong>Store TP/WSD Total</strong></td><td><strong>None</strong></td><td>Not intended for rolling stance</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Reasons for Fixing Sub and Ranged Weapons (Sortie Compatibility and Compensator Handling)**
@@ -69,7 +69,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Back: Camulus's Mantle (Snapshot +10)
 * Waist: Impulse Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot Total</strong></td><td><strong>+70%</strong></td><td>Reach cap with equipment only</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>None</strong></td><td>Only equipped for a split second during pre-cast</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Only for shooting preparation stance</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot Total</strong></td><td><strong>+70%</strong></td><td>Reach cap with equipment only</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>None</strong></td><td>Only equipped for a split second during pre-cast</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Only for shooting preparation stance</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Regarding Snapshot Value Adjustment**
@@ -98,7 +98,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, STP+10)
 * Waist: Fotia Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+70 or higher</strong></td><td>Sum of Ishkur Banner, Ikenga body/feet, Malignance hands/legs, etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-35%</strong></td><td>DT-35% (Malignance hands/legs-18%, Ikenga body/feet-17%)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard ranged combat (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+70 or higher</strong></td><td>Sum of Ishkur Banner, Ikenga body/feet, Malignance hands/legs, etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-35%</strong></td><td>DT-35% (Malignance hands/legs-18%, Ikenga body/feet-17%)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard ranged combat (TP accumulation only)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Philosophy of Extreme Store TP (STP) Configuration**
@@ -131,7 +131,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Back: Camulus's Mantle (Any augments as long as STP+10 is present)
 * Waist: Yemaya Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+80 or higher</strong></td><td>Sum of Malignance head/body/hands/feet-50%, CS legs-12%, accessories, etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-41%</strong></td><td>DT-41% (Malignance head/body/hands/feet-31% + Defending/Crepuscular ring-10%)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>Specifically for Quick Draw (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+80 or higher</strong></td><td>Sum of Malignance head/body/hands/feet-50%, CS legs-12%, accessories, etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-41%</strong></td><td>DT-41% (Malignance head/body/hands/feet-31% + Defending/Crepuscular ring-10%)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>Specifically for Quick Draw (TP accumulation only)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Purpose is "Accumulating TP Instantly" rather than "Damage"**
@@ -196,9 +196,9 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 
 ---
 
-  > **📖 Related Articles**
+  > **Related Articles**
   > More detailed maneuvers for Corsair in Sortie and skillchain mechanics are explained in dedicated articles!
-  > ➡️ **[Sortie Guide (Corsair Perspective) is here](article_en.html?file=articles/sortie_corsair_en.md)**
+  > **[Sortie Guide (Corsair Perspective) is here](article_en.html?file=articles/sortie_corsair_en.md)**
 
 ### Physical Ranged WS Gear (<span class="ws-highlight">Last Stand</span>, etc.)
 * Main Weapon: Rostam (Path A or B)
@@ -218,7 +218,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 * Back: Camulus's Mantle (AGI+30, R.Acc+20, R.Atk+20, WSD+10%)
 * Waist: Fotia Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+62%</strong></td><td>4 Nyame parts (+47%) + Mantle (+10%) + Left Ring (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-35%</strong></td><td>Nyame head/body/legs/feet-31% + Mantle-4%</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+62%</strong></td><td>4 Nyame parts (+47%) + Mantle (+10%) + Left Ring (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-35%</strong></td><td>Nyame head/body/legs/feet-31% + Mantle-4%</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Balancing R.Acc and Weapon Skill Damage**
@@ -245,7 +245,7 @@ A specialized accuracy set for high-evasion bosses like in Sortie to ensure skil
 * Back: Mummu Cape
 * Waist: Yemaya Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+40 or higher</strong></td><td>Prioritizing TP acquisition for firing a second Radiance immediately</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-35%</strong></td><td>Malignance body/hands/feet-23% + CS legs-12%</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>WS damage completely sacrificed for maximum hit reliability</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+40 or higher</strong></td><td>Prioritizing TP acquisition for firing a second Radiance immediately</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-35%</strong></td><td>Malignance body/hands/feet-23% + CS legs-12%</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>WS damage completely sacrificed for maximum hit reliability</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Prioritize "Hitting" and "Securing TP" even if WSD is sacrificed**
@@ -278,7 +278,7 @@ Adopts "Pixie Hairpin +1" and "Archon Ring" to boost Darkness damage.
 * Back: Camulus's Mantle (AGI+30, M.Acc+20, Magic Damage+20, WSD+10%)
 * Waist: Orpheus's Sash or Darkness Obi
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+45%</strong></td><td>Nyame Hands/Legs (+23%), Mantle (+10%), Neck (+7%), Ear (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-20%</strong></td><td>Nyame Hands/Legs (-15%) + Mantle (-5%)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr><tr><td><strong>Dark Damage Total</strong></td><td><strong>+33%</strong></td><td>Pixie Hairpin +1 (+28%), Archon Ring (+5%) (directly boosts Darkness WS damage)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+45%</strong></td><td>Nyame Hands/Legs (+23%), Mantle (+10%), Neck (+7%), Ear (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-20%</strong></td><td>Nyame Hands/Legs (-15%) + Mantle (-5%)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr><tr><td><strong>Dark Damage Total</strong></td><td><strong>+33%</strong></td><td>Pixie Hairpin +1 (+28%), Archon Ring (+5%) (directly boosts Darkness WS damage)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary (<span class="ws-highlight">Leaden Salute</span>)
 * **Essential "Dark Magic Attack" Gear**
@@ -354,7 +354,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, Double Attack+10%, Physical Damage Taken-10%)
 * Waist: Sailfi Belt +1 (Rank 15)
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+71</strong></td><td>Rostam A(+25), CS Legs(+12), Crepuscular Dagger(+10), etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>DT-48% + PDT-10% (reaches the maximum cap)</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Body(+6), Ear(+5) *Perfect adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+71</strong></td><td>Rostam A(+25), CS Legs(+12), Crepuscular Dagger(+10), etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>DT-48% + PDT-10% (reaches the maximum cap)</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Body(+6), Ear(+5) *Perfect adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Adjustment of Multi-Attack and Dual Wield**
@@ -387,7 +387,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, Double Attack+10%, Physical Damage Taken-10%)
 * Waist: Sailfi Belt +1 (Rank 15)
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+27</strong></td><td>Sum of CS Legs(+12), Ear(+5), Ring(+4,+6)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Physical -50% (Cap) / Magic -44%</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Body(+6), Ear(+5) *Perfect adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+27</strong></td><td>Sum of CS Legs(+12), Ear(+5), Ring(+4,+6)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Physical -50% (Cap) / Magic -44%</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Body(+6), Ear(+5) *Perfect adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Configuration Centered on Savage Blade**
@@ -411,7 +411,7 @@ Equipment sets for performing melee combat alongside frontliners using Savage Bl
 * Back: Camulus's Mantle (STR+30, Acc+20, Atk+20, WSD+10%, Damage Taken-5%)
 * Waist: Sailfi Belt +1 (Rank 15)
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+73%</strong></td><td>Nyame Set (+58%), Mantle (+10%), Ring (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Nyame Set (-38%) + Ring (-10%) + Mantle (-5%) *Extremely robust</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (melee WS only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+73%</strong></td><td>Nyame Set (+58%), Mantle (+10%), Ring (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Nyame Set (-38%) + Ring (-10%) + Mantle (-5%) *Extremely robust</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (melee WS only)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Stabilizing Damage through STR Boost**
@@ -441,7 +441,7 @@ A specialized accuracy set to ensure Light skillchains are generated against hig
 * Back: Mummu Cape
 * Waist: Mummu Sash
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>TP and damage completely sacrificed for maximum hit reliability</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Close combat focus ensuring high safety during melee phase</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>To guarantee skillchain completion under extreme evasion targets</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>TP and damage completely sacrificed for maximum hit reliability</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Close combat focus ensuring high safety during melee phase</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>To guarantee skillchain completion under extreme evasion targets</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Prioritize Maintaining Skillchains**
@@ -469,7 +469,7 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 * Back: Camulus's Mantle (DEX+20, Acc+30, Atk+20, STP+10, Physical Damage Taken-10%)
 * Waist: Reiki Yotai
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+75</strong></td><td>Sum of Malignance Set (+50), Mantle (+10), etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Physical -50% (Cap) / Magic -41%</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Ear (+4), Waist (+7) *Perfect adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+75</strong></td><td>Sum of Malignance Set (+50), Mantle (+10), etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -50%</strong> (Cap Target)</td><td>Physical -50% (Cap) / Magic -41%</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Ear (+4), Waist (+7) *Perfect adjustment for min. interval with Sapo Nin</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
 
 ### Equipment Points & Commentary
 * **Balancing Survival and TP Rotation**
@@ -490,4 +490,4 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 
 ---
 
-➡️ **[Entry-level Corsair Gear Guide is here](article_en.html?file=articles/corsair_equip_beginner_en.md)** | 🏠 **[Back to Homepage](index_en.html)** | 🔝 **[Back to Top](#)**
+**[Entry-level Corsair Gear Guide is here](article_en.html?file=articles/corsair_equip_beginner_en.md)** | **[Back to Homepage](index_en.html)** | **[Back to Top](#)**

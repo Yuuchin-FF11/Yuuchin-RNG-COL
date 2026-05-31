@@ -20,7 +20,7 @@ export const linkMap = {
     "カムラスマント": "http://wiki.ffo.jp/html/35517.html",
     "王将の首飾り": "http://wiki.ffo.jp/html/36145.html",
     "クレパスクラナイフ": "http://wiki.ffo.jp/html/38361.html",
-    "ベヨーブレット": "http://wiki.ffo.jp/html/39083.html",
+    "ベヨーブレット": "https://wiki.ffo.jp/html/38564.html",
     "昏黄の耳飾り": "http://wiki.ffo.jp/html/38368.html",
     "ラヌンナイフ": "https://wiki.ffo.jp/html/36109.html",
     "ドミネンスピアス": "http://wiki.ffo.jp/html/34878.html",
@@ -28,7 +28,15 @@ export const linkMap = {
     "インパルスベルト": "http://wiki.ffo.jp/html/20373.html",
     "フリオミシピアス": "http://wiki.ffo.jp/html/29865.html",
     "胡蝶のイヤリング": "https://wiki.ffo.jp/html/22306.html",
+    "胡蝶の耳": "https://wiki.ffo.jp/html/22306.html",
     "ネイグリング": "http://wiki.ffo.jp/html/37597.html",
+    "ヌスクシールド": "https://wiki.ffo.jp/html/35904.html",
+    "アダマンアーマー": "https://wiki.ffo.jp/html/39176.html",
+    "王将の手袋": "https://wiki.ffo.jp/html/36140.html",
+    "驕慢の耳": "https://wiki.ffo.jp/html/30287.html",
+    "驕慢 of 耳": "https://wiki.ffo.jp/html/30287.html",
+    "ヴェクサーリング": "https://wiki.ffo.jp/html/28131.html",
+    "ヴェクサーリング+1": "https://wiki.ffo.jp/html/28131.html",
     "イシュクターバン": "http://wiki.ffo.jp/html/40007.html",
     "メランリング": "http://wiki.ffo.jp/html/39711.html",
     "コモドアチャーム": "http://wiki.ffo.jp/html/37218.html",
@@ -50,7 +58,7 @@ export const linkMap = {
     "アタクトス": "http://wiki.ffo.jp/html/25813.html",
     "フォシャベルト": "http://wiki.ffo.jp/html/32705.html",
     "ルザフリング": "http://wiki.ffo.jp/html/12946.html",
-    "デベステトブレット": "http://wiki.ffo.jp/html/35443.html",
+    "デベステトバレット": "http://wiki.ffo.jp/html/35443.html",
     "ディンジルリング": "http://wiki.ffo.jp/html/35914.html",
     "八輪 of 帯": "http://wiki.ffo.jp/html/32704.html",
     "八輪の帯": "http://wiki.ffo.jp/html/32704.html",
@@ -152,6 +160,20 @@ export const linkMap = {
     "黒の残魂": "https://wiki.ffo.jp/html/37427.html",
     "互助会引換券・銅": "https://wiki.ffo.jp/html/30241.html",
     "アミノン": "https://wiki.ffo.jp/html/39253.html",
+    "漁師風近東鍋": "http://wiki.ffo.jp/html/36430.html",
+    "アブゾタック": "https://wiki.ffo.jp/html/10419.html",
+    "フラズル": "https://wiki.ffo.jp/html/31590.html",
+    "闇のスレノディ": "https://wiki.ffo.jp/html/12326.html",
+    "闇スレ": "https://wiki.ffo.jp/html/12326.html",
+    "昏黄の耳": "http://wiki.ffo.jp/html/38368.html",
+    "ケンタークベルト": "https://wiki.ffo.jp/html/33913.html",
+    "ケンタークベルト+1": "https://wiki.ffo.jp/html/33913.html",
+    "スティキニリング": "https://wiki.ffo.jp/html/33098.html",
+    "スティキニリング+1": "https://wiki.ffo.jp/html/33098.html",
+    "ロリケートトルク+1": "http://wiki.ffo.jp/html/34789.html",
+    "オノワイヤリング+1": "http://wiki.ffo.jp/html/35440.html",
+    "ガズブレスレット+1": "http://wiki.ffo.jp/html/35439.html",
+    "シーリチリング+1": "http://wiki.ffo.jp/html/35694.html",
 
     // --- 英語キーワード ---
     "Rostam": "https://wiki.ffo.jp/html/37235.html",
@@ -161,6 +183,7 @@ export const linkMap = {
     "Chasseur's": "https://wiki.ffo.jp/html/33205.html",
     "Lanun": "https://wiki.ffo.jp/html/30924.html",
     "Chasseur's Earring": "https://wiki.ffo.jp/html/38629.html",
+    "Chasseur's Earring +2": "https://wiki.ffo.jp/html/38629.html",
     "Laksamana's": "https://wiki.ffo.jp/html/30044.html",
     "Adhemar Jacket": "https://wiki.ffo.jp/html/34613.html",
     "Adhemar Wristbands": "https://wiki.ffo.jp/html/34613.html",
@@ -186,6 +209,7 @@ export const linkMap = {
     "Luzaf's Ring": "https://wiki.ffo.jp/html/12946.html",
     "Carrier's Sash": "https://wiki.ffo.jp/html/26679.html",
     "Onowai Earring": "https://wiki.ffo.jp/html/35440.html",
+    "Onowai Earring +1": "http://wiki.ffo.jp/html/35440.html",
     "Enervating Earring": "https://wiki.ffo.jp/html/33195.html",
     "Rajas Ring": "https://wiki.ffo.jp/html/305.html",
     "Fotia Belt": "https://wiki.ffo.jp/html/32705.html",
@@ -213,6 +237,12 @@ export const linkMap = {
     "Eabani Earring": "https://wiki.ffo.jp/html/34143.html",
     "Gleti's Knife": "https://wiki.ffo.jp/html/38205.html",
     "Anarchy": "https://wiki.ffo.jp/html/20554.html",
+    "Nusku Shield": "https://wiki.ffo.jp/html/35904.html",
+    "Adaman Armor": "https://wiki.ffo.jp/html/39176.html",
+    "Regal Gloves": "https://wiki.ffo.jp/html/36140.html",
+    "Sanare Earring": "https://wiki.ffo.jp/html/30287.html",
+    "Vexer Ring": "https://wiki.ffo.jp/html/28131.html",
+    "Vexer Ring +1": "https://wiki.ffo.jp/html/28131.html",
     "Ataktos": "https://wiki.ffo.jp/html/25813.html",
     "Republican Platinum Medal": "https://wiki.ffo.jp/html/38491.html",
     "Gazu Bracelets": "https://wiki.ffo.jp/html/35439.html",
@@ -225,6 +255,10 @@ export const linkMap = {
     "Mummu Gorget": "https://wiki.ffo.jp/html/39388.html",
     "Mummu Cape": "https://wiki.ffo.jp/html/39389.html",
     "Mummu Sash": "https://wiki.ffo.jp/html/39390.html",
+    "Crepuscular Mask": "https://wiki.ffo.jp/html/39387.html",
+    "Crepuscular Gorget": "https://wiki.ffo.jp/html/39388.html",
+    "Crepuscular Cape": "https://wiki.ffo.jp/html/39389.html",
+    "Crepuscular Sash": "https://wiki.ffo.jp/html/39390.html",
     "Carmine Finger": "https://wiki.ffo.jp/html/34550.html",
     "Herculean": "https://wiki.ffo.jp/html/35458.html",
     "Arvina Ring": "https://wiki.ffo.jp/html/31848.html",
@@ -276,7 +310,19 @@ export const linkMap = {
     "Mimics": "https://wiki.ffo.jp/html/537.html",
     "Swart Astral Detritus": "https://wiki.ffo.jp/html/37427.html",
     "Copper A.M.A.N. Voucher": "https://wiki.ffo.jp/html/30241.html",
-    "Aminon": "https://wiki.ffo.jp/html/39253.html"
+    "Aminon": "https://wiki.ffo.jp/html/39253.html",
+    "Marine Stewpot": "https://wiki.ffo.jp/html/36430.html",
+    "Absorb-TP": "https://wiki.ffo.jp/html/10419.html",
+    "Frazzle": "https://wiki.ffo.jp/html/31590.html",
+    "Dark Threnody": "https://wiki.ffo.jp/html/12326.html",
+    "Kentarch Belt": "https://wiki.ffo.jp/html/33913.html",
+    "Kentarch Belt +1": "https://wiki.ffo.jp/html/33913.html",
+    "Stikini Ring": "https://wiki.ffo.jp/html/33098.html",
+    "Stikini Ring +1": "https://wiki.ffo.jp/html/33098.html",
+    "Loricate Torque +1": "http://wiki.ffo.jp/html/34789.html",
+    "Onowai Earring +1": "http://wiki.ffo.jp/html/35440.html",
+    "Gazu Bracelet +1": "http://wiki.ffo.jp/html/35439.html",
+    "Chirich Ring +1": "http://wiki.ffo.jp/html/35694.html"
 };
 
 // 略称・接頭辞マッピング（日本語・英語両対応）
@@ -343,6 +389,12 @@ export function normalizeEquipmentName(searchName, isEn) {
             else if (normalizedName.includes('Gorget')) normalizedName = 'Mummu Gorget';
             else if (normalizedName.includes('Cape')) normalizedName = 'Mummu Cape';
             else if (normalizedName.includes('Sash')) normalizedName = 'Mummu Sash';
+        }
+        else if (normalizedName.startsWith('Crepuscular')) {
+            if (normalizedName.includes('Mask')) normalizedName = 'Crepuscular Mask';
+            else if (normalizedName.includes('Gorget')) normalizedName = 'Crepuscular Gorget';
+            else if (normalizedName.includes('Cape')) normalizedName = 'Crepuscular Cape';
+            else if (normalizedName.includes('Sash')) normalizedName = 'Crepuscular Sash';
         }
         else if (normalizedName.startsWith('Carmine Finger')) normalizedName = 'Carmine Finger';
         else if (normalizedName.startsWith('Amini') && !['Amini Caban', 'Amini Gapette', 'Amini Brague', 'Amini Bottillon', 'Amini Bottillons'].includes(normalizedName)) normalizedName = 'Amini Attire';

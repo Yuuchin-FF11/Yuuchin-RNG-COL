@@ -1,6 +1,6 @@
 # Ranger Equipment Guide (Gastraphetes Edition)
 
-👉 **[Standard Equipment (Yoichi, Annihilator, etc.) is here](article_en.html?file=articles/hunter_equip_en.md)**
+**[Standard Equipment (Yoichi, Annihilator, etc.) is here](article_en.html?file=articles/hunter_equip_en.md)**
 
 This page is a dedicated guide/template for introducing and editing the high-end equipment configuration of Ranger (Ranger) centered around the ultimate Mythic Weapon, **"Gastraphetes"**.
 Please feel free to input and use your favorite equipment configuration!
@@ -29,9 +29,9 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Back: Belenus's Cape (AGI+20, Rng.Acc.+20, Rng.Atk.+20, "Snapshot"+10)
 * Waist: Yemaya Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot Total</strong></td><td><strong>+63%</strong> (Equipment Frame)</td><td>Total including native Gastraphetes (+10%), armor, and accessories (Slight +3% overflow)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>None</strong></td><td>Only equipped for a split second during pre-cast</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Only for shooting preparation stance</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot Total</strong></td><td><strong>+63%</strong> (Equipment Frame)</td><td>Total including native Gastraphetes (+10%), armor, and accessories (Slight +3% overflow)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>None</strong></td><td>Only equipped for a split second during pre-cast</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Only for shooting preparation stance</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **Strong Build Support via Gastraphetes' Native "Snapshot +10"**:
   Having **"Snapshot+10"** standard on the ultimate weapon Gastraphetes itself is a massive benefit! It greatly eases the demand for Snapshot properties on other slots, making the overall snapshot setup much more accessible and flexible.
 * **Smart "Total 63%" Frame & the Practical Choice of 3% Overflow**:
@@ -60,9 +60,9 @@ Store TP (STP) focused equipment configuration to gather TP efficiently with nor
 * Back: Belenus's Cape (AGI+20, Rng.Acc.+30, Rng.Atk.+20, "Store TP"+10)
 * Waist: Yemaya Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+65</strong></td><td>Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -29% to -39%</strong></td><td>DT-29% (Head-6%, Body-11%, Legs-12%) + PDT-10% (Ikenga Hands/Feet)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard ranged combat (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+65</strong></td><td>Hands(+9), Legs(+12), Feet(+7), Neck(+7), Left Ear(+5), Right Ear(+5), Left Ring(+6), Back(+10), Waist(+4)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -29% to -39%</strong></td><td>DT-29% (Head-6%, Body-11%, Legs-12%) + PDT-10% (Ikenga Hands/Feet)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard ranged combat (TP accumulation only)</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **Standard STP Equipment Frame Breakdown (100% Accurate Objective Facts)**:
   * Hands: Ikenga's Gloves (+9)
   * Legs: AM Brague +3 (+12)
@@ -101,19 +101,19 @@ Equipment configuration to maximize the magic damage of the signature Weapon Ski
 * Back: Belenus's Cape (AGI+30, Mag.Acc.+20, Mag.Dmg.+20, WSD+10%)
 * Waist: Orpheus's Sash or Korin Obi
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+73%</strong></td><td>Nyame 5-pieces (+58%), Left Ring (+5%), Back (+10%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr><tr><td><strong>Magic Attack (M.Atk) Total</strong></td><td><strong>+180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes (directly boosts magic WS).</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+73%</strong></td><td>Nyame 5-pieces (+58%), Left Ring (+5%), Back (+10%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-37%</strong></td><td>Total of Nyame 5-pieces (Highly durable and safe)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr><tr><td><strong>Magic Attack (M.Atk) Total</strong></td><td><strong>+180</strong> (Armor & Accessories)</td><td>Nyame 5-pieces (+150), Neck (+10), Right Ear (+10), Right Ring (+10). *Note: Add +110 from dual Malevolence and +40 from Gastraphetes (directly boosts magic WS).</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **The Perfect Balance of WSD and Magic Attack (Why Choose Nyame)**:
   * Just like Corsair's Leaden Salute, the key to maximizing damage is the perfect balance between **Weapon Skill Damage (WSD)** and **Magic Attack (M.Atk)**.
   * While other Ranger gear offers higher WSD values (such as certain WSD+12% pieces), they lack Magic Attack. Therefore, the **Nyame Armor set (Path B Rank 30)**, which provides exceptionally high amounts of both WSD and Magic Attack simultaneously, is the absolute best choice for this light-elemental Weapon Skill.
 * **The Immense Power of Dual-Wielded Malevolence (Max Augments) & Acquisition Tips**:
   * Dual-wielding **Malevolence** with Max Augments provides an incredible boost to your magic Weapon Skills, drastically magnifying Trueflight's damage output.
   * Acquiring the maximum augments on Malevolence is an extremely challenging journey that requires relentless effort, but the devastating damage output is well worth the struggle! Never give up and keep pushing!
-  * **💡 Strategy Tip for Simplicity**: When farming for the Malevolence Max Augments, instead of the 1-on-1 Sinister Rain fight, keep challenging the standard **3-battle consecutive version** repeatedly to secure the best rolls.
+  * **Strategy Tip for Simplicity**: When farming for the Malevolence Max Augments, instead of the 1-on-1 Sinister Rain fight, keep challenging the standard **3-battle consecutive version** repeatedly to secure the best rolls.
 * **Smart Swapping between Korin Obi and Orpheus's Sash depending on Buffs**:
   * For the waist slot, if you have a Scholar in your party who can grant you light-element storm weather spells (Aurorastorm / 極光の陣), equip the **Korin Obi (光輪の帯)**. If you do not have weather support (such as during solo play), **Orpheus's Sash (オルペウスサッシュ)** is the preferred choice to leverage the distance-based damage multiplier. 
 
 ---
 
-🏠 **[Back to Homepage](index_en.html)** ｜ ⬆ * [Back to Top](#)
+**[Back to Homepage](index_en.html)** ｜ ⬆ * [Back to Top](#)

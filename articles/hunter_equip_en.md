@@ -1,6 +1,6 @@
 # Ranger Equipment Guide (High-End & Ideal)
 
-👉 **[Gastraphetes Equipment Guide is here](article_en.html?file=articles/hunter_gastraphetes_en.md)**
+**[Gastraphetes Equipment Guide is here](article_en.html?file=articles/hunter_gastraphetes_en.md)**
 
 ---
 
@@ -33,9 +33,9 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 | **Back** | Belenus's Cape | AGI+20, Rng.Acc.+20, Rng.Atk.+20, "Snapshot"+10 |
 | **Waist** | Yemaya Belt | |
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot Total</strong></td><td><strong>+69%</strong> (Equipment Frame)</td><td>Capped target is 70% (Perfectly capped including +10% from Merit Points)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>None</strong></td><td>Only equipped for a split second during pre-cast</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Only for shooting preparation stance</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Snapshot Total</strong></td><td><strong>+69%</strong> (Equipment Frame)</td><td>Capped target is 70% (Perfectly capped including +10% from Merit Points)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>None</strong></td><td>Only equipped for a split second during pre-cast</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Only for shooting preparation stance</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **Mechanism to Reach the Snapshot Cap (70% Cap)**:
   * The maximum Snapshot cap for Ranger is **70%**.
   * Rangers secure **+10%** from Merit Points, meaning the required amount in the equipment frame is **+60%**.
@@ -67,9 +67,9 @@ Specialized "Store TP (STP)" configuration to fire ranged attacks and transition
 * Back: Belenus's Cape (AGI+20, Ranged Accuracy+30, Ranged Attack+30, Store TP+10)
 * Waist: Yemaya Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+81</strong></td><td>Sum of AR Beret +4 (+11), AM Brague +3 (+10), Ikenga hands/feet (+9x2), etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -29% to -39%</strong></td><td>-29% Damage Taken (Head-6, Body-11, Legs-12) + -10% Physical Damage Taken (Ikenga hands/feet)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard ranged combat (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+81</strong></td><td>Sum of AR Beret +4 (+11), AM Brague +3 (+10), Ikenga hands/feet (+9x2), etc.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>Effective -29% to -39%</strong></td><td>-29% Damage Taken (Head-6, Body-11, Legs-12) + -10% Physical Damage Taken (Ikenga hands/feet)</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard ranged combat (TP accumulation only)</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **Seamless Gear Swapping & Macro Line Limit Solution**
   Key accessories (ears, rings, waist) and weapons/ammo are completely shared with the Snapshot (pre-cast) set. This minimizes the number of equipment swaps required, allowing the entire transition to easily fit within the game's 6-line macro limit for smooth, stress-free combat.
 * **AM Caban +3 (Body) Fixed for Continuous Velocity Shot**
@@ -99,9 +99,9 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
 * Back: Belenus's Cape (AGI+30, Ranged Accuracy+20, Ranged Attack+20, WSD+10%)
 * Waist: Fotia Belt
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+81%</strong></td><td>Head (+10%), Body Nyame (+13%), Hands Nyame (+11%), Legs (+10%), Feet AM (+12%), Back (+10%), Waist (+10%), Left Ring (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-24%</strong></td><td>Body Nyame (-9%), Hands Nyame (-7%), Feet AM (-8%)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+81%</strong></td><td>Head (+10%), Body Nyame (+13%), Hands Nyame (+11%), Legs (+10%), Feet AM (+12%), Back (+10%), Waist (+10%), Left Ring (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-24%</strong></td><td>Body Nyame (-9%), Hands Nyame (-7%), Feet AM (-8%)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **The Golden Balance of Ranged Accuracy and WSD in Physical WS**:
   In physical ranged Weapon Skills, "Accuracy is paramount—if a shot doesn't hit, it's meaningless." Because missing a physical WS leads to a devastating loss (complete waste of TP and a massive drop in damage), this set is strategically configured to perfectly balance high Ranged Accuracy with high Weapon Skill Damage (WSD) to minimize any chance of missing.
 * **Complementary Accessory Pairing (Moonshade & Beyla, Epaminondas & Ifrimad)**:
@@ -137,9 +137,9 @@ Optimized set to maximize magic damage from "Trueflight" (Light elemental magic 
 * Back: Belenus's Cape (AGI+30, Magic Accuracy+20, Magic Damage+20, WSD+10%)
 * Waist: Orpheus's Sash
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+73%</strong></td><td>Nyame 5-pieces (+58%), Epaminondas's Ring (+5%), Belenus's Cape (+10%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-37%</strong></td><td>Robust damage cut from full Nyame 5-pieces set</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr><tr><td><strong>Magic Attack (M.Atk) Total</strong></td><td><strong>+340 or higher</strong></td><td>Nyame 5-pieces (+310), Sibyl Scarf (+10), Friomisi Earring (+10), Dingir Ring (+10), etc. (directly boosts magic WS)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+73%</strong></td><td>Nyame 5-pieces (+58%), Epaminondas's Ring (+5%), Belenus's Cape (+10%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-37%</strong></td><td>Robust damage cut from full Nyame 5-pieces set</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr><tr><td><strong>Magic Attack (M.Atk) Total</strong></td><td><strong>+340 or higher</strong></td><td>Nyame 5-pieces (+310), Sibyl Scarf (+10), Friomisi Earring (+10), Dingir Ring (+10), etc. (directly boosts magic WS)</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **The True Role of This Set: The Ultimate "Wildfire (WF) Specialized" Configuration**:
   In high-end play, this equipment set functions as a dedicated **"Wildfire (WF) specialized"** configuration. Launching Trueflight requires shifting to the Mythic weapon "GastraFates" as your ranged weapon, along with completely different dedicated weapons. Thus, this set is optimized to push gun-fired Wildfire to its absolute limit.
 * **Capitalizing on "Never-Miss" Magic WS: Maximizing Magic Attack & WSD to the Limit**:
@@ -175,9 +175,9 @@ Dual Wield configuration to strike enemies and accumulate TP in a flash while ma
 | **Back** | [Belenus's Cape](https://wiki.ffo.jp/html/35511.html) | DEX+20, Accuracy+30, Attack+20, Double Attack+10%, PDT-10% |
 | **Waist** | [Sailfi Belt +1](https://wiki.ffo.jp/html/32262.html) | Rank 15 |
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+32</strong></td><td>Legs AM Brague (+10), Chirich Ring+1 (+6), Melanic Ring (+4), Scout's Gorget+2 (+5), Telos Earring (+5), Sherida Earring (+2)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-50% or more</strong> (Cap Target)</td><td>Ironclad safety in close-quarters combat</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Suppanomimi (+5%), Adhemar Jacket +1 (+6%) perfectly hitting the Dual Wield cap</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Store TP Total</strong></td><td><strong>+32</strong></td><td>Legs AM Brague (+10), Chirich Ring+1 (+6), Melanic Ring (+4), Scout's Gorget+2 (+5), Telos Earring (+5), Sherida Earring (+2)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-50% or more</strong> (Cap Target)</td><td>Ironclad safety in close-quarters combat</td></tr><tr><td><strong>Dual Wield Total</strong></td><td><strong>+11%</strong></td><td>Suppanomimi (+5%), Adhemar Jacket +1 (+6%) perfectly hitting the Dual Wield cap</td></tr><tr><td><strong>WSD Total</strong></td><td><strong>None</strong></td><td>For standard melee combat (TP accumulation only)</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **Safety First: Ironclad Close-Quarters Survival with PDT/DT -50% Cap**:
   The greatest highlight of this equipment set is the ability to maintain the **DT -50% cap** at all times while performing rapid, multi-hit melee attacks. This safely compensates for the Ranger's natural fragility, offering absolute security against unexpected hits and high-damage area-of-effect special attacks from bosses.
 * **Perfect "Dual Wield +11" Adjustment for Minimum Attack Interval**:
@@ -211,9 +211,9 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 | **Back** | [Belenus's Cape](https://wiki.ffo.jp/html/35511.html) | STR+30, Accuracy+20, Attack+20, WSD+10% |
 | **Waist** | [Sailfi Belt +1](https://wiki.ffo.jp/html/32262.html) | Rank 15 |
 
-<details><summary>📊 Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+88%</strong></td><td>Hauksbok Arrow (+20%), Nyame 5-pieces (+58%), Belenus's Cape (+10%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-43%</strong></td><td>Nyame set (-38%), Regal Ring (-5%) for high defense and security</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (melee WS only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+88%</strong></td><td>Hauksbok Arrow (+20%), Nyame 5-pieces (+58%), Belenus's Cape (+10%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-43%</strong></td><td>Nyame set (-38%), Regal Ring (-5%) for high defense and security</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (melee WS only)</td></tr></tbody></table></details>
 
-#### 💡 Equipment Points & Commentary
+#### Equipment Points & Commentary
 * **Rivaling Frontline Attacker Jobs: The Mind-Blowing Power of Ranger's Savage Blade**:
   Savage Blade performed by a Ranger in close-quarters combat is incredibly powerful, capable of **rivaling or even outdamaging dedicated frontline melee jobs**. This set maximizes the Ranger's hidden melee potential, perfectly combining dream-like burst damage with practical reliability.
 * **Flawless Balance Between STR Boost & WSD**:
@@ -226,4 +226,4 @@ Configured to maximize the impact of the strongest single-handed sword Weapon Sk
 
 ---
 
-🏠 **[Back to Homepage](index_en.html)** ｜ ⬆ * [Back to Top](#)
+**[Back to Homepage](index_en.html)** ｜ ⬆ * [Back to Top](#)

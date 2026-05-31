@@ -228,14 +228,21 @@ function initParticles() {
         }
 
         draw() {
+            // 1. 外側のぼんやりした柔らかな光彩（大きめで極めて薄い円）を低負荷で描画
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.opacity * 0.25;
+            ctx.fill();
+
+            // 2. 内側のくっきりした粒子コアを描画
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
             ctx.globalAlpha = this.opacity;
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = this.color;
             ctx.fill();
-            ctx.globalAlpha = 1;
+
+            ctx.globalAlpha = 1; // アルファ値を安全にリセット
         }
     }
 

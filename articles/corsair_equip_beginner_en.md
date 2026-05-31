@@ -3,10 +3,10 @@
 This page introduces **"Budget Gear (Entry-level)"** sets that are relatively easy to collect for those who have just started Corsair or cannot yet prepare high-end equipment such as Nyame or Ikenga sets.
 Please use this as a reference for gathering equipment first and gradually stepping up to **[High-end Equipment (Ideal Sets)](article_en.html?file=articles/corsair_equip_en.md)**.
 
-> **⚠️ Prerequisite: Collect the "Malignance Set" first!**
-> This "Budget Gear Guide" assumes that you have already collected the **"Malignance Armor Set"**, which can be obtained from the High-Tier Mission Battlefield "★The Lady of Wings."
+> **Prerequisite: Collect the "Malignance Set" first!**
+> This "Budget Gear Guide" assumes that you have already collected the **"Malignance Armor Set"**, which can be obtained from the High-Tier Mission Battlefield "The Lady of Wings."
 > For Corsair, Malignance Armor has exceptional performance with high levels of Accuracy, Store TP, Damage Taken Cut, and Magic Evasion. In current FFXI, it is no exaggeration to say that it is essential equipment (must-have gear) whether you are fighting in melee or performing ranged attacks.
-> If you don't have it yet, start by farming "★The Lady of Wings" (difficulty: Very Easy to Normal, or any difficulty you can repeat) to complete all five pieces of the Malignance set!
+> If you don't have it yet, start by farming "The Lady of Wings" (difficulty: Very Easy to Normal, or any difficulty you can repeat) to complete all five pieces of the Malignance set!
 
 ## Phantom Roll Set
 Dedicated equipment to boost the party's firepower. Includes gear that extends duration or provides bonuses.
@@ -30,7 +30,7 @@ Dedicated equipment to boost the party's firepower. Includes gear that extends d
 
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -91,7 +91,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Waist: Ponente Sash or Impulse Belt
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -126,7 +126,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Waist: Kawkab Belt
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -171,7 +171,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Waist: Yemaya Belt or any other STP gear
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -239,7 +239,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Waist: Ponente Sash or Impulse Belt
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -272,7 +272,7 @@ Equipment to speed up the shooting stance (Snapshot, Rapid Shot, etc.).
 * Waist: Hachirin-no-Obi
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -345,7 +345,7 @@ Equipment sets for performing melee combat with Savage Blade, etc., alongside fr
 * Waist: Sailfi Belt +1 (Rank 15)
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -390,7 +390,7 @@ Equipment sets for performing melee combat with Savage Blade, etc., alongside fr
 * Waist: Sailfi Belt +1 (Rank 15)
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -428,7 +428,7 @@ Equipment sets for performing melee combat with Savage Blade, etc., alongside fr
 * Waist: Fotia Belt
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -467,7 +467,7 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 * Waist: Sailfi Belt +1 (Rank 15)
 
 <details>
-<summary>📊 Estimated Total Stats (Click to expand)</summary>
+<summary>Estimated Total Stats (Click to expand)</summary>
 
 | Item | Total Value | Details/Notes |
 | :--- | :--- | :--- |
@@ -505,4 +505,4 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 
 ---
 
-> ➡️ **[Corsair High-end Gear Guide (Ideal/High-end) is here](article_en.html?file=articles/corsair_equip_en.md)** ｜ 🏠 **[Back to Homepage](index_en.html)** ｜ ⬆️ **[Back to Top](#)**
+> **[Corsair High-end Gear Guide (Ideal/High-end) is here](article_en.html?file=articles/corsair_equip_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**

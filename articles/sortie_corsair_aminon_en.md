@@ -222,14 +222,9 @@ This is the physical Savage Blade damage set designed to maximize output during 
 
 #### Savage Blade WS Gear Spec Commentary 🐾
 
-This set is designed for the Corsair to output maximum damage in single Savage Blade casts from limited TP resources (automatic Regain, Absorb-TP, and Quick Draw).
+Fundamentally, this set is identical to the standard Savage Blade equipment setup. However, because the battle against Aminon requires higher accuracy, it has been slightly adjusted to prioritize accuracy. Through extensive real combat experience, this configuration has proven to be the most stable and reliable setup for delivering physical damage.
 
-*   **Nyame 5-Piece Full Adoption for Massive Base Stats and WSD**
-    Adopting the Nyame set across all five armor slots maximizes the critical "STR" and "DEX" stats essential for Savage Blade calculations. With each piece contributing significant WS Damage (WSD+), the cumulative WSD of the gear reaches an astronomical **+78%**, unleashing devastating physical force in every swing.
-*   **TP Bonus +1250 for Low-TP Execution Optimization**
-    By stacking the TP Bonus +1000 from the ranged weapon **Anarchy** and the TP Bonus +250 from the left ear **Moonshade Earring**, COR gains a persistent **TP Bonus of +1250**. Since COR must immediately execute Savage Blade at 1000 TP to minimize boss TP accumulation, this +1250 bonus allows COR to consistently fire Savage Blade at a "2250 TP equivalent multiplier."
-*   **Powerhouse Augmentation from the Latest Content Rewards and Practical Alternatives**
-    The inclusion of **Crepuscular Gorget** in the neck, **Ifrimad Ring** in the right ring, and **Crepuscular Sash** in the waist slot represents the absolute pinnacle of rewards in the modern Vana'diel. However, the set also perfectly accommodates practical alternatives: **Gazu Bracelet +1 (Rank 15)** for massive DEX and Accuracy boost, **Fotia Gorget** for reliable Savage Blade enhancement, and **Kentarch Belt +1 (Rank 15)** for Double Attack reinforcement. This allows flexible customization based on your gear progression🐾
+Alternative options, such as Gazu Bracelet +1 (Rank 15) for hands, Fotia Gorget for neck, and Kentarch Belt +1 (Rank 15) for waist, are also fully integrated. This allows flexible customization to further boost accuracy and multi-attacks based on your individual progression🐾
 
 
 

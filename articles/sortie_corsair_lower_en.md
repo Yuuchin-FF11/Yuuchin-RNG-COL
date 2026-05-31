@@ -100,4 +100,13 @@ The Sector H boss is an empowered version of the upper D boss (Degei) and, as it
 
 </div>
 
+<div class="boss-box" id="aminon-link">
+
+## 👑 The Ultimate Boss: Hard Aminon Corsair Tactical Guide
+For a highly detailed, dedicated guide on Corsair's specific role, opening roll rotations, Savage Blade DPS, and RDM debuff quick draw synergy (Empyrean Feet required) in the battle against **Hard Aminon**, please refer to our dedicated page. 🐾
+
+👉 **[Hard Aminon Corsair Tactical Guide Here](article_en.html?file=articles/sortie_corsair_aminon_en.md)**
+
+</div>
+
 > ⬅️ **[Back to Sortie Strategy Guide (Upper Sectors: DABC)](article_en.html?file=articles/sortie_corsair_en.md)** ｜ 🏠 **[Back to Homepage](index_en.html)** ｜ ⬆️ **[Back to Top](#)**

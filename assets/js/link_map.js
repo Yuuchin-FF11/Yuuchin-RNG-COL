@@ -151,6 +151,7 @@ export const linkMap = {
     "オーメン": "https://wiki.ffo.jp/html/35829.html",
     "黒の残魂": "https://wiki.ffo.jp/html/37427.html",
     "互助会引換券・銅": "https://wiki.ffo.jp/html/30241.html",
+    "アミノン": "https://wiki.ffo.jp/html/39253.html",
 
     // --- 英語キーワード ---
     "Rostam": "https://wiki.ffo.jp/html/37235.html",
@@ -274,7 +275,8 @@ export const linkMap = {
     "Skeleton Key": "https://wiki.ffo.jp/html/3830.html",
     "Mimics": "https://wiki.ffo.jp/html/537.html",
     "Swart Astral Detritus": "https://wiki.ffo.jp/html/37427.html",
-    "Copper A.M.A.N. Voucher": "https://wiki.ffo.jp/html/30241.html"
+    "Copper A.M.A.N. Voucher": "https://wiki.ffo.jp/html/30241.html",
+    "Aminon": "https://wiki.ffo.jp/html/39253.html"
 };
 
 // 略称・接頭辞マッピング（日本語・英語両対応）

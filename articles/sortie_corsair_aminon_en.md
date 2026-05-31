@@ -182,15 +182,15 @@ By utilizing the sub-job Dark Knight (/DRK) advantage, it adopts a "One-Handed S
 * Back: Camulus's Mantle (HP+80, Evasion/Magic Evasion+20, Enmity-10, DT-5%)
 * Waist: Crepuscular Sash
 
-<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Damage Taken (DT)</td><td>-50% (Capped)</td><td>Gear totals -78% (effectively -58% including the +20% DT from Regal Gloves), easily exceeding the 50% cap for rock-solid tank-like mitigation.</td></tr><tr><td>Magic Evasion</td><td>+600 or more</td><td>colossal defense led by Nyame Feet R30 (+150), CS Legs +3 (+125), Crepuscular Mask, and Regal.</td></tr><tr><td>All Status Resistance</td><td>+25%</td><td>Ironclad ailment resistance via Regal Gloves (+15%) and Crepuscular Mask (+10%).</td></tr></tbody></table></details>
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Damage Taken (DT)</td><td>-50% (Capped)</td><td>Gear totals -73% (effectively -53% including the +20% DT from Regal Gloves), easily exceeding the 50% cap for rock-solid tank-like mitigation.</td></tr><tr><td>Magic Evasion</td><td>+600 or more</td><td>colossal defense led by Nyame Feet R30 (+150), CS Legs +3 (+125), Crepuscular Mask, and Regal.</td></tr><tr><td>All Status Resistance</td><td>+25%</td><td>Ironclad ailment resistance via Regal Gloves (+15%) and Crepuscular Mask (+10%).</td></tr></tbody></table></details>
 
 #### Idle Gear Spec Commentary 🐾
 
 This idle gear set embodies a highly sophisticated logic of "durability and efficiency" born from extensive real combat experience against Aminon.
 
 *   **Countering the Penalty of "Regal Gloves" with Excessive DT Over-capping**
-    By default, the raw sum of Damage Taken (DT) across the gear pieces reaches a colossal **DT -78%**. This excessive over-capping is a deliberate choice to accommodate the **Regal Gloves** (Convert damage taken to TP +20 / Damage Taken +20%).
-    Due to the massive drawback of "Damage Taken +20%" hidden in the gloves' unique properties, the net damage reduction drops to **DT -58%**, which still **easily maintains the absolute hard cap of 50% DT reduction**.
+    By default, the raw sum of Damage Taken (DT) across the gear pieces reaches a colossal **DT -73%**. This excessive over-capping is a deliberate choice to accommodate the **Regal Gloves** (Convert damage taken to TP +20 / Damage Taken +20%).
+    Due to the massive drawback of "Damage Taken +20%" hidden in the gloves' unique properties, the net damage reduction drops to **DT -53%**, which still **easily maintains the absolute hard cap of 50% DT reduction**.
 *   **Converting Even the Slightest Damage into TP**
     The Regal Gloves are equipped because of their "Convert damage taken to TP +20" property. This ensures that every single tick of the boss's fierce AoE damage is actively converted into TP, accelerating the COR's TP recovery cycle between Absorb-TP casts and physical Weapon Skills (Savage Blade). While the visual difference may feel subtle, it represents an ultimate optimization for maximum battle efficiency.
 *   **Highly Optimized "Magic Defense" Accessories**
@@ -218,7 +218,7 @@ This is the physical Savage Blade damage set designed to maximize output during 
 * Back: Camulus's Mantle (STR+30, Accuracy/Attack+20, WSD+10%, DT-5%)
 * Waist: Crepuscular Sash or Kentarch Belt +1 (Rank 15)
 
-<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>WS Damage (WSD)</td><td>+73%</td><td>colossus WSD (+58%) via 5-piece Nyame, stacked with Epaminondas (+5%) and Camulus's Mantle (+10%). Combined with "Ephramad's Ring" which boosts Physical Damage Limit +10% for immense output. *Adjusts based on alternative gear choices.*</td></tr><tr><td>TP Bonus</td><td>+1250</td><td>Combined TP Bonus +1000 from Anarchy and +250 from Moonshade Earring for immense low-TP execution damage.</td></tr><tr><td>Damage Taken (DT)</td><td>-40% or more</td><td>Highly safe build even during active DPS, combining Nyame's passive DT (-30%), Nusku Shield (-5%), and Camulus's Mantle (-5%).</td></tr></tbody></table></details>
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>WS Damage (WSD)</td><td>+73%</td><td>colossus WSD (+58%) via 5-piece Nyame, stacked with Epaminondas (+5%) and Camulus's Mantle (+10%). Combined with "Ephramad's Ring" which boosts Physical Damage Limit +10% for immense output. *Adjusts based on alternative gear choices.*</td></tr><tr><td>TP Bonus</td><td>+1250</td><td>Combined TP Bonus +1000 from Anarchy and +250 from Moonshade Earring for immense low-TP execution damage.</td></tr><tr><td>Damage Taken (DT)</td><td>-35% or more</td><td>Highly safe build even during active DPS, combining Nyame's passive DT (-30%) and Camulus's Mantle (-5%). *Adjusts if alternative hand gear is used.*</td></tr></tbody></table></details>
 
 #### Savage Blade WS Gear Spec Commentary 🐾
 
@@ -249,7 +249,7 @@ This set is dedicated to ensuring Absorb-TP lands with 100% certainty, bypassing
 * Back: Crepuscular Cape
 * Waist: Crepuscular Sash
 
-<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Magic Accuracy (M.Acc)</td><td><strong>+650 or more</strong></td><td>A combination of CS+3 armor pieces, Crepuscular series, double Stikini+1 (+22), Crepuscular & Chasseur+2 (+30), etc.</td></tr><tr><td>Dark Magic Skill</td><td><strong>+16</strong></td><td>Boosted by double Stikini Ring +1, significantly improving the base M.Acc and drain capacity of Absorb-TP.</td></tr><tr><td>Damage Taken (DT)</td><td><strong>-50% (Capped)</strong></td><td>Combines DT properties from CS+3 armor (Head -10%, Body -13%, Legs -12%), Nusku Shield (-5%), Crepuscular Gorget (-5%), Crepuscular Cape (-5%), and Chasseur's Earring +2 (-5%), net DT -55% easily caps at the hard limit of -50% DT.</td></tr></tbody></table></details>
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Magic Accuracy (M.Acc)</td><td><strong>+650 or more</strong></td><td>A combination of CS+3 armor pieces, Crepuscular series, double Stikini+1 (+22), Crepuscular & Chasseur+2 (+30), etc.</td></tr><tr><td>Dark Magic Skill</td><td><strong>+16</strong></td><td>Boosted by double Stikini Ring +1, significantly improving the base M.Acc and drain capacity of Absorb-TP.</td></tr><tr><td>Damage Taken (DT)</td><td><strong>-50% (Capped)</strong></td><td>Combines DT properties from CS+3 armor (Head -10%, Body -13%, Legs -12%), Crepuscular Gorget (-5%), Crepuscular Cape (-5%), and Chasseur's Earring +2 (-5%), net DT -50% easily caps at the hard limit of -50% DT.</td></tr></tbody></table></details>
 
 #### Absorb-TP Gear Spec Commentary 🐾
 

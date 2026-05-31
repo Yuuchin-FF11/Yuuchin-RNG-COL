@@ -65,8 +65,14 @@ Absorb-TP will **not** land reliably unless these two key debuffs are permanentl
 *   Maintain and reapply **Stoneskin** constantly while assisting with self-healing, ensuring absolute control and enmity of the boss.
 
 ### 💃 Dancer (Main DPS) Role
-*   Maintain Steps (facing backward is fine as long as weapon is drawn) and actively use job abilities to quickly generate TP.
-*   Utilize **Climactic Flourish** and massive Weapon Skills to serve as the party's primary source of DPS.
+*   **Fierce TP & FM Cycle for Unrivaled DPS**:
+    *   Fully utilizing **Sub DRG (Dragoon)**, execute **Jump abilities** (Jump, High Jump, etc.) on cooldown to instantly secure massive TP.
+    *   Constantly apply **Steps** to rapidly generate **FM (Finishing Moves)**.
+    *   Consume FM via **Reverse Flourish (R.Flourish)** to instantly recover vast amounts of TP, maintaining an extremely high-speed TP generation cycle.
+    *   Combined with **Climactic Flourish (C.Flourish)**, this allows non-stop, devastating Weapon Skill (Savage Blade) spam, serving as the party's primary main DPS.
+*   **Precise Enmity Management via Super Jump**:
+    *   Since the Dancer puts out immense DPS, the risk of pulling enmity off the Tank (Paladin) increases heavily as the battle progresses.
+    *   Therefore, after dealing a significant chunk of damage, the Dancer must execute **Super Jump** to shed their enmity, safely handing the boss's attention back to the Tank.
 
 ### 🎲 Support/Backline Roles (COR, RDM, BRD, GEO)
 *   **TP Generation**: Rely on **Tactician's Roll** Regain + **Absorb-TP** (which returns the drained TP to you via Magic Acumen, etc.) to rapidly accumulate TP.

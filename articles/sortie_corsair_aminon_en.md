@@ -139,4 +139,43 @@ Keep a close eye on the Red Mage's debuff casts and shoot the corresponding shot
     *   This gear piece houses the unique property "Enhances Quick Draw" (increases debuff effectiveness by +20% and extends duration). Paired with its exceptionally high Magic Accuracy (M.Acc), it ensures you bypass Aminon's extremely high Magic Evasion to successfully land and maximize the debuff enhancements. 🐾
 
 ---
+
+## 🛡️ Aminon (Hard Mode) Corsair Dedicated Real Combat Gear Sets
+
+These are the ultra-high-end real combat gear sets designed to withstand Aminon's terrifying mechanics and heavy damage while maintaining reliable Absorb-TP rotations and physical DPS.
+
+### 1. Idle (DT & Magic Evasion) Gear Set
+This set is engineered to safely idle between Absorb-TP casts, completely resisting (blocking) the boss's fierce AoE physical and magic attacks, as well as various deadly status ailments, while capping damage taken.
+
+By utilizing the sub-job Dark Knight (/DRK) advantage, it adopts a "One-Handed Sword + Shield" style, trading dual-wielding for absolute shield defense and massive damage reduction.
+
+| Slot | Equipment Name | Primary Stats & Tactical Role |
+| :--- | :--- | :--- |
+| Main | **Naegling** | Core weapon for Savage Blade DPS. |
+| Sub Shield | **Nusku Shield** | Sub-DRK privilege. Drastically increases survivability and defense. |
+| Ranged | **Anarchy** or **Ataktos** | TP Bonus +1000 to push Savage Blade damage to the limit. |
+| Head | **Mu's Mask** | Latest god-tier piece providing stats, Magic Evasion, DT-10%, and all status resistance +10%. |
+| Body | **Adaman Armor** | Legendary armor hosting DT-10% and enhances resistance to all status ailments. |
+| Hands | **Regal Gloves** | Overwhelming status resistance: Magic Evasion +80, DT-4%, all status resistance +15%. |
+| Legs | **CS Trousers +3** | Empyrean +3 legs. Incredible defensive stats: Magic Evasion +130, DT-13%. |
+| Feet | **Nyame Sollerets** | Path B Rank 30: colossal stat boosts, Magic Evasion +150, DT-7%. |
+| Neck | **Loricate Torque +1** | Steady physical damage reduction and DT-6%. |
+| Left Ear | **Sanare Earring** | Valuable Magic Evasion +6 and Magic Defense +4. |
+| Right Ear | **Onowai Earring +1** | Massive HP boost and DT-5% (effectively -8%). |
+| Left Ring | **Melanic Ring** | Ultra-rare ring: all status resistance +5%, DT-4%. |
+| Right Ring | **Vexer Ring +1** | Excellent utility ring: Magic Evasion +10, MDT-4%, DT-3%. |
+| Back | **Camulus's Mantle** | Dedicated cape: HP+80, Evasion/Magic Evasion+20, Enmity-10, DT-5%. |
+| Waist | **Mu's Sash** | Latest content reward: high-spec Magic Accuracy/Evasion/Magic Evasion +30. |
+
+<details><summary>Stat Totals & Summary (Click to Expand)</summary><table><thead><tr><th>Stat Category</th><th>Total Value</th><th>Details & Remarks</th></tr></thead><tbody><tr><td>Damage Taken (DT)</td><td>-50% (Capped)</td><td>Gear totals -67%, easily exceeding the 50% cap for rock-solid tank-like mitigation.</td></tr><tr><td>Magic Evasion</td><td>+600 or more</td><td>colossal defense led by Nyame Feet R30 (+150), CS Legs +3 (+130), Mu's Mask, and Regal.</td></tr><tr><td>All Status Resistance</td><td>+30% or more</td><td>Ironclad ailment resistance via Regal Gloves (+15%), Mu's Mask (+10%), and Melanic Ring (+5%).</td></tr></tbody></table></details>
+
+#### Idle Gear Spec Commentary 🐾
+This is a "diamond-hard" idle set designed to minimize incoming damage during Absorb-TP cast recovery windows or Aminon's fierce AoE physical/magic assaults.
+
+By employing the Paladin-like "One-Handed Sword + Shield" setup (Naegling + Nusku Shield), it forfeits dual-wielding in exchange for overwhelming damage reduction and shield block rate.
+Integrating the latest rewards like "Mu's Mask" and "Mu's Sash" with highly potent status-resisting classics such as "Adaman Armor," "Regal Gloves," and "Melanic Ring" ensures a very high probability of completely resisting Aminon's deadly status ailments.
+Damage Taken reduction reaches a staggering "-67%" from gear alone, far exceeding the active cap of "-50%". This meticulous high-end design ensures that even if you swap a slot for more Magic Accuracy or HP, you will permanently maintain capped damage mitigation. 🐾
+
+---
 🐾 *This is an exceptionally refined tactical flow born directly from the Master's real combat experience!* 🐾
+

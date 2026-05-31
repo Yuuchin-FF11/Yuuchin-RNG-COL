@@ -1799,16 +1799,30 @@ nav a:hover::after {
    Responsive Markdown Tables (FFXI Bismarck Style)
    ========================================================================== */
 .markdown-body table {
-    display: block;
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     border-collapse: collapse;
     margin-top: 1.5rem;
     margin-bottom: 2rem;
     background: rgba(16, 32, 48, 0.2);
     border: 1px solid var(--glass-border);
     border-radius: 8px;
+}
+
+/* PCなどの大画面では、右側のスペースをフルに活用して横スクロールを完全廃止 */
+@media (min-width: 768px) {
+    .markdown-body table {
+        display: table;
+        table-layout: auto;
+    }
+}
+
+/* スマホなどの小画面では、画面からはみ出さないようにスライド可能にする */
+@media (max-width: 767px) {
+    .markdown-body table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .markdown-body table th,
@@ -1830,6 +1844,12 @@ nav a:hover::after {
 
 .markdown-body table td {
     color: var(--text-light);
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* 1列目（部位やジョブなど）だけは折り返さずに美しく1行で収める */
+.markdown-body table td:first-child {
     white-space: nowrap;
 }
 

@@ -554,3 +554,207 @@ select:focus {
     padding: 0.05rem 0.35rem;
     border-radius: 4px;
 }
+
+/* === 多段タイムライン風連携カードUIスタイル === */
+.multi-step-card {
+    grid-column: 1 / -1; /* 全幅表示にしてタイムラインを広く見せる */
+}
+
+@media (min-width: 769px) {
+    .multi-step-card {
+        grid-column: span 2;
+    }
+}
+
+.sc-multi-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sc-multi-title-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.sc-multi-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.sc-multi-name {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+}
+
+.sc-multi-name.chain-light { color: var(--color-light); text-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
+.sc-multi-name.chain-dark { color: var(--color-dark); text-shadow: 0 0 12px rgba(168, 85, 247, 0.4); }
+.sc-multi-name.chain-fusion { color: var(--color-fusion); text-shadow: 0 0 12px rgba(239, 68, 110, 0.4); }
+.sc-multi-name.chain-distortion { color: var(--color-distortion); text-shadow: 0 0 12px rgba(59, 130, 246, 0.4); }
+.sc-multi-name.chain-gravitation { color: var(--color-gravitation); text-shadow: 0 0 12px rgba(16, 185, 129, 0.4); }
+.sc-multi-name.chain-fragmentation { color: var(--color-fragmentation); text-shadow: 0 0 12px rgba(6, 182, 212, 0.4); }
+
+.sc-multi-level-badge {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+}
+.sc-multi-level-badge.chain-light { color: var(--color-light); background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.25); }
+.sc-multi-level-badge.chain-dark { color: var(--color-dark); background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.25); }
+.sc-multi-level-badge.chain-fusion { color: var(--color-fusion); background: rgba(239, 68, 110, 0.15); border: 1px solid rgba(239, 68, 110, 0.25); }
+.sc-multi-level-badge.chain-distortion { color: var(--color-distortion); background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.25); }
+.sc-multi-level-badge.chain-gravitation { color: var(--color-gravitation); background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.25); }
+.sc-multi-level-badge.chain-fragmentation { color: var(--color-fragmentation); background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.25); }
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+}
+
+.timeline-step {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.timeline-ws-node {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-ws-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #cbd5e1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* 最終連携タイプに応じた丸数字のネオンボーダー */
+.multi-step-card.chain-light .timeline-ws-num { border-color: var(--color-light); box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); color: var(--color-light); }
+.multi-step-card.chain-dark .timeline-ws-num { border-color: var(--color-dark); box-shadow: 0 0 8px rgba(168, 85, 247, 0.4); color: var(--color-dark); }
+.multi-step-card.chain-fusion .timeline-ws-num { border-color: var(--color-fusion); box-shadow: 0 0 8px rgba(239, 68, 110, 0.4); color: var(--color-fusion); }
+.multi-step-card.chain-distortion .timeline-ws-num { border-color: var(--color-distortion); box-shadow: 0 0 8px rgba(59, 130, 246, 0.4); color: var(--color-distortion); }
+.multi-step-card.chain-gravitation .timeline-ws-num { border-color: var(--color-gravitation); box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); color: var(--color-gravitation); }
+.multi-step-card.chain-fragmentation .timeline-ws-num { border-color: var(--color-fragmentation); box-shadow: 0 0 8px rgba(6, 182, 212, 0.4); color: var(--color-fragmentation); }
+
+.timeline-ws-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.timeline-ws-name {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+.timeline-ws-type {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.timeline-connector-line {
+    width: 3px;
+    margin-left: 12.5px;
+    min-height: 70px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+/* 発生する連携ごとのコネクターラインのネオン化 */
+.timeline-connector-line.chain-light { background: var(--color-light); box-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+.timeline-connector-line.chain-dark { background: var(--color-dark); box-shadow: 0 0 8px rgba(168, 85, 247, 0.5); }
+.timeline-connector-line.chain-fusion { background: var(--color-fusion); box-shadow: 0 0 8px rgba(239, 68, 110, 0.5); }
+.timeline-connector-line.chain-distortion { background: var(--color-distortion); box-shadow: 0 0 8px rgba(59, 130, 246, 0.5); }
+.timeline-connector-line.chain-gravitation { background: var(--color-gravitation); box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
+.timeline-connector-line.chain-fragmentation { background: var(--color-fragmentation); box-shadow: 0 0 8px rgba(6, 182, 212, 0.5); }
+.timeline-connector-line.chain-level1 { background: rgba(255, 255, 255, 0.3); }
+
+.timeline-chain-badge {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(4, 2, 10, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    z-index: 3;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.timeline-chain-badge.chain-light { border-color: rgba(245, 158, 11, 0.35); color: var(--color-light); box-shadow: 0 0 10px rgba(245, 158, 11, 0.15); }
+.timeline-chain-badge.chain-dark { border-color: rgba(168, 85, 247, 0.35); color: var(--color-dark); box-shadow: 0 0 10px rgba(168, 85, 247, 0.15); }
+.timeline-chain-badge.chain-fusion { border-color: rgba(239, 68, 110, 0.35); color: var(--color-fusion); box-shadow: 0 0 10px rgba(239, 68, 110, 0.15); }
+.timeline-chain-badge.chain-distortion { border-color: rgba(59, 130, 246, 0.35); color: var(--color-distortion); box-shadow: 0 0 10px rgba(59, 130, 246, 0.15); }
+.timeline-chain-badge.chain-gravitation { border-color: rgba(16, 185, 129, 0.35); color: var(--color-gravitation); box-shadow: 0 0 10px rgba(16, 185, 129, 0.15); }
+.timeline-chain-badge.chain-fragmentation { border-color: rgba(6, 182, 212, 0.35); color: var(--color-fragmentation); box-shadow: 0 0 10px rgba(6, 182, 212, 0.15); }
+.timeline-chain-badge.chain-level1 { border-color: rgba(255, 255, 255, 0.15); color: var(--color-level1); }
+
+.tl-chain-name {
+    font-weight: 900;
+}
+
+.tl-chain-level {
+    font-size: 0.65rem;
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+}
+
+.tl-am-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    padding: 0.05rem 0.35rem;
+    border-radius: 4px;
+    text-shadow: 0 0 5px rgba(251, 191, 36, 0.4);
+}
+
+.last-ws-step {
+    margin-bottom: 0;
+}
+

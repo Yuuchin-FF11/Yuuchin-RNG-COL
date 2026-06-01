@@ -363,8 +363,9 @@ const elementClasses = {
 
 // 3. 連携計算コアエンジン
 function getSkillchainResult(tossAttrs, closeAttrs) {
-    // 1段目(トス)と2段目(〆)の属性の全ペアを優先順位順(左から順)に走査
-    // 最初に見つかった有効な連携の組み合わせを即座に返す (FFXI公式ルール)
+    const candidates = [];
+    
+    // 発生し得るすべての連携候補をリストアップ
     for (const toss of tossAttrs) {
         for (const close of closeAttrs) {
             if (chainMatrix[toss] && chainMatrix[toss][close]) {
@@ -376,11 +377,17 @@ function getSkillchainResult(tossAttrs, closeAttrs) {
                 else if (chain === "光" || chain === "闇") level = 3;
                 else if (["湾曲", "分解", "重力", "核熱"].includes(chain)) level = 2;
 
-                return { name: chain, level: level, toss: toss, close: close };
+                candidates.push({ name: chain, level: level, toss: toss, close: close });
             }
         }
     }
-    return null;
+    
+    if (candidates.length === 0) return null;
+    
+    // FFXI公式仕様：発生する連携のうち、最もレベルの高い連携（Lv4 ＞ Lv3 ＞ Lv2 ＞ Lv1）を最優先する。
+    // レベルが同じ場合は、WSの属性優先度順（先に見つかった配列順）を優先する。
+    candidates.sort((a, b) => b.level - a.level);
+    return candidates[0];
 }
 
 // 4. 逆引き探索ロジック

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Chat Translator - コントロールパネル</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- 共通スタイルシート -->
+    <link rel="stylesheet" href="app.css">
+</head>
+<body class="admin-body">
+
+    <div class="admin-container">
+        
+        <!-- ヘッダー -->
+        <header class="admin-header">
+            <h1>YouTube Chat Translator</h1>
+            <p>海外リスナーからのコメントを自動翻訳し、OBSへオシャレに透過表示します 🐾</p>
+        </header>
+
+        <!-- メイン設定カード -->
+        <main class="glass-card">
+            <h2 class="card-title">配信接続設定</h2>
+            
+            <!-- APIキー入力 -->
+            <div class="form-group">
+                <label for="api-key">YouTube Data API v3 キー</label>
+                <input type="password" id="api-key" placeholder="AIzaSy...（ご自身のAPIキーを入力してください）" autocomplete="current-password">
+            </div>
+
+            <!-- 配信URL入力 -->
+            <div class="form-group">
+                <label for="live-url">YouTube 配信URL または ライブ動画ID</label>
+                <input type="text" id="live-url" placeholder="https://www.youtube.com/watch?v=... または 動画ID">
+            </div>
+
+            <!-- アクションボタンとステータス -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <div class="btn-group">
+                    <button id="btn-connect" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        OBS用リンクを生成
+                    </button>
+                    <button id="btn-save" class="btn btn-secondary">設定を保存</button>
+                </div>
+                
+                <div id="connection-status" class="status-indicator status-disconnected">
+                    <div class="status-dot"></div>
+                    <span id="status-text">未接続</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- OBSコピペ用エリア（接続生成後に表示） -->
+        <section id="obs-link-card" class="glass-card" style="display: none;">
+            <h2 class="card-title">OBS 連携用URL</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                以下のURLをコピーして、OBSの「ブラウザソース」のURL欄に貼り付けてください。背景は自動的に透過されます。
+            </p>
+            <div class="copy-url-area">
+                <input type="text" id="obs-url" readonly>
+                <button id="btn-copy-url" class="btn btn-success">
+                    コピー
+                </button>
+            </div>
+        </section>
+
+        <!-- デザインカスタマイズカード -->
+        <section class="glass-card">
+            <h2 class="card-title">オーバーレイのデザイン調整</h2>
+            
+            <div class="form-row">
+                <!-- フォントサイズ -->
+                <div class="form-group">
+                    <label for="font-size">フォントサイズ（通常メッセージ）</label>
+                    <div class="slider-container">
+                        <input type="range" id="font-size" min="12" max="32" value="16">
+                        <span id="font-size-val" class="slider-value">16px</span>
+                    </div>
+                </div>
+
+                <!-- 翻訳テキストサイズ -->
+                <div class="form-group">
+                    <label for="trans-size">翻訳テキストのサイズ</label>
+                    <div class="slider-container">
+                        <input type="range" id="trans-size" min="10" max="30" value="15">
+                        <span id="trans-size-val" class="slider-value">15px</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row" style="margin-top: 1rem;">
+                <!-- 表示時間 -->
+                <div class="form-group">
+                    <label for="display-time">コメントの表示時間（フェードアウトまで）</label>
+                    <div class="slider-container">
+                        <input type="range" id="display-time" min="5" max="60" value="15">
+                        <span id="display-time-val" class="slider-value">15秒</span>
+                    </div>
+                </div>
+
+                <!-- スクロール速度 -->
+                <div class="form-group">
+                    <label for="max-comments">画面上の最大同時表示数</label>
+                    <div class="slider-container">
+                        <input type="range" id="max-comments" min="3" max="15" value="6">
+                        <span id="max-comments-val" class="slider-value">6個</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- テスト送信カード -->
+        <section class="glass-card">
+            <h2 class="card-title">テスト送信（動作・デザイン確認用）</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                配信中でない時でも、以下のボタンを押すことで、ダミーのコメントを生成してOBS上に送信テストを行えます。
+            </p>
+            <div class="test-panel">
+                <button id="btn-test-en" class="btn btn-secondary">🇺🇸 英語テスト</button>
+                <button id="btn-test-kr" class="btn btn-secondary">🇰🇷 韓国語テスト</button>
+                <button id="btn-test-jp" class="btn btn-secondary">🇯🇵 日本語テスト</button>
+                <button id="btn-clear-test" class="btn btn-danger">クリア</button>
+            </div>
+            <p id="test-info-text" style="color: var(--success-color); font-size: 0.85rem; margin-top: 0.75rem; text-align: center; display: none;">
+                テストコメントを送信しました！OBS画面を確認してください🐾
+            </p>
+        </section>
+
+        <!-- APIキー取得マニュアル -->
+        <section class="glass-card help-box">
+            <h4>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                YouTube API キーの無料取得手順（最初の一度だけ必要です）
+            </h4>
+            <ol>
+                <li><a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a> にご自身のGoogleアカウントでログインします。</li>
+                <li>画面上のプロジェクト選択から「新しいプロジェクト」を作成します（名前は適当で構いません）。</li>
+                <li>左側メニューの「APIとサービス」＞「ライブラリ」を開き、検索窓に「YouTube」と入力して、<strong>YouTube Data API v3</strong> を有効化（Enable）します。</li>
+                <li>有効化後、左メニューの「認証情報（Credentials）」を開き、画面上の「＋認証情報を作成」から「APIキー」を選択します。</li>
+                <li>生成された「AIzaSy...」から始まるAPIキーをコピーし、上の設定フォームに貼り付けて保存してください。</li>
+            </ol>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted);">
+                ※APIキーは完全に無料の範囲内で稼働します。外部サーバーへ送信されることはなく、ご主人様のブラウザ内（ローカル）にのみ保存されますので安全です。
+            </p>
+        </section>
+
+    </div>
+
+    <!-- 管理画面用スクリプト -->
+    <script src="admin.js"></script>
+</body>
+</html>

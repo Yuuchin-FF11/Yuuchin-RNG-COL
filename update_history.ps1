@@ -49,16 +49,20 @@ function Update-HistoryHtml {
     
     $liElement = if ($TargetFile) {
         @"
-                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
-                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">$todayStr</span>
-                            <a href="$articleLink`?file=$TargetFile" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">$Message</a><span class="new-badge">New</span>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">$todayStr</span>
+                            <div style="flex: 1;">
+                                <a href="$articleLink`?file=$TargetFile" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">$Message</a><span class="new-badge">New</span>
+                            </div>
                         </li>
 "@
     } else {
         @"
-                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
-                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">$todayStr</span>
-                            <span>$Message</span><span class="new-badge">New</span>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">$todayStr</span>
+                            <div style="flex: 1;">
+                                <span>$Message</span><span class="new-badge">New</span>
+                            </div>
                         </li>
 "@
     }

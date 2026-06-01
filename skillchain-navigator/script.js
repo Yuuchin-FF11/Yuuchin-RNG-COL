@@ -211,7 +211,7 @@ const weaponWSData = {
         { name: "シャッターソウル", attrs: ["重力", "硬化"], type: "両手棍 (メリポ/イオニック)" },
         { name: "タルタロスベイン", attrs: ["炸裂", "溶解"], type: "両手棍 (ミシック)" },
         { name: "ヴィゾフニル", attrs: ["貫通", "振動"], type: "両手棍 (エンピ)" },
-        { name: "オムニシエンス", attrs: ["湾曲", "収縮"], type: "両手棍 (イオニック)" },
+        { name: "オムニシエンス", attrs: ["重力", "貫通"], type: "両手棍 (ミシック)" },
         { name: "ガーランドオブブリス", attrs: ["核熱", "溶解"], type: "両手棍 (習得)" },
         { name: "オシャラ", attrs: ["硬化", "振動", "核熱"], type: "両手棍 (プライム)" }
     ],
@@ -227,7 +227,7 @@ const weaponWSData = {
         { name: "エイペクスアロー", attrs: ["分解", "貫通"], type: "弓術 (メリポ/イオニック)" },
         { name: "南無八幡", attrs: ["光", "湾曲"], type: "弓術 (レリック)" },
         { name: "ジシュヌの光輝", attrs: ["光", "核熱"], type: "弓術 (エンピ)" },
-        { name: "シャルヴ", "attrs": ["貫通", "切断", "重力"], "type": "弓術 (プライム)" }
+        { name: "シャルヴ", attrs: ["貫通", "切断", "重力"], type: "弓術 (プライム)" }
     ],
     Marksmanship: [
         { name: "ホットショット", attrs: ["溶解", "貫通"], type: "射撃 (初期)" },
@@ -354,7 +354,7 @@ const elementClasses = {
 };
 
 // 3. 連携計算コアエンジン
-function getSkillchainResult(tossAttrs, closeAttrs) {
+function getSkillchainResult(tossAttrs, closeAttrs, ionicMode) {
     const candidates = [];
     
     // 発生し得るすべての連携候補をリストアップ
@@ -374,6 +374,17 @@ function getSkillchainResult(tossAttrs, closeAttrs) {
         }
     }
     
+    // イオニック究極連携 (レベル4) の動的判定
+    // イオニックAM3中かつ、トスに光があり、〆に光がある場合は「極光」、闇同士なら「黒闇」が発生する
+    if (ionicMode === "IONIC_AM3") {
+        if (tossAttrs.includes("光") && closeAttrs.includes("光")) {
+            candidates.push({ name: "極光", level: 4, toss: "光", close: "光" });
+        }
+        if (tossAttrs.includes("闇") && closeAttrs.includes("闇")) {
+            candidates.push({ name: "黒闇", level: 4, toss: "闇", close: "闇" });
+        }
+    }
+    
     if (candidates.length === 0) return null;
     
     // FFXI公式仕様：発生する連携のうち、最もレベルの高い連携（Lv4 ＞ Lv3 ＞ Lv2 ＞ Lv1）を最優先する。
@@ -382,16 +393,39 @@ function getSkillchainResult(tossAttrs, closeAttrs) {
     return candidates[0];
 }
 
+// イオニックウェポン装備かつAM3中において、武神流秘奥義（メリポWS）に属性を追加する関数
+function getModifiedAttrs(ws, ionicMode) {
+    if (!ws) return [];
+    let attrs = [...ws.attrs];
+    if (ionicMode === "IONIC_AM3" && ws.type && ws.type.includes("メリポ/イオニック")) {
+        if (ws.attrs.includes("分解") || ws.attrs.includes("核熱")) {
+            if (!attrs.includes("光")) {
+                attrs.push("光");
+            }
+        }
+        if (ws.attrs.includes("湾曲") || ws.attrs.includes("重力")) {
+            if (!attrs.includes("闇")) {
+                attrs.push("闇");
+            }
+        }
+    }
+    return attrs;
+}
+
 // 4. 逆引き探索ロジック
-function searchSkillchains(weapon1, weapon2, targetChain) {
+function searchSkillchains(weapon1, weapon2, targetChain, ionicMode) {
     const tossList = weaponWSData[weapon1] || [];
     const closeList = weaponWSData[weapon2] || [];
     const results = [];
 
     for (const tossWS of tossList) {
         for (const closeWS of closeList) {
+            // イオニックAM3による属性拡張を適用
+            const tossAttrs = getModifiedAttrs(tossWS, ionicMode);
+            const closeAttrs = getModifiedAttrs(closeWS, ionicMode);
+
             // 連携の試算
-            const result = getSkillchainResult(tossWS.attrs, closeWS.attrs);
+            const result = getSkillchainResult(tossAttrs, closeAttrs, ionicMode);
             
             if (result) {
                 // ターゲット連携フィルター
@@ -405,9 +439,13 @@ function searchSkillchains(weapon1, weapon2, targetChain) {
                 }
 
                 if (isMatch) {
+                    // 表示用に拡張された属性を持つオブジェクトを作成
+                    const modifiedToss = { ...tossWS, attrs: tossAttrs };
+                    const modifiedClose = { ...closeWS, attrs: closeAttrs };
+
                     results.push({
-                        toss: tossWS,
-                        close: closeWS,
+                        toss: modifiedToss,
+                        close: modifiedClose,
                         chain: result
                     });
                 }
@@ -424,6 +462,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectWeapon1 = document.getElementById("weapon-1");
     const selectWeapon2 = document.getElementById("weapon-2");
     const selectTargetChain = document.getElementById("target-chain");
+    const selectIonicMode = document.getElementById("ionic-mode");
     const btnSearch = document.getElementById("btn-search");
     
     const resultsList = document.getElementById("results-list");
@@ -435,9 +474,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const w1 = selectWeapon1.value;
         const w2 = selectWeapon2.value;
         const target = selectTargetChain.value;
+        const ionic = selectIonicMode.value;
 
         // 探索の実行
-        const results = searchSkillchains(w1, w2, target);
+        const results = searchSkillchains(w1, w2, target, ionic);
 
         // UIのクリーンアップ
         resultsList.innerHTML = "";
@@ -476,7 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             card.innerHTML = `
                 <div class="sc-badge-row">
-                    <span class="sc-name ${chainClass}">【${res.chain.name}連携】</span>
+                    <span class="sc-name ${chainClass}">【${res.chain.name === "黒闇" ? "極闇/黒闇" : res.chain.name}連携】</span>
                     <span class="sc-level">Lv${res.chain.level} 連携</span>
                 </div>
                 <div class="ws-steps">

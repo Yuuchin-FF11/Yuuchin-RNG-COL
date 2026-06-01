@@ -230,7 +230,7 @@ Alternative options, such as "Gazu Bracelet +1 (Rank 15)" for hands, "Fotia Gorg
 
 
 ### 3. Absorb-TP (Extreme M.Acc) Gear Set
-This set is dedicated to boosting Magic Accuracy to the absolute cap (95% landing limit) to minimize the risk of resists against Aminon's extremely high Magic Evasion.
+This set is dedicated to boosting Magic Accuracy to the absolute cap (95% landing limit) to minimize the risk of a complete miss (NO EFFECT). Since Absorb spells have no partial resists (they either land fully or miss completely), maximizing accuracy is mandatory to avoid a fatal 0% drain wipe against Aminon's extremely high Magic Evasion.
 
 * Main Weapon: Naegling
 * Sub Shield: Nusku Shield
@@ -253,7 +253,7 @@ This set is dedicated to boosting Magic Accuracy to the absolute cap (95% landin
 
 #### Absorb-TP Gear Spec Commentary
 
-This is a highly optimized, specialized build dedicated entirely to pushing the "Absorb-TP" (via sub DRK) landing rate to the absolute system limit of 95% to fully suppress Aminon's TP.
+This is a highly optimized, specialized build dedicated entirely to pushing the "Absorb-TP" (via sub DRK) landing rate to the absolute system limit of 95%, ensuring we minimize the fatal 5% chance of a complete "NO EFFECT" miss.
 
 *   **Pushing the Frontline Limits for sub-DRK Absorb-TP**
     Landing Absorb-TP while actively fighting on the frontline as a main DPS—especially under the extremely tight constraints of sub-DRK (which heavily limits Dark Magic skill and Magic Accuracy options)—is one of the most demanding tasks in FF11. This build represents the "theoretical peak of Magic Accuracy", packing every single point of M.Acc gear currently available to a Corsair.

@@ -130,6 +130,17 @@ export const linkMap = {
     "アキヌフォート": "https://wiki.ffo.jp/html/35357.html",
     "ピナカ": "https://wiki.ffo.jp/html/38966.html",
     "アープ": "https://wiki.ffo.jp/html/38967.html",
+    "南無八幡": "https://wiki.ffo.jp/html/3094.html",
+    "カラナック": "https://wiki.ffo.jp/html/3095.html",
+    "ジシュヌ of 光輝": "https://wiki.ffo.jp/html/21097.html",
+    "ジシュヌの光輝": "https://wiki.ffo.jp/html/21097.html",
+    "ワイルドファイア": "https://wiki.ffo.jp/html/21103.html",
+    "トゥルーフライト": "https://wiki.ffo.jp/html/15867.html",
+    "レデンサリュート": "https://wiki.ffo.jp/html/15895.html",
+    "ラストスタンド": "https://wiki.ffo.jp/html/25612.html",
+    "シャルヴ": "https://wiki.ffo.jp/html/39103.html",
+    "ジ・エンド": "https://wiki.ffo.jp/html/39104.html",
+    "スカウトボルト": "https://wiki.ffo.jp/html/37250.html",
     "シビルスカーフ": "https://wiki.ffo.jp/html/38516.html",
     "アチピテール": "https://wiki.ffo.jp/html/25808.html",
     "ベヨーアロー": "https://wiki.ffo.jp/html/39082.html",
@@ -416,7 +427,7 @@ export function normalizeEquipmentName(searchName, isEn) {
         else if (normalizedName.startsWith('アミニ') && !['アミニカバン', 'アミニガペット', 'アミニブラーグ', 'アミニボティヨン'].includes(normalizedName)) normalizedName = 'アミニアタイア';
         else if (normalizedName.startsWith('オリオン') && !['オリオンブラッカエ', 'オリオンベレー', 'オリオンジャーキン', 'オリオングローブ', 'オリオンソックス'].includes(normalizedName)) normalizedName = 'オリオンアタイア';
         else if (normalizedName.startsWith('ベレナ')) normalizedName = 'ベレナスケープ';
-        else if (normalizedName.startsWith('スカウト')) normalizedName = 'スカウトゴルゲット';
+        else if (normalizedName.startsWith('スカウト') && !normalizedName.includes('ボルト')) normalizedName = 'スカウトゴルゲット';
         else if (normalizedName.startsWith('アルケ') && !['アルケベレー', 'アルケジャーキン', 'アルケブレーサー', 'アルケブラッカエ', 'アルケソックス'].includes(normalizedName)) normalizedName = 'アルケアタイア';
         else if (normalizedName.startsWith('アルカディア') && !['アルカディアベレー', 'アルカディアジャーキン', 'アルカディアグローブ', 'アルカディアブラッカエ', 'アルカディアソックス'].includes(normalizedName)) normalizedName = 'アルカディアアタイア';
     }

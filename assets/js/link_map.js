@@ -128,6 +128,8 @@ export const linkMap = {
     "アナイアレイター": "https://wiki.ffo.jp/html/3080.html",
     "ガーンデーヴァ": "https://wiki.ffo.jp/html/20383.html",
     "アキヌフォート": "https://wiki.ffo.jp/html/35357.html",
+    "ガストラフェテス": "https://wiki.ffo.jp/html/15187.html",
+    "シャランガ": "https://wiki.ffo.jp/html/37295.html",
     "ピナカ": "https://wiki.ffo.jp/html/38966.html",
     "アープ": "https://wiki.ffo.jp/html/38967.html",
     "南無八幡": "https://wiki.ffo.jp/html/3094.html",

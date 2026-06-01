@@ -223,10 +223,9 @@ The biggest reason for this is that progressing RoV missions rewards you with sp
 Whether you want to play a melee or a mage, grabbing these EXP boosts first will drastically speed up your overall progression.
 
 (At first, your level is capped at 50.
-After that, you'll need to complete "Limit Break" quests
-to raise the cap by 5 levels at a time.
+After that, you'll need to complete "Limit Break" quests to raise the cap by 5 levels at a time.
 
-I'll cover those in a separate article.
+For details on how to progress through the Limit Break quests starting from level 50, please refer to our dedicated [Limit Break Guide (Lv50-99)](article_en.html?file=articles/limit_break_guide.md). It covers the easiest and safest ways to unlock your level caps solo, so be sure to check it out once you get close to level 50!
 For now, do your best to reach this point!)
 
 ---

@@ -66,7 +66,6 @@ export const linkMap = {
     "無の喉輪": "http://wiki.ffo.jp/html/39388.html",
     "無の外装": "http://wiki.ffo.jp/html/39389.html",
     "無の腰当": "http://wiki.ffo.jp/html/39390.html",
-    "キー": "https://wiki.ffo.jp/html/3831.html",
     "オルペウスサッシュ": "http://wiki.ffo.jp/html/37383.html",
     "シャスーピアス": "http://wiki.ffo.jp/html/38629.html",
     "コンペンセーター": "http://wiki.ffo.jp/html/34211.html",

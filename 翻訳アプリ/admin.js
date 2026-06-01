@@ -13,6 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const obsUrlInput = document.getElementById('obs-url');
     const btnCopyUrl = document.getElementById('btn-copy-url');
     
+    // フィルターチェックボックス
+    const filterForeignCheckbox = document.getElementById('filter-foreign');
+
+    // マイク・音声認識・テキスト送信フォーム
+    const btnMicToggle = document.getElementById('btn-mic-toggle');
+    const micDot = document.getElementById('mic-dot');
+    const micBtnText = document.getElementById('mic-btn-text');
+    const micStatus = document.getElementById('mic-status');
+    const broadcasterTextInput = document.getElementById('broadcaster-text-input');
+    const btnSendBroadcasterText = document.getElementById('btn-send-broadcaster-text');
+    
     // スライダー
     const fontSizeSlider = document.getElementById('font-size');
     const fontSizeVal = document.getElementById('font-size-val');
@@ -72,6 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 maxCommentsSlider.value = settings.maxComments || 6;
                 maxCommentsVal.textContent = `${maxCommentsSlider.value}個`;
                 
+                if (filterForeignCheckbox) {
+                    filterForeignCheckbox.checked = settings.filterForeign || false;
+                }
+                
                 showStatus('disconnected', '設定をロードしました');
             } catch (e) {
                 console.error('Failed to parse settings:', e);
@@ -88,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
             fontSize: parseInt(fontSizeSlider.value),
             transSize: parseInt(transSizeSlider.value),
             displayTime: parseInt(displayTimeSlider.value),
-            maxComments: parseInt(maxCommentsSlider.value)
+            maxComments: parseInt(maxCommentsSlider.value),
+            filterForeign: filterForeignCheckbox ? filterForeignCheckbox.checked : false
         };
     }
 
@@ -151,9 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const settings = getSettingsObject();
         localStorage.setItem('yt_translator_settings', JSON.stringify(settings));
 
-        // クエリパラメータ付きのURLを生成（61秒は無制限を表すためtime=0として渡す）
+        // クエリパラメータ付きのURLを生成（61秒は無制限を表すためtime=0として渡す。フィルターフラグも付加）
         const finalTime = settings.displayTime === 61 ? 0 : settings.displayTime;
-        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${finalTime}&max=${settings.maxComments}`;
+        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${finalTime}&max=${settings.maxComments}&filter=${settings.filterForeign ? 1 : 0}`;
         
         obsUrlInput.value = obsUrl;
         obsLinkCard.style.display = 'block';
@@ -337,4 +353,180 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // ==========================================================================
+    // 配信者用 日本語から英語への自動翻訳ロジック
+    // ==========================================================================
+    async function translateTextToEn(text) {
+        if (!text) return '';
+        try {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&q=${encodeURIComponent(text)}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('Translation to English failed');
+            
+            const data = await res.json();
+            if (data && data[0] && data[0][0] && data[0][0][0]) {
+                return data[0][0][0].trim();
+            }
+            return text;
+        } catch (err) {
+            console.error('Translation error to English:', err);
+            return text;
+        }
+    }
+
+    // 配信者メッセージ送信処理
+    function sendBroadcasterTranslation(original, trans) {
+        const broadcasterChat = {
+            id: 'bc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+            author: {
+                name: 'Yuuchin (配信者)',
+                avatar: 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png',
+                isOwner: true
+            },
+            message: original,
+            translation: trans,
+            isBroadcaster: true,
+            needTranslation: true,
+            timestamp: Date.now()
+        };
+        
+        // localStorageに書き込み、overlay側のstorageイベントを発火させる
+        localStorage.setItem('yt_translator_broadcaster_chat', JSON.stringify(broadcasterChat));
+        
+        // 自分の履歴にも追加
+        appendToChatLog(broadcasterChat);
+    }
+
+    // ==========================================================================
+    // 配信者マイクリアルタイム音声認識（Web Speech API）制御
+    // ==========================================================================
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    let isListening = false;
+
+    if (SpeechRecognition && btnMicToggle) {
+        recognition = new SpeechRecognition();
+        recognition.lang = 'ja-JP';
+        recognition.continuous = true;
+        recognition.interimResults = false;
+        
+        recognition.onstart = () => {
+            isListening = true;
+            if (micDot) micDot.classList.add('active');
+            if (micBtnText) micBtnText.textContent = 'マイク音声認識: ON';
+            if (micStatus) {
+                micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                micStatus.style.color = 'var(--success-color)';
+            }
+        };
+        
+        recognition.onend = () => {
+            isListening = false;
+            if (micDot) micDot.classList.remove('active');
+            if (micBtnText) micBtnText.textContent = 'マイク音声認識: OFF';
+            if (micStatus && micStatus.textContent.includes('マイク入力中')) {
+                micStatus.textContent = '音声認識は停止しています。';
+                micStatus.style.color = 'var(--text-muted)';
+            }
+        };
+        
+        recognition.onerror = (e) => {
+            console.error('Speech recognition error:', e.error);
+            if (micStatus) {
+                if (e.error === 'not-allowed') {
+                    micStatus.textContent = 'エラー: マイクの使用が許可されていません。ブラウザのアドレスバーの鍵アイコンからマイクを許可してください🐾';
+                } else {
+                    micStatus.textContent = `音声認識エラー: ${e.error}。マイク接続を確認してください🐾`;
+                }
+                micStatus.style.color = 'var(--error-color)';
+            }
+            stopSpeechRecognition();
+        };
+        
+        recognition.onresult = async (event) => {
+            const resultText = event.results[event.results.length - 1][0].transcript.trim();
+            if (!resultText) return;
+            
+            if (micStatus) {
+                micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
+                micStatus.style.color = 'var(--accent-color)';
+            }
+            
+            const translatedText = await translateTextToEn(resultText);
+            sendBroadcasterTranslation(resultText, translatedText);
+            
+            if (micStatus) {
+                micStatus.textContent = `字幕送信完了: 「${translatedText}」🐾`;
+                micStatus.style.color = 'var(--success-color)';
+            }
+            
+            setTimeout(() => {
+                if (isListening && micStatus) {
+                    micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                    micStatus.style.color = 'var(--success-color)';
+                }
+            }, 3000);
+        };
+
+        function startSpeechRecognition() {
+            if (!recognition) return;
+            try {
+                recognition.start();
+            } catch (e) {
+                console.error('Failed to start recognition:', e);
+            }
+        }
+        
+        function stopSpeechRecognition() {
+            if (!recognition) return;
+            try {
+                recognition.stop();
+            } catch (e) {
+                console.error('Failed to stop recognition:', e);
+            }
+        }
+        
+        btnMicToggle.addEventListener('click', () => {
+            if (isListening) {
+                stopSpeechRecognition();
+            } else {
+                startSpeechRecognition();
+            }
+        });
+    } else if (btnMicToggle) {
+        if (micStatus) {
+            micStatus.textContent = 'お使いのブラウザは音声認識をサポートしていません。ChromeまたはEdgeをご使用ください🐾';
+        }
+        btnMicToggle.disabled = true;
+    }
+
+    // ==========================================================================
+    // クイックテキスト返答フォーム制御
+    // ==========================================================================
+    if (broadcasterTextInput && btnSendBroadcasterText) {
+        async function handleSendBroadcasterText() {
+            const text = broadcasterTextInput.value.trim();
+            if (!text) return;
+            
+            broadcasterTextInput.value = '';
+            const originalPlaceholder = broadcasterTextInput.placeholder;
+            broadcasterTextInput.placeholder = '自動翻訳して送信中...';
+            
+            const translated = await translateTextToEn(text);
+            sendBroadcasterTranslation(text, translated);
+            
+            broadcasterTextInput.placeholder = '送信完了いたしました！🐾';
+            setTimeout(() => {
+                broadcasterTextInput.placeholder = originalPlaceholder;
+            }, 2000);
+        }
+        
+        btnSendBroadcasterText.addEventListener('click', handleSendBroadcasterText);
+        broadcasterTextInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendBroadcasterText();
+            }
+        });
+    }
 });

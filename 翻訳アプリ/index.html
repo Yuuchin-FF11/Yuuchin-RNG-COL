@@ -121,7 +121,16 @@
                     <div class="slider-container">
                         <input type="range" id="max-comments" min="3" max="15" value="6">
                         <span id="max-comments-val" class="slider-value">6個</span>
-                    </div>
+                </div>
+            </div>
+
+            <!-- 海外コメント専用フィルター -->
+            <div class="form-row" style="margin-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+                <div class="form-group" style="flex-direction: row; align-items: center; gap: 0.75rem; width: 100%;">
+                    <input type="checkbox" id="filter-foreign" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--accent-color); margin-top: 0;">
+                    <label for="filter-foreign" style="margin-bottom: 0; cursor: pointer; font-weight: 600;">
+                        海外コメントのみ表示（日本語コメントを除外し、英語・韓国語など自動翻訳されたコメントだけを流します🐾）
+                    </label>
                 </div>
             </div>
         </section>
@@ -141,6 +150,39 @@
             <p id="test-info-text" style="color: var(--success-color); font-size: 0.85rem; margin-top: 0.75rem; text-align: center; display: none;">
                 テストコメントを送信しました！OBS画面を確認してください🐾
             </p>
+        </section>
+
+        <!-- 配信者リアルタイム音声翻訳（マイク ＆ テキスト入力） -->
+        <section class="glass-card">
+            <h2 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mic-icon-svg" style="color: var(--accent-color);"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                配信者リアルタイム音声翻訳（マイク ＆ テキスト入力）
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                ご主人様がマイクに向かって日本語で喋ると、リアルタイム音声認識され、自動英訳された英語字幕が配信画面にオシャレに流れます。声を出せない時はタイピングでの送信も可能です🐾
+            </p>
+            
+            <!-- マイク音声認識コントロール -->
+            <div class="mic-control-area" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 1rem;">
+                <button id="btn-mic-toggle" class="btn btn-secondary" style="display: flex; align-items: center; gap: 0.5rem; min-width: 170px; justify-content: center;">
+                    <span id="mic-dot" style="width: 10px; height: 10px; background: #64748b; border-radius: 50%; display: inline-block;"></span>
+                    <span id="mic-btn-text">マイク音声認識: OFF</span>
+                </button>
+                <div id="mic-status" style="color: var(--text-muted); font-size: 0.9rem; font-weight: bold; flex: 1;">
+                    音声認識は停止しています。「マイク音声認識: ON」にすると喋った日本語が自動英訳されます。
+                </div>
+            </div>
+
+            <!-- クイックテキスト返答フォーム -->
+            <div class="form-group" style="margin-top: 1rem;">
+                <label for="broadcaster-text-input">タイピングで英訳字幕を送信する（キーボード入力用）</label>
+                <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                    <input type="text" id="broadcaster-text-input" placeholder="ここに日本語で返事を入力して送信ボタンを押すと、自動で英訳されて画面に字幕が流れます..." style="flex: 1;">
+                    <button id="btn-send-broadcaster-text" class="btn btn-primary" style="display: flex; align-items: center; gap: 0.5rem; min-width: 100px; justify-content: center;">
+                        送信
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- APIキー取得マニュアル -->

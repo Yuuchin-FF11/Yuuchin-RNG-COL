@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0（無制限）が指定された場合にデフォルト値15に上書きされるのを防ぐため、hasで判定
     let displayTime = params.has('time') ? parseInt(params.get('time')) : 15;
     let maxComments = parseInt(params.get('max')) || 6;
+    let filterForeign = (params.get('filter') === '1');
 
     let activeLiveChatId = '';
     let nextPageToken = '';
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newDisplayTime = settings.displayTime === 61 ? 0 : settings.displayTime;
                 displayTime = (newDisplayTime !== undefined) ? newDisplayTime : displayTime;
                 maxComments = settings.maxComments || maxComments;
+                filterForeign = (settings.filterForeign !== undefined) ? settings.filterForeign : filterForeign;
                 applyStyles();
             } catch (err) {
                 console.error('Failed to parse live settings:', err);
@@ -71,6 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // 表示のクリア
         if (e.key === 'yt_translator_test_clear') {
             commentContainer.innerHTML = '';
+        }
+        
+        // 配信者メッセージの受信
+        if (e.key === 'yt_translator_broadcaster_chat' && e.newValue) {
+            try {
+                const broadcasterChat = JSON.parse(e.newValue);
+                addCommentCard(broadcasterChat);
+            } catch (err) {
+                console.error('Failed to parse broadcaster chat:', err);
+            }
         }
     });
 
@@ -107,8 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     
     function addCommentCard(chatData) {
-        // 管理画面へログを同期するためにlocalStorageへ書き込み（実チャットの逆転送）
-        if (chatData.id && !chatData.id.startsWith('test_')) {
+        // 海外コメント専用フィルターがオンの場合、日本語（翻訳不要）のコメントをスキップ（配信者発言は除く）
+        if (filterForeign && !chatData.needTranslation && !chatData.isBroadcaster) {
+            return;
+        }
+
+        // 管理画面へログを同期するためにlocalStorageへ書き込み（実チャットの逆転送。配信者は除く）
+        if (chatData.id && !chatData.id.startsWith('test_') && !chatData.isBroadcaster) {
             localStorage.setItem('yt_translator_real_chat', JSON.stringify(chatData));
         }
 
@@ -121,15 +138,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // カード全体のコンテナ
         const card = document.createElement('div');
-        card.className = 'comment-card';
+        if (chatData.isBroadcaster) {
+            card.className = 'comment-card comment-card-broadcaster';
+        } else {
+            card.className = 'comment-card';
+        }
         card.id = chatData.id;
 
         // アイコン
         const img = document.createElement('img');
         img.className = 'avatar';
-        img.src = chatData.author.avatar || 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png';
+        if (chatData.isBroadcaster) {
+            // 配信者用のゴールドマイクアバター（SVG）
+            img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23eab308" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>';
+        } else {
+            img.src = chatData.author.avatar || 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png';
+        }
         img.alt = chatData.author.name;
-        img.onerror = () => { img.src = 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png'; };
+        img.onerror = () => { if (!chatData.isBroadcaster) img.src = 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png'; };
         card.appendChild(img);
 
         // コンテンツエリア
@@ -185,9 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 一定時間経過後にフェードアウトさせて削除（displayTimeが0の時は無制限のためタイマーを起動しない）
         if (displayTime > 0) {
+            // 配信者の発言は長めに表示（通常の1.5倍、最低でも10秒）
+            const currentDisplayTime = chatData.isBroadcaster ? Math.max(displayTime * 1.5, 10) : displayTime;
             setTimeout(() => {
                 removeCard(card);
-            }, displayTime * 1000);
+            }, currentDisplayTime * 1000);
         }
     }
 

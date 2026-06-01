@@ -104,6 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     
     function addCommentCard(chatData) {
+        // 管理画面へログを同期するためにlocalStorageへ書き込み（実チャットの逆転送）
+        if (chatData.id && !chatData.id.startsWith('test_')) {
+            localStorage.setItem('yt_translator_real_chat', JSON.stringify(chatData));
+        }
+
         // すでに表示数制限を超えている場合は古いものから消去
         const currentCards = commentContainer.querySelectorAll('.comment-card:not(.fade-out)');
         if (currentCards.length >= maxComments) {

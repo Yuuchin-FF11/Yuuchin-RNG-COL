@@ -54,6 +54,19 @@
             </div>
         </main>
 
+        <!-- チャット履歴ログカード -->
+        <section class="glass-card">
+            <h2 class="card-title">配信中のチャット履歴（自動翻訳ログ）</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                配信中に届いたすべてのコメント（自動翻訳付き）がここに消えずに蓄積され、いつでもスクロールで見返すことができます🐾
+            </p>
+            <div id="chat-log-list" style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; padding-right: 0.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 1rem;">
+                <div id="chat-log-empty" style="color: var(--text-muted); text-align: center; padding: 2rem 0; font-size: 0.9rem;">
+                    まだコメントはありません。配信に接続するか、テスト送信を行うとここに履歴が蓄積されます。
+                </div>
+            </div>
+        </section>
+
         <!-- OBSコピペ用エリア（接続生成後に表示） -->
         <section id="obs-link-card" class="glass-card" style="display: none;">
             <h2 class="card-title">OBS 連携用URL</h2>

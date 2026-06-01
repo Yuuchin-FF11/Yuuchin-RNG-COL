@@ -187,6 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // localStorageに書き込み、オーバーレイ（overlay.html）側のstorageイベントを発火させる
         localStorage.setItem('yt_translator_test_chat', JSON.stringify(testComment));
         
+        // 自分の履歴にも追加
+        appendToChatLog(testComment);
+
         // テスト通知テキストを表示
         testInfoText.textContent = `[${lang}] テストコメントを送信しました！🐾`;
         testInfoText.style.display = 'block';
@@ -222,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 🇯🇵 日本語テスト送信
     btnTestJp.addEventListener('click', () => {
         const japaneseChats = [
-            { o: "こんにちは！いつも配信楽しみに見てます！", t: "こんにちは！いつも配信楽しみに見てます！", n: "ゆうくん_FF11" },
+            { o: "こんにちは! いつも配信楽しみに見てます！", t: "こんにちは！いつも配信楽しみに見てます！", n: "ゆうくん_FF11" },
             { o: "今の連携ダメージめちゃくちゃすごいですねー！！", t: "今の連携ダメージめちゃくちゃすごいですねー！！", n: "マートの弟子" }
         ];
         const chat = japaneseChats[Math.floor(Math.random() * japaneseChats.length)];
@@ -233,8 +236,94 @@ document.addEventListener('DOMContentLoaded', () => {
     // クリア送信
     btnClearTest.addEventListener('click', () => {
         localStorage.setItem('yt_translator_test_clear', Date.now().toString());
-        testInfoText.textContent = "画面をクリアしました 🐾";
+        
+        // 履歴ログのクリア
+        const emptyEl = document.getElementById('chat-log-empty');
+        chatLogList.innerHTML = '';
+        if (emptyEl) {
+            chatLogList.appendChild(emptyEl);
+            emptyEl.style.display = 'block';
+        }
+
+        testInfoText.textContent = "画面と履歴をクリアしました 🐾";
         testInfoText.style.display = 'block';
         setTimeout(() => testInfoText.style.display = 'none', 2000);
+    });
+
+    // ==========================================================================
+    // チャット履歴ログの描画 ＆ 管理ロジック
+    // ==========================================================================
+    const chatLogList = document.getElementById('chat-log-list');
+    const chatLogEmpty = document.getElementById('chat-log-empty');
+
+    function appendToChatLog(chat) {
+        if (!chatLogList) return;
+
+        // 空メッセージプレースホルダーを消去
+        if (chatLogEmpty) {
+            chatLogEmpty.style.display = 'none';
+        }
+
+        // ログカードの作成
+        const logItem = document.createElement('div');
+        logItem.style.background = 'rgba(255, 255, 255, 0.03)';
+        logItem.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+        logItem.style.borderRadius = '8px';
+        logItem.style.padding = '0.5rem 0.75rem';
+        logItem.style.display = 'flex';
+        logItem.style.gap = '0.75rem';
+        logItem.style.alignItems = 'flex-start';
+        logItem.style.fontSize = '0.875rem';
+        logItem.style.lineHeight = '1.4';
+        logItem.style.animation = 'fadeIn 0.25s ease-out forwards';
+        logItem.style.marginBottom = '0.5rem';
+
+        // 送信者名
+        const name = document.createElement('strong');
+        name.style.color = chat.author.isOwner ? '#eab308' : (chat.author.isModerator ? '#3b82f6' : '#cbd5e1');
+        name.style.minWidth = '80px';
+        name.style.maxWidth = '120px';
+        name.style.whiteSpace = 'nowrap';
+        name.style.overflow = 'hidden';
+        name.style.textOverflow = 'ellipsis';
+        name.textContent = chat.author.name;
+        logItem.appendChild(name);
+
+        // コンテンツ（原文 ＋ 翻訳）
+        const contentBox = document.createElement('div');
+        contentBox.style.flex = '1';
+        contentBox.style.display = 'flex';
+        contentBox.style.flexDirection = 'column';
+        contentBox.style.gap = '0.2rem';
+
+        const origText = document.createElement('span');
+        origText.style.color = '#f1f5f9';
+        origText.textContent = chat.message;
+        contentBox.appendChild(origText);
+
+        if (chat.needTranslation && chat.translation) {
+            const transText = document.createElement('span');
+            transText.style.color = '#38bdf8';
+            transText.style.fontWeight = 'bold';
+            transText.innerHTML = `<span style="color: var(--accent-color); font-size: 0.75rem; font-weight: bold; margin-right: 0.25rem;">[自動翻訳]</span>${chat.translation}`;
+            contentBox.appendChild(transText);
+        }
+
+        logItem.appendChild(contentBox);
+
+        // 最新のコメントを一番上にする
+        chatLogList.insertBefore(logItem, chatLogList.firstChild);
+    }
+
+    // 外部（overlay.html）からの実チャットを受信して履歴に追加
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'yt_translator_real_chat' && e.newValue) {
+            try {
+                const chat = JSON.parse(e.newValue);
+                appendToChatLog(chat);
+            } catch (err) {
+                console.error('Failed to parse real chat log:', err);
+            }
+        }
     });
 });

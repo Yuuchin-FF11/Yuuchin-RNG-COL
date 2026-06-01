@@ -150,7 +150,7 @@ Keep a close eye on the Red Mage's debuff casts and shoot the corresponding shot
 | 🔵 **Paralyze** | ➡️ **Ice Shot** | Greatly increases the paralysis activation rate and depth, heavily restricting the boss's actions. |
 
 ### ⚠️ Absolute Gear Rule for Quick Draw Support
-*   When executing these debuff enhancement shots, **you MUST equip Empyrean Feet armor (CS Sollerets +3 / Chasseur's Sollerets +3, etc.)**!
+*   When executing these debuff enhancement shots, **you MUST equip Empyrean Feet armor (CS Boots +3 / Chasseur's Boots +3, etc.)**!
 *   **Critical Specs of Empyrean Feet**:
     *   This gear piece houses the unique property "Enhances Quick Draw" (increases debuff effectiveness by +20% and extends duration). Paired with its exceptionally high Magic Accuracy (M.Acc), it ensures you bypass Aminon's extremely high Magic Evasion to successfully land and maximize the debuff enhancements.
 
@@ -240,7 +240,7 @@ This set is dedicated to ensuring Absorb-TP lands with 100% certainty, bypassing
 * Body: Chasseur's Frac +3
 * Hands: Chasseur's Gantry +3
 * Legs: Chasseur's Trousers +3
-* Feet: Chasseur's Sollerets +3
+* Feet: Chasseur's Boots +3
 * Neck: Crepuscular Gorget
 * Left Ear: Crepuscular Earring
 * Right Ear: Chasseur's Earring +2

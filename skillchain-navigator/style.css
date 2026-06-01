@@ -426,3 +426,131 @@ select:focus {
         transform: translateY(0);
     }
 }
+
+/* === 常時ダブル結果表示用UIスタイル === */
+.sc-double-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.sc-header-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.sc-header-side:first-child {
+    padding-right: 0.5rem;
+}
+
+.sc-header-side.highlight-side {
+    padding-left: 0.75rem;
+    position: relative;
+}
+
+.sc-header-divider {
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    align-self: stretch;
+}
+
+.sc-mode-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.15rem;
+}
+
+.label-ionic {
+    color: #f59e0b; /* イオ側はゴールド */
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.sc-name-small {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #cbd5e1;
+}
+
+.sc-level-small {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.sc-name-big {
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+}
+
+.sc-level-big {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-muted);
+}
+
+/* WS追加属性のゴールドハイライト */
+.attr-added {
+    color: #fbbf24;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+    background: rgba(251, 191, 36, 0.1);
+    padding: 0.05rem 0.25rem;
+    border-radius: 4px;
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    display: inline-block;
+}
+
+/* ダブルMB属性表示 */
+.mb-double-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.mb-half {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mb-half:last-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 0.75rem;
+}
+
+.mb-label-small {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.font-ionic-mb .mb-label-small {
+    color: #fbbf24; /* イオ側はゴールド */
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.2);
+}
+
+.mb-elements-small {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.mb-elements-small .mb-el {
+    font-size: 0.65rem;
+    padding: 0.05rem 0.35rem;
+    border-radius: 4px;
+}

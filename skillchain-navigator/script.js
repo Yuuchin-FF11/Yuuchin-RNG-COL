@@ -419,49 +419,60 @@ function getModifiedAttrs(ws, ionicMode) {
     return attrs;
 }
 
-// 4. 逆引き探索ロジック
-function searchSkillchains(weapon1, weapon2, targetChain, ionicMode) {
+// 4. 逆引き探索ロジック (通常時とイオAM3時の両方の結果を同時に計算・取得する)
+function searchSkillchains(weapon1, weapon2, targetChain) {
     const tossList = weaponWSData[weapon1] || [];
     const closeList = weaponWSData[weapon2] || [];
     const results = [];
 
     for (const tossWS of tossList) {
         for (const closeWS of closeList) {
-            // イオニックAM3による属性拡張を適用
-            const tossAttrs = getModifiedAttrs(tossWS, ionicMode);
-            const closeAttrs = getModifiedAttrs(closeWS, ionicMode);
+            // ① 通常時の属性と計算
+            const tossAttrsNormal = getModifiedAttrs(tossWS, "NORMAL");
+            const closeAttrsNormal = getModifiedAttrs(closeWS, "NORMAL");
+            const resultNormal = getSkillchainResult(tossAttrsNormal, closeAttrsNormal, "NORMAL");
 
-            // 連携の試算
-            const result = getSkillchainResult(tossAttrs, closeAttrs, ionicMode);
-            
-            if (result) {
-                // ターゲット連携フィルター
-                let isMatch = false;
-                if (targetChain === "ANY") {
-                    isMatch = true;
-                } else if (targetChain === "Lv1") {
-                    isMatch = (result.level === 1);
-                } else {
-                    isMatch = (result.name === targetChain);
-                }
+            // ② イオAM3中の属性と計算
+            const tossAttrsIonic = getModifiedAttrs(tossWS, "IONIC_AM3");
+            const closeAttrsIonic = getModifiedAttrs(closeWS, "IONIC_AM3");
+            const resultIonic = getSkillchainResult(tossAttrsIonic, closeAttrsIonic, "IONIC_AM3");
 
-                if (isMatch) {
-                    // 表示用に拡張された属性を持つオブジェクトを作成
-                    const modifiedToss = { ...tossWS, attrs: tossAttrs };
-                    const modifiedClose = { ...closeWS, attrs: closeAttrs };
+            // どちらも連携が発生しない場合はスキップ
+            if (!resultNormal && !resultIonic) continue;
 
-                    results.push({
-                        toss: modifiedToss,
-                        close: modifiedClose,
-                        chain: result
-                    });
-                }
+            // ターゲット連携フィルター
+            let isMatch = false;
+            if (targetChain === "ANY") {
+                isMatch = true;
+            } else if (targetChain === "Lv1") {
+                isMatch = ((resultNormal && resultNormal.level === 1) || (resultIonic && resultIonic.level === 1));
+            } else if (targetChain === "極光" || targetChain === "黒闇") {
+                // 極光・黒闇はイオAM3限定なので、ionic時の名前とマッチ
+                isMatch = (resultIonic && resultIonic.name === targetChain);
+            } else {
+                // 通常の連携（光、闇、湾曲など）
+                isMatch = ((resultNormal && resultNormal.name === targetChain) || (resultIonic && resultIonic.name === targetChain));
+            }
+
+            if (isMatch) {
+                results.push({
+                    tossNormal: { ...tossWS, attrs: tossAttrsNormal },
+                    closeNormal: { ...closeWS, attrs: closeAttrsNormal },
+                    tossIonic: { ...tossWS, attrs: tossAttrsIonic },
+                    closeIonic: { ...closeWS, attrs: closeAttrsIonic },
+                    chainNormal: resultNormal,
+                    chainIonic: resultIonic
+                });
             }
         }
     }
 
-    // 連携レベルが高い順にソート
-    return results.sort((a, b) => b.chain.level - a.chain.level);
+    // 連携レベルが高い順にソート（イオAM3時のレベルを優先）
+    return results.sort((a, b) => {
+        const lvA = a.chainIonic ? a.chainIonic.level : (a.chainNormal ? a.chainNormal.level : 0);
+        const lvB = b.chainIonic ? b.chainIonic.level : (b.chainNormal ? b.chainNormal.level : 0);
+        return lvB - lvA;
+    });
 }
 
 // 5. DOM連携およびUI描画
@@ -469,7 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectWeapon1 = document.getElementById("weapon-1");
     const selectWeapon2 = document.getElementById("weapon-2");
     const selectTargetChain = document.getElementById("target-chain");
-    const selectIonicMode = document.getElementById("ionic-mode");
     const btnSearch = document.getElementById("btn-search");
     
     const resultsList = document.getElementById("results-list");
@@ -481,10 +491,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const w1 = selectWeapon1.value;
         const w2 = selectWeapon2.value;
         const target = selectTargetChain.value;
-        const ionic = selectIonicMode.value;
 
         // 探索の実行
-        const results = searchSkillchains(w1, w2, target, ionic);
+        const results = searchSkillchains(w1, w2, target);
 
         // UIのクリーンアップ
         resultsList.innerHTML = "";
@@ -501,51 +510,102 @@ document.addEventListener("DOMContentLoaded", () => {
         results.forEach((res, index) => {
             const card = document.createElement("div");
             
-            // 連携レベルに応じたクラス適用
+            // イオAM3時の連携に応じたカードクラスの決定（イオAM3をメインデザインに）
+            const mainChain = res.chainIonic || res.chainNormal;
             let chainClass = "chain-level1";
-            if (res.chain.name === "光" || res.chain.name === "極光") chainClass = "chain-light";
-            else if (res.chain.name === "闇" || res.chain.name === "黒闇") chainClass = "chain-dark";
-            else if (res.chain.name === "核熱") chainClass = "chain-fusion";
-            else if (res.chain.name === "湾曲") chainClass = "chain-distortion";
-            else if (res.chain.name === "重力") chainClass = "chain-gravitation";
-            else if (res.chain.name === "分解") chainClass = "chain-fragmentation";
+            if (mainChain.name === "光" || mainChain.name === "極光") chainClass = "chain-light";
+            else if (mainChain.name === "闇" || mainChain.name === "黒闇") chainClass = "chain-dark";
+            else if (mainChain.name === "核熱") chainClass = "chain-fusion";
+            else if (mainChain.name === "湾曲") chainClass = "chain-distortion";
+            else if (mainChain.name === "重力") chainClass = "chain-gravitation";
+            else if (mainChain.name === "分解") chainClass = "chain-fragmentation";
 
             card.className = `sc-card ${chainClass}`;
             card.style.animationDelay = `${index * 0.05}s`;
 
-            // MB要素の組み立て
-            const mbList = mbElements[res.chain.name] || [];
-            let mbElementsHTML = "";
-            mbList.forEach(el => {
+            // MB要素の組み立て (通常時)
+            const mbListNormal = res.chainNormal ? (mbElements[res.chainNormal.name] || []) : [];
+            let mbNormalHTML = "";
+            mbListNormal.forEach(el => {
                 const elClass = elementClasses[el] || "";
-                mbElementsHTML += `<span class="mb-el ${elClass}">${el}</span>`;
+                mbNormalHTML += `<span class="mb-el ${elClass}">${el}</span>`;
             });
 
+            // MB要素の組み立て (イオAM3時)
+            const mbListIonic = res.chainIonic ? (mbElements[res.chainIonic.name] || []) : [];
+            let mbIonicHTML = "";
+            mbListIonic.forEach(el => {
+                const elClass = elementClasses[el] || "";
+                mbIonicHTML += `<span class="mb-el ${elClass}">${el}</span>`;
+            });
+
+            // WS属性の文字列表記（AM3による新規追加属性には足跡マーク🐾を付与）
+            function getWSAttrsHTML(normalWS, ionicWS) {
+                let parts = [];
+                ionicWS.attrs.forEach(attr => {
+                    const isAdded = !normalWS.attrs.includes(attr);
+                    if (isAdded) {
+                        parts.push(`<span class="attr-added" title="イオAM3中の追加属性">${attr}🐾</span>`);
+                    } else {
+                        parts.push(attr);
+                    }
+                });
+                return parts.join('/');
+            }
+
+            const tossAttrsStr = getWSAttrsHTML(res.tossNormal, res.tossIonic);
+            const closeAttrsStr = getWSAttrsHTML(res.closeNormal, res.closeIonic);
+
+            // 連携名・レベル表示文字列の決定
+            const normalName = res.chainNormal ? `【${res.chainNormal.name}連携】` : "なし";
+            const normalLv = res.chainNormal ? `Lv${res.chainNormal.level}` : "";
+            const ionicName = res.chainIonic ? `【${res.chainIonic.name === "黒闇" ? "極闇/黒闇" : res.chainIonic.name}連携】` : "なし";
+            const ionicLv = res.chainIonic ? `Lv${res.chainIonic.level}` : "";
+
             card.innerHTML = `
-                <div class="sc-badge-row">
-                    <span class="sc-name ${chainClass}">【${res.chain.name === "黒闇" ? "極闇/黒闇" : res.chain.name}連携】</span>
-                    <span class="sc-level">Lv${res.chain.level} 連携</span>
+                <div class="sc-badge-row sc-double-header">
+                    <div class="sc-header-side">
+                        <span class="sc-mode-label">通常武器</span>
+                        <span class="sc-name-small">${normalName}</span>
+                        <span class="sc-level-small">${normalLv}</span>
+                    </div>
+                    <div class="sc-header-divider"></div>
+                    <div class="sc-header-side highlight-side">
+                        <span class="sc-mode-label label-ionic">イオAM3中 🐾</span>
+                        <span class="sc-name-big ${chainClass}">${ionicName}</span>
+                        <span class="sc-level-big">${ionicLv}</span>
+                    </div>
                 </div>
+                
                 <div class="ws-steps">
                     <div class="ws-step">
                         <span class="ws-num">1</span>
                         <div>
-                            <span class="ws-name">${res.toss.name}</span>
-                            <span class="ws-type">（${res.toss.type} ［${res.toss.attrs.join('/')}］）</span>
+                            <span class="ws-name">${res.tossNormal.name}</span>
+                            <span class="ws-type">（${res.tossNormal.type} ［${tossAttrsStr}］）</span>
                         </div>
                     </div>
                     <div class="ws-step">
                         <span class="ws-num">2</span>
                         <div>
-                            <span class="ws-name">${res.close.name}</span>
-                            <span class="ws-type">（${res.close.type} ［${res.close.attrs.join('/')}］）</span>
+                            <span class="ws-name">${res.closeNormal.name}</span>
+                            <span class="ws-type">（${res.closeNormal.type} ［${closeAttrsStr}］）</span>
                         </div>
                     </div>
                 </div>
-                <div class="mb-row">
-                    <span class="mb-label">🔥 マジックバースト対応属性</span>
-                    <div class="mb-elements">
-                        ${mbElementsHTML || '<span class="mb-el">なし</span>'}
+                
+                <div class="mb-double-row">
+                    <div class="mb-half">
+                        <span class="mb-label-small">🔥 通常MB:</span>
+                        <div class="mb-elements-small">
+                            ${mbNormalHTML || '<span class="mb-el">なし</span>'}
+                        </div>
+                    </div>
+                    <div class="mb-half font-ionic-mb">
+                        <span class="mb-label-small">🔥 AM3中MB:</span>
+                        <div class="mb-elements-small">
+                            ${mbIonicHTML || '<span class="mb-el">なし</span>'}
+                        </div>
                     </div>
                 </div>
             `;

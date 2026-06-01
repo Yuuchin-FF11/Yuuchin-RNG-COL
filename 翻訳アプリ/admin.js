@@ -31,14 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const testInfoText = document.getElementById('test-info-text');
 
     // スライダーの数値連動
-    function setupSlider(slider, valueDisplay, unit = 'px') {
+    function setupSlider(slider, valueDisplay, unit = 'px', customFormatter = null) {
         slider.addEventListener('input', () => {
-            valueDisplay.textContent = `${slider.value}${unit}`;
+            if (customFormatter) {
+                valueDisplay.textContent = customFormatter(slider.value);
+            } else {
+                valueDisplay.textContent = `${slider.value}${unit}`;
+            }
         });
     }
     setupSlider(fontSizeSlider, fontSizeVal, 'px');
     setupSlider(transSizeSlider, transSizeVal, 'px');
-    setupSlider(displayTimeSlider, displayTimeVal, '秒');
+
+    // 表示時間スライダー用のフォーマッタ（61秒の時は無制限と表示）
+    const displayTimeFormatter = (val) => {
+        return parseInt(val) === 61 ? '無制限 🐾' : `${val}秒`;
+    };
+    setupSlider(displayTimeSlider, displayTimeVal, '秒', displayTimeFormatter);
+
     setupSlider(maxCommentsSlider, maxCommentsVal, '個');
 
     // localStorageからの設定復元
@@ -57,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 transSizeVal.textContent = `${transSizeSlider.value}px`;
                 
                 displayTimeSlider.value = settings.displayTime || 15;
-                displayTimeVal.textContent = `${displayTimeSlider.value}秒`;
+                displayTimeVal.textContent = displayTimeFormatter(displayTimeSlider.value);
                 
                 maxCommentsSlider.value = settings.maxComments || 6;
                 maxCommentsVal.textContent = `${maxCommentsSlider.value}個`;
@@ -141,8 +151,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const settings = getSettingsObject();
         localStorage.setItem('yt_translator_settings', JSON.stringify(settings));
 
-        // クエリパラメータ付きのURLを生成
-        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${settings.displayTime}&max=${settings.maxComments}`;
+        // クエリパラメータ付きのURLを生成（61秒は無制限を表すためtime=0として渡す）
+        const finalTime = settings.displayTime === 61 ? 0 : settings.displayTime;
+        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${finalTime}&max=${settings.maxComments}`;
         
         obsUrlInput.value = obsUrl;
         obsLinkCard.style.display = 'block';

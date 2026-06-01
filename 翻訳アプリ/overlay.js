@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // デザイン設定（パラメータが無い場合のデフォルト値）
     let fontSize = parseInt(params.get('size')) || 16;
     let transSize = parseInt(params.get('tsize')) || 15;
-    let displayTime = parseInt(params.get('time')) || 15;
+    // 0（無制限）が指定された場合にデフォルト値15に上書きされるのを防ぐため、hasで判定
+    let displayTime = params.has('time') ? parseInt(params.get('time')) : 15;
     let maxComments = parseInt(params.get('max')) || 6;
 
     let activeLiveChatId = '';
@@ -47,7 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const settings = JSON.parse(e.newValue);
                 fontSize = settings.fontSize || fontSize;
                 transSize = settings.transSize || transSize;
-                displayTime = settings.displayTime || displayTime;
+                // 管理画面側の61秒（無制限）を0秒（無制限）に変換して適用
+                const newDisplayTime = settings.displayTime === 61 ? 0 : settings.displayTime;
+                displayTime = (newDisplayTime !== undefined) ? newDisplayTime : displayTime;
                 maxComments = settings.maxComments || maxComments;
                 applyStyles();
             } catch (err) {
@@ -180,10 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
         card.appendChild(content);
         commentContainer.appendChild(card);
 
-        // 一定時間経過後にフェードアウトさせて削除
-        setTimeout(() => {
-            removeCard(card);
-        }, displayTime * 1000);
+        // 一定時間経過後にフェードアウトさせて削除（displayTimeが0の時は無制限のためタイマーを起動しない）
+        if (displayTime > 0) {
+            setTimeout(() => {
+                removeCard(card);
+            }, displayTime * 1000);
+        }
     }
 
     function removeCard(cardElement) {

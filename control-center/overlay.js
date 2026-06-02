@@ -31,9 +31,6 @@ window.onerror = function(message, source, lineno, colno, error) {
 document.addEventListener('DOMContentLoaded', () => {
     const commentContainer = document.getElementById('comment-container');
 
-    // 起動確認用の初期デバッグ表示（OBSにロードされているかを確認するため一時表示します🐾）
-    showDebugError("Debug: Overlay Loaded. Auto-polling started...");
-
     // OBS環境とブラウザプレビュー環境を自動検知し、眩しさ防止の黒背景を適応するマジカルシステム🐾
     if (window.obsstudio) {
         // OBS配信ソース内ではゲーム画面を遮らないように完全透過にします
@@ -511,9 +508,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 const chats = await res.json();
-                
-                pollCount++;
-                showDebugError(`Debug: Connected! Count: ${pollCount} | Chats: ${chats.length}`);
                 
                 if (Array.isArray(chats)) {
                     chats.forEach(chat => {

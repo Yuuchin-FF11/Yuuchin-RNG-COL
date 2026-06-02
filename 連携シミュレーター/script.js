@@ -514,19 +514,15 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
         const tossWS = currentWSList[totalWSCount - 1];
 
         for (const nextWS of nextWSList) {
-            let nextAM = currentAM;
-
-            if (nextWS.type.includes("メリポ/イオニック") && !nextAM) {
-                nextAM = "IONIC_AM1";
-            }
-
-            const tossAttrs = getModifiedAttrs(tossWS, nextAM ? "IONIC_AM3" : "NORMAL");
-            const closeAttrs = getModifiedAttrs(nextWS, nextAM ? "IONIC_AM3" : "NORMAL");
+            // ※AMは「着弾後」に付与されるため、現在のステップでの属性追加判定には「直前までのcurrentAM」を使用する
+            const tossAttrs = getModifiedAttrs(tossWS, currentAM ? "IONIC_AM3" : "NORMAL");
+            const closeAttrs = getModifiedAttrs(nextWS, currentAM ? "IONIC_AM3" : "NORMAL");
 
             let stepTossAttrs = currentChain ? [currentChain.name] : tossAttrs;
             let stepResult = getSkillchainResult(stepTossAttrs, closeAttrs, "NORMAL");
 
-            // Ionic ultimate chain check
+            // Ionic ultimate chain check (AMが「すでに」付与されている状態で、〆がメリポWSの場合に究極連携化)
+            let nextAM = currentAM;
             if (nextAM && nextWS.type.includes("メリポ/イオニック")) {
                 if (stepResult && (stepResult.name === "光" || stepResult.name === "闇")) {
                     let meetSteps = false;
@@ -538,7 +534,7 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
                     if (meetSteps) {
                         const name = stepResult.name === "光" ? "極光" : "黒闇";
                         stepResult = { name: name, level: 4, toss: stepResult.toss, close: stepResult.close };
-                        nextAM = null;
+                        nextAM = null; // 究極連携発生で消滅
                     }
                 }
             }
@@ -548,9 +544,15 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
                 continue;
             }
 
+            // イオニックのアフターマス付加判定（時系列的に着弾後に付加され、次のステップの再帰呼び出しに引き渡す）
+            let passAM = nextAM;
+            if (nextWS.type.includes("メリポ/イオニック") && !passAM) {
+                passAM = "IONIC_AM1";
+            }
+
             // Backtracking
             currentWSList.push(nextWS);
-            dfs(currentWSList, stepResult, nextAM);
+            dfs(currentWSList, stepResult, passAM);
             currentWSList.pop();
         }
     }
@@ -582,13 +584,8 @@ function calculateSkillchainSteps(wsList) {
         const closeWS = wsList[i];
         totalWSCount = i + 1; // 現在のWSインデックス
 
-        // --- イオニックウェポンのアフターマス付加判定 ---
-        // 4手目などのショウハでAM1が付加される挙動をシミュレート
-        if (closeWS.type.includes("メリポ/イオニック") && !currentAM) {
-            currentAM = "IONIC_AM1"; // 照破を撃った時点でAM1が付加
-        }
-
         // --- 連携属性の取得 (AM状態に応じた属性追加を適用) ---
+        // ※AMは「着弾後」に付与されるため、現在のステップでの属性追加判定には「直前までのcurrentAM」を使用する
         const tossAttrs = getModifiedAttrs(tossWS, currentAM ? "IONIC_AM3" : "NORMAL");
         const closeAttrs = getModifiedAttrs(closeWS, currentAM ? "IONIC_AM3" : "NORMAL");
 
@@ -606,7 +603,7 @@ function calculateSkillchainSteps(wsList) {
         let stepResult = getSkillchainResult(stepTossAttrs, closeAttrs, "NORMAL");
 
         // --- 究極連携（極光・黒闇）への変化判定 ---
-        // 条件：AMが付与されており、かつ【締めWSがイオニック対応の武神流秘奥義であること】！
+        // 条件：AMが「すでに」付与されており、かつ【締めWSがイオニック対応の武神流秘奥義であること】！
         if (currentAM && closeWS.type.includes("メリポ/イオニック")) {
             if (stepResult && (stepResult.name === "光" || stepResult.name === "闇")) {
                 let meetSteps = false;
@@ -633,6 +630,11 @@ function calculateSkillchainSteps(wsList) {
             chain: stepResult, // 発生した連携 (null の場合は連携不成立)
             amState: currentAM
         });
+
+        // --- イオニックウェポンのアフターマス付加判定（時系列的に着弾後に付加） ---
+        if (closeWS.type.includes("メリポ/イオニック") && !currentAM) {
+            currentAM = "IONIC_AM1"; // このWSが着弾したことにより、次のステップからAM1効果が有効化
+        }
 
         // 次のステップのために現在の連携を更新
         currentChain = stepResult;

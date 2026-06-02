@@ -1,6 +1,6 @@
-# Sortie Corsair Strategy Guide (Lower Sectors: GEFH)
+﻿# Sortie Corsair Strategy Guide (Lower Sectors: GEFH)
 
-> ⬅**[Back to Sortie Strategy Guide (Upper Sectors: DABC)](article_en.html?file=articles/sortie_corsair_en.md)**
+> ⬅**[Back to Sortie Strategy Guide (Upper Sectors: DABC)](article_en.html?file=記事/sortie_corsair_en.md)**
 
 ## Basics of Lower Sector Strategy
 
@@ -25,7 +25,7 @@ Since lower sector bosses have **extremely high evasion**, you must pay close at
 
 *   **Switch to Accuracy-Focused Gear**
     When firing <span class="ws-highlight">Exenterator</span>, switch to an equipment set that maximizes "Melee Accuracy" and stand by. If you miss and break the skillchain, the party's total damage will drop significantly. Prioritize "ensuring it hits" over damage.
-    *(See [Exenterator Accuracy Gear here](article_en.html?file=articles/corsair_equip_en.md#exzen-acc))*
+    *(See [Exenterator Accuracy Gear here](article_en.html?file=記事/corsair_equip_en.md#exzen-acc))*
 *   **Recommended Food: "Sublime Sushi"**
     Choose "Sublime Sushi." This is not only for boosting melee accuracy but also because there are situations in the **H boss battle where you use "<span class="ws-highlight">Last Stand</span>."** By eating "Sublime Sushi," which provides the highest boost to both physical and ranged accuracy, you can stabilize both melee and ranged follow-ups.
 
@@ -67,7 +67,7 @@ The Sector F boss is an empowered version of the upper B boss (Leshonn). Its att
 *   **Resource Conservation and Attribute Adaptation**:
     If the boss is weak to Earth, the Scholar creates Gravitation. Since the Corsair has few ways to follow up solo, stick to following up with **"<span class="ws-highlight">Wildfire</span>"** only if the Rune Fencer connects it, and conserve resources.
     The moment the attribute changes to Ice weakness (Wind attribute), fully utilize your stored TP and shots to burst it down with the **Leaden Salute → 2 Shots → Wildfire** skillchain extension.
-    > **[How to create/use this solo SC macro (See Upper Sectors Guide)](article_en.html?file=articles/sortie_corsair_en.md#timing-of-skillchain-follow-up-ws)**
+    > **[How to create/use this solo SC macro (See Upper Sectors Guide)](article_en.html?file=記事/sortie_corsair_en.md#timing-of-skillchain-follow-up-ws)**
 
 </div>
 
@@ -89,7 +89,7 @@ The Sector H boss is an empowered version of the upper D boss (Degei) and, as it
 
 (※1) You cannot connect solo against a Gravitation SC, but if the Tank or another ally connects it, you can follow up with Wildfire as a Darkness SC.
 
-> **[See the Radiance (Fragmentation follow-up) macro explanation here (Upper Sectors Guide)](article_en.html?file=articles/sortie_corsair_en.md#laststand-macro)**
+> **[See the Radiance (Fragmentation follow-up) macro explanation here (Upper Sectors Guide)](article_en.html?file=記事/sortie_corsair_en.md#laststand-macro)**
 
 ### Key Points for Aita
 *   **"Vivisection" Reset**: The boss uses the wide-area special move "Vivisection" roughly every 3 minutes, which resets the current weakness. Watch for the next special move to identify the new weakness.
@@ -104,9 +104,9 @@ The Sector H boss is an empowered version of the upper D boss (Degei) and, as it
 <div class="boss-box" id="aminon-link">
 
 ## The Ultimate Boss: Hard Aminon Corsair Tactical Guide
-For a highly detailed, dedicated guide on Corsair's specific role, opening roll rotations, Savage Blade DPS, and RDM debuff quick draw synergy (Empyrean Feet required) in the battle against **Hard Aminon**, please refer to our dedicated page. **[Hard Aminon Corsair Tactical Guide Here](article_en.html?file=articles/sortie_corsair_aminon_en.md)**
+For a highly detailed, dedicated guide on Corsair's specific role, opening roll rotations, Savage Blade DPS, and RDM debuff quick draw synergy (Empyrean Feet required) in the battle against **Hard Aminon**, please refer to our dedicated page. **[Hard Aminon Corsair Tactical Guide Here](article_en.html?file=記事/sortie_corsair_aminon_en.md)**
 
 </div>
 -->
 
-> ⬅**[Back to Sortie Strategy Guide (Upper Sectors: DABC)](article_en.html?file=articles/sortie_corsair_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**
+> ⬅**[Back to Sortie Strategy Guide (Upper Sectors: DABC)](article_en.html?file=記事/sortie_corsair_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**

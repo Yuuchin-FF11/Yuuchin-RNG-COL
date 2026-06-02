@@ -1,6 +1,6 @@
-# Sortie Corsair Strategy Guide (Upper Sectors: DABC)
+﻿# Sortie Corsair Strategy Guide (Upper Sectors: DABC)
 
-> ⬅**[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=articles/sortie_corsair_lower_en.md)**
+> ⬅**[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=記事/sortie_corsair_lower_en.md)**
 
 ## Premise: Party Composition
 The strategy described in this article assumes the following party composition:
@@ -311,4 +311,4 @@ Skomora is fixed to **Fire Weakness**, just like Ghatjot.
 
 ---
 
-> **[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=articles/sortie_corsair_lower_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**
+> **[Sortie Strategy Guide (Lower Sectors: GEFH) is here](article_en.html?file=記事/sortie_corsair_lower_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**

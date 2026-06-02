@@ -1,7 +1,7 @@
 ﻿# ソーティ攻略（コルセア視点：上層編 DABC）
 
 
-> ⬅「[ソーティ攻略（下層編 GEFH）はこちら](article.html?file=articles/sortie_corsair_lower.md)」
+> ⬅「[ソーティ攻略（下層編 GEFH）はこちら](article.html?file=記事/sortie_corsair_lower.md)」
 
 ## 前提となるパーティ構成
 本記事で解説するソーティ攻略の立ち回りは、以下のパーティ構成を前提としています。
@@ -357,4 +357,4 @@ C区画のボスは、Aボスと同じく固定で「火属性」が弱点とな
 
 ---
 
-> 「[ソーティ攻略（下層編 GEFH）はこちら](article.html?file=articles/sortie_corsair_lower.md)」 ｜ 「[HPトップに戻る](index.html)」 ｜ ⬆「[ページの一番上へ](#)」
+> 「[ソーティ攻略（下層編 GEFH）はこちら](article.html?file=記事/sortie_corsair_lower.md)」 ｜ 「[HPトップに戻る](index.html)」 ｜ ⬆「[ページの一番上へ](#)」

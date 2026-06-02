@@ -1,6 +1,6 @@
-# Ranger Equipment Guide (Gastraphetes Edition)
+﻿# Ranger Equipment Guide (Gastraphetes Edition)
 
-**[Standard Equipment (Yoichi, Annihilator, etc.) is here](article_en.html?file=articles/hunter_equip_en.md)**
+**[Standard Equipment (Yoichi, Annihilator, etc.) is here](article_en.html?file=記事/hunter_equip_en.md)**
 
 This page is a dedicated guide/template for introducing and editing the high-end equipment configuration of Ranger (Ranger) centered around the ultimate Mythic Weapon, **"Gastraphetes"**.
 Please feel free to input and use your favorite equipment configuration!

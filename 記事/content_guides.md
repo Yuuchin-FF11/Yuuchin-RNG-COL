@@ -1,4 +1,4 @@
-# エンドコンテンツ攻略情報
+﻿# エンドコンテンツ攻略情報
 
 このページでは、FF11のエンドコンテンツにおける攻略記事をコンテンツ別にまとめています。
 目的に合わせて各攻略記事をご参照ください。
@@ -6,22 +6,22 @@
 ## 攻略記事一覧
 
 ### はじめての方・復帰された方へ
-* 「[新規や復帰者がまず目指す事](article.html?file=articles/beginner_guide.md)」
+* 「[新規や復帰者がまず目指す事](article.html?file=記事/beginner_guide.md)」
   現在のヴァナ・ディールでエンドコンテンツに参加するために、最低限準備しておくべきことや目標をまとめています。
-* 「[完全新規向けスタートダッシュガイド（レベル30まで編）](article.html?file=articles/starter_guide.md)」
+* 「[完全新規向けスタートダッシュガイド（レベル30まで編）](article.html?file=記事/starter_guide.md)」
   全くのゼロからFF11を始めた人が、移動ワープの開放から最初の難関であるサポートジョブ取得までを迷わずに突破するための現代版チュートリアルです。
-* 「[ソロでもできる！限界突破ガイド（レベル50〜99編）](article.html?file=articles/limit_break_guide.md)」
+* 「[ソロでもできる！限界突破ガイド（レベル50〜99編）](article.html?file=記事/limit_break_guide.md)」
   レベル50から始まるFF11最大の試練「限界突破」を、現代のソロ用緩和ギミックやマウント最深部下車テクニック、フェイス解禁などの裏技を駆使してスマートに乗り越えるためのロードマップです。
 
 
 ### ソーティ
-* 「[ソーティ攻略（コルセア視点：上層編 DABC）](article.html?file=articles/sortie_corsair.md)」
+* 「[ソーティ攻略（コルセア視点：上層編 DABC）](article.html?file=記事/sortie_corsair.md)」
   突入時の強化手順、B区画でのエレメンタル討伐から、上層ボス（D→A→B→C）における連携と追撃パターンを解説しています。
-* 「[ソーティ攻略（コルセア視点：下層編 GEFH）](article.html?file=articles/sortie_corsair_lower.md)」
+* 「[ソーティ攻略（コルセア視点：下層編 GEFH）](article.html?file=記事/sortie_corsair_lower.md)」
   上層を終えた後の下層（上位ボス G→E→F→H）の攻略手順や立ち回りについて解説しています。
 
 ### オデシー ジェール
-* 「[オデシー ジェール攻略（準備中）](article.html?file=articles/odyssey_gaol.md)」
+* 「[オデシー ジェール攻略（準備中）](article.html?file=記事/odyssey_gaol.md)」
   Veng+25などの高難易度を戦い抜くための、ジェールにおける遠隔編成（狩人・コルセア）での立ち回りや、各ボスごとの戦術を解説します。
 
 ---

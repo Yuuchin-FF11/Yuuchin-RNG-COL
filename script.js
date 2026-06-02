@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initParticles();
     initAIChat();
@@ -275,7 +275,7 @@ async function loadDiaryEntries() {
     if (!container) return;
     
     try {
-        const response = await fetch('articles/diary.json');
+        const response = await fetch('記事/diary.json');
         if (!response.ok) throw new Error('Failed to load diary entries');
         
         const entries = await response.json();
@@ -291,7 +291,7 @@ async function loadDiaryEntries() {
                     <div class="diary-date">${entry.date}</div>
                     <div class="diary-content">
                         <div class="diary-image-container">
-                            <img src="${entry.image}" alt="${entry.title}" onerror="this.src='assets/images/hunter_image.jpg'">
+                            <img src="${entry.image}" alt="${entry.title}" onerror="this.src='画像素材/images/hunter_image.jpg'">
                         </div>
                         <div class="diary-text">
                             <h3>${entry.title}</h3>

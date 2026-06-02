@@ -1,6 +1,6 @@
-# FF11 From Scratch! The Ultimate Start Dash Guide for Complete Beginners (Up to Level 30)
+﻿# FF11 From Scratch! The Ultimate Start Dash Guide for Complete Beginners (Up to Level 30)
 
-*Note: For details on how to progress through the Limit Break quests starting from level 50, please refer to our dedicated [Limit Break Guide (Lv50-99)](article_en.html?file=articles/limit_break_guide.md).*
+*Note: For details on how to progress through the Limit Break quests starting from level 50, please refer to our dedicated [Limit Break Guide (Lv50-99)](article_en.html?file=記事/limit_break_guide.md).*
 
 ## 1. Introduction: Why I wrote this article
 This article was born when a viewer on my YouTube channel, who had never played FFXI before, got interested and actually started playing!
@@ -227,7 +227,7 @@ Whether you want to play a melee or a mage, grabbing these EXP boosts first will
 (At first, your level is capped at 50.
 After that, you'll need to complete "Limit Break" quests to raise the cap by 5 levels at a time.
 
-For details on how to progress through the Limit Break quests starting from level 50, please refer to our dedicated [Limit Break Guide (Lv50-99)](article_en.html?file=articles/limit_break_guide.md). It covers the easiest and safest ways to unlock your level caps solo, so be sure to check it out once you get close to level 50!
+For details on how to progress through the Limit Break quests starting from level 50, please refer to our dedicated [Limit Break Guide (Lv50-99)](article_en.html?file=記事/limit_break_guide.md). It covers the easiest and safest ways to unlock your level caps solo, so be sure to check it out once you get close to level 50!
 For now, do your best to reach this point!)
 
 ---

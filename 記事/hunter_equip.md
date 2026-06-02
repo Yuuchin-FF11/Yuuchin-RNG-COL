@@ -1,6 +1,6 @@
 ﻿# 狩人 装備紹介（ハイエンド・理想編）
 
-「[ガストラフェテス装備はこちら](article.html?file=articles/hunter_gastraphetes.md)」
+「[ガストラフェテス装備はこちら](article.html?file=記事/hunter_gastraphetes.md)」
 
 ---
 

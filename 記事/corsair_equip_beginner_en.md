@@ -1,7 +1,7 @@
-# Corsair Equipment Guide (Budget / Entry-level)
+﻿# Corsair Equipment Guide (Budget / Entry-level)
 
 This page introduces **"Budget Gear (Entry-level)"** sets that are relatively easy to collect for those who have just started Corsair or cannot yet prepare high-end equipment such as Nyame or Ikenga sets.
-Please use this as a reference for gathering equipment first and gradually stepping up to **[High-end Equipment (Ideal Sets)](article_en.html?file=articles/corsair_equip_en.md)**.
+Please use this as a reference for gathering equipment first and gradually stepping up to **[High-end Equipment (Ideal Sets)](article_en.html?file=記事/corsair_equip_en.md)**.
 
 > **Prerequisite: Collect the "Malignance Set" first!**
 > This "Budget Gear Guide" assumes that you have already collected the **"Malignance Armor Set"**, which can be obtained from the High-Tier Mission Battlefield "The Lady of Wings."
@@ -505,4 +505,4 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 
 ---
 
-> **[Corsair High-end Gear Guide (Ideal/High-end) is here](article_en.html?file=articles/corsair_equip_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**
+> **[Corsair High-end Gear Guide (Ideal/High-end) is here](article_en.html?file=記事/corsair_equip_en.md)** ｜ **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**

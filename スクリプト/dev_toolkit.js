@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 function validateHtml(filename) {
@@ -90,6 +90,6 @@ if (cmd === 'html') {
     const ok = checkMdLinks('articles');
     process.exit(ok ? 0 : 1);
 } else {
-    console.log("Usage: node scripts/dev_toolkit.js [html|links]");
+    console.log("Usage: node スクリプト/dev_toolkit.js [html|links]");
     process.exit(1);
 }

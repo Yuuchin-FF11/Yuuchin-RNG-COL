@@ -1,6 +1,6 @@
-# Ranger Equipment Guide (High-End & Ideal)
+﻿# Ranger Equipment Guide (High-End & Ideal)
 
-**[Gastraphetes Equipment Guide is here](article_en.html?file=articles/hunter_gastraphetes_en.md)**
+**[Gastraphetes Equipment Guide is here](article_en.html?file=記事/hunter_gastraphetes_en.md)**
 
 ---
 

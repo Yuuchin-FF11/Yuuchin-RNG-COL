@@ -1,8 +1,8 @@
-# FFXI Bismarck - Automated Link URL Validator (scripts/check_links.ps1)
+﻿# FFXI Bismarck - Automated Link URL Validator (スクリプト/check_links.ps1)
 # This script extracts all wiki.ffo.jp URLs from link_map.js and checks if they return 200 OK.
 # UTF-8 Encoding safe (ASCII only to prevent Japanese encoding errors in Windows PowerShell).
 
-$linkMapPath = Join-Path (Get-Location) "assets/js/link_map.js"
+$linkMapPath = Join-Path (Get-Location) "画像素材/js/link_map.js"
 if (-not (Test-Path $linkMapPath)) {
     Write-Error "link_map.js not found at: $linkMapPath"
     exit 1

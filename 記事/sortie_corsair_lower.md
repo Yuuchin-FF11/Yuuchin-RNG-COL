@@ -1,5 +1,5 @@
 ﻿# ソーティ攻略（コルセア視点：下層編 GEFH）
-> ⬅「[ソーティ攻略（上層編 DABC）に戻る](article.html?file=articles/sortie_corsair.md)」
+> ⬅「[ソーティ攻略（上層編 DABC）に戻る](article.html?file=記事/sortie_corsair.md)」
 
 ## 下層攻略の基本
 
@@ -26,7 +26,7 @@
 
 *   「命中特化装備への切り替え」
     <span class="ws-highlight">エクゼンレター</span>を放つ際は、とにかく「近接命中」を最大限に確保できる装備セットに切り替えて待機します。ここでミスをして連携を止めてしまうと、パーティ全体の総ダメージが大きく落ちてしまうため、ダメージよりも「確実に当てること」を最優先します。
-    （[エクゼン命中重視装備はこちら](article.html?file=articles/corsair_equip.md#exzen-acc)）
+    （[エクゼン命中重視装備はこちら](article.html?file=記事/corsair_equip.md#exzen-acc)）
 *   「食事は「特上スシ」を推奨」
     食事は「特上スシ」を選択します。これは近接命中の底上げはもちろんですが、「Hボス戦において「<span class="ws-highlight">ラストスタンド</span>」を使用する場面がある」ためです。物理命中・飛命の両方が最も高く上がる「特上スシ」を食べることで、近接・遠隔どちらの追撃も安定させることができます。
 
@@ -74,7 +74,7 @@ F区画のボスは上層のBボス（Leshonn）の強化版です。属性が�
 *   「リソースの温存と属性変化への対応」：
     ボスの属性が土弱点の場合、学者は重力連携を作成しますが、コルセアは単独で繋ぐ手段が乏しいため、魔導剣士が繋いでくれた場合に「<span class="ws-highlight">ワイルドファイア</span>」で追撃する程度に留め、リソースを温存します。
     属性が氷弱点（風属性）に変化した瞬間に、温存していたTPとドローをフル活用し、「<span class="ws-highlight">レデンサリュート</span> → <span class="ability-highlight">ドロー2発</span> → <span class="ws-highlight">ワイルドファイア</span>」などの連携延長ルートで一気に削ります。
-    > 「[この一人連携マクロの作り方・解説はこちら（上層編へ）](article.html?file=articles/sortie_corsair.md#重要連携追撃のwsを撃つタイミングについて)」
+    > 「[この一人連携マクロの作り方・解説はこちら（上層編へ）](article.html?file=記事/sortie_corsair.md#重要連携追撃のwsを撃つタイミングについて)」
 
 
 </div>
@@ -99,7 +99,7 @@ H区画のボスは、上層のDボス（Degei）の強化版であり、外見�
 
 (※1) 重力連携に対しては単独では繋げませんが、盾役などが連携を繋いでくれた場合に闇連携として追撃可能です。
  
-> 「[極光（分解への追撃）マクロの解説はこちら（上層編へ）](article.html?file=articles/sortie_corsair.md#laststand-macro)」
+> 「[極光（分解への追撃）マクロの解説はこちら（上層編へ）](article.html?file=記事/sortie_corsair.md#laststand-macro)」
 
 
 ### Aita戦の重要ポイント
@@ -114,10 +114,10 @@ H区画のボスは、上層のDボス（Degei）の強化版であり、外見�
 <div class="boss-box" id="aminon-link">
 
 ## Aminon (Hard Mode) コルセア特化立ち回り (Corsair Tactical Guide)
-ソーティの真の最難関ボス「Aminon (Hard Mode / 強バージョン)」戦における、コルセアの開幕ロール回し、爆速TP確保からのサベッジブレード削り、そして赤魔道士の弱体魔法と連携したクイックドロー支援（エンピ足装備必須）など、極限の実戦的立ち回りを単品ページにて徹底解説しています。「[Aminon (Hard Mode) コルセア特化立ち回りはこちら](article.html?file=articles/sortie_corsair_aminon.md)」
+ソーティの真の最難関ボス「Aminon (Hard Mode / 強バージョン)」戦における、コルセアの開幕ロール回し、爆速TP確保からのサベッジブレード削り、そして赤魔道士の弱体魔法と連携したクイックドロー支援（エンピ足装備必須）など、極限の実戦的立ち回りを単品ページにて徹底解説しています。「[Aminon (Hard Mode) コルセア特化立ち回りはこちら](article.html?file=記事/sortie_corsair_aminon.md)」
 
 </div>
 
 
 
-> ⬅「[ソーティ攻略（上層編 DABC）に戻る](article.html?file=articles/sortie_corsair.md)」 ｜ 「[HPトップに戻る](index.html)」 ｜ ⬆「[ページの一番上へ](#)」
+> ⬅「[ソーティ攻略（上層編 DABC）に戻る](article.html?file=記事/sortie_corsair.md)」 ｜ 「[HPトップに戻る](index.html)」 ｜ ⬆「[ページの一番上へ](#)」

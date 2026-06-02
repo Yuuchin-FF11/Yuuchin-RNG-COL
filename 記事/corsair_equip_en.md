@@ -1,10 +1,10 @@
-# Corsair Equipment Guide
+﻿# Corsair Equipment Guide
 
 This guide details the recommended equipment for Corsair.
 
 > **For Beginners and Returning Players**
 > This page focuses on "Ideal Gear Sets" for high-end content (such as Sortie) aimed at active players.
-> For "Entry-level Gear (Uniqlo Gear)" that is easier to collect if you don't have Nyame or Ikenga yet, please refer to the **[Entry-level Gear Guide](article_en.html?file=articles/corsair_equip_beginner_en.md)**. Use this page as your ultimate goal.
+> For "Entry-level Gear (Uniqlo Gear)" that is easier to collect if you don't have Nyame or Ikenga yet, please refer to the **[Entry-level Gear Guide](article_en.html?file=記事/corsair_equip_beginner_en.md)**. Use this page as your ultimate goal.
 
 ## Phantom Roll Set
 Dedicated equipment to boost the party's firepower. Includes gear that extends duration or provides bonuses.
@@ -198,7 +198,7 @@ Equipment to instantly accumulate TP when shooting <span class="ability-highligh
 
   > **Related Articles**
   > More detailed maneuvers for Corsair in Sortie and skillchain mechanics are explained in dedicated articles!
-  > **[Sortie Guide (Corsair Perspective) is here](article_en.html?file=articles/sortie_corsair_en.md)**
+  > **[Sortie Guide (Corsair Perspective) is here](article_en.html?file=記事/sortie_corsair_en.md)**
 
 ### Physical Ranged WS Gear (<span class="ws-highlight">Last Stand</span>, etc.)
 * Main Weapon: Rostam (Path A or B)
@@ -490,4 +490,4 @@ Melee combat (TP gain) set focusing on damage taken cut and magic evasion to enh
 
 ---
 
-**[Entry-level Corsair Gear Guide is here](article_en.html?file=articles/corsair_equip_beginner_en.md)** | **[Back to Homepage](index_en.html)** | **[Back to Top](#)**
+**[Entry-level Corsair Gear Guide is here](article_en.html?file=記事/corsair_equip_beginner_en.md)** | **[Back to Homepage](index_en.html)** | **[Back to Top](#)**

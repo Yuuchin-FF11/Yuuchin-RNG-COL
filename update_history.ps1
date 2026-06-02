@@ -1,4 +1,4 @@
-param (
+﻿param (
     [string]$File,
     [string]$MsgJa,
     [string]$MsgEn
@@ -7,7 +7,7 @@ param (
 # 1. If MsgJa is empty, start interactive mode in English (safe ASCII only)
 if (-not $MsgJa) {
     Write-Host "--- FFXI Bismarck HP Update History Auto-Updater ---" -ForegroundColor Cyan
-    $File = Read-Host "1. Article file path (e.g., articles/hunter_gastraphetes.md / Press Enter to skip)"
+    $File = Read-Host "1. Article file path (e.g., 記事/hunter_gastraphetes.md / Press Enter to skip)"
     $MsgJa = Read-Host "2. Update Message (Japanese - Required)"
     $MsgEn = Read-Host "3. Update Message (English - Press Enter to copy Japanese)"
     

@@ -1,5 +1,24 @@
 // YouTube Chat Translator - OBS Overlay ロジック
 
+// OBS/ブラウザ内のエラーを画面に赤文字で強制デバッグ表示する救急措置🐾
+window.onerror = function(message, source, lineno, colno, error) {
+    const errDiv = document.createElement('div');
+    errDiv.style.color = '#ef4444';
+    errDiv.style.background = 'rgba(0,0,0,0.95)';
+    errDiv.style.padding = '10px';
+    errDiv.style.border = '2px solid #ef4444';
+    errDiv.style.borderRadius = '8px';
+    errDiv.style.zIndex = '99999';
+    errDiv.style.position = 'fixed';
+    errDiv.style.top = '10px';
+    errDiv.style.left = '10px';
+    errDiv.style.fontSize = '12px';
+    errDiv.style.fontFamily = 'monospace';
+    errDiv.textContent = `JS Error: ${message} at ${source}:${lineno}:${colno}`;
+    document.body.appendChild(errDiv);
+    return false;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const commentContainer = document.getElementById('comment-container');
 

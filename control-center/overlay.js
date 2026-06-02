@@ -1,21 +1,29 @@
 // YouTube Chat Translator - OBS Overlay ロジック
 
 // OBS/ブラウザ内のエラーを画面に赤文字で強制デバッグ表示する救急措置🐾
+function showDebugError(msg) {
+    let errDiv = document.getElementById('debug-err-div');
+    if (!errDiv) {
+        errDiv = document.createElement('div');
+        errDiv.id = 'debug-err-div';
+        errDiv.style.color = '#ef4444';
+        errDiv.style.background = 'rgba(0,0,0,0.95)';
+        errDiv.style.padding = '10px';
+        errDiv.style.border = '2px solid #ef4444';
+        errDiv.style.borderRadius = '8px';
+        errDiv.style.zIndex = '99999';
+        errDiv.style.position = 'fixed';
+        errDiv.style.top = '10px';
+        errDiv.style.left = '10px';
+        errDiv.style.fontSize = '12px';
+        errDiv.style.fontFamily = 'monospace';
+        document.body.appendChild(errDiv);
+    }
+    errDiv.textContent = msg;
+}
+
 window.onerror = function(message, source, lineno, colno, error) {
-    const errDiv = document.createElement('div');
-    errDiv.style.color = '#ef4444';
-    errDiv.style.background = 'rgba(0,0,0,0.95)';
-    errDiv.style.padding = '10px';
-    errDiv.style.border = '2px solid #ef4444';
-    errDiv.style.borderRadius = '8px';
-    errDiv.style.zIndex = '99999';
-    errDiv.style.position = 'fixed';
-    errDiv.style.top = '10px';
-    errDiv.style.left = '10px';
-    errDiv.style.fontSize = '12px';
-    errDiv.style.fontFamily = 'monospace';
-    errDiv.textContent = `JS Error: ${message} at ${source}:${lineno}:${colno}`;
-    document.body.appendChild(errDiv);
+    showDebugError(`JS Error: ${message} at ${source}:${lineno}:${colno}`);
     return false;
 };
 
@@ -493,7 +501,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(async () => {
             try {
                 const res = await fetch(`http://localhost:${port}/api/chat?t=${Date.now()}`);
-                if (!res.ok) return;
+                if (!res.ok) {
+                    showDebugError(`API Response Error: status ${res.status}`);
+                    return;
+                }
                 const chats = await res.json();
                 if (Array.isArray(chats)) {
                     chats.forEach(chat => {
@@ -517,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             } catch (err) {
-                // 静かに無視
+                showDebugError(`API Fetch Exception: ${err.message || err.toString()}`);
             }
         }, 500); // 0.5秒間隔で極めて低負荷かつリアルタイムに同期します🐾
     }

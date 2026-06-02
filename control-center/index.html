@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Chat Translator - コントロールパネル</title>
+    <title>配信コントロールセンター - 統合コントロールパネル</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +17,8 @@
         
         <!-- ヘッダー -->
         <header class="admin-header">
-            <h1>YouTube Chat Translator</h1>
-            <p>海外リスナーからのコメントを自動翻訳し、OBSへオシャレに透過表示します 🐾</p>
+            <h1>配信コントロールセンター</h1>
+            <p>音声認識英訳、YouTubeチャット翻訳、およびOBSオーバーレイを統合管理する配信アシスタント 🐾</p>
         </header>
 
         <!-- メイン設定カード -->
@@ -135,6 +135,102 @@
             </div>
         </section>
 
+        <!-- 効果音 ＆ プレミアムアラート設定 -->
+        <section class="glass-card">
+            <h2 class="card-title">効果音 ＆ プレミアムアラート設定</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                スパチャやメンバーシップが届いた瞬間に、OBSからタルタルの倒れる声（うわあぁぁ…）を自動で鳴らします🐾
+            </p>
+            
+            <div class="form-row">
+                <!-- 効果音の音量 -->
+                <div class="form-group">
+                    <label for="effect-volume">効果音の音量</label>
+                    <div class="slider-container">
+                        <input type="range" id="effect-volume" min="0" max="100" value="90">
+                        <span id="effect-volume-val" class="slider-value">90%</span>
+                    </div>
+                </div>
+
+                <!-- 効果音テスト -->
+                <div class="form-group" style="justify-content: flex-end;">
+                    <label>効果音の手動テスト</label>
+                    <button id="btn-test-sound" class="btn btn-secondary" style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        タルタル死亡声をテスト再生 💀
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 音声読み上げ（棒読みコメビュ内蔵）設定 -->
+        <section class="glass-card">
+            <h2 class="card-title">音声読み上げ設定（棒読みコメビュ内蔵）</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                外部アプリを使わずに、届いたYouTubeチャットを日本語で自動読み上げします。海外からのコメントはネイティブ発声や同時通訳も可能です🐾
+            </p>
+            
+            <div class="form-row">
+                <!-- 読み上げのON/OFF -->
+                <div class="form-group" style="justify-content: center;">
+                    <label for="enable-read-aloud" style="margin-bottom: 0.5rem;">コメントの音声読み上げ機能</label>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 0.75rem 1rem;">
+                        <input type="checkbox" id="enable-read-aloud" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--accent-color);">
+                        <label for="enable-read-aloud" style="margin-bottom: 0; cursor: pointer; font-weight: 700; color: #fff;">
+                            自動読み上げを有効にする（コメビュ内蔵）
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 読み上げモード of 選択 -->
+                <div class="form-group">
+                    <label for="read-aloud-mode">他言語（海外コメント）の読み上げモード</label>
+                    <select id="read-aloud-mode" style="margin-top: 0.25rem;">
+                        <option value="native_only" selected>ネイティブ原文のみ（日本語訳は読まない） 🌟</option>
+                        <option value="interpreter">同時通訳（英文 ➔ 日本語訳を連続朗読）</option>
+                        <option value="translation_only">翻訳日本語のみ（日本語訳のみ朗読）</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 読み上げ音声キャラクター選択 -->
+            <div class="form-row" style="margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.25rem;">
+                <div class="form-group" style="width: 100%;">
+                    <label for="read-aloud-character">読み上げ音声キャラクター（ボイス）</label>
+                    <select id="read-aloud-character" style="margin-top: 0.25rem;">
+                        <option value="standard" selected>ブラウザ標準（極上アニメ風ピッチ🐾）</option>
+                        <option value="vv_3">VOICEVOX：ずんだもん（大人気アニメ声） 💚</option>
+                        <option value="vv_2">VOICEVOX：四国めたん（ツンデレ萌え声） 🎀</option>
+                        <option value="vv_8">VOICEVOX：春日部つむぎ（ハキハキかわいい） 🌻</option>
+                        <option value="vv_14">VOICEVOX：冥鳴ひまり（あまあま極萌え声） 💘</option>
+                    </select>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.35rem; margin-bottom: 0;">
+                        ※PCの裏で完全無料の音声合成ソフト「VOICEVOX」を起動しておくだけで、ずんだもん等の本物の可愛い萌え声で読み上げます！起動していない場合は、自動的にブラウザ標準の極上アニメ声（ChromeのGoogle日本語推奨）に切り替わります🐾
+                    </p>
+                </div>
+            </div>
+            
+            <div class="form-row" style="margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.25rem;">
+                <!-- 声の高さ（ピッチ） -->
+                <div class="form-group">
+                    <label for="read-aloud-pitch">声の高さ（ピッチ）</label>
+                    <div class="slider-container">
+                        <input type="range" id="read-aloud-pitch" min="0.5" max="2.0" step="0.1" value="1.2">
+                        <span id="read-aloud-pitch-val" class="slider-value">1.2 (少し高め・明るく自然🐾)</span>
+                    </div>
+                </div>
+
+                <!-- 読み上げ速度（スピード） -->
+                <div class="form-group">
+                    <label for="read-aloud-rate">読み上げの速度（スピード）</label>
+                    <div class="slider-container">
+                        <input type="range" id="read-aloud-rate" min="0.5" max="2.0" step="0.1" value="1.1">
+                        <span id="read-aloud-rate-val" class="slider-value">1.1 (少し早め🐾)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- テスト送信カード -->
         <section class="glass-card">
             <h2 class="card-title">テスト送信（動作・デザイン確認用）</h2>
@@ -145,6 +241,8 @@
                 <button id="btn-test-en" class="btn btn-secondary">🇺🇸 英語テスト</button>
                 <button id="btn-test-kr" class="btn btn-secondary">🇰🇷 韓国語テスト</button>
                 <button id="btn-test-jp" class="btn btn-secondary">🇯🇵 日本語テスト</button>
+                <button id="btn-test-sc" class="btn btn-secondary" style="border-color: rgba(234, 179, 8, 0.4); color: #facc15;">💖 スパチャテスト</button>
+                <button id="btn-test-member" class="btn btn-secondary" style="border-color: rgba(16, 185, 129, 0.4); color: #34d399;">💚 メンバー加入テスト</button>
                 <button id="btn-clear-test" class="btn btn-danger">クリア</button>
             </div>
             <p id="test-info-text" style="color: var(--success-color); font-size: 0.85rem; margin-top: 0.75rem; text-align: center; display: none;">

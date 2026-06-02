@@ -1,18 +1,18 @@
 /* YouTube Chat Translator - 共通スタイルシート */
 
 :root {
-    --bg-color: #0b0f19;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --glass-blur: blur(12px);
-    --text-color: #f3f4f6;
-    --text-muted: #9ca3af;
-    --accent-color: #00d2ff;
-    --accent-glow: rgba(0, 210, 255, 0.4);
+    --bg-color: #06040d;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(234, 179, 8, 0.12); /* 高級感のある薄いゴールド境界 */
+    --glass-blur: blur(16px);
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-color: #eab308; /* ロイヤルゴールド */
+    --accent-glow: rgba(234, 179, 8, 0.25);
     --success-color: #10b981;
     --error-color: #ef4444;
     --font-family: 'Outfit', 'Inter', 'Noto Sans JP', sans-serif;
-    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -57,14 +57,14 @@ body {
 }
 
 .admin-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 800;
-    letter-spacing: -0.05em;
-    background: linear-gradient(135deg, #00d2ff 0%, #d946ef 100%);
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #3b82f6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
-    text-shadow: 0 0 40px rgba(0, 210, 255, 0.2);
+    text-shadow: 0 0 50px rgba(234, 179, 8, 0.25);
 }
 
 .admin-header p {
@@ -85,8 +85,8 @@ body {
 }
 
 .glass-card:hover {
-    border-color: rgba(0, 210, 255, 0.25);
-    box-shadow: 0 12px 40px 0 rgba(0, 210, 255, 0.1);
+    border-color: rgba(234, 179, 8, 0.3);
+    box-shadow: 0 16px 48px 0 rgba(234, 179, 8, 0.15);
 }
 
 .card-title {
@@ -555,3 +555,161 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
         opacity: 1;
     }
 }
+
+/* ==========================================================================
+   配信者用プレミアム字幕カード (Broadcaster Premium Card)
+   ========================================================================== */
+
+.comment-card-broadcaster {
+    background: linear-gradient(135deg, rgba(20, 10, 40, 0.75) 0%, rgba(10, 20, 40, 0.75) 100%);
+    backdrop-filter: blur(18px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+    border: 1px solid rgba(234, 179, 8, 0.35); /* ゴールドの薄い枠線 */
+    border-radius: 16px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    box-shadow: 0 12px 40px rgba(234, 179, 8, 0.15), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    max-width: 500px;
+    width: fit-content;
+    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: left bottom;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 虹色グラデーションの微細な光るボーダーエフェクト */
+.comment-card-broadcaster::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #eab308, #d946ef, #00d2ff);
+}
+
+.comment-card-broadcaster .avatar {
+    border-color: rgba(234, 179, 8, 0.6);
+    box-shadow: 0 0 12px rgba(234, 179, 8, 0.3);
+}
+
+.comment-card-broadcaster .author-name {
+    color: #eab308; /* ゴールドカラーの名前に */
+    font-weight: 900;
+}
+
+.comment-card-broadcaster .translation-text {
+    color: #d946ef; /* ビビッドなマゼンタ・パープルで英訳を強調 */
+    font-size: 1.05rem !important;
+}
+
+/* マイク動作中のパルスアニメーションインジケーター (管理画面用) */
+.mic-dot.active {
+    background: var(--error-color) !important;
+    box-shadow: 0 0 10px var(--error-color);
+    animation: micPulse 1.2s infinite alternate;
+}
+
+@keyframes micPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   スーパーチャット用プレミアムカード (Super Chat Premium Card)
+   ========================================================================== */
+.comment-card-superchat {
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(20, 10, 40, 0.8) 100%);
+    backdrop-filter: blur(18px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+    border: 1px solid rgba(234, 179, 8, 0.5); /* 強めのゴールド枠 */
+    border-radius: 16px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    box-shadow: 0 12px 40px rgba(234, 179, 8, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: fit-content;
+    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: left bottom;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.comment-card-superchat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f59e0b, #eab308, #ef4444);
+}
+
+.comment-card-superchat .avatar {
+    border-color: rgba(234, 179, 8, 0.8);
+    box-shadow: 0 0 12px rgba(234, 179, 8, 0.4);
+}
+
+.comment-card-superchat .author-name {
+    color: #fef08a; /* ライトゴールド */
+    font-weight: 900;
+}
+
+/* ==========================================================================
+   メンバーシップ加入用プレミアムカード (Membership Premium Card)
+   ========================================================================== */
+.comment-card-membership {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(10, 20, 40, 0.8) 100%);
+    backdrop-filter: blur(18px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+    border: 1px solid rgba(16, 185, 129, 0.5); /* 強めのグリーン枠 */
+    border-radius: 16px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: fit-content;
+    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: left bottom;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.comment-card-membership::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981, #34d399, #00d2ff);
+}
+
+.comment-card-membership .avatar {
+    border-color: rgba(16, 185, 129, 0.8);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.comment-card-membership .author-name {
+    color: #a7f3d0; /* ライトグリーン */
+    font-weight: 900;
+}
+

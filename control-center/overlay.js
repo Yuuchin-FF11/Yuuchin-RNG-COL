@@ -3,6 +3,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const commentContainer = document.getElementById('comment-container');
 
+    // OBS環境とブラウザプレビュー環境を自動検知し、眩しさ防止の黒背景を適応するマジカルシステム🐾
+    if (window.obsstudio) {
+        // OBS配信ソース内ではゲーム画面を遮らないように完全透過にします
+        document.body.style.setProperty('background-color', 'rgba(0, 0, 0, 0)', 'important');
+    } else {
+        // 通常のブラウザプレビューでは眩しさを防ぎ目に優しい極上の漆黒ダーク背景にします🐾
+        document.body.style.setProperty('background-color', 'rgba(10, 10, 10, 0.98)', 'important');
+    }
+
     // クエリパラメータの解析
     const params = new URLSearchParams(window.location.search);
     const videoId = params.get('v') || '';
@@ -57,6 +66,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyStyles();
             } catch (err) {
                 console.error('Failed to parse live settings:', err);
+            }
+        }
+
+        // 手動効果音テスト再生の受信 (同期ランダム再生)
+        if (e.key === 'yt_translator_test_sound_trigger' && e.newValue) {
+            try {
+                const triggerData = JSON.parse(e.newValue);
+                const soundNum = triggerData.num || (Math.random() < 0.5 ? 1 : 2);
+                
+                const savedSettings = localStorage.getItem('yt_translator_settings');
+                let volume = 0.9;
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    volume = (settings.effectVolume !== undefined) ? (settings.effectVolume / 100) : 0.9;
+                }
+                const audio = new Audio(`効果音/レベルアップ_${soundNum}.mp3?v=${Date.now()}`);
+                audio.volume = volume;
+                audio.play().catch(err => console.warn('Audio test playback blocked by browser/OBS:', err));
+            } catch (err) {
+                console.error('Failed to play test sound:', err);
             }
         }
         
@@ -119,6 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     
     function addCommentCard(chatData) {
+        // メモリ上の重複リスト ＆ DOMから検索する二重防衛線により、超高速な同時発生時の二重描画も100%完璧に防ぎます🐾
+        if (chatData.id) {
+            if (processedMessageIds.has(chatData.id) || document.getElementById(chatData.id)) {
+                return;
+            }
+            processedMessageIds.add(chatData.id);
+        }
+
         // 海外コメント専用フィルターがオンの場合、日本語（翻訳不要）のコメントをスキップ（配信者発言は除く）
         if (filterForeign && !chatData.needTranslation && !chatData.isBroadcaster) {
             return;
@@ -127,6 +164,33 @@ document.addEventListener('DOMContentLoaded', () => {
         // 管理画面へログを同期するためにlocalStorageへ書き込み（実チャットの逆転送。配信者は除く）
         if (chatData.id && !chatData.id.startsWith('test_') && !chatData.isBroadcaster) {
             localStorage.setItem('yt_translator_real_chat', JSON.stringify(chatData));
+            
+            // ローカルサーバーAPIへ逆同期（別プロセス間での超安定読み上げ同期用）🐾
+            const port = window.location.port || '8080';
+            fetch(`http://localhost:${port}/api/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(chatData)
+            }).catch(err => console.error('Failed to sync real chat to API:', err));
+        }
+
+        // スーパーチャットまたはメンバーシップの場合に、設定された音量で効果音を自動再生 (ランダム2パターン再生)
+        if (chatData.isSuperChat || chatData.isMembership) {
+            try {
+                const savedSettings = localStorage.getItem('yt_translator_settings');
+                let volume = 0.9;
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    volume = (settings.effectVolume !== undefined) ? (settings.effectVolume / 100) : 0.9;
+                }
+                // 1か2をランダムで選択
+                const soundNum = Math.random() < 0.5 ? 1 : 2;
+                const audio = new Audio(`効果音/レベルアップ_${soundNum}.mp3?v=${Date.now()}`);
+                audio.volume = volume;
+                audio.play().catch(err => console.warn('Auto playback blocked by browser/OBS:', err));
+            } catch (err) {
+                console.error('Failed to auto play effect sound:', err);
+            }
         }
 
         // すでに表示数制限を超えている場合は古いものから消去
@@ -140,6 +204,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = document.createElement('div');
         if (chatData.isBroadcaster) {
             card.className = 'comment-card comment-card-broadcaster';
+        } else if (chatData.isSuperChat) {
+            card.className = 'comment-card comment-card-superchat';
+        } else if (chatData.isMembership) {
+            card.className = 'comment-card comment-card-membership';
         } else {
             card.className = 'comment-card';
         }
@@ -180,30 +248,60 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         content.appendChild(nameNode);
 
-        // 原文メッセージ
-        const origMsg = document.createElement('span');
-        origMsg.className = 'message-original';
-        origMsg.style.fontSize = `${fontSize}px`;
-        origMsg.textContent = chatData.message;
-        content.appendChild(origMsg);
+        // 配信者（ご主人様）の場合は、英語（翻訳先）をメインに大きく表示し、日本語（原文）を下に小さく添える黄金比レイアウト🐾
+        if (chatData.isBroadcaster) {
+            // メインは英訳された美しい英語
+            const origMsg = document.createElement('span');
+            origMsg.className = 'message-original';
+            origMsg.style.fontSize = `${fontSize}px`;
+            origMsg.textContent = chatData.translation;
+            content.appendChild(origMsg);
 
-        // 翻訳メッセージ（必要な場合のみ追加）
-        if (chatData.needTranslation && chatData.translation) {
-            const transBox = document.createElement('div');
-            transBox.className = 'translation-box';
+            // サブに元の日本語を小さく控えめに添える（英語を引き立てるためグレー文字にします）
+            if (chatData.message) {
+                const transBox = document.createElement('div');
+                transBox.className = 'translation-box';
+                transBox.style.borderTop = '1px solid rgba(255, 255, 255, 0.05)';
 
-            const label = document.createElement('span');
-            label.className = 'translation-label';
-            label.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6 6-6"/></svg> 翻訳`;
-            transBox.appendChild(label);
+                const label = document.createElement('span');
+                label.className = 'translation-label';
+                label.innerHTML = `[日本語]`;
+                transBox.appendChild(label);
 
-            const transMsg = document.createElement('span');
-            transMsg.className = 'translation-text';
-            transMsg.style.fontSize = `${transSize}px`;
-            transMsg.textContent = chatData.translation;
-            transBox.appendChild(transMsg);
+                const transMsg = document.createElement('span');
+                transMsg.className = 'translation-text';
+                transMsg.style.color = 'var(--text-muted)'; // 控えめなグレー色にして英語を引き立てます🐾
+                transMsg.style.fontSize = `${transSize}px`;
+                transMsg.textContent = chatData.message;
+                transBox.appendChild(transMsg);
 
-            content.appendChild(transBox);
+                content.appendChild(transBox);
+            }
+        } else {
+            // 通常の視聴者の場合は、原文をメインにし、必要なら翻訳を下に追加（従来どおり）
+            const origMsg = document.createElement('span');
+            origMsg.className = 'message-original';
+            origMsg.style.fontSize = `${fontSize}px`;
+            origMsg.textContent = chatData.message;
+            content.appendChild(origMsg);
+
+            if (chatData.needTranslation && chatData.translation) {
+                const transBox = document.createElement('div');
+                transBox.className = 'translation-box';
+
+                const label = document.createElement('span');
+                label.className = 'translation-label';
+                label.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6 6-6"/></svg> 翻訳`;
+                transBox.appendChild(label);
+
+                const transMsg = document.createElement('span');
+                transMsg.className = 'translation-text';
+                transMsg.style.fontSize = `${transSize}px`;
+                transMsg.textContent = chatData.translation;
+                transBox.appendChild(transMsg);
+
+                content.appendChild(transBox);
+            }
         }
 
         card.appendChild(content);
@@ -302,14 +400,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const author = item.authorDetails;
                     const snippet = item.snippet;
-                    const message = snippet.textMessageDetails ? snippet.textMessageDetails.messageText : '';
                     
+                    let message = '';
+                    let isSuperChat = false;
+                    let isMembership = false;
+
+                    if (snippet.type === 'textMessageDetails' && snippet.textMessageDetails) {
+                        message = snippet.textMessageDetails.messageText;
+                    } else if (snippet.type === 'superChatEvent' && snippet.superChatDetails) {
+                        message = snippet.superChatDetails.userComment || `Super Chat! (${snippet.superChatDetails.amountDisplayString})`;
+                        isSuperChat = true;
+                    } else if (snippet.type === 'memberMilestoneChatEvent' && snippet.memberMilestoneChatEvent) {
+                        message = snippet.memberMilestoneChatEvent.userComment || 'Membership Milestone!';
+                        isMembership = true;
+                    } else if (snippet.type === 'newSponsorEvent') {
+                        message = 'New Member Welcomed! 🎉';
+                        isMembership = true;
+                    }
+
                     if (!message) continue;
 
-                    // 翻訳処理
+                    // 翻訳処理 (スーパーチャットやメンバーシップも翻訳する)
                     const translated = await translateText(message);
                     
-                    // 重複排除のメモリ制限（1000件を超えたら古いものを削除）
+                    // 重複排除 of memory limit (1000件を超えたら古いものを削除)
                     if (processedMessageIds.size > 1000) {
                         const firstKey = processedMessageIds.values().next().value;
                         processedMessageIds.delete(firstKey);
@@ -327,6 +441,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         message: message,
                         translation: translated,
                         needTranslation: message !== translated,
+                        isSuperChat: isSuperChat,
+                        isMembership: isMembership,
                         timestamp: new Date(snippet.publishedAt).getTime()
                     };
 
@@ -348,6 +464,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pollTimeoutId) clearTimeout(pollTimeoutId);
         fetchChatMessages();
     }
+
+    // ==========================================================================
+    // 別ブラウザプロセス間（通常のChrome ➔ OBSブラウザソース）超安定ハイブリッドAPI同期 🐾
+    // ==========================================================================
+    let lastSyncedChatId = '';
+    async function startApiPolling() {
+        const port = window.location.port || '8080';
+        setInterval(async () => {
+            try {
+                const res = await fetch(`http://localhost:${port}/api/chat?t=${Date.now()}`);
+                if (!res.ok) return;
+                const chat = await res.json();
+                if (chat && chat.id && chat.id !== lastSyncedChatId) {
+                    lastSyncedChatId = chat.id;
+                    
+                    // 重複処理防止
+                    if (!processedMessageIds.has(chat.id)) {
+                        processedMessageIds.add(chat.id);
+                        addCommentCard(chat);
+                        
+                        // メモリー制限（1000件）
+                        if (processedMessageIds.size > 1000) {
+                            const firstKey = processedMessageIds.values().next().value;
+                            processedMessageIds.delete(firstKey);
+                        }
+                    }
+                }
+            } catch (err) {
+                // 静かに無視
+            }
+        }, 500); // 0.5秒間隔で極めて低負荷かつリアルタイムに同期します🐾
+    }
+    startApiPolling();
 
     // 初期化起動
     fetchLiveChatId();

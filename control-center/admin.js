@@ -624,8 +624,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     
     function sendTestComment(original, trans, name, avatar, lang, isOwner = false, isSuperChat = false, isMembership = false) {
+        const commentId = 'test_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
         const testComment = {
-            id: 'test_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+            id: commentId,
             author: {
                 name: name,
                 avatar: avatar,
@@ -638,6 +639,9 @@ document.addEventListener('DOMContentLoaded', () => {
             isMembership: isMembership,
             timestamp: Date.now()
         };
+
+        // 自分の重複排除リストに登録して二重読み上げ・二重描画を防ぐ🐾
+        processedChatIdsAdmin.add(commentId);
 
         // localStorageに書き込み、オーバーレイ（overlay.html）側のstorageイベントを発火させる
         localStorage.setItem('yt_translator_test_chat', JSON.stringify(testComment));

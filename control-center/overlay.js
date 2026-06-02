@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // デザイン設定（パラメータが無い場合のデフォルト値）
     let fontSize = parseInt(params.get('size')) || 16;
     let transSize = parseInt(params.get('tsize')) || 15;
-    // 0（無制限）が指定された場合にデフォルト値15に上書きされるのを防ぐため、hasで判定
-    let displayTime = params.has('time') ? parseInt(params.get('time')) : 15;
+    // 0（無制限）が指定された場合にデフォルト値15に上書きされるのを防ぐため、null判定を適用
+    let displayTime = (params.get('time') !== null) ? parseInt(params.get('time')) : 15;
     let maxComments = parseInt(params.get('max')) || 6;
     let filterForeign = (params.get('filter') === '1');
 
@@ -217,8 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.className = 'avatar';
         if (chatData.isBroadcaster) {
-            // 配信者用のゴールドマイクアバター（SVG）
-            img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23eab308" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>';
+            // 配信者用のゴールドマイクアバター（互換性のため静的画像URLにフォールバック）
+            img.src = 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png';
         } else {
             img.src = chatData.author.avatar || 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png';
         }

@@ -468,26 +468,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 別ブラウザプロセス間（通常のChrome ➔ OBSブラウザソース）超安定ハイブリッドAPI同期 🐾
     // ==========================================================================
-    let lastSyncedChatId = '';
     async function startApiPolling() {
         const port = window.location.port || '8080';
         setInterval(async () => {
             try {
                 const res = await fetch(`http://localhost:${port}/api/chat?t=${Date.now()}`);
                 if (!res.ok) return;
-                const chat = await res.json();
-                if (chat && chat.id && chat.id !== lastSyncedChatId) {
-                    lastSyncedChatId = chat.id;
+                const chats = await res.json();
+                if (Array.isArray(chats)) {
+                    chats.forEach(chat => {
+                        if (chat && chat.id && !processedMessageIds.has(chat.id)) {
+                            processedMessageIds.add(chat.id);
+                            addCommentCard(chat);
+                        }
+                    });
                     
-                    // 重複処理防止
-                    if (!processedMessageIds.has(chat.id)) {
-                        processedMessageIds.add(chat.id);
-                        addCommentCard(chat);
-                        
-                        // メモリー制限（1000件）
-                        if (processedMessageIds.size > 1000) {
-                            const firstKey = processedMessageIds.values().next().value;
-                            processedMessageIds.delete(firstKey);
+                    // メモリー制限（1000件）
+                    if (processedMessageIds.size > 1000) {
+                        const keys = Array.from(processedMessageIds);
+                        for (let i = 0; i < keys.length - 1000; i++) {
+                            processedMessageIds.delete(keys[i]);
                         }
                     }
                 }

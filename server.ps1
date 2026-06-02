@@ -1,9 +1,9 @@
 $port = 8080
 $listener = $null
 $started = $false
-$global:LatestChatData = $null
+$global:ChatQueue = @()
 
-# 8080から8090番ポートまでで空いているポートを自動スキャンして起動します🐾
+# Scan ports from 8080 to 8090 to find an available one
 while (-not $started -and $port -le 8090) {
     try {
         $listener = New-Object System.Net.HttpListener
@@ -34,7 +34,7 @@ try {
         # Disable Keep-Alive to prevent connection state issues
         $response.KeepAlive = $false
         
-        # 安全なURLデコード（古い環境の文字化けバグを回避しつつクラッシュを防ぐフォールバック設計）🐾
+        # Safe URL decode with fallback
         $rawPath = $request.RawUrl.Split('?')[0].TrimStart('/')
         $path = $rawPath
         try {
@@ -44,7 +44,7 @@ try {
         }
         if ($path -eq "") { $path = "index.html" }
         
-        # API エンドポイントの処理 (別プロセス間の超安定ハイブリッド同期用) 🐾
+        # API Endpoint handling for cross-process synchronization
         if ($path -eq "api/chat") {
             $response.Headers.Add("Access-Control-Allow-Origin", "*")
             $response.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
@@ -59,7 +59,12 @@ try {
             if ($request.HttpMethod -eq "POST") {
                 $reader = New-Object System.IO.StreamReader($request.InputStream)
                 $body = $reader.ReadToEnd()
-                $global:LatestChatData = $body
+                
+                # Add to queue and limit to last 50 items
+                $global:ChatQueue += $body
+                if ($global:ChatQueue.Count -gt 50) {
+                    $global:ChatQueue = $global:ChatQueue[-50..-1]
+                }
                 
                 $response.ContentType = "application/json"
                 $resBytes = [System.Text.Encoding]::UTF8.GetBytes('{"status":"ok"}')
@@ -71,8 +76,9 @@ try {
             
             if ($request.HttpMethod -eq "GET") {
                 $response.ContentType = "application/json"
-                $dataToSend = if ($global:LatestChatData) { $global:LatestChatData } else { "{}" }
-                $resBytes = [System.Text.Encoding]::UTF8.GetBytes($dataToSend)
+                # Return queue as a JSON array
+                $jsonArray = "[" + ($global:ChatQueue -join ",") + "]"
+                $resBytes = [System.Text.Encoding]::UTF8.GetBytes($jsonArray)
                 $response.ContentLength64 = $resBytes.Length
                 $response.OutputStream.Write($resBytes, 0, $resBytes.Length)
                 $response.Close()

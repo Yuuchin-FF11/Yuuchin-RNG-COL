@@ -1044,7 +1044,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 別ブラウザプロセス間（OBSブラウザソース ➔ 通常のChrome読み上げ）超安定ハイブリッドAPI同期 🐾
     // ==========================================================================
-    let lastSyncedChatIdAdmin = '';
     const processedChatIdsAdmin = new Set();
     async function startApiPollingAdmin() {
         const port = window.location.port || '8080';
@@ -1052,26 +1051,27 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await fetch(`http://localhost:${port}/api/chat?t=${Date.now()}`);
                 if (!res.ok) return;
-                const chat = await res.json();
-                if (chat && chat.id && chat.id !== lastSyncedChatIdAdmin) {
-                    lastSyncedChatIdAdmin = chat.id;
-                    
-                    // 重複処理防止 (自分で送信した配信者発言は除く)
-                    if (!processedChatIdsAdmin.has(chat.id) && !chat.isBroadcaster) {
-                        processedChatIdsAdmin.add(chat.id);
-                        
-                        // 履歴に追加
-                        appendToChatLog(chat);
-                        
-                        // ナナミちゃんの音声読み上げをキック🐾
-                        if (readAloudManager) {
-                            readAloudManager.speak(chat);
+                const chats = await res.json();
+                if (Array.isArray(chats)) {
+                    chats.forEach(chat => {
+                        if (chat && chat.id && !processedChatIdsAdmin.has(chat.id) && !chat.isBroadcaster) {
+                            processedChatIdsAdmin.add(chat.id);
+                            
+                            // 履歴に追加
+                            appendToChatLog(chat);
+                            
+                            // 音声読み上げをキック🐾
+                            if (readAloudManager) {
+                                readAloudManager.speak(chat);
+                            }
                         }
-                        
-                        // メモリー制限（1000件）
-                        if (processedChatIdsAdmin.size > 1000) {
-                            const firstKey = processedChatIdsAdmin.values().next().value;
-                            processedChatIdsAdmin.delete(firstKey);
+                    });
+                    
+                    // メモリー制限（1000件）
+                    if (processedChatIdsAdmin.size > 1000) {
+                        const keys = Array.from(processedChatIdsAdmin);
+                        for (let i = 0; i < keys.length - 1000; i++) {
+                            processedChatIdsAdmin.delete(keys[i]);
                         }
                     }
                 }

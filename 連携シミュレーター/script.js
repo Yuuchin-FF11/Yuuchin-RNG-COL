@@ -480,17 +480,14 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
     // 侍などの一人連携（ソロ）を想定し、2手目以降は〆側武器種（weapon2）の全WSから選択
     const nextWSList = closeList;
 
-    function dfs(currentWSList) {
-        if (currentWSList.length === targetSteps) {
+    function dfs(currentWSList, currentChain, currentAM) {
+        const totalWSCount = currentWSList.length;
+
+        if (totalWSCount === targetSteps) {
             const steps = calculateSkillchainSteps(currentWSList);
-            
-            // 途中で連携が途切れていないかチェック
-            const isBroken = steps.some(step => step.chain === null);
-            if (isBroken) return;
-            
             const lastStep = steps[steps.length - 1];
-            
-            // ターゲット連携フィルターの判定
+            if (!lastStep || lastStep.chain === null) return;
+
             let isMatch = false;
             if (targetChain === "ANY") {
                 isMatch = true;
@@ -509,24 +506,58 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
             return;
         }
 
+        // Limit results to prevent UI freeze
+        if (results.length >= 500) {
+            return;
+        }
+
+        const tossWS = currentWSList[totalWSCount - 1];
+
         for (const nextWS of nextWSList) {
-            // 計算の高速化（枝刈り）：
-            // 次のWSを繋げた1ステップを仮計算し、もし連携が途切れるなら、その先は探索しない
-            const testList = [...currentWSList, nextWS];
-            const testSteps = calculateSkillchainSteps(testList);
-            const lastTestStep = testSteps[testSteps.length - 1];
-            
-            if (lastTestStep.chain === null) {
-                continue; // 連携が途切れるので、この組み合わせのDFSは枝刈りして終了
+            let nextAM = currentAM;
+
+            if (nextWS.type.includes("メリポ/イオニック") && !nextAM) {
+                nextAM = "IONIC_AM1";
             }
-            
-            dfs(testList);
+
+            const tossAttrs = getModifiedAttrs(tossWS, nextAM ? "IONIC_AM3" : "NORMAL");
+            const closeAttrs = getModifiedAttrs(nextWS, nextAM ? "IONIC_AM3" : "NORMAL");
+
+            let stepTossAttrs = currentChain ? [currentChain.name] : tossAttrs;
+            let stepResult = getSkillchainResult(stepTossAttrs, closeAttrs, "NORMAL");
+
+            // Ionic ultimate chain check
+            if (nextAM && nextWS.type.includes("メリポ/イオニック")) {
+                if (stepResult && (stepResult.name === "光" || stepResult.name === "闇")) {
+                    let meetSteps = false;
+                    const totalCountWithNext = totalWSCount + 1;
+                    if (nextAM === "IONIC_AM3" && totalCountWithNext >= 2) meetSteps = true;
+                    else if (nextAM === "IONIC_AM2" && totalCountWithNext >= 3) meetSteps = true;
+                    else if (nextAM === "IONIC_AM1" && totalCountWithNext >= 4) meetSteps = true;
+
+                    if (meetSteps) {
+                        const name = stepResult.name === "光" ? "極光" : "黒闇";
+                        stepResult = { name: name, level: 4, toss: stepResult.toss, close: stepResult.close };
+                        nextAM = null;
+                    }
+                }
+            }
+
+            // Pruning
+            if (stepResult === null) {
+                continue;
+            }
+
+            // Backtracking
+            currentWSList.push(nextWS);
+            dfs(currentWSList, stepResult, nextAM);
+            currentWSList.pop();
         }
     }
 
     // トス側武器種（weapon1）の全WSをスタート地点としてDFSを開始
     for (const startWS of tossList) {
-        dfs([startWS]);
+        dfs([startWS], null, null);
     }
 
     // 最終ステップの連携レベル順にソート

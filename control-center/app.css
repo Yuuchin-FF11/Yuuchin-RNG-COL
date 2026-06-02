@@ -377,7 +377,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* 下から上に流す */
+    justify-content: flex-start; /* 左上に寄せるため上寄せに変更🐾 */
     overflow: hidden;
 }
 
@@ -406,14 +406,14 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
     max-width: 480px;
     width: fit-content;
-    animation: slideInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: left bottom;
+    animation: slideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
     transition: all 0.3s ease;
 }
 
 /* フェードアウトアニメーション（JSで追加される） */
 .comment-card.fade-out {
-    animation: fadeOutDown 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    animation: fadeOutLeft 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards; /* 左フェードアウトに変更🐾 */
 }
 
 /* リスナーアイコン */
@@ -536,6 +536,17 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     }
 }
 
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
 @keyframes fadeOutDown {
     0% {
         opacity: 1;
@@ -544,6 +555,17 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     100% {
         opacity: 0;
         transform: translateY(-16px) scale(0.95);
+    }
+}
+
+@keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.95);
     }
 }
 
@@ -574,8 +596,8 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
     max-width: 500px;
     width: fit-content;
-    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: left bottom;
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -642,8 +664,8 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
     max-width: 500px;
     width: fit-content;
-    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: left bottom;
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -686,8 +708,8 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
     max-width: 500px;
     width: fit-content;
-    animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    transform-origin: left bottom;
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;

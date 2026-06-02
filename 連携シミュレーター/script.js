@@ -649,6 +649,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectWeapon2 = document.getElementById("weapon-2");
     const selectTargetChain = document.getElementById("target-chain");
     const selectTargetSteps = document.getElementById("target-steps");
+    const checkUnordered = document.getElementById("unordered-weapons");
     const btnSearch = document.getElementById("btn-search");
     
     const resultsList = document.getElementById("results-list");
@@ -661,9 +662,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const w2 = selectWeapon2.value;
         const target = selectTargetChain.value;
         const stepsCount = parseInt(selectTargetSteps.value);
+        const unordered = checkUnordered ? checkUnordered.checked : false;
 
-        // 探索の実行
-        const results = searchSkillchains(w1, w2, target, stepsCount);
+        // 探索の実行 (順不同対応)
+        let results = [];
+        if (unordered && w1 !== w2) {
+            const resultsA = searchSkillchains(w1, w2, target, stepsCount);
+            const resultsB = searchSkillchains(w2, w1, target, stepsCount);
+            results = [...resultsA, ...resultsB];
+            
+            // ソート
+            if (stepsCount === 2) {
+                results.sort((a, b) => {
+                    const lvA = a.chainIonic ? a.chainIonic.level : (a.chainNormal ? a.chainNormal.level : 0);
+                    const lvB = b.chainIonic ? b.chainIonic.level : (b.chainNormal ? b.chainNormal.level : 0);
+                    return lvB - lvA;
+                });
+            } else {
+                results.sort((a, b) => {
+                    const lvA = a.steps[a.steps.length - 1].chain.level;
+                    const lvB = b.steps[b.steps.length - 1].chain.level;
+                    return lvB - lvA;
+                });
+            }
+        } else {
+            results = searchSkillchains(w1, w2, target, stepsCount);
+        }
 
         // UIのクリーンアップ
         resultsList.innerHTML = "";

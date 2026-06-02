@@ -6,17 +6,18 @@ function showDebugError(msg) {
     if (!errDiv) {
         errDiv = document.createElement('div');
         errDiv.id = 'debug-err-div';
-        errDiv.style.color = '#ef4444';
-        errDiv.style.background = 'rgba(0,0,0,0.95)';
-        errDiv.style.padding = '10px';
-        errDiv.style.border = '2px solid #ef4444';
-        errDiv.style.borderRadius = '8px';
+        errDiv.style.color = '#ff3333';
+        errDiv.style.background = 'rgba(0, 0, 0, 0.95)';
+        errDiv.style.padding = '20px';
+        errDiv.style.border = '4px solid #ff3333';
+        errDiv.style.borderRadius = '12px';
         errDiv.style.zIndex = '99999';
         errDiv.style.position = 'fixed';
-        errDiv.style.top = '10px';
-        errDiv.style.left = '10px';
-        errDiv.style.fontSize = '12px';
-        errDiv.style.fontFamily = 'monospace';
+        errDiv.style.top = '20px';
+        errDiv.style.left = '20px';
+        errDiv.style.fontSize = '24px'; // 視認性向上のため大幅に巨大化🐾
+        errDiv.style.fontWeight = 'bold';
+        errDiv.style.fontFamily = 'sans-serif';
         document.body.appendChild(errDiv);
     }
     errDiv.textContent = msg;
@@ -499,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 別ブラウザプロセス間（通常のChrome ➔ OBSブラウザソース）超安定ハイブリッドAPI同期 🐾
     // ==========================================================================
     let isFirstPoll = true; // 初回起動時の過去ログ読み込みスルー用フラグ🐾
+    let pollCount = 0; // 接続成功確認用カウンタ🐾
     async function startApiPolling() {
         const port = window.location.port || '8080';
         setInterval(async () => {
@@ -509,6 +511,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 const chats = await res.json();
+                
+                pollCount++;
+                showDebugError(`Debug: Connected! Count: ${pollCount} | Chats: ${chats.length}`);
+                
                 if (Array.isArray(chats)) {
                     chats.forEach(chat => {
                         if (chat && chat.id) {

@@ -523,8 +523,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const trimmed = urlOrId.trim();
         if (trimmed.length === 11) return trimmed; // すでにIDの場合
         
-        // URLパターンからの抽出
-        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        // URLパターンからの抽出（live/形式の配信URLにも対応）
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|live\/)([^#\&\?]*).*/;
         const match = trimmed.match(regExp);
         return (match && match[2].length === 11) ? match[2] : '';
     }

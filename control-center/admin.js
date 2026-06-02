@@ -595,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // クエリパラメータ付きのURLを生成（61秒は無制限を表すためtime=0として渡す。フィルターフラグも付加）
         const finalTime = settings.displayTime === 61 ? 0 : settings.displayTime;
-        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${finalTime}&max=${settings.maxComments}&filter=${settings.filterForeign ? 1 : 0}`;
+        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${finalTime}&max=${settings.maxComments}&filter=${settings.filterForeign ? 1 : 0}&cb=${Date.now()}`;
         
         obsUrlInput.value = obsUrl;
         obsLinkCard.style.display = 'block';

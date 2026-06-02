@@ -519,11 +519,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     chats.forEach(chat => {
                         if (chat && chat.id) {
                             if (!processedMessageIds.has(chat.id)) {
-                                processedMessageIds.add(chat.id);
-                                
                                 // 初回起動時はサーバーに残っている古いデータを表示しない🐾
                                 if (!isFirstPoll) {
                                     addCommentCard(chat);
+                                } else {
+                                    // 初回時は描画せずにID登録のみ行い既読とします🐾
+                                    processedMessageIds.add(chat.id);
                                 }
                             }
                         }

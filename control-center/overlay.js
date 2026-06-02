@@ -485,10 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // メモリー制限（1000件）
                     if (processedMessageIds.size > 1000) {
-                        const keys = Array.from(processedMessageIds);
-                        for (let i = 0; i < keys.length - 1000; i++) {
-                            processedMessageIds.delete(keys[i]);
-                        }
+                        const firstKey = processedMessageIds.values().next().value;
+                        processedMessageIds.delete(firstKey);
                     }
                 }
             } catch (err) {

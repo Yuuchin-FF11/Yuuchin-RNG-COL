@@ -1073,10 +1073,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // メモリー制限（1000件）
                     if (processedChatIdsAdmin.size > 1000) {
-                        const keys = Array.from(processedChatIdsAdmin);
-                        for (let i = 0; i < keys.length - 1000; i++) {
-                            processedChatIdsAdmin.delete(keys[i]);
-                        }
+                        const firstKey = processedChatIdsAdmin.values().next().value;
+                        processedChatIdsAdmin.delete(firstKey);
                     }
                 }
             } catch (err) {

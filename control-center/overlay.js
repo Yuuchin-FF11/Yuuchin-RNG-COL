@@ -487,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 別ブラウザプロセス間（通常のChrome ➔ OBSブラウザソース）超安定ハイブリッドAPI同期 🐾
     // ==========================================================================
+    let isFirstPoll = true; // 初回起動時の過去ログ読み込みスルー用フラグ🐾
     async function startApiPolling() {
         const port = window.location.port || '8080';
         setInterval(async () => {
@@ -496,11 +497,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const chats = await res.json();
                 if (Array.isArray(chats)) {
                     chats.forEach(chat => {
-                        if (chat && chat.id && !processedMessageIds.has(chat.id)) {
-                            processedMessageIds.add(chat.id);
-                            addCommentCard(chat);
+                        if (chat && chat.id) {
+                            if (!processedMessageIds.has(chat.id)) {
+                                processedMessageIds.add(chat.id);
+                                
+                                // 初回起動時はサーバーに残っている古いデータを表示しない🐾
+                                if (!isFirstPoll) {
+                                    addCommentCard(chat);
+                                }
+                            }
                         }
                     });
+                    isFirstPoll = false;
                     
                     // メモリー制限（1000件）
                     if (processedMessageIds.size > 1000) {

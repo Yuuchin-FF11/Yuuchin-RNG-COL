@@ -1049,6 +1049,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 別ブラウザプロセス間（OBSブラウザソース ➔ 通常のChrome読み上げ）超安定ハイブリッドAPI同期 🐾
     // ==========================================================================
     const processedChatIdsAdmin = new Set();
+    let isFirstPollAdmin = true; // 初回起動時の過去ログ読み込みスルー用フラグ🐾
     async function startApiPollingAdmin() {
         const port = window.location.port || '8080';
         setInterval(async () => {
@@ -1058,18 +1059,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 const chats = await res.json();
                 if (Array.isArray(chats)) {
                     chats.forEach(chat => {
-                        if (chat && chat.id && !processedChatIdsAdmin.has(chat.id) && !chat.isBroadcaster) {
-                            processedChatIdsAdmin.add(chat.id);
-                            
-                            // 履歴に追加
-                            appendToChatLog(chat);
-                            
-                            // 音声読み上げをキック🐾
-                            if (readAloudManager) {
-                                readAloudManager.speak(chat);
+                        if (chat && chat.id) {
+                            if (!processedChatIdsAdmin.has(chat.id)) {
+                                processedChatIdsAdmin.add(chat.id);
+                                
+                                // 初回起動時はサーバーに残っている古いデータを読み上げ・表示しない🐾
+                                if (!isFirstPollAdmin && !chat.isBroadcaster) {
+                                    appendToChatLog(chat);
+                                    
+                                    // 音声読み上げをキック🐾
+                                    if (readAloudManager) {
+                                        readAloudManager.speak(chat);
+                                    }
+                                }
                             }
                         }
                     });
+                    isFirstPollAdmin = false;
                     
                     // メモリー制限（1000件）
                     if (processedChatIdsAdmin.size > 1000) {

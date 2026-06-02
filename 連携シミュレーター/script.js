@@ -479,8 +479,11 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
     // 3段〜6段多段連携の場合 (DFSによる高速・事前枝刈り探索)
     // 侍などの一人連携（ソロ）を想定し、2手目以降は〆側武器種（weapon2）の全WSから選択
     const nextWSList = closeList;
+    let forceStop = false; // 強制終了フラグ
 
     function dfs(currentWSList, currentChain, currentAM) {
+        if (forceStop) return; // すでに結果上限に達した場合は即時に帰る
+
         const totalWSCount = currentWSList.length;
 
         if (totalWSCount === targetSteps) {
@@ -502,18 +505,20 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
                     wsList: [...currentWSList],
                     steps: steps
                 });
+                
+                // 結果が100件に達したら、再帰DFS探索自体をその場で完全・即時強制終了する
+                if (results.length >= 100) {
+                    forceStop = true;
+                }
             }
-            return;
-        }
-
-        // Limit results to prevent UI freeze
-        if (results.length >= 500) {
             return;
         }
 
         const tossWS = currentWSList[totalWSCount - 1];
 
         for (const nextWS of nextWSList) {
+            if (forceStop) break; // フラグが立った瞬間、ループも即座に脱出して強制終了する
+
             // ※AMは「着弾後」に付与されるため、現在のステップでの属性追加判定には「直前までのcurrentAM」を使用する
             const tossAttrs = getModifiedAttrs(tossWS, currentAM ? "IONIC_AM3" : "NORMAL");
             const closeAttrs = getModifiedAttrs(nextWS, currentAM ? "IONIC_AM3" : "NORMAL");
@@ -559,6 +564,7 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
 
     // トス側武器種（weapon1）の全WSをスタート地点としてDFSを開始
     for (const startWS of tossList) {
+        if (forceStop) break; // スタート地点のループも即座に脱出する
         dfs([startWS], null, null);
     }
 
@@ -691,7 +697,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // UIのクリーンアップ
         resultsList.innerHTML = "";
-        resultCount.textContent = `${results.length}件`;
+        
+        // 件数の表示（上限100件の注意書きを付与してUI負荷を軽減）
+        if (results.length > 100) {
+            resultCount.textContent = `100件 (計${results.length}件中、上位100件を表示中🐾)`;
+        } else {
+            resultCount.textContent = `${results.length}件`;
+        }
 
         if (results.length === 0) {
             noResults.style.display = "block";
@@ -700,8 +712,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         noResults.style.display = "none";
 
-        // 結果カードの動的生成
-        results.forEach((res, index) => {
+        // 表示件数を最大100件にスライスしてブラウザの描画フリーズを完璧に防止
+        const displayResults = results.slice(0, 100);
+        displayResults.forEach((res, index) => {
             const card = document.createElement("div");
             
             // --- パターン1：通常2WSモード（通常＆AM3ダブル併記） ---

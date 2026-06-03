@@ -40,8 +40,16 @@ class ReadAloudManager {
         const textsToSpeak = this.prepareTexts(chat);
         if (textsToSpeak.length === 0) return;
 
-        this.queue.push(...textsToSpeak);
-        this.processQueue();
+        // スパチャまたはメンバーシップの場合は、効果音再生を優先するため読み上げを2.5秒遅らせます🐾
+        if (chat.isSuperChat || chat.isMembership) {
+            setTimeout(() => {
+                this.queue.push(...textsToSpeak);
+                this.processQueue();
+            }, 2500);
+        } else {
+            this.queue.push(...textsToSpeak);
+            this.processQueue();
+        }
     }
 
     // VOICEVOXの音声合成APIを呼び出すメソッド

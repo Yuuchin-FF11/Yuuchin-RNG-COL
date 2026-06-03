@@ -362,17 +362,69 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     
     // Step 1: ライブ配信IDからアクティブなライブチャットIDを取得
+    let liveChatIdRetryTimeoutId = null;
+
+    // YouTube接続ステータスを画面端に控えめに表示するお給仕システム🐾
+    function showLiveStatusMessage(msg, isError = false) {
+        let statusDiv = document.getElementById('live-status-div');
+        if (!statusDiv) {
+            statusDiv = document.createElement('div');
+            statusDiv.id = 'live-status-div';
+            statusDiv.style.zIndex = '9999';
+            statusDiv.style.position = 'fixed';
+            statusDiv.style.top = '15px';
+            statusDiv.style.right = '15px';
+            statusDiv.style.padding = '10px 16px';
+            statusDiv.style.borderRadius = '8px';
+            statusDiv.style.fontFamily = "'Outfit', 'Noto Sans JP', sans-serif";
+            statusDiv.style.fontSize = '14px';
+            statusDiv.style.fontWeight = '600';
+            statusDiv.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            statusDiv.style.backdropFilter = 'blur(8px)';
+            statusDiv.style.webkitBackdropFilter = 'blur(8px)';
+            statusDiv.style.transition = 'all 0.3s ease';
+            document.body.appendChild(statusDiv);
+        }
+        
+        if (isError) {
+            statusDiv.style.color = '#f87171'; // ソフトな赤色
+            statusDiv.style.background = 'rgba(127, 29, 29, 0.85)'; // ダークレッド半透明
+            statusDiv.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+        } else {
+            statusDiv.style.color = '#eab308'; // ロイヤルゴールド
+            statusDiv.style.background = 'rgba(15, 23, 42, 0.85)'; // ディープネイビー半透明
+            statusDiv.style.border = '1px solid rgba(234, 179, 8, 0.4)';
+        }
+        statusDiv.textContent = msg;
+        statusDiv.style.display = 'block';
+    }
+
+    function hideLiveStatusMessage() {
+        const statusDiv = document.getElementById('live-status-div');
+        if (statusDiv) {
+            statusDiv.style.display = 'none';
+        }
+    }
+
+    // Step 1: ライブ配信IDからアクティブなライブチャットIDを取得
     async function fetchLiveChatId() {
         if (!videoId || !apiKey) {
             console.warn('Video ID or API Key is missing. Operating in Test Mode.');
             return;
         }
 
+        if (liveChatIdRetryTimeoutId) clearTimeout(liveChatIdRetryTimeoutId);
+
         const url = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}`;
         
         try {
             const res = await fetch(url);
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            if (!res.ok) {
+                let errMsg = `YouTube API接続エラー (${res.status})`;
+                if (res.status === 400) errMsg = 'YouTube APIエラー: リクエストが不正です🐾';
+                if (res.status === 403) errMsg = 'YouTube APIエラー: キーの権限不足またはアクセス制限超過です🐾';
+                throw new Error(errMsg);
+            }
             
             const data = await res.json();
             if (data.items && data.items.length > 0) {
@@ -380,15 +432,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (details && details.activeLiveChatId) {
                     activeLiveChatId = details.activeLiveChatId;
                     console.log('Successfully acquired Active Live Chat ID:', activeLiveChatId);
+                    hideLiveStatusMessage(); // 接続成功時はステータス表示を消す🐾
                     startChatPolling(); // ポーリング開始
                 } else {
-                    console.error('This video is not an active live stream.');
+                    console.warn('This video is not an active live stream yet. Retrying in 20s...');
+                    showLiveStatusMessage('配信開始を待機しています（YouTubeチャットID未発行）🐾');
+                    liveChatIdRetryTimeoutId = setTimeout(fetchLiveChatId, 20000);
                 }
             } else {
-                console.error('Video not found. Please check Video ID.');
+                console.warn('Video not found. It might be private or upcoming. Retrying in 20s...');
+                showLiveStatusMessage('YouTube配信情報をロード中、または開始待機中...🐾');
+                liveChatIdRetryTimeoutId = setTimeout(fetchLiveChatId, 20000);
             }
         } catch (err) {
             console.error('Failed to acquire Live Chat ID:', err);
+            showLiveStatusMessage(err.message || 'YouTube接続に失敗しました。20秒後に再試行します🐾', true);
+            liveChatIdRetryTimeoutId = setTimeout(fetchLiveChatId, 20000);
         }
     }
 

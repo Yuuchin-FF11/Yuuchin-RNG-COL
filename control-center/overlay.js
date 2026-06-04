@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let isSuperChat = false;
                     let isMembership = false;
 
-                    if (snippet.type === 'textMessageDetails' && snippet.textMessageDetails) {
+                    if (snippet.type === 'textMessageEvent' && snippet.textMessageDetails) {
                         message = snippet.textMessageDetails.messageText;
                     } else if (snippet.type === 'superChatEvent' && snippet.superChatDetails) {
                         message = snippet.superChatDetails.userComment || `Super Chat! (${snippet.superChatDetails.amountDisplayString})`;

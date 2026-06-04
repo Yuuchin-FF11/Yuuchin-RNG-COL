@@ -28,6 +28,36 @@ window.onerror = function(message, source, lineno, colno, error) {
     return false;
 };
 
+// お上品（NGワード）フィルターのロジック🐾
+function cleanMessage(text, enableFilter, customWordsString) {
+    if (!text || !enableFilter) return text;
+    
+    const defaultNgWords = [
+        'ちんちん', 'ちんこ', 'まんこ', 'おまんこ', 'うんこ', 'うんち', 
+        'ぺにす', 'ペニス', 'ヴぁぎな', 'ヴァギナ', 'ばぎな', 'バギナ',
+        'ちんぽ', 'チンポ', 'ま〜ん', 'まーん', 'ち〜ん', 'きんたま', '金玉',
+        'おめこ', 'おちょんちん', 'ちんちー', 'おてぃんてぃん', 'ティンポ', 'てぃんぽ'
+    ];
+    
+    let ngWords = [...defaultNgWords];
+    if (customWordsString) {
+        const customList = customWordsString.split(',')
+            .map(w => w.trim())
+            .filter(w => w.length > 0);
+        ngWords = [...ngWords, ...customList];
+    }
+    
+    let cleanedText = text;
+    ngWords.forEach(word => {
+        const escapedWord = word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        const regex = new RegExp(escapedWord, 'gi');
+        const replacement = '🐾'.repeat(word.length);
+        cleanedText = cleanedText.replace(regex, replacement);
+    });
+    
+    return cleanedText;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const commentContainer = document.getElementById('comment-container');
 
@@ -176,6 +206,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     
     function addCommentCard(chatData) {
+        // お上品フィルターの適用🐾
+        let enableNsfwFilter = true;
+        let nsfwWords = '';
+        try {
+            const savedSettings = localStorage.getItem('yt_translator_settings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                enableNsfwFilter = settings.enableNsfwFilter !== undefined ? settings.enableNsfwFilter : true;
+                nsfwWords = settings.nsfwWords || '';
+            }
+        } catch (e) {}
+
+        if (chatData.message) {
+            chatData.message = cleanMessage(chatData.message, enableNsfwFilter, nsfwWords);
+        }
+        if (chatData.translation) {
+            chatData.translation = cleanMessage(chatData.translation, enableNsfwFilter, nsfwWords);
+        }
+
         // メモリ上の重複リスト ＆ DOMから検索する二重防衛線により、超高速な同時発生時の二重描画も100%完璧に防ぎます🐾
         if (chatData.id) {
             if (document.getElementById(chatData.id)) {

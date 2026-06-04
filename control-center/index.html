@@ -133,6 +133,20 @@
                     </label>
                 </div>
             </div>
+
+            <!-- お上品フィルター（NGワード機能） -->
+            <div class="form-row" style="margin-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+                <div class="form-group" style="width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                        <input type="checkbox" id="enable-nsfw-filter" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--accent-color);">
+                        <label for="enable-nsfw-filter" style="margin-bottom: 0; cursor: pointer; font-weight: 700; color: #fff;">
+                            お上品フィルターを有効にする（下ネタ・不適切ワードを自動で「🐾」に伏字化＆読み上げスキップします🐾）
+                        </label>
+                    </div>
+                    <label for="nsfw-words">追加のNGワード（カンマ「,」区切りで複数指定が可能です）</label>
+                    <input type="text" id="nsfw-words" placeholder="ちんちん, ちんこ （標準的な下ネタは自動で登録されています。追加したい言葉があれば入力してください）" style="margin-top: 0.25rem;">
+                </div>
+            </div>
         </section>
 
         <!-- 効果音 ＆ プレミアムアラート設定 -->

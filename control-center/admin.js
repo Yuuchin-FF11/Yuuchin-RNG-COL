@@ -1,5 +1,35 @@
 // YouTube Chat Translator - 管理画面ロジック
 
+// お上品（NGワード）フィルターのロジック🐾
+function cleanMessage(text, enableFilter, customWordsString) {
+    if (!text || !enableFilter) return text;
+    
+    const defaultNgWords = [
+        'ちんちん', 'ちんこ', 'まんこ', 'おまんこ', 'うんこ', 'うんち', 
+        'ぺにす', 'ペニス', 'ヴぁぎな', 'ヴァギナ', 'ばぎな', 'バギナ',
+        'ちんぽ', 'チンポ', 'ま〜ん', 'まーん', 'ち〜ん', 'きんたま', '金玉',
+        'おめこ', 'おちょんちん', 'ちんちー', 'おてぃんてぃん', 'ティンポ', 'てぃんぽ'
+    ];
+    
+    let ngWords = [...defaultNgWords];
+    if (customWordsString) {
+        const customList = customWordsString.split(',')
+            .map(w => w.trim())
+            .filter(w => w.length > 0);
+        ngWords = [...ngWords, ...customList];
+    }
+    
+    let cleanedText = text;
+    ngWords.forEach(word => {
+        const escapedWord = word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        const regex = new RegExp(escapedWord, 'gi');
+        const replacement = '🐾'.repeat(word.length);
+        cleanedText = cleanedText.replace(regex, replacement);
+    });
+    
+    return cleanedText;
+}
+
 // ==========================================================================
 // ハイブリッド同時通訳・音声読み上げ制御クラス (SpeechSynthesisキュー管理)
 // ==========================================================================
@@ -266,9 +296,25 @@ class ReadAloudManager {
     prepareTexts(chat) {
         const mode = this.modeSelect ? this.modeSelect.value : 'native_only';
         const authorName = chat.author.name;
+
+        // お上品フィルターの適用🐾
+        let enableNsfwFilter = true;
+        let nsfwWords = '';
+        try {
+            const savedSettings = localStorage.getItem('yt_translator_settings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                enableNsfwFilter = settings.enableNsfwFilter !== undefined ? settings.enableNsfwFilter : true;
+                nsfwWords = settings.nsfwWords || '';
+            }
+        } catch (e) {}
+
+        const originalCleaned = cleanMessage(chat.message || '', enableNsfwFilter, nsfwWords);
+        const translationCleaned = cleanMessage(chat.translation || '', enableNsfwFilter, nsfwWords);
+
         // 人間らしい喋り方（息継ぎの間）を自動補正🐾
-        const originalText = this.makeNaturalText(chat.message || '');
-        const translationText = this.makeNaturalText(chat.translation || '');
+        const originalText = this.makeNaturalText(originalCleaned);
+        const translationText = this.makeNaturalText(translationCleaned);
 
         // スパチャやメンバーシップお祝い枕詞
         let prefix = '';
@@ -358,6 +404,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // フィルターチェックボックス
     const filterForeignCheckbox = document.getElementById('filter-foreign');
+    const enableNsfwFilterCheckbox = document.getElementById('enable-nsfw-filter');
+    const nsfwWordsInput = document.getElementById('nsfw-words');
 
     // 音声読み上げチェックボックス ＆ モードセレクト ＆ スライダー
     const enableReadAloudCheckbox = document.getElementById('enable-read-aloud');
@@ -470,6 +518,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterForeignCheckbox.checked = settings.filterForeign || false;
                 }
 
+                if (enableNsfwFilterCheckbox) {
+                    enableNsfwFilterCheckbox.checked = settings.enableNsfwFilter !== undefined ? settings.enableNsfwFilter : true;
+                }
+                if (nsfwWordsInput) {
+                    nsfwWordsInput.value = settings.nsfwWords || '';
+                }
+
                 if (enableReadAloudCheckbox) {
                     enableReadAloudCheckbox.checked = settings.enableReadAloud !== undefined ? settings.enableReadAloud : true;
                 }
@@ -511,6 +566,8 @@ document.addEventListener('DOMContentLoaded', () => {
             maxComments: parseInt(maxCommentsSlider.value),
             effectVolume: parseInt(effectVolumeSlider.value),
             filterForeign: filterForeignCheckbox ? filterForeignCheckbox.checked : false,
+            enableNsfwFilter: enableNsfwFilterCheckbox ? enableNsfwFilterCheckbox.checked : true,
+            nsfwWords: nsfwWordsInput ? nsfwWordsInput.value.trim() : '',
             enableReadAloud: enableReadAloudCheckbox ? enableReadAloudCheckbox.checked : true,
             readAloudMode: readAloudModeSelect ? readAloudModeSelect.value : 'native_only',
             readAloudCharacter: readAloudCharacterSelect ? readAloudCharacterSelect.value : 'standard',

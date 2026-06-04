@@ -245,8 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.className = 'avatar';
         if (chatData.isBroadcaster) {
-            // 配信者用のゴールドマイクアバター（互換性のため静的画像URLにフォールバック）
-            img.src = 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png';
+            // 配信者用のアバター画像（broadcaster.png）を読み込みます🐾
+            img.src = 'broadcaster.png';
         } else {
             img.src = chatData.author.avatar || 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png';
         }

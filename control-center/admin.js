@@ -872,7 +872,7 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'bc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
             author: {
                 name: 'Yuuchin (配信者)',
-                avatar: 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png',
+                avatar: 'broadcaster.png',
                 isOwner: true
             },
             message: original,

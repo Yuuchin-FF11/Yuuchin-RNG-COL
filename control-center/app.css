@@ -617,6 +617,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 .comment-card-broadcaster .avatar {
     border-color: rgba(234, 179, 8, 0.6);
     box-shadow: 0 0 12px rgba(234, 179, 8, 0.3);
+    object-position: center 30%; /* タルタルの顔周りに焦点を合わせます🐾 */
 }
 
 .comment-card-broadcaster .author-name {

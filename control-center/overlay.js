@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addCommentCard(chatData) {
         // メモリ上の重複リスト ＆ DOMから検索する二重防衛線により、超高速な同時発生時の二重描画も100%完璧に防ぎます🐾
         if (chatData.id) {
-            if (processedMessageIds.has(chatData.id) || document.getElementById(chatData.id)) {
+            if (document.getElementById(chatData.id)) {
                 return;
             }
             processedMessageIds.add(chatData.id);

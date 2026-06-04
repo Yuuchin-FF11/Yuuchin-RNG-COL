@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let activeLiveChatId = '';
     let nextPageToken = '';
-    let pollingInterval = 4000; // デフォルト4秒
+    let pollingInterval = 6000; // 節約設定：6秒（1日の無料枠で最大16時間以上の配信に対応します🐾）
     let pollTimeoutId = null;
     let processedMessageIds = new Set(); // 重複排除用
 
@@ -535,8 +535,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
             nextPageToken = data.nextPageToken || nextPageToken;
             
-            // API指定の推奨ポーリング間隔を適用（通常3〜5秒）
-            pollingInterval = data.pollingIntervalMillis || pollingInterval;
+            // API指定の推奨ポーリング間隔を適用（クォータ節約のため、最低でも6秒間隔を維持します🐾）
+            pollingInterval = Math.max(data.pollingIntervalMillis || 6000, 6000);
 
             if (data.items && data.items.length > 0) {
                 // 差分のみを処理

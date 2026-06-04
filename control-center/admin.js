@@ -30,6 +30,13 @@ function cleanMessage(text, enableFilter, customWordsString) {
     return cleanedText;
 }
 
+// マイク・音声認識用の状態管理変数（読み上げクラスとイベントリスナーの双方から参照できるようにトップレベルに配置します🐾）
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition = null;
+let isListening = false;
+let shouldBeListening = false; // ご主人様が意図的にマイクをONにしているかを表すフラグ🐾
+let isSpeechSynthesisActive = false; // 読み上げがアクティブ（再生中）かを表すフラグ🐾
+
 // ==========================================================================
 // ハイブリッド同時通訳・音声読み上げ制御クラス (SpeechSynthesisキュー管理)
 // ==========================================================================
@@ -54,6 +61,17 @@ class ReadAloudManager {
         if (this.synth.onvoiceschanged !== undefined) {
             this.synth.onvoiceschanged = loadVoices;
         }
+
+        // Chrome/EdgeのSpeechSynthesisバグ対策：マイク音声認識（SpeechRecognition）との競合により、
+        // しばらく無言のときに発声が保留（ペンディング）されてしまう不具合を防ぐため、
+        // 5秒ごとに自動で resume() を呼び出してロックを強制解除する見守りタイマーを回します🐾
+        setInterval(() => {
+            if (this.synth) {
+                try {
+                    this.synth.resume();
+                } catch(e) {}
+            }
+        }, 5000);
     }
 
     // コメントを読み上げキューに追加する
@@ -149,6 +167,15 @@ class ReadAloudManager {
         }
 
         this.speaking = true;
+
+        // 【プランA】 読み上げを開始するので、マイクがオンの場合は一時的にマイクを停止します🐾
+        isSpeechSynthesisActive = true;
+        if (isListening && recognition) {
+            try {
+                recognition.stop();
+            } catch(e) {}
+        }
+
         const item = this.queue.shift();
 
         const charVal = this.characterSelect ? this.characterSelect.value : 'standard';
@@ -157,12 +184,25 @@ class ReadAloudManager {
         if (item.lang === 'ja-JP' && charVal.startsWith('vv_')) {
             const speakerId = parseInt(charVal.replace('vv_', ''));
             const success = await this.speakVoiceVox(item.text, speakerId);
+            
+            // VOICEVOX発声終了時のマイク再開処理🐾
+            isSpeechSynthesisActive = false;
+            if (shouldBeListening && !isListening && recognition) {
+                try { recognition.start(); } catch(e) {}
+            }
+
             if (success) {
                 this.speaking = false;
                 setTimeout(() => this.processQueue(), 250);
                 return;
             }
             console.log('VOICEVOX is unavailable, falling back to browser SpeechSynthesis...');
+            
+            // VOICEVOX失敗でSpeechSynthesisにフォールバックする場合は、再度マイクを停止します
+            isSpeechSynthesisActive = true;
+            if (isListening && recognition) {
+                try { recognition.stop(); } catch(e) {}
+            }
         }
 
         const utterance = new SpeechSynthesisUtterance(item.text);
@@ -194,15 +234,27 @@ class ReadAloudManager {
             utterance.rate = 1.1;
         }
 
+        // 読み上げ終了後のマイク再開ヘルパー🐾
+        const resumeRecognition = () => {
+            isSpeechSynthesisActive = false;
+            if (shouldBeListening && !isListening && recognition) {
+                try {
+                    recognition.start();
+                } catch(e) {}
+            }
+        };
+
         // 読み上げフリーズ防止用ウォッチドッグタイマー (最大12秒で強制ロック解除) 🐾
         const watchdogId = setTimeout(() => {
             console.warn('SpeechSynthesis output timed out. Forcing next queue...');
+            resumeRecognition(); // マイク再開🐾
             this.speaking = false;
             this.processQueue();
         }, 12000);
 
         utterance.onend = () => {
             clearTimeout(watchdogId);
+            resumeRecognition(); // マイク再開🐾
             this.speaking = false;
             setTimeout(() => this.processQueue(), 250);
         };
@@ -210,6 +262,7 @@ class ReadAloudManager {
         utterance.onerror = (e) => {
             clearTimeout(watchdogId);
             console.error('SpeechSynthesis error:', e);
+            resumeRecognition(); // マイク再開🐾
             this.speaking = false;
             setTimeout(() => this.processQueue(), 250);
         };
@@ -278,6 +331,23 @@ class ReadAloudManager {
         if (!text) return '';
         
         let cleaned = text;
+        
+        // ななみちゃんの漢字誤読防止レスキュー（「楽しみ」➔「たのしみ」などのひらがな置換）🐾
+        cleaned = cleaned.replace(/楽しみ/g, 'たのしみ');
+        cleaned = cleaned.replace(/楽しんで/g, 'たのしんで');
+        cleaned = cleaned.replace(/楽しむ/g, 'たのしむ');
+        cleaned = cleaned.replace(/楽しかった/g, 'たのしかった');
+        
+        // 挨拶の「は」と「わ」の誤読防止（「〜」や長音符がついても正しく「わ」と発音するようにします🐾）
+        cleaned = cleaned.replace(/こんにちは/g, 'こんにちわ');
+        cleaned = cleaned.replace(/こんばんは/g, 'こんばんわ');
+        
+        // 長音符「ー」および波ダッシュ「〜」「～」の音声エンジン誤読対策🐾
+        // ななみちゃんは長音符「ー」や波ダッシュ「〜」を無視して短く読んでしまう（「おーい」➔「おい」等）ため、
+        // 「ーー」のように重ねることで綺麗に長音として伸ばして発音させます🐾
+        cleaned = cleaned.replace(/ー+/g, 'ーー');
+        cleaned = cleaned.replace(/[〜～]+/g, 'ーー');
+        
         // 連続する感嘆符などを自然な感嘆と短い息継ぎスペースに変換
         cleaned = cleaned.replace(/[!?！？]+/g, '！ ');
         // 文中のスペースを読点（、）に変換して、機械的な早口を防ぎ「自然な間」を設ける
@@ -890,6 +960,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'yt_translator_real_chat' && e.newValue) {
             try {
                 const chat = JSON.parse(e.newValue);
+                
+                // 重複排除チェック（APIポーリング側との二重処理を防ぎます🐾）
+                if (chat && chat.id) {
+                    if (processedChatIdsAdmin.has(chat.id)) {
+                        return;
+                    }
+                    processedChatIdsAdmin.add(chat.id);
+                }
+                
                 appendToChatLog(chat);
                 
                 // 実チャットの読み上げ
@@ -957,10 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 配信者マイクリアルタイム音声認識（Web Speech API）制御 ＆ 自動再起動レスキュー
     // ==========================================================================
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let recognition = null;
-    let isListening = false;
-    let shouldBeListening = false; // ご主人様が意図的にマイクをONにしているかを表すフラグ🐾
+    // (※マイク状態変数定義は、クラス内からも参照可能にするためトップレベルへ移動しました🐾)
 
     if (SpeechRecognition && btnMicToggle) {
         recognition = new SpeechRecognition();
@@ -982,7 +1058,8 @@ document.addEventListener('DOMContentLoaded', () => {
             isListening = false;
             
             // ボタンがONのままなのにブラウザのタイムアウト等で勝手に切れてしまった場合 ➔ 即座に自動再接続！🐾
-            if (shouldBeListening) {
+            // ※読み上げによる一時停止中（isSpeechSynthesisActive === true）は自動再接続をスキップします🐾
+            if (shouldBeListening && !isSpeechSynthesisActive) {
                 console.log('Speech recognition disconnected automatically. Reconnecting immediately...');
                 try {
                     recognition.start();
@@ -990,7 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Failed to auto-restart recognition:', e);
                     // 少しディレイを入れてからリトライ
                     setTimeout(() => {
-                        if (shouldBeListening && !isListening) {
+                        if (shouldBeListening && !isListening && !isSpeechSynthesisActive) {
                             try { recognition.start(); } catch(err) { console.error(err); }
                         }
                     }, 500);

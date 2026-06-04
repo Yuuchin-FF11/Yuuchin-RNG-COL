@@ -101,12 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const trans = card.querySelector('.translation-text');
             if (orig) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    orig.style.fontSize = `${fontSize + 4}px`; // 配信者は一律4px大きく表示🐾
+                    orig.style.fontSize = `${fontSize + 12}px`; // 配信者はしっかり目立つように12px大きく表示🐾
                 } else {
                     orig.style.fontSize = `${fontSize}px`;
                 }
             }
-            if (trans) trans.style.fontSize = `${transSize}px`;
+            if (trans) {
+                if (card.classList.contains('comment-card-broadcaster')) {
+                    trans.style.fontSize = `${transSize + 6}px`; // 配信者のサブ日本語も6px大きく表示🐾
+                } else {
+                    trans.style.fontSize = `${transSize}px`;
+                }
+            }
         });
     }
     applyStyles();
@@ -239,12 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
             processedMessageIds.add(chatData.id);
         }
 
-        // 海外コメント専用フィルターがオンの場合、日本語（翻訳不要）のコメントをスキップ（配信者発言は除く）
-        if (filterForeign && !chatData.needTranslation && !chatData.isBroadcaster) {
-            return;
-        }
-
         // 管理画面へログを同期するためにlocalStorageへ書き込み（実チャットの逆転送。配信者は除く）
+        // ※表示フィルターに関係なく、管理画面（読み上げ用）にはすべてのチャットを同期します🐾
         if (chatData.id && !chatData.id.startsWith('test_') && !chatData.isBroadcaster) {
             localStorage.setItem('yt_translator_real_chat', JSON.stringify(chatData));
             
@@ -255,6 +257,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(chatData)
             }).catch(err => console.error('Failed to sync real chat to API:', err));
+        }
+
+        // 海外コメント専用フィルターがオンの場合、日本語（翻訳不要）のコメントをスキップ（配信者発言は除く）
+        // ※管理画面への同期後に実行することで、画面に非表示でも読み上げは機能するようにします🐾
+        if (filterForeign && !chatData.needTranslation && !chatData.isBroadcaster) {
+            return;
         }
 
         // スーパーチャットまたはメンバーシップの場合に、設定された音量で効果音を自動再生 (ランダム2パターン再生)
@@ -333,10 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 配信者（ご主人様）の場合は、英語（翻訳先）をメインに大きく表示し、日本語（原文）を下に小さく添える黄金比レイアウト🐾
         if (chatData.isBroadcaster) {
-            // メインは英訳された美しい英語（配信者発言は通常より少し大きく表示します🐾）
+            // メインは英訳された美しい英語（配信者発言は通常より大幅に大きく表示します🐾）
             const origMsg = document.createElement('span');
             origMsg.className = 'message-original';
-            origMsg.style.fontSize = `${fontSize + 4}px`; // 通常より一律4px大きくします🐾
+            origMsg.style.fontSize = `${fontSize + 12}px`; // 通常より一律12px大きくします🐾
             origMsg.textContent = chatData.translation;
             content.appendChild(origMsg);
 
@@ -354,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const transMsg = document.createElement('span');
                 transMsg.className = 'translation-text';
                 transMsg.style.color = 'var(--text-muted)'; // 控えめなグレー色にして英語を引き立てます🐾
-                transMsg.style.fontSize = `${transSize}px`;
+                transMsg.style.fontSize = `${transSize + 6}px`; // サブの日本語も6px大きくします🐾
                 transMsg.textContent = chatData.message;
                 transBox.appendChild(transMsg);
 

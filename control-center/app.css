@@ -594,7 +594,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     align-items: flex-start;
     box-shadow: 0 12px 40px rgba(234, 179, 8, 0.15), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    max-width: 500px;
+    max-width: 600px; /* 文字が大きくなった分、吹き出しの幅も広げます🐾 */
     width: fit-content;
     animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
     transform-origin: left top; /* 左上を基点に変更🐾 */
@@ -627,7 +627,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 
 .comment-card-broadcaster .translation-text {
     color: #d946ef; /* ビビッドなマゼンタ・パープルで英訳を強調 */
-    font-size: 1.05rem !important;
+    font-size: 1.05rem; /* JSからの動的なサイズ指定を優先するため !important を除去します🐾 */
 }
 
 /* マイク動作中のパルスアニメーションインジケーター (管理画面用) */

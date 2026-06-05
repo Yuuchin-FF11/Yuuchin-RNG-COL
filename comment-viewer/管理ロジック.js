@@ -641,7 +641,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // iframeのソースを設定して読み込みを開始
         showStatus('connecting', 'YouTubeに接続中...');
-        iframe.src = `https://www.youtube.com/live_chat?v=${videoId}`;
+        iframe.src = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${window.location.hostname}`;
 
         // OBS用リンクの生成 (オーバーレイ.htmlの場所を取得)
         let overlayPath = window.location.href

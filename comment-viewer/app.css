@@ -1,0 +1,738 @@
+/* YouTube Chat Translator - 共通スタイルシート */
+
+:root {
+    --bg-color: #06040d;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(234, 179, 8, 0.12); /* 高級感のある薄いゴールド境界 */
+    --glass-blur: blur(16px);
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-color: #eab308; /* ロイヤルゴールド */
+    --accent-glow: rgba(234, 179, 8, 0.25);
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --font-family: 'Outfit', 'Inter', 'Noto Sans JP', sans-serif;
+    --shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   管理画面（Admin Dashboard）のスタイル
+   ========================================================================== */
+
+.admin-body {
+    background: radial-gradient(circle at top right, #1e1b4b, #090514, #020005);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-container {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ヘッダー */
+.admin-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.admin-header h1 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 50px rgba(234, 179, 8, 0.25);
+}
+
+.admin-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* ガラスカード */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    border-color: rgba(234, 179, 8, 0.3);
+    box-shadow: 0 16px 48px 0 rgba(234, 179, 8, 0.15);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.75rem;
+}
+
+.card-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 18px;
+    background: linear-gradient(to bottom, var(--accent-color), #d946ef);
+    border-radius: 3px;
+}
+
+/* フォーム要素 */
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+input[type="text"], input[type="password"], select {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* スライダー */
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.slider-container input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--accent-color);
+    transition: transform 0.1s ease;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.slider-value {
+    min-width: 45px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* ボタン */
+.btn {
+    padding: 0.875rem 1.5rem;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00d2ff 0%, #00a8ff 100%);
+    color: #000;
+    box-shadow: 0 4px 20px rgba(0, 210, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 210, 255, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(16, 185, 129, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(239, 68, 68, 0.5);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ボタンコンテナ */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+}
+
+/* 接続ステータス */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+
+.status-disconnected .status-dot {
+    background-color: var(--text-muted);
+}
+
+.status-connecting .status-dot {
+    background-color: #f59e0b;
+    animation: pulse 1.5s infinite alternate;
+}
+
+.status-connected .status-dot {
+    background-color: var(--success-color);
+    box-shadow: 0 0 10px var(--success-color);
+}
+
+.status-error .status-dot {
+    background-color: var(--error-color);
+    box-shadow: 0 0 10px var(--error-color);
+}
+
+/* アラート・ヘルプ情報 */
+.help-box {
+    background: rgba(0, 210, 255, 0.03);
+    border: 1px dashed rgba(0, 210, 255, 0.3);
+    border-radius: 12px;
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.help-box h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.help-box ol {
+    padding-left: 1.25rem;
+}
+
+.help-box li {
+    margin-bottom: 0.25rem;
+}
+
+.help-box a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    transition: opacity 0.2s;
+}
+
+.help-box a:hover {
+    opacity: 0.8;
+}
+
+/* コピペ用URLエリア */
+.copy-url-area {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.copy-url-area input[type="text"] {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.15);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* テスト送信コントロール */
+.test-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+}
+
+/* ==========================================================================
+   OBSオーバーレイ表示画面（Overlay）のスタイル
+   ========================================================================== */
+
+.overlay-body {
+    background-color: transparent !important;
+    min-height: 100vh;
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 左上に寄せるため上寄せに変更🐾 */
+    overflow: hidden;
+}
+
+/* コメント一覧コンテナ */
+#comment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    max-width: 100%;
+    width: 100%;
+    /* OBSでの配置に合わせた調整 */
+}
+
+/* コメントカード */
+.comment-card {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 0.875rem 1.125rem;
+    display: flex;
+    gap: 0.875rem;
+    align-items: flex-start;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    max-width: 480px;
+    width: fit-content;
+    animation: slideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
+    transition: all 0.3s ease;
+}
+
+/* フェードアウトアニメーション（JSで追加される） */
+.comment-card.fade-out {
+    animation: fadeOutLeft 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards; /* 左フェードアウトに変更🐾 */
+}
+
+/* リスナーアイコン */
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+/* コメントテキストエリア */
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0; /* 折り返しを正常にするためのハック */
+}
+
+/* リスナー名 */
+.author-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+/* 配信主バッジ・モデレーターバッジなど */
+.badge {
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+.badge-owner {
+    background: #eab308;
+    color: #000;
+}
+
+.badge-moderator {
+    background: #3b82f6;
+    color: #fff;
+}
+
+/* メッセージ本文（原文） */
+.message-original {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #f8fafc;
+    word-break: break-word;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* 自動翻訳エリア */
+.translation-box {
+    margin-top: 0.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    animation: fadeIn 0.25s ease-out forwards;
+}
+
+.translation-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.translation-text {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #38bdf8; /* 明るいライトブルーで翻訳を強調 */
+    word-break: break-word;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   アニメーション定義
+   ========================================================================== */
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 12px 4px rgba(245, 158, 11, 0.2);
+    }
+}
+
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes fadeOutDown {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.95);
+    }
+}
+
+@keyframes fadeOutLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.95);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   配信者用プレミアム字幕カード (Broadcaster Premium Card)
+   ========================================================================== */
+
+.comment-card-broadcaster {
+    background: linear-gradient(135deg, rgba(20, 10, 40, 0.75) 0%, rgba(10, 20, 40, 0.75) 100%);
+    backdrop-filter: blur(18px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+    border: 1px solid rgba(234, 179, 8, 0.35); /* ゴールドの薄い枠線 */
+    border-radius: 16px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    box-shadow: 0 12px 40px rgba(234, 179, 8, 0.15), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    max-width: 600px; /* 文字が大きくなった分、吹き出しの幅も広げます🐾 */
+    width: fit-content;
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 虹色グラデーションの微細な光るボーダーエフェクト */
+.comment-card-broadcaster::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #eab308, #d946ef, #00d2ff);
+}
+
+.comment-card-broadcaster .avatar {
+    border-color: rgba(234, 179, 8, 0.6);
+    box-shadow: 0 0 12px rgba(234, 179, 8, 0.3);
+    object-position: center 30%; /* タルタルの顔周りに焦点を合わせます🐾 */
+}
+
+.comment-card-broadcaster .author-name {
+    color: #eab308; /* ゴールドカラーの名前に */
+    font-weight: 900;
+}
+
+.comment-card-broadcaster .translation-text {
+    color: #d946ef; /* ビビッドなマゼンタ・パープルで英訳を強調 */
+    font-size: 1.05rem; /* JSからの動的なサイズ指定を優先するため !important を除去します🐾 */
+}
+
+/* マイク動作中のパルスアニメーションインジケーター (管理画面用) */
+.mic-dot.active {
+    background: var(--error-color) !important;
+    box-shadow: 0 0 10px var(--error-color);
+    animation: micPulse 1.2s infinite alternate;
+}
+
+@keyframes micPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   スーパーチャット用プレミアムカード (Super Chat Premium Card)
+   ========================================================================== */
+.comment-card-superchat {
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(20, 10, 40, 0.8) 100%);
+    backdrop-filter: blur(18px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+    border: 1px solid rgba(234, 179, 8, 0.5); /* 強めのゴールド枠 */
+    border-radius: 16px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    box-shadow: 0 12px 40px rgba(234, 179, 8, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: fit-content;
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.comment-card-superchat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f59e0b, #eab308, #ef4444);
+}
+
+.comment-card-superchat .avatar {
+    border-color: rgba(234, 179, 8, 0.8);
+    box-shadow: 0 0 12px rgba(234, 179, 8, 0.4);
+}
+
+.comment-card-superchat .author-name {
+    color: #fef08a; /* ライトゴールド */
+    font-weight: 900;
+}
+
+/* ==========================================================================
+   メンバーシップ加入用プレミアムカード (Membership Premium Card)
+   ========================================================================== */
+.comment-card-membership {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(10, 20, 40, 0.8) 100%);
+    backdrop-filter: blur(18px) saturate(200%);
+    -webkit-backdrop-filter: blur(18px) saturate(200%);
+    border: 1px solid rgba(16, 185, 129, 0.5); /* 強めのグリーン枠 */
+    border-radius: 16px;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: fit-content;
+    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
+    transform-origin: left top; /* 左上を基点に変更🐾 */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.comment-card-membership::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981, #34d399, #00d2ff);
+}
+
+.comment-card-membership .avatar {
+    border-color: rgba(16, 185, 129, 0.8);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.comment-card-membership .author-name {
+    color: #a7f3d0; /* ライトグリーン */
+    font-weight: 900;
+}
+

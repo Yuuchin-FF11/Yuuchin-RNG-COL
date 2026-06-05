@@ -1,4 +1,4 @@
-// YouTube Chat Translator - OBS Overlay ロジック
+// YouTube Chat Translator - OBS Overlay ロジック (コメビュ版・APIキー不要)
 
 // OBS/ブラウザ内のエラーを画面に赤文字で強制デバッグ表示する救急措置🐾
 function showDebugError(msg) {
@@ -15,7 +15,7 @@ function showDebugError(msg) {
         errDiv.style.position = 'fixed';
         errDiv.style.top = '20px';
         errDiv.style.left = '20px';
-        errDiv.style.fontSize = '24px'; // 視認性向上のため大幅に巨大化🐾
+        errDiv.style.fontSize = '24px';
         errDiv.style.fontWeight = 'bold';
         errDiv.style.fontFamily = 'sans-serif';
         document.body.appendChild(errDiv);
@@ -66,30 +66,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // OBS環境とブラウザプレビュー環境を自動検知し、眩しさ防止の黒背景を適応するマジカルシステム🐾
     if (window.obsstudio) {
-        // OBS配信ソース内ではゲーム画面を遮らないように完全透過にします
         document.body.style.setProperty('background-color', 'rgba(0, 0, 0, 0)', 'important');
     } else {
-        // 通常のブラウザプレビューでは眩しさを防ぎ目に優しい極上の漆黒ダーク背景にします🐾
         document.body.style.setProperty('background-color', 'rgba(10, 10, 10, 0.98)', 'important');
     }
 
     // クエリパラメータの解析
     const params = new URLSearchParams(window.location.search);
-    const videoId = params.get('v') || '';
-    const apiKey = params.get('key') || '';
     
     // デザイン設定（パラメータが無い場合のデフォルト値）
     let fontSize = parseInt(params.get('size')) || 16;
     let transSize = parseInt(params.get('tsize')) || 15;
-    // 0（無制限）が指定された場合にデフォルト値15に上書きされるのを防ぐため、null判定を適用
     let displayTime = (params.get('time') !== null) ? parseInt(params.get('time')) : 15;
     let maxComments = parseInt(params.get('max')) || 6;
     let filterForeign = (params.get('filter') === '1');
 
-    let activeLiveChatId = '';
-    let nextPageToken = '';
-    let pollingInterval = 6000; // 節約設定：6秒（1日の無料枠で最大16時間以上の配信に対応します🐾）
-    let pollTimeoutId = null;
     let processedMessageIds = new Set(); // 重複排除用
 
     // CSSカスタム変数の適用
@@ -97,21 +88,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.setProperty('--font-size-base', `${fontSize}px`);
         document.documentElement.style.setProperty('--font-size-trans', `${transSize}px`);
         
-        // 生成済みの全カードのスタイルを即座に変更
         const cards = document.querySelectorAll('.comment-card');
         cards.forEach(card => {
             const orig = card.querySelector('.message-original');
             const trans = card.querySelector('.translation-text');
             if (orig) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    orig.style.fontSize = `${fontSize + 12}px`; // 配信者はしっかり目立つように12px大きく表示🐾
+                    orig.style.fontSize = `${fontSize + 12}px`;
                 } else {
                     orig.style.fontSize = `${fontSize}px`;
                 }
             }
             if (trans) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    trans.style.fontSize = `${transSize + 6}px`; // 配信者のサブ日本語も6px大きく表示🐾
+                    trans.style.fontSize = `${transSize + 6}px`;
                 } else {
                     trans.style.fontSize = `${transSize}px`;
                 }
@@ -131,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const settings = JSON.parse(e.newValue);
                 fontSize = settings.fontSize || fontSize;
                 transSize = settings.transSize || transSize;
-                // 管理画面側の61秒（無制限）を0秒（無制限）に変換して適用
                 const newDisplayTime = settings.displayTime === 61 ? 0 : settings.displayTime;
                 displayTime = (newDisplayTime !== undefined) ? newDisplayTime : displayTime;
                 maxComments = settings.maxComments || maxComments;
@@ -142,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 手動効果音テスト再生の受信 (同期ランダム再生)
+        // 手動効果音テスト再生の受信
         if (e.key === 'yt_translator_test_sound_trigger' && e.newValue) {
             try {
                 const triggerData = JSON.parse(e.newValue);
@@ -186,35 +175,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Failed to parse broadcaster chat:', err);
             }
         }
-    });
 
-    // ==========================================================================
-    // 無料Google翻訳API（JSONP経由/直接フェッチ）連動
-    // ==========================================================================
-    
-    async function translateText(text) {
-        if (!text) return '';
-        
-        // アルファベット、半角記号、数字のみの単純な文字列や、顔文字は翻訳をパスする
-        const isOnlyAscii = /^[\s!-~]*$/.test(text);
-        if (isOnlyAscii && text.length < 3) return text;
-
-        try {
-            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ja&dt=t&q=${encodeURIComponent(text)}`;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error('Translation request failed');
-            
-            const data = await res.json();
-            if (data && data[0] && data[0][0] && data[0][0][0]) {
-                const translated = data[0][0][0];
-                return translated.trim();
+        // 実チャットの直接受信（管理ロジック側から localStorage で飛んできた場合）
+        if (e.key === 'yt_translator_real_chat' && e.newValue) {
+            try {
+                const realChat = JSON.parse(e.newValue);
+                addCommentCard(realChat);
+            } catch (err) {
+                console.error('Failed to parse real chat:', err);
             }
-            return text;
-        } catch (err) {
-            console.error('Translation error:', err);
-            return text; // エラー時は原文を表示
         }
-    }
+    });
 
     // ==========================================================================
     // コメントカードの作成・描画 ＆ フェードアウト制御
@@ -229,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // お上品フィルターの適用🐾
         let enableNsfwFilter = true;
         let nsfwWords = '';
         try {
@@ -248,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
             chatData.translation = cleanMessage(chatData.translation, enableNsfwFilter, nsfwWords);
         }
 
-        // メモリ上の重複リスト ＆ DOMから検索する二重防衛線により、超高速な同時発生時の二重描画も100%完璧に防ぎます🐾
         if (chatData.id) {
             if (document.getElementById(chatData.id)) {
                 return;
@@ -256,27 +225,12 @@ document.addEventListener('DOMContentLoaded', () => {
             processedMessageIds.add(chatData.id);
         }
 
-        // 管理画面へログを同期するためにlocalStorageへ書き込み（実チャットの逆転送。配信者は除く）
-        // ※表示フィルターに関係なく、管理画面（読み上げ用）にはすべてのチャットを同期します🐾
-        if (chatData.id && !chatData.id.startsWith('test_') && !chatData.isBroadcaster) {
-            localStorage.setItem('yt_translator_real_chat', JSON.stringify(chatData));
-            
-            // ローカルサーバーAPIへ逆同期（別プロセス間での超安定読み上げ同期用）🐾
-            const port = window.location.port || '8080';
-            fetch(`http://localhost:${port}/api/chat`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(chatData)
-            }).catch(err => console.error('Failed to sync real chat to API:', err));
-        }
-
         // 海外コメント専用フィルターがオンの場合、日本語（翻訳不要）のコメントをスキップ（配信者発言は除く）
-        // ※管理画面への同期後に実行することで、画面に非表示でも読み上げは機能するようにします🐾
         if (filterForeign && !chatData.needTranslation && !chatData.isBroadcaster) {
             return;
         }
 
-        // スーパーチャットまたはメンバーシップの場合に、設定された音量で効果音を自動再生 (ランダム2パターン再生)
+        // スーパーチャットまたはメンバーシップの場合に、設定された音量で効果音を自動再生
         if (chatData.isSuperChat || chatData.isMembership) {
             try {
                 const savedSettings = localStorage.getItem('yt_translator_settings');
@@ -285,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const settings = JSON.parse(savedSettings);
                     volume = (settings.effectVolume !== undefined) ? (settings.effectVolume / 100) : 0.9;
                 }
-                // 1か2をランダムで選択
                 const soundNum = Math.random() < 0.5 ? 1 : 2;
                 const audio = new Audio(`効果音/レベルアップ_${soundNum}.mp3?v=${Date.now()}`);
                 audio.volume = volume;
@@ -319,7 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.className = 'avatar';
         if (chatData.isBroadcaster) {
-            // 配信者用のアバター画像（broadcaster.png）を読み込みます🐾
             img.src = 'broadcaster.png';
         } else {
             img.src = chatData.author.avatar || 'https://www.gstatic.com/youtube/img/creator/no_profile_image.png';
@@ -332,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = document.createElement('div');
         content.className = 'comment-content';
 
-        // 名前（バッジ対応）
+        // 名前
         const nameNode = document.createElement('span');
         nameNode.className = 'author-name';
         nameNode.textContent = chatData.author.name;
@@ -350,16 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         content.appendChild(nameNode);
 
-        // 配信者（ご主人様）の場合は、英語（翻訳先）をメインに大きく表示し、日本語（原文）を下に小さく添える黄金比レイアウト🐾
+        // 配信者の場合は、英語（翻訳先）をメインに大きく表示し、日本語（原文）を下に小さく添える
         if (chatData.isBroadcaster) {
-            // メインは英訳された美しい英語（配信者発言は通常より大幅に大きく表示します🐾）
             const origMsg = document.createElement('span');
             origMsg.className = 'message-original';
-            origMsg.style.fontSize = `${fontSize + 12}px`; // 通常より一律12px大きくします🐾
+            origMsg.style.fontSize = `${fontSize + 12}px`;
             origMsg.textContent = chatData.translation;
             content.appendChild(origMsg);
 
-            // サブに元の日本語を小さく控えめに添える（英語を引き立てるためグレー文字にします）
             if (chatData.message) {
                 const transBox = document.createElement('div');
                 transBox.className = 'translation-box';
@@ -372,15 +322,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const transMsg = document.createElement('span');
                 transMsg.className = 'translation-text';
-                transMsg.style.color = 'var(--text-muted)'; // 控えめなグレー色にして英語を引き立てます🐾
-                transMsg.style.fontSize = `${transSize + 6}px`; // サブの日本語も6px大きくします🐾
+                transMsg.style.color = 'var(--text-muted)';
+                transMsg.style.fontSize = `${transSize + 6}px`;
                 transMsg.textContent = chatData.message;
                 transBox.appendChild(transMsg);
 
                 content.appendChild(transBox);
             }
         } else {
-            // 通常の視聴者の場合は、原文をメインにし、必要なら翻訳を下に追加（従来どおり）
             const origMsg = document.createElement('span');
             origMsg.className = 'message-original';
             origMsg.style.fontSize = `${fontSize}px`;
@@ -409,9 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.appendChild(content);
         commentContainer.appendChild(card);
 
-        // 一定時間経過後にフェードアウトさせて削除（displayTimeが0の時は無制限のためタイマーを起動しない）
         if (displayTime > 0) {
-            // 配信者の発言は長めに表示（通常の1.5倍、最低でも10秒）
             const currentDisplayTime = chatData.isBroadcaster ? Math.max(displayTime * 1.5, 10) : displayTime;
             setTimeout(() => {
                 removeCard(card);
@@ -423,7 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!cardElement || cardElement.classList.contains('fade-out')) return;
         
         cardElement.classList.add('fade-out');
-        // アニメーション完了後にDOMから完全に削除 (0.4秒後)
         setTimeout(() => {
             if (cardElement.parentNode === commentContainer) {
                 commentContainer.removeChild(cardElement);
@@ -432,205 +378,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // YouTube Data API v3 を用いたチャット取得ストリーム
+    // 別ブラウザプロセス間（通常のChrome ➔ OBSブラウザソース）超安定ハイブリッドAPI同期
     // ==========================================================================
-    
-    // Step 1: ライブ配信IDからアクティブなライブチャットIDを取得
-    let liveChatIdRetryTimeoutId = null;
-
-    // YouTube接続ステータスを画面端に控えめに表示するお給仕システム🐾
-    function showLiveStatusMessage(msg, isError = false) {
-        let statusDiv = document.getElementById('live-status-div');
-        if (!statusDiv) {
-            statusDiv = document.createElement('div');
-            statusDiv.id = 'live-status-div';
-            statusDiv.style.zIndex = '9999';
-            statusDiv.style.position = 'fixed';
-            statusDiv.style.top = '15px';
-            statusDiv.style.right = '15px';
-            statusDiv.style.padding = '10px 16px';
-            statusDiv.style.borderRadius = '8px';
-            statusDiv.style.fontFamily = "'Outfit', 'Noto Sans JP', sans-serif";
-            statusDiv.style.fontSize = '14px';
-            statusDiv.style.fontWeight = '600';
-            statusDiv.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
-            statusDiv.style.backdropFilter = 'blur(8px)';
-            statusDiv.style.webkitBackdropFilter = 'blur(8px)';
-            statusDiv.style.transition = 'all 0.3s ease';
-            document.body.appendChild(statusDiv);
-        }
-        
-        if (isError) {
-            statusDiv.style.color = '#f87171'; // ソフトな赤色
-            statusDiv.style.background = 'rgba(127, 29, 29, 0.85)'; // ダークレッド半透明
-            statusDiv.style.border = '1px solid rgba(239, 68, 68, 0.4)';
-        } else {
-            statusDiv.style.color = '#eab308'; // ロイヤルゴールド
-            statusDiv.style.background = 'rgba(15, 23, 42, 0.85)'; // ディープネイビー半透明
-            statusDiv.style.border = '1px solid rgba(234, 179, 8, 0.4)';
-        }
-        statusDiv.textContent = msg;
-        statusDiv.style.display = 'block';
-    }
-
-    function hideLiveStatusMessage() {
-        const statusDiv = document.getElementById('live-status-div');
-        if (statusDiv) {
-            statusDiv.style.display = 'none';
-        }
-    }
-
-    // Step 1: ライブ配信IDからアクティブなライブチャットIDを取得
-    async function fetchLiveChatId() {
-        if (!videoId || !apiKey) {
-            console.warn('Video ID or API Key is missing. Operating in Test Mode.');
-            return;
-        }
-
-        if (liveChatIdRetryTimeoutId) clearTimeout(liveChatIdRetryTimeoutId);
-
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}`;
-        
-        try {
-            const res = await fetch(url);
-            if (!res.ok) {
-                let errMsg = `YouTube API接続エラー (${res.status})`;
-                if (res.status === 400) errMsg = 'YouTube APIエラー: リクエストが不正です🐾';
-                if (res.status === 403) errMsg = 'YouTube APIエラー: キーの権限不足またはアクセス制限超過です🐾';
-                throw new Error(errMsg);
-            }
-            
-            const data = await res.json();
-            if (data.items && data.items.length > 0) {
-                const details = data.items[0].liveStreamingDetails;
-                if (details && details.activeLiveChatId) {
-                    activeLiveChatId = details.activeLiveChatId;
-                    console.log('Successfully acquired Active Live Chat ID:', activeLiveChatId);
-                    hideLiveStatusMessage(); // 接続成功時はステータス表示を消す🐾
-                    startChatPolling(); // ポーリング開始
-                } else {
-                    console.warn('This video is not an active live stream yet. Retrying in 20s...');
-                    showLiveStatusMessage('配信開始を待機しています（YouTubeチャットID未発行）🐾');
-                    liveChatIdRetryTimeoutId = setTimeout(fetchLiveChatId, 20000);
-                }
-            } else {
-                console.warn('Video not found. It might be private or upcoming. Retrying in 20s...');
-                showLiveStatusMessage('YouTube配信情報をロード中、または開始待機中...🐾');
-                liveChatIdRetryTimeoutId = setTimeout(fetchLiveChatId, 20000);
-            }
-        } catch (err) {
-            console.error('Failed to acquire Live Chat ID:', err);
-            showLiveStatusMessage(err.message || 'YouTube接続に失敗しました。20秒後に再試行します🐾', true);
-            liveChatIdRetryTimeoutId = setTimeout(fetchLiveChatId, 20000);
-        }
-    }
-
-    // Step 2: ライブチャットIDからメッセージを定期的に取得（ポーリング）
-    async function fetchChatMessages() {
-        if (!activeLiveChatId) return;
-
-        let url = `https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=${encodeURIComponent(activeLiveChatId)}&part=snippet,authorDetails&key=${encodeURIComponent(apiKey)}`;
-        if (nextPageToken) {
-            url += `&pageToken=${encodeURIComponent(nextPageToken)}`;
-        }
-
-        try {
-            const res = await fetch(url);
-            if (!res.ok) {
-                // APIエラー時は少し長めに待ってから再起動
-                console.error(`Chat API error: ${res.status}. Retrying in 10s...`);
-                pollTimeoutId = setTimeout(fetchChatMessages, 10000);
-                return;
-            }
-
-            const data = await res.json();
-            nextPageToken = data.nextPageToken || nextPageToken;
-            
-            // API指定の推奨ポーリング間隔を適用（クォータ節約のため、最低でも6秒間隔を維持します🐾）
-            pollingInterval = Math.max(data.pollingIntervalMillis || 6000, 6000);
-
-            if (data.items && data.items.length > 0) {
-                // 差分のみを処理
-                const newItems = data.items.filter(item => !processedMessageIds.has(item.id));
-                
-                // 初回読み込み時は画面がコメントで埋まるのを防ぐため、最後の数件のみ処理
-                const itemsToProcess = nextPageToken ? newItems : newItems.slice(-3);
-
-                for (const item of itemsToProcess) {
-                    processedMessageIds.add(item.id);
-
-                    const author = item.authorDetails;
-                    const snippet = item.snippet;
-                    
-                    let message = '';
-                    let isSuperChat = false;
-                    let isMembership = false;
-
-                    if (snippet.type === 'textMessageEvent' && snippet.textMessageDetails) {
-                        message = snippet.textMessageDetails.messageText;
-                    } else if (snippet.type === 'superChatEvent' && snippet.superChatDetails) {
-                        message = snippet.superChatDetails.userComment || `Super Chat! (${snippet.superChatDetails.amountDisplayString})`;
-                        isSuperChat = true;
-                    } else if (snippet.type === 'memberMilestoneChatEvent' && snippet.memberMilestoneChatEvent) {
-                        message = snippet.memberMilestoneChatEvent.userComment || 'Membership Milestone!';
-                        isMembership = true;
-                    } else if (snippet.type === 'newSponsorEvent') {
-                        message = 'New Member Welcomed! 🎉';
-                        isMembership = true;
-                    }
-
-                    if (!message) continue;
-
-                    // 翻訳処理 (スーパーチャットやメンバーシップも翻訳する)
-                    const translated = await translateText(message);
-                    
-                    // 重複排除 of memory limit (1000件を超えたら古いものを削除)
-                    if (processedMessageIds.size > 1000) {
-                        const firstKey = processedMessageIds.values().next().value;
-                        processedMessageIds.delete(firstKey);
-                    }
-
-                    // 描画用オブジェクトに整形
-                    const chatItem = {
-                        id: item.id,
-                        author: {
-                            name: author.displayName,
-                            avatar: author.profileImageUrl,
-                            isOwner: author.isChatOwner,
-                            isModerator: author.isChatModerator
-                        },
-                        message: message,
-                        translation: translated,
-                        needTranslation: message !== translated,
-                        isSuperChat: isSuperChat,
-                        isMembership: isMembership,
-                        timestamp: new Date(snippet.publishedAt).getTime()
-                    };
-
-                    addCommentCard(chatItem);
-                }
-            }
-
-            // 次のポーリングをスケジュール
-            pollTimeoutId = setTimeout(fetchChatMessages, pollingInterval);
-
-        } catch (err) {
-            console.error('Error fetching chat messages:', err);
-            // ネットワークエラー時は5秒後に再試行
-            pollTimeoutId = setTimeout(fetchChatMessages, 5000);
-        }
-    }
-
-    function startChatPolling() {
-        if (pollTimeoutId) clearTimeout(pollTimeoutId);
-        fetchChatMessages();
-    }
-
-    // ==========================================================================
-    // 別ブラウザプロセス間（通常のChrome ➔ OBSブラウザソース）超安定ハイブリッドAPI同期 🐾
-    // ==========================================================================
-    let isFirstPoll = true; // 初回起動時の過去ログ読み込みスルー用フラグ🐾
-    let pollCount = 0; // 接続成功確認用カウンタ🐾
+    let isFirstPoll = true;
     async function startApiPolling() {
         const port = window.location.port || '8080';
         setInterval(async () => {
@@ -646,11 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     chats.forEach(chat => {
                         if (chat && chat.id) {
                             if (!processedMessageIds.has(chat.id)) {
-                                // 初回起動時はサーバーに残っている古いデータを表示しない🐾
                                 if (!isFirstPoll) {
                                     addCommentCard(chat);
                                 } else {
-                                    // 初回時は描画せずにID登録のみ行い既読とします🐾
                                     processedMessageIds.add(chat.id);
                                 }
                             }
@@ -658,7 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     isFirstPoll = false;
                     
-                    // メモリー制限（1000件）
                     if (processedMessageIds.size > 1000) {
                         const firstKey = processedMessageIds.values().next().value;
                         processedMessageIds.delete(firstKey);
@@ -667,10 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 showDebugError(`API Fetch Exception: ${err.message || err.toString()}`);
             }
-        }, 500); // 0.5秒間隔で極めて低負荷かつリアルタイムに同期します🐾
+        }, 500);
     }
     startApiPolling();
-
-    // 初期化起動
-    fetchLiveChatId();
 });

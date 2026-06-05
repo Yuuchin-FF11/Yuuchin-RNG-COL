@@ -1,4 +1,4 @@
-// YouTube Chat Translator - 管理画面ロジック
+// YouTube Chat Translator - 管理画面ロジック (コメビュ版・APIキー不要)
 
 // お上品（NGワード）フィルターのロジック🐾
 function cleanMessage(text, enableFilter, customWordsString) {
@@ -33,12 +33,12 @@ function cleanMessage(text, enableFilter, customWordsString) {
 // 起動時刻の記録（過去ログ巻き戻り防止用）🐾
 const appLoadTime = Date.now();
 
-// マイク・音声認識用の状態管理変数（読み上げクラスとイベントリスナーの双方から参照できるようにトップレベルに配置します🐾）
+// マイク・音声認識用の状態管理変数🐾
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = null;
 let isListening = false;
-let shouldBeListening = false; // ご主人様が意図的にマイクをONにしているかを表すフラグ🐾
-let isSpeechSynthesisActive = false; // 読み上げがアクティブ（再生中）かを表すフラグ🐾
+let shouldBeListening = false;
+let isSpeechSynthesisActive = false;
 
 // ==========================================================================
 // ハイブリッド同時通訳・音声読み上げ制御クラス (SpeechSynthesisキュー管理)
@@ -65,9 +65,7 @@ class ReadAloudManager {
             this.synth.onvoiceschanged = loadVoices;
         }
 
-        // Chrome/EdgeのSpeechSynthesisバグ対策：マイク音声認識（SpeechRecognition）との競合により、
-        // しばらく無言のときに発声が保留（ペンディング）されてしまう不具合を防ぐため、
-        // 5秒ごとに自動で resume() を呼び出してロックを強制解除する見守りタイマーを回します🐾
+        // Chrome/EdgeのSpeechSynthesisバグ対策
         setInterval(() => {
             if (this.synth) {
                 try {
@@ -77,13 +75,11 @@ class ReadAloudManager {
         }, 5000);
     }
 
-    // コメントを読み上げキューに追加する
     speak(chat) {
         if (!this.enableCheckbox || !this.enableCheckbox.checked) {
             return;
         }
 
-        // 配信者自身の翻訳メッセージは読み上げない
         if (chat.isBroadcaster) {
             return;
         }
@@ -91,7 +87,6 @@ class ReadAloudManager {
         const textsToSpeak = this.prepareTexts(chat);
         if (textsToSpeak.length === 0) return;
 
-        // スパチャまたはメンバーシップの場合は、効果音再生を優先するため読み上げを2.5秒遅らせます🐾
         if (chat.isSuperChat || chat.isMembership) {
             setTimeout(() => {
                 this.queue.push(...textsToSpeak);
@@ -103,25 +98,20 @@ class ReadAloudManager {
         }
     }
 
-    // VOICEVOXの音声合成APIを呼び出すメソッド
     async speakVoiceVox(text, speakerId) {
         try {
-            // 1. 音声合成用クエリの作成
             const queryUrl = `http://localhost:50021/audio_query?text=${encodeURIComponent(text)}&speaker=${speakerId}`;
             const queryRes = await fetch(queryUrl, { method: 'POST' });
             if (!queryRes.ok) throw new Error('VOICEVOX query failed');
             const queryData = await queryRes.json();
 
-            // ピッチとスピードをスライダー設定に同期
             if (this.rateSlider) {
                 queryData.speedScale = parseFloat(this.rateSlider.value);
             }
             if (this.pitchSlider) {
-                // VOICEVOXの標準音高（1.0）に対し、ピッチ調整を同期（1.5など）
-                queryData.pitchScale = parseFloat(this.pitchSlider.value) - 0.5; // VOICEVOX用にマッピング微調整
+                queryData.pitchScale = parseFloat(this.pitchSlider.value) - 0.5;
             }
 
-            // 2. 音声合成の実行
             const synthUrl = `http://localhost:50021/synthesis?speaker=${speakerId}`;
             const synthRes = await fetch(synthUrl, {
                 method: 'POST',
@@ -134,7 +124,6 @@ class ReadAloudManager {
             const audioUrl = URL.createObjectURL(audioBlob);
             const audio = new Audio(audioUrl);
             
-            // 音量設定
             if (this.volumeSlider) {
                 audio.volume = parseInt(this.volumeSlider.value) / 100;
             } else {
@@ -159,19 +148,16 @@ class ReadAloudManager {
             });
         } catch (err) {
             console.warn('VOICEVOX is not running or failed:', err);
-            return false; // 失敗時は標準SpeechSynthesisに自動フォールバック🐾
+            return false;
         }
     }
 
-    // キューを順次消化
     async processQueue() {
         if (this.speaking || this.queue.length === 0) {
             return;
         }
 
         this.speaking = true;
-
-        // 【プランA】 読み上げを開始するので、マイクがオンの場合は一時的にマイクを停止します🐾
         isSpeechSynthesisActive = true;
         if (isListening && recognition) {
             try {
@@ -180,15 +166,12 @@ class ReadAloudManager {
         }
 
         const item = this.queue.shift();
-
         const charVal = this.characterSelect ? this.characterSelect.value : 'standard';
 
-        // 日本語コメントでVOICEVOXキャラクターが選ばれている場合、VOICEVOXでの発声を試みる
         if (item.lang === 'ja-JP' && charVal.startsWith('vv_')) {
             const speakerId = parseInt(charVal.replace('vv_', ''));
             const success = await this.speakVoiceVox(item.text, speakerId);
             
-            // VOICEVOX発声終了時のマイク再開処理🐾
             isSpeechSynthesisActive = false;
             if (shouldBeListening && !isListening && recognition) {
                 try { recognition.start(); } catch(e) {}
@@ -201,7 +184,6 @@ class ReadAloudManager {
             }
             console.log('VOICEVOX is unavailable, falling back to browser SpeechSynthesis...');
             
-            // VOICEVOX失敗でSpeechSynthesisにフォールバックする場合は、再度マイクを停止します
             isSpeechSynthesisActive = true;
             if (isListening && recognition) {
                 try { recognition.stop(); } catch(e) {}
@@ -211,24 +193,21 @@ class ReadAloudManager {
         const utterance = new SpeechSynthesisUtterance(item.text);
         utterance.lang = item.lang;
 
-        // 最適なアニメ風/女性音声を自動選択🐾
         const bestVoice = this.getBestVoice(item.lang);
         if (bestVoice) {
             utterance.voice = bestVoice;
         }
 
-        // 音量は効果音ボリューム設定と同期
         if (this.volumeSlider) {
             utterance.volume = parseInt(this.volumeSlider.value) / 100;
         } else {
             utterance.volume = 1.0;
         }
 
-        // 声の高さ（ピッチ）と速度（スピード）を同期
         if (this.pitchSlider) {
             utterance.pitch = parseFloat(this.pitchSlider.value);
         } else {
-            utterance.pitch = 1.5;
+            utterance.pitch = 1.2;
         }
 
         if (this.rateSlider) {
@@ -237,7 +216,6 @@ class ReadAloudManager {
             utterance.rate = 1.1;
         }
 
-        // 読み上げ終了後のマイク再開ヘルパー🐾
         const resumeRecognition = () => {
             isSpeechSynthesisActive = false;
             if (shouldBeListening && !isListening && recognition) {
@@ -247,17 +225,16 @@ class ReadAloudManager {
             }
         };
 
-        // 読み上げフリーズ防止用ウォッチドッグタイマー (最大12秒で強制ロック解除) 🐾
         const watchdogId = setTimeout(() => {
             console.warn('SpeechSynthesis output timed out. Forcing next queue...');
-            resumeRecognition(); // マイク再開🐾
+            resumeRecognition();
             this.speaking = false;
             this.processQueue();
         }, 12000);
 
         utterance.onend = () => {
             clearTimeout(watchdogId);
-            resumeRecognition(); // マイク再開🐾
+            resumeRecognition();
             this.speaking = false;
             setTimeout(() => this.processQueue(), 250);
         };
@@ -265,12 +242,11 @@ class ReadAloudManager {
         utterance.onerror = (e) => {
             clearTimeout(watchdogId);
             console.error('SpeechSynthesis error:', e);
-            resumeRecognition(); // マイク再開🐾
+            resumeRecognition();
             this.speaking = false;
             setTimeout(() => this.processQueue(), 250);
         };
 
-        // ChromeのSpeechSynthesisフリーズ防止ハック（再生前にリセット ＆ 再開を噛ませる）🐾
         try {
             this.synth.cancel();
             this.synth.resume();
@@ -279,29 +255,21 @@ class ReadAloudManager {
         this.synth.speak(utterance);
     }
 
-    // 読み上げの強制停止 ＆ キュークリア
     clear() {
         this.queue = [];
         this.synth.cancel();
         this.speaking = false;
     }
 
-    // 最適な女性音声を取得するメソッド
     getBestVoice(lang) {
         if (!this.voices || this.voices.length === 0) {
             this.voices = this.synth.getVoices();
         }
 
-        // 言語コードでフィルタ
         const langVoices = this.voices.filter(v => v.lang.toLowerCase().replace('_', '-').startsWith(lang.toLowerCase()));
         if (langVoices.length === 0) return null;
 
         if (lang.toLowerCase().startsWith('ja')) {
-            // 日本語の優先順位：
-            // 1. Nanami (Edge/Windows 10/11 最新のAI自然音声。人間の肉声そのもの！)
-            // 2. Google 日本語 (Chromeの高品質な女性クラウド音声)
-            // 3. Ayumi (標準の女性高音ボイス)
-            // 4. Haruka (標準の女性ボイス)
             const nanami = langVoices.find(v => v.name.includes('Nanami') || v.name.includes('Natural') || v.name.includes('Online'));
             if (nanami) return nanami;
             
@@ -314,63 +282,44 @@ class ReadAloudManager {
             const haruka = langVoices.find(v => v.name.includes('Haruka') || v.name.includes('Ichiro') === false);
             if (haruka) return haruka;
         } else if (lang.toLowerCase().startsWith('en')) {
-            // 英語女性優先：Google US English -> Zira -> その他女性
             const googleEn = langVoices.find(v => v.name.includes('Google') || v.name.includes('US English'));
             if (googleEn) return googleEn;
             
             const zira = langVoices.find(v => v.name.includes('Zira') || v.name.includes('Hazel'));
             if (zira) return zira;
         } else if (lang.toLowerCase().startsWith('ko')) {
-            // 韓国語女性優先：Heami -> その他
             const heami = langVoices.find(v => v.name.includes('Heami') || v.name.includes('Google'));
             if (heami) return heami;
         }
 
-        return langVoices[0]; // 見つからなければ最初の音声
+        return langVoices[0];
     }
 
-    // 喋り方を人間らしく滑らかにするポーズ（間）自動チューニングフィルター🐾
     makeNaturalText(text) {
         if (!text) return '';
-        
         let cleaned = text;
-        
-        // ななみちゃんの漢字誤読防止レスキュー（「楽しみ」➔「たのしみ」などのひらがな置換）🐾
         cleaned = cleaned.replace(/楽しみ/g, 'たのしみ');
         cleaned = cleaned.replace(/楽しんで/g, 'たのしんで');
         cleaned = cleaned.replace(/楽しむ/g, 'たのしむ');
         cleaned = cleaned.replace(/楽しかった/g, 'たのしかった');
-        
-        // 挨拶の「は」と「わ」の誤読防止（「〜」や長音符がついても正しく「わ」と発音するようにします🐾）
         cleaned = cleaned.replace(/こんにちは/g, 'こんにちわ');
         cleaned = cleaned.replace(/こんばんは/g, 'こんばんわ');
-        
-        // 長音符「ー」および波ダッシュ「〜」「～」の音声エンジン誤読対策🐾
-        // ななみちゃんは長音符「ー」や波ダッシュ「〜」を無視して短く読んでしまう（「おーい」➔「おい」等）ため、
-        // 「ーー」のように重ねることで綺麗に長音として伸ばして発音させます🐾
         cleaned = cleaned.replace(/ー+/g, 'ーー');
         cleaned = cleaned.replace(/[〜～]+/g, 'ーー');
-        
-        // 連続する感嘆符などを自然な感嘆と短い息継ぎスペースに変換
         cleaned = cleaned.replace(/[!?！？]+/g, '！ ');
-        // 文中のスペースを読点（、）に変換して、機械的な早口を防ぎ「自然な間」を設ける
         cleaned = cleaned.replace(/\s+/g, '、');
-        
         return cleaned;
     }
 
-    // 簡易日本語判定（日本語が1文字でも含まれていれば日本語として扱う）
     isJapanese(text) {
         const jpRegex = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/;
         return jpRegex.test(text);
     }
 
-    // 読み上げテキストと音声言語のペアを構築する
     prepareTexts(chat) {
         const mode = this.modeSelect ? this.modeSelect.value : 'native_only';
         const authorName = chat.author.name;
 
-        // お上品フィルターの適用🐾
         let enableNsfwFilter = true;
         let nsfwWords = '';
         try {
@@ -385,11 +334,9 @@ class ReadAloudManager {
         const originalCleaned = cleanMessage(chat.message || '', enableNsfwFilter, nsfwWords);
         const translationCleaned = cleanMessage(chat.translation || '', enableNsfwFilter, nsfwWords);
 
-        // 人間らしい喋り方（息継ぎの間）を自動補正🐾
         const originalText = this.makeNaturalText(originalCleaned);
         const translationText = this.makeNaturalText(translationCleaned);
 
-        // スパチャやメンバーシップお祝い枕詞
         let prefix = '';
         if (chat.isSuperChat) {
             prefix = 'プレミアムスーパーチャット！';
@@ -401,7 +348,6 @@ class ReadAloudManager {
         const result = [];
 
         if (isJp) {
-            // 日本語コメントは常に100%日本語（ja-JP）でそのまま読み上げ🐾
             let readText = '';
             if (prefix) {
                 readText += `${prefix}、${authorName}さんより、`;
@@ -411,11 +357,9 @@ class ReadAloudManager {
             readText += originalText;
             result.push({ text: readText, lang: 'ja-JP' });
         } else {
-            // 外国語コメント：モード別分岐
             const foreignLang = this.detectForeignLang(originalText);
 
             if (mode === 'native_only') {
-                // 原文のみ（日本語翻訳は読まない）
                 let readText = '';
                 if (prefix) {
                     readText += `${prefix}、`;
@@ -423,7 +367,6 @@ class ReadAloudManager {
                 readText += `${authorName}、${originalText}`;
                 result.push({ text: readText, lang: foreignLang });
             } else if (mode === 'interpreter') {
-                // 同時通訳（原文 -> 日本語訳）
                 let readTextOriginal = '';
                 if (prefix) {
                     readTextOriginal += `${prefix}、`;
@@ -434,7 +377,6 @@ class ReadAloudManager {
                 let readTextTrans = `日本語訳、${translationText}`;
                 result.push({ text: readTextTrans, lang: 'ja-JP' });
             } else if (mode === 'translation_only') {
-                // 翻訳日本語のみ
                 let readText = '';
                 if (prefix) {
                     readText += `${prefix}、${authorName}さんより、`;
@@ -449,7 +391,6 @@ class ReadAloudManager {
         return result;
     }
 
-    // 外国語の簡易判定（デフォルト en-US、韓国語 ko-KR を優先検知）
     detectForeignLang(text) {
         const koRegex = /[\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7AF\uD7B0-\uD7FF]/;
         if (koRegex.test(text)) {
@@ -460,11 +401,8 @@ class ReadAloudManager {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 読み上げマネージャーのインスタンス化
     const readAloudManager = new ReadAloudManager();
 
-    // DOM要素の取得
-    const apiKeyInput = document.getElementById('api-key');
     const liveUrlInput = document.getElementById('live-url');
     const btnConnect = document.getElementById('btn-connect');
     const btnSave = document.getElementById('btn-save');
@@ -475,12 +413,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const obsUrlInput = document.getElementById('obs-url');
     const btnCopyUrl = document.getElementById('btn-copy-url');
     
-    // フィルターチェックボックス
     const filterForeignCheckbox = document.getElementById('filter-foreign');
     const enableNsfwFilterCheckbox = document.getElementById('enable-nsfw-filter');
     const nsfwWordsInput = document.getElementById('nsfw-words');
 
-    // 音声読み上げチェックボックス ＆ モードセレクト ＆ スライダー
     const enableReadAloudCheckbox = document.getElementById('enable-read-aloud');
     const readAloudModeSelect = document.getElementById('read-aloud-mode');
     const readAloudCharacterSelect = document.getElementById('read-aloud-character');
@@ -489,12 +425,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const readAloudRateSlider = document.getElementById('read-aloud-rate');
     const readAloudRateVal = document.getElementById('read-aloud-rate-val');
 
-    // 効果音 ＆ ボリュームコントロール
     const effectVolumeSlider = document.getElementById('effect-volume');
     const effectVolumeVal = document.getElementById('effect-volume-val');
     const btnTestSound = document.getElementById('btn-test-sound');
 
-    // マイク・音声認識・テキスト送信フォーム
     const btnMicToggle = document.getElementById('btn-mic-toggle');
     const micDot = document.getElementById('mic-dot');
     const micBtnText = document.getElementById('mic-btn-text');
@@ -502,7 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const broadcasterTextInput = document.getElementById('broadcaster-text-input');
     const btnSendBroadcasterText = document.getElementById('btn-send-broadcaster-text');
     
-    // スライダー
     const fontSizeSlider = document.getElementById('font-size');
     const fontSizeVal = document.getElementById('font-size-val');
     const transSizeSlider = document.getElementById('trans-size');
@@ -512,14 +445,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxCommentsSlider = document.getElementById('max-comments');
     const maxCommentsVal = document.getElementById('max-comments-val');
     
-    // テスト送信ボタン
     const btnTestEn = document.getElementById('btn-test-en');
     const btnTestKr = document.getElementById('btn-test-kr');
     const btnTestJp = document.getElementById('btn-test-jp');
     const btnClearTest = document.getElementById('btn-clear-test');
     const testInfoText = document.getElementById('test-info-text');
 
-    // スライダーの数値連動
+    const iframe = document.getElementById('youtube-chat-iframe');
+    let chatObserver = null;
+
     function setupSlider(slider, valueDisplay, unit = 'px', customFormatter = null) {
         slider.addEventListener('input', () => {
             if (customFormatter) {
@@ -533,15 +467,12 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSlider(transSizeSlider, transSizeVal, 'px');
     setupSlider(effectVolumeSlider, effectVolumeVal, '%');
 
-    // 表示時間スライダー用のフォーマッタ（61秒の時は無制限と表示）
     const displayTimeFormatter = (val) => {
         return parseInt(val) === 61 ? '無制限 🐾' : `${val}秒`;
     };
     setupSlider(displayTimeSlider, displayTimeVal, '秒', displayTimeFormatter);
-
     setupSlider(maxCommentsSlider, maxCommentsVal, '個');
 
-    // 読み上げ調整スライダー用フォーマッタ
     const pitchFormatter = (val) => {
         const num = parseFloat(val);
         if (num >= 1.5) return `${val} (アニメ声・超かわいい🐾)`;
@@ -563,13 +494,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setupSlider(readAloudRateSlider, readAloudRateVal, '', rateFormatter);
     }
 
-    // localStorageからの設定復元
     function loadSettings() {
         const savedSettings = localStorage.getItem('yt_translator_settings');
         if (savedSettings) {
             try {
                 const settings = JSON.parse(savedSettings);
-                apiKeyInput.value = settings.apiKey || '';
                 liveUrlInput.value = settings.liveUrl || '';
                 
                 fontSizeSlider.value = settings.fontSize || 16;
@@ -628,10 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     loadSettings();
 
-    // 設定の取得
     function getSettingsObject() {
         return {
-            apiKey: apiKeyInput.value.trim(),
             liveUrl: liveUrlInput.value.trim(),
             fontSize: parseInt(fontSizeSlider.value),
             transSize: parseInt(transSizeSlider.value),
@@ -649,37 +576,31 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // ステータス表示の変更
     function showStatus(type, text) {
         connectionStatus.className = `status-indicator status-${type}`;
         statusText.textContent = text;
     }
 
-    // YouTubeのURLからVideo ID（ライブID）を抽出
     function extractVideoId(urlOrId) {
         if (!urlOrId) return '';
         const trimmed = urlOrId.trim();
-        if (trimmed.length === 11) return trimmed; // すでにIDの場合
+        if (trimmed.length === 11) return trimmed;
         
-        // URLパターンからの抽出（live/形式の配信URLにも対応）
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|live\/)([^#\&\?]*).*/;
         const match = trimmed.match(regExp);
         return (match && match[2].length === 11) ? match[2] : '';
     }
 
-    // 💀 効果音テスト再生ボタンの制御 (ランダム2パターン再生 ＆ 音量同期)
     if (btnTestSound) {
         btnTestSound.addEventListener('click', () => {
             try {
                 const vol = parseInt(effectVolumeSlider.value) / 100;
-                // 1か2をランダムで選択 (末尾にキャッシュバスターを追加してブラウザのキャッシュを防ぐ🐾)
                 const soundNum = Math.random() < 0.5 ? 1 : 2;
                 const soundFile = `効果音/レベルアップ_${soundNum}.mp3?v=${Date.now()}`;
                 const audio = new Audio(soundFile);
                 audio.volume = vol;
                 audio.play().catch(err => console.log('Audio test blocked by browser:', err));
                 
-                // OBSオーバーレイ側でもテスト再生させるために同期トリガーをセット（ファイル番号も同期）
                 localStorage.setItem('yt_translator_test_sound_trigger', JSON.stringify({
                     time: Date.now().toString(),
                     num: soundNum
@@ -690,59 +611,274 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 設定保存ボタン
     btnSave.addEventListener('click', () => {
         const settings = getSettingsObject();
         localStorage.setItem('yt_translator_settings', JSON.stringify(settings));
-        
-        // テスト用設定同期
         localStorage.setItem('yt_translator_live_settings', JSON.stringify(settings));
         
         showStatus('connected', '設定を保存しました🐾');
-        setTimeout(() => showStatus('disconnected', '接続準備完了'), 2000);
+        setTimeout(() => {
+            if (chatObserver) {
+                showStatus('connected', 'チャット監視中🐾');
+            } else {
+                showStatus('disconnected', '接続準備完了');
+            }
+        }, 2000);
     });
 
-    // OBS用リンクを生成・接続
+    // ==========================================================================
+    // コメビュ版 (CORS無効 Edge iframe 接続ロジック)
+    // ==========================================================================
     btnConnect.addEventListener('click', () => {
-        const apiKey = apiKeyInput.value.trim();
         const liveUrl = liveUrlInput.value.trim();
-        
-        if (!apiKey) {
-            alert('YouTube APIキーを入力してください！');
-            apiKeyInput.focus();
-            return;
-        }
-        
         const videoId = extractVideoId(liveUrl);
+        
         if (!videoId) {
             alert('有効なYouTube配信URLまたは動画IDを入力してください！');
             liveUrlInput.focus();
             return;
         }
 
-        // 現在のHTMLがある場所（ローカルパス）から overlay.html のパスを作成
-        let overlayPath = window.location.href.replace('index.html', 'overlay.html');
-        // もし末尾がスラッシュで終わっている、またはindex.htmlが無いローカルディレクトリの場合
-        if (!overlayPath.includes('overlay.html')) {
+        // iframeのソースを設定して読み込みを開始
+        showStatus('connecting', 'YouTubeに接続中...');
+        iframe.src = `https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${window.location.hostname}`;
+
+        // OBS用リンクの生成 (オーバーレイ.htmlの場所を取得)
+        let overlayPath = window.location.href
+            .replace('管理画面.html', 'オーバーレイ.html')
+            .replace('admin.html', 'overlay.html');
+        if (!overlayPath.includes('オーバーレイ.html') && !overlayPath.includes('overlay.html')) {
             overlayPath = overlayPath + (overlayPath.endsWith('/') ? '' : '/') + 'overlay.html';
         }
 
-        // 設定の保存
         const settings = getSettingsObject();
         localStorage.setItem('yt_translator_settings', JSON.stringify(settings));
 
-        // クエリパラメータ付きのURLを生成（61秒は無制限を表すためtime=0として渡す。フィルターフラグも付加）
         const finalTime = settings.displayTime === 61 ? 0 : settings.displayTime;
-        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&key=${encodeURIComponent(apiKey)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${finalTime}&max=${settings.maxComments}&filter=${settings.filterForeign ? 1 : 0}&cb=${Date.now()}`;
+        const obsUrl = `${overlayPath}?v=${encodeURIComponent(videoId)}&size=${settings.fontSize}&tsize=${settings.transSize}&time=${finalTime}&max=${settings.maxComments}&filter=${settings.filterForeign ? 1 : 0}&cb=${Date.now()}`;
         
         obsUrlInput.value = obsUrl;
         obsLinkCard.style.display = 'block';
         obsLinkCard.scrollIntoView({ behavior: 'smooth' });
-
-        showStatus('connected', 'OBS連携リンクを生成しました！');
     });
 
-    // コピーボタン
+    iframe.addEventListener('load', () => {
+        console.log('Iframe loaded! Starting chat observation...');
+        showStatus('connecting', 'チャット読込完了、監視中🐾');
+        startIframeObservation();
+    });
+
+    function startIframeObservation() {
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (!iframeDoc) {
+                console.error('Cannot access iframe document');
+                showStatus('disconnected', 'CORS解除Edgeでのみ動作します');
+                return;
+            }
+
+            const targetContainer = iframeDoc.querySelector('#chat-items') || iframeDoc.querySelector('yt-live-chat-item-list-renderer');
+            
+            if (targetContainer) {
+                console.log('Chat container found! Starting observer...');
+                setupObserver(targetContainer);
+                showStatus('connected', 'チャット監視中🐾');
+            } else {
+                console.log('Chat container not found yet. Retrying in 1s...');
+                setTimeout(startIframeObservation, 1000);
+            }
+        } catch (e) {
+            console.error('Error starting iframe observation:', e);
+            showStatus('disconnected', '接続エラー（F12で詳細を確認）');
+        }
+    }
+
+    function setupObserver(targetNode) {
+        if (chatObserver) {
+            chatObserver.disconnect();
+        }
+
+        chatObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mut) => {
+                mut.addedNodes.forEach((node) => {
+                    if (node.nodeType !== Node.ELEMENT_NODE) return;
+                    
+                    let chatItem = null;
+                    let isSuperChat = false;
+                    let isMembership = false;
+                    
+                    if (node.tagName.toLowerCase() === 'yt-live-chat-text-message-renderer') {
+                        chatItem = node;
+                    } else if (node.tagName.toLowerCase() === 'yt-live-chat-paid-message-renderer') {
+                        chatItem = node;
+                        isSuperChat = true;
+                    } else if (node.tagName.toLowerCase() === 'yt-live-chat-membership-item-renderer') {
+                        chatItem = node;
+                        isMembership = true;
+                    } else {
+                        chatItem = node.querySelector('yt-live-chat-text-message-renderer');
+                        if (!chatItem) {
+                            chatItem = node.querySelector('yt-live-chat-paid-message-renderer');
+                            if (chatItem) isSuperChat = true;
+                        }
+                        if (!chatItem) {
+                            chatItem = node.querySelector('yt-live-chat-membership-item-renderer');
+                            if (chatItem) isMembership = true;
+                        }
+                    }
+                    
+                    if (chatItem) {
+                        processNewChatNode(chatItem, isSuperChat, isMembership);
+                    }
+                });
+            });
+        });
+
+        chatObserver.observe(targetNode, { childList: true, subtree: true });
+    }
+
+    function getChatMessageText(messageEl) {
+        if (!messageEl) return '';
+        let text = '';
+        messageEl.childNodes.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                text += node.textContent;
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                if (node.tagName.toLowerCase() === 'img' && node.classList.contains('emoji')) {
+                    text += node.getAttribute('alt') || '';
+                } else {
+                    text += node.textContent;
+                }
+            }
+        });
+        return text;
+    }
+
+    async function processNewChatNode(node, isSuperChat, isMembership) {
+        try {
+            const id = node.getAttribute('id');
+            if (id && processedChatIdsAdmin.has(id)) {
+                return;
+            }
+            if (id) {
+                processedChatIdsAdmin.add(id);
+            }
+
+            const authorNameEl = node.querySelector('#author-name');
+            const authorName = authorNameEl ? authorNameEl.textContent.trim() : 'ゲスト';
+
+            const avatarImg = node.querySelector('#img');
+            const avatarUrl = avatarImg ? avatarImg.getAttribute('src') : 'https://i.pravatar.cc/100';
+
+            const isOwner = node.hasAttribute('author-type') && node.getAttribute('author-type') === 'owner';
+            const isModerator = node.hasAttribute('author-type') && node.getAttribute('author-type') === 'moderator';
+
+            let messageText = '';
+            let purchaseAmount = '';
+
+            if (isSuperChat) {
+                const messageEl = node.querySelector('#message');
+                messageText = messageEl ? getChatMessageText(messageEl) : '';
+                const amountEl = node.querySelector('#purchase-amount');
+                purchaseAmount = amountEl ? amountEl.textContent.trim() : '';
+                if (purchaseAmount) {
+                    messageText = `[${purchaseAmount}] ${messageText}`;
+                }
+            } else if (isMembership) {
+                const headerSubtextEl = node.querySelector('#header-subtext');
+                const messageEl = node.querySelector('#message');
+                const headerText = headerSubtextEl ? headerSubtextEl.textContent.trim() : '新規メンバー！';
+                const messageTextBody = messageEl ? getChatMessageText(messageEl) : '';
+                messageText = messageTextBody ? `${headerText} - ${messageTextBody}` : headerText;
+            } else {
+                const messageEl = node.querySelector('#message');
+                messageText = messageEl ? getChatMessageText(messageEl) : '';
+            }
+
+            if (!messageText) return;
+
+            // 自動翻訳
+            let translationText = '';
+            let needTranslation = false;
+            
+            if (!readAloudManager.isJapanese(messageText)) {
+                translationText = await translateText(messageText);
+                needTranslation = (messageText.toLowerCase() !== translationText.toLowerCase());
+            } else {
+                translationText = messageText;
+                needTranslation = false;
+            }
+
+            const chatObj = {
+                id: id || ('yt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5)),
+                author: {
+                    name: authorName,
+                    avatar: avatarUrl,
+                    isOwner: isOwner,
+                    isModerator: isModerator
+                },
+                message: messageText,
+                translation: translationText,
+                needTranslation: needTranslation,
+                isSuperChat: isSuperChat,
+                isMembership: isMembership,
+                purchaseAmount: purchaseAmount,
+                timestamp: Date.now()
+            };
+
+            // ローカルストレージに送信
+            localStorage.setItem('yt_translator_real_chat', JSON.stringify(chatObj));
+
+            // ローカルAPIにPOST送信
+            const port = window.location.port || '8080';
+            fetch(`http://localhost:${port}/api/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(chatObj)
+            }).catch(err => console.error('Failed to sync chat to API:', err));
+
+            // 画面ログに追加
+            appendToChatLog(chatObj);
+
+            // 読み上げ
+            if (readAloudManager) {
+                readAloudManager.speak(chatObj);
+            }
+
+            // スパチャやメンバーシップの場合、効果音再生トリガー
+            if (isSuperChat || isMembership) {
+                const soundNum = Math.random() < 0.5 ? 1 : 2;
+                localStorage.setItem('yt_translator_test_sound_trigger', JSON.stringify({
+                    time: Date.now().toString(),
+                    num: soundNum
+                }));
+            }
+
+        } catch (e) {
+            console.error('Error processing chat node:', e);
+        }
+    }
+
+    // ==========================================================================
+    // 翻訳API呼び出し (Google 翻訳フリーAPI)
+    // ==========================================================================
+    async function translateText(text) {
+        if (!text) return '';
+        try {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ja&dt=t&q=${encodeURIComponent(text)}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('Translation failed');
+            const data = await res.json();
+            if (data && data[0] && data[0][0] && data[0][0][0]) {
+                return data[0][0][0].trim();
+            }
+            return text;
+        } catch (err) {
+            console.error('Translation error:', err);
+            return text;
+        }
+    }
+
     btnCopyUrl.addEventListener('click', () => {
         obsUrlInput.select();
         document.execCommand('copy');
@@ -758,9 +894,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================================
-    // サーバーレス・テストコメント送信機能（localStorage同期を利用した超安定システム）
+    // サーバーレス・テストコメント送信機能
     // ==========================================================================
-    
     function sendTestComment(original, trans, name, avatar, lang, isOwner = false, isSuperChat = false, isMembership = false) {
         const commentId = 'test_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
         const testComment = {
@@ -778,13 +913,9 @@ document.addEventListener('DOMContentLoaded', () => {
             timestamp: Date.now()
         };
 
-        // 自分の重複排除リストに登録して二重読み上げ・二重描画を防ぐ🐾
         processedChatIdsAdmin.add(commentId);
-
-        // localStorageに書き込み、オーバーレイ（overlay.html）側のstorageイベントを発火させる
         localStorage.setItem('yt_translator_test_chat', JSON.stringify(testComment));
         
-        // ローカルサーバーAPIへ同期（別ブラウザプロセス間での超安定リアルタイム同期用）🐾
         const port = window.location.port || '8080';
         fetch(`http://localhost:${port}/api/chat`, {
             method: 'POST',
@@ -792,15 +923,12 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(testComment)
         }).catch(err => console.error('Failed to sync test comment to API:', err));
         
-        // 自分の履歴にも追加
         appendToChatLog(testComment);
 
-        // 音声読み上げをキック
         if (readAloudManager) {
             readAloudManager.speak(testComment);
         }
 
-        // テスト通知テキストを表示
         testInfoText.textContent = `[${lang}] テストコメントを送信しました！🐾`;
         testInfoText.style.display = 'block';
         
@@ -809,19 +937,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    // 🇺🇸 英語テスト送信 (通常コメントとして送信🐾)
     btnTestEn.addEventListener('click', () => {
         const englishChats = [
             { o: "Hello from New York! Your stream is so cozy! Great sniper play!", t: "ニューヨークからこんにちは！あなたの配信はとても居心地が良いですね！素晴らしいスナイパーのプレイです！", n: "Emily_NY" },
             { o: "Wow, what a nice gear setup! Can you show it again?", t: "わぁ、なんて素晴らしい装備構成なんでしょう！もう一度見せてもらえますか？", n: "John_RNG" },
-            { o: "Hi from UK! I love FFXI streams! Keep it up!", t: "イギリスからこんにちは！FF11の配信が大好きです！その調子で頑張ってください！", n: "Vana_Fan_UK" }
+            { o: "Hi from UK! I love FFXI streams! Keep it up!", t: "イギリスからこんにちは！FF11 of 配信が大好きです！その調子で頑張ってください！", n: "Vana_Fan_UK" }
         ];
         const chat = englishChats[Math.floor(Math.random() * englishChats.length)];
         const avatarNum = Math.floor(Math.random() * 4) + 1;
         sendTestComment(chat.o, chat.t, chat.n, `https://i.pravatar.cc/100?img=${avatarNum + 10}`, 'English', false, false, false);
     });
 
-    // 🇰🇷 韓国語テスト送信 (通常コメントとして送信🐾)
     btnTestKr.addEventListener('click', () => {
         const koreanChats = [
             { o: "안녕하세요! 한국에서 보고 있습니다. 활 쏘는 솜씨가 대단하시네요!", t: "こんにちは！韓国から見ています。弓を射る腕前が素晴らしいですね！", n: "K-Ranger" },
@@ -832,7 +958,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sendTestComment(chat.o, chat.t, chat.n, `https://i.pravatar.cc/100?img=${avatarNum + 20}`, 'Korean', false, false, false);
     });
 
-    // 🇯🇵 日本語テスト送信 (通常コメント)
     btnTestJp.addEventListener('click', () => {
         const japaneseChats = [
             { o: "こんにちは! いつも配信楽しみに見てます！", t: "こんにちは！いつも配信楽しみに見てます！", n: "ゆうくん_FF11" },
@@ -843,7 +968,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sendTestComment(chat.o, chat.t, chat.n, `https://i.pravatar.cc/100?img=${avatarNum + 30}`, 'Japanese', false, false, false);
     });
 
-    // 💖 スーパーチャットテスト送信 (お祝い読み上げ ＆ 悲鳴同期🐾)
     const btnTestSc = document.getElementById('btn-test-sc');
     if (btnTestSc) {
         btnTestSc.addEventListener('click', () => {
@@ -857,7 +981,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 💚 メンバーシップ加入テスト送信
     const btnTestMember = document.getElementById('btn-test-member');
     if (btnTestMember) {
         btnTestMember.addEventListener('click', () => {
@@ -871,16 +994,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // クリア送信
     btnClearTest.addEventListener('click', () => {
         localStorage.setItem('yt_translator_test_clear', Date.now().toString());
         
-        // 読み上げクリア
         if (readAloudManager) {
             readAloudManager.clear();
         }
         
-        // 履歴ログのクリア
         const emptyEl = document.getElementById('chat-log-empty');
         chatLogList.innerHTML = '';
         if (emptyEl) {
@@ -894,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================================
-    // チャット履歴ログの描画 ＆ 管理ロジック
+    // チャット履歴ログの描画
     // ==========================================================================
     const chatLogList = document.getElementById('chat-log-list');
     const chatLogEmpty = document.getElementById('chat-log-empty');
@@ -902,12 +1022,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendToChatLog(chat) {
         if (!chatLogList) return;
 
-        // 空メッセージプレースホルダーを消去
         if (chatLogEmpty) {
             chatLogEmpty.style.display = 'none';
         }
 
-        // ログカードの作成
         const logItem = document.createElement('div');
         logItem.style.background = 'rgba(255, 255, 255, 0.03)';
         logItem.style.border = '1px solid rgba(255, 255, 255, 0.08)';
@@ -921,7 +1039,6 @@ document.addEventListener('DOMContentLoaded', () => {
         logItem.style.animation = 'fadeIn 0.25s ease-out forwards';
         logItem.style.marginBottom = '0.5rem';
 
-        // 送信者名
         const name = document.createElement('strong');
         name.style.color = chat.author.isOwner ? '#eab308' : (chat.author.isModerator ? '#3b82f6' : '#cbd5e1');
         name.style.minWidth = '80px';
@@ -932,7 +1049,6 @@ document.addEventListener('DOMContentLoaded', () => {
         name.textContent = chat.author.name;
         logItem.appendChild(name);
 
-        // コンテンツ（原文 ＋ 翻訳）
         const contentBox = document.createElement('div');
         contentBox.style.flex = '1';
         contentBox.style.display = 'flex';
@@ -953,18 +1069,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         logItem.appendChild(contentBox);
-
-        // 最新のコメントを一番上にする
         chatLogList.insertBefore(logItem, chatLogList.firstChild);
     }
 
-    // 外部（overlay.html）からの実チャットを受信して履歴に追加
+    // 外部からの実チャットを受信
     window.addEventListener('storage', (e) => {
         if (e.key === 'yt_translator_real_chat' && e.newValue) {
             try {
                 const chat = JSON.parse(e.newValue);
                 
-                // 重複排除チェック（APIポーリング側との二重処理を防ぎます🐾）
                 if (chat && chat.id) {
                     if (processedChatIdsAdmin.has(chat.id)) {
                         return;
@@ -978,7 +1091,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 appendToChatLog(chat);
                 
-                // 実チャットの読み上げ
                 if (readAloudManager) {
                     readAloudManager.speak(chat);
                 }
@@ -1009,7 +1121,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 配信者メッセージ送信処理
     function sendBroadcasterTranslation(original, trans) {
         const broadcasterChat = {
             id: 'bc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
@@ -1025,10 +1136,8 @@ document.addEventListener('DOMContentLoaded', () => {
             timestamp: Date.now()
         };
         
-        // localStorageに書き込み、overlay側のstorageイベントを発火させる
         localStorage.setItem('yt_translator_broadcaster_chat', JSON.stringify(broadcasterChat));
         
-        // ローカルサーバーAPIへ同期（別ブラウザプロセス間での超安定リアルタイム同期用）🐾
         const port = window.location.port || '8080';
         fetch(`http://localhost:${port}/api/chat`, {
             method: 'POST',
@@ -1036,15 +1145,12 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(broadcasterChat)
         }).catch(err => console.error('Failed to sync broadcaster chat to API:', err));
         
-        // 自分の履歴にも追加
         appendToChatLog(broadcasterChat);
     }
 
     // ==========================================================================
-    // 配信者マイクリアルタイム音声認識（Web Speech API）制御 ＆ 自動再起動レスキュー
+    // 配信者マイクリアルタイム音声認識 (Web Speech API)
     // ==========================================================================
-    // (※マイク状態変数定義は、クラス内からも参照可能にするためトップレベルへ移動しました🐾)
-
     if (SpeechRecognition && btnMicToggle) {
         recognition = new SpeechRecognition();
         recognition.lang = 'ja-JP';
@@ -1064,22 +1170,19 @@ document.addEventListener('DOMContentLoaded', () => {
         recognition.onend = () => {
             isListening = false;
             
-            // ボタンがONのままなのにブラウザのタイムアウト等で勝手に切れてしまった場合 ➔ 即座に自動再接続！🐾
-            // ※読み上げによる一時停止中（isSpeechSynthesisActive === true）は自動再接続をスキップします🐾
             if (shouldBeListening && !isSpeechSynthesisActive) {
                 console.log('Speech recognition disconnected automatically. Reconnecting immediately...');
                 try {
                     recognition.start();
                 } catch (e) {
                     console.error('Failed to auto-restart recognition:', e);
-                    // 少しディレイを入れてからリトライ
                     setTimeout(() => {
                         if (shouldBeListening && !isListening && !isSpeechSynthesisActive) {
                             try { recognition.start(); } catch(err) { console.error(err); }
                         }
                     }, 500);
                 }
-                return; // 自動復帰中はUI表記を「ON」のまま維持します🐾
+                return;
             }
             
             if (micDot) micDot.classList.remove('active');
@@ -1092,13 +1195,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         recognition.onerror = (e) => {
             console.error('Speech recognition error:', e.error);
-            if (e.error === 'aborted') return; // 自動再接続時の一時的なエラーはログのみで無視します
+            if (e.error === 'aborted') return;
             
             if (micStatus) {
                 if (e.error === 'not-allowed') {
                     micStatus.textContent = 'エラー: マイクの使用が許可されていません。ブラウザのアドレスバーの鍵アイコンからマイクを許可してください🐾';
                     micStatus.style.color = 'var(--error-color)';
-                    shouldBeListening = false; // 許可がない場合は再起動ループを停止
+                    shouldBeListening = false;
                 } else {
                     micStatus.textContent = `一時的な音声認識エラー: ${e.error}。自動再起動を試みます...🐾`;
                     micStatus.style.color = 'var(--accent-color)';
@@ -1195,10 +1298,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // 別ブラウザプロセス間（OBSブラウザソース ➔ 通常のChrome読み上げ）超安定ハイブリッドAPI同期 🐾
+    // APIポーリング同期
     // ==========================================================================
     const processedChatIdsAdmin = new Set();
-    let isFirstPollAdmin = true; // 初回起動時の過去ログ読み込みスルー用フラグ🐾
+    let isFirstPollAdmin = true;
     async function startApiPollingAdmin() {
         const port = window.location.port || '8080';
         setInterval(async () => {
@@ -1217,7 +1320,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (!isFirstPollAdmin && !isPastChat && !chat.isBroadcaster) {
                                     appendToChatLog(chat);
                                     
-                                    // 音声読み上げをキック🐾
                                     if (readAloudManager) {
                                         readAloudManager.speak(chat);
                                     }
@@ -1227,16 +1329,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     isFirstPollAdmin = false;
                     
-                    // メモリー制限（1000件）
                     if (processedChatIdsAdmin.size > 1000) {
                         const firstKey = processedChatIdsAdmin.values().next().value;
                         processedChatIdsAdmin.delete(firstKey);
                     }
                 }
             } catch (err) {
-                // 静かに無視
+                // 無視
             }
-        }, 500); // 0.5秒間隔で極めて低負荷かつリアルタイムに同期します🐾
+        }, 500);
     }
     startApiPollingAdmin();
 });

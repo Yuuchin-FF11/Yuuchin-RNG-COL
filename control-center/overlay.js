@@ -104,14 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const trans = card.querySelector('.translation-text');
             if (orig) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    orig.style.fontSize = `${fontSize + 12}px`; // 配信者はしっかり目立つように12px大きく表示🐾
+                    orig.style.fontSize = `${fontSize + 16}px`; // 配信者はしっかり目立つように16px大きく表示🐾
                 } else {
                     orig.style.fontSize = `${fontSize}px`;
                 }
             }
             if (trans) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    trans.style.fontSize = `${transSize + 6}px`; // 配信者のサブ日本語も6px大きく表示🐾
+                    trans.style.fontSize = `${transSize + 2}px`; // 配信者のサブ日本語は2px大きくして控えめに🐾
                 } else {
                     trans.style.fontSize = `${transSize}px`;
                 }
@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // メインは英訳された美しい英語（配信者発言は通常より大幅に大きく表示します🐾）
             const origMsg = document.createElement('span');
             origMsg.className = 'message-original';
-            origMsg.style.fontSize = `${fontSize + 12}px`; // 通常より一律12px大きくします🐾
+            origMsg.style.fontSize = `${fontSize + 16}px`; // 通常より一律16px大きくします🐾
             origMsg.textContent = chatData.translation;
             content.appendChild(origMsg);
 
@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const transMsg = document.createElement('span');
                 transMsg.className = 'translation-text';
                 transMsg.style.color = 'var(--text-muted)'; // 控えめなグレー色にして英語を引き立てます🐾
-                transMsg.style.fontSize = `${transSize + 6}px`; // サブの日本語も6px大きくします🐾
+                transMsg.style.fontSize = `${transSize + 2}px`; // サブの日本語は2px大きくして控えめに🐾
                 transMsg.textContent = chatData.message;
                 transBox.appendChild(transMsg);
 

@@ -94,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const trans = card.querySelector('.translation-text');
             if (orig) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    orig.style.fontSize = `${fontSize + 12}px`;
+                    orig.style.fontSize = `${fontSize + 16}px`;
                 } else {
                     orig.style.fontSize = `${fontSize}px`;
                 }
             }
             if (trans) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    trans.style.fontSize = `${transSize + 6}px`;
+                    trans.style.fontSize = `${transSize + 2}px`;
                 } else {
                     trans.style.fontSize = `${transSize}px`;
                 }
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chatData.isBroadcaster) {
             const origMsg = document.createElement('span');
             origMsg.className = 'message-original';
-            origMsg.style.fontSize = `${fontSize + 12}px`;
+            origMsg.style.fontSize = `${fontSize + 16}px`;
             origMsg.textContent = chatData.translation;
             content.appendChild(origMsg);
 
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const transMsg = document.createElement('span');
                 transMsg.className = 'translation-text';
                 transMsg.style.color = 'var(--text-muted)';
-                transMsg.style.fontSize = `${transSize + 6}px`;
+                transMsg.style.fontSize = `${transSize + 2}px`;
                 transMsg.textContent = chatData.message;
                 transBox.appendChild(transMsg);
 

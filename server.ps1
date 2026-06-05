@@ -107,13 +107,17 @@ try {
             
             $response.ContentLength64 = $bytes.Length
             
-            # Send bytes
-            $response.OutputStream.Write($bytes, 0, $bytes.Length)
+            # Send bytes (Skip if it is a HEAD request to prevent HttpListener crash)
+            if ($request.HttpMethod -ne "HEAD") {
+                $response.OutputStream.Write($bytes, 0, $bytes.Length)
+            }
         } else {
             $response.StatusCode = 404
             $err = [System.Text.Encoding]::UTF8.GetBytes("404 Not Found")
             $response.ContentLength64 = $err.Length
-            $response.OutputStream.Write($err, 0, $err.Length)
+            if ($request.HttpMethod -ne "HEAD") {
+                $response.OutputStream.Write($err, 0, $err.Length)
+            }
         }
         $response.Close()
     }

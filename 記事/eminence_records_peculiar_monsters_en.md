@@ -49,7 +49,7 @@ Change your HP to West Adoulin (e.g., in front of the Mog House) and make full u
 
 #### <span style="color: var(--accent-color);">7. Wajaom Woodlands (Eminence Obj #1)</span>
 * Target NM: Awoken Hildesvini (Marid)
-* Move: Use Unity Warp (CL135 or CL125).
+* Move: Use Unity Warp (CL125 or CL135).
 
 #### <span style="color: var(--accent-color);">8. Aydeewa Subterrane (Eminence Obj #6)</span>
 * Target NM: Awoken Hrungnir (Golem)

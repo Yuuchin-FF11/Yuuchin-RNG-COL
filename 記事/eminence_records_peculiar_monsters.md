@@ -50,7 +50,7 @@
 
 #### <span style="color: var(--accent-color);">7. ワジャーム樹林（エミ目標1）</span>
 * 討伐NM: Awoken Hildesvini（マーリド族）
-* 移動：ユニティワープ（CL135 または CL125）で飛びます。
+* 移動：ユニティワープ（CL125 または CL135）で飛びます。
 
 #### <span style="color: var(--accent-color);">8. エジワ蘿洞（エミ目標6）</span>
 * 討伐NM: Awoken Hrungnir（ゴーレム族）

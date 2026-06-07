@@ -75,7 +75,7 @@ Connect from Jeuno areas to Aht Urhgan and Reisenjima using unique teleport netw
 
 #### <span style="color: var(--accent-color);">12. Reisenjima (Eminence Obj #8)</span>
 * Target NM: Awoken Stoorworm (Hydra)
-* Move: After defeating the Mount Zhayolm NM, Warp/Dejon back to town and use a Teleport Ring (e.g., D. Holla Ring) to warp to a Crag, then enter Reisenjima via the Dimensional Portal. Once in Reisenjima, use Reisenjima Warp #9 (Ethereal Ingress #9).
+* Move: After defeating the Mount Zhayolm NM, use a Teleport Ring (e.g., D. Holla Ring) on the spot to warp to a Crag, then enter Reisenjima via the Dimensional Portal. Once in Reisenjima, use Reisenjima Warp #9 (Ethereal Ingress #9).
 * Return: After defeat, use Warp/Dejon to return to town.
 
 ---

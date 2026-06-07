@@ -949,6 +949,136 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // ==========================================================================
+    // お気に入り機能のロジック 🐾
+    // ==========================================================================
+    const btnAddFav = document.getElementById("btn-add-fav");
+    const favoritesSection = document.getElementById("favorites-section");
+    const favoritesList = document.getElementById("favorites-list");
+
+    const weaponNamesJp = {
+        HandToHand: "格闘", Dagger: "短剣", Sword: "片手剣", GreatSword: "両手剣",
+        Axe: "片手斧", GreatAxe: "両手斧", Scythe: "両手鎌", Polearm: "両手槍",
+        Katana: "片手刀", GreatKatana: "両手刀", Club: "片手棍", Staff: "両手棍",
+        Bow: "弓術", Marksmanship: "射撃"
+    };
+
+    function renderFavorites() {
+        if (!favoritesList || !favoritesSection) return;
+
+        let favs = [];
+        try {
+            const saved = localStorage.getItem("ff11_chain_favorites");
+            if (saved) favs = JSON.parse(saved);
+        } catch (e) {
+            console.error("Failed to load favorites:", e);
+        }
+
+        if (favs.length === 0) {
+            favoritesSection.style.display = "none";
+            return;
+        }
+
+        favoritesSection.style.display = "block";
+        favoritesList.innerHTML = "";
+
+        favs.forEach((fav, idx) => {
+            const chip = document.createElement("div");
+            chip.className = "favorite-chip";
+            
+            const w1Name = weaponNamesJp[fav.w1] || fav.w1;
+            const w2Name = weaponNamesJp[fav.w2] || fav.w2;
+            const label = `${w1Name} ➔ ${w2Name} (${fav.steps}手 / ${fav.target === "ANY" ? "すべて" : fav.target})`;
+            
+            chip.innerHTML = `
+                <span>${label}</span>
+                <button class="btn-delete-fav" data-index="${idx}">×</button>
+            `;
+
+            // チップクリックで条件を復元して再探索 🐾
+            chip.addEventListener("click", (e) => {
+                if (e.target.classList.contains("btn-delete-fav")) return;
+                
+                selectWeapon1.value = fav.w1;
+                selectWeapon2.value = fav.w2;
+                selectTargetChain.value = fav.target;
+                selectTargetSteps.value = fav.steps.toString();
+                if (checkUnordered) checkUnordered.checked = fav.unordered;
+                
+                btnSearch.click();
+            });
+
+            // 削除ボタン
+            const btnDelete = chip.querySelector(".btn-delete-fav");
+            btnDelete.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const index = parseInt(btnDelete.getAttribute("data-index"));
+                deleteFavorite(index);
+            });
+
+            favoritesList.appendChild(chip);
+        });
+    }
+
+    function saveFavorite() {
+        const w1 = selectWeapon1.value;
+        const w2 = selectWeapon2.value;
+        const target = selectTargetChain.value;
+        const steps = parseInt(selectTargetSteps.value);
+        const unordered = checkUnordered ? checkUnordered.checked : false;
+
+        let favs = [];
+        try {
+            const saved = localStorage.getItem("ff11_chain_favorites");
+            if (saved) favs = JSON.parse(saved);
+        } catch (e) {}
+
+        // 重複チェック 🐾
+        const duplicate = favs.find(f => 
+            f.w1 === w1 && f.w2 === w2 && f.target === target && 
+            f.steps === steps && f.unordered === unordered
+        );
+
+        if (duplicate) {
+            alert("この検索条件はすでにお気に入りに登録されています🐾");
+            return;
+        }
+
+        favs.push({ w1, w2, target, steps, unordered });
+        localStorage.setItem("ff11_chain_favorites", JSON.stringify(favs));
+        renderFavorites();
+    }
+
+    function deleteFavorite(index) {
+        let favs = [];
+        try {
+            const saved = localStorage.getItem("ff11_chain_favorites");
+            if (saved) favs = JSON.parse(saved);
+        } catch (e) {}
+
+        favs.splice(index, 1);
+        localStorage.setItem("ff11_chain_favorites", JSON.stringify(favs));
+        renderFavorites();
+    }
+
+    if (btnAddFav) {
+        btnAddFav.addEventListener("click", saveFavorite);
+    }
+
+    // 初回お気に入り描画 🐾
+    renderFavorites();
+
     // 初回ロード時にも自動的に探索を実行する（親切設計）
     btnSearch.click();
 });
+
+// ==========================================================================
+// サービスワーカーの登録（PWA対応）🐾
+// ==========================================================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('ServiceWorker registered successfully:', reg.scope))
+            .catch(err => console.warn('ServiceWorker registration failed:', err));
+    });
+}

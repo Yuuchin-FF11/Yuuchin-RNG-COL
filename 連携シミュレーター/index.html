@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- PWA対応 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#eab308">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
     <div class="container">
@@ -16,6 +22,17 @@
             <h1>FFXI 連携逆引きシミュレーター</h1>
             <p>使用する「2つの武器種」と「狙いたい連携」を選ぶだけで、最適なWSの組み合わせを一瞬で逆引き探索します 🐾</p>
         </header>
+
+        <!-- 保存されたお気に入り連携（お気に入りがある場合のみ表示されます） 🐾 -->
+        <section id="favorites-section" class="glass-card" style="display: none; margin-bottom: 1.5rem; padding: 1.25rem;">
+            <h2 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.5rem; border-bottom: none; padding-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color: var(--accent-color);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                お気に入り連携リスト
+            </h2>
+            <div id="favorites-list" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem;">
+                <!-- 動的にお気に入り登録されたチップが追加されます -->
+            </div>
+        </section>
 
         <main class="main-card glass-card">
             <div class="form-grid">
@@ -97,10 +114,14 @@
 
             </div>
 
-            <div class="action-area">
+            <div class="action-area" style="display: flex; gap: 1rem; justify-content: center;">
                 <button id="btn-search" class="btn btn-primary">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     連携ルートを探索する
+                </button>
+                <button id="btn-add-fav" class="btn btn-secondary" style="border-color: rgba(234, 179, 8, 0.4); color: #fbbf24; padding: 1rem 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color: #fbbf24;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    お気に入りに保存
                 </button>
             </div>
         </main>

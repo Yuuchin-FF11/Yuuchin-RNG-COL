@@ -758,3 +758,75 @@ select:focus {
     margin-bottom: 0;
 }
 
+/* ==========================================================================
+   お気に入り連携リスト（Favorites）のスタイル🐾
+   ========================================================================== */
+.favorite-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.favorite-chip:hover {
+    background: rgba(234, 179, 8, 0.1);
+    border-color: rgba(234, 179, 8, 0.4);
+    color: #fef08a;
+    transform: translateY(-1px);
+}
+
+.favorite-chip .btn-delete-fav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: none;
+}
+
+.favorite-chip .btn-delete-fav:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* カード内のお気に入り追加ボタン */
+.btn-fav {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.btn-fav:hover {
+    transform: scale(1.2);
+    color: #fbbf24;
+}
+
+.btn-fav.active {
+    color: #fbbf24;
+    filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
+}
+

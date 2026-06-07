@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配信コントロールセンター (コメビュ版・APIキー不要)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- 共通スタイルシート -->
+    <link rel="stylesheet" href="app.css">
+</head>
+<body class="admin-body">
+
+    <div class="admin-container">
+        
+        <!-- ヘッダー -->
+        <header class="admin-header">
+            <h1>配信コントロールセンター <span style="font-size: 1.2rem; background: var(--accent-color); color: #000; -webkit-text-fill-color: #000; padding: 0.2rem 0.6rem; border-radius: 6px; margin-left: 0.5rem; font-weight: 800;">コメビュ版 (APIキー不要)🐾</span></h1>
+            <p>APIキーの制限なしで無限にチャットを自動取得・翻訳し、ななみちゃんで読み上げる配信アシスタント 🐾</p>
+        </header>
+
+        <!-- メイン設定カード -->
+        <main class="glass-card">
+            <h2 class="card-title">配信接続設定</h2>
+            
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #34d399; font-weight: 600;">
+                💡 コメビュ（スクレイピング）方式で接続するため、YouTube APIキーの登録は不要です！どれだけ長時間配信しても制限超過（クォータ切れ）になりません🐾
+            </div>
+
+            <!-- 配信URL入力 -->
+            <div class="form-group">
+                <label for="live-url">YouTube 配信URL または ライブ動画ID</label>
+                <div style="display: flex; gap: 0.75rem; align-items: center;">
+                    <input type="text" id="live-url" placeholder="https://www.youtube.com/watch?v=... または 動画ID" style="flex: 1;">
+                    <button id="btn-detect-live" class="btn btn-secondary" style="min-width: 155px; display: flex; align-items: center; gap: 0.5rem; justify-content: center; background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); color: var(--accent-color);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        配信枠を自動取得
+                    </button>
+                </div>
+            </div>
+
+            <!-- アクションボタンとステータス -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <div class="btn-group">
+                    <button id="btn-connect" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        OBS用リンクを生成
+                    </button>
+                    <button id="btn-save" class="btn btn-secondary">設定を保存</button>
+                </div>
+                
+                <div id="connection-status" class="status-indicator status-disconnected">
+                    <div class="status-dot"></div>
+                    <span id="status-text">未接続</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- チャット履歴ログカード -->
+        <section class="glass-card">
+            <h2 class="card-title">配信中のチャット履歴（自動翻訳ログ）</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                配信中に届いたすべてのコメント（自動翻訳付き）がここに消えずに蓄積され、いつでもスクロールで見返すことができます🐾
+            </p>
+            <div id="chat-log-list" style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; padding-right: 0.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 1rem;">
+                <div id="chat-log-empty" style="color: var(--text-muted); text-align: center; padding: 2rem 0; font-size: 0.9rem;">
+                    まだコメントはありません。配信に接続するか、テスト送信を行うとここに履歴が蓄積されます。
+                </div>
+            </div>
+        </section>
+
+        <!-- OBSコピペ用エリア（接続生成後に表示） -->
+        <section id="obs-link-card" class="glass-card" style="display: none;">
+            <h2 class="card-title">OBS 連携用URL</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                以下のURLをコピーして、OBSの「ブラウザソース」のURL欄に貼り付けてください。背景は自動的に透過されます。
+            </p>
+            <div class="copy-url-area">
+                <input type="text" id="obs-url" readonly>
+                <button id="btn-copy-url" class="btn btn-success">
+                    コピー
+                </button>
+            </div>
+        </section>
+
+        <!-- デザインカスタマイズカード -->
+        <section class="glass-card">
+            <h2 class="card-title">オーバーレイのデザイン調整</h2>
+            
+            <div class="form-row">
+                <!-- フォントサイズ -->
+                <div class="form-group">
+                    <label for="font-size">フォントサイズ（通常メッセージ）</label>
+                    <div class="slider-container">
+                        <input type="range" id="font-size" min="12" max="32" value="16">
+                        <span id="font-size-val" class="slider-value">16px</span>
+                    </div>
+                </div>
+
+                <!-- 翻訳テキストサイズ -->
+                <div class="form-group">
+                    <label for="trans-size">翻訳テキストのサイズ</label>
+                    <div class="slider-container">
+                        <input type="range" id="trans-size" min="10" max="30" value="15">
+                        <span id="trans-size-val" class="slider-value">15px</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row" style="margin-top: 1rem;">
+                <!-- 表示時間 -->
+                <div class="form-group">
+                    <label for="display-time">コメントの表示時間（フェードアウトまで）</label>
+                    <div class="slider-container">
+                        <input type="range" id="display-time" min="5" max="61" value="15">
+                        <span id="display-time-val" class="slider-value">15秒</span>
+                    </div>
+                </div>
+
+                <!-- スクロール速度 -->
+                <div class="form-group">
+                    <label for="max-comments">画面上の最大同時表示数</label>
+                    <div class="slider-container">
+                        <input type="range" id="max-comments" min="3" max="15" value="6">
+                        <span id="max-comments-val" class="slider-value">6個</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 海外コメント専用フィルター -->
+            <div class="form-row" style="margin-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+                <div class="form-group" style="flex-direction: row; align-items: center; gap: 0.75rem; width: 100%;">
+                    <input type="checkbox" id="filter-foreign" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--accent-color); margin-top: 0;">
+                    <label for="filter-foreign" style="margin-bottom: 0; cursor: pointer; font-weight: 600;">
+                        海外コメントのみ表示（日本語コメントを除外し、英語・韓国語など自動翻訳されたコメントだけを流します🐾）
+                    </label>
+                </div>
+            </div>
+
+            <!-- お上品フィルター（NGワード機能） -->
+            <div class="form-row" style="margin-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+                <div class="form-group" style="width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                        <input type="checkbox" id="enable-nsfw-filter" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--accent-color);">
+                        <label for="enable-nsfw-filter" style="margin-bottom: 0; cursor: pointer; font-weight: 700; color: #fff;">
+                            お上品フィルターを有効にする（下ネタ・不適切ワードを自動で「🐾」に伏字化＆読み上げスキップします🐾）
+                        </label>
+                    </div>
+                    <label for="nsfw-words">追加のNGワード（カンマ「,」区切りで複数指定が可能です）</label>
+                    <input type="text" id="nsfw-words" placeholder="ちんちん, ちんこ （標準的な下ネタは自動で登録されています。追加したい言葉があれば入力してください）" style="margin-top: 0.25rem;">
+                </div>
+            </div>
+        </section>
+
+        <!-- 効果音 ＆ プレミアムアラート設定 -->
+        <section class="glass-card">
+            <h2 class="card-title">効果音 ＆ プレミアムアラート設定</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                スパチャやメンバーシップが届いた瞬間に、OBSからタルタルの倒れる声（うわあぁぁ…）を自動で鳴らします🐾
+            </p>
+            
+            <div class="form-row">
+                <!-- 効果音の音量 -->
+                <div class="form-group">
+                    <label for="effect-volume">効果音の音量</label>
+                    <div class="slider-container">
+                        <input type="range" id="effect-volume" min="0" max="100" value="90">
+                        <span id="effect-volume-val" class="slider-value">90%</span>
+                    </div>
+                </div>
+
+                <!-- 効果音テスト -->
+                <div class="form-group" style="justify-content: flex-end;">
+                    <label>効果音の手動テスト</label>
+                    <button id="btn-test-sound" class="btn btn-secondary" style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-color);"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        タルタル死亡声をテスト再生 💀
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 音声読み上げ（棒読みコメビュ内蔵）設定 -->
+        <section class="glass-card">
+            <h2 class="card-title">音声読み上げ設定（棒読みコメビュ内蔵）</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                外部アプリを使わずに、届いたYouTubeチャットを日本語で自動読み上げします。海外からのコメントはネイティブ発声や同時通訳も可能です🐾
+            </p>
+            
+            <div class="form-row">
+                <!-- 読み上げのON/OFF -->
+                <div class="form-group" style="justify-content: center;">
+                    <label for="enable-read-aloud" style="margin-bottom: 0.5rem;">コメントの音声読み上げ機能</label>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 0.75rem 1rem;">
+                        <input type="checkbox" id="enable-read-aloud" style="width: 20px; height: 20px; cursor: pointer; accent-color: var(--accent-color);">
+                        <label for="enable-read-aloud" style="margin-bottom: 0; cursor: pointer; font-weight: 700; color: #fff;">
+                            自動読み上げを有効にする（コメビュ内蔵）
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 読み上げモード of 選択 -->
+                <div class="form-group">
+                    <label for="read-aloud-mode">他言語（海外コメント）の読み上げモード</label>
+                    <select id="read-aloud-mode" style="margin-top: 0.25rem;">
+                        <option value="native_only" selected>ネイティブ原文のみ（日本語訳は読まない） 🌟</option>
+                        <option value="interpreter">同時通訳（英文 ➔ 日本語訳を連続朗読）</option>
+                        <option value="translation_only">翻訳日本語のみ（日本語訳のみ朗読）</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 読み上げ音声キャラクター選択 -->
+            <div class="form-row" style="margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.25rem;">
+                <div class="form-group" style="width: 100%;">
+                    <label for="read-aloud-character">読み上げ音声キャラクター（ボイス）</label>
+                    <select id="read-aloud-character" style="margin-top: 0.25rem;">
+                        <option value="standard" selected>ブラウザ標準（極上アニメ風ピッチ🐾）</option>
+                        <option value="vv_3">VOICEVOX：ずんだもん（大人気アニメ声） 💚</option>
+                        <option value="vv_2">VOICEVOX：四国めたん（ツンデレ萌え声） 🎀</option>
+                        <option value="vv_8">VOICEVOX：春日部つむぎ（ハキハキかわいい） 🌻</option>
+                        <option value="vv_14">VOICEVOX：冥鳴ひまり（あまあま極萌え声） 💘</option>
+                    </select>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.35rem; margin-bottom: 0;">
+                        ※PCの裏で完全無料の音声合成ソフト「VOICEVOX」を起動しておくだけで、ずんだもん等の本物の可愛い萌え声で読み上げます！起動していない場合は、自動的にブラウザ標準の極上アニメ声（ChromeのGoogle日本語推奨）に切り替わります🐾
+                    </p>
+                </div>
+            </div>
+            
+            <div class="form-row" style="margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.25rem;">
+                <!-- 声の高さ（ピッチ） -->
+                <div class="form-group">
+                    <label for="read-aloud-pitch">声の高さ（ピッチ）</label>
+                    <div class="slider-container">
+                        <input type="range" id="read-aloud-pitch" min="0.5" max="2.0" step="0.1" value="1.2">
+                        <span id="read-aloud-pitch-val" class="slider-value">1.2 (少し高め・明るく自然🐾)</span>
+                    </div>
+                </div>
+
+                <!-- 読み上げ速度（スピード） -->
+                <div class="form-group">
+                    <label for="read-aloud-rate">読み上げの速度（スピード）</label>
+                    <div class="slider-container">
+                        <input type="range" id="read-aloud-rate" min="0.5" max="2.0" step="0.1" value="1.1">
+                        <span id="read-aloud-rate-val" class="slider-value">1.1 (少し早め🐾)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- テスト送信カード -->
+        <section class="glass-card">
+            <h2 class="card-title">テスト送信（動作・デザイン確認用）</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                配信中でない時でも、以下のボタンを押すことで、ダミーのコメントを生成してOBS上に送信テストを行えます。
+            </p>
+            <div class="test-panel">
+                <button id="btn-test-en" class="btn btn-secondary">🇺🇸 英語テスト</button>
+                <button id="btn-test-kr" class="btn btn-secondary">🇰🇷 韓国語テスト</button>
+                <button id="btn-test-jp" class="btn btn-secondary">🇯🇵 日本語テスト</button>
+                <button id="btn-test-sc" class="btn btn-secondary" style="border-color: rgba(234, 179, 8, 0.4); color: #facc15;">💖 スパチャテスト</button>
+                <button id="btn-test-member" class="btn btn-secondary" style="border-color: rgba(16, 185, 129, 0.4); color: #34d399;">💚 メンバー加入テスト</button>
+                <button id="btn-clear-test" class="btn btn-danger">クリア</button>
+            </div>
+            <p id="test-info-text" style="color: var(--success-color); font-size: 0.85rem; margin-top: 0.75rem; text-align: center; display: none;">
+                テストコメントを送信しました！OBS画面を確認してください🐾
+            </p>
+        </section>
+
+        <!-- 配信者リアルタイム音声翻訳（マイク ＆ テキスト入力） -->
+        <section class="glass-card">
+            <h2 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mic-icon-svg" style="color: var(--accent-color);"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                配信者リアルタイム音声翻訳（マイク ＆ テキスト入力）
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+                ご主人様がマイクに向かって日本語で喋ると、リアルタイム音声認識され、自動英訳された英語字幕が配信画面にオシャレに流れます。声を出せない時はタイピングでの送信も可能です🐾
+            </p>
+            
+            <!-- マイク音声認識コントロール -->
+            <div class="mic-control-area" style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; padding: 1rem;">
+                <button id="btn-mic-toggle" class="btn btn-secondary" style="display: flex; align-items: center; gap: 0.5rem; min-width: 170px; justify-content: center;">
+                    <span id="mic-dot" style="width: 10px; height: 10px; background: #64748b; border-radius: 50%; display: inline-block;"></span>
+                    <span id="mic-btn-text">マイク音声認識: OFF</span>
+                </button>
+                <div id="mic-status" style="color: var(--text-muted); font-size: 0.9rem; font-weight: bold; flex: 1;">
+                    音声認識は停止しています。「マイク音声認識: ON」にすると喋った日本語が自動英訳されます。
+                </div>
+            </div>
+
+            <!-- クイックテキスト返答フォーム -->
+            <div class="form-group" style="margin-top: 1rem;">
+                <label for="broadcaster-text-input">タイピングで英訳字幕を送信する（キーボード入力用）</label>
+                <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                    <input type="text" id="broadcaster-text-input" placeholder="ここに日本語で返事を入力して送信ボタンを押すと、自動で英訳されて画面に字幕が流れます..." style="flex: 1;">
+                    <button id="btn-send-broadcaster-text" class="btn btn-primary" style="display: flex; align-items: center; gap: 0.5rem; min-width: 100px; justify-content: center;">
+                        送信
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- コメビュ版ヘルプマニュアル -->
+        <section class="glass-card help-box">
+            <h4>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                コメビュ版 (APIキー不要) のご使用手順
+            </h4>
+            <ol>
+                <li>新フォルダ内にある **「コメビュ版お給仕起動.bat」** をダブルクリックして起動します（セキュリティ解除されたEdgeが自動で立ち上がります）。</li>
+                <li>YouTube Studioでテスト配信または本配信を開始し、配信URLをコピーします。</li>
+                <li>管理画面の「配信URL」に貼り付け、**「接続」** ボタンをクリックします。</li>
+                <li>生成された **OBS用リンク** をコピーし、OBSの「ブラウザソース」のURL欄に貼り付け（上書き）直します。</li>
+                <li>OBS側で **「現在のページのキャッシュをクリア」** を押して画面を再読み込みすれば完了です🐾</li>
+            </ol>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted);">
+                ※Edgeがセキュリティ解除された開発者モードで動作するため、YouTubeチャット画面から直接コメントをCORS制限なしでスクレイピングできます。APIキーは不要で、1日の利用上限もありません。
+            </p>
+        </section>
+
+    </div>
+
+    <!-- YouTubeチャット監視用非表示iframe (CORS無効 Edgeモードでのみ機能します🐾) -->
+    <iframe id="youtube-chat-iframe" style="display:block; width:280px; height:360px; border:2px solid rgba(234, 179, 8, 0.3); position:fixed; bottom:20px; right:20px; z-index:99999; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: #0f172a;"></iframe>
+
+    <!-- 管理画面用スクリプト -->
+    <script src="管理ロジック_test.js"></script>
+</body>
+</html>

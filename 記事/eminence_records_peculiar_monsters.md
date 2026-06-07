@@ -90,7 +90,7 @@
 
 #### <span style="color: var(--accent-color);">12. 醴泉島（エミ目標8）</span>
 * 討伐NM: Awoken Stoorworm（ハイドラ族）
-* 出現座標: (F-11 / #9ワープ目の前)
+* 出現座標: (Ethereal Ingress #9 の目の前)
 * 移動：ゼオルム討伐後、その場でテレポリング（Ｄ．ホラリング等）を使いテレポ岩へ飛び、Dimensional Portalから醴泉島へ移動します。島に入ったら、島のワープ #9へ移動します。
 * 帰還：討伐後、デジョンで街へ戻ります。
 

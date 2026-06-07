@@ -98,7 +98,7 @@ Finish the run using Home Point (HP) Warps for the final 3 zones.
 ---
 
 ## After Completion
-Once the 15th NM in Qufim Island is defeated, use HP Warp to Port Jeuno, talk to the NPC Elijah to report, and claim your rewards (A.M.A.N. Cooper / Silver Voucher and Corrosive Psyche).
+Once the 15th NM in Qufim Island is defeated, use HP Warp to Upper Jeuno, talk to the NPC Elijah to report, and claim your reward (Corrosive Psyche). (Note: Silver Vouchers are obtained automatically upon defeating each NM as Eminence objective rewards.)
 
 ---
 

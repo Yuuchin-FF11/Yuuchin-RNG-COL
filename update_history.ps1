@@ -1,4 +1,4 @@
-﻿param (
+param (
     [string]$File,
     [string]$MsgJa,
     [string]$MsgEn
@@ -68,7 +68,7 @@ function Update-HistoryHtml {
     }
 
     # 2.4 Insert right below the What's New <ul> tag
-    $ulPattern = '(<ul style="list-style:\s*none;\s*padding:\s*1rem\s*0\.5rem;\s*margin:\s*0;">)'
+    $ulPattern = '(<ul(?:\s+id="whats-new-list")?\s+style="list-style:\s*none;\s*padding:\s*1rem\s*0\.5rem;\s*margin:\s*0;">)'
     
     if ($content -match $ulPattern) {
         $replacement = "`$1`n$liElement"

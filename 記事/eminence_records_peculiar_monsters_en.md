@@ -31,7 +31,7 @@ Start from your registered East Adoulin HP and cover the Adoulin and nearby outd
 
 #### <span style="color: var(--accent-color);">4. Arrapago Reef (Eminence Obj #7)</span>
 * Target NM: Awoken Morbol Emperor (Morbol)
-* Move: Return to Castle Zvahl, use the Survival Guide to warp to Caedarva Mire (or nearby), then move to Arrapago Reef.
+* Move: Return to Castle Zvahl, use the Survival Guide to warp to Caedarva Mire, then move to Arrapago Reef.
 * Return: After defeat, use Warp/Dejon to return to Adoulin.
 
 ---

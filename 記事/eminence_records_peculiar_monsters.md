@@ -31,7 +31,7 @@
 
 #### <span style="color: var(--accent-color);">4. アラパゴ暗礁域（エミ目標7）</span>
 * 討伐NM: Awoken Morbol Emperor（モルボル族）
-* 移動：ズヴァール城へ戻り、Survival Guideでカダーバの浮沼（またはアラパゴ近辺）へ飛び、アラパゴ暗礁域へ。
+* 移動：ズヴァール城へ戻り、Survival Guideでカダーバの浮沼へ飛び、アラパゴ暗礁域へ。
 * 帰還：討伐後、デジョンでアドゥリンへ戻ります。
 
 ---

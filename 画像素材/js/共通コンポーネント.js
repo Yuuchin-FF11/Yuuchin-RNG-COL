@@ -35,7 +35,7 @@ const headerHTMLJa = `
                 <li><a href="#about">スタイル</a></li>
                 <li><a href="#jobs">メインジョブ</a></li>
                 <li><a href="#guides">攻略情報</a></li>
-                <li><a href="#diary">冒険日記</a></li>
+                <li><a href="#useful-guides">お役立ち情報</a></li>
                 <li><a href="#stream">ライブ配信</a></li>
                 <li><a href="#life">ヴァナ生活</a></li>
             </ul>
@@ -57,7 +57,7 @@ const headerHTMLJa = `
                 <li><a href="#about">スタイル</a></li>
                 <li><a href="#jobs">メインジョブ</a></li>
                 <li><a href="#guides">攻略情報</a></li>
-                <li><a href="#diary">冒険日記</a></li>
+                <li><a href="#useful-guides">お役立ち情報</a></li>
                 <li><a href="#stream">ライブ配信</a></li>
                 <li><a href="#life">ヴァナ生活</a></li>
             </ul>
@@ -74,7 +74,7 @@ const headerHTMLEn = `
                 <li><a href="#about">Style</a></li>
                 <li><a href="#jobs">Jobs</a></li>
                 <li><a href="#guides">Guides</a></li>
-                <li><a href="#diary">Diary</a></li>
+                <li><a href="#useful-guides">Useful Guides</a></li>
                 <li><a href="#stream">Stream</a></li>
                 <li><a href="#life">Vana'diel Life</a></li>
             </ul>
@@ -96,7 +96,7 @@ const headerHTMLEn = `
                 <li><a href="#about">Style</a></li>
                 <li><a href="#jobs">Jobs</a></li>
                 <li><a href="#guides">Guides</a></li>
-                <li><a href="#diary">Diary</a></li>
+                <li><a href="#useful-guides">Useful Guides</a></li>
                 <li><a href="#stream">Stream</a></li>
                 <li><a href="#life">Vana'diel Life</a></li>
             </ul>

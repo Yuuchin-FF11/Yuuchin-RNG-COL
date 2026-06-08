@@ -1,8 +1,8 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initParticles();
     initAIChat();
-    loadDiaryEntries();
+
     initMobileMenu();
 
 
@@ -270,64 +270,7 @@ function initParticles() {
     animate();
 }
 
-async function loadDiaryEntries() {
-    const container = document.getElementById('diary-timeline-container');
-    if (!container) return;
-    
-    try {
-        const response = await fetch('記事/diary.json');
-        if (!response.ok) throw new Error('Failed to load diary entries');
-        
-        const entries = await response.json();
-        container.innerHTML = ''; // Clear loading spinner
-        
-        entries.forEach((entry, index) => {
-            const delayClass = `delay-${(index % 3) + 1}`;
-            const tagsHtml = entry.tags.map(tag => `<span>#${tag}</span>`).join('');
-            const linkHtml = entry.markdownFile ? `<div style="margin-top: 1rem;"><a href="article.html?file=${entry.markdownFile}" class="job-link">詳細を読む <i class="fa-solid fa-arrow-right"></i></a></div>` : '';
-            
-            const cardHtml = `
-                <div class="diary-card glass-card fade-in-up ${delayClass}">
-                    <div class="diary-date">${entry.date}</div>
-                    <div class="diary-content">
-                        <div class="diary-image-container">
-                            <img src="${entry.image}" alt="${entry.title}" onerror="this.src='画像素材/images/hunter_image.jpg'">
-                        </div>
-                        <div class="diary-text">
-                            <h3>${entry.title}</h3>
-                            <p>${entry.content}</p>
-                            ${linkHtml}
-                            <div class="diary-tags">
-                                ${tagsHtml}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.innerHTML += cardHtml;
-        });
-        
-        // Setup intersection observer for new cards
-        const observer = new IntersectionObserver((observerEntries) => {
-            observerEntries.forEach(observerEntry => {
-                if (observerEntry.isIntersecting) {
-                    observerEntry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        container.querySelectorAll('.glass-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(card);
-        });
-        
-    } catch (error) {
-        console.error(error);
-        container.innerHTML = `<div style="text-align: center; color: #ff6b6b;"><p>日記の読み込みに失敗しました。</p></div>`;
-    }
-}
+
 
 function initBackToTop() {
     const backToTopBtn = document.getElementById('fixed-back-to-top');

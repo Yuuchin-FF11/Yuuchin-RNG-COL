@@ -1,4 +1,4 @@
-﻿# FF11 From Scratch! The Ultimate Start Dash Guide for Complete Beginners (Up to Level 30)
+# FF11 From Scratch! The Ultimate Start Dash Guide for Complete Beginners (Up to Level 30)
 
 *Note: For details on how to progress through the Limit Break quests starting from level 50, please refer to our dedicated [Limit Break Guide (Lv50-99)](article_en.html?file=記事/limit_break_guide.md).*
 
@@ -254,3 +254,7 @@ I've outlined the golden route for the early game, but you might still hit walls
 
 In those cases, try searching online for **"FFXI (Quest Name)"**.
 Most likely, an FFXI strategy site called **"BG Wiki" or "FFXIclopedia"** will appear at the top. These sites have comprehensive details on quest steps and exact NPC coordinates, so be sure to bookmark and utilize them!
+
+---
+
+> **[Back to Homepage](index_en.html)** ｜ ⬆**[Back to Top](#)**

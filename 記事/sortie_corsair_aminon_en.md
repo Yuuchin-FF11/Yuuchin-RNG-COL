@@ -268,3 +268,7 @@ This is a highly optimized, specialized build dedicated entirely to pushing the 
 
 ---
 *This is an exceptionally refined tactical flow born directly from real combat experience!*
+
+---
+
+> [Back to Homepage](index_en.html) | ⬆ [Back to Top](#)

@@ -1683,10 +1683,13 @@ nav a:hover::after {
     visibility: visible;
 }
 
-/* スマホでは「一番上へ」を非表示にしてスッキリさせる */
+/* スマホでは「一番上へ」のサイズと位置を調整 */
 @media (max-width: 767px) {
     .footer-top-link {
-        display: none !important;
+        bottom: 20px;
+        right: 20px;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
     }
 }
 

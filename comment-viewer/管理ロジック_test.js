@@ -642,12 +642,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('フェッチに失敗しました');
                 }
                 
-                const responseUrl = response.url;
-                console.log('Detect Live response URL:', responseUrl);
+                const html = await response.text();
+                console.log('Detect Live HTML loaded. Length:', html.length);
                 
-                const videoId = extractVideoId(responseUrl);
-                // リダイレクト先のURLが /watch?v= または /live/ で動画IDが含まれるかチェック
-                if (videoId && (responseUrl.includes('watch?v=') || responseUrl.includes('live/'))) {
+                let videoId = '';
+                
+                // 1. canonicalリンクから抽出を試みる
+                const canonicalMatch = html.match(/<link rel="canonical" href="[^"]*(?:watch\?v=|embed\/|live\/)([a-zA-Z0-9_-]{11})"/);
+                if (canonicalMatch) {
+                    videoId = canonicalMatch[1];
+                    console.log('Detected videoId from canonical:', videoId);
+                }
+                
+                // 2. もし見つからなければ、ytInitialPlayerResponse の videoId から抽出を試みる
+                if (!videoId) {
+                    const videoIdMatch = html.match(/"videoId"\s*:\s*"([a-zA-Z0-9_-]{11})"/);
+                    if (videoIdMatch) {
+                        videoId = videoIdMatch[1];
+                        console.log('Detected videoId from ytInitialPlayerResponse:', videoId);
+                    }
+                }
+                
+                // 3. それでも見つからなければ、一般的な watch?v= から抽出を試みる
+                if (!videoId) {
+                    const generalMatch = html.match(/(?:watch\?v=|embed\/|live\/)([a-zA-Z0-9_-]{11})/);
+                    if (generalMatch) {
+                        videoId = generalMatch[1];
+                        console.log('Detected videoId from general matches:', videoId);
+                    }
+                }
+                
+                if (videoId) {
                     liveUrlInput.value = videoId;
                     showStatus('connected', '配信枠を検出しました！🐾');
                     

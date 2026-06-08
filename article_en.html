@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
@@ -116,9 +116,13 @@
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
                     // 先にMarkdownをパースすることで**太字**を確定させ、生の**マークの露出を防ぎます！
-                    const parsedHtml = marked.parse(text);
+                    let parsedHtml = marked.parse(text);
+                    if (typeof parsedHtml === 'string') {
+                        // マークダウン内の画像相対パス「../画像素材/」を、HTML読み込み時の「画像素材/」に自動置換して画像切れを防止🐾
+                        parsedHtml = parsedHtml.replace(/\.\.\/画像素材\//g, '画像素材/');
+                    }
                     // HTMLタグを破壊しないように配慮しながら「」『』のイエローゴールド強調置換を実行
-                    const processedText = parsedHtml.replace(/([「『])([^」』\n<>]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>');
+                    const processedText = (typeof parsedHtml === 'string') ? parsedHtml.replace(/([「『])([^」』\n<>]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>') : parsedHtml;
                     contentDiv.innerHTML = processedText;
 
                     const tempDiv = document.createElement('div');

@@ -21,6 +21,9 @@
         <header class="header">
             <h1>FFXI 連携逆引きシミュレーター</h1>
             <p>使用する「2つの武器種」と「狙いたい連携」を選ぶだけで、最適なWSの組み合わせを一瞬で逆引き探索します 🐾</p>
+            <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem; line-height: 1.4;">
+                ※本シミュレーターはAIで作成したもので少しこちらで調整もしましたが、もしかしたら間違った連携があるかもしれませんのでご了承ください。
+            </p>
         </header>
 
         <!-- 保存されたお気に入り連携（お気に入りがある場合のみ表示されます） 🐾 -->
@@ -104,6 +107,18 @@
                         <option value="4">4手連携 (WS 4回：4連コンボ)</option>
                         <option value="5">5手連携 (WS 5回：最長通常ループ限界)</option>
                         <option value="6">6手連携 (WS 6回：究極AM1極光・極闇限界)</option>
+                    </select>
+                </div>
+
+                <!-- 初期アフターマス（多段連携時のみ表示） -->
+                <div class="form-group" id="initial-am-group" style="display: none;">
+                    <label for="initial-am">初期アフターマス状態 (3手以上時)</label>
+                    <select id="initial-am">
+                        <option value="NONE" selected>なし (通常スタート)</option>
+                        <option value="IONIC_AM1">イオニック AM1 (4連以上で極光/黒闇)</option>
+                        <option value="IONIC_AM2">イオニック AM2 (3連以上で極光/黒闇)</option>
+                        <option value="IONIC_AM3">イオニック AM3 (2連以上で極光/黒闇🐾)</option>
+                    </select>
                 </div>
 
                 <!-- 順不同チェックボックス -->

@@ -421,7 +421,7 @@ function getModifiedAttrs(ws, ionicMode) {
 
 // 4. 逆引き探索ロジック
 // (targetSteps === 2 の場合は通常時とイオAM3時の両方の結果を同時に計算・取得、それ以上の場合はDFS多段探索を実行)
-function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
+function searchSkillchains(weapon1, weapon2, targetChain, targetSteps, initialAM = null) {
     const tossList = weaponWSData[weapon1] || [];
     const closeList = weaponWSData[weapon2] || [];
     const results = [];
@@ -487,7 +487,7 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
         const totalWSCount = currentWSList.length;
 
         if (totalWSCount === targetSteps) {
-            const steps = calculateSkillchainSteps(currentWSList);
+            const steps = calculateSkillchainSteps(currentWSList, initialAM);
             const lastStep = steps[steps.length - 1];
             if (!lastStep || lastStep.chain === null) return;
 
@@ -565,7 +565,7 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
     // トス側武器種（weapon1）の全WSをスタート地点としてDFSを開始
     for (const startWS of tossList) {
         if (forceStop) break; // スタート地点のループも即座に脱出する
-        dfs([startWS], null, null);
+        dfs([startWS], null, initialAM);
     }
 
     // 最終ステップの連携レベル順にソート
@@ -577,12 +577,12 @@ function searchSkillchains(weapon1, weapon2, targetChain, targetSteps) {
 }
 
 // 多段連携の連鎖的計算を行う関数
-function calculateSkillchainSteps(wsList) {
+function calculateSkillchainSteps(wsList, initialAM = null) {
     if (wsList.length < 2) return [];
     
     const steps = [];
     let currentChain = null; // 直前に発生した連携（トス属性となる）
-    let currentAM = null; // 現在のアフターマスレベル
+    let currentAM = initialAM === "NONE" ? null : initialAM; // 現在のアフターマスレベル
     let totalWSCount = 0; // 全体のWS着弾カウント
 
     for (let i = 1; i < wsList.length; i++) {
@@ -659,6 +659,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnSearch = document.getElementById("btn-search");
     
     const resultsList = document.getElementById("results-list");
+    
+    // 接続段数による初期AMグループの表示制御
+    selectTargetSteps.addEventListener("change", () => {
+        const stepsCount = parseInt(selectTargetSteps.value);
+        const initialAMGroup = document.getElementById("initial-am-group");
+        if (initialAMGroup) {
+            if (stepsCount >= 3) {
+                initialAMGroup.style.display = "block";
+            } else {
+                initialAMGroup.style.display = "none";
+                const selectInitialAM = document.getElementById("initial-am");
+                if (selectInitialAM) selectInitialAM.value = "NONE";
+            }
+        }
+    });
     const resultCount = document.getElementById("result-count");
     const noResults = document.getElementById("no-results");
 
@@ -669,12 +684,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = selectTargetChain.value;
         const stepsCount = parseInt(selectTargetSteps.value);
         const unordered = checkUnordered ? checkUnordered.checked : false;
+        const selectInitialAM = document.getElementById("initial-am");
+        const initialAM = selectInitialAM ? selectInitialAM.value : "NONE";
+        const passAM = initialAM === "NONE" ? null : initialAM;
 
         // 探索の実行 (順不同対応)
         let results = [];
         if (unordered && w1 !== w2) {
-            const resultsA = searchSkillchains(w1, w2, target, stepsCount);
-            const resultsB = searchSkillchains(w2, w1, target, stepsCount);
+            const resultsA = searchSkillchains(w1, w2, target, stepsCount, passAM);
+            const resultsB = searchSkillchains(w2, w1, target, stepsCount, passAM);
             results = [...resultsA, ...resultsB];
             
             // ソート
@@ -692,7 +710,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         } else {
-            results = searchSkillchains(w1, w2, target, stepsCount);
+            results = searchSkillchains(w1, w2, target, stepsCount, passAM);
         }
 
         // UIのクリーンアップ
@@ -1005,6 +1023,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 selectTargetSteps.value = fav.steps.toString();
                 if (checkUnordered) checkUnordered.checked = fav.unordered;
                 
+                // 接続段数変更による表示制御をトリガーし、初期AM値を復元
+                const event = new Event('change');
+                selectTargetSteps.dispatchEvent(event);
+                
+                const selectInitialAM = document.getElementById("initial-am");
+                if (selectInitialAM) {
+                    selectInitialAM.value = fav.initialAM || "NONE";
+                }
+                
                 btnSearch.click();
             });
 
@@ -1026,6 +1053,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = selectTargetChain.value;
         const steps = parseInt(selectTargetSteps.value);
         const unordered = checkUnordered ? checkUnordered.checked : false;
+        const selectInitialAM = document.getElementById("initial-am");
+        const initialAM = selectInitialAM ? selectInitialAM.value : "NONE";
 
         let favs = [];
         try {
@@ -1036,7 +1065,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // 重複チェック 🐾
         const duplicate = favs.find(f => 
             f.w1 === w1 && f.w2 === w2 && f.target === target && 
-            f.steps === steps && f.unordered === unordered
+            f.steps === steps && f.unordered === unordered &&
+            (f.initialAM === initialAM || (!f.initialAM && initialAM === "NONE"))
         );
 
         if (duplicate) {
@@ -1044,7 +1074,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        favs.push({ w1, w2, target, steps, unordered });
+        favs.push({ w1, w2, target, steps, unordered, initialAM });
         localStorage.setItem("ff11_chain_favorites", JSON.stringify(favs));
         renderFavorites();
     }

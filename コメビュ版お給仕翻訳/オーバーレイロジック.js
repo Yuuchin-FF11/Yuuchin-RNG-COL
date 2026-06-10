@@ -94,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const trans = card.querySelector('.translation-text');
             if (orig) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    orig.style.fontSize = `${fontSize + 16}px`;
+                    orig.style.fontSize = `${fontSize + 6}px`; /* サイズ補正を小さく調整🐾 */
                 } else {
                     orig.style.fontSize = `${fontSize}px`;
                 }
             }
             if (trans) {
                 if (card.classList.contains('comment-card-broadcaster')) {
-                    trans.style.fontSize = `${transSize + 2}px`;
+                    trans.style.fontSize = `${transSize + 1}px`; /* サイズ補正を小さく調整🐾 */
                 } else {
                     trans.style.fontSize = `${transSize}px`;
                 }
@@ -248,6 +248,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // 配信者用の吹き出し（.comment-card-broadcaster）がすでに2個以上表示されている場合は古いものから消去🐾
+        if (chatData.isBroadcaster) {
+            const currentBroadcasterCards = commentContainer.querySelectorAll('.comment-card-broadcaster:not(.fade-out)');
+            if (currentBroadcasterCards.length >= 2) {
+                const oldestBroadcasterCard = currentBroadcasterCards[0];
+                removeCard(oldestBroadcasterCard);
+            }
+        }
+
+
         // すでに表示数制限を超えている場合は古いものから消去
         const currentCards = commentContainer.querySelectorAll('.comment-card:not(.fade-out)');
         if (currentCards.length >= maxComments) {
@@ -306,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chatData.isBroadcaster) {
             const origMsg = document.createElement('span');
             origMsg.className = 'message-original';
-            origMsg.style.fontSize = `${fontSize + 16}px`;
+            origMsg.style.fontSize = `${fontSize + 6}px`; /* サイズ補正を小さく調整🐾 */
             origMsg.textContent = chatData.translation;
             content.appendChild(origMsg);
 
@@ -323,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const transMsg = document.createElement('span');
                 transMsg.className = 'translation-text';
                 transMsg.style.color = 'var(--text-muted)';
-                transMsg.style.fontSize = `${transSize + 2}px`;
+                transMsg.style.fontSize = `${transSize + 1}px`; /* サイズ補正を小さく調整🐾 */
                 transMsg.textContent = chatData.message;
                 transBox.appendChild(transMsg);
 

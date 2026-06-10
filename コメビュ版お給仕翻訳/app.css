@@ -378,6 +378,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* 左上に寄せるため上寄せに変更🐾 */
+    align-items: flex-end; /* 右寄せに変更🐾 */
     overflow: hidden;
 }
 
@@ -385,9 +386,13 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
 #comment-container {
     display: flex;
     flex-direction: column;
+    align-items: flex-end; /* 右寄せ🐾 */
     gap: 0.875rem;
     max-width: 100%;
     width: 100%;
+    margin-top: 180px; /* キーボードを避けるための上部余白🐾 */
+    margin-bottom: 220px; /* チャット欄を避けるための下部余白🐾 */
+    max-height: calc(100vh - 400px); /* あふれ防止のための高さ制限🐾 */
     /* OBSでの配置に合わせた調整 */
 }
 
@@ -404,22 +409,22 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     align-items: flex-start;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    max-width: 480px;
+    max-width: 380px; /* 吹き出しをコンパクトに🐾 */
     width: fit-content;
-    animation: slideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
-    transform-origin: left top; /* 左上を基点に変更🐾 */
+    animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 右スライドインに変更🐾 */
+    transform-origin: right top; /* 右上を基点に変更🐾 */
     transition: all 0.3s ease;
 }
 
 /* フェードアウトアニメーション（JSで追加される） */
 .comment-card.fade-out {
-    animation: fadeOutLeft 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards; /* 左フェードアウトに変更🐾 */
+    animation: fadeOutRight 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards; /* 右フェードアウトに変更🐾 */
 }
 
 /* リスナーアイコン */
 .avatar {
-    width: 38px;
-    height: 38px;
+    width: 32px; /* アイコンをコンパクトに縮小🐾 */
+    height: 32px; /* アイコンをコンパクトに縮小🐾 */
     border-radius: 50%;
     border: 1.5px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -569,6 +574,27 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     }
 }
 
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes fadeOutRight {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+}
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -594,10 +620,10 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     align-items: flex-start;
     box-shadow: 0 12px 40px rgba(234, 179, 8, 0.15), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    max-width: 600px; /* 文字が大きくなった分、吹き出しの幅も広げます🐾 */
+    max-width: 450px; /* 吹き出しをコンパクトに縮小🐾 */
     width: fit-content;
-    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
-    transform-origin: left top; /* 左上を基点に変更🐾 */
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 右スライドインに変更🐾 */
+    transform-origin: right top; /* 右上を基点に変更🐾 */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -663,10 +689,10 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     align-items: flex-start;
     box-shadow: 0 12px 40px rgba(234, 179, 8, 0.25), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    max-width: 500px;
+    max-width: 400px; /* 吹き出しをコンパクトに縮小🐾 */
     width: fit-content;
-    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
-    transform-origin: left top; /* 左上を基点に変更🐾 */
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 右スライドインに変更🐾 */
+    transform-origin: right top; /* 右上を基点に変更🐾 */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -707,10 +733,10 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus {
     align-items: flex-start;
     box-shadow: 0 12px 40px rgba(16, 185, 129, 0.25), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    max-width: 500px;
+    max-width: 400px; /* 吹き出しをコンパクトに縮小🐾 */
     width: fit-content;
-    animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 左スライドインに変更🐾 */
-    transform-origin: left top; /* 左上を基点に変更🐾 */
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* 右スライドインに変更🐾 */
+    transform-origin: right top; /* 右上を基点に変更🐾 */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;

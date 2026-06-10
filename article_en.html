@@ -162,6 +162,7 @@
     <script type="module">
         import { linkMap, keywordsEn, normalizeEquipmentName } from './画像素材/js/link_map.js';
         import { SUPABASE_URL, SUPABASE_ANON_KEY } from './画像素材/js/supabase_config.js';
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbx3tcuuAdd0KlOq35qv1lPbqUx3kI064F2_VBohfRdg9OZUYUwT-q6tdqgiPfe-K3dCQw/exec";
 
         const urlParams = new URLSearchParams(window.location.search);
         const file = urlParams.get('file');
@@ -473,6 +474,23 @@
                          ]);
 
                      if (error) throw error;
+
+                     // Gmail通知用のGASリクエスト送信（バックグラウンドで実行し、描画を妨げない）🐾
+                     try {
+                         const gasParams = new URLSearchParams({
+                             action: 'comment_notification',
+                             pageTitle: document.title,
+                             pageUrl: window.location.href,
+                             nickname: nickname,
+                             content: content
+                         });
+                         fetch(`${GAS_API_URL}?${gasParams.toString()}`, {
+                             method: 'GET',
+                             mode: 'cors'
+                         }).catch(e => console.warn('Notification send skipped:', e));
+                     } catch (err) {
+                         console.warn('Gmail notification failed:', err);
+                     }
 
                      // Success
                      commentContent.value = '';

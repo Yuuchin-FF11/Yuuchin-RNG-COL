@@ -135,6 +135,12 @@
                     const processedText = (typeof parsedHtml === 'string') ? parsedHtml.replace(/([「『])([^」』\n<>]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>') : parsedHtml;
                     contentDiv.innerHTML = processedText;
 
+                    // 記事のタイトル（最初の h1）をブラウザタイトルに動的設定🐾
+                    const firstH1 = contentDiv.querySelector('h1');
+                    if (firstH1) {
+                        document.title = firstH1.textContent + ' | FFXI Bismarck';
+                    }
+
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = contentDiv.innerHTML;
                     

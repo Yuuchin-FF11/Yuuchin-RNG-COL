@@ -72,6 +72,35 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             font-weight: 500;
         }
+        /* コメント欄のプレミアムスタイル🐾 */
+        .comments-section { width: 100%; text-align: left; }
+        .comment-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .comment-card:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.4rem;
+        }
+        .comment-author { color: var(--accent-color); font-weight: bold; }
+        .comment-date { font-family: monospace; opacity: 0.7; }
+        .comment-body { font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+        #comment-submit-btn:hover { background: #00bcd4; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -91,6 +120,35 @@
                     <div id="markdown-content" class="markdown-body">
                         <div style="text-align: center; padding: 3rem 0;"><i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color);"></i><p>記事を読み込み中...</p></div>
                     </div>
+                    
+                    <!-- コメントセクション🐾 -->
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 3rem 0;">
+                    <div id="comments-section" class="comments-section">
+                        <h3 style="font-family: 'Zen Maru Gothic', sans-serif; color: var(--accent-color); margin-bottom: 1.5rem;"><i class="fa-solid fa-comments"></i> コメント</h3>
+                        
+                        <!-- コメント表示エリア -->
+                        <div id="comments-list" class="comments-list" style="margin-bottom: 2rem;">
+                            <p style="opacity: 0.6; font-size: 0.95rem;">コメントを読み込み中...</p>
+                        </div>
+                        
+                        <!-- コメント投稿フォーム -->
+                        <form id="comment-form" style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px; width: 100%;">
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem; flex: 1; min-width: 200px;">
+                                    <label for="comment-nickname" style="font-size: 0.9rem; font-weight: bold; opacity: 0.8;">ニックネーム</label>
+                                    <input type="text" id="comment-nickname" maxlength="30" placeholder="名無しの旅人" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.6rem; color: white; font-family: inherit;">
+                                </div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label for="comment-content" style="font-size: 0.9rem; font-weight: bold; opacity: 0.8;">コメント内容 (最大500文字)</label>
+                                <textarea id="comment-content" required maxlength="500" placeholder="温かいコメントをお待ちしております🐾" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.8rem; color: white; font-family: inherit; min-height: 100px; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" id="comment-submit-btn" style="align-self: flex-start; background: var(--primary-color); border: 1px solid var(--glass-border); color: white; padding: 0.7rem 2rem; border-radius: 30px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fa-solid fa-paper-plane"></i> コメントを送信
+                            </button>
+                            <p id="comment-message" style="font-size: 0.9rem; display: none;"></p>
+                        </form>
+                    </div>
                 </div>
             </article>
 
@@ -109,8 +167,11 @@
 
     <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> ページの一番上へ</a>
 
+    <!-- Supabase CDN の読み込み🐾 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module">
         import { linkMap, keywordsJa, normalizeEquipmentName } from './画像素材/js/link_map.js';
+        import { SUPABASE_URL, SUPABASE_ANON_KEY } from './画像素材/js/supabase_config.js';
 
         const urlParams = new URLSearchParams(window.location.search);
         const file = urlParams.get('file');
@@ -306,6 +367,156 @@
                  window.scrollTo({ top: 0, behavior: 'smooth' });
              });
          }
+
+         // === コメント機能のJavaScriptロジック🐾 ===
+         const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+         const commentsList = document.getElementById('comments-list');
+         const commentForm = document.getElementById('comment-form');
+         const commentNickname = document.getElementById('comment-nickname');
+         const commentContent = document.getElementById('comment-content');
+         const commentMessage = document.getElementById('comment-message');
+         const commentSubmitBtn = document.getElementById('comment-submit-btn');
+
+         // お上品フィルター（送信前の簡易NGワードチェック）
+         function checkNsfwWords(text) {
+             const defaultNgWords = [
+                 'ちんちん', 'ちんこ', 'まんこ', 'おまんこ', 'うんこ', 'うんち', 
+                 'ぺにす', 'ペニス', 'ヴぁぎな', 'ヴァギナ', 'ばぎな', 'バギナ',
+                 'ちんぽ', 'チンポ', 'きんたま', '金玉', 'おめこ', 'おてぃんてぃん'
+             ];
+             for (let word of defaultNgWords) {
+                 if (text.includes(word)) {
+                     return true;
+                 }
+             }
+             return false;
+         }
+
+         // コメント一覧の読み込み
+         async function loadComments() {
+             if (!supabase || !file) {
+                 commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">データベースの接続が初期化されていません。</p>';
+                 return;
+             }
+
+             try {
+                 const { data, error } = await supabase
+                     .from('comments')
+                     .select('nickname, content, created_at')
+                     .eq('article_id', file)
+                     .eq('is_approved', true)
+                     .order('created_at', { ascending: true });
+
+                 if (error) throw error;
+
+                 if (!data || data.length === 0) {
+                     commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">最初のコメントを投稿してみましょう！🐾</p>';
+                     return;
+                 }
+
+                 commentsList.innerHTML = data.map(comment => {
+                     const date = new Date(comment.created_at).toLocaleString('ja-JP', {
+                         year: 'numeric',
+                         month: '2-digit',
+                         day: '2-digit',
+                         hour: '2-digit',
+                         minute: '2-digit'
+                     });
+                     // XSS対策のサニタイズ
+                     const safeNickname = comment.nickname.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                     const safeContent = comment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                     
+                     return `
+                         <div class="comment-card">
+                             <div class="comment-meta">
+                                 <span class="comment-author"><i class="fa-solid fa-user"></i> ${safeNickname}</span>
+                                 <span class="comment-date">${date}</span>
+                             </div>
+                             <div class="comment-body">${safeContent}</div>
+                         </div>
+                     `;
+                 }).join('');
+             } catch (err) {
+                 console.error('Error loading comments:', err);
+                 commentsList.innerHTML = '<p style="color: #ff6b6b; font-size: 0.95rem;">コメントの読み込みに失敗しました。</p>';
+             }
+         }
+
+         // コメント投稿処理
+         if (commentForm) {
+             commentForm.addEventListener('submit', async (e) => {
+                 e.preventDefault();
+
+                 if (!supabase || !file) {
+                     showMessage('データベースの接続エラーが発生しました。', 'red');
+                     return;
+                 }
+
+                 const nickname = commentNickname.value.trim() || '名無しの旅人';
+                 const content = commentContent.value.trim();
+
+                 if (!content) return;
+
+                 // 簡易お上品フィルターチェック🐾
+                 if (checkNsfwWords(nickname) || checkNsfwWords(content)) {
+                     showMessage('お上品な言葉づかいで投稿をお願いいたします🐾', 'red');
+                     return;
+                 }
+
+                 // 同一端末からの連投ガード（60秒制限）🐾
+                 const lastPostTime = localStorage.getItem('last_comment_time_' + file);
+                 if (lastPostTime && (Date.now() - parseInt(lastPostTime)) < 60000) {
+                     const remain = Math.ceil((60000 - (Date.now() - parseInt(lastPostTime))) / 1000);
+                     showMessage(`連続投稿は制限されています。あと ${remain} 秒ほどお待ちください。`, 'red');
+                     return;
+                 }
+
+                 // 送信ボタンの無効化（ローディング）
+                 commentSubmitBtn.disabled = true;
+                 const origBtnHtml = commentSubmitBtn.innerHTML;
+                 commentSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 送信中...';
+
+                 try {
+                     const { error } = await supabase
+                         .from('comments')
+                         .insert([
+                             {
+                                 article_id: file,
+                                 nickname: nickname,
+                                 content: content
+                             }
+                         ]);
+
+                     if (error) throw error;
+
+                     // 投稿成功処理
+                     commentContent.value = '';
+                     localStorage.setItem('last_comment_time_' + file, Date.now().toString());
+                     showMessage('コメントを投稿しました！', 'green');
+                     
+                     // コメント一覧を再ロード
+                     await loadComments();
+                 } catch (err) {
+                     console.error('Error posting comment:', err);
+                     showMessage('コメントの送信に失敗しました。', 'red');
+                 } finally {
+                     commentSubmitBtn.disabled = false;
+                     commentSubmitBtn.innerHTML = origBtnHtml;
+                 }
+             });
+         }
+
+         function showMessage(text, color) {
+             commentMessage.textContent = text;
+             commentMessage.style.color = color === 'green' ? '#a8e063' : '#ff6b6b';
+             commentMessage.style.display = 'block';
+             setTimeout(() => {
+                 commentMessage.style.display = 'none';
+             }, 5000);
+         }
+
+         // 初期ロード実行🐾
+         setTimeout(loadComments, 500);
      </script>
 
 </body>

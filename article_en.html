@@ -62,6 +62,35 @@
         .markdown-body a { color: #a8e063; text-decoration: none; border-bottom: 1px dashed #a8e063; font-weight: 700; }
         .auto-link { color: #a8e063; font-weight: 700; text-decoration: none; border-bottom: 1px dashed #a8e063; }
         .highlight-bracket { color: #ffb700; font-weight: bold; text-shadow: 0 0 8px rgba(255, 183, 0, 0.2); }
+        /* Premium Comments Style🐾 */
+        .comments-section { width: 100%; text-align: left; }
+        .comment-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .comment-card:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.4rem;
+        }
+        .comment-author { color: var(--accent-color); font-weight: bold; }
+        .comment-date { font-family: monospace; opacity: 0.7; }
+        .comment-body { font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+        #comment-submit-btn:hover { background: #00bcd4; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -81,6 +110,35 @@
                     <div id="markdown-content" class="markdown-body">
                         <div style="text-align: center; padding: 3rem 0;"><i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color);"></i><p>Loading article...</p></div>
                     </div>
+                    
+                    <!-- Comments Section🐾 -->
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 3rem 0;">
+                    <div id="comments-section" class="comments-section">
+                        <h3 style="font-family: 'Zen Maru Gothic', sans-serif; color: var(--accent-color); margin-bottom: 1.5rem;"><i class="fa-solid fa-comments"></i> Comments</h3>
+                        
+                        <!-- Comments Display Area -->
+                        <div id="comments-list" class="comments-list" style="margin-bottom: 2rem;">
+                            <p style="opacity: 0.6; font-size: 0.95rem;">Loading comments...</p>
+                        </div>
+                        
+                        <!-- Comment Submission Form -->
+                        <form id="comment-form" style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px; width: 100%;">
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem; flex: 1; min-width: 200px;">
+                                    <label for="comment-nickname" style="font-size: 0.9rem; font-weight: bold; opacity: 0.8;">Nickname</label>
+                                    <input type="text" id="comment-nickname" maxlength="30" placeholder="Anonymous Adventurer" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.6rem; color: white; font-family: inherit;">
+                                </div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label for="comment-content" style="font-size: 0.9rem; font-weight: bold; opacity: 0.8;">Comment (Max 500 characters)</label>
+                                <textarea id="comment-content" required maxlength="500" placeholder="Share your warm thoughts🐾" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.8rem; color: white; font-family: inherit; min-height: 100px; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" id="comment-submit-btn" style="align-self: flex-start; background: var(--primary-color); border: 1px solid var(--glass-border); color: white; padding: 0.7rem 2rem; border-radius: 30px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fa-solid fa-paper-plane"></i> Submit Comment
+                            </button>
+                            <p id="comment-message" style="font-size: 0.9rem; display: none;"></p>
+                        </form>
+                    </div>
                 </div>
             </article>
 
@@ -99,8 +157,11 @@
 
     <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> Back to Top</a>
 
+    <!-- Supabase CDN🐾 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module">
         import { linkMap, keywordsEn, normalizeEquipmentName } from './画像素材/js/link_map.js';
+        import { SUPABASE_URL, SUPABASE_ANON_KEY } from './画像素材/js/supabase_config.js';
 
         const urlParams = new URLSearchParams(window.location.search);
         const file = urlParams.get('file');
@@ -291,6 +352,155 @@
                  window.scrollTo({ top: 0, behavior: 'smooth' });
              });
          }
+
+         // === Comments Feature JS Logic🐾 ===
+         const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+         const commentsList = document.getElementById('comments-list');
+         const commentForm = document.getElementById('comment-form');
+         const commentNickname = document.getElementById('comment-nickname');
+         const commentContent = document.getElementById('comment-content');
+         const commentMessage = document.getElementById('comment-message');
+         const commentSubmitBtn = document.getElementById('comment-submit-btn');
+
+         // NSFW Check
+         function checkNsfwWords(text) {
+             const defaultNgWords = [
+                 'ちんちん', 'ちんこ', 'まんこ', 'おまんこ', 'うんこ', 'うんち', 
+                 'ぺにす', 'ペニス', 'ヴぁぎな', 'ヴァギナ', 'ばぎな', 'バギナ',
+                 'ちんぽ', 'チンポ', 'きんたま', '金玉', 'おめこ', 'おてぃんてぃん'
+             ];
+             for (let word of defaultNgWords) {
+                 if (text.includes(word)) {
+                     return true;
+                 }
+             }
+             return false;
+         }
+
+         // Load Comments
+         async function loadComments() {
+             if (!supabase || !file) {
+                 commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">Database connection not initialized.</p>';
+                 return;
+             }
+
+             try {
+                 const { data, error } = await supabase
+                     .from('comments')
+                     .select('nickname, content, created_at')
+                     .eq('article_id', file)
+                     .eq('is_approved', true)
+                     .order('created_at', { ascending: true });
+
+                 if (error) throw error;
+
+                 if (!data || data.length === 0) {
+                     commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">Be the first to comment!🐾</p>';
+                     return;
+                 }
+
+                 commentsList.innerHTML = data.map(comment => {
+                     const date = new Date(comment.created_at).toLocaleString('en-US', {
+                         year: 'numeric',
+                         month: '2-digit',
+                         day: '2-digit',
+                         hour: '2-digit',
+                         minute: '2-digit'
+                     });
+                     // Sanitize XSS
+                     const safeNickname = comment.nickname.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                     const safeContent = comment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                     
+                     return `
+                         <div class="comment-card">
+                             <div class="comment-meta">
+                                 <span class="comment-author"><i class="fa-solid fa-user"></i> ${safeNickname}</span>
+                                 <span class="comment-date">${date}</span>
+                             </div>
+                             <div class="comment-body">${safeContent}</div>
+                         </div>
+                     `;
+                 }).join('');
+             } catch (err) {
+                 console.error('Error loading comments:', err);
+                 commentsList.innerHTML = '<p style="color: #ff6b6b; font-size: 0.95rem;">Failed to load comments.</p>';
+             }
+         }
+
+         // Post Comment
+         if (commentForm) {
+             commentForm.addEventListener('submit', async (e) => {
+                 e.preventDefault();
+
+                 if (!supabase || !file) {
+                     showMessage('Database connection error.', 'red');
+                     return;
+                 }
+
+                 const nickname = commentNickname.value.trim() || 'Anonymous Adventurer';
+                 const content = commentContent.value.trim();
+
+                 if (!content) return;
+
+                 // NSFW Check🐾
+                 if (checkNsfwWords(nickname) || checkNsfwWords(content)) {
+                     showMessage('Please use polite language🐾', 'red');
+                     return;
+                 }
+
+                 // Rate Limit (60 seconds)🐾
+                 const lastPostTime = localStorage.getItem('last_comment_time_' + file);
+                 if (lastPostTime && (Date.now() - parseInt(lastPostTime)) < 60000) {
+                     const remain = Math.ceil((60000 - (Date.now() - parseInt(lastPostTime))) / 1000);
+                     showMessage(`Rate limited. Please wait ${remain} seconds.`, 'red');
+                     return;
+                 }
+
+                 // Disable Submit Button
+                 commentSubmitBtn.disabled = true;
+                 const origBtnHtml = commentSubmitBtn.innerHTML;
+                 commentSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+                 try {
+                     const { error } = await supabase
+                         .from('comments')
+                         .insert([
+                             {
+                                 article_id: file,
+                                 nickname: nickname,
+                                 content: content
+                             }
+                         ]);
+
+                     if (error) throw error;
+
+                     // Success
+                     commentContent.value = '';
+                     localStorage.setItem('last_comment_time_' + file, Date.now().toString());
+                     showMessage('Comment posted successfully!', 'green');
+                     
+                     await loadComments();
+                 } catch (err) {
+                     console.error('Error posting comment:', err);
+                     showMessage('Failed to post comment.', 'red');
+                 } finally {
+                     commentSubmitBtn.disabled = false;
+                     commentSubmitBtn.innerHTML = origBtnHtml;
+                 }
+             });
+         }
+
+         function showMessage(text, color) {
+             commentMessage.textContent = text;
+             commentMessage.style.color = color === 'green' ? '#a8e063' : '#ff6b6b';
+             commentMessage.style.display = 'block';
+             setTimeout(() => {
+                 commentMessage.style.display = 'none';
+             }, 5000);
+         }
+
+         // Initial Load🐾
+         setTimeout(loadComments, 500);
     </script>
 </body>
 </html>

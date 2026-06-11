@@ -166,6 +166,10 @@ class ReadAloudManager {
         }
 
         const item = this.queue.shift();
+        
+        // 読み上げ用のテキストに変換辞書を適用
+        item.text = this.applyReadingDictionary(item.text);
+        
         const charVal = this.characterSelect ? this.characterSelect.value : 'standard';
 
         if (item.lang === 'ja-JP' && charVal.startsWith('vv_')) {
@@ -397,6 +401,35 @@ class ReadAloudManager {
             return 'ko-KR';
         }
         return 'en-US';
+    }
+
+    applyReadingDictionary(text) {
+        if (!text) return text;
+        let dict = [];
+        try {
+            const saved = localStorage.getItem('yt_translator_reading_dict');
+            if (saved) {
+                dict = JSON.parse(saved);
+            }
+        } catch(e) {
+            console.error('Failed to parse reading dictionary:', e);
+        }
+        
+        if (!Array.isArray(dict) || dict.length === 0) {
+            return text;
+        }
+        
+        // 長い単語から順にソートして、部分一致による誤置換を防ぐ
+        const sortedDict = [...dict].sort((a, b) => b.word.length - a.word.length);
+        
+        let result = text;
+        for (const item of sortedDict) {
+            if (!item.word) continue;
+            const escapedWord = item.word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            const regex = new RegExp(escapedWord, 'gi');
+            result = result.replace(regex, item.reading || '');
+        }
+        return result;
     }
 }
 
@@ -1406,4 +1439,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
     startApiPollingAdmin();
+
+    // ==========================================================================
+    // 読み上げ辞書UI制御ロジック🐾
+    // ==========================================================================
+    const dictWordInput = document.getElementById('dict-word');
+    const dictReadingInput = document.getElementById('dict-reading');
+    const btnAddDict = document.getElementById('btn-add-dict');
+    const dictListContainer = document.getElementById('dict-list-container');
+    const dictListBody = document.getElementById('dict-list-body');
+
+    if (btnAddDict && dictWordInput && dictReadingInput && dictListContainer && dictListBody) {
+        function getDictionary() {
+            try {
+                const saved = localStorage.getItem('yt_translator_reading_dict');
+                return saved ? JSON.parse(saved) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveDictionary(dict) {
+            localStorage.setItem('yt_translator_reading_dict', JSON.stringify(dict));
+        }
+
+        function renderDictionary() {
+            const dict = getDictionary();
+            dictListBody.innerHTML = '';
+            
+            if (dict.length === 0) {
+                dictListContainer.style.display = 'none';
+                return;
+            }
+            
+            dictListContainer.style.display = 'block';
+            dict.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
+                
+                const tdWord = document.createElement('td');
+                tdWord.style.padding = '0.5rem';
+                tdWord.style.color = '#fff';
+                tdWord.textContent = item.word;
+                
+                const tdReading = document.createElement('td');
+                tdReading.style.padding = '0.5rem';
+                tdReading.style.color = '#fff';
+                tdReading.textContent = item.reading;
+                
+                const tdAction = document.createElement('td');
+                tdAction.style.padding = '0.5rem';
+                tdAction.style.textAlign = 'right';
+                
+                const btnDelete = document.createElement('button');
+                btnDelete.textContent = '削除🐾';
+                btnDelete.style.background = 'rgba(239, 68, 68, 0.15)';
+                btnDelete.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+                btnDelete.style.color = '#f87171';
+                btnDelete.style.padding = '0.2rem 0.5rem';
+                btnDelete.style.borderRadius = '4px';
+                btnDelete.style.cursor = 'pointer';
+                btnDelete.style.fontSize = '0.8rem';
+                
+                btnDelete.addEventListener('click', () => {
+                    const currentDict = getDictionary();
+                    currentDict.splice(index, 1);
+                    saveDictionary(currentDict);
+                    renderDictionary();
+                });
+                
+                tdAction.appendChild(btnDelete);
+                tr.appendChild(tdWord);
+                tr.appendChild(tdReading);
+                tr.appendChild(tdAction);
+                dictListBody.appendChild(tr);
+            });
+        }
+
+        btnAddDict.addEventListener('click', () => {
+            const word = dictWordInput.value.trim();
+            const reading = dictReadingInput.value.trim();
+            
+            if (!word || !reading) {
+                alert('変換前の単語と読み方の両方を入力してください🐾');
+                return;
+            }
+            
+            const currentDict = getDictionary();
+            
+            // 重複チェック (すでに登録されている単語は上書き)
+            const existingIndex = currentDict.findIndex(item => item.word.toLowerCase() === word.toLowerCase());
+            if (existingIndex > -1) {
+                currentDict[existingIndex].reading = reading;
+            } else {
+                currentDict.push({ word, reading });
+            }
+            
+            saveDictionary(currentDict);
+            renderDictionary();
+            
+            // 入力欄をリセット
+            dictWordInput.value = '';
+            dictReadingInput.value = '';
+            dictWordInput.focus();
+        });
+
+        // 初回ロード時に辞書リストを表示
+        renderDictionary();
+    }
 });

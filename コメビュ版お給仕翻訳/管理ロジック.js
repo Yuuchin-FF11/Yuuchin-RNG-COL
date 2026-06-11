@@ -448,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCopyUrl = document.getElementById('btn-copy-url');
     
     const filterForeignCheckbox = document.getElementById('filter-foreign');
+    const enableJpTranslationCheckbox = document.getElementById('enable-jp-translation');
     const enableNsfwFilterCheckbox = document.getElementById('enable-nsfw-filter');
     const nsfwWordsInput = document.getElementById('nsfw-words');
 
@@ -554,6 +555,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterForeignCheckbox.checked = settings.filterForeign || false;
                 }
 
+                if (enableJpTranslationCheckbox) {
+                    enableJpTranslationCheckbox.checked = settings.enableJpTranslation || false;
+                }
+
                 if (enableNsfwFilterCheckbox) {
                     enableNsfwFilterCheckbox.checked = settings.enableNsfwFilter !== undefined ? settings.enableNsfwFilter : true;
                 }
@@ -600,6 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
             maxComments: parseInt(maxCommentsSlider.value),
             effectVolume: parseInt(effectVolumeSlider.value),
             filterForeign: filterForeignCheckbox ? filterForeignCheckbox.checked : false,
+            enableJpTranslation: enableJpTranslationCheckbox ? enableJpTranslationCheckbox.checked : false,
             enableNsfwFilter: enableNsfwFilterCheckbox ? enableNsfwFilterCheckbox.checked : true,
             nsfwWords: nsfwWordsInput ? nsfwWordsInput.value.trim() : '',
             enableReadAloud: enableReadAloudCheckbox ? enableReadAloudCheckbox.checked : true,
@@ -900,8 +906,16 @@ document.addEventListener('DOMContentLoaded', () => {
             let translationText = '';
             let needTranslation = false;
             
+            const enableJpTranslation = document.getElementById('enable-jp-translation');
+            const shouldTranslateJp = enableJpTranslation ? enableJpTranslation.checked : false;
+
             if (!readAloudManager.isJapanese(messageText)) {
+                // 海外言語 ➔ 日本語訳
                 translationText = await translateText(messageText);
+                needTranslation = (messageText.toLowerCase() !== translationText.toLowerCase());
+            } else if (shouldTranslateJp) {
+                // 日本語 ➔ 英訳 (設定がONの場合)🐾
+                translationText = await translateTextToEn(messageText);
                 needTranslation = (messageText.toLowerCase() !== translationText.toLowerCase());
             } else {
                 translationText = messageText;

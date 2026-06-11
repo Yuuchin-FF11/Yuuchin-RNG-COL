@@ -333,6 +333,39 @@
                     </button>
                 </div>
             </div>
+
+            <!-- マイク誤認識修正辞書登録（カスタム音声認識置換機能） -->
+            <div class="form-row" style="margin-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.25rem;">
+                <div class="form-group" style="width: 100%;">
+                    <label style="font-weight: 700; color: #fff; margin-bottom: 0.5rem;">マイク誤認識修正（自分が喋った言葉の修正🐾）</label>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.75rem;">
+                        マイクが聞き間違えやすい言葉（例:「派遣ゲーム」）を正しい漢字や表現（例:「覇権ゲーム」）に強制的に書き換えます。
+                    </p>
+                    <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.75rem;">
+                        <input type="text" id="correct-incorrect-word" placeholder="誤認識される言葉 (例: 派遣ゲーム)" style="flex: 1; margin: 0; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0.5rem; border-radius: 8px;">
+                        <input type="text" id="correct-correct-word" placeholder="正しい言葉 (例: 覇権ゲーム)" style="flex: 1; margin: 0; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 0.5rem; border-radius: 8px;">
+                        <button id="btn-add-correct" class="btn btn-secondary" style="min-width: 120px; background: rgba(234, 179, 8, 0.15); border: 1px solid var(--accent-color); color: var(--accent-color); font-weight: 700; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">
+                            登録する🐾
+                        </button>
+                    </div>
+                    
+                    <!-- 登録済み誤認識修正リスト -->
+                    <div id="correct-list-container" style="background: rgba(0, 0, 0, 0.2); border-radius: 8px; padding: 0.75rem; max-height: 150px; overflow-y: auto; display: none; border: 1px solid rgba(255, 255, 255, 0.05);">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-muted); text-align: left;">
+                                    <th style="padding: 0.35rem 0.5rem; font-weight: normal; color: var(--accent-color);">誤認識される言葉</th>
+                                    <th style="padding: 0.35rem 0.5rem; font-weight: normal; color: var(--accent-color);">正しい言葉</th>
+                                    <th style="padding: 0.35rem 0.5rem; text-align: right; font-weight: normal; color: var(--accent-color);">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="correct-list-body">
+                                <!-- 動的に行を追加 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- コメビュ版ヘルプマニュアル -->

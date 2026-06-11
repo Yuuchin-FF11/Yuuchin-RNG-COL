@@ -1308,9 +1308,41 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         
+        function applySpeechCorrection(text) {
+            if (!text) return text;
+            let dict = [];
+            try {
+                const saved = localStorage.getItem('yt_translator_speech_correct_dict');
+                if (saved) {
+                    dict = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.error('Failed to parse speech correction dictionary:', e);
+            }
+
+            if (!Array.isArray(dict) || dict.length === 0) {
+                return text;
+            }
+
+            // 長い単語から順にソートして誤置換を防ぐ
+            const sortedDict = [...dict].sort((a, b) => b.incorrect.length - a.incorrect.length);
+
+            let result = text;
+            for (const item of sortedDict) {
+                if (!item.incorrect) continue;
+                const escapedWord = item.incorrect.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                const regex = new RegExp(escapedWord, 'gi');
+                result = result.replace(regex, item.correct || '');
+            }
+            return result;
+        }
+
         recognition.onresult = async (event) => {
-            const resultText = event.results[event.results.length - 1][0].transcript.trim();
-            if (!resultText) return;
+            const rawText = event.results[event.results.length - 1][0].transcript.trim();
+            if (!rawText) return;
+            
+            // 音声認識された日本語を誤認識修正辞書で補正する🐾
+            const resultText = applySpeechCorrection(rawText);
             
             if (micStatus) {
                 micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
@@ -1546,5 +1578,113 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 初回ロード時に辞書リストを表示
         renderDictionary();
+    }
+
+    // ==========================================================================
+    // マイク誤認識修正辞書UI制御ロジック🐾
+    // ==========================================================================
+    const correctIncorrectInput = document.getElementById('correct-incorrect-word');
+    const correctCorrectInput = document.getElementById('correct-correct-word');
+    const btnAddCorrect = document.getElementById('btn-add-correct');
+    const correctListContainer = document.getElementById('correct-list-container');
+    const correctListBody = document.getElementById('correct-list-body');
+
+    if (btnAddCorrect && correctIncorrectInput && correctCorrectInput && correctListContainer && correctListBody) {
+        function getCorrectDictionary() {
+            try {
+                const saved = localStorage.getItem('yt_translator_speech_correct_dict');
+                return saved ? JSON.parse(saved) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCorrectDictionary(dict) {
+            localStorage.setItem('yt_translator_speech_correct_dict', JSON.stringify(dict));
+        }
+
+        function renderCorrectDictionary() {
+            const dict = getCorrectDictionary();
+            correctListBody.innerHTML = '';
+            
+            if (dict.length === 0) {
+                correctListContainer.style.display = 'none';
+                return;
+            }
+            
+            correctListContainer.style.display = 'block';
+            dict.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
+                
+                const tdIncorrect = document.createElement('td');
+                tdIncorrect.style.padding = '0.5rem';
+                tdIncorrect.style.color = '#fff';
+                tdIncorrect.textContent = item.incorrect;
+                
+                const tdCorrect = document.createElement('td');
+                tdCorrect.style.padding = '0.5rem';
+                tdCorrect.style.color = '#fff';
+                tdCorrect.textContent = item.correct;
+                
+                const tdAction = document.createElement('td');
+                tdAction.style.padding = '0.5rem';
+                tdAction.style.textAlign = 'right';
+                
+                const btnDelete = document.createElement('button');
+                btnDelete.textContent = '削除🐾';
+                btnDelete.style.background = 'rgba(239, 68, 68, 0.15)';
+                btnDelete.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+                btnDelete.style.color = '#f87171';
+                btnDelete.style.padding = '0.2rem 0.5rem';
+                btnDelete.style.borderRadius = '4px';
+                btnDelete.style.cursor = 'pointer';
+                btnDelete.style.fontSize = '0.8rem';
+                
+                btnDelete.addEventListener('click', () => {
+                    const currentDict = getCorrectDictionary();
+                    currentDict.splice(index, 1);
+                    saveCorrectDictionary(currentDict);
+                    renderCorrectDictionary();
+                });
+                
+                tdAction.appendChild(btnDelete);
+                tr.appendChild(tdIncorrect);
+                tr.appendChild(tdCorrect);
+                tr.appendChild(tdAction);
+                correctListBody.appendChild(tr);
+            });
+        }
+
+        btnAddCorrect.addEventListener('click', () => {
+            const incorrect = correctIncorrectInput.value.trim();
+            const correct = correctCorrectInput.value.trim();
+            
+            if (!incorrect || !correct) {
+                alert('誤認識される言葉と正しい言葉の両方を入力してください🐾');
+                return;
+            }
+            
+            const currentDict = getCorrectDictionary();
+            
+            // 重複チェック (すでに登録されている言葉は上書き)
+            const existingIndex = currentDict.findIndex(item => item.incorrect.toLowerCase() === incorrect.toLowerCase());
+            if (existingIndex > -1) {
+                currentDict[existingIndex].correct = correct;
+            } else {
+                currentDict.push({ incorrect, correct });
+            }
+            
+            saveCorrectDictionary(currentDict);
+            renderCorrectDictionary();
+            
+            // 入力欄をリセット
+            correctIncorrectInput.value = '';
+            correctCorrectInput.value = '';
+            correctIncorrectInput.focus();
+        });
+
+        // 初回ロード時に辞書リストを表示
+        renderCorrectDictionary();
     }
 });

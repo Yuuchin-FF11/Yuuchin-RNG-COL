@@ -17,7 +17,7 @@
         
         <!-- ヘッダー -->
         <header class="admin-header">
-            <h1>配信コントロールセンター <span style="font-size: 1.2rem; background: var(--accent-color); color: #000; padding: 0.2rem 0.6rem; border-radius: 6px; margin-left: 0.5rem; font-weight: 800;">コメビュ版 (APIキー不要)🐾</span></h1>
+            <h1>配信コントロールセンター <span style="font-size: 1.2rem; background: var(--accent-color); color: #000; -webkit-text-fill-color: #000; padding: 0.2rem 0.6rem; border-radius: 6px; margin-left: 0.5rem; font-weight: 800;">コメビュ版 (APIキー不要)🐾</span></h1>
             <p>APIキーの制限なしで無限にチャットを自動取得・翻訳し、ななみちゃんで読み上げる配信アシスタント 🐾</p>
         </header>
 
@@ -32,7 +32,13 @@
             <!-- 配信URL入力 -->
             <div class="form-group">
                 <label for="live-url">YouTube 配信URL または ライブ動画ID</label>
-                <input type="text" id="live-url" placeholder="https://www.youtube.com/watch?v=... または 動画ID">
+                <div style="display: flex; gap: 0.75rem; align-items: center;">
+                    <input type="text" id="live-url" placeholder="https://www.youtube.com/watch?v=... または 動画ID" style="flex: 1;">
+                    <button id="btn-detect-live" class="btn btn-secondary" style="min-width: 155px; display: flex; align-items: center; gap: 0.5rem; justify-content: center; background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); color: var(--accent-color);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        配信枠を自動取得
+                    </button>
+                </div>
             </div>
 
             <!-- アクションボタンとステータス -->

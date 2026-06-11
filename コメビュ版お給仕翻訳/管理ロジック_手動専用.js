@@ -405,7 +405,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const liveUrlInput = document.getElementById('live-url');
     const btnConnect = document.getElementById('btn-connect');
-    const btnDetectLive = document.getElementById('btn-detect-live');
     const btnSave = document.getElementById('btn-save');
     const connectionStatus = document.getElementById('connection-status');
     const statusText = document.getElementById('status-text');
@@ -626,71 +625,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 2000);
     });
-
-    // ==========================================================================
-    // 配信枠の自動取得ロジック（CORS無効化 Edge経由でのスクレイピング）🐾
-    // ==========================================================================
-    if (btnDetectLive) {
-        btnDetectLive.addEventListener('click', async () => {
-            const channelId = 'UCmqjbqc6hR8s4Fwi9KDQ2yQ';
-            showStatus('connecting', '配信枠を自動確認中...');
-            
-            try {
-                // CORS無効化されたEdgeで実行されるため、直接フェッチが可能です🐾
-                const response = await fetch(`https://www.youtube.com/channel/${channelId}/live`);
-                if (!response.ok) {
-                    throw new Error('フェッチに失敗しました');
-                }
-                
-                const html = await response.text();
-                console.log('Detect Live HTML loaded. Length:', html.length);
-                
-                let videoId = '';
-                
-                // 1. canonicalリンクから抽出を試みる
-                const canonicalMatch = html.match(/<link rel="canonical" href="[^"]*(?:watch\?v=|embed\/|live\/)([a-zA-Z0-9_-]{11})"/);
-                if (canonicalMatch) {
-                    videoId = canonicalMatch[1];
-                    console.log('Detected videoId from canonical:', videoId);
-                }
-                
-                // 2. もし見つからなければ、ytInitialPlayerResponse の videoId から抽出を試みる
-                if (!videoId) {
-                    const videoIdMatch = html.match(/"videoId"\s*:\s*"([a-zA-Z0-9_-]{11})"/);
-                    if (videoIdMatch) {
-                        videoId = videoIdMatch[1];
-                        console.log('Detected videoId from ytInitialPlayerResponse:', videoId);
-                    }
-                }
-                
-                // 3. それでも見つからなければ、一般的な watch?v= から抽出を試みる
-                if (!videoId) {
-                    const generalMatch = html.match(/(?:watch\?v=|embed\/|live\/)([a-zA-Z0-9_-]{11})/);
-                    if (generalMatch) {
-                        videoId = generalMatch[1];
-                        console.log('Detected videoId from general matches:', videoId);
-                    }
-                }
-                
-                if (videoId) {
-                    liveUrlInput.value = videoId;
-                    showStatus('connected', '配信枠を検出しました！🐾');
-                    
-                    // 設定を自動保存
-                    const settings = getSettingsObject();
-                    localStorage.setItem('yt_translator_settings', JSON.stringify(settings));
-                    localStorage.setItem('yt_translator_live_settings', JSON.stringify(settings));
-                } else {
-                    alert('現在、ライブ配信が検出できませんでした。配信が開始されているかご確認ください🐾');
-                    showStatus('disconnected', '配信枠が検出できませんでした');
-                }
-            } catch (err) {
-                console.error('配信枠の自動検出エラー:', err);
-                alert('配信枠の自動取得中にエラーが発生しました。手動でURLを入力してください🐾');
-                showStatus('disconnected', '自動取得エラー');
-            }
-        });
-    }
 
     // ==========================================================================
     // コメビュ版 (CORS無効 Edge iframe 接続ロジック)

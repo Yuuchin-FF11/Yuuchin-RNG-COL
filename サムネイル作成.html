@@ -893,22 +893,22 @@
             const cy = currentMask === 'none' ? 360 : 360;
 
             ctx.save();
-            ctx.font = 'italic bold 90px "Impact", "Arial Black", sans-serif';
+            ctx.font = 'italic bold 140px "Impact", "Arial Black", sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
             // グラデーション色
-            const grad = ctx.createLinearGradient(cx - 50, cy - 50, cx + 50, cy + 50);
+            const grad = ctx.createLinearGradient(cx - 80, cy - 80, cx + 80, cy + 80);
             grad.addColorStop(0, '#f87171'); // 赤ネオン
             grad.addColorStop(1, '#60a5fa'); // 青ネオン
 
             // 影と光彩効果
             ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
-            ctx.shadowBlur = 20;
+            ctx.shadowBlur = 25;
 
             // テキストの枠線（フチ）
             ctx.strokeStyle = '#0f172a';
-            ctx.lineWidth = 14;
+            ctx.lineWidth = 18;
             ctx.strokeText('VS', cx, cy);
 
             // テキスト塗りつぶし

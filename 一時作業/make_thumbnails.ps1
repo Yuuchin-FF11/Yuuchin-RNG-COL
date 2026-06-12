@@ -173,8 +173,14 @@ CreateThumbnail $inPath3 $outPath4 $titleText4 56
 $inputName5 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150, 46, 106, 112, 103)) # トローブ.jpg
 $outBase5 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150)) # トローブ
 $titleText5 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150, 227, 130, 173, 227, 131, 163, 227, 131, 169, 231, 183, 143, 229, 139, 149, 229, 147, 161, 227, 129, 167, 231, 174, 177, 233, 150, 139, 227, 129, 145, 239, 188, 129)) # トローブキャラ総動員で箱開け！
-$subText5 = $utf8.GetString([byte[]](239, 188, 185, 239, 189, 149, 239, 189, 149, 239, 189, 131, 239, 189, 136, 239, 189, 137, 239, 189, 142, 239, 188, 160, 227, 130, 191, 227, 131, 171, 231, 139, 169)) # Ｙｕｕｃｈｉｎ＠タル狩
 
 $inPath5 = Join-Path $tempDir $inputName5
 $outPath5 = Join-Path $tempDir ($outBase5 + $suffix)
-CreateThumbnail $inPath5 $outPath5 $titleText5 56 $subText5
+CreateThumbnail $inPath5 $outPath5 $titleText5 56
+
+# --- 7. Trove Named ---
+$outBase6 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150, 95, 229, 144, 141, 229, 133, 165, 227, 130, 138)) # トローブ_名入り
+$subText5 = $utf8.GetString([byte[]](239, 188, 185, 239, 189, 149, 239, 189, 149, 239, 189, 131, 239, 189, 136, 239, 189, 137, 239, 189, 142, 239, 188, 160, 227, 130, 191, 227, 131, 171, 231, 139, 169)) # Ｙｕｕｃｈｉｎ＠タル狩
+
+$outPath6 = Join-Path $tempDir ($outBase6 + $suffix)
+CreateThumbnail $inPath5 $outPath6 $titleText5 56 $subText5

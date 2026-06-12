@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プレミアム対決サムネイル作成ツール 🐾</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --primary: #eab308;
+            --primary-hover: #ca8a04;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(234, 179, 8, 0.2);
+            --border-focus: rgba(234, 179, 8, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(88, 28, 135, 0.3) 0px, transparent 50%);
+        }
+
+        header {
+            background-color: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.3);
+        }
+
+        .header-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .header-links a:hover {
+            color: var(--primary);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            padding: 1.5rem;
+            gap: 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* コントロールパネル (左側) */
+        .control-panel {
+            flex: 1;
+            min-width: 450px;
+            max-width: 550px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+        }
+
+        /* カスタムスクロールバー */
+        .control-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+        .control-panel::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.3);
+        }
+        .control-panel::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        section {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1rem;
+        }
+
+        section:last-child {
+            border: none;
+            padding: 0;
+        }
+
+        h2 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.75rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        /* 入力コントロール */
+        input[type="text"], select {
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 5px rgba(234, 179, 8, 0.3);
+        }
+
+        /* ファイルアップロードのボタン */
+        .file-upload {
+            position: relative;
+            display: block;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.4);
+            border: 1px dashed rgba(234, 179, 8, 0.4);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background-color: rgba(234, 179, 8, 0.05);
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .file-name-display {
+            font-size: 0.7rem;
+            color: var(--primary);
+            margin-top: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* スライダー調整 */
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .slider-row span {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            width: 50px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 4px rgba(234, 179, 8, 0.5);
+        }
+
+        /* チェックボックス・ボタン選択 */
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-select {
+            flex: 1;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 0.4rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-select.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: rgba(234, 179, 8, 0.1);
+        }
+
+        /* カラーピッカー */
+        .color-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: none;
+        }
+
+        input[type="color"]::-webkit-slider-thumb {
+            border-radius: 50%;
+        }
+
+        /* 決定ダウンロードボタン */
+        .btn-download {
+            background: linear-gradient(135deg, #f59e0b, #eab308);
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            padding: 0.85rem;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(234, 179, 8, 0.4);
+        }
+
+        .btn-download:active {
+            transform: translateY(0);
+        }
+
+        /* プレビューエリア (右側) */
+        .preview-area {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(15, 23, 42, 0.4);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .canvas-container {
+            width: 100%;
+            max-width: 850px;
+            aspect-ratio: 16/9;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #000;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .preview-tip {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>プレミアム対決サムネイル作成ツール 🐾</h1>
+        <div class="header-links">
+            <a href="https://yuuchin-ff11.github.io/Yuuchin-RNG-COL/" target="_blank">Yuuchin-RNG-COL ホームページ</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 左側 コントロールパネル -->
+        <div class="control-panel">
+            <!-- 1. 背景テンプレート -->
+            <section>
+                <h2>【1】 背景テンプレートの選択</h2>
+                <div class="grid-2">
+                    <div class="form-group" style="grid-column: span 2;">
+                        <select id="bgTemplate" onchange="draw()">
+                            <option value="fire-ice">炎と氷の宿命対決 (赤 ＆ 青)</option>
+                            <option value="gold-thunder">ロイヤルゴールド雷撃 (金 ＆ 闇)</option>
+                            <option value="dark-neon">ダークネオン魔殿 (紫 ＆ 桃)</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 画像1：ボス -->
+            <section>
+                <h2>【2】 左側の画像（ボスなど）</h2>
+                <div class="file-upload">
+                    <span class="file-upload-text">画像をドラッグ＆ドロップ または クリックして追加</span>
+                    <input type="file" id="imageLoader1" accept="image/*" onchange="handleImage(event, 1)">
+                    <div class="file-name-display" id="fileName1">選択されていません</div>
+                </div>
+                <div class="slider-group">
+                    <div class="slider-row">
+                        <span>拡大率</span>
+                        <input type="range" id="scale1" min="0.1" max="3" step="0.01" value="1" oninput="draw()">
+                    </div>
+                    <div class="slider-row">
+                        <span>左右移動</span>
+                        <input type="range" id="posX1" min="-600" max="600" step="1" value="0" oninput="draw()">
+                    </div>
+                    <div class="slider-row">
+                        <span>上下移動</span>
+                        <input type="range" id="posY1" min="-400" max="400" step="1" value="0" oninput="draw()">
+                    </div>
+                    <div class="slider-row">
+                        <span>背景ぼかし</span>
+                        <input type="range" id="blur1" min="0" max="20" step="1" value="0" oninput="draw()">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 画像2：自分（タルタル） -->
+            <section>
+                <h2>【3】 右側の画像（自分・透過PNGなど）</h2>
+                <div class="file-upload">
+                    <span class="file-upload-text">画像をドラッグ＆ドロップ または クリックして追加</span>
+                    <input type="file" id="imageLoader2" accept="image/*" onchange="handleImage(event, 2)">
+                    <div class="file-name-display" id="fileName2">選択されていません</div>
+                </div>
+                <div class="slider-group">
+                    <div class="slider-row">
+                        <span>拡大率</span>
+                        <input type="range" id="scale2" min="0.1" max="3" step="0.01" value="1" oninput="draw()">
+                    </div>
+                    <div class="slider-row">
+                        <span>左右移動</span>
+                        <input type="range" id="posX2" min="-600" max="600" step="1" value="0" oninput="draw()">
+                    </div>
+                    <div class="slider-row">
+                        <span>上下移動</span>
+                        <input type="range" id="posY2" min="-400" max="400" step="1" value="0" oninput="draw()">
+                    </div>
+                    <div class="slider-row">
+                        <span>背景ぼかし</span>
+                        <input type="range" id="blur2" min="0" max="20" step="1" value="0" oninput="draw()">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 切り抜きフレーム設定 -->
+            <section>
+                <h2>【4】 画像の切り抜き・配置レイアウト</h2>
+                <div class="form-group">
+                    <label>はめ込み型フレーム枠（右側画像に適用されます）</label>
+                    <div class="btn-group">
+                        <button class="btn-select active" id="mask-none" onclick="setMask('none')">斜め分割</button>
+                        <button class="btn-select" id="mask-shield" onclick="setMask('shield')">盾型 (VS)</button>
+                        <button class="btn-select" id="mask-circle" onclick="setMask('circle')">丸型 (円)</button>
+                        <button class="btn-select" id="mask-square" onclick="setMask('square')">透過直乗せ</button>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>中央VSロゴの表示</label>
+                        <select id="showVs" onchange="draw()">
+                            <option value="yes">表示する</option>
+                            <option value="no">非表示</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>境界線の太さ</label>
+                        <input type="range" id="lineWidth" min="0" max="15" step="1" value="6" oninput="draw()">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. テキスト設定 -->
+            <section>
+                <h2>【5】 テキスト文字入れ</h2>
+                <div class="form-group">
+                    <label>メインタイトル（上段）</label>
+                    <input type="text" id="textMain" value="THE DECISIVE BATTLE" placeholder="メインテキストを入力" oninput="draw()">
+                </div>
+                <div class="form-group">
+                    <label>サブタイトル（下段）</label>
+                    <input type="text" id="textSub" value="ジェール Veng25 攻略！" placeholder="サブテキストを入力" oninput="draw()">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>文字のサイズ</label>
+                        <input type="range" id="textSize" min="20" max="120" value="65" oninput="draw()">
+                    </div>
+                    <div class="form-group">
+                        <label>文字の色</label>
+                        <div class="color-row">
+                            <input type="color" id="textColor" value="#ffffff" onchange="draw()">
+                            <input type="color" id="textColorGrad" value="#eab308" onchange="draw()">
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">グラデーション</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. 保存ボタン -->
+            <button class="btn-download" onclick="downloadImage()">
+                画像をダウンロード (1280x720) 🐾
+            </button>
+        </div>
+
+        <!-- 右側 プレビューエリア -->
+        <div class="preview-area">
+            <div class="canvas-container">
+                <canvas id="thumbnailCanvas" width="1280" height="720"></canvas>
+            </div>
+            <div class="preview-tip">
+                <span>※ プレビュー画像は自動で実寸サイズ（1280×720）に調整されて書き出されます。</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('thumbnailCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 画像オブジェクト
+        let img1 = new Image();
+        let img2 = new Image();
+        let img1Loaded = false;
+        let img2Loaded = false;
+
+        // 現在のマスクタイプ ('none', 'shield', 'circle', 'square')
+        let currentMask = 'none';
+
+        // 初期ロード時にデフォルト描画
+        window.onload = function() {
+            draw();
+        };
+
+        // 画像の読み込み処理
+        function handleImage(e, imageNum) {
+            const reader = new FileReader();
+            const file = e.target.files[0];
+            if (!file) return;
+
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    if (imageNum === 1) {
+                        img1 = img;
+                        img1Loaded = true;
+                        document.getElementById('fileName1').innerText = file.name;
+                    } else {
+                        img2 = img;
+                        img2Loaded = true;
+                        document.getElementById('fileName2').innerText = file.name;
+                    }
+                    draw();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // マスク枠の設定
+        function setMask(maskType) {
+            currentMask = maskType;
+            const buttons = ['none', 'shield', 'circle', 'square'];
+            buttons.forEach(btn => {
+                const el = document.getElementById('mask-' + btn);
+                if (btn === maskType) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+            draw();
+        }
+
+        // メイン描画処理
+        function draw() {
+            // キャンバスクリア
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 1. 背景テンプレートの描画
+            drawBackground();
+
+            // 2. 左側画像の描画 (ボスなど)
+            if (img1Loaded) {
+                ctx.save();
+                // 斜めカットの場合、左側領域にのみクリップ
+                if (currentMask === 'none') {
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(800, 0);
+                    ctx.lineTo(480, 720);
+                    ctx.lineTo(0, 720);
+                    ctx.closePath();
+                    ctx.clip();
+                }
+                drawImageAdjusted(img1, 1);
+                ctx.restore();
+            }
+
+            // 3. 右側画像の描画 (自分など)
+            if (img2Loaded) {
+                ctx.save();
+                if (currentMask === 'none') {
+                    // 斜めカットの右側領域にクリップ
+                    ctx.beginPath();
+                    ctx.moveTo(800, 0);
+                    ctx.lineTo(1280, 0);
+                    ctx.lineTo(1280, 720);
+                    ctx.lineTo(480, 720);
+                    ctx.closePath();
+                    ctx.clip();
+                    drawImageAdjusted(img2, 2);
+                } else if (currentMask === 'shield') {
+                    // 盾型（中央〜右側に配置するフレーム）
+                    drawShieldPath(960, 360, 380, 480);
+                    ctx.clip();
+                    drawImageAdjusted(img2, 2);
+                } else if (currentMask === 'circle') {
+                    // 丸型枠
+                    ctx.beginPath();
+                    ctx.arc(960, 360, 220, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.clip();
+                    drawImageAdjusted(img2, 2);
+                } else if (currentMask === 'square') {
+                    // 枠なし透過直乗せ (全画面をクリップせずにそのまま描く)
+                    drawImageAdjusted(img2, 2);
+                }
+                ctx.restore();
+            }
+
+            // 4. 境界線エフェクトの描画
+            drawBorders();
+
+            // 5. VSロゴの描画
+            const showVs = document.getElementById('showVs').value;
+            if (showVs === 'yes') {
+                drawVsLogo();
+            }
+
+            // 6. テキストの描画
+            drawText();
+        }
+
+        // 背景テンプレート描画
+        function drawBackground() {
+            const template = document.getElementById('bgTemplate').value;
+
+            if (template === 'fire-ice') {
+                // 炎と氷 (赤と青)
+                const gradLeft = ctx.createLinearGradient(0, 0, 640, 720);
+                gradLeft.addColorStop(0, '#450a0a');
+                gradLeft.addColorStop(0.5, '#7f1d1d');
+                gradLeft.addColorStop(1, '#ef4444');
+
+                const gradRight = ctx.createLinearGradient(640, 0, 1280, 720);
+                gradRight.addColorStop(0, '#0c4a6e');
+                gradRight.addColorStop(0.5, '#0369a1');
+                gradRight.addColorStop(1, '#3b82f6');
+
+                // 左背景
+                ctx.fillStyle = gradLeft;
+                ctx.fillRect(0, 0, 640, 720);
+                // 右背景
+                ctx.fillStyle = gradRight;
+                ctx.fillRect(640, 0, 640, 720);
+
+                // 炎のエネルギー感（中央の光のブレンド）
+                const beam = ctx.createRadialGradient(640, 360, 50, 640, 360, 300);
+                beam.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+                beam.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.fillStyle = beam;
+                ctx.fillRect(0, 0, 1280, 720);
+
+            } else if (template === 'gold-thunder') {
+                // ロイヤルゴールド雷
+                const grad = ctx.createLinearGradient(0, 0, 1280, 720);
+                grad.addColorStop(0, '#020617');
+                grad.addColorStop(0.5, '#1e1b4b');
+                grad.addColorStop(1, '#020617');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 1280, 720);
+
+                // 稲妻エフェクト（擬似）
+                ctx.strokeStyle = 'rgba(234, 179, 8, 0.15)';
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(640, 0);
+                ctx.lineTo(600, 200);
+                ctx.lineTo(680, 400);
+                ctx.lineTo(640, 720);
+                ctx.stroke();
+
+                ctx.strokeStyle = 'rgba(234, 179, 8, 0.08)';
+                ctx.lineWidth = 15;
+                ctx.stroke();
+
+            } else if (template === 'dark-neon') {
+                // ダークネオン
+                const grad = ctx.createRadialGradient(640, 360, 100, 640, 360, 800);
+                grad.addColorStop(0, '#1e1b4b');
+                grad.addColorStop(0.7, '#0f172a');
+                grad.addColorStop(1, '#020617');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 1280, 720);
+
+                // ネオンサークル枠線（うっすらした光）
+                ctx.strokeStyle = 'rgba(192, 132, 252, 0.1)';
+                ctx.lineWidth = 60;
+                ctx.beginPath();
+                ctx.arc(640, 360, 300, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+
+        // スライダー調整を反映して画像を描画
+        function drawImageAdjusted(img, imageNum) {
+            const scale = parseFloat(document.getElementById('scale' + imageNum).value);
+            const posX = parseFloat(document.getElementById('posX' + imageNum).value);
+            const posY = parseFloat(document.getElementById('posY' + imageNum).value);
+            const blurVal = parseInt(document.getElementById('blur' + imageNum).value);
+
+            ctx.save();
+            
+            // ぼかし効果の適用
+            if (blurVal > 0) {
+                ctx.filter = `blur(${blurVal}px)`;
+            }
+
+            // 画像のサイズ計算
+            const aspect = img.width / img.height;
+            let dw = canvas.width;
+            let dh = canvas.height;
+
+            if (aspect > canvas.width / canvas.height) {
+                dh = canvas.height;
+                dw = dh * aspect;
+            } else {
+                dw = canvas.width;
+                dh = dw / aspect;
+            }
+
+            // スケール適用
+            dw *= scale;
+            dh *= scale;
+
+            // 配置の中心点
+            let cx = 0;
+            let cy = 360;
+
+            if (imageNum === 1) {
+                cx = currentMask === 'none' ? 320 : 640; // 斜めなら左寄り、直乗せなら中央
+            } else {
+                cx = currentMask === 'none' ? 960 : 960; // 右側に配置
+            }
+
+            // 位置移動を合成
+            const dx = cx - (dw / 2) + posX;
+            const dy = cy - (dh / 2) + posY;
+
+            ctx.drawImage(img, dx, dy, dw, dh);
+            ctx.restore();
+        }
+
+        // 盾型のパスを構築
+        function drawShieldPath(x, y, w, h) {
+            ctx.beginPath();
+            ctx.moveTo(x, y - h/2);
+            // 上部左右の広がり
+            ctx.quadraticCurveTo(x + w/2, y - h/2, x + w/2, y - h/6);
+            // 下部への絞り込み
+            ctx.quadraticCurveTo(x + w/2, y + h/6, x, y + h/2);
+            ctx.quadraticCurveTo(x - w/2, y + h/6, x - w/2, y - h/6);
+            ctx.quadraticCurveTo(x - w/2, y - h/2, x, y - h/2);
+            ctx.closePath();
+        }
+
+        // 境界線の描画
+        function drawBorders() {
+            const width = parseInt(document.getElementById('lineWidth').value);
+            if (width <= 0) return;
+
+            const template = document.getElementById('bgTemplate').value;
+            let color = '#ffffff';
+
+            if (template === 'fire-ice') color = '#f1f5f9';
+            if (template === 'gold-thunder') color = '#eab308';
+            if (template === 'dark-neon') color = '#c084fc';
+
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = color;
+
+            if (currentMask === 'none') {
+                // 斜めカットの境界線
+                ctx.beginPath();
+                ctx.moveTo(800, 0);
+                ctx.lineTo(480, 720);
+                ctx.stroke();
+            } else if (currentMask === 'shield' && img2Loaded) {
+                // 盾型フレームのふち
+                drawShieldPath(960, 360, 380, 480);
+                ctx.stroke();
+            } else if (currentMask === 'circle' && img2Loaded) {
+                // 丸型フレームのふち
+                ctx.beginPath();
+                ctx.arc(960, 360, 220, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        // VSロゴの描画
+        function drawVsLogo() {
+            const cx = currentMask === 'none' ? 640 : 750; // 配置レイアウトに応じて位置を変える
+            const cy = currentMask === 'none' ? 360 : 360;
+
+            ctx.save();
+            ctx.font = 'italic bold 90px "Impact", "Arial Black", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // グラデーション色
+            const grad = ctx.createLinearGradient(cx - 50, cy - 50, cx + 50, cy + 50);
+            grad.addColorStop(0, '#f87171'); // 赤ネオン
+            grad.addColorStop(1, '#60a5fa'); // 青ネオン
+
+            // 影と光彩効果
+            ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+            ctx.shadowBlur = 20;
+
+            // テキストの枠線（フチ）
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 14;
+            ctx.strokeText('VS', cx, cy);
+
+            // テキスト塗りつぶし
+            ctx.fillStyle = grad;
+            ctx.fillText('VS', cx, cy);
+
+            ctx.restore();
+        }
+
+        // 文字（タイトル）の描画
+        function drawText() {
+            const textMain = document.getElementById('textMain').value.trim();
+            const textSub = document.getElementById('textSub').value.trim();
+
+            const textSize = parseInt(document.getElementById('textSize').value);
+            const color1 = document.getElementById('textColor').value;
+            const color2 = document.getElementById('textColorGrad').value;
+
+            ctx.save();
+            
+            // フォントスタイル
+            ctx.textAlign = 'center';
+            ctx.font = `bold ${textSize}px "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif`;
+
+            // 上段テキスト（メインタイトル）
+            if (textMain) {
+                const x = 640;
+                const y = 550; // 下部に文字を集めて視認性を上げる
+
+                // テキストグラデーション
+                const grad = ctx.createLinearGradient(x, y - textSize, x, y + 10);
+                grad.addColorStop(0, color1);
+                grad.addColorStop(1, color2);
+
+                // フチ取り
+                ctx.strokeStyle = '#020617';
+                ctx.lineWidth = 12;
+                ctx.strokeText(textMain, x, y);
+
+                // 影・光彩
+                ctx.shadowColor = color2;
+                ctx.shadowBlur = 10;
+
+                // 塗りつぶし
+                ctx.fillStyle = grad;
+                ctx.fillText(textMain, x, y);
+            }
+
+            // 下段テキスト（サブタイトル）
+            if (textSub) {
+                const subSize = Math.round(textSize * 0.65);
+                ctx.font = `bold ${subSize}px "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif`;
+                
+                const x = 640;
+                const y = 635;
+
+                // フチ取り
+                ctx.strokeStyle = '#020617';
+                ctx.lineWidth = 10;
+                ctx.strokeText(textSub, x, y);
+
+                // 塗りつぶし
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(textSub, x, y);
+            }
+
+            ctx.restore();
+        }
+
+        // ダウンロード処理
+        function downloadImage() {
+            const link = document.createElement('a');
+            const fileName = document.getElementById('textSub').value.trim() || 'thumbnail';
+            link.download = fileName + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>

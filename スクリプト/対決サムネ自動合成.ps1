@@ -100,7 +100,7 @@ if (Test-Path $selfPath) {
     $g.SetClip($shieldPath)
     $selfW = 550
     $selfH = [int]($selfW * ($selfBmp.Height / $selfBmp.Width))
-    $s_pos_x = 960 - ($selfW / 2) - 35
+    $s_pos_x = 960 - ($selfW / 2) - 15
     $s_pos_y = 360 - ($selfH / 2) - 100
     $g.DrawImage($selfBmp, [float]$s_pos_x, [float]$s_pos_y, [float]$selfW, [float]$selfH)
     $g.ResetClip()

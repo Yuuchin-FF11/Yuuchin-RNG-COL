@@ -75,7 +75,7 @@ function DrawStyledText($g, $text, $x, $y, $emSize, $align) {
     }
 }
 
-function CreateThumbnail($inputPath, $outputPath, $titleText, $fontSize) {
+function CreateThumbnail($inputPath, $outputPath, $titleText, $fontSize, $subTitleText = $null) {
     if (-not (Test-Path $inputPath)) {
         Write-Error "Input not found: $inputPath"
         return
@@ -115,6 +115,10 @@ function CreateThumbnail($inputPath, $outputPath, $titleText, $fontSize) {
     $g.DrawImage($img, [System.Drawing.Rectangle]::new(0, 0, $width, $height), [System.Drawing.Rectangle]::new($sx, $sy, $drawW, $drawH), [System.Drawing.GraphicsUnit]::Pixel)
     
     DrawStyledText $g $titleText 640 90 $fontSize "Center"
+    
+    if ($subTitleText) {
+        DrawStyledText $g $subTitleText 640 610 40 "Center"
+    }
     
     $bmp.Save($outputPath, [System.Drawing.Imaging.ImageFormat]::Png)
     $g.Dispose()
@@ -169,7 +173,8 @@ CreateThumbnail $inPath3 $outPath4 $titleText4 56
 $inputName5 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150, 46, 106, 112, 103)) # トローブ.jpg
 $outBase5 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150)) # トローブ
 $titleText5 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150, 227, 130, 173, 227, 131, 163, 227, 131, 169, 231, 183, 143, 229, 139, 149, 229, 147, 161, 227, 129, 167, 231, 174, 177, 233, 150, 139, 227, 129, 145, 239, 188, 129)) # トローブキャラ総動員で箱開け！
+$subText5 = $utf8.GetString([byte[]](239, 188, 185, 239, 189, 149, 239, 189, 149, 239, 189, 131, 239, 189, 136, 239, 189, 137, 239, 189, 142, 239, 188, 160, 227, 130, 191, 227, 131, 171, 231, 139, 169)) # Ｙｕｕｃｈｉｎ＠タル狩
 
 $inPath5 = Join-Path $tempDir $inputName5
 $outPath5 = Join-Path $tempDir ($outBase5 + $suffix)
-CreateThumbnail $inPath5 $outPath5 $titleText5 56
+CreateThumbnail $inPath5 $outPath5 $titleText5 56 $subText5

@@ -378,6 +378,7 @@
                             <option value="fire-ice">炎と氷の宿命対決 (赤 ＆ 青)</option>
                             <option value="gold-thunder">ロイヤルゴールド雷撃 (金 ＆ 闇)</option>
                             <option value="dark-neon">ダークネオン魔殿 (紫 ＆ 桃)</option>
+                            <option value="fighting-game">アーケード格闘ゲーム風 (赤青・グリッド・走査線)</option>
                         </select>
                     </div>
                 </div>
@@ -706,6 +707,83 @@
                 ctx.beginPath();
                 ctx.arc(640, 360, 300, 0, Math.PI * 2);
                 ctx.stroke();
+            } else if (template === 'fighting-game') {
+                // アーケード格闘ゲーム風 (赤青・グリッド・走査線)
+                
+                // 1. 左の赤背景と右の青背景のベースグラデーション
+                const gradLeft = ctx.createLinearGradient(0, 0, 640, 720);
+                gradLeft.addColorStop(0, '#581c87'); // 紫から赤へのグラデーション
+                gradLeft.addColorStop(0.5, '#991b1b');
+                gradLeft.addColorStop(1, '#ef4444');
+
+                const gradRight = ctx.createLinearGradient(640, 0, 1280, 720);
+                gradRight.addColorStop(0, '#1e3a8a');
+                gradRight.addColorStop(0.5, '#1d4ed8');
+                gradRight.addColorStop(1, '#06b6d4'); // シアン
+
+                // 左（赤）の描画
+                ctx.fillStyle = gradLeft;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(750, 0);
+                ctx.lineTo(530, 720);
+                ctx.lineTo(0, 720);
+                ctx.closePath();
+                ctx.fill();
+
+                // 右（青）の描画
+                ctx.fillStyle = gradRight;
+                ctx.beginPath();
+                ctx.moveTo(750, 0);
+                ctx.lineTo(1280, 0);
+                ctx.lineTo(1280, 720);
+                ctx.lineTo(530, 720);
+                ctx.closePath();
+                ctx.fill();
+
+                // 2. 斜めストライプ装飾
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+                for (let i = -100; i < 1380; i += 80) {
+                    ctx.beginPath();
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i + 30, 0);
+                    ctx.lineTo(i - 170, 720);
+                    ctx.lineTo(i - 200, 720);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                // 3. サイバーグリッド（格子）の描画
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+                ctx.lineWidth = 1;
+                // 縦線
+                for (let x = 0; x < 1280; x += 60) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, 720);
+                    ctx.stroke();
+                }
+                // 横線
+                for (let y = 0; y < 720; y += 60) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(1280, y);
+                    ctx.stroke();
+                }
+
+                // 4. レトロアーケード風の走査線（スキャンライン）
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+                for (let y = 0; y < 720; y += 4) {
+                    ctx.fillRect(0, y, 1280, 1.5);
+                }
+
+                // 5. 中央の衝突スパーク光彩
+                const collision = ctx.createRadialGradient(640, 360, 20, 640, 360, 250);
+                collision.addColorStop(0, 'rgba(253, 224, 71, 0.4)');
+                collision.addColorStop(0.3, 'rgba(239, 68, 68, 0.2)');
+                collision.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.fillStyle = collision;
+                ctx.fillRect(0, 0, 1280, 720);
             }
         }
 
@@ -782,6 +860,7 @@
             if (template === 'fire-ice') color = '#f1f5f9';
             if (template === 'gold-thunder') color = '#eab308';
             if (template === 'dark-neon') color = '#c084fc';
+            if (template === 'fighting-game') color = '#facc15';
 
             ctx.save();
             ctx.strokeStyle = color;

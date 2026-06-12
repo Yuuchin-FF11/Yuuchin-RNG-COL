@@ -149,11 +149,18 @@ $inPath2 = Join-Path $tempDir $inputName2
 $outPath2 = Join-Path $tempDir ($outBase2 + $suffix)
 CreateThumbnail $inPath2 $outPath2 $titleTextNew 56
 
-# --- 4. Kamui ---
+# --- 4. Kamui Apollyon ---
 $inputName3 = $utf8.GetString([byte[]](231, 165, 158, 229, 168, 129, 46, 106, 112, 103)) # 神威.jpg
-$outBase3 = $utf8.GetString([byte[]](231, 165, 158, 229, 168, 129)) # 神威
-$titleText3 = $utf8.GetString([byte[]](227, 130, 162, 227, 131, 157, 227, 131, 170, 227, 130, 170, 227, 131, 179, 239, 188, 161, 239, 188, 161, 227, 128, 128, 227, 131, 134, 227, 131, 161, 227, 131, 138, 227, 130, 185, 239, 188, 161, 239, 188, 161, 227, 128, 128, 231, 165, 158, 229, 168, 129, 230, 150, 176, 239, 188, 162, 239, 188, 167, 239, 188, 173)) # アポリオンＡＡ　テメナスＡＡ　神威新ＢＧＭ
+$outBase3 = $utf8.GetString([byte[]](231, 165, 158, 229, 168, 129, 95, 227, 130, 162, 227, 131, 157, 227, 131, 170, 227, 130, 170, 227, 131, 179)) # 神威_アポリオン
+$titleText3 = $utf8.GetString([byte[]](227, 130, 162, 227, 131, 157, 227, 131, 170, 227, 130, 170, 227, 131, 179, 239, 188, 161, 239, 188, 161, 227, 128, 128, 231, 165, 158, 229, 168, 129, 230, 150, 176, 239, 188, 162, 239, 188, 167, 239, 188, 173)) # アポリオンＡＡ　神威新ＢＧＭ
 
 $inPath3 = Join-Path $tempDir $inputName3
 $outPath3 = Join-Path $tempDir ($outBase3 + $suffix)
-CreateThumbnail $inPath3 $outPath3 $titleText3 42
+CreateThumbnail $inPath3 $outPath3 $titleText3 56
+
+# --- 5. Kamui Temenos ---
+$outBase4 = $utf8.GetString([byte[]](231, 165, 158, 229, 168, 129, 95, 227, 131, 134, 227, 131, 161, 227, 131, 138, 227, 130, 185)) # 神威_テメナス
+$titleText4 = $utf8.GetString([byte[]](227, 131, 134, 227, 131, 161, 227, 131, 138, 227, 130, 185, 239, 188, 161, 239, 188, 161, 227, 128, 128, 231, 165, 158, 229, 168, 129, 230, 150, 176, 239, 188, 162, 239, 188, 167, 239, 188, 173)) # テメナスＡＡ　神威新ＢＧＭ
+
+$outPath4 = Join-Path $tempDir ($outBase4 + $suffix)
+CreateThumbnail $inPath3 $outPath4 $titleText4 56

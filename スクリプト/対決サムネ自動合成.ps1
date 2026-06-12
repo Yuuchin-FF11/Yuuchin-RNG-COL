@@ -1,8 +1,12 @@
 Add-Type -AssemblyName System.Drawing
 
 $baseDir = (Get-Location).Path
-$bossPath = Join-Path $baseDir "一時作業\バンバ.png"
-$selfPath = Join-Path $baseDir "一時作業\白タル.jpg"
+$utf8 = [System.Text.Encoding]::UTF8
+$tempDirName = $utf8.GetString([byte[]](228, 184, 128, 230, 153, 130, 228, 189, 156, 230, 165, 173))
+$bossName = $utf8.GetString([byte[]](227, 131, 144, 227, 131, 179, 227, 131, 144, 46, 112, 110, 103))
+$selfName = $utf8.GetString([byte[]](231, 153, 189, 227, 130, 191, 227, 131, 171, 46, 106, 112, 103))
+$bossPath = Join-Path $baseDir (Join-Path $tempDirName $bossName)
+$selfPath = Join-Path $baseDir (Join-Path $tempDirName $selfName)
 $outputPath = Join-Path $baseDir "versus_thumbnail_Bumba.png"
 
 $width = 1280

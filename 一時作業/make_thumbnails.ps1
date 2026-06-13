@@ -196,6 +196,7 @@ CreateThumbnail $inPath5 $outPath7 $titleText7 45
 $outBase8 = $utf8.GetString([byte[]](231, 165, 158, 229, 168, 129, 95, 227, 130, 162, 227, 131, 157, 227, 131, 170, 227, 130, 170, 227, 131, 179, 95, 227, 130, 189, 227, 131, 173)) # 神威_アポリオン_ソロ
 $titleText8 = $utf8.GetString([byte[]](227, 130, 189, 227, 131, 173, 227, 129, 167, 230, 140, 145, 227, 130, 128, 239, 188, 129, 227, 130, 162, 227, 131, 157, 227, 131, 170, 227, 130, 170, 227, 131, 179, 239, 188, 161, 239, 188, 161, 227, 128, 128, 231, 165, 158, 229, 168, 129, 230, 150, 176, 239, 188, 162, 239, 188, 167, 239, 188, 173)) # ソロで挑む！アポリオンＡＡ　神威新ＢＧＭ
 
+$inPath3 = Join-Path $tempDir $inputName3
 $outPath8 = Join-Path $tempDir ($outBase8 + $suffix)
 CreateThumbnail $inPath3 $outPath8 $titleText8 45
 
@@ -205,3 +206,11 @@ $titleText9 = $utf8.GetString([byte[]](227, 130, 189, 227, 131, 173, 227, 129, 1
 
 $outPath9 = Join-Path $tempDir ($outBase9 + $suffix)
 CreateThumbnail $inPath3 $outPath9 $titleText9 45
+
+# --- 11. Trove Beast Gold (トローブ獣_一攫千金) ---
+$inputName10 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150, 231, 141, 163, 46, 106, 112, 103)) # トローブ獣.jpg
+$outBase10 = $utf8.GetString([byte[]](227, 131, 136, 227, 131, 173, 227, 131, 188, 227, 131, 150, 231, 141, 163, 95, 228, 184, 128, 230, 148, 171, 229, 141, 131, 233, 135, 145)) # トローブ獣_一攫千金
+
+$inPath10 = Join-Path $tempDir $inputName10
+$outPath10 = Join-Path $tempDir ($outBase10 + $suffix)
+CreateThumbnail $inPath10 $outPath10 $titleText7 45

@@ -1655,13 +1655,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (shouldBeListening) {
                     if (!isSpeechSynthesisActive) {
                         const now = Date.now();
-                        // 連続エラー回数に応じて再接続の待機時間を可変（1回目: 500ms, 2回目: 2000ms, 3回目以上: 5000ms）🐾
-                        // これにより、突発的な単発のエラーでは遅延ほぼなしで即時に再接続が走ります🐾
+                        // 連続エラー回数（no-speechやabortedを除く通信異常など）に応じて再接続の待機時間を可変🐾
+                        // 直近のエラーが no-speech またはエラーなしの場合は delay = 0 で即座に再起動します🐾
                         let delay = 0;
-                        if (consecutiveErrorCount > 0) {
+                        if (lastErrorType && lastErrorType !== 'no-speech' && lastErrorType !== 'aborted') {
                             if (consecutiveErrorCount === 1) delay = 500;
                             else if (consecutiveErrorCount === 2) delay = 2000;
-                            else delay = 5000;
+                            else if (consecutiveErrorCount >= 3) delay = 5000;
                         }
 
                         if (window.micRestartTimeoutId) {
@@ -1669,7 +1669,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
 
                         if (delay > 0) {
-                            console.log(`Speech recognition disconnected with errors (consecutive count: ${consecutiveErrorCount}). Waiting ${delay}ms before reconnecting...`);
+                            console.log(`Speech recognition disconnected with errors (type: ${lastErrorType}, consecutive count: ${consecutiveErrorCount}). Waiting ${delay}ms before reconnecting...`);
                             if (micStatus) {
                                 // 軽微なエラー時は「接続維持中」の表示のままにし、警告テキストでチカチカするのを防ぎます🐾
                                 if (consecutiveErrorCount >= 3) {
@@ -1686,7 +1686,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }
                             }, delay);
                         } else {
-                            console.log('Speech recognition disconnected automatically. Reconnecting immediately...');
+                            console.log('Speech recognition disconnected (normal/no-speech). Reconnecting immediately...');
                             reconnectSpeechRecognition();
                         }
                     } else {
@@ -1713,7 +1713,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.warn('Speech recognition warning:', e.error);
                 lastErrorTime = Date.now();
                 lastErrorType = e.error;
-                consecutiveErrorCount++;
+
+                // no-speech（無音タイムアウト）や aborted（手動停止）は通信異常ではないので、連続エラーカウントから除外します🐾
+                if (e.error !== 'no-speech' && e.error !== 'aborted') {
+                    consecutiveErrorCount++;
+                }
 
                 if (e.error === 'aborted') return;
 

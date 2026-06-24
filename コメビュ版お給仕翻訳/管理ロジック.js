@@ -1633,6 +1633,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 isListening = true;
                 isStarting = false; // 起動処理完了🐾
                 lastStartSuccessTime = Date.now();
+                consecutiveErrorCount = 0; // 正常に起動できたら連続エラーカウントをリセット🐾
+                lastErrorType = ''; // エラー状態をクリア🐾
                 if (micDot) micDot.classList.add('active');
                 if (micBtnText) micBtnText.textContent = 'マイク音声認識: ON';
                 if (micStatus) {
@@ -1648,19 +1650,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (shouldBeListening) {
                     if (!isSpeechSynthesisActive) {
                         const now = Date.now();
-                        // 直近でネットワークエラーが発生していた場合、再接続まで5秒待つようにする🐾
-                        const isNetworkErrorRecent = (lastErrorType === 'network' && (now - lastErrorTime) < 10000);
-                        const delay = isNetworkErrorRecent ? 5000 : 0;
+                        // 連続エラー回数に応じて再接続の待機時間を可変（1回目: 500ms, 2回目: 2000ms, 3回目以上: 5000ms）🐾
+                        // これにより、突発的な単発のエラーでは遅延ほぼなしで即時に再接続が走ります🐾
+                        let delay = 0;
+                        if (consecutiveErrorCount > 0) {
+                            if (consecutiveErrorCount === 1) delay = 500;
+                            else if (consecutiveErrorCount === 2) delay = 2000;
+                            else delay = 5000;
+                        }
 
                         if (window.micRestartTimeoutId) {
                             clearTimeout(window.micRestartTimeoutId);
                         }
 
                         if (delay > 0) {
-                            console.log(`Speech recognition disconnected. Network error detected, waiting ${delay}ms before reconnecting...`);
+                            console.log(`Speech recognition disconnected with errors (consecutive count: ${consecutiveErrorCount}). Waiting ${delay}ms before reconnecting...`);
                             if (micStatus) {
-                                micStatus.textContent = 'ネットワークエラーのため、5秒後に再接続を試みます... 🐾';
-                                micStatus.style.color = 'var(--accent-color)';
+                                // 軽微なエラー時は「接続維持中」の表示のままにし、警告テキストでチカチカするのを防ぎます🐾
+                                if (consecutiveErrorCount >= 3) {
+                                    micStatus.textContent = '接続が不安定なため、一時待機して再接続を試みます... 🐾';
+                                    micStatus.style.color = 'var(--accent-color)';
+                                } else {
+                                    micStatus.textContent = 'マイク接続維持中（自動復旧）... 🎙️';
+                                    micStatus.style.color = 'var(--success-color)';
+                                }
                             }
                             window.micRestartTimeoutId = setTimeout(() => {
                                 if (shouldBeListening && !isListening && !isSpeechSynthesisActive) {
@@ -1704,9 +1717,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         micStatus.textContent = 'エラー: マイクの使用が許可されていません。ブラウザのアドレスバーの鍵アイコンからマイクを許可してください🐾';
                         micStatus.style.color = 'var(--error-color)';
                         shouldBeListening = false;
-                    } else if (e.error === 'no-speech') {
-                        // 無音タイムアウトはWeb Speech APIの仕様なので、警告せずサイレント復旧を促す🐾
-                        micStatus.textContent = 'マイク接続維持中（無音自動復旧）... 🎙️';
+                    } else if (e.error === 'no-speech' || e.error === 'network') {
+                        // 無音タイムアウトや一時的な通信瞬断は仕様なので、警告せずサイレント復旧を促す🐾
+                        micStatus.textContent = 'マイク接続維持中（自動復旧）... 🎙️';
                         micStatus.style.color = 'var(--success-color)';
                     } else {
                         micStatus.textContent = `接続調整中 (${e.error})。自動再起動します...🐾`;
@@ -1717,6 +1730,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             recognition.onresult = async (event) => {
                 consecutiveErrorCount = 0; // 正常に聞き取れたら連続エラーをリセット🐾
+                lastErrorType = ''; // エラー状態をクリア🐾
                 if (isSpeechSynthesisActive) {
                     console.log('Speech recognition ignored: SpeechSynthesis is currently active (soft-mute)🐾');
                     return;

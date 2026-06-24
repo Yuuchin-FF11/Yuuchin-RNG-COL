@@ -322,6 +322,9 @@ class ReadAloudManager {
 
             const watchdogId = setTimeout(() => {
                 console.warn('SpeechSynthesis output timed out. Forcing next queue...');
+                // タイムアウト時はイベントの競合を防ぐため、イベントハンドラを無効化してから cancel します🐾
+                utterance.onend = null;
+                utterance.onerror = null;
                 try {
                     this.synth.cancel(); // タイムアウト時のみ、詰まりを解消するために cancel を実行🐾
                 } catch(err) {}
@@ -329,7 +332,7 @@ class ReadAloudManager {
                 resumeRecognition();
                 this.speaking = false;
                 this.processQueue();
-            }, 12000);
+            }, 30000); // 長いコメントの読み上げにも対応できるよう、タイムアウトを30秒へ延長🐾
 
             utterance.onend = () => {
                 clearTimeout(watchdogId);
@@ -348,9 +351,11 @@ class ReadAloudManager {
                 cleanUtterance();
 
                 try {
-                    // ななみちゃん（Online音声）での再生が失敗した場合（synthesis-failedなど）の3重安全化処理🐾
-                    // bestVoice の存在チェックと name プロパティの存在チェックを二重に強化🐾
-                    if (bestVoice && bestVoice.name && bestVoice.name.includes('Online')) {
+                    // タイムアウトや意図的な cancel() による中断（interrupted）や強制終了（aborted）の場合はリトライ・フォールバックを行いません🐾
+                    if (e.error === 'interrupted' || e.error === 'aborted') {
+                        console.log(`SpeechSynthesis aborted or interrupted (${e.error}). No retry.`);
+                    } else if (bestVoice && bestVoice.name && bestVoice.name.includes('Online')) {
+                        // ななみちゃん（Online音声）での再生が接続断などで本当に失敗した場合（synthesis-failedなど）のみリトライします🐾
                         if (!item._isFallbackAttempted) {
                             // 1度目の失敗：1.5秒待ってから、ななみちゃんのままでもう一度再試行する🐾
                             console.warn('Online voice failed. Retrying with same Online voice after 1.5s...');

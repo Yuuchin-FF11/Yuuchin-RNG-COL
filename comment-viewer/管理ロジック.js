@@ -1510,6 +1510,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         logItem.appendChild(contentBox);
+
+        if (chat.isBroadcaster) {
+            // 誤認識した自分の言葉をワンクリックで修正フォームへ転送するショートカットボタン🐾
+            const btnCorrectLog = document.createElement('button');
+            btnCorrectLog.textContent = '修正登録🐾';
+            btnCorrectLog.style.background = 'rgba(234, 179, 8, 0.12)';
+            btnCorrectLog.style.border = '1px solid var(--accent-color)';
+            btnCorrectLog.style.color = 'var(--accent-color)';
+            btnCorrectLog.style.padding = '0.15rem 0.4rem';
+            btnCorrectLog.style.borderRadius = '6px';
+            btnCorrectLog.style.cursor = 'pointer';
+            btnCorrectLog.style.fontSize = '0.75rem';
+            btnCorrectLog.style.alignSelf = 'center';
+            btnCorrectLog.style.marginLeft = 'auto';
+            btnCorrectLog.style.flexShrink = '0';
+            
+            btnCorrectLog.addEventListener('click', () => {
+                if (correctIncorrectInput) {
+                    correctIncorrectInput.value = chat.message;
+                    correctIncorrectInput.focus();
+                    correctIncorrectInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+            logItem.appendChild(btnCorrectLog);
+        }
+
         chatLogList.insertBefore(logItem, chatLogList.firstChild);
     }
 
@@ -2201,5 +2227,106 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 初回ロード時に辞書リストを表示
         renderCorrectDictionary();
+
+        // --- HP用語プリセットデータのロード＆トグル制御🐾 ---
+        let isPresetLoaded = false;
+        const btnTogglePreset = document.getElementById('btn-toggle-preset');
+        const presetTagsContainer = document.getElementById('preset-tags-container');
+        const presetTagsList = document.getElementById('preset-tags-list');
+
+        if (btnTogglePreset && presetTagsContainer && presetTagsList) {
+            btnTogglePreset.addEventListener('click', async () => {
+                if (presetTagsContainer.style.display === 'none') {
+                    presetTagsContainer.style.display = 'block';
+                    btnTogglePreset.textContent = 'HP用語プリセットを閉じる🐾';
+                    
+                    if (!isPresetLoaded) {
+                        try {
+                            presetTagsList.innerHTML = '<span style="color: var(--text-muted); font-size: 0.8rem;">用語データを読み込み中...🐾</span>';
+                            // サーバー経由で用語データをフェッチ（親ディレクトリの.agentから取得）🐾
+                            const response = await fetch('../.agent/extracted_ff11_words.txt');
+                            if (!response.ok) throw new Error('Failed to load words list');
+                            const text = await response.text();
+                            
+                            // 用語データのパースとクリーニング🐾
+                            const lines = text.split('\n');
+                            const wordSet = new Set();
+                            
+                            lines.forEach(line => {
+                                let word = line.trim();
+                                if (!word || word.startsWith('===')) return;
+                                
+                                // マークダウン記法の除去とテキストのクレンジング🐾
+                                word = word.replace(/^-\s+/, ''); // リスト先頭のダッシュを除去
+                                word = word.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1'); // リンクのテキスト部分だけ抽出
+                                word = word.replace(/[\[\]「」『』()（）"']/g, ''); // ブラケット・カッコ類の除去
+                                word = word.split(' (')[0]; // 補足情報のカット
+                                word = word.split('(')[0];
+                                word = word.trim();
+                                
+                                // ひらがな・カタカナ・漢字を含む日本語の固有名詞を厳選🐾
+                                if (word.length >= 3 && word.length <= 15) {
+                                    // ひらがな、カタカナ、漢字が少なくとも1文字含まれているか確認
+                                    if (/[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(word)) {
+                                        // 完全に数値や記号のみ、または意味のない記号列、URL等は除外🐾
+                                        if (!/^[0-9:\-\+]+$/.test(word) && !word.startsWith('http') && word !== '???') {
+                                            wordSet.add(word);
+                                        }
+                                    }
+                                }
+                            });
+                            
+                            // 五十音順にソート🐾
+                            const sortedWords = Array.from(wordSet).sort((a, b) => a.localeCompare(b, 'ja'));
+                            presetTagsList.innerHTML = '';
+                            
+                            if (sortedWords.length === 0) {
+                                presetTagsList.innerHTML = '<span style="color: var(--text-muted); font-size: 0.8rem;">登録可能な用語が見つかりませんでした🐾</span>';
+                            } else {
+                                sortedWords.forEach(word => {
+                                    const span = document.createElement('span');
+                                    span.textContent = word;
+                                    span.style.background = 'rgba(56, 189, 248, 0.15)';
+                                    span.style.border = '1px solid rgba(56, 189, 248, 0.3)';
+                                    span.style.color = '#38bdf8';
+                                    span.style.padding = '0.2rem 0.5rem';
+                                    span.style.borderRadius = '6px';
+                                    span.style.cursor = 'pointer';
+                                    span.style.fontSize = '0.8rem';
+                                    span.style.transition = 'all 0.2s';
+                                    
+                                    span.addEventListener('mouseover', () => {
+                                        span.style.background = 'rgba(56, 189, 248, 0.25)';
+                                        span.style.borderColor = '#38bdf8';
+                                    });
+                                    span.addEventListener('mouseout', () => {
+                                        span.style.background = 'rgba(56, 189, 248, 0.15)';
+                                        span.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+                                    });
+                                    
+                                    span.addEventListener('click', () => {
+                                        if (correctCorrectInput) {
+                                            correctCorrectInput.value = word;
+                                            if (correctIncorrectInput) {
+                                                correctIncorrectInput.focus();
+                                            }
+                                        }
+                                    });
+                                    
+                                    presetTagsList.appendChild(span);
+                                });
+                                isPresetLoaded = true;
+                            }
+                        } catch (err) {
+                            console.error('Failed to load preset words:', err);
+                            presetTagsList.innerHTML = '<span style="color: #f87171; font-size: 0.8rem;">用語プリセットの読み込みに失敗しました。サーバーが起動しているかご確認ください🐾</span>';
+                        }
+                    }
+                } else {
+                    presetTagsContainer.style.display = 'none';
+                    btnTogglePreset.textContent = 'HP用語プリセットを表示🐾';
+                }
+            });
+        }
     }
 });

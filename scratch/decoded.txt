@@ -1,0 +1,27 @@
+﻿=== USER INPUT ===
+<USER_REQUEST>
+前回の作業内容は？
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-06-24T07:12:38+09:00.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.5 Flash (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
+
+=== USER INPUT ===
+<USER_REQUEST>
+前回の作業はどこで終わった？
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-06-24T07:13:47+09:00.
+</ADDITIONAL_METADATA>
+
+=== USER INPUT ===
+<USER_REQUEST>
+２４日の不具合修正をしたと思うんだけど、エラーは出なくなったがたまにマイクが自動でオフになってしまう時があるから、原因を調査してみて
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-06-24T07:15:20+09:00.
+</ADDITIONAL_METADATA>
+

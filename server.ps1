@@ -96,11 +96,16 @@ try {
             $bytes = [System.IO.File]::ReadAllBytes($fullPath)
             
             # Simple MIME types without explicit charset to prevent .NET internal byte mismatch
-            if ($path.EndsWith(".html")) { $response.ContentType = "text/html" }
-            elseif ($path.EndsWith(".css")) { $response.ContentType = "text/css" }
-            elseif ($path.EndsWith(".js")) { $response.ContentType = "application/javascript" }
-            elseif ($path.EndsWith(".json")) { $response.ContentType = "application/json" }
-            elseif ($path.EndsWith(".md")) { $response.ContentType = "text/markdown" }
+            $pathLower = $path.ToLower()
+            if ($pathLower.EndsWith(".html")) { $response.ContentType = "text/html" }
+            elseif ($pathLower.EndsWith(".css")) { $response.ContentType = "text/css" }
+            elseif ($pathLower.EndsWith(".js")) { $response.ContentType = "application/javascript" }
+            elseif ($pathLower.EndsWith(".json")) { $response.ContentType = "application/json" }
+            elseif ($pathLower.EndsWith(".md")) { $response.ContentType = "text/markdown" }
+            elseif ($pathLower.EndsWith(".mp3")) { $response.ContentType = "audio/mpeg" }
+            elseif ($pathLower.EndsWith(".png")) { $response.ContentType = "image/png" }
+            elseif ($pathLower.EndsWith(".jpg") -or $pathLower.EndsWith(".jpeg")) { $response.ContentType = "image/jpeg" }
+            elseif ($pathLower.EndsWith(".gif")) { $response.ContentType = "image/gif" }
             
             # Add CORS headers so we don't run into issues
             $response.Headers.Add("Access-Control-Allow-Origin", "*")

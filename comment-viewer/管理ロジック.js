@@ -39,6 +39,45 @@ let recognition = null;
 let isListening = false;
 let shouldBeListening = false;
 let isSpeechSynthesisActive = false;
+let lastErrorTime = 0;
+let lastErrorType = '';
+let isStarting = false;
+let lastStartAttemptTime = 0;
+let lastStartSuccessTime = 0;
+let consecutiveErrorCount = 0;
+
+// 音声合成（読み上げ）の状態を切り替えるセッター関数。
+// OFFになった際にマイクが意図せず停止していれば自動復帰させる🐾
+function setSpeechSynthesisActive(active) {
+    isSpeechSynthesisActive = active;
+    if (!active) {
+        if (shouldBeListening && !isListening) {
+            console.log('Speech recognition was stopped during SpeechSynthesis. Restarting now...🐾');
+            if (typeof window.reconnectSpeechRecognition === 'function') {
+                window.reconnectSpeechRecognition();
+            } else {
+                try {
+                    if (recognition) recognition.start();
+                } catch (e) {
+                    console.warn('Failed to restart recognition after SpeechSynthesis ended:', e);
+                }
+            }
+        }
+    }
+}
+
+// マイク入力を無視する状態（ソフトミュート）を読み上げ終了後3秒間維持し、デバイス競合を防ぐデバウンス処理🐾
+function triggerDelayedMicRestart() {
+    if (window.micRestartTimeoutId) {
+        clearTimeout(window.micRestartTimeoutId);
+    }
+    
+    // 読み上げ自体は終わっているが、マイクのソフトミュート解除を3秒遅延させる🐾
+    window.micRestartTimeoutId = setTimeout(() => {
+        setSpeechSynthesisActive(false);
+        console.log('Mic soft-mute released (speech synthesis active flag cleared)🐾');
+    }, 3000); // 3秒待ってからソフトミュートを解除🐾
+}
 
 // ==========================================================================
 // ハイブリッド同時通訳・音声読み上げ制御クラス (SpeechSynthesisキュー管理)
@@ -87,15 +126,8 @@ class ReadAloudManager {
         const textsToSpeak = this.prepareTexts(chat);
         if (textsToSpeak.length === 0) return;
 
-        if (chat.isSuperChat || chat.isMembership) {
-            setTimeout(() => {
-                this.queue.push(...textsToSpeak);
-                this.processQueue();
-            }, 2500);
-        } else {
-            this.queue.push(...textsToSpeak);
-            this.processQueue();
-        }
+        this.queue.push(...textsToSpeak);
+        this.processQueue();
     }
 
     async speakVoiceVox(text, speakerId) {
@@ -157,106 +189,213 @@ class ReadAloudManager {
             return;
         }
 
-        this.speaking = true;
-        isSpeechSynthesisActive = true;
-        if (isListening && recognition) {
-            try {
-                recognition.stop();
-            } catch(e) {}
+        if (window.micRestartTimeoutId) {
+            clearTimeout(window.micRestartTimeoutId);
+            window.micRestartTimeoutId = null;
         }
+        this.speaking = true;
+        setSpeechSynthesisActive(true);
 
-        const item = this.queue.shift();
-        
-        // 読み上げ用のテキストに変換辞書を適用
-        item.text = this.applyReadingDictionary(item.text);
-        
-        const charVal = this.characterSelect ? this.characterSelect.value : 'standard';
-
-        if (item.lang === 'ja-JP' && charVal.startsWith('vv_')) {
-            const speakerId = parseInt(charVal.replace('vv_', ''));
-            const success = await this.speakVoiceVox(item.text, speakerId);
-            
-            isSpeechSynthesisActive = false;
-            if (shouldBeListening && !isListening && recognition) {
-                try { recognition.start(); } catch(e) {}
-            }
-
-            if (success) {
+        // マイクは停止せず、ソフトミュート（無視）にするため即座に非同期処理を実行する🐾
+        setTimeout(async () => {
+            const item = this.queue.shift();
+            if (!item) {
+                setSpeechSynthesisActive(false);
                 this.speaking = false;
-                setTimeout(() => this.processQueue(), 250);
                 return;
             }
-            console.log('VOICEVOX is unavailable, falling back to browser SpeechSynthesis...');
+
+            // 読み上げ用のテキストに変換辞書を適用🐾
+            item.text = this.applyReadingDictionary(item.text);
             
-            isSpeechSynthesisActive = true;
-            if (isListening && recognition) {
-                try { recognition.stop(); } catch(e) {}
+            const charVal = this.characterSelect ? this.characterSelect.value : 'standard';
+
+            // VOICEVOXでの読み上げ処理
+            if (item.lang === 'ja-JP' && charVal.startsWith('vv_')) {
+                const speakerId = parseInt(charVal.replace('vv_', ''));
+                const success = await this.speakVoiceVox(item.text, speakerId);
+                
+                // 読み上げ終了後のマイク再開処理を削除し、遅延ミュート解除（または即時解除）を実行🐾
+                setSpeechSynthesisActive(false);
+
+                if (success) {
+                    this.speaking = false;
+                    setTimeout(() => this.processQueue(), 250);
+                    return;
+                }
+                console.log('VOICEVOX is unavailable, falling back to browser SpeechSynthesis...');
+                
+                setSpeechSynthesisActive(true);
+                // フォールバックの際も、少し待ってからSpeechSynthesisを開始する🐾
+                await new Promise(r => setTimeout(r, 500));
             }
-        }
 
-        const utterance = new SpeechSynthesisUtterance(item.text);
-        utterance.lang = item.lang;
+            // Edge のオンライン音声は cancel()/getVoices()/ウェイトではリセットできないため、
+            // ボリューム0の極短ウォームアップ発話で接続を事前に確立してから本番発話を行う🐾
+            try {
+                this.synth.cancel();
+            } catch(e) {}
+            await new Promise(r => setTimeout(r, 200));
 
-        const bestVoice = this.getBestVoice(item.lang);
-        if (bestVoice) {
-            utterance.voice = bestVoice;
-        }
+            // ウォームアップ発話（フォールバック試行時はスキップ。失敗が確定した接続で時間を浪費しない）🐾
+            if (!item._isFallbackAttempted) {
+                const warmupSuccess = await new Promise((resolve) => {
+                    const warmup = new SpeechSynthesisUtterance('.');
+                    warmup.volume = 0.01;  // ほぼ無音
+                    warmup.rate = 10;      // 最速で終わらせる
+                    warmup.lang = item.lang;
+                    // ウォームアップにも同じオンライン音声を使って接続を確立🐾
+                    const wVoice = this.getBestVoice(item.lang);
+                    if (wVoice) warmup.voice = wVoice;
 
-        if (this.volumeSlider) {
-            utterance.volume = parseInt(this.volumeSlider.value) / 100;
-        } else {
-            utterance.volume = 1.0;
-        }
+                    const wTimeout = setTimeout(() => resolve(false), 3000);
+                    warmup.onend = () => { clearTimeout(wTimeout); resolve(true); };
+                    warmup.onerror = () => { clearTimeout(wTimeout); resolve(false); };
 
-        if (this.pitchSlider) {
-            utterance.pitch = parseFloat(this.pitchSlider.value);
-        } else {
-            utterance.pitch = 1.2;
-        }
+                    try {
+                        this.synth.speak(warmup);
+                    } catch(e) {
+                        clearTimeout(wTimeout);
+                        resolve(false);
+                    }
+                });
 
-        if (this.rateSlider) {
-            utterance.rate = parseFloat(this.rateSlider.value);
-        } else {
-            utterance.rate = 1.1;
-        }
+                if (!warmupSuccess) {
+                    console.warn('Warmup utterance failed. Connection may be unstable...');
+                    // ウォームアップが失敗しても本番発話は試みる（別の原因かもしれない）
+                    try { this.synth.cancel(); } catch(e) {}
+                    await new Promise(r => setTimeout(r, 500));
+                }
+            }
 
-        const resumeRecognition = () => {
-            isSpeechSynthesisActive = false;
-            if (shouldBeListening && !isListening && recognition) {
+            // 音声リストを再取得🐾
+            this.voices = this.synth.getVoices();
+
+            // 標準SpeechSynthesisでの読み上げ処理
+            const utterance = new SpeechSynthesisUtterance(item.text);
+            utterance.lang = item.lang;
+
+            // オンライン音声のリトライ・フォールバック判定🐾
+            let bestVoice = null;
+            if (item._isFallbackAttempted === 2) {
+                // 最終フォールバック：ローカルオフライン音声（Microsoft Harukaなど）を選択🐾
+                bestVoice = this.getBestLocalVoice(item.lang);
+            } else {
+                // 通常時および1回目のリトライ時：ななみちゃん（Online音声）を選択🐾
+                bestVoice = this.getBestVoice(item.lang);
+            }
+            if (bestVoice) {
+                utterance.voice = bestVoice;
+            }
+
+            if (this.volumeSlider) {
+                utterance.volume = parseInt(this.volumeSlider.value) / 100;
+            } else {
+                utterance.volume = 1.0;
+            }
+
+            if (this.pitchSlider) {
+                utterance.pitch = parseFloat(this.pitchSlider.value);
+            } else {
+                utterance.pitch = 1.2;
+            }
+
+            if (this.rateSlider) {
+                utterance.rate = parseFloat(this.rateSlider.value);
+            } else {
+                utterance.rate = 1.1;
+            }
+
+            // GCからUtteranceオブジェクトを保護🐾
+            if (!window.activeUtterances) { window.activeUtterances = []; }
+            window.activeUtterances.push(utterance);
+
+            const resumeRecognition = () => {
+                triggerDelayedMicRestart();
+            };
+
+            const cleanUtterance = () => {
+                if (window.activeUtterances) {
+                    window.activeUtterances = window.activeUtterances.filter(u => u !== utterance);
+                }
+            };
+
+            const watchdogId = setTimeout(() => {
+                console.warn('SpeechSynthesis output timed out. Forcing next queue...');
                 try {
-                    recognition.start();
-                } catch(e) {}
+                    this.synth.cancel(); // タイムアウト時のみ、詰まりを解消するために cancel を実行🐾
+                } catch(err) {}
+                cleanUtterance();
+                resumeRecognition();
+                this.speaking = false;
+                this.processQueue();
+            }, 12000);
+
+            utterance.onend = () => {
+                clearTimeout(watchdogId);
+                cleanUtterance();
+                // 読み上げ完了直後に cancel() を呼び、Edgeのオンライン音声サーバー接続を即座に切断🐾
+                // これにより次の speak() 時に古い接続との競合を防ぐ
+                try { this.synth.cancel(); } catch(err) {}
+                resumeRecognition();
+                this.speaking = false;
+                setTimeout(() => this.processQueue(), 250);
+            };
+
+            utterance.onerror = (e) => {
+                clearTimeout(watchdogId);
+                console.error('SpeechSynthesis error:', e.error || e); // 詳細なエラー原因を出力🐾
+                cleanUtterance();
+
+                try {
+                    // ななみちゃん（Online音声）での再生が失敗した場合（synthesis-failedなど）の3重安全化処理🐾
+                    // bestVoice の存在チェックと name プロパティの存在チェックを二重に強化🐾
+                    if (bestVoice && bestVoice.name && bestVoice.name.includes('Online')) {
+                        if (!item._isFallbackAttempted) {
+                            // 1度目の失敗：1.5秒待ってから、ななみちゃんのままでもう一度再試行する🐾
+                            console.warn('Online voice failed. Retrying with same Online voice after 1.5s...');
+                            item._isFallbackAttempted = 1; // 1回目試行完了
+                            // エラー状態の音声エンジンをリセットしてからリトライ🐾
+                            try { this.synth.cancel(); } catch(err) {}
+                            this.queue.unshift(item);
+                            // 再試行のウェイト中はマイクを起動させずOFFのままキープ🐾
+                            this.speaking = false;
+                            setTimeout(() => this.processQueue(), 1500); // 1.5秒のウェイトを置いて再試行🐾
+                            return;
+                        } else if (item._isFallbackAttempted === 1) {
+                            // 2度目の失敗（ななみちゃんでリトライしたのにダメだった場合）：最終手段として Haruka などのローカルオフライン音声へフォールバック🐾
+                            console.warn('Online voice failed again. Falling back to local offline voice...');
+                            item._isFallbackAttempted = 2; // 2回目（最終）フォールバック
+                            // Edgeの音声エンジンがエラー状態のまま残っているため、cancel()で内部状態を強制リセットしてから十分な回復時間を置く🐾
+                            try { this.synth.cancel(); } catch(err) {}
+                            this.queue.unshift(item);
+                            // 再試行のウェイト中はマイクを起動させずOFFのままキープ🐾
+                            this.speaking = false;
+                            setTimeout(() => this.processQueue(), 1500); // 1.5秒待って音声エンジン回復後に Haruka で再試行🐾
+                            return;
+                        }
+                    }
+                } catch (err) {
+                    console.error('Error in SpeechSynthesis error handler recovery:', err);
+                }
+
+                // いかなる想定外のエラーが起きても、確実にキュー処理とマイクをONに戻すセーフティネット🐾
+                resumeRecognition();
+                this.speaking = false;
+                setTimeout(() => this.processQueue(), 250);
+            };
+
+            try {
+                this.synth.speak(utterance);
+            } catch (err) {
+                console.error('Failed to trigger synth.speak:', err);
+                clearTimeout(watchdogId);
+                cleanUtterance();
+                resumeRecognition();
+                this.speaking = false;
+                setTimeout(() => this.processQueue(), 250);
             }
-        };
-
-        const watchdogId = setTimeout(() => {
-            console.warn('SpeechSynthesis output timed out. Forcing next queue...');
-            resumeRecognition();
-            this.speaking = false;
-            this.processQueue();
-        }, 12000);
-
-        utterance.onend = () => {
-            clearTimeout(watchdogId);
-            resumeRecognition();
-            this.speaking = false;
-            setTimeout(() => this.processQueue(), 250);
-        };
-
-        utterance.onerror = (e) => {
-            clearTimeout(watchdogId);
-            console.error('SpeechSynthesis error:', e);
-            resumeRecognition();
-            this.speaking = false;
-            setTimeout(() => this.processQueue(), 250);
-        };
-
-        try {
-            this.synth.cancel();
-            this.synth.resume();
-        } catch(err) {}
-
-        this.synth.speak(utterance);
+        }, 0);
     }
 
     clear() {
@@ -297,6 +436,35 @@ class ReadAloudManager {
         }
 
         return langVoices[0];
+    }
+
+    getBestLocalVoice(lang) {
+        if (!this.voices || this.voices.length === 0) {
+            this.voices = this.synth.getVoices();
+        }
+
+        // localService === true の音声だけを対象にする（サーバー依存音声を完全に除外）🐾
+        const langVoices = this.voices.filter(v =>
+            v.localService === true &&
+            v.lang.toLowerCase().replace('_', '-').startsWith(lang.toLowerCase())
+        );
+
+        if (langVoices.length === 0) {
+            console.warn('[フォールバック] ローカルの日本語音声が見つかりません。読み上げをスキップします。');
+            return null;
+        }
+
+        if (lang.toLowerCase().startsWith('ja')) {
+            const haruka = langVoices.find(v => v.name.includes('Haruka'));
+            if (haruka) return haruka;
+            const ayumi = langVoices.find(v => v.name.includes('Ayumi'));
+            if (ayumi) return ayumi;
+        } else if (lang.toLowerCase().startsWith('en')) {
+            const zira = langVoices.find(v => v.name.includes('Zira'));
+            if (zira) return zira;
+        }
+
+        return langVoices[0]; // ローカル音声の中から最初のものを返す
     }
 
     makeNaturalText(text) {
@@ -528,6 +696,87 @@ document.addEventListener('DOMContentLoaded', () => {
     if (readAloudRateSlider && readAloudRateVal) {
         setupSlider(readAloudRateSlider, readAloudRateVal, '', rateFormatter);
     }
+
+    // ==========================================================================
+    // 効果音プリロードシステム（バックグラウンドタブでも確実に再生するため）🐾
+    // HTML5 Audio はバックグラウンドタブでブラウザにブロックされるため、
+    // AudioContext + プリロード済み AudioBuffer を使って再生する
+    // ==========================================================================
+    let effectAudioCtx = null;
+    const preloadedSoundBuffers = {};
+
+    async function initEffectAudioPreload() {
+        try {
+            effectAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            for (const num of [1, 2]) {
+                const response = await fetch(`効果音/レベルアップ_${num}.mp3`);
+                const arrayBuffer = await response.arrayBuffer();
+                preloadedSoundBuffers[num] = await effectAudioCtx.decodeAudioData(arrayBuffer);
+            }
+            console.log('効果音プリロード完了🐾');
+        } catch (err) {
+            console.warn('効果音プリロード失敗（HTML5 Audio にフォールバックします）:', err);
+        }
+    }
+
+    function unlockEffectAudioCtx() {
+        if (effectAudioCtx && effectAudioCtx.state === 'suspended') {
+            effectAudioCtx.resume().catch(() => {});
+            console.log('AudioContext アンロック完了🐾');
+        }
+    }
+    document.addEventListener('click', unlockEffectAudioCtx);
+    document.addEventListener('keydown', unlockEffectAudioCtx);
+
+    // AudioContext のバックグラウンド・サスペンド復帰用🐾
+    setInterval(() => {
+        if (effectAudioCtx && effectAudioCtx.state === 'suspended') {
+            effectAudioCtx.resume().catch(() => {});
+        }
+    }, 10000);
+
+    function playEffectSound(soundNum, volume) {
+        return new Promise((resolve) => {
+            if (effectAudioCtx && effectAudioCtx.state === 'running' && preloadedSoundBuffers[soundNum]) {
+                try {
+                    const source = effectAudioCtx.createBufferSource();
+                    source.buffer = preloadedSoundBuffers[soundNum];
+                    const gainNode = effectAudioCtx.createGain();
+                    gainNode.gain.value = volume;
+                    source.connect(gainNode);
+                    gainNode.connect(effectAudioCtx.destination);
+                    source.onended = () => {
+                        // 再生終了時にオーディオ接続を明示的に解除してリソースを解放する🐾
+                        source.disconnect();
+                        gainNode.disconnect();
+                        resolve(true);
+                    };
+                    source.start(0);
+                    return;
+                } catch (e) {
+                    console.warn('AudioContext 再生失敗、HTML5 Audio にフォールバック:', e);
+                }
+            }
+            try {
+                const audio = new Audio(`効果音/レベルアップ_${soundNum}.mp3?v=${Date.now()}`);
+                audio.volume = volume;
+                if (!window.activeAudios) { window.activeAudios = []; }
+                window.activeAudios.push(audio);
+                const clean = () => {
+                    if (window.activeAudios) {
+                        window.activeAudios = window.activeAudios.filter(a => a !== audio);
+                    }
+                };
+                audio.onended = () => { clean(); resolve(true); };
+                audio.onerror = () => { clean(); resolve(false); };
+                audio.play().catch(() => { clean(); resolve(false); });
+            } catch (e) {
+                resolve(false);
+            }
+        });
+    }
+
+    initEffectAudioPreload();
 
     function loadSettings() {
         const savedSettings = localStorage.getItem('yt_translator_settings');
@@ -953,18 +1202,47 @@ document.addEventListener('DOMContentLoaded', () => {
             // 画面ログに追加
             appendToChatLog(chatObj);
 
-            // 読み上げ
-            if (readAloudManager) {
-                readAloudManager.speak(chatObj);
-            }
-
-            // スパチャやメンバーシップの場合、効果音再生トリガー
+            // 読み上げと効果音再生の直列制御（音声競合によるななみちゃんフリーズバグの根本防止🐾）
             if (isSuperChat || isMembership) {
+                setSpeechSynthesisActive(true); // 効果音再生の段階から音声合成中フラグを立ててソフトミュート開始🐾
+
                 const soundNum = Math.random() < 0.5 ? 1 : 2;
+                let hasTriggeredSpeech = false;
+                
+                const startSpeechFallback = () => {
+                    if (!hasTriggeredSpeech) {
+                        hasTriggeredSpeech = true;
+                        if (readAloudManager) {
+                            readAloudManager.speak(chatObj);
+                        }
+                    }
+                };
+
+                // 5秒のタイムアウトで強制的に読み上げを開始するセーフティネット🐾
+                const speechTimeoutId = setTimeout(startSpeechFallback, 5000);
+
+                // プリロード済み AudioContext で効果音を再生（バックグラウンドタブ対応）🐾
+                const vol = parseInt(effectVolumeSlider.value) / 100;
+                playEffectSound(soundNum, vol).then(success => {
+                    clearTimeout(speechTimeoutId);
+                    if (success) {
+                        // 効果音終了後、300ms待ってから読み上げ🐾
+                        setTimeout(startSpeechFallback, 300);
+                    } else {
+                        console.warn('効果音再生失敗、読み上げのみ開始します');
+                        startSpeechFallback();
+                    }
+                });
+
                 localStorage.setItem('yt_translator_test_sound_trigger', JSON.stringify({
                     time: Date.now().toString(),
                     num: soundNum
                 }));
+            } else {
+                // 通常チャットは即時読み上げ
+                if (readAloudManager) {
+                    readAloudManager.speak(chatObj);
+                }
             }
 
         } catch (e) {
@@ -982,8 +1260,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const res = await fetch(url);
             if (!res.ok) throw new Error('Translation failed');
             const data = await res.json();
-            if (data && data[0] && data[0][0] && data[0][0][0]) {
-                return data[0][0][0].trim();
+            
+            if (data && data[0]) {
+                let translated = '';
+                for (let i = 0; i < data[0].length; i++) {
+                    if (data[0][i] && data[0][i][0]) {
+                        translated += data[0][i][0];
+                    }
+                }
+                return translated.trim();
             }
             return text;
         } catch (err) {
@@ -1038,8 +1323,46 @@ document.addEventListener('DOMContentLoaded', () => {
         
         appendToChatLog(testComment);
 
-        if (readAloudManager) {
-            readAloudManager.speak(testComment);
+        // 読み上げと効果音再生の直列制御（音声競合によるななみちゃんフリーズバグの根本防止🐾）
+        if (isSuperChat || isMembership) {
+            setSpeechSynthesisActive(true); // 効果音再生の段階から音声合成中フラグを立ててソフトミュート開始🐾
+
+            const soundNum = Math.random() < 0.5 ? 1 : 2;
+            let hasTriggeredSpeech = false;
+            
+            const startSpeechFallback = () => {
+                if (!hasTriggeredSpeech) {
+                    hasTriggeredSpeech = true;
+                    if (readAloudManager) {
+                        readAloudManager.speak(testComment);
+                    }
+                }
+            };
+
+            // 5秒のタイムアウトで強制的に読み上げを開始するセーフティネット🐾
+            const speechTimeoutId = setTimeout(startSpeechFallback, 5000);
+
+            // プリロード済み AudioContext で効果音を再生🐾
+            const vol = parseInt(effectVolumeSlider.value) / 100;
+            playEffectSound(soundNum, vol).then(success => {
+                clearTimeout(speechTimeoutId);
+                if (success) {
+                    setTimeout(startSpeechFallback, 300);
+                } else {
+                    console.warn('効果音再生失敗、読み上げのみ開始します');
+                    startSpeechFallback();
+                }
+            });
+
+            localStorage.setItem('yt_translator_test_sound_trigger', JSON.stringify({
+                time: Date.now().toString(),
+                num: soundNum
+            }));
+        } else {
+            // 通常チャットは即時読み上げ
+            if (readAloudManager) {
+                readAloudManager.speak(testComment);
+            }
         }
 
         testInfoText.textContent = `[${lang}] テストコメントを送信しました！🐾`;
@@ -1218,14 +1541,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     async function translateTextToEn(text) {
         if (!text) return '';
+        
+        // 「え？」「絵？」単体の特別ガードルール🐾
+        const trimmedSimple = text.trim().replace(/[?？]/g, '');
+        if (trimmedSimple === 'え' || trimmedSimple === '絵') {
+            return 'Eh?';
+        }
+
         try {
             const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&q=${encodeURIComponent(text)}`;
             const res = await fetch(url);
             if (!res.ok) throw new Error('Translation to English failed');
             
             const data = await res.json();
-            if (data && data[0] && data[0][0] && data[0][0][0]) {
-                return data[0][0][0].trim();
+            if (data && data[0]) {
+                let translated = '';
+                for (let i = 0; i < data[0].length; i++) {
+                    if (data[0][i]) {
+                        let transPart = data[0][i][0] || '';
+                        const origPart = data[0][i][1] || '';
+                        
+                        // 各セグメントが「え」「絵」等の聞き返しの場合は「Eh?」に置き換える🐾
+                        const trimmedOrig = origPart.trim().replace(/[?？]/g, '');
+                        if (trimmedOrig === 'え' || trimmedOrig === '絵') {
+                            transPart = transPart.includes('?') || origPart.includes('?') ? 'Eh? ' : 'Eh ';
+                        }
+                        
+                        translated += transPart;
+                    }
+                }
+                return translated.trim();
             }
             return text;
         } catch (err) {
@@ -1261,67 +1606,230 @@ document.addEventListener('DOMContentLoaded', () => {
         appendToChatLog(broadcasterChat);
     }
 
+
     // ==========================================================================
     // 配信者マイクリアルタイム音声認識 (Web Speech API)
     // ==========================================================================
     if (SpeechRecognition && btnMicToggle) {
-        recognition = new SpeechRecognition();
-        recognition.lang = 'ja-JP';
-        recognition.continuous = true;
-        recognition.interimResults = false;
         
-        recognition.onstart = () => {
-            isListening = true;
-            if (micDot) micDot.classList.add('active');
-            if (micBtnText) micBtnText.textContent = 'マイク音声認識: ON';
-            if (micStatus) {
-                micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
-                micStatus.style.color = 'var(--success-color)';
+        // 音声認識インスタンスの初期化・再構築（リビルド）関数🐾
+        function initSpeechRecognition() {
+            if (recognition) {
+                // 既存のインスタンスのイベントハンドラを解除して破棄🐾
+                recognition.onstart = null;
+                recognition.onend = null;
+                recognition.onerror = null;
+                recognition.onresult = null;
+                try { recognition.abort(); } catch(e) {}
+                recognition = null;
             }
-        };
-        
-        recognition.onend = () => {
-            isListening = false;
-            
-            if (shouldBeListening && !isSpeechSynthesisActive) {
-                console.log('Speech recognition disconnected automatically. Reconnecting immediately...');
-                try {
-                    recognition.start();
-                } catch (e) {
-                    console.error('Failed to auto-restart recognition:', e);
+
+            recognition = new SpeechRecognition();
+            recognition.lang = 'ja-JP';
+            recognition.continuous = true;
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                isListening = true;
+                isStarting = false; // 起動処理完了🐾
+                lastStartSuccessTime = Date.now();
+                if (micDot) micDot.classList.add('active');
+                if (micBtnText) micBtnText.textContent = 'マイク音声認識: ON';
+                if (micStatus) {
+                    micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                    micStatus.style.color = 'var(--success-color)';
+                }
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                isStarting = false;
+
+                if (shouldBeListening) {
+                    if (!isSpeechSynthesisActive) {
+                        const now = Date.now();
+                        // 直近でネットワークエラーが発生していた場合、再接続まで5秒待つようにする🐾
+                        const isNetworkErrorRecent = (lastErrorType === 'network' && (now - lastErrorTime) < 10000);
+                        const delay = isNetworkErrorRecent ? 5000 : 0;
+
+                        if (window.micRestartTimeoutId) {
+                            clearTimeout(window.micRestartTimeoutId);
+                        }
+
+                        if (delay > 0) {
+                            console.log(`Speech recognition disconnected. Network error detected, waiting ${delay}ms before reconnecting...`);
+                            if (micStatus) {
+                                micStatus.textContent = 'ネットワークエラーのため、5秒後に再接続を試みます... 🐾';
+                                micStatus.style.color = 'var(--accent-color)';
+                            }
+                            window.micRestartTimeoutId = setTimeout(() => {
+                                if (shouldBeListening && !isListening && !isSpeechSynthesisActive) {
+                                    reconnectSpeechRecognition();
+                                }
+                            }, delay);
+                        } else {
+                            console.log('Speech recognition disconnected automatically. Reconnecting immediately...');
+                            reconnectSpeechRecognition();
+                        }
+                    } else {
+                        // 読み上げ中のため、UIはONを維持しつつ、自動再起動は読み上げ完了時に任せる🐾
+                        if (micStatus) {
+                            micStatus.textContent = '読み上げ中のため、マイク入力を一時停止（ソフトミュート）しています... 🐾';
+                            micStatus.style.color = 'var(--accent-color)';
+                        }
+                    }
+                    return;
+                }
+
+                // 本当に手動で停止された場合のみUIをOFF表示にする🐾
+                if (micDot) micDot.classList.remove('active');
+                if (micBtnText) micBtnText.textContent = 'マイク音声認識: OFF';
+                if (micStatus) {
+                    micStatus.textContent = '音声認識は停止しています。';
+                    micStatus.style.color = 'var(--text-muted)';
+                }
+            };
+
+            recognition.onerror = (e) => {
+                // console.errorの代わりにconsole.warnを使用し、エラーの赤文字出力を防ぐ🐾
+                console.warn('Speech recognition warning:', e.error);
+                lastErrorTime = Date.now();
+                lastErrorType = e.error;
+                consecutiveErrorCount++;
+
+                if (e.error === 'aborted') return;
+
+                if (micStatus) {
+                    if (e.error === 'not-allowed') {
+                        micStatus.textContent = 'エラー: マイクの使用が許可されていません。ブラウザのアドレスバーの鍵アイコンからマイクを許可してください🐾';
+                        micStatus.style.color = 'var(--error-color)';
+                        shouldBeListening = false;
+                    } else if (e.error === 'no-speech') {
+                        // 無音タイムアウトはWeb Speech APIの仕様なので、警告せずサイレント復旧を促す🐾
+                        micStatus.textContent = 'マイク接続維持中（無音自動復旧）... 🎙️';
+                        micStatus.style.color = 'var(--success-color)';
+                    } else {
+                        micStatus.textContent = `接続調整中 (${e.error})。自動再起動します...🐾`;
+                        micStatus.style.color = 'var(--accent-color)';
+                    }
+                }
+            };
+
+            recognition.onresult = async (event) => {
+                consecutiveErrorCount = 0; // 正常に聞き取れたら連続エラーをリセット🐾
+                if (isSpeechSynthesisActive) {
+                    console.log('Speech recognition ignored: SpeechSynthesis is currently active (soft-mute)🐾');
+                    return;
+                }
+                const rawText = event.results[event.results.length - 1][0].transcript.trim();
+                if (!rawText) return;
+
+                const resultText = applySpeechCorrection(rawText);
+
+                if (micStatus) {
+                    micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
+                    micStatus.style.color = 'var(--accent-color)';
+                }
+
+                const translatedText = await translateTextToEn(resultText);
+                sendBroadcasterTranslation(resultText, translatedText);
+
+                if (micStatus) {
+                    micStatus.textContent = `字幕送信完了: 「${translatedText}」🐾`;
+                    micStatus.style.color = 'var(--success-color)';
+                }
+
+                setTimeout(() => {
+                    if (isListening && micStatus) {
+                        micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                        micStatus.style.color = 'var(--success-color)';
+                    }
+                }, 3000);
+            };
+        }
+
+        // 安全な音声認識の再接続・再生成ロジック🐾
+        function reconnectSpeechRecognition() {
+            if (!shouldBeListening || isSpeechSynthesisActive) return;
+
+            isStarting = true;
+            lastStartAttemptTime = Date.now();
+
+            // エラーが3回以上連続して起きている場合は、インスタンスを完全に作り直して固まりを打破する🐾
+            const needRebuild = (consecutiveErrorCount >= 3);
+            if (needRebuild) {
+                console.log('Speech recognition has multiple errors. Rebuilding instance...');
+                consecutiveErrorCount = 0;
+                initSpeechRecognition();
+            }
+
+            try {
+                recognition.start();
+            } catch (e) {
+                console.warn('Failed to start recognition in reconnect (retrying with timeout):', e);
+                if (e.message && e.message.includes('already started')) {
+                    isListening = true;
+                    isStarting = false;
+                } else {
                     setTimeout(() => {
                         if (shouldBeListening && !isListening && !isSpeechSynthesisActive) {
-                            try { recognition.start(); } catch(err) { console.error(err); }
+                            try { recognition.start(); } catch(err) { console.warn(err); }
                         }
                     }, 500);
                 }
-                return;
             }
-            
-            if (micDot) micDot.classList.remove('active');
-            if (micBtnText) micBtnText.textContent = 'マイク音声認識: OFF';
-            if (micStatus) {
-                micStatus.textContent = '音声認識は停止しています。';
-                micStatus.style.color = 'var(--text-muted)';
+        }
+
+        function startSpeechRecognition() {
+            if (window.micRestartTimeoutId) {
+                clearTimeout(window.micRestartTimeoutId);
+                window.micRestartTimeoutId = null;
             }
-        };
-        
-        recognition.onerror = (e) => {
-            console.error('Speech recognition error:', e.error);
-            if (e.error === 'aborted') return;
-            
-            if (micStatus) {
-                if (e.error === 'not-allowed') {
-                    micStatus.textContent = 'エラー: マイクの使用が許可されていません。ブラウザのアドレスバーの鍵アイコンからマイクを許可してください🐾';
-                    micStatus.style.color = 'var(--error-color)';
-                    shouldBeListening = false;
+            shouldBeListening = true;
+            consecutiveErrorCount = 0;
+
+            if (!recognition) {
+                initSpeechRecognition();
+            }
+
+            isStarting = true;
+            lastStartAttemptTime = Date.now();
+
+            try {
+                recognition.start();
+            } catch (e) {
+                console.warn('Failed to start recognition (standard start):', e);
+                if (e.message && e.message.includes('already started')) {
+                    isListening = true;
+                    isStarting = false;
                 } else {
-                    micStatus.textContent = `一時的な音声認識エラー: ${e.error}。自動再起動を試みます...🐾`;
-                    micStatus.style.color = 'var(--accent-color)';
+                    initSpeechRecognition();
+                    try { recognition.start(); } catch(err) { console.error('Speech restart critical fail:', err); }
                 }
             }
-        };
-        
+        }
+
+        function stopSpeechRecognition() {
+            if (window.micRestartTimeoutId) {
+                clearTimeout(window.micRestartTimeoutId);
+                window.micRestartTimeoutId = null;
+            }
+            shouldBeListening = false;
+            isStarting = false;
+            consecutiveErrorCount = 0;
+            try {
+                if (recognition) recognition.stop();
+            } catch (e) {
+                console.error('Failed to stop recognition:', e);
+            }
+        }
+
+        // セッターなどの外部から安全に再接続ロジックを叩けるようにグローバル露出🐾
+        window.reconnectSpeechRecognition = reconnectSpeechRecognition;
+
+        // 初回のみ初期化実行🐾
+        initSpeechRecognition();
+
         function applySpeechCorrection(text) {
             if (!text) return text;
             let dict = [];
@@ -1351,54 +1859,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return result;
         }
 
-        recognition.onresult = async (event) => {
-            const rawText = event.results[event.results.length - 1][0].transcript.trim();
-            if (!rawText) return;
-            
-            // 音声認識された日本語を誤認識修正辞書で補正する🐾
-            const resultText = applySpeechCorrection(rawText);
-            
-            if (micStatus) {
-                micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
-                micStatus.style.color = 'var(--accent-color)';
-            }
-            
-            const translatedText = await translateTextToEn(resultText);
-            sendBroadcasterTranslation(resultText, translatedText);
-            
-            if (micStatus) {
-                micStatus.textContent = `字幕送信完了: 「${translatedText}」🐾`;
-                micStatus.style.color = 'var(--success-color)';
-            }
-            
-            setTimeout(() => {
-                if (isListening && micStatus) {
-                    micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
-                    micStatus.style.color = 'var(--success-color)';
-                }
-            }, 3000);
-        };
-
-        function startSpeechRecognition() {
-            if (!recognition) return;
-            shouldBeListening = true;
-            try {
-                recognition.start();
-            } catch (e) {
-                console.error('Failed to start recognition:', e);
-            }
-        }
-        
-        function stopSpeechRecognition() {
-            if (!recognition) return;
-            shouldBeListening = false;
-            try {
-                recognition.stop();
-            } catch (e) {
-                console.error('Failed to stop recognition:', e);
-            }
-        }
-        
         btnMicToggle.addEventListener('click', () => {
             if (shouldBeListening) {
                 stopSpeechRecognition();
@@ -1406,6 +1866,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 startSpeechRecognition();
             }
         });
+
+        // マイク稼働状態の自己修復・監視用ハートビートタイマー🐾
+        setInterval(() => {
+            if (!shouldBeListening || isSpeechSynthesisActive) return;
+            const now = Date.now();
+
+            if (!isListening) {
+                // 起動開始してから3秒経っても onstart が発火しない場合は膠着とみなして強制リビルド復帰🐾
+                if (isStarting && (now - lastStartAttemptTime) > 3000) {
+                    console.log('Heartbeat: Speech recognition start timed out. Rebuilding and recovering...🐾');
+                    initSpeechRecognition();
+                    reconnectSpeechRecognition();
+                } else if (!isStarting) {
+                    console.log('Heartbeat: Speech recognition should be running but is stopped. Recovering...🐾');
+                    reconnectSpeechRecognition();
+                }
+            }
+        }, 4000); // 4秒ごとに生存チェック🐾
     } else if (btnMicToggle) {
         if (micStatus) {
             micStatus.textContent = 'お使いのブラウザは音声認識をサポートしていません。ChromeまたはEdgeをご使用ください🐾';

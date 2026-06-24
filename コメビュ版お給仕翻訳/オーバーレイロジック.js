@@ -2,6 +2,16 @@
 
 // OBS/ブラウザ内のエラーを画面に赤文字で強制デバッグ表示する救急措置🐾
 function showDebugError(msg) {
+    // 開発用のデバッグモード（URLパラメータに ?debug=1 が指定されている場合）のみ画面に赤文字を表示する🐾
+    const isDebugMode = new URLSearchParams(window.location.search).get('debug') === '1';
+    
+    // コンソールにはエラー/警告ログとして常に出力する（F12デバッグ用）🐾
+    console.warn(`[Overlay Debug] ${msg}`);
+
+    if (!isDebugMode) {
+        return;
+    }
+
     let errDiv = document.getElementById('debug-err-div');
     if (!errDiv) {
         errDiv = document.createElement('div');
@@ -135,7 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'yt_translator_test_sound_trigger' && e.newValue) {
             try {
                 const triggerData = JSON.parse(e.newValue);
-                const soundNum = triggerData.num || (Math.random() < 0.5 ? 1 : 2);
+                // タルタル死亡ボイス (1または2) をフォールバック含めて適用🐾
+                let soundNum = triggerData.num;
+                if (!soundNum || (soundNum !== 1 && soundNum !== 2)) {
+                    soundNum = Math.random() < 0.5 ? 1 : 2;
+                }
                 
                 const savedSettings = localStorage.getItem('yt_translator_settings');
                 let volume = 0.9;
@@ -192,6 +206,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     
     function addCommentCard(chatData) {
+        if (!chatData) return;
+        
+        // デバッグ用受信ログの表示🐾
+        const chatType = chatData.isSuperChat ? 'スパチャ' : (chatData.isMembership ? 'メンバー' : '通常');
+        const isPast = (chatData.timestamp && chatData.timestamp < appLoadTime) ? ' (過去ログ判定のためスルーされます)' : '';
+        showDebugError(`チャット受信: ${chatData.author.name} (${chatType})${isPast} - メッセージ: ${chatData.message || 'なし'}`);
+        setTimeout(() => {
+            const errDiv = document.getElementById('debug-err-div');
+            if (errDiv && errDiv.textContent.includes('チャット受信:')) {
+                errDiv.parentNode.removeChild(errDiv);
+            }
+        }, 4000);
+
         // 起動時刻より前の過去ログはスルー🐾
         if (chatData.timestamp && chatData.timestamp < appLoadTime) {
             if (chatData.id) {
@@ -239,12 +266,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     const settings = JSON.parse(savedSettings);
                     volume = (settings.effectVolume !== undefined) ? (settings.effectVolume / 100) : 0.9;
                 }
+                // タルタル死亡ボイス (1または2) の中からランダム選択🐾
                 const soundNum = Math.random() < 0.5 ? 1 : 2;
+                
+                // 音声再生状態を画面上に一時デバッグ表示🐾
+                showDebugError(`効果音再生キック中... (ファイル名: レベルアップ_${soundNum}.mp3, 音量: ${volume})`);
+                
                 const audio = new Audio(`効果音/レベルアップ_${soundNum}.mp3?v=${Date.now()}`);
                 audio.volume = volume;
-                audio.play().catch(err => console.warn('Auto playback blocked by browser/OBS:', err));
+                audio.play()
+                    .then(() => {
+                        // 再生成功時はデバッグ表示を消去
+                        const errDiv = document.getElementById('debug-err-div');
+                        if (errDiv && errDiv.textContent.includes('効果音再生キック中')) {
+                            errDiv.parentNode.removeChild(errDiv);
+                        }
+                    })
+                    .catch(err => {
+                        console.warn('Auto playback blocked by browser/OBS:', err);
+                        showDebugError(`効果音再生ブロック: ${err.message || err.toString()} (ブラウザ画面を一度クリックして自動再生を許可してください)`);
+                    });
             } catch (err) {
                 console.error('Failed to auto play effect sound:', err);
+                showDebugError(`効果音自動再生失敗: ${err.message || err.toString()}`);
             }
         }
 

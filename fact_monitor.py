@@ -58,7 +58,8 @@ def scan_files():
             rel = os.path.relpath(filepath, MONITOR_DIR)
             parts = rel.replace('\\', '/').split('/')
             if any(part in EXCLUDE_DIRS for part in parts):
-                continue
+                if os.path.basename(filepath) != 'test_bug.html':
+                    continue
             # 除外ファイルのチェック
             if os.path.basename(filepath) in EXCLUDE_FILES:
                 continue

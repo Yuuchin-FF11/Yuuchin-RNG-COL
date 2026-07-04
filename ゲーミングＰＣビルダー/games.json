@@ -1,0 +1,306 @@
+[
+  {
+    "id": "minecraft",
+    "name": "マインクラフト",
+    "category": "survival",
+    "bannerUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Minecraft_Logo-en.svg",
+    "isLogo": true,
+    "description": "世界一のアクティブユーザー数を誇るモンスタータイトル。バニラなら軽量ですが、影MODや大規模マルチサーバーへの参加ではスペックが重要になります。",
+    "targets": [
+      {
+        "fps": "60FPS (標準プレイ)",
+        "cpuClass": 2,
+        "gpuClass": 1,
+        "ramGb": 16,
+        "description": "バニラ（MODなし）で遊ぶならグラフィックボードがなくても動作します。Ryzen 8600Gなどの強力な内蔵GPUが最適です。"
+      },
+      {
+        "fps": "144FPS (軽い影MOD導入)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "軽い影MODを入れたり、描画距離を伸ばして滑らかに遊びたい人向けの標準構成です。"
+      },
+      {
+        "fps": "240FPS (重い影MOD・大量MOD導入)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 32,
+        "description": "リアルな水面や光を表現する重いシェーダーを適用し、かつメモリを大量に消費する工業化MODなどを入れても快適に遊べる構成です。"
+      }
+    ]
+  },
+  {
+    "id": "apex_legends",
+    "name": "Apex Legends",
+    "category": "fps",
+    "bannerUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/header.jpg",
+    "description": "日本で絶大な人気を誇るハイスピードバトルロイヤル。常時アクティブ上位であり、144FPS以上でのプレイが勝敗を分ける定番競技ゲームです。",
+    "targets": [
+      {
+        "fps": "60FPS (カジュアルプレイ)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "家庭用ゲーム機（PS4など）と同等の画質・フレームレートで遊ぶための標準的なエントリー構成です。"
+      },
+      {
+        "fps": "144FPS (標準ゲーミング設定)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "ゲーミングモニターの性能を引き出し、敵の動きをヌルヌルと滑らかに捉えることができる推奨構成です。"
+      },
+      {
+        "fps": "240FPS (競技用プロ設定)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 16,
+        "description": "撃ち合いの瞬間や煙の描写があっても240FPSを維持し、一瞬の判断ミスを減らすための本格的な高性能構成です。"
+      }
+    ]
+  },
+  {
+    "id": "counter_strike_2",
+    "name": "Counter-Strike 2",
+    "category": "fps",
+    "bannerUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/header.jpg",
+    "description": "Steam内で圧倒的な同時接続数を誇るグローバルNo.1シューター。驚異的な軽さで、ミドルクラスのパーツでも超高フレームレートが狙えます。",
+    "targets": [
+      {
+        "fps": "144FPS (本格プレイ)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "フルHDの画質設定調整で、144FPSを安定して維持できる非常にコスパの良い構成です。"
+      },
+      {
+        "fps": "240FPS / 360FPS (競技者仕様)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 16,
+        "description": "わずかな入力遅延も許されない極限の対戦を行うための、最高クラスのCPUとGPUの組み合わせです。"
+      }
+    ]
+  },
+  {
+    "id": "valorant",
+    "name": "VALORANT",
+    "category": "fps",
+    "bannerUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Valorant_logo.svg",
+    "isLogo": true,
+    "invertLogo": true,
+    "description": "日本および世界でアクティブプレイヤーが爆発し続けている5対5の戦術シューター。動作が極めて軽く、グラボなしの高性能内蔵GPUでも快適に動作します。",
+    "targets": [
+      {
+        "fps": "100FPS (グラボなしオンボード)",
+        "cpuClass": 2,
+        "gpuClass": 1,
+        "ramGb": 16,
+        "description": "グラボなしでも画質設定を低くすれば滑らかに動作します。予算を極限まで抑えたい人向けです。"
+      },
+      {
+        "fps": "144FPS (エントリー設定)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "フルHDの最高画質設定でも144FPSを常時キープできる快適なエントリー構成です。"
+      },
+      {
+        "fps": "240FPS+ (競技モニター対応)",
+        "cpuClass": 3,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "240Hzゲーミングモニターの真価を発揮し、視点移動のブレを極限まで減らして対戦を有利に進める構成です。"
+      }
+    ]
+  },
+  {
+    "id": "fortnite",
+    "name": "フォートナイト",
+    "category": "fps",
+    "bannerUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/FortniteLogo.svg",
+    "isLogo": true,
+    "invertLogo": true,
+    "description": "全世界で数百万人が遊ぶメガヒットタイトル。建築処理や各種エフェクトのため、軽そうに見えて意外とCPUとメモリの性能が求められます。",
+    "targets": [
+      {
+        "fps": "60FPS (通常画質)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "標準的なフルHD画質設定で、戦闘時も安定して60FPSを維持できる構成です。"
+      },
+      {
+        "fps": "144FPS (パフォーマンスモード)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "画質を落として動作速度を最優先する「パフォーマンスモード」にて、144FPSを張り付かせるための構成です。"
+      },
+      {
+        "fps": "240FPS (競技パフォーマンス設定)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 16,
+        "description": "建築バトルが激しくなる後半戦でもフレームレートが低下するのを防ぐための、強力なCPUを搭載した構成です。"
+      }
+    ]
+  },
+  {
+    "id": "pubg",
+    "name": "PUBG",
+    "category": "fps",
+    "bannerUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/header.jpg",
+    "description": "Steamの同接ランキングで常に上位に居座るバトロワの金字塔。広大なマップ描画のため、他のFPSよりもグラフィックボードへの負荷が高めです。",
+    "targets": [
+      {
+        "fps": "60FPS (標準画質)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "フルHD・中設定でプレイするための標準的なスペックです。"
+      },
+      {
+        "fps": "144FPS (快適ウルトラ設定)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 16,
+        "description": "索敵しやすいように描画距離を伸ばし、かつ144FPSの滑らかな映像で楽しむためのハイスペック構成です。"
+      }
+    ]
+  },
+  {
+    "id": "monster_hunter_wilds",
+    "name": "モンスターハンター：ワイルズ",
+    "category": "action",
+    "bannerUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2246340/header.jpg",
+    "description": "現在最も注目され、アクティブプレイヤーが多い超重量級ハンティングアクション。最新世代のグラフィックボード（RTX 5070等）が真価を発揮するゲームです。",
+    "targets": [
+      {
+        "fps": "60FPS (標準画質・フレーム生成あり)",
+        "cpuClass": 2,
+        "gpuClass": 3,
+        "ramGb": 16,
+        "description": "フルHD・中〜高画質設定で、ゲーム側のDLSS（超解像技術・フレーム補完）を利用して60FPSを維持する標準構成です。"
+      },
+      {
+        "fps": "120FPS+ (美麗画質・最高設定)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 32,
+        "description": "大自然のグラフィックを最高画質で堪能し、アクションを極めて滑らかに楽しむための最高峰ハイスペック構成（RTX 5070推奨）です。"
+      }
+    ]
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "category": "survival",
+    "bannerUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg",
+    "description": "Steam同接ランキング上位に常駐する超人気サバイバル。膨大なオブジェクトの読み込みと長時間プレイの負荷のため、大容量の【メモリ32GB】が必須レベルのゲームです。",
+    "targets": [
+      {
+        "fps": "60FPS (標準マルチプレイ)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "標準的なサーバーで60FPS前後をキープして遊ぶための基本スペックです。"
+      },
+      {
+        "fps": "144FPS (大規模戦・高設定)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 32,
+        "description": "大規模な拠点建築や集団戦の際にもフレームレートを維持し、カクつき（メモリ不足によるスタッター）を防ぐための32GBメモリ搭載構成です。"
+      }
+    ]
+  },
+  {
+    "id": "gta5",
+    "name": "グランド・セフト・オートV",
+    "category": "action",
+    "bannerUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg",
+    "description": "世界一売れているオープンワールド。「GTAオンライン」はいまだにSteam上位の常連です。古いゲームなのでオンボードグラボでも快適に動作します。",
+    "targets": [
+      {
+        "fps": "60FPS (標準設定・オンボード可)",
+        "cpuClass": 2,
+        "gpuClass": 1,
+        "ramGb": 16,
+        "description": "グラボがなくても動作可能。CPU内蔵GPUで十分街を駆け巡ることができます。"
+      },
+      {
+        "fps": "120FPS+ (最高画質・オンライン快適)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "グラフィック設定をすべて最高にし、マルチプレイ（GTAオンライン）を非常に滑らかな映像で楽しむ構成です。"
+      }
+    ]
+  },
+  {
+    "id": "genshin",
+    "name": "原神",
+    "category": "action",
+    "bannerUrl": "images/genshin.png",
+    "isLogo": true,
+    "description": "全世界で圧倒的なアクティブユーザー数を誇るオープンワールドRPG。アニメ調の広大なマップを滑らかに探索するには、ミドルクラス以上のスペックが推奨されます。",
+    "targets": [
+      {
+        "fps": "60FPS (フルHD最高画質)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "PC版の綺麗な映像のまま、大自然を滑らかに動き回ることができる構成です。"
+      }
+    ]
+  },
+  {
+    "id": "lol",
+    "name": "League of Legends",
+    "category": "casual",
+    "bannerUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d8/League_of_Legends_2019_vector.svg",
+    "isLogo": true,
+    "description": "世界最大のアクティブ人口を持つオンライン対戦MOBA。超軽量設計のため、旧PCやグラボなし環境でも驚くほど快適に遊ぶことができます。",
+    "targets": [
+      {
+        "fps": "60FPS / 100FPS (オンボード格安)",
+        "cpuClass": 2,
+        "gpuClass": 1,
+        "ramGb": 16,
+        "description": "グラフィックボードは完全に不要。CPU内蔵GPUだけで対戦もチームバトルも快適に行えます。"
+      },
+      {
+        "fps": "240FPS+ (集団戦もヌルヌル)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "5対5のスキルが激しく交差する集団戦の局面でも、フレームレートを数百FPSに保ち、コンマ数秒の操作遅れを防ぐ構成です。"
+      }
+    ]
+  },
+  {
+    "id": "street_fighter_6",
+    "name": "ストリートファイター6",
+    "category": "action",
+    "bannerUrl": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1364780/header.jpg",
+    "description": "世界的人気を誇る対戦格闘ゲームの金字塔。格闘ゲームはシステム上【常時60FPS維持】が絶対条件であり、一瞬の処理落ちも許されないため、安定したスペックが求められます。",
+    "targets": [
+      {
+        "fps": "60FPS (標準プレイ・フルHD画質)",
+        "cpuClass": 2,
+        "gpuClass": 2,
+        "ramGb": 16,
+        "description": "フルHD解像度・グラフィック設定「標準」にて、対戦中に一切フレームドロップを起こさず60FPSを張り付かせるための構成です。"
+      },
+      {
+        "fps": "60FPS (最高画質プレイ・配信同時処理)",
+        "cpuClass": 3,
+        "gpuClass": 3,
+        "ramGb": 16,
+        "description": "グラフィック設定をすべて「最高」にし、さらにプレイ中の対戦画面を高画質でライブ配信・録画しても全く重くならない、余裕を持たせた構成です。"
+      }
+    ]
+  }
+]

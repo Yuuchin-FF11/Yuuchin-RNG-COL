@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GamePC-Builder | ゲームPC構成シミュレーター</title>
+  <!-- Google Fonts Outfit & Noto Sans JP -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=12">
+</head>
+<body>
+  <div class="background-overlay"></div>
+  <div class="glow-effect"></div>
+
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-logo">
+        <span class="logo-accent">GAME</span>PC BUILDER
+      </div>
+      <div class="header-tagline">やりたいゲームと目標FPSから、最適な自作PC構成を逆算</div>
+      <button id="btn-reset" class="btn btn-secondary">構成リセット</button>
+    </header>
+
+    <div class="price-notice-banner">
+      <span class="notice-icon">ℹ</span> ※表示されている合計金額および各パーツの価格は、2026年6月時点の市場平均価格です。価格は常に変動するため、現在の正確な価格は右側の「最新の市場価格をチェックする」からご確認ください。
+    </div>
+
+    <main class="app-content">
+      <!-- 左側：選択・カスタマイズエリア -->
+      <section class="configulator-section">
+        <!-- ステップ1：ゲーム選択 -->
+        <div class="glass-card section-card" id="step-game">
+          <div class="card-header">
+            <span class="step-badge">STEP 1</span>
+            <h2>やりたいゲームを選択</h2>
+          </div>
+          <!-- カテゴリ切り替えタブ -->
+          <div class="category-tabs" id="category-tabs-container">
+            <button class="tab-btn active" data-category="all">すべて</button>
+            <button class="tab-btn" data-category="fps">FPS / シューター</button>
+            <button class="tab-btn" data-category="action">アクション / RPG</button>
+            <button class="tab-btn" data-category="survival">サバイバル</button>
+            <button class="tab-btn" data-category="casual">軽量 / カジュアル</button>
+          </div>
+          <div class="game-grid" id="game-list">
+            <!-- JavaScriptで動的生成 -->
+            <div class="loading-spinner">データを読み込み中...</div>
+          </div>
+        </div>
+
+        <!-- ステップ2：目標設定 -->
+        <div class="glass-card section-card hidden" id="step-target">
+          <div class="card-header">
+            <span class="step-badge">STEP 2</span>
+            <h2>目標フレームレート (FPS) を選択</h2>
+          </div>
+          <div id="game-info" class="game-brief-box">
+            <!-- 選択されたゲームの紹介 -->
+          </div>
+          <div class="target-options" id="target-list">
+            <!-- JavaScriptで動的生成 -->
+          </div>
+        </div>
+
+        <!-- ステップ3：パーツカスタマイズ -->
+        <div class="glass-card section-card hidden" id="step-parts">
+          <div class="card-header">
+            <span class="step-badge">STEP 3</span>
+            <h2>パーツ構成の調整・カスタマイズ</h2>
+          </div>
+          <p class="section-desc">自動選定された構成から、パーツを自由に変更できます。互換性チェックも自動で行われます。</p>
+          
+          <div class="parts-list" id="parts-selector-container">
+            <!-- 各パーツカテゴリの選択行がJavaScriptで動的生成されます -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 右側：見積もり＆診断結果サマリー -->
+      <aside class="summary-section">
+        <div class="glass-card sticky-card">
+          <div class="summary-header">
+            <h3>構成見積もりサマリー</h3>
+            <span class="summary-status-tag" id="config-status-tag">構成良好</span>
+          </div>
+
+          <!-- 合計金額表示 -->
+          <div class="price-display-container">
+            <div class="price-label">合計金額（参考）</div>
+            <div class="price-main">
+              <span class="currency">¥</span>
+              <span id="total-price" class="price-value">0</span>
+            </div>
+          </div>
+
+          <!-- 互換性警告表示エリア -->
+          <div id="compatibility-alert-box" class="alert-box alert-success hidden">
+            <!-- 警告メッセージがここに挿入されます -->
+          </div>
+
+          <!-- スペック診断 -->
+          <div class="spec-diagnosis-box">
+            <h4 class="box-title">構成スペック診断</h4>
+            <div class="diagnosis-items">
+              <div class="diagnosis-item">
+                <span class="diag-label">ゲーム動作適性</span>
+                <span class="diag-value" id="diag-suitability">未選定</span>
+              </div>
+              <div class="diagnosis-item">
+                <span class="diag-label">グラフィックス出力</span>
+                <span class="diag-value" id="diag-gpu-status">未選定</span>
+              </div>
+              <div class="diagnosis-item">
+                <span class="diag-label">メモリ通信速度</span>
+                <span class="diag-value" id="diag-memory-status">未選定</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- アクションエリア -->
+          <div class="summary-actions">
+            <button id="btn-check-prices" class="btn btn-primary btn-block">
+              最新の市場価格をチェックする
+            </button>
+          </div>
+
+          <!-- 最新価格チェック時のローディング＆ショップリンク -->
+          <div id="price-check-results" class="price-results-box hidden">
+            <div class="price-check-loading hidden">
+              <div class="mini-spinner"></div>
+              <span>各パーツショップの最新価格情報を構築中...</span>
+            </div>
+            <div class="price-links-container hidden">
+              <p class="links-desc">※詳細な最新の販売価格や在庫状況は、以下のリンクから各ショップの検索結果にて直接ご確認ください。</p>
+              <ul class="shop-links-list" id="shop-links-ul">
+                <!-- JavaScriptでショップ検索リンクが追加されます -->
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+    </main>
+
+    <footer class="app-footer-bar">
+      <p>GamePC-Builder Prototype - 初心者のためのPCパーツ構成ガイド</p>
+      <p class="footer-note">※表示されている価格は市場相場に基づいた参考価格です。実際の購入価格はショップによって異なります。</p>
+    </footer>
+  </div>
+
+  <script src="app.js?v=12"></script>
+</body>
+</html>

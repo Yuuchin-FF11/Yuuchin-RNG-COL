@@ -1,0 +1,204 @@
+{
+  "cpu": [
+    {
+      "id": "cpu_i7_14700k",
+      "name": "Intel Core i7-14700K",
+      "price": 75000,
+      "performanceClass": 3,
+      "socket": "LGA1700",
+      "hasGraphics": true,
+      "details": "20コア/28スレッド, 最大5.6GHz。ゲームも実況配信も快適にこなす高性能CPU。"
+    },
+    {
+      "id": "cpu_i5_14400",
+      "name": "Intel Core i5-14400",
+      "price": 36000,
+      "performanceClass": 2,
+      "socket": "LGA1700",
+      "hasGraphics": true,
+      "details": "10コア/16スレッド, 最大4.7GHz。内蔵グラフィックス搭載で、グラボなしでの動作も可能。"
+    },
+    {
+      "id": "cpu_i5_14400f",
+      "name": "Intel Core i5-14400F",
+      "price": 33000,
+      "performanceClass": 2,
+      "socket": "LGA1700",
+      "hasGraphics": false,
+      "details": "10コア/16スレッド。内蔵グラフィックス非搭載のため、画面表示にはグラフィックボードが必須。"
+    },
+    {
+      "id": "cpu_ryzen7_7800x3d",
+      "name": "AMD Ryzen 7 7800X3D",
+      "price": 50000,
+      "performanceClass": 3,
+      "socket": "AM5",
+      "hasGraphics": true,
+      "details": "8コア/16スレッド。型落ちとなりましたが、3D V-Cache技術によりゲーム性能は現在も一線級の定番CPU。"
+    },
+    {
+      "id": "cpu_ryzen5_8600g",
+      "name": "AMD Ryzen 5 8600G",
+      "price": 40000,
+      "performanceClass": 2,
+      "socket": "AM5",
+      "hasGraphics": true,
+      "details": "6コア/12スレッド。非常に強力な内蔵グラフィックス（Radeon 760M）を搭載し、グラボなしで軽いゲームが遊べます。"
+    },
+    {
+      "id": "cpu_ryzen5_7500f",
+      "name": "AMD Ryzen 5 7500F",
+      "price": 31500,
+      "performanceClass": 2,
+      "socket": "AM5",
+      "hasGraphics": false,
+      "details": "6コア/12スレッド。高コスパなゲーム用CPUですが、グラフィックス機能は非搭載のためグラボが必須です。"
+    }
+  ],
+  "gpu": [
+    {
+      "id": "gpu_none",
+      "name": "なし（CPU内蔵グラフィックスを使用）",
+      "price": 0,
+      "performanceClass": 1,
+      "isNone": true,
+      "details": "グラフィックボードを搭載せず、CPUの内蔵映像出力を使います。予算を劇的に抑えられますが、重いゲームは動きません。"
+    },
+    {
+      "id": "gpu_rtx5070",
+      "name": "NVIDIA GeForce RTX 5070",
+      "price": 145000,
+      "performanceClass": 3,
+      "details": "NVIDIA最新のRTX 50シリーズ。圧倒的なレイトレーシング性能と最新DLSSにより、重量級ゲームも最高の環境でプレイ可能。"
+    },
+    {
+      "id": "gpu_rtx4070super",
+      "name": "NVIDIA GeForce RTX 4070 SUPER",
+      "price": 110000,
+      "performanceClass": 3,
+      "details": "最新ゲームを144FPS以上、さらには240FPSの超高フレームレートで快適に遊べる高性能グラフィックボード。"
+    },
+    {
+      "id": "gpu_rtx4060",
+      "name": "NVIDIA GeForce RTX 4060",
+      "price": 48000,
+      "performanceClass": 2,
+      "details": "現在のゲーミングPCの超定番。フルHD解像度であれば、ほとんどのゲームが快適に動く高コスパモデル。"
+    },
+    {
+      "id": "gpu_rtx3050",
+      "name": "NVIDIA GeForce RTX 3050 6GB",
+      "price": 32000,
+      "performanceClass": 2,
+      "details": "エントリー向けの省電力グラフィックボード。設定を調整すれば最新ゲームも動作します。"
+    },
+    {
+      "id": "gpu_rx7600",
+      "name": "AMD Radeon RX 7600",
+      "price": 42000,
+      "performanceClass": 2,
+      "details": "VRAM 8GB搭載。同価格帯のNVIDIA製よりも描画性能が高く、コスパに優れたグラフィックボード。"
+    }
+  ],
+  "motherboard": [
+    {
+      "id": "mb_z790",
+      "name": "ASUS ROG STRIX Z790-F GAMING WIFI",
+      "price": 45000,
+      "socket": "LGA1700",
+      "details": "Intel第14世代対応。強力な電源回路と拡張性を備えたゲーミング向け高級マザーボード。"
+    },
+    {
+      "id": "mb_b760",
+      "name": "MSI PRO B760M-A WIFI",
+      "price": 18000,
+      "socket": "LGA1700",
+      "details": "Intel第14世代対応。必要十分な機能を備えた、コンパクト（Micro-ATX）で高コスパなマザーボード。"
+    },
+    {
+      "id": "mb_x670",
+      "name": "ASUS PRIME X670-P-CSM",
+      "price": 32000,
+      "socket": "AM5",
+      "details": "AMD Ryzen 7000/8000対応。高速なPCIe 5.0規格に対応した安定性の高い標準マザーボード。"
+    },
+    {
+      "id": "mb_b650",
+      "name": "ASRock B650M Pro RS",
+      "price": 20000,
+      "socket": "AM5",
+      "details": "AMD Ryzen 7000/8000対応。白を基調としたヒートシンクが特徴の人気エントリーマザーボード。"
+    }
+  ],
+  "memory": [
+    {
+      "id": "mem_32gb_dual",
+      "name": "DDR5-5600 32GB (16GBx2枚組)",
+      "price": 58000,
+      "isDualChannel": true,
+      "details": "現在のゲーム用としては推奨の容量。2枚組なので速度も最大（デュアルチャネル動作）になります。"
+    },
+    {
+      "id": "mem_16gb_dual",
+      "name": "DDR5-5600 16GB (8GBx2枚組)",
+      "price": 31000,
+      "isDualChannel": true,
+      "details": "一般的な用途や軽めのゲームなら十分な容量。2枚組なので性能がしっかり引き出せます。"
+    },
+    {
+      "id": "mem_16gb_single",
+      "name": "DDR5-5600 16GB (16GBx1枚組)",
+      "price": 29000,
+      "isDualChannel": false,
+      "details": "1枚だけなので価格は安いですが、特にグラボなし（オンボード）の際、描画性能が大幅に低下するため注意が必要です。"
+    }
+  ],
+  "storage": [
+    {
+      "id": "ssd_2tb",
+      "name": "M.2 NVMe SSD 2TB (PCIe Gen4)",
+      "price": 38000,
+      "details": "容量に余裕がある超高速SSD。最新ゲームは1本で100GBを超えることも多いため、2TBあると安心です。"
+    },
+    {
+      "id": "ssd_1tb",
+      "name": "M.2 NVMe SSD 1TB (PCIe Gen4)",
+      "price": 21000,
+      "details": "ゲームを数本入れるだけなら十分な容量の超高速SSD。"
+    }
+  ],
+  "power": [
+    {
+      "id": "power_850w",
+      "name": "850W 80PLUS GOLD電源",
+      "price": 18000,
+      "details": "RTX 5070などの最新ハイスペックグラボや、将来のアップグレードにも余裕で対応できる大容量電源。"
+    },
+    {
+      "id": "power_750w",
+      "name": "750W 80PLUS GOLD電源",
+      "price": 14000,
+      "details": "ミドル〜ハイエンドグラボにも対応できる高効率・大容量な電源ユニット。"
+    },
+    {
+      "id": "power_650w",
+      "name": "650W 80PLUS BRONZE電源",
+      "price": 8500,
+      "details": "グラボなし構成や、RTX 4060などの省電力グラボに最適なスタンダード電源。"
+    }
+  ],
+  "case": [
+    {
+      "id": "case_atx",
+      "name": "ATX ミドルタワーケース（ファン搭載）",
+      "price": 11000,
+      "details": "どんなマザーボードや大型グラフィックボードも入る、冷却性能に優れた標準的なケース。"
+    },
+    {
+      "id": "case_matx",
+      "name": "Micro-ATX ミニタワーケース",
+      "price": 7500,
+      "details": "コンパクトで置き場所に困らないケース。※ATXサイズのマザーボードは入らないので注意。"
+    }
+  ]
+}

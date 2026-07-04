@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ファクトスキャナー検証用バグ入りファイル</title>
+    <style>
+        /* テストケース2: CSSによる縮小・アスペクト比変化の注意（Warning） */
+        .versus-image-css {
+            background-image: url('../画像素材/images/vsあみのん.png');
+            width: 300px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ファクトスキャナー検証用テストページ</h1>
+
+    <!-- テストケース1: HTML imgタグによる致命的オーバーサイズ指定（Danger） -->
+    <!-- 実際の画像サイズに対して、明らかに大きなサイズを指定しています -->
+    <div>
+        <h2>テスト1: imgタグでの過大指定</h2>
+        <img src="../画像素材/images/vsあみのん.png" width="1200" height="1200" alt="対決画像">
+    </div>
+
+    <!-- テストケース3: インラインスタイルによる致命的オーバーサイズ指定（Danger） -->
+    <div>
+        <h2>テスト3: インラインスタイルでの過大指定</h2>
+        <div style="background-image: url('../画像素材/images/vsあみのん.png'); width: 1500px; height: 1500px;"></div>
+    </div>
+
+</body>
+</html>

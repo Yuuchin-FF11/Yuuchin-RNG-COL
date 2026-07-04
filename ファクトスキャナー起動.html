@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファクト・スキャナー (Fact Scanner)</title>
+    <!-- Google Fonts: Outfit & Inter の読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #07070b;
+            --bg-card: rgba(18, 18, 29, 0.75);
+            --primary: #06b6d4; /* ネオンシアン */
+            --primary-glow: rgba(6, 182, 212, 0.4);
+            --accent: #8b5cf6; /* ネオンパープル */
+            --accent-glow: rgba(139, 92, 246, 0.4);
+            --danger: #f43f5e; /* ネオンローズ・レッド */
+            --danger-glow: rgba(244, 63, 94, 0.3);
+            --success: #10b981; /* ネオングリーン */
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-focus: rgba(6, 182, 212, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.12) 0px, transparent 40%);
+        }
+
+        header {
+            background-color: rgba(7, 7, 11, 0.85);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.65rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem;
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* 2カラムレイアウト */
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* ドラッグ＆ドロップエリア */
+        .drop-zone-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .drop-zone {
+            background: var(--bg-card);
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(6, 182, 212, 0.04);
+            box-shadow: 0 0 30px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .drop-zone.success {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.04);
+        }
+
+        .drop-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .drop-zone:hover .drop-icon {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .drop-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .drop-subtext {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .file-info-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: none;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* レポートカード表示 */
+        .report-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .panel-title-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .asset-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            overflow-y: auto;
+            max-height: 600px;
+            padding-right: 0.5rem;
+        }
+
+        /* スクロールバー装飾 */
+        .asset-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .asset-list::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .asset-list::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        /* アセットカード */
+        .asset-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .asset-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateX(3px);
+        }
+
+        .asset-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .asset-path {
+            font-family: monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            word-break: break-all;
+            color: #e5e7eb;
+        }
+
+        .status-pill {
+            padding: 0.25rem 0.65rem;
+            border-radius: 30px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pill.missing {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+        }
+
+        .status-pill.unverified {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-pill.ok {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-pill.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        /* 測定値グリッド */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.75rem;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 0.85rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .spec-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .spec-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        /* 警告ブロック */
+        .alert-block {
+            background: rgba(244, 63, 94, 0.06);
+            border: 1px solid rgba(244, 63, 94, 0.18);
+            border-radius: 8px;
+            padding: 0.85rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: #fda4af;
+            box-shadow: 0 0 15px var(--danger-glow);
+            animation: pulse 2s infinite alternate;
+        }
+
+        .alert-icon {
+            font-size: 1rem;
+            color: var(--danger);
+            font-weight: bold;
+        }
+
+        /* プレースホルダー表示 */
+        .empty-placeholder {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { border-color: rgba(244, 63, 94, 0.15); }
+            100% { border-color: rgba(244, 63, 94, 0.35); }
+        }
+
+        /* トースト通知 */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(18, 18, 29, 0.9);
+            border: 1px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.25);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            z-index: 100;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            backdrop-filter: blur(10px);
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        .toast-icon {
+            color: var(--primary);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toast" class="toast">
+        <span class="toast-icon">✓</span>
+        <span id="toastMessage">AIへの指示テキストをコピーしました</span>
+    </div>
+
+    <header>
+        <div class="header-title-container">
+            <h1>ファクト・スキャナー</h1>
+            <div class="subtitle">コード内のアセット記述と物理データの「解像度・存在」の不一致を自動検出するファクトチェックツール</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="workspace-grid">
+            
+            <!-- 左カラム: ファイル投入エリア -->
+            <div class="drop-zone-container">
+                <!-- 1. ソースコードの投入 -->
+                <div class="drop-zone" id="codeDropZone" onclick="document.getElementById('codeFileInput').click()">
+                    <div class="drop-icon">📄</div>
+                    <div class="drop-text" id="codeDropText">【ステップ1】プログラムファイルをドロップ</div>
+                    <div class="drop-subtext">またはクリックしてファイルを選択 (HTML, JS, CSS)</div>
+                    <div class="file-info-badge" id="codeFileBadge">未選択</div>
+                    <input type="file" id="codeFileInput" style="display: none;" accept=".html,.js,.css" onchange="handleCodeFileSelect(event)">
+                </div>
+
+                <!-- 2. アセット画像の投入 -->
+                <div class="drop-zone" id="imageDropZone" onclick="document.getElementById('imageFileInput').click()">
+                    <div class="drop-icon">🖼️</div>
+                    <div class="drop-text" id="imageDropText">【ステップ2】画像ファイルをまとめてドロップ</div>
+                    <div class="drop-subtext">またはクリックして画像を選択 (PNG, JPG, GIF) ※複数選択可</div>
+                    <div class="file-info-badge" id="imageFileBadge" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); color: var(--accent);">0個の画像がセットされています</div>
+                    <input type="file" id="imageFileInput" style="display: none;" accept="image/*" multiple onchange="handleImageFileSelect(event)">
+                </div>
+            </div>
+
+            <!-- 右カラム: 事実検証レポートパネル -->
+            <div class="report-panel">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="panel-title-dot"></span>
+                        事実検証レポート (Fact Report)
+                    </div>
+                </div>
+
+                <!-- 結果リスト -->
+                <div class="asset-list" id="assetList" style="display: none;">
+                    <!-- ここに動的にアセットカードが追加されます -->
+                </div>
+
+                <!-- 何も読み込まれていない時のプレースホルダー -->
+                <div class="empty-placeholder" id="emptyPlaceholder">
+                    <div class="empty-icon">🔍</div>
+                    <p>プログラムファイルをドラッグ＆ドロップすると、<br>コード内の画像アセットの調査を開始します。</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        let codeContent = "";
+        let detectedAssets = []; // 検出された画像一覧 { path: string, basename: string }
+        let loadedImagesMap = new Map(); // 読み込まれた画像データ { filename: File }
+
+        // トースト通知を表示する関数
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMessage');
+            msgEl.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // AIへの指示用プロンプトをクリップボードにコピーする関数
+        function copyAiPrompt(filename, physW, physH, codeW, codeH, source) {
+            const promptText = `以下のプログラムコードにおいて、画像アセット「${filename}」の描画サイズに不整合バグがあります。
+
+【物理的な事実（ファクト情報）】
+・実際の画像サイズ（オリジナル解像度）: ${physW} x ${physH} px
+・コード上の描画指定サイズ: ${codeW} x ${codeH} px (検出元: ${source})
+
+【バグの状況】
+コード上での描画サイズ指定が、画像の物理サイズ（${physW}x${physH}px）を超えているかズレているため、表示が見切れる、または画像が不自然に歪むバグが発生しています。
+
+【AIへの指示】
+この事実を元に、プログラムコード内の該当箇所を正しく修正したコードを提示してください。特に、画像範囲外の座標を指定している部分があれば、画像内に収まるように適切に縮小・調整してください。`;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert("AIへの指示テキスト（プロンプト）をコピーしました！\\nこのままChatGPTやGeminiなどのAIのチャット画面に貼り付けて送信してください。");
+            }).catch(err => {
+                console.error("コピー失敗:", err);
+            });
+        }
+
+        // ドラッグオーバー等のイベントデフォルト挙動の停止
+        const dropZones = ['codeDropZone', 'imageDropZone'];
+        dropZones.forEach(id => {
+            const zone = document.getElementById(id);
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                zone.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            zone.addEventListener('dragover', () => zone.classList.add('dragover'), false);
+            zone.addEventListener('dragleave', () => zone.classList.remove('dragover'), false);
+            zone.addEventListener('drop', () => zone.classList.remove('dragover'), false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        // ドロップ時のハンドリング
+        document.getElementById('codeDropZone').addEventListener('drop', function(e) {
+            const file = e.dataTransfer.files[0];
+            if (file) processCodeFile(file);
+        });
+
+        document.getElementById('imageDropZone').addEventListener('drop', function(e) {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) processImageFiles(files);
+        });
+
+        // ファイル選択時のハンドリング
+        function handleCodeFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) processCodeFile(file);
+        }
+
+        function handleImageFileSelect(e) {
+            const files = e.target.files;
+            if (files.length > 0) processImageFiles(files);
+        }
+
+        // プログラムファイルの読み込みと解析
+        function processCodeFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                codeContent = event.target.result;
+                
+                // バッジの表示
+                const badge = document.getElementById('codeFileBadge');
+                badge.innerText = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+                badge.style.display = 'inline-block';
+                document.getElementById('codeDropZone').classList.add('success');
+                
+                // 画像アセットの抽出
+                scanAssets(codeContent);
+            };
+            reader.readAsText(file);
+        }
+
+        // 画像ファイルの読み込みと登録
+        function processImageFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file.type.startsWith('image/')) {
+                    // ファイル名（ベース名）をキーにしてマップに登録
+                    loadedImagesMap.set(file.name.toLowerCase(), file);
+                }
+            }
+            
+            // バッジの更新
+            const badge = document.getElementById('imageFileBadge');
+            badge.innerText = `${loadedImagesMap.size}個の画像がセットされています`;
+            badge.style.display = 'inline-block';
+            document.getElementById('imageDropZone').classList.add('success');
+            
+            // すでにコードが読み込まれている場合は再突合
+            if (detectedAssets.length > 0) {
+                renderReport();
+            }
+        }
+
+        // ソースコードから画像パスをスキャンする
+        function scanAssets(content) {
+            let matches = [];
+            
+            // 1. クォーテーションで囲まれた画像パス（HTML/JS等）
+            const quoteRegex = /["']([^"'\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg))["']/gi;
+            let match;
+            while ((match = quoteRegex.exec(content)) !== null) {
+                matches.push(match[1]);
+            }
+            
+            // 2. CSSの url(...) 形式 (クォーテーション任意)
+            const cssUrlRegex = /url\(\s*["']?([^"')\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg))["']?\s*\)/gi;
+            while ((match = cssUrlRegex.exec(content)) !== null) {
+                matches.push(match[1]);
+            }
+            
+            // 重複の排除
+            const uniquePaths = [...new Set(matches)].sort();
+            
+            detectedAssets = uniquePaths.map(path => {
+                // ファイル名のみを抽出（例: "path/to/image.png" -> "image.png"）
+                const basename = path.split('/').pop().split('\\').pop();
+                return {
+                    path: path,
+                    basename: basename
+                };
+            });
+            
+            renderReport();
+        }
+
+        // 簡易コード解析で描画サイズ（width/height）の指定をすべて検出する関数
+        function parseAllRenderSizes(codeText, imageName) {
+            const escapedName = imageName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            const results = [];
+            
+            // 1. HTMLの <img src="..." width="X" height="Y"> の検出
+            const imgTagRegex = new RegExp(`<img[^>]*src=["'][^"']*${escapedName}["'][^>]*>`, 'gi');
+            let imgMatch;
+            while ((imgMatch = imgTagRegex.exec(codeText)) !== null) {
+                const tag = imgMatch[0];
+                const wMatch = tag.match(/width=["']?(\d+)["']?/i);
+                const hMatch = tag.match(/height=["']?(\d+)["']?/i);
+                if (wMatch && hMatch) {
+                    results.push({ width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: 'HTML <img> 属性' });
+                }
+            }
+
+            // 2. JSの drawImage などの検出（変数名経由の解析）
+            const varRegex = new RegExp(`(\\w+)\\s*\\.\\s*src\\s*=\\s*["'][^"']*${escapedName}["']`, 'gi');
+            let varMatch;
+            while ((varMatch = varRegex.exec(codeText)) !== null) {
+                const varName = varMatch[1]; // 例: "logoImg"
+                
+                // drawImage(logoImg, dx, dy, dw, dh) の5引数呼び出しを探す
+                const d5Regex = new RegExp(`drawImage\\(\\s*${varName}\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\\)`, 'g');
+                let d5Match;
+                while ((d5Match = d5Regex.exec(codeText)) !== null) {
+                    results.push({ width: parseInt(d5Match[1]), height: parseInt(d5Match[2]), source: `drawImage(${varName}, ...)` });
+                }
+                
+                // drawImage(logoImg, sx, sy, sw, sh, dx, dy, dw, dh) の9引数呼び出しを探す
+                const d9Regex = new RegExp(`drawImage\\(\\s*${varName}\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\\)`, 'g');
+                let d9Match;
+                while ((d9Match = d9Regex.exec(codeText)) !== null) {
+                    results.push({ width: parseInt(d9Match[1]), height: parseInt(d9Match[2]), source: `drawImage(${varName}, ...)` });
+                }
+
+                // 2.1 JSのプロパティ指定 (例: img.width = 100; img.height = 100;)
+                const wPropRegex = new RegExp(`${varName}\\s*\\.\\s*width\\s*=\\s*(\\d+)`, 'gi');
+                    const hPropRegex = new RegExp(`${varName}\\s*\\.\\s*height\\s*=\\s*(\\d+)`, 'gi');
+                let wp, hp;
+                if ((wp = wPropRegex.exec(codeText)) && (hp = hPropRegex.exec(codeText))) {
+                    results.push({ width: parseInt(wp[1]), height: parseInt(hp[1]), source: `${varName}.width / .height` });
+                }
+                
+                // 2.2 style.width / style.height の検出 (例: img.style.width = '100px';)
+                const wStyleRegex = new RegExp(`${varName}\\s*\\.\\s*style\\s*\\.\\s*width\\s*=\\s*["'](\\d+)px["']`, 'gi');
+                const hStyleRegex = new RegExp(`${varName}\\s*\\.\\s*style\\s*\\.\\s*height\\s*=\\s*["'](\\d+)px["']`, 'gi');
+                let ws, hs;
+                if ((ws = wStyleRegex.exec(codeText)) && (hs = hStyleRegex.exec(codeText))) {
+                    results.push({ width: parseInt(ws[1]), height: parseInt(hs[1]), source: `${varName}.style.width / .style.height` });
+                }
+            }
+
+            // 3. CSS内のクラスやIDセレクタに指定された width/height の検出
+            const cssBlocks = codeText.match(/[^{}]+\{[^{}]+\}/g);
+            if (cssBlocks) {
+                for (let block of cssBlocks) {
+                    if (block.toLowerCase().includes(imageName.toLowerCase())) {
+                        const wMatch = block.match(/width\s*:\s*(\d+)px/i);
+                        const hMatch = block.match(/height\s*:\s*(\d+)px/i);
+                        if (wMatch && hMatch) {
+                            results.push({ width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: 'CSS スタイル指定' });
+                        }
+                    }
+                }
+            }
+
+            // 4. HTMLのインラインスタイル style="..." の検出
+            // バックリファレンス \1 を使用して、囲み文字（ダブル/シングルクォーテーション）の内側を正しくキャプチャする
+            const inlineStyleRegex = /style=(["'])(.*?)\1/gi;
+            let styleMatch;
+            while ((styleMatch = inlineStyleRegex.exec(codeText)) !== null) {
+                const styleContent = styleMatch[2]; // style属性の中身
+                
+                // そのstyle属性内に画像名が含まれる場合
+                if (styleContent.toLowerCase().includes(imageName.toLowerCase())) {
+                    const wMatch = styleContent.match(/width\s*:\s*(\d+)px/i);
+                    const hMatch = styleContent.match(/height\s*:\s*(\d+)px/i);
+                    if (wMatch && hMatch) {
+                        results.push({ width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: 'HTML インラインスタイル' });
+                    }
+                }
+            }
+            
+            return results;
+        }
+
+        // 事実検証レポートのレンダリング
+        function renderReport() {
+            const listContainer = document.getElementById('assetList');
+            const placeholder = document.getElementById('emptyPlaceholder');
+            
+            listContainer.innerHTML = "";
+            
+            if (detectedAssets.length === 0) {
+                listContainer.style.display = 'none';
+                placeholder.style.display = 'flex';
+                placeholder.innerHTML = `
+                    <div class="empty-icon">⚠️</div>
+                    <p>ファイル内に検出可能な画像アセットの記述（png, jpg, gif等）が<br>見つかりませんでした。</p>
+                `;
+                return;
+            }
+            
+            placeholder.style.display = 'none';
+            listContainer.style.display = 'flex';
+            
+            detectedAssets.forEach(asset => {
+                const imageFile = loadedImagesMap.get(asset.basename.toLowerCase());
+                
+                // カード要素の作成
+                const card = document.createElement('div');
+                card.className = 'asset-card';
+                
+                // コード上のすべての描画設定をスキャン
+                const renderSizes = parseAllRenderSizes(codeContent, asset.basename);
+                
+                if (!imageFile) {
+                    // 画像ファイルがドロップされていない状態
+                    let sizesText = '検出なし';
+                    if (renderSizes.length > 0) {
+                        sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                    }
+                    
+                    card.innerHTML = `
+                        <div class="asset-meta">
+                            <span class="asset-path">${asset.path}</span>
+                            <span class="status-pill unverified">画像未投入</span>
+                        </div>
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">状態</span>
+                                <span class="spec-value" style="color: var(--text-muted);">検証待ち</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">コード上の設定</span>
+                                <span class="spec-value">${sizesText}</span>
+                            </div>
+                        </div>
+                        <div class="drop-subtext" style="text-align: center; margin-top: 0.5rem; border: 1px dashed rgba(255,255,255,0.05); padding: 0.5rem; border-radius: 6px;">
+                            💡 左エリアに <strong>${asset.basename}</strong> をドロップすると、サイズ整合性のチェックを行います。
+                        </div>
+                    `;
+                    listContainer.appendChild(card);
+                } else {
+                    // 画像ファイルがドロップされ、読み込み可能な状態
+                    const img = new Image();
+                    const objectUrl = URL.createObjectURL(imageFile);
+                    
+                    img.onload = function() {
+                        const physW = img.naturalWidth;
+                        const physH = img.naturalHeight;
+                        URL.revokeObjectURL(objectUrl);
+                        
+                        let cardStatusClass = 'ok';
+                        let cardStatusText = 'OK (検証済)';
+                        
+                        // 検出されたすべてのサイズ指定を評価して表示用の要素を組み立てる
+                        let alertBlocksHtml = '';
+                        let specsGridHtml = `
+                            <div class="spec-item">
+                                <span class="spec-label">実際の画像サイズ (物理)</span>
+                                <span class="spec-value" style="color: var(--primary);">${physW} x ${physH} px</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">ファイル容量</span>
+                                <span class="spec-value">${(imageFile.size / 1024).toFixed(2)} KB</span>
+                            </div>
+                        `;
+                        
+                        if (renderSizes.length === 0) {
+                            specsGridHtml += `
+                                <div class="spec-item">
+                                    <span class="spec-label">コード上の指定</span>
+                                    <span class="spec-value">検出なし</span>
+                                </div>
+                            `;
+                        } else {
+                            let hasDanger = false;
+                            let hasWarning = false;
+                            
+                            renderSizes.forEach((renderSize, idx) => {
+                                specsGridHtml += `
+                                    <div class="spec-item" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; grid-column: 1 / -1;">
+                                        <span class="spec-label">指定 ${idx + 1}: ${renderSize.source}</span>
+                                        <span class="spec-value">${renderSize.width} x ${renderSize.height} px</span>
+                                    </div>
+                                `;
+                                
+                                // 乖離チェック
+                                if (renderSize.width > physW || renderSize.height > physH) {
+                                    hasDanger = true;
+                                    alertBlocksHtml += `
+                                        <div class="alert-block" style="margin-top: 0.75rem;">
+                                            <span class="alert-icon">⚠️</span>
+                                            <div style="flex: 1; text-align: left;">
+                                                <strong>【警告】描画座標の範囲外指定エラーの危険！ (${renderSize.source})</strong><br>
+                                                コード上の指示（${renderSize.width}x${renderSize.height}px）は、
+                                                画像の物理サイズ（${physW}x${physH}px）をオーバーしています。
+                                                これにより画像の端が見切れるか、描画時に完全に切り落とされるバグが起きる可能性が極めて高いです。
+                                                <button onclick="copyAiPrompt('${asset.basename}', ${physW}, ${physH}, ${renderSize.width}, ${renderSize.height}, '${renderSize.source}')" style="margin-top: 0.75rem; background: var(--danger); color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; display: block; box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);">
+                                                    AIへの修正指示テキストをコピーする
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                } else if (renderSize.width !== physW || renderSize.height !== physH) {
+                                    hasWarning = true;
+                                    alertBlocksHtml += `
+                                        <div class="alert-block" style="margin-top: 0.75rem; background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.15); color: #fde047; box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);">
+                                            <span class="alert-icon" style="color: #f59e0b;">💡</span>
+                                            <div style="flex: 1; text-align: left;">
+                                                <strong>【注意】サイズ縮小またはアスペクト比変化 (${renderSize.source})</strong><br>
+                                                コード上で画像（物理 ${physW}x${physH}px）を ${renderSize.width}x${renderSize.height}px にリサイズして描画しています。
+                                                比率が崩れてキャラクターが横に伸びたりしていないか確認してください。
+                                                <button onclick="copyAiPrompt('${asset.basename}', ${physW}, ${physH}, ${renderSize.width}, ${renderSize.height}, '${renderSize.source}')" style="margin-top: 0.75rem; background: #d97706; color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; display: block; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
+                                                    AIへの修正指示テキストをコピーする
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                            });
+                            
+                            if (hasDanger) {
+                                cardStatusClass = 'missing';
+                                cardStatusText = '致命的乖離（バグの危険）';
+                            } else if (hasWarning) {
+                                cardStatusClass = 'warning';
+                                cardStatusText = '注意（縮小表示）';
+                            }
+                        }
+                        
+                        card.innerHTML = `
+                            <div class="asset-meta">
+                                <span class="asset-path">${asset.path}</span>
+                                <span class="status-pill ${cardStatusClass}">${cardStatusText}</span>
+                            </div>
+                            <div class="specs-grid">
+                                ${specsGridHtml}
+                            </div>
+                            ${alertBlocksHtml}
+                        `;
+                    };
+                    
+                    img.onerror = function() {
+                        URL.revokeObjectURL(objectUrl);
+                        card.innerHTML = `
+                            <div class="asset-meta">
+                                <span class="asset-path">${asset.path}</span>
+                                <span class="status-pill missing">解析エラー</span>
+                            </div>
+                            <p class="drop-subtext">画像のヘッダー情報が壊れているか、読み込めませんでした。</p>
+                        `;
+                    };
+                    
+                    img.src = objectUrl;
+                    listContainer.appendChild(card);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,23 +1,22 @@
 @echo off
-chcp 65001 > nul
-title ãƒ•ã‚¡ã‚¯ãƒˆãƒ»ã‚¹ã‚­ãƒ£ãƒŠãƒ¼ ç›£è¦–ã‚µãƒ¼ãƒãƒ¼
+title ƒtƒ@ƒNƒgEƒXƒLƒƒƒi[ ŠÄŽ‹ƒT[ƒo[
 
 echo ===================================================
-echo   ãƒ•ã‚¡ã‚¯ãƒˆãƒ»ã‚¹ã‚­ãƒ£ãƒŠãƒ¼ è‡ªå‹•ç›£è¦–ã‚µãƒ¼ãƒãƒ¼ã‚’èµ·å‹•ã—ã¾ã™...
+echo   ƒtƒ@ƒNƒgEƒXƒLƒƒƒi[ Ž©“®ŠÄŽ‹ƒT[ƒo[‚ð‹N“®‚µ‚Ü‚·...
 echo ===================================================
 echo.
 
-:: ãƒãƒ¼ãƒˆ8080ã®é‡è¤‡ãƒ—ãƒ­ã‚»ã‚¹å¼·åˆ¶çµ‚äº†
+:: ƒ|[ƒg8080‚Ìd•¡ƒvƒƒZƒX‹­§I—¹
 for /f "tokens=5" %%a in ('netstat -aon ^| findstr :8080 ^| findstr LISTENING') do (
     taskkill /f /pid %%a > nul 2>&1
 )
 
-:: Pythonã®å®Ÿè¡Œãƒ‘ã‚¹ã‚’è‡ªå‹•æ¤œå‡º
+:: Python‚ÌŽÀsƒpƒX‚ðŽ©“®ŒŸo
 set PYTHON_CMD=python
 where python > nul 2>&1
 if %errorlevel% equ 0 goto :start_server
 
-:: AppDataå†…ã®æ¨™æº–ãƒ‘ã‚¹ã‚’æŽ¢ç´¢
+:: AppData“à‚Ì•W€ƒpƒX‚ð’Tõ
 for /d %%d in ("%USERPROFILE%\AppData\Local\Programs\Python\Python*") do (
     if exist "%%d\python.exe" (
         set PYTHON_CMD="%%d\python.exe"
@@ -25,7 +24,7 @@ for /d %%d in ("%USERPROFILE%\AppData\Local\Programs\Python\Python*") do (
     )
 )
 
-:: ãã®ä»–ã®æ¨™æº–ãƒ‘ã‚¹ã‚’æŽ¢ç´¢
+:: ‚»‚Ì‘¼‚Ì•W€ƒpƒX‚ð’Tõ
 if exist "C:\Python310\python.exe" (
     set PYTHON_CMD="C:\Python310\python.exe"
     goto :start_server
@@ -35,24 +34,24 @@ if exist "C:\Python39\python.exe" (
     goto :start_server
 )
 
-echo ã€è­¦å‘Šã€‘ç’°å¢ƒå¤‰æ•° PATH ã« Python ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚
-echo é€šå¸¸ã® python ã‚³ãƒžãƒ³ãƒ‰ã§ã®èµ·å‹•ã‚’è©¦ã¿ã¾ã™ãŒã€èµ·å‹•ã—ãªã„å ´åˆã¯
-echo Python 3 ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã€ç’°å¢ƒå¤‰æ•° PATH ã«è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
+echo yŒxzŠÂ‹«•Ï” PATH ‚É Python ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB
+echo ’Êí‚Ì python ƒRƒ}ƒ“ƒh‚Å‚Ì‹N“®‚ðŽŽ‚Ý‚Ü‚·‚ªA‹N“®‚µ‚È‚¢ê‡‚Í
+echo Python 3 ‚ðƒCƒ“ƒXƒg[ƒ‹‚µAŠÂ‹«•Ï” PATH ‚É’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
 echo.
 
 :start_server
-:: Pythonã‚µãƒ¼ãƒãƒ¼ã‚’èµ·å‹•
+:: PythonƒT[ƒo[‚ð‹N“®
 start "" %PYTHON_CMD% fact_monitor.py
 
-:: èµ·å‹•å¾…æ©Ÿ
+:: ‹N“®‘Ò‹@
 timeout /t 2 /nobreak > nul
 
-:: ãƒ–ãƒ©ã‚¦ã‚¶ã§é–‹ã
+:: ƒuƒ‰ƒEƒU‚ÅŠJ‚­
 start http://localhost:8080/
 
 echo.
 echo ---------------------------------------------------
-echo   è‡ªå‹•ç›£è¦–ã‚µãƒ¼ãƒãƒ¼ãŒèµ·å‹•ã—ã¾ã—ãŸã€‚
-echo   ã“ã®ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹ã¨ã€è‡ªå‹•ç›£è¦–ãŒåœæ­¢ã—ã¾ã™ã€‚
+echo   Ž©“®ŠÄŽ‹ƒT[ƒo[‚ª‹N“®‚µ‚Ü‚µ‚½B
+echo   ‚±‚ÌƒEƒBƒ“ƒhƒE‚ð•Â‚¶‚é‚ÆAŽ©“®ŠÄŽ‹‚ª’âŽ~‚µ‚Ü‚·B
 echo ---------------------------------------------------
 pause

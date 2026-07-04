@@ -1054,7 +1054,7 @@
                 }
                 textEl.innerText = `自動監視：接続完了 (${path || 'ローカル'})`;
             } else {
-                if (isMonitorActive || textEl.innerText === '自動監視：未接続') {
+                if (isMonitorActive || textEl.innerText.includes('未接続')) {
                     statusEl.classList.remove('connected');
                     textEl.innerText = "自動監視：オフライン";
                     isMonitorActive = false;

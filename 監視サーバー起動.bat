@@ -40,10 +40,11 @@ echo Python 3 をインストールし、環境変数 PATH に追加してください。
 echo.
 
 :start_server
-:: Pythonサーバーを起動
-start "" %PYTHON_CMD% fact_monitor.py
+:: Pythonの標準出力をUTF-8に強制し、エラーログを記録する
+set PYTHONIOENCODING=utf-8
+start "" %PYTHON_CMD% fact_monitor.py > fact_monitor.log 2>&1
 
-:: 起動待機
+:: 起動待機 (2秒)
 timeout /t 2 /nobreak > nul
 
 :: ブラウザで開く
@@ -52,6 +53,7 @@ start http://localhost:8080/
 echo.
 echo ---------------------------------------------------
 echo   自動監視サーバーが起動しました。
-echo   このウィンドウを閉じると、自動監視が停止します。
+echo   もしブラウザでエラーが出る場合は、「fact_monitor.log」
+echo   ファイルを確認し、AIに内容を伝えてください。
 echo ---------------------------------------------------
 pause

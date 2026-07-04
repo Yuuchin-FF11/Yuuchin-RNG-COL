@@ -44,7 +44,7 @@ class FactMonitorHandler(SimpleHTTPRequestHandler):
     def initialize_watcher(cls):
         """起動時のファイル状態を初期化"""
         cls.watched_files = cls.scan_files()
-        print(f"【監視開始】対象ファイル数: {len(cls.watched_files)} 件")
+        print(f"[INFO] Watcher initialized. Monitoring {len(cls.watched_files)} files.")
 
     def do_GET(self):
         # APIエンドポイント /api/status へのリクエスト処理
@@ -132,11 +132,11 @@ def run_server():
     FactMonitorHandler.initialize_watcher()
     server_address = ('', PORT)
     httpd = HTTPServer(server_address, FactMonitorHandler)
-    print(f"【監視サーバー起動完了】 http://localhost:{PORT}/ でファクト・スキャナーが稼働中...")
+    print(f"[INFO] Server started successfully at http://localhost:{PORT}/")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\nサーバーを停止します。")
+        print("\n[INFO] Stopping server...")
         httpd.server_close()
 
 if __name__ == '__main__':

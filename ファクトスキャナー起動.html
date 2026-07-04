@@ -510,6 +510,7 @@
         let codeContent = "";
         let detectedAssets = []; // 検出されたアセット一覧 { path: string, basename: string }
         let loadedAssetsMap = new Map(); // 読み込まれたアセットデータ { filename: File }
+        let assetsDropped = false; // アセットファイルが投入されたかどうかのフラグ
 
         // トースト通知を表示する関数
         function showToast(message) {
@@ -603,6 +604,7 @@
 
         // アセットファイル（画像・音声）の読み込みと登録
         function processAssetFiles(files) {
+            assetsDropped = true; // アセット投入フラグを立てる
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 if (file.type.startsWith('image/') || file.type.startsWith('audio/') || /\.(mp3|wav|ogg)$/i.test(file.name)) {
@@ -780,34 +782,67 @@
                     let statusText = '検証待ち';
                     let specsGridHtml = '';
                     
-                    if (isAudio) {
+                    if (assetsDropped) {
+                        // アセットがドロップ済みで不足している場合は「リンク切れ」と判定
                         statusClass = 'missing';
-                        statusText = 'リンク切れの疑い';
-                        specsGridHtml = `
-                            <div class="spec-item">
-                                <span class="spec-label">アセット種別</span>
-                                <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">状態</span>
-                                <span class="spec-value" style="color: var(--danger);">未投入（存在未確認）</span>
-                            </div>
-                        `;
-                    } else {
-                        let sizesText = '検出なし';
-                        if (renderSizes.length > 0) {
-                            sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                        statusText = isAudio ? 'リンク切れの疑い' : 'ファイル未検出（リンク切れ）';
+                        
+                        if (isAudio) {
+                            specsGridHtml = `
+                                <div class="spec-item">
+                                    <span class="spec-label">アセット種別</span>
+                                    <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">状態</span>
+                                    <span class="spec-value" style="color: var(--danger);">見つかりません（リンク切れ）</span>
+                                </div>
+                            `;
+                        } else {
+                            let sizesText = '検出なし';
+                            if (renderSizes.length > 0) {
+                                sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                            }
+                            specsGridHtml = `
+                                <div class="spec-item">
+                                    <span class="spec-label">状態</span>
+                                    <span class="spec-value" style="color: var(--danger);">見つかりません（リンク切れ）</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">コード上の設定</span>
+                                    <span class="spec-value">${sizesText}</span>
+                                </div>
+                            `;
                         }
-                        specsGridHtml = `
-                            <div class="spec-item">
-                                <span class="spec-label">状態</span>
-                                <span class="spec-value" style="color: var(--text-muted);">検証待ち</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">コード上の設定</span>
-                                <span class="spec-value">${sizesText}</span>
-                            </div>
-                        `;
+                    } else {
+                        // 初期状態（アセット未投入）
+                        if (isAudio) {
+                            specsGridHtml = `
+                                <div class="spec-item">
+                                    <span class="spec-label">アセット種別</span>
+                                    <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">状態</span>
+                                    <span class="spec-value" style="color: var(--text-muted);">検証待ち（未投入）</span>
+                                </div>
+                            `;
+                        } else {
+                            let sizesText = '検出なし';
+                            if (renderSizes.length > 0) {
+                                sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                            }
+                            specsGridHtml = `
+                                <div class="spec-item">
+                                    <span class="spec-label">状態</span>
+                                    <span class="spec-value" style="color: var(--text-muted);">検証待ち</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">コード上の設定</span>
+                                    <span class="spec-value">${sizesText}</span>
+                                </div>
+                            `;
+                        }
                     }
                     
                     card.innerHTML = `
@@ -1005,10 +1040,10 @@
             if (connected) {
                 if (!isMonitorActive) {
                     statusEl.classList.add('connected');
-                    textEl.innerText = `自動監視：接続完了`;
                     isMonitorActive = true;
                     showToast("監視サーバーと接続しました。フォルダの自動監視を開始します。");
                 }
+                textEl.innerText = `自動監視：接続完了 (${path || 'ローカル'})`;
             } else {
                 if (isMonitorActive || textEl.innerText === '自動監視：未接続') {
                     statusEl.classList.remove('connected');

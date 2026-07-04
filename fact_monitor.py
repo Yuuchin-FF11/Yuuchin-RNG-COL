@@ -11,7 +11,7 @@ MONITOR_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 監視対象外のディレクトリやファイル
 EXCLUDE_DIRS = {'.git', '.agent', '.agents', '.vscode', 'scratch'}
-EXCLUDE_FILES = {'fact_monitor.py', 'fact_scanner.py', 'fact_report.md', 'STATUS_REPORT.md'}
+EXCLUDE_FILES = {'fact_monitor.py', 'fact_scanner.py', 'fact_report.md', 'STATUS_REPORT.md', 'ファクトスキャナー起動.html'}
 
 class FactMonitorHandler(SimpleHTTPRequestHandler):
     # サーバー全体のファイル状態を管理するためのクラス変数
@@ -100,7 +100,8 @@ class FactMonitorHandler(SimpleHTTPRequestHandler):
             "connected": True,
             "modified": modified,
             "target_file_name": target_file_name,
-            "code_content": code_content
+            "code_content": code_content,
+            "monitoring_path": os.path.basename(MONITOR_DIR)
         }
 
         self.send_response(200)

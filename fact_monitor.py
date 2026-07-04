@@ -70,6 +70,50 @@ def scan_files():
     return state
 
 
+def scan_project_data():
+    """プロジェクト全体のコードファイルとアセットファイルの一覧を返す"""
+    code_files = []
+    assets = []
+    
+    code_extensions = (".html", ".css", ".js")
+    asset_extensions = (".png", ".jpg", ".jpeg", ".gif", ".mp3", ".wav", ".ogg")
+    
+    for root, dirs, files in os.walk(MONITOR_DIR):
+        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
+        
+        rel_dir = os.path.relpath(root, MONITOR_DIR)
+        parts = [] if rel_dir == "." else rel_dir.replace("\\", "/").split("/")
+        if any(part in EXCLUDE_DIRS for part in parts):
+            continue
+            
+        for file in files:
+            filepath = os.path.join(root, file)
+            rel_file = os.path.relpath(filepath, MONITOR_DIR).replace("\\", "/")
+            
+            if file in EXCLUDE_FILES:
+                if file != "test_bug.html":
+                    continue
+            
+            ext = os.path.splitext(file)[1].lower()
+            
+            if ext in code_extensions:
+                try:
+                    with open(filepath, "r", encoding="utf-8", errors="replace") as f:
+                        content = f.read()
+                except OSError:
+                    content = ""
+                code_files.append({
+                    "path": rel_file,
+                    "name": file,
+                    "content": content
+                })
+            elif ext in asset_extensions:
+                assets.append(rel_file)
+                
+    return {"files": code_files, "assets": assets}
+
+
+
 # グローバルな監視状態
 watched_files = scan_files()
 
@@ -92,6 +136,8 @@ class MonitorHandler(BaseHTTPRequestHandler):
 
         if url_path == '/api/status':
             self._handle_api_status(parsed)
+        elif url_path == '/api/project-scan':
+            self._handle_api_project_scan()
         elif url_path == '/' or url_path == '':
             self._serve_scanner_html()
         else:
@@ -147,6 +193,18 @@ class MonitorHandler(BaseHTTPRequestHandler):
         }
 
         body = json.dumps(response_data, ensure_ascii=False).encode('utf-8')
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json; charset=utf-8')
+        self.send_header('Content-Length', str(len(body)))
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _handle_api_project_scan(self):
+        """プロジェクト全体の一括スキャン結果を返すAPI"""
+        project_data = scan_project_data()
+        body = json.dumps(project_data, ensure_ascii=False).encode('utf-8')
+        
         self.send_response(200)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.send_header('Content-Length', str(len(body)))

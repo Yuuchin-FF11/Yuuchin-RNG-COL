@@ -1,0 +1,53 @@
+# ASCII-only batch file generator
+$lines = @(
+    '@echo off'
+    'cd /d %~dp0'
+    'title Fact Scanner Server'
+    ''
+    'echo =========================================='
+    'echo   Fact Scanner - Auto Monitor Server'
+    'echo =========================================='
+    'echo.'
+    ''
+    'for /f "tokens=5" %%a in (''netstat -aon 2^>nul ^| findstr :8080 ^| findstr LISTENING'') do taskkill /f /pid %%a > nul 2>&1'
+    ''
+    'where py > nul 2>&1'
+    'if %errorlevel%==0 goto FOUND_PY'
+    ''
+    'where python > nul 2>&1'
+    'if %errorlevel%==0 goto FOUND_PYTHON'
+    ''
+    'echo [ERROR] Python not found.'
+    'pause'
+    'exit /b 1'
+    ''
+    ':FOUND_PY'
+    'set PYTHON_CMD=py'
+    'goto RUN'
+    ''
+    ':FOUND_PYTHON'
+    'set PYTHON_CMD=python'
+    'goto RUN'
+    ''
+    ':RUN'
+    'echo   Detected: %PYTHON_CMD%'
+    'echo.'
+    'start "Fact Scanner Server" %PYTHON_CMD% fact_monitor.py'
+    'timeout /t 2 /nobreak > nul'
+    'start http://localhost:8080/'
+    'echo.'
+    'echo   Server started. Close the server window to stop.'
+    'echo.'
+    'pause'
+)
+
+$crlf = "`r`n"
+$content = $lines -join $crlf
+$content += $crlf
+
+$bytes = [System.Text.Encoding]::ASCII.GetBytes($content)
+[System.IO.File]::WriteAllBytes(
+    (Join-Path $PSScriptRoot '..\監視サーバー起動.bat'),
+    $bytes
+)
+Write-Host "Done: ASCII-only bat file created"

@@ -1,4 +1,5 @@
 @echo off
+cd /d %~dp0
 title ファクト・スキャナー 監視サーバー
 
 echo ===================================================
@@ -42,7 +43,8 @@ echo.
 :start_server
 :: Pythonの標準出力をUTF-8に強制し、エラーログを記録する
 set PYTHONIOENCODING=utf-8
-start "" %PYTHON_CMD% fact_monitor.py > fact_monitor.log 2>&1
+echo [INFO] Python command: %PYTHON_CMD%
+start /b "" %PYTHON_CMD% fact_monitor.py > fact_monitor.log 2>&1
 
 :: 起動待機 (2秒)
 timeout /t 2 /nobreak > nul

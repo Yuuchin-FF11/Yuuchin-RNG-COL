@@ -4,6 +4,7 @@ title ファクト・スキャナー 監視サーバー
 
 echo ===================================================
 echo   ファクト・スキャナー 自動監視サーバーを起動します...
+echo   (PowerShellを使用するため、Python不要で動きます)
 echo ===================================================
 echo.
 
@@ -12,39 +13,8 @@ for /f "tokens=5" %%a in ('netstat -aon ^| findstr :8080 ^| findstr LISTENING') 
     taskkill /f /pid %%a > nul 2>&1
 )
 
-:: Pythonの実行パスを自動検出
-set PYTHON_CMD=python
-where python > nul 2>&1
-if %errorlevel% equ 0 goto :start_server
-
-:: AppData内の標準パスを探索
-for /d %%d in ("%USERPROFILE%\AppData\Local\Programs\Python\Python*") do (
-    if exist "%%d\python.exe" (
-        set PYTHON_CMD="%%d\python.exe"
-        goto :start_server
-    )
-)
-
-:: その他の標準パスを探索
-if exist "C:\Python310\python.exe" (
-    set PYTHON_CMD="C:\Python310\python.exe"
-    goto :start_server
-)
-if exist "C:\Python39\python.exe" (
-    set PYTHON_CMD="C:\Python39\python.exe"
-    goto :start_server
-)
-
-echo 【警告】環境変数 PATH に Python が見つかりません。
-echo 通常の python コマンドでの起動を試みますが、起動しない場合は
-echo Python 3 をインストールし、環境変数 PATH に追加してください。
-echo.
-
-:start_server
-:: Pythonの標準出力をUTF-8に強制し、エラーログを記録する
-set PYTHONIOENCODING=utf-8
-echo [INFO] Python command: %PYTHON_CMD%
-start /b "" %PYTHON_CMD% fact_monitor.py > fact_monitor.log 2>&1
+:: PowerShellサーバーを非同期で起動
+start /b "" powershell -ExecutionPolicy Bypass -File fact_monitor.ps1 > fact_monitor.log 2>&1
 
 :: 起動待機 (2秒)
 timeout /t 2 /nobreak > nul

@@ -401,6 +401,42 @@
         .toast-icon {
             color: var(--primary);
             font-weight: bold;
+        /* 自動監視ステータス */
+        .monitor-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+        .monitor-status.connected {
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.05);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+        .monitor-status.connected .status-dot {
+            background-color: var(--success);
+            box-shadow: 0 0 8px var(--success);
+            animation: pulse-green 1.5s infinite;
+        }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
     </style>
 </head>
@@ -415,6 +451,10 @@
         <div class="header-title-container">
             <h1>ファクト・スキャナー</h1>
             <div class="subtitle">コード内のアセット記述と物理データの「解像度・存在」の不一致を自動検出するファクトチェックツール</div>
+        </div>
+        <div class="monitor-status" id="monitorStatus">
+            <span class="status-dot"></span>
+            <span class="status-text" id="monitorStatusText">自動監視：未接続</span>
         </div>
     </header>
 
@@ -432,13 +472,13 @@
                     <input type="file" id="codeFileInput" style="display: none;" accept=".html,.js,.css" onchange="handleCodeFileSelect(event)">
                 </div>
 
-                <!-- 2. アセット画像の投入 -->
+                <!-- 2. アセット（画像・音声）の投入 -->
                 <div class="drop-zone" id="imageDropZone" onclick="document.getElementById('imageFileInput').click()">
-                    <div class="drop-icon">🖼️</div>
-                    <div class="drop-text" id="imageDropText">【ステップ2】画像ファイルをまとめてドロップ</div>
-                    <div class="drop-subtext">またはクリックして画像を選択 (PNG, JPG, GIF) ※複数選択可</div>
-                    <div class="file-info-badge" id="imageFileBadge" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); color: var(--accent);">0個の画像がセットされています</div>
-                    <input type="file" id="imageFileInput" style="display: none;" accept="image/*" multiple onchange="handleImageFileSelect(event)">
+                    <div class="drop-icon">🖼️🎵</div>
+                    <div class="drop-text" id="imageDropText">【ステップ2】アセット（画像や音声）をドロップ</div>
+                    <div class="drop-subtext">またはクリックして選択 (PNG, JPG, GIF, MP3, WAV, OGG) ※複数選択可</div>
+                    <div class="file-info-badge" id="imageFileBadge" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); color: var(--accent);">0個のアセットがセットされています</div>
+                    <input type="file" id="imageFileInput" style="display: none;" accept="image/*,audio/*" multiple onchange="handleImageFileSelect(event)">
                 </div>
             </div>
 
@@ -459,7 +499,7 @@
                 <!-- 何も読み込まれていない時のプレースホルダー -->
                 <div class="empty-placeholder" id="emptyPlaceholder">
                     <div class="empty-icon">🔍</div>
-                    <p>プログラムファイルをドラッグ＆ドロップすると、<br>コード内の画像アセットの調査を開始します。</p>
+                    <p>プログラムファイルをドラッグ＆ドロップすると、<br>コード内の画像や音声アセットの調査を開始します。</p>
                 </div>
             </div>
 
@@ -468,8 +508,8 @@
 
     <script>
         let codeContent = "";
-        let detectedAssets = []; // 検出された画像一覧 { path: string, basename: string }
-        let loadedImagesMap = new Map(); // 読み込まれた画像データ { filename: File }
+        let detectedAssets = []; // 検出されたアセット一覧 { path: string, basename: string }
+        let loadedAssetsMap = new Map(); // 読み込まれたアセットデータ { filename: File }
 
         // トースト通知を表示する関数
         function showToast(message) {
@@ -529,7 +569,7 @@
 
         document.getElementById('imageDropZone').addEventListener('drop', function(e) {
             const files = e.dataTransfer.files;
-            if (files.length > 0) processImageFiles(files);
+            if (files.length > 0) processAssetFiles(files);
         });
 
         // ファイル選択時のハンドリング
@@ -540,7 +580,7 @@
 
         function handleImageFileSelect(e) {
             const files = e.target.files;
-            if (files.length > 0) processImageFiles(files);
+            if (files.length > 0) processAssetFiles(files);
         }
 
         // プログラムファイルの読み込みと解析
@@ -555,25 +595,25 @@
                 badge.style.display = 'inline-block';
                 document.getElementById('codeDropZone').classList.add('success');
                 
-                // 画像アセットの抽出
+                // アセットの抽出
                 scanAssets(codeContent);
             };
             reader.readAsText(file);
         }
 
-        // 画像ファイルの読み込みと登録
-        function processImageFiles(files) {
+        // アセットファイル（画像・音声）の読み込みと登録
+        function processAssetFiles(files) {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                if (file.type.startsWith('image/')) {
+                if (file.type.startsWith('image/') || file.type.startsWith('audio/') || /\.(mp3|wav|ogg)$/i.test(file.name)) {
                     // ファイル名（ベース名）をキーにしてマップに登録
-                    loadedImagesMap.set(file.name.toLowerCase(), file);
+                    loadedAssetsMap.set(file.name.toLowerCase(), file);
                 }
             }
             
             // バッジの更新
             const badge = document.getElementById('imageFileBadge');
-            badge.innerText = `${loadedImagesMap.size}個の画像がセットされています`;
+            badge.innerText = `${loadedAssetsMap.size}個のアセットがセットされています`;
             badge.style.display = 'inline-block';
             document.getElementById('imageDropZone').classList.add('success');
             
@@ -583,19 +623,19 @@
             }
         }
 
-        // ソースコードから画像パスをスキャンする
+        // ソースコードから画像や音声パスをスキャンする
         function scanAssets(content) {
             let matches = [];
             
-            // 1. クォーテーションで囲まれた画像パス（HTML/JS等）
-            const quoteRegex = /["']([^"'\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg))["']/gi;
+            // 1. クォーテーションで囲まれた画像・音声パス（HTML/JS等）
+            const quoteRegex = /["']([^"'\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg|mp3|wav|ogg))["']/gi;
             let match;
             while ((match = quoteRegex.exec(content)) !== null) {
                 matches.push(match[1]);
             }
             
             // 2. CSSの url(...) 形式 (クォーテーション任意)
-            const cssUrlRegex = /url\(\s*["']?([^"')\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg))["']?\s*\)/gi;
+            const cssUrlRegex = /url\(\s*["']?([^"')\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg|mp3|wav|ogg))["']?\s*\)/gi;
             while ((match = cssUrlRegex.exec(content)) !== null) {
                 matches.push(match[1]);
             }
@@ -715,7 +755,7 @@
                 placeholder.style.display = 'flex';
                 placeholder.innerHTML = `
                     <div class="empty-icon">⚠️</div>
-                    <p>ファイル内に検出可能な画像アセットの記述（png, jpg, gif等）が<br>見つかりませんでした。</p>
+                    <p>ファイル内に検出可能な画像・音声アセットの記述が<br>見つかりませんでした。</p>
                 `;
                 return;
             }
@@ -724,28 +764,41 @@
             listContainer.style.display = 'flex';
             
             detectedAssets.forEach(asset => {
-                const imageFile = loadedImagesMap.get(asset.basename.toLowerCase());
+                const assetFile = loadedAssetsMap.get(asset.basename.toLowerCase());
+                const isAudio = /\.(?:mp3|wav|ogg)$/i.test(asset.basename);
                 
                 // カード要素の作成
                 const card = document.createElement('div');
                 card.className = 'asset-card';
                 
-                // コード上のすべての描画設定をスキャン
-                const renderSizes = parseAllRenderSizes(codeContent, asset.basename);
+                // コード上のすべての描画設定をスキャン（音声は対象外）
+                const renderSizes = isAudio ? [] : parseAllRenderSizes(codeContent, asset.basename);
                 
-                if (!imageFile) {
-                    // 画像ファイルがドロップされていない状態
-                    let sizesText = '検出なし';
-                    if (renderSizes.length > 0) {
-                        sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
-                    }
+                if (!assetFile) {
+                    // アセットファイルがドロップされていない状態
+                    let statusClass = 'unverified';
+                    let statusText = '検証待ち';
+                    let specsGridHtml = '';
                     
-                    card.innerHTML = `
-                        <div class="asset-meta">
-                            <span class="asset-path">${asset.path}</span>
-                            <span class="status-pill unverified">画像未投入</span>
-                        </div>
-                        <div class="specs-grid">
+                    if (isAudio) {
+                        statusClass = 'missing';
+                        statusText = 'リンク切れの疑い';
+                        specsGridHtml = `
+                            <div class="spec-item">
+                                <span class="spec-label">アセット種別</span>
+                                <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">状態</span>
+                                <span class="spec-value" style="color: var(--danger);">未投入（存在未確認）</span>
+                            </div>
+                        `;
+                    } else {
+                        let sizesText = '検出なし';
+                        if (renderSizes.length > 0) {
+                            sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                        }
+                        specsGridHtml = `
                             <div class="spec-item">
                                 <span class="spec-label">状態</span>
                                 <span class="spec-value" style="color: var(--text-muted);">検証待ち</span>
@@ -754,16 +807,50 @@
                                 <span class="spec-label">コード上の設定</span>
                                 <span class="spec-value">${sizesText}</span>
                             </div>
+                        `;
+                    }
+                    
+                    card.innerHTML = `
+                        <div class="asset-meta">
+                            <span class="asset-path">${asset.path}</span>
+                            <span class="status-pill ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="specs-grid">
+                            ${specsGridHtml}
                         </div>
                         <div class="drop-subtext" style="text-align: center; margin-top: 0.5rem; border: 1px dashed rgba(255,255,255,0.05); padding: 0.5rem; border-radius: 6px;">
                             💡 左エリアに <strong>${asset.basename}</strong> をドロップすると、サイズ整合性のチェックを行います。
                         </div>
                     `;
                     listContainer.appendChild(card);
+                } else if (isAudio) {
+                    // 音声ファイルが投入され、実在が確認された状態
+                    const capacityKb = (assetFile.size / 1024).toFixed(2);
+                    card.innerHTML = `
+                        <div class="asset-meta">
+                            <span class="asset-path">${asset.path}</span>
+                            <span class="status-pill ok">OK (存在確認済)</span>
+                        </div>
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">アセット種別</span>
+                                <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">ファイル容量</span>
+                                <span class="spec-value">${capacityKb} KB</span>
+                            </div>
+                            <div class="spec-item" style="grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem;">
+                                <span class="spec-label">検証結果</span>
+                                <span class="spec-value" style="color: var(--success);">音声ファイルがプロジェクト内に正常に存在しています。リンク切れはありません。</span>
+                            </div>
+                        </div>
+                    `;
+                    listContainer.appendChild(card);
                 } else {
                     // 画像ファイルがドロップされ、読み込み可能な状態
                     const img = new Image();
-                    const objectUrl = URL.createObjectURL(imageFile);
+                    const objectUrl = URL.createObjectURL(assetFile);
                     
                     img.onload = function() {
                         const physW = img.naturalWidth;
@@ -782,7 +869,7 @@
                             </div>
                             <div class="spec-item">
                                 <span class="spec-label">ファイル容量</span>
-                                <span class="spec-value">${(imageFile.size / 1024).toFixed(2)} KB</span>
+                                <span class="spec-value">${(assetFile.size / 1024).toFixed(2)} KB</span>
                             </div>
                         `;
                         
@@ -875,8 +962,64 @@
                     img.src = objectUrl;
                     listContainer.appendChild(card);
                 }
-            });
         }
+
+        // 監視サーバーとの連携・ポーリング処理
+        const statusUrl = '/api/status'; // 相対パスにすることで同一サーバーからの配信時に競合を防ぐ
+        let isMonitorActive = false;
+
+        function checkServerStatus() {
+            fetch(statusUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error("Server not responding");
+                    return response.json();
+                })
+                .then(data => {
+                    updateMonitorUI(true, data.monitoring_path);
+                    
+                    // ファイルが変更された場合
+                    if (data.modified && data.code_content) {
+                        codeContent = data.code_content;
+                        
+                        // バッジ表示を「自動リロード」に更新
+                        const badge = document.getElementById('codeFileBadge');
+                        badge.innerText = `${data.target_file_name} (自動監視中)`;
+                        badge.style.display = 'inline-block';
+                        document.getElementById('codeDropZone').classList.add('success');
+                        
+                        // アセット抽出とスキャンを再実行
+                        scanAssets(codeContent);
+                        
+                        showToast(`ファクトスキャナー：${data.target_file_name} の変更を検出して自動更新しました！`);
+                    }
+                })
+                .catch(err => {
+                    updateMonitorUI(false);
+                });
+        }
+
+        function updateMonitorUI(connected, path) {
+            const statusEl = document.getElementById('monitorStatus');
+            const textEl = document.getElementById('monitorStatusText');
+            
+            if (connected) {
+                if (!isMonitorActive) {
+                    statusEl.classList.add('connected');
+                    textEl.innerText = `自動監視：接続完了`;
+                    isMonitorActive = true;
+                    showToast("監視サーバーと接続しました。フォルダの自動監視を開始します。");
+                }
+            } else {
+                if (isMonitorActive || textEl.innerText === '自動監視：未接続') {
+                    statusEl.classList.remove('connected');
+                    textEl.innerText = "自動監視：オフライン";
+                    isMonitorActive = false;
+                }
+            }
+        }
+
+        // 1秒ごとに監視サーバーへ問い合わせを実行
+        setInterval(checkServerStatus, 1000);
     </script>
 </body>
 </html>

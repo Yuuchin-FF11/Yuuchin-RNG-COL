@@ -29,5 +29,16 @@
         <div style="background-image: url('../画像素材/images/vsあみのん.png'); width: 1500px; height: 1500px;"></div>
     </div>
 
+    <!-- テストケース4: 音声アセットのリンク切れテスト -->
+    <!-- 実在しない音声ファイルを指定し、リンク切れ警告が出るか確認します -->
+    <div>
+        <h2>テスト4: 実在しない音声ファイルの指定</h2>
+        <audio src="../sound/missing_bgm.mp3" controls></audio>
+        <script>
+            // JS記述からの検出テスト用
+            const soundEffect = 'sound/missing_effect.wav';
+        </script>
+    </div>
+
 </body>
 </html>

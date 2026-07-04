@@ -73,35 +73,45 @@ class FactMonitorHandler(SimpleHTTPRequestHandler):
 
     def handle_api_status(self):
         """ファイル変更チェックを行い、結果をJSONで返すAPI"""
+        # クエリパラメータから last_check を取得
+        parsed_url = urllib.parse.urlparse(self.path)
+        query_params = urllib.parse.parse_qs(parsed_url.query)
+        
+        last_check = 0.0
+        try:
+            if 'last_check' in query_params:
+                last_check = float(query_params['last_check'][0])
+        except (ValueError, IndexError):
+            pass
+
         current_state = self.scan_files()
+        
         modified = False
         target_file_name = ""
         code_content = ""
+        max_mtime = last_check
 
-        # 新規追加または更新されたファイルを検出
-        for path, mtime in current_state.items():
-            if path not in self.watched_files:
-                # 新規ファイル追加
-                modified = True
-                target_file_name = os.path.basename(path)
-                code_content = self.read_file_safe(path)
-                break
-            elif mtime > self.watched_files[path]:
-                # 既存ファイルの更新
-                modified = True
-                target_file_name = os.path.basename(path)
-                code_content = self.read_file_safe(path)
-                break
+        # 最も新しいmtimeを見つける
+        if current_state:
+            max_mtime = max(current_state.values())
 
-        # 削除されたファイルを監視リストから除外
-        self.watched_files = current_state
+        # 最後にチェックした時間より新しいファイルがある場合
+        # 初回起動時（last_check == 0）は変更検知をスキップし初期同期のみ行う
+        if last_check > 0.0 and max_mtime > last_check:
+            for path, mtime in current_state.items():
+                if mtime > last_check:
+                    modified = True
+                    target_file_name = os.path.basename(path)
+                    code_content = self.read_file_safe(path)
+                    break
 
         response_data = {
             "connected": True,
             "modified": modified,
             "target_file_name": target_file_name,
             "code_content": code_content,
-            "monitoring_path": os.path.basename(MONITOR_DIR)
+            "monitoring_path": os.path.basename(MONITOR_DIR),
+            "last_check": max_mtime
         }
 
         self.send_response(200)

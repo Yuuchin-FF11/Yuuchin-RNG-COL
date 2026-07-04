@@ -1000,17 +1000,26 @@
         }
 
         // 監視サーバーとの連携・ポーリング処理
-        const statusUrl = '/api/status'; // 相対パスにすることで同一サーバーからの配信時に競合を防ぐ
+        // file:/// で直接開いた場合でもローカルサーバー(localhost:8080)と連携できるよう接続先を自動切替
+        const statusUrl = window.location.protocol === 'file:' 
+            ? 'http://localhost:8080/api/status' 
+            : '/api/status';
         let isMonitorActive = false;
+        let lastCheckTime = 0.0; // 最後に同期したファイル更新日時
 
         function checkServerStatus() {
-            fetch(statusUrl)
+            fetch(`${statusUrl}?last_check=${lastCheckTime}`)
                 .then(response => {
                     if (!response.ok) throw new Error("Server not responding");
                     return response.json();
                 })
                 .then(data => {
                     updateMonitorUI(true, data.monitoring_path);
+                    
+                    // サーバー側の最新タイムスタンプを記憶
+                    if (data.last_check) {
+                        lastCheckTime = data.last_check;
+                    }
                     
                     // ファイルが変更された場合
                     if (data.modified && data.code_content) {

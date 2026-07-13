@@ -6,25 +6,25 @@ This guide details the recommended equipment for Corsair.
 > This page focuses on "Ideal Gear Sets" for high-end content (such as Sortie) aimed at active players.
 > For "Entry-level Gear (Uniqlo Gear)" that is easier to collect if you don't have Nyame or Ikenga yet, please refer to the **[Entry-level Gear Guide](article_en.html?file=記事/corsair_equip_beginner_en.md)**. Use this page as your ultimate goal.
 
-Recommended Corsair Merit Points
+## Recommended Corsair Merit Points
 
 The following settings are highly recommended for the most stable and effective setup:
 
 ・Group 1
-Phantom Roll Recast: 5 steps
-Quick Draw Recast: 5 steps
+[Phantom Roll](http://wiki.ffo.jp/html/843.html) Recast: 5 steps
+[Quick Draw](http://wiki.ffo.jp/html/13594.html) Recast: 5 steps
 
-For Group 1, these two options are without doubt the best choices. Other options such as Quick Draw Accuracy, Random Deal Recast, and Bust Duration Reduction do not yield significant benefits even with points invested. Thus, maximizing Phantom Roll Recast and Quick Draw Recast is the most stable choice.
+For Group 1, these two options are without doubt the best choices. Other options such as Quick Draw Accuracy, [Random Deal](http://wiki.ffo.jp/html/13597.html) Recast, and [Bust](http://wiki.ffo.jp/html/843.html) Duration Reduction do not yield significant benefits even with points invested. Thus, maximizing [Phantom Roll](http://wiki.ffo.jp/html/843.html) Recast and [Quick Draw](http://wiki.ffo.jp/html/13594.html) Recast is the most stable choice.
 
 ・Group 2
-Snake Eye: 1 step
-Fold: 1 step
-Winning Streak: 3 steps
-Loaded Deck: 5 steps
+[Snake Eye](http://wiki.ffo.jp/html/13595.html): 1 step
+[Fold](http://wiki.ffo.jp/html/13768.html): 1 step
+[Winning Streak](http://wiki.ffo.jp/html/20120.html): 3 steps
+[Loaded Deck](http://wiki.ffo.jp/html/20121.html): 5 steps
 
-For Group 2, Loaded Deck 5 is absolutely essential. This is because it has a 100% chance to restore a party member's ability if they only have one ability on cooldown (1 recast waiting). If you want to guarantee restoring a specific crucial ability, ask the party member to avoid using other abilities, allowing you to target and restore that specific one with a 100% success rate. Make sure to equip your Relic body (which enhances Loaded Deck) when using this!
-The remaining 5 points are allocated as follows: 1 point in Snake Eye, 1 point in Fold, and 3 points in Winning Streak. Keeping 1 point in Snake Eye is vital for adjusting roll numbers. Having 1 point in Fold is extremely useful for emergency situations, such as when you double up from an unlucky 6 (common with Samurai Roll) and bust. Finally, allocating the remaining 3 points to Winning Streak extends roll duration by 60 seconds (20 seconds per point).
-This is the most stable allocation for Group 2. High-end content heavily relies on ability recovery via Loaded Deck, making this the absolute best choice.
+For Group 2, [Loaded Deck](http://wiki.ffo.jp/html/20121.html) 5 is absolutely essential. This is because it has a 100% chance to restore a party member's ability if they only have one ability on cooldown (1 recast waiting). If you want to guarantee restoring a specific crucial ability, ask the party member to avoid using other abilities, allowing you to target and restore that specific one with a 100% success rate. Make sure to equip your Relic body (which enhances [Loaded Deck](http://wiki.ffo.jp/html/20121.html)) when using this!
+The remaining 5 points are allocated as follows: 1 point in [Snake Eye](http://wiki.ffo.jp/html/13595.html), 1 point in [Fold](http://wiki.ffo.jp/html/13768.html), and 3 points in [Winning Streak](http://wiki.ffo.jp/html/20120.html). Keeping 1 point in [Snake Eye](http://wiki.ffo.jp/html/13595.html) is vital for adjusting roll numbers. Having 1 point in [Fold](http://wiki.ffo.jp/html/13768.html) is extremely useful for emergency situations, such as when you double up from an unlucky 6 (common with Samurai Roll) and [bust](http://wiki.ffo.jp/html/843.html). Finally, allocating the remaining 3 points to [Winning Streak](http://wiki.ffo.jp/html/20120.html) extends roll duration by 60 seconds (20 seconds per point).
+This is the most stable allocation for Group 2. High-end content heavily relies on ability recovery via [Loaded Deck](http://wiki.ffo.jp/html/20121.html), making this the absolute best choice.
 
 ## Phantom Roll Set
 Dedicated equipment to boost the party's firepower. Includes gear that extends duration or provides bonuses.

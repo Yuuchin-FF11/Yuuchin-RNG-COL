@@ -1,10 +1,17 @@
 [
   {
+    "date": "2026.07.13",
+    "file": "記事/corsair_equip.md",
+    "msgJa": "コルセア装備紹介ページに、実戦で最も安定する「おすすめメリットポイント設定」の解説を追記しました。",
+    "msgEn": "Added recommended Merit Point settings for Corsair to the equipment guide.",
+    "isNew": true
+  },
+  {
     "date": "2026.06.01",
     "file": "記事/limit_break_guide.md",
     "msgJa": "ソロでもできる限界突破ガイド（レベル50〜99編）を更新しました",
     "msgEn": "Updated Limit Break Guide (Lv50-99) for solo players",
-    "isNew": true
+    "isNew": false
   },
   {
     "date": "2026.06.01",

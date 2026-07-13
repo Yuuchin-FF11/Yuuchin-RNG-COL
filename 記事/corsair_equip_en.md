@@ -11,20 +11,20 @@ This guide details the recommended equipment for Corsair.
 The following settings are highly recommended for the most stable and effective setup:
 
 ・Group 1
-[Phantom Roll](https://wiki.ffo.jp/html/1049.html) Recast: 5 steps
-[Quick Draw](https://wiki.ffo.jp/html/13594.html) Recast: 5 steps
+[Phantom Roll](https://wiki.ffo.jp/html/845.html) Recast: 5 steps
+[Quick Draw](https://wiki.ffo.jp/html/8404.html) Recast: 5 steps
 
-For Group 1, these two options are without doubt the best choices. Other options such as Quick Draw Accuracy, [Random Deal](https://wiki.ffo.jp/html/13597.html) Recast, and [Bust](https://wiki.ffo.jp/html/1050.html) Duration Reduction do not yield significant benefits even with points invested. Thus, maximizing [Phantom Roll](https://wiki.ffo.jp/html/1049.html) Recast and [Quick Draw](https://wiki.ffo.jp/html/13594.html) Recast is the most stable choice.
+For Group 1, these two options are without doubt the best choices. Other options such as Quick Draw Accuracy, [Random Deal](https://wiki.ffo.jp/html/12125.html) Recast, and [Bust](https://wiki.ffo.jp/html/849.html) Duration Reduction do not yield significant benefits even with points invested. Thus, maximizing [Phantom Roll](https://wiki.ffo.jp/html/845.html) Recast and [Quick Draw](https://wiki.ffo.jp/html/8404.html) Recast is the most stable choice.
 
 ・Group 2
-[Snake Eye](https://wiki.ffo.jp/html/14589.html): 1 step
-[Fold](https://wiki.ffo.jp/html/14590.html): 1 step
-[Winning Streak](https://wiki.ffo.jp/html/14587.html): 3 steps
-[Loaded Deck](https://wiki.ffo.jp/html/14588.html): 5 steps
+[Snake Eye](https://wiki.ffo.jp/html/10411.html): 1 step
+[Fold](https://wiki.ffo.jp/html/10452.html): 1 step
+[Winning Streak](https://wiki.ffo.jp/html/10427.html): 3 steps
+[Loaded Deck](https://wiki.ffo.jp/html/10428.html): 5 steps
 
-For Group 2, [Loaded Deck](https://wiki.ffo.jp/html/14588.html) 5 is absolutely essential. This is because it has a 100% chance to restore a party member's ability if they only have one ability on cooldown (1 recast waiting). If you want to guarantee restoring a specific crucial ability, ask the party member to avoid using other abilities, allowing you to target and restore that specific one with a 100% success rate. Make sure to equip your Relic body (which enhances [Loaded Deck](https://wiki.ffo.jp/html/14588.html)) when using this!
-The remaining 5 points are allocated as follows: 1 point in [Snake Eye](https://wiki.ffo.jp/html/14589.html), 1 point in [Fold](https://wiki.ffo.jp/html/14590.html), and 3 points in [Winning Streak](https://wiki.ffo.jp/html/14587.html). Keeping 1 point in [Snake Eye](https://wiki.ffo.jp/html/14589.html) is vital for adjusting roll numbers. Having 1 point in [Fold](https://wiki.ffo.jp/html/14590.html) is extremely useful for emergency situations, such as when you double up from an unlucky 6 (common with Samurai Roll) and [bust](https://wiki.ffo.jp/html/1050.html). Finally, allocating the remaining 3 points to [Winning Streak](https://wiki.ffo.jp/html/14587.html) extends roll duration by 60 seconds (20 seconds per point).
-This is the most stable allocation for Group 2. High-end content heavily relies on ability recovery via [Loaded Deck](https://wiki.ffo.jp/html/14588.html), making this the absolute best choice.
+For Group 2, [Loaded Deck](https://wiki.ffo.jp/html/10428.html) 5 is absolutely essential. This is because it has a 100% chance to restore a party member's ability if they only have one ability on cooldown (1 recast waiting). If you want to guarantee restoring a specific crucial ability, ask the party member to avoid using other abilities, allowing you to target and restore that specific one with a 100% success rate. Make sure to equip your Relic body (which enhances [Loaded Deck](https://wiki.ffo.jp/html/10428.html)) when using this!
+The remaining 5 points are allocated as follows: 1 point in [Snake Eye](https://wiki.ffo.jp/html/10411.html), 1 point in [Fold](https://wiki.ffo.jp/html/10452.html), and 3 points in [Winning Streak](https://wiki.ffo.jp/html/10427.html). Keeping 1 point in [Snake Eye](https://wiki.ffo.jp/html/10411.html) is vital for adjusting roll numbers. Having 1 point in [Fold](https://wiki.ffo.jp/html/10452.html) is extremely useful for emergency situations, such as when you double up from an unlucky 6 (common with Samurai Roll) and [bust](https://wiki.ffo.jp/html/849.html). Finally, allocating the remaining 3 points to [Winning Streak](https://wiki.ffo.jp/html/10427.html) extends roll duration by 60 seconds (20 seconds per point).
+This is the most stable allocation for Group 2. High-end content heavily relies on ability recovery via [Loaded Deck](https://wiki.ffo.jp/html/10428.html), making this the absolute best choice.
 
 ## Phantom Roll Set
 Dedicated equipment to boost the party's firepower. Includes gear that extends duration or provides bonuses.

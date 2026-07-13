@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -401,6 +401,7 @@
         .toast-icon {
             color: var(--primary);
             font-weight: bold;
+        }
         /* 自動監視ステータス */
         .monitor-status {
             display: flex;
@@ -438,7 +439,323 @@
             70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
-    </style>
+    
+        /* タブり替えメニュー */
+        .tab-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab-button.active {
+            color: var(--primary);
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.05);
+        }
+
+        /* モードり替えトグルスイッ */
+        .mode-toggle-container {
+            display: inline-flex;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            padding: 0.25rem;
+            border-radius: 30px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .mode-button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.5rem 1.2rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .mode-button:hover {
+            color: var(--text-light);
+        }
+
+        .mode-button.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        /* ダッシュボードサマリー */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2.5rem;
+            align-items: stretch;
+        }
+
+        /* 健康度スコアカー */
+        .score-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .score-circle-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-circle-svg {
+            width: 130px;
+            height: 130px;
+            transform: rotate(-90deg);
+        }
+
+        .score-circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.03);
+            stroke-width: 8;
+        }
+
+        .score-circle-bar {
+            fill: none;
+            stroke: var(--success);
+            stroke-width: 8;
+            stroke-dasharray: 345.5;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease-out, stroke 0.3s ease;
+        }
+
+        .score-text {
+            position: absolute;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            color: var(--text-light);
+            display: flex;
+            align-items: baseline;
+        }
+
+        #scoreValue {
+            font-size: 2.5rem;
+        }
+
+        .score-unit {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-left: 2px;
+        }
+
+        /* 統計グリッ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-card.danger {
+            border-color: rgba(244, 63, 94, 0.15);
+            background: rgba(244, 63, 94, 0.02);
+        }
+
+        .stat-card.warning {
+            border-color: rgba(245, 158, 11, 0.15);
+            background: rgba(245, 158, 11, 0.02);
+        }
+
+        .stat-card.success {
+            border-color: rgba(16, 185, 129, 0.15);
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        .stat-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card.danger .stat-num {
+            color: var(--danger);
+            text-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+        }
+
+        .stat-card.warning .stat-num {
+            color: #f59e0b;
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .stat-card.success .stat-num {
+            color: var(--success);
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ファイル一覧診断ブル */
+        .file-list-table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.8rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .table-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-refresh-scan {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--primary);
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-refresh-scan:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .file-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .file-table th {
+            text-align: left;
+            padding: 0.75rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        .file-table td {
+            padding: 0.85rem 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .file-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .file-table tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .file-link-btn {
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            background: transparent;
+            border: none;
+            text-decoration: underline;
+        }
+
+        .file-link-btn:hover {
+            color: var(--text-light);
+        }
+
+        .pill-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .pill-badge.zero {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .pill-badge.warn {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .pill-badge.danger {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--danger);
+        }
+            </style>
 </head>
 <body>
 
@@ -459,102 +776,245 @@
     </header>
 
     <main>
-        <div class="workspace-grid">
-            
-            <!-- 左カラム: ファイル投入エリア -->
-            <div class="drop-zone-container">
-                <!-- 1. ソースコードの投入 -->
-                <div class="drop-zone" id="codeDropZone" onclick="document.getElementById('codeFileInput').click()">
-                    <div class="drop-icon">📄</div>
-                    <div class="drop-text" id="codeDropText">【ステップ1】プログラムファイルをドロップ</div>
-                    <div class="drop-subtext">またはクリックしてファイルを選択 (HTML, JS, CSS)</div>
-                    <div class="file-info-badge" id="codeFileBadge">未選択</div>
-                    <input type="file" id="codeFileInput" style="display: none;" accept=".html,.js,.css" onchange="handleCodeFileSelect(event)">
-                </div>
+        <!-- タブメニュー -->
+        <div class="tab-container">
+            <button id="tabBtnDrop" class="tab-button active" onclick="switchTab('drop')">個別ファイル検証</button>
+            <button id="tabBtnDashboard" class="tab-button" onclick="switchTab('dashboard')">プロジェクトダッシュボード</button>
+        </div>
 
-                <!-- 2. アセット（画像・音声）の投入 -->
-                <div class="drop-zone" id="imageDropZone" onclick="document.getElementById('imageFileInput').click()">
-                    <div class="drop-icon">🖼️🎵</div>
-                    <div class="drop-text" id="imageDropText">【ステップ2】アセット（画像や音声）をドロップ</div>
-                    <div class="drop-subtext">またはクリックして選択 (PNG, JPG, GIF, MP3, WAV, OGG) ※複数選択可</div>
-                    <div class="file-info-badge" id="imageFileBadge" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); color: var(--accent);">0個のアセットがセットされています</div>
-                    <input type="file" id="imageFileInput" style="display: none;" accept="image/*,audio/*" multiple onchange="handleImageFileSelect(event)">
+        <!-- 1. 個別ファイル検証コンッ -->
+        <div id="tabContentDrop">
+            <!-- モードり替えトグルスイッ -->
+            <center>
+                <div class="mode-toggle-container" style="margin-bottom: 1.5rem;">
+                    <button class="mode-button active" id="modeAsset" onclick="switchMode('asset')">アセット整合性チェック (通常モードド)</button>
+                    <button class="mode-button" id="modeDiff" onclick="switchMode('diff')">AI出力デグレ検証 (Before/Afterモー)</button>
                 </div>
-            </div>
+            </center>
 
-            <!-- 右カラム: 事実検証レポートパネル -->
-            <div class="report-panel">
-                <div class="panel-header">
-                    <div class="panel-title">
-                        <span class="panel-title-dot"></span>
-                        事実検証レポート (Fact Report)
+            <div class="workspace-grid">
+                
+                <!-- 左カラ: ファイル投エリア -->
+                <div class="drop-zone-container">
+                    <!-- 1. ソースコード投 -->
+                    <div class="drop-zone" id="codeDropZone" onclick="document.getElementById('codeFileInput').click()">
+                        <div class="drop-icon"></div>
+                        <div class="drop-text" id="codeDropText">【ステップ1】プログラムファイルをドロップ</div>
+                        <div class="drop-subtext">またはクリックしてファイルを選択 (HTML, JS, CSS, MD, JSON, CSV)</div>
+                        <div class="file-info-badge" id="codeFileBadge">未選択</div>
+                        <input type="file" id="codeFileInput" style="display: none;" accept=".html,.js,.css,.md,.json,.csv" onchange="handleCodeFileSelect(event)">
+                    </div>
+
+                    <!-- 2. アセット画像・音声の投入 -->
+                    <div class="drop-zone" id="imageDropZone" onclick="document.getElementById('imageFileInput').click()">
+                        <div class="drop-icon">🎵</div>
+                        <div class="drop-text" id="imageDropText">【ステップ2】アセット（画像や音声）をドロップ</div>
+                        <div class="drop-subtext">またはクリックして選択 (PNG, JPG, GIF, MP3, WAV, OGG) ※複数選択可</div>
+                        <div class="file-info-badge" id="imageFileBadge" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); color: var(--accent);">0個アセットがセットされています</div>
+                        <input type="file" id="imageFileInput" style="display: none;" accept="image/*,audio/*" multiple onchange="handleImageFileSelect(event)">
+                    </div>
+                    <!-- 注意書きヘルプメッセージ -->
+                    <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.4; padding: 0 0.5rem;">
+                        ※ 検出ファイル数が多い場合や、巨大なファイルが含まれている場合、スキャン完了までに数十秒ほど時間がかかる場合があります。
                     </div>
                 </div>
 
-                <!-- 結果リスト -->
-                <div class="asset-list" id="assetList" style="display: none;">
-                    <!-- ここに動的にアセットカードが追加されます -->
+                <!-- 右カラ: 事実検証レポートトパネル -->
+                <div class="report-panel">
+                    <div class="panel-header">
+                        <div class="panel-title" id="reportPanelTitle">
+                            <span class="panel-title-dot"></span>
+                            事実検証レポート (Fact Report)
+                        </div>
+                    </div>
+
+                    <!-- 一括アクションパネル -->
+                    <div class="action-panel" id="actionPanel" style="display: none;">
+                        <button class="btn-action" onclick="copyAllAiPrompts()"> 全バグ修正挤を一括コピ</button>
+                        <button class="btn-action" onclick="copyReportAsMarkdown()"> Markdownレポトをコピ</button>
+                        <button class="btn-action" onclick="copyContextSheet()" style="border-color: rgba(6, 182, 212, 0.3); color: var(--primary);"> AIコンヂストシートをコピ</button>
+                    </div>
+
+                    <!-- 差刱歴インジケーター表示エリア -->
+                    <div id="diffIndicatorArea"></div>
+
+                    <!-- 初忀けやることナビ表示エリア -->
+                    <div id="nextActionArea"></div>
+
+                    <!-- 結果リス -->
+                    <div class="asset-list" id="assetList" style="display: none;">
+                        <!-- ここに動的にアセットカードが追加されま -->
+                    </div>
+
+                    <!-- 何も読み込まれてぁすのプレースホルダー -->
+                    <div class="empty-placeholder" id="emptyPlaceholder">
+                        <div class="empty-icon"></div>
+                        <p>プログラムファイルをドラッグ＆ドロップすると<br>コードの画像や音声アセットの調査を開始します</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. プロジェクトダッシュボードコンテンツ -->
+        <div id="tabContentDashboard" class="dashboard-container" style="display: none;">
+            <!-- サマリーカー -->
+            <div class="summary-cards">
+                <!-- 健康度スコア -->
+                <div class="score-card">
+                    <div class="score-label">プロジェクト健康度</div>
+                    <div class="score-circle-container">
+                        <svg class="score-circle-svg">
+                            <circle class="score-circle-bg" cx="65" cy="65" r="55"></circle>
+                            <circle id="scoreCircleBar" class="score-circle-bar" cx="65" cy="65" r="55"></circle>
+                        </svg>
+                        <div class="score-text">
+                            <span id="scoreValue">100</span><span class="score-unit">点</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 何も読み込まれていない時のプレースホルダー -->
-                <div class="empty-placeholder" id="emptyPlaceholder">
-                    <div class="empty-icon">🔍</div>
-                    <p>プログラムファイルをドラッグ＆ドロップすると、<br>コード内の画像や音声アセットの調査を開始します。</p>
+                <!-- 統計一覧 -->
+                <div class="stats-grid">
+                    <div class="stat-card danger">
+                        <div class="stat-num" id="statDangerCount">0</div>
+                        <div class="stat-label">画質ボケ・サイズ不足 (Danger)</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-num" id="statWarnCount">0</div>
+                        <div class="stat-label">表示枠とのサイズズレ (Warning)</div>
+                    </div>
+                    <div class="stat-card danger" style="background: rgba(244, 63, 94, 0.03); border-color: rgba(244, 63, 94, 0.15);">
+                        <div class="stat-num" id="statLinkBreakCount">0</div>
+                        <div class="stat-label">ファイルが見つからない (Link Break)</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-num" id="statSuccessCount">0</div>
+                        <div class="stat-label">問題なし・サイズ適正 (Success)</div>
+                    </div>
+                </div>
+            </div>
+            <!-- スキャンプログレスバー -->
+            <div id="scanProgressContainer" style="display: none; background: rgba(255, 255, 255, 0.03); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.5rem;">
+                    <span id="scanProgressText">スキャン中... 0% (0/0)</span>
+                </div>
+                <div style="width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 3px; overflow: hidden;">
+                    <div id="scanProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width 0.1s ease; border-radius: 3px;"></div>
                 </div>
             </div>
 
+            <!-- ファイル一覧診断ブル -->
+            <div class="file-list-table-container">
+                <div class="table-title">
+                    <span> プロジェクト構成ファイルの診断一覧</span>
+                    <button class="btn-refresh-scan" onclick="runProjectScan()"> 一括スキャン再実行</button>
+                </div>
+                <table class="file-table">
+                    <thead>
+                        <tr>
+                            <th>ファイル / パス</th>
+                            <th>画質ボケ</th>
+                            <th>サイズズレ</th>
+                            <th>ファイルなし</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectFileTableBody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                                「一括スキャン再実行」を押すと、ロジェクトの全ファイルの検証を開始します
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 
     <script>
+        let currentMode = "asset"; // "asset" また "diff"
         let codeContent = "";
         let detectedAssets = []; // 検出されたアセット一覧 { path: string, basename: string }
-        let loadedAssetsMap = new Map(); // 読み込まれたアセットデータ { filename: File }
-        let assetsDropped = false; // アセットファイルが投入されたかどうかのフラグ
+        let loadedAssetsMap = new Map(); // 読み込まれたアセットタ { filename: File }
+        let assetsDropped = false;
+        let allAssetsInFolder = []; // 監視対象フォルダの全アセット
+        let currentFileName = "不なファイル";
+        let currentFileType = "html";
+        let syntaxErrorDetail = null;
+        let lastScanBugs = []; // 前回のバグリスト比輔
+        let projectFiles = []; // プロジェクト全体構成ファイル
 
-        // トースト通知を表示する関数
+        // トスト通知
         function showToast(message) {
             const toast = document.getElementById('toast');
             const msgEl = document.getElementById('toastMessage');
-            msgEl.innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            if (msgEl && toast) {
+                msgEl.innerText = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
         }
 
-        // AIへの指示用プロンプトをクリップボードにコピーする関数
-        function copyAiPrompt(filename, physW, physH, codeW, codeH, source) {
-            const promptText = `以下のプログラムコードにおいて、画像アセット「${filename}」の描画サイズに不整合バグがあります。
-
-【物理的な事実（ファクト情報）】
-・実際の画像サイズ（オリジナル解像度）: ${physW} x ${physH} px
-・コード上の描画指定サイズ: ${codeW} x ${codeH} px (検出元: ${source})
-
-【バグの状況】
-コード上での描画サイズ指定が、画像の物理サイズ（${physW}x${physH}px）を超えているかズレているため、表示が見切れる、または画像が不自然に歪むバグが発生しています。
-
-【AIへの指示】
-この事実を元に、プログラムコード内の該当箇所を正しく修正したコードを提示してください。特に、画像範囲外の座標を指定している部分があれば、画像内に収まるように適切に縮小・調整してください。`;
-
-            navigator.clipboard.writeText(promptText).then(() => {
-                alert("AIへの指示テキスト（プロンプト）をコピーしました！\\nこのままChatGPTやGeminiなどのAIのチャット画面に貼り付けて送信してください。");
-            }).catch(err => {
-                console.error("コピー失敗:", err);
-            });
+        // タブり替
+        function switchTab(tabName) {
+            const dropContent = document.getElementById("tabContentDrop");
+            const dashboardContent = document.getElementById("tabContentDashboard");
+            const btnDrop = document.getElementById("tabBtnDrop");
+            const btnDashboard = document.getElementById("tabBtnDashboard");
+            
+            if (tabName === 'drop') {
+                dropContent.style.display = "block";
+                dashboardContent.style.display = "none";
+                btnDrop.classList.add("active");
+                btnDashboard.classList.remove("active");
+            } else {
+                dropContent.style.display = "none";
+                dashboardContent.style.display = "flex";
+                btnDrop.classList.remove("active");
+                btnDashboard.classList.add("active");
+                runProjectScan();
+            }
         }
 
-        // ドラッグオーバー等のイベントデフォルト挙動の停止
+        // モードり替
+        function switchMode(mode) {
+            currentMode = mode;
+            const btnAsset = document.getElementById('modeAsset');
+            const btnDiff = document.getElementById('modeDiff');
+            
+            if (mode === 'asset') {
+                btnAsset.classList.add('active');
+                btnDiff.classList.remove('active');
+                document.getElementById('imageDropZone').style.display = 'flex';
+                document.getElementById('codeDropZone').querySelector('.drop-text').innerText = '【ステップ1】プログラムファイルをドロップ';
+                document.getElementById('codeDropZone').querySelector('.drop-subtext').innerText = 'またはクリックしてファイルを選択 (HTML, JS, CSS, MD, JSON, CSV)';
+            } else {
+                btnAsset.classList.remove('active');
+                btnDiff.classList.add('active');
+                document.getElementById('imageDropZone').style.display = 'none';
+                document.getElementById('codeDropZone').querySelector('.drop-text').innerText = '【ステップ1】修正前コー (Before) をドロ';
+                document.getElementById('codeDropZone').querySelector('.drop-subtext').innerText = 'またはクリックしてファイルを選択 (HTML, JS, CSS, MD, JSON, CSV)';
+            }
+            resetScanner();
+        }
+
+        // ドラッグ＆ドロップイベントッォルト無効
         const dropZones = ['codeDropZone', 'imageDropZone'];
         dropZones.forEach(id => {
             const zone = document.getElementById(id);
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                zone.addEventListener(eventName, preventDefaults, false);
-            });
-            
-            zone.addEventListener('dragover', () => zone.classList.add('dragover'), false);
-            zone.addEventListener('dragleave', () => zone.classList.remove('dragover'), false);
-            zone.addEventListener('drop', () => zone.classList.remove('dragover'), false);
+            if (zone) {
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    zone.addEventListener(eventName, preventDefaults, false);
+                });
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    zone.addEventListener(eventName, () => zone.classList.add('dragover'), false);
+                });
+                ['dragleave', 'drop'].forEach(eventName => {
+                    zone.addEventListener(eventName, () => zone.classList.remove('dragover'), false);
+                });
+            }
         });
 
         function preventDefaults(e) {
@@ -562,16 +1022,22 @@
             e.stopPropagation();
         }
 
-        // ドロップ時のハンドリング
-        document.getElementById('codeDropZone').addEventListener('drop', function(e) {
-            const file = e.dataTransfer.files[0];
-            if (file) processCodeFile(file);
-        });
+        // ドロハンドリング
+        const codeDropZone = document.getElementById('codeDropZone');
+        if (codeDropZone) {
+            codeDropZone.addEventListener('drop', (e) => {
+                const file = e.dataTransfer.files[0];
+                if (file) processCodeFile(file);
+            });
+        }
 
-        document.getElementById('imageDropZone').addEventListener('drop', function(e) {
-            const files = e.dataTransfer.files;
-            if (files.length > 0) processAssetFiles(files);
-        });
+        const imageDropZone = document.getElementById('imageDropZone');
+        if (imageDropZone) {
+            imageDropZone.addEventListener('drop', (e) => {
+                const files = e.dataTransfer.files;
+                if (files.length > 0) processAssetFiles(files);
+            });
+        }
 
         // ファイル選択時のハンドリング
         function handleCodeFileSelect(e) {
@@ -584,486 +1050,1724 @@
             if (files.length > 0) processAssetFiles(files);
         }
 
-        // プログラムファイルの読み込みと解析
+        // ファイル種別の拡張子解
         function processCodeFile(file) {
+            currentFileName = file.name;
+            currentFileType = file.name.split('.').pop().toLowerCase();
+            
             const reader = new FileReader();
             reader.onload = function(event) {
                 codeContent = event.target.result;
                 
-                // バッジの表示
                 const badge = document.getElementById('codeFileBadge');
-                badge.innerText = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+                badge.innerText = `${file.name} (読み込み完)`;
                 badge.style.display = 'inline-block';
                 document.getElementById('codeDropZone').classList.add('success');
                 
-                // アセットの抽出
                 scanAssets(codeContent);
+                showToast(`ファイル ${file.name} を読み込みました`);
             };
-            reader.readAsText(file);
+            reader.readAsText(file, 'utf-8');
         }
 
-        // アセットファイル（画像・音声）の読み込みと登録
         function processAssetFiles(files) {
-            assetsDropped = true; // アセット投入フラグを立てる
+            assetsDropped = true;
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                if (file.type.startsWith('image/') || file.type.startsWith('audio/') || /\.(mp3|wav|ogg)$/i.test(file.name)) {
-                    // ファイル名（ベース名）をキーにしてマップに登録
-                    loadedAssetsMap.set(file.name.toLowerCase(), file);
-                }
+                loadedAssetsMap.set(file.name.toLowerCase(), file);
             }
             
-            // バッジの更新
             const badge = document.getElementById('imageFileBadge');
             badge.innerText = `${loadedAssetsMap.size}個のアセットがセットされています`;
             badge.style.display = 'inline-block';
             document.getElementById('imageDropZone').classList.add('success');
             
-            // すでにコードが読み込まれている場合は再突合
-            if (detectedAssets.length > 0) {
-                renderReport();
-            }
+            scanAssets(codeContent);
+            showToast(`${files.length}個アセットを追加読み込みしました`);
         }
 
-        // ソースコードから画像や音声パスをスキャンする
+        // スキャナメインロジックD/JSON/CSV対応
         function scanAssets(content) {
-            let matches = [];
+            detectedAssets = [];
+            syntaxErrorDetail = null;
             
-            // 1. クォーテーションで囲まれた画像・音声パス（HTML/JS等）
-            const quoteRegex = /["']([^"'\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg|mp3|wav|ogg))["']/gi;
-            let match;
-            while ((match = quoteRegex.exec(content)) !== null) {
-                matches.push(match[1]);
+            if (!content) return;
+            
+            try {
+                if (currentFileType === "json") {
+                    const obj = JSON.parse(content);
+                    const strings = extractStringsFromJson(obj);
+                    const assetExts = ['.png', '.jpg', '.jpeg', '.gif', '.mp3', '.wav', '.ogg'];
+                    strings.forEach(str => {
+                        const cleaned = str.trim();
+                        const lower = cleaned.toLowerCase();
+                        const isAsset = assetExts.some(ext => lower.endsWith(ext));
+                        if (isAsset) {
+                            const basename = cleaned.split('/').pop().split('\\\\').pop();
+                            detectedAssets.push({ path: cleaned, basename: basename });
+                        }
+                    });
+                } else if (currentFileType === "csv") {
+                    const lines = content.split(/\r?\n/);
+                    const assetExts = ['.png', '.jpg', '.jpeg', '.gif', '.mp3', '.wav', '.ogg'];
+                    lines.forEach(line => {
+                        const cells = splitCsvLine(line);
+                        cells.forEach(cell => {
+                            const cleaned = cell.trim();
+                            const lower = cleaned.toLowerCase();
+                            const isAsset = assetExts.some(ext => lower.endsWith(ext));
+                            if (isAsset) {
+                                const basename = cleaned.split('/').pop().split('\\\\').pop();
+                                detectedAssets.push({ path: cleaned, basename: basename });
+                            }
+                        });
+                    });
+                } else if (currentFileType === "md") {
+                    const linkRegex = /\[[^\]]*\]\(([^)]+)\)/g;
+                    let match;
+                    let lastIdx = -1;
+                    const assetExts = ['.png', '.jpg', '.jpeg', '.gif', '.mp3', '.wav', '.ogg'];
+                    while ((match = linkRegex.exec(content)) !== null) {
+                        if (linkRegex.lastIndex === lastIdx) break;
+                        lastIdx = linkRegex.lastIndex;
+                        const path = match[1].trim();
+                        const lower = path.toLowerCase();
+                        const isAsset = assetExts.some(ext => lower.endsWith(ext));
+                        if (isAsset && !new RegExp('^(https?:|mailto:|#)', 'i').test(path)) {
+                            const basename = path.split('/').pop().split('\\\\').pop();
+                            detectedAssets.push({ path: path, basename: basename });
+                        }
+                    }
+                } else {
+                    // HTML, JS, CSS 用の解析
+                    const imgRegex = /["']([^"']+\.(?:png|jpg|jpeg|gif))["']/gi;
+                    let match;
+                    let lastIdxImg = -1;
+                    while ((match = imgRegex.exec(content)) !== null) {
+                        if (imgRegex.lastIndex === lastIdxImg) break;
+                        lastIdxImg = imgRegex.lastIndex;
+                        const path = match[1];
+                        if (!new RegExp('^(https?:|mailto:|#)', 'i').test(path)) {
+                            const basename = path.split('/').pop().split('\\\\').pop();
+                            detectedAssets.push({ path: path, basename: basename });
+                        }
+                    }
+                    
+                    const audioRegex = /["']([^"']+\.(?:mp3|wav|ogg))["']/gi;
+                    let lastIdxAudio = -1;
+                    while ((match = audioRegex.exec(content)) !== null) {
+                        if (audioRegex.lastIndex === lastIdxAudio) break;
+                        lastIdxAudio = audioRegex.lastIndex;
+                        const path = match[1];
+                        if (!new RegExp('^(https?:|mailto:|#)', 'i').test(path)) {
+                            const basename = path.split('/').pop().split('\\\\').pop();
+                            detectedAssets.push({ path: path, basename: basename });
+                        }
+                    }
+                }
+                
+                // 重褙
+                detectedAssets = detectedAssets.filter((asset, index, self) =>
+                    index === self.findIndex(t => t.basename.toLowerCase() === asset.basename.toLowerCase())
+                );
+                
+            } catch (err) {
+                syntaxErrorDetail = { message: `${currentFileType.toUpperCase()} 構文エラーパース失敗）`, detail: err.message };
             }
-            
-            // 2. CSSの url(...) 形式 (クォーテーション任意)
-            const cssUrlRegex = /url\(\s*["']?([^"')\s#\?]+\.(?:png|jpg|jpeg|gif|webp|svg|mp3|wav|ogg))["']?\s*\)/gi;
-            while ((match = cssUrlRegex.exec(content)) !== null) {
-                matches.push(match[1]);
-            }
-            
-            // 重複の排除
-            const uniquePaths = [...new Set(matches)].sort();
-            
-            detectedAssets = uniquePaths.map(path => {
-                // ファイル名のみを抽出（例: "path/to/image.png" -> "image.png"）
-                const basename = path.split('/').pop().split('\\').pop();
-                return {
-                    path: path,
-                    basename: basename
-                };
-            });
             
             renderReport();
         }
-
-        // 簡易コード解析で描画サイズ（width/height）の指定をすべて検出する関数
-        function parseAllRenderSizes(codeText, imageName) {
-            const escapedName = imageName.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-            const results = [];
-            
-            // 1. HTMLの <img src="..." width="X" height="Y"> の検出
-            const imgTagRegex = new RegExp(`<img[^>]*src=["'][^"']*${escapedName}["'][^>]*>`, 'gi');
-            let imgMatch;
-            while ((imgMatch = imgTagRegex.exec(codeText)) !== null) {
-                const tag = imgMatch[0];
-                const wMatch = tag.match(/width=["']?(\d+)["']?/i);
-                const hMatch = tag.match(/height=["']?(\d+)["']?/i);
-                if (wMatch && hMatch) {
-                    results.push({ width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: 'HTML <img> 属性' });
-                }
-            }
-
-            // 2. JSの drawImage などの検出（変数名経由の解析）
-            const varRegex = new RegExp(`(\\w+)\\s*\\.\\s*src\\s*=\\s*["'][^"']*${escapedName}["']`, 'gi');
-            let varMatch;
-            while ((varMatch = varRegex.exec(codeText)) !== null) {
-                const varName = varMatch[1]; // 例: "logoImg"
-                
-                // drawImage(logoImg, dx, dy, dw, dh) の5引数呼び出しを探す
-                const d5Regex = new RegExp(`drawImage\\(\\s*${varName}\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\\)`, 'g');
-                let d5Match;
-                while ((d5Match = d5Regex.exec(codeText)) !== null) {
-                    results.push({ width: parseInt(d5Match[1]), height: parseInt(d5Match[2]), source: `drawImage(${varName}, ...)` });
-                }
-                
-                // drawImage(logoImg, sx, sy, sw, sh, dx, dy, dw, dh) の9引数呼び出しを探す
-                const d9Regex = new RegExp(`drawImage\\(\\s*${varName}\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\\)`, 'g');
-                let d9Match;
-                while ((d9Match = d9Regex.exec(codeText)) !== null) {
-                    results.push({ width: parseInt(d9Match[1]), height: parseInt(d9Match[2]), source: `drawImage(${varName}, ...)` });
-                }
-
-                // 2.1 JSのプロパティ指定 (例: img.width = 100; img.height = 100;)
-                const wPropRegex = new RegExp(`${varName}\\s*\\.\\s*width\\s*=\\s*(\\d+)`, 'gi');
-                    const hPropRegex = new RegExp(`${varName}\\s*\\.\\s*height\\s*=\\s*(\\d+)`, 'gi');
-                let wp, hp;
-                if ((wp = wPropRegex.exec(codeText)) && (hp = hPropRegex.exec(codeText))) {
-                    results.push({ width: parseInt(wp[1]), height: parseInt(hp[1]), source: `${varName}.width / .height` });
-                }
-                
-                // 2.2 style.width / style.height の検出 (例: img.style.width = '100px';)
-                const wStyleRegex = new RegExp(`${varName}\\s*\\.\\s*style\\s*\\.\\s*width\\s*=\\s*["'](\\d+)px["']`, 'gi');
-                const hStyleRegex = new RegExp(`${varName}\\s*\\.\\s*style\\s*\\.\\s*height\\s*=\\s*["'](\\d+)px["']`, 'gi');
-                let ws, hs;
-                if ((ws = wStyleRegex.exec(codeText)) && (hs = hStyleRegex.exec(codeText))) {
-                    results.push({ width: parseInt(ws[1]), height: parseInt(hs[1]), source: `${varName}.style.width / .style.height` });
-                }
-            }
-
-            // 3. CSS内のクラスやIDセレクタに指定された width/height の検出
-            const cssBlocks = codeText.match(/[^{}]+\{[^{}]+\}/g);
-            if (cssBlocks) {
-                for (let block of cssBlocks) {
-                    if (block.toLowerCase().includes(imageName.toLowerCase())) {
-                        const wMatch = block.match(/width\s*:\s*(\d+)px/i);
-                        const hMatch = block.match(/height\s*:\s*(\d+)px/i);
-                        if (wMatch && hMatch) {
-                            results.push({ width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: 'CSS スタイル指定' });
+        function renderReport() {
+                    const listContainer = document.getElementById('assetList');
+                    const placeholder = document.getElementById('emptyPlaceholder');
+                    
+                    listContainer.innerHTML = "";
+                    
+                    if (detectedAssets.length === 0) {
+                        listContainer.style.display = 'none';
+                        placeholder.style.display = 'flex';
+                        placeholder.innerHTML = `
+                            <div class="empty-icon">⚠️</div>
+                            <p>ファイル内に検出可能な画像・音声アセットの記述が<br>見つかりませんでした。</p>
+                        `;
+                        return;
+                    }
+                    
+                    placeholder.style.display = 'none';
+                    listContainer.style.display = 'flex';
+                    
+                    detectedAssets.forEach(asset => {
+                        const assetFile = loadedAssetsMap.get(asset.basename.toLowerCase());
+                        const isAudio = /\.(?:mp3|wav|ogg)$/i.test(asset.basename);
+                        
+                        // カード要素の作成
+                        const card = document.createElement('div');
+                        card.className = 'asset-card';
+                        
+                        // コード上のすべての描画設定をスキャン（音声は対象外）
+                        const renderSizes = isAudio ? [] : parseAllRenderSizes(codeContent, asset.basename);
+                        
+                        if (!assetFile) {
+                            // アセットファイルがドロップされていない状態
+                            let statusClass = 'unverified';
+                            let statusText = '検証待ち';
+                            let specsGridHtml = '';
+                            
+                            if (assetsDropped) {
+                                // アセットがドロップ済みで不足している場合は「リンク切れ」と判定
+                                statusClass = 'missing';
+                                statusText = isAudio ? 'リンク切れの疑い' : 'ファイル未検出（リンク切れ）';
+                                
+                                if (isAudio) {
+                                    specsGridHtml = `
+                                        <div class="spec-item">
+                                            <span class="spec-label">アセット種別</span>
+                                            <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
+                                        </div>
+                                        <div class="spec-item">
+                                            <span class="spec-label">状態</span>
+                                            <span class="spec-value" style="color: var(--danger);">見つかりません（リンク切れ）</span>
+                                        </div>
+                                    `;
+                                } else {
+                                    let sizesText = '検出なし';
+                                    if (renderSizes.length > 0) {
+                                        sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                                    }
+                                    specsGridHtml = `
+                                        <div class="spec-item">
+                                            <span class="spec-label">状態</span>
+                                            <span class="spec-value" style="color: var(--danger);">見つかりません（リンク切れ）</span>
+                                        </div>
+                                        <div class="spec-item">
+                                            <span class="spec-label">コード上の設定</span>
+                                            <span class="spec-value">${sizesText}</span>
+                                        </div>
+                                    `;
+                                }
+                            } else {
+                                // 初期状態（アセット未投入）
+                                if (isAudio) {
+                                    specsGridHtml = `
+                                        <div class="spec-item">
+                                            <span class="spec-label">アセット種別</span>
+                                            <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
+                                        </div>
+                                        <div class="spec-item">
+                                            <span class="spec-label">状態</span>
+                                            <span class="spec-value" style="color: var(--text-muted);">検証待ち（未投入）</span>
+                                        </div>
+                                    `;
+                                } else {
+                                    let sizesText = '検出なし';
+                                    if (renderSizes.length > 0) {
+                                        sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                                    }
+                                    specsGridHtml = `
+                                        <div class="spec-item">
+                                            <span class="spec-label">状態</span>
+                                            <span class="spec-value" style="color: var(--text-muted);">検証待ち</span>
+                                        </div>
+                                        <div class="spec-item">
+                                            <span class="spec-label">コード上の設定</span>
+                                            <span class="spec-value">${sizesText}</span>
+                                        </div>
+                                    `;
+                                }
+                            }
+                            
+                            card.innerHTML = `
+                                <div class="asset-meta">
+                                    <span class="asset-path">${asset.path}</span>
+                                    <span class="status-pill ${statusClass}">${statusText}</span>
+                                </div>
+                                <div class="specs-grid">
+                                    ${specsGridHtml}
+                                </div>
+                                <div class="drop-subtext" style="text-align: center; margin-top: 0.5rem; border: 1px dashed rgba(255,255,255,0.05); padding: 0.5rem; border-radius: 6px;">
+                                    💡 左エリアに <strong>${asset.basename}</strong> をドロップすると、サイズ整合性のチェックを行います。
+                                </div>
+                            `;
+                            listContainer.appendChild(card);
+                        } else if (isAudio) {
+                            // 音声ファイルが投入され、実在が確認された状態
+                            const capacityKb = (assetFile.size / 1024).toFixed(2);
+                            card.innerHTML = `
+                                <div class="asset-meta">
+                                    <span class="asset-path">${asset.path}</span>
+                                    <span class="status-pill ok">OK (存在確認済)</span>
+                                </div>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <span class="spec-label">アセット種別</span>
+                                        <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">ファイル容量</span>
+                                        <span class="spec-value">${capacityKb} KB</span>
+                                    </div>
+                                    <div class="spec-item" style="grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem;">
+                                        <span class="spec-label">検証結果</span>
+                                        <span class="spec-value" style="color: var(--success);">音声ファイルがプロジェクト内に正常に存在しています。リンク切れはありません。</span>
+                                    </div>
+                                </div>
+                            `;
+                            listContainer.appendChild(card);
+                        } else {
+                            // 画像ファイルがドロップされ、読み込み可能な状態
+                            const img = new Image();
+                            const objectUrl = URL.createObjectURL(assetFile);
+                            
+                            img.onload = function() {
+                                const physW = img.naturalWidth;
+                                const physH = img.naturalHeight;
+                                URL.revokeObjectURL(objectUrl);
+                                
+                                let cardStatusClass = 'ok';
+                                let cardStatusText = 'OK (検証済)';
+                                
+                                // 検出されたすべてのサイズ指定を評価して表示用の要素を組み立てる
+                                let alertBlocksHtml = '';
+                                let specsGridHtml = `
+                                    <div class="spec-item">
+                                        <span class="spec-label">実際の画像サイズ (物理)</span>
+                                        <span class="spec-value" style="color: var(--primary);">${physW} x ${physH} px</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">ファイル容量</span>
+                                        <span class="spec-value">${(assetFile.size / 1024).toFixed(2)} KB</span>
+                                    </div>
+                                `;
+                                
+                                if (renderSizes.length === 0) {
+                                    specsGridHtml += `
+                                        <div class="spec-item">
+                                            <span class="spec-label">コード上の指定</span>
+                                            <span class="spec-value">検出なし</span>
+                                        </div>
+                                    `;
+                                } else {
+                                    let hasDanger = false;
+                                    let hasWarning = false;
+                                    
+                                    renderSizes.forEach((renderSize, idx) => {
+                                        specsGridHtml += `
+                                            <div class="spec-item" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; grid-column: 1 / -1;">
+                                                <span class="spec-label">指定 ${idx + 1}: ${renderSize.source}</span>
+                                                <span class="spec-value">${renderSize.width} x ${renderSize.height} px</span>
+                                            </div>
+                                        `;
+                                        
+                                        // 乖離チェック
+                                        if (renderSize.width > physW || renderSize.height > physH) {
+                                            hasDanger = true;
+                                            alertBlocksHtml += `
+                                                <div class="alert-block" style="margin-top: 0.75rem;">
+                                                    <span class="alert-icon">⚠️</span>
+                                                    <div style="flex: 1; text-align: left;">
+                                                        <strong>【警告】描画座標の範囲外指定エラーの危険！ (${renderSize.source})</strong><br>
+                                                        コード上の指示（${renderSize.width}x${renderSize.height}px）は、
+                                                        画像の物理サイズ（${physW}x${physH}px）をオーバーしています。
+                                                        これにより画像の端が見切れるか、描画時に完全に切り落とされるバグが起きる可能性が極めて高いです。
+                                                        <button onclick="copyAiPrompt('${asset.basename}', ${physW}, ${physH}, ${renderSize.width}, ${renderSize.height}, '${renderSize.source}')" style="margin-top: 0.75rem; background: var(--danger); color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; display: block; box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);">
+                                                            AIへの修正指示テキストをコピーする
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        } else if (renderSize.width !== physW || renderSize.height !== physH) {
+                                            hasWarning = true;
+                                            alertBlocksHtml += `
+                                                <div class="alert-block" style="margin-top: 0.75rem; background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.15); color: #fde047; box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);">
+                                                    <span class="alert-icon" style="color: #f59e0b;">💡</span>
+                                                    <div style="flex: 1; text-align: left;">
+                                                        <strong>【注意】サイズ縮小またはアスペクト比変化 (${renderSize.source})</strong><br>
+                                                        コード上で画像（物理 ${physW}x${physH}px）を ${renderSize.width}x${renderSize.height}px にリサイズして描画しています。
+                                                        比率が崩れてキャラクターが横に伸びたりしていないか確認してください。
+                                                        <button onclick="copyAiPrompt('${asset.basename}', ${physW}, ${physH}, ${renderSize.width}, ${renderSize.height}, '${renderSize.source}')" style="margin-top: 0.75rem; background: #d97706; color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; display: block; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
+                                                            AIへの修正指示テキストをコピーする
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }
+                                    });
+                                    
+                                    if (hasDanger) {
+                                        cardStatusClass = 'missing';
+                                        cardStatusText = '致命的乖離（バグの危険）';
+                                    } else if (hasWarning) {
+                                        cardStatusClass = 'warning';
+                                        cardStatusText = '注意（縮小表示）';
+                                    }
+                                }
+                                
+                                card.innerHTML = `
+                                    <div class="asset-meta">
+                                        <span class="asset-path">${asset.path}</span>
+                                        <span class="status-pill ${cardStatusClass}">${cardStatusText}</span>
+                                    </div>
+                                    <div class="specs-grid">
+                                        ${specsGridHtml}
+                                    </div>
+                                    ${alertBlocksHtml}
+                                `;
+                            };
+                            
+                            img.onerror = function() {
+                                URL.revokeObjectURL(objectUrl);
+                                card.innerHTML = `
+                                    <div class="asset-meta">
+                                        <span class="asset-path">${asset.path}</span>
+                                        <span class="status-pill missing">解析エラー</span>
+                                    </div>
+                                    <p class="drop-subtext">画像のヘッダー情報が壊れているか、読み込めませんでした。</p>
+                                `;
+                            };
+                            
+                            img.src = objectUrl;
+                            listContainer.appendChild(card);
                         }
-                    }
+                    });
                 }
-            }
 
-            // 4. HTMLのインラインスタイル style="..." の検出
-            // バックリファレンス \1 を使用して、囲み文字（ダブル/シングルクォーテーション）の内側を正しくキャプチャする
-            const inlineStyleRegex = /style=(["'])(.*?)\1/gi;
-            let styleMatch;
-            while ((styleMatch = inlineStyleRegex.exec(codeText)) !== null) {
-                const styleContent = styleMatch[2]; // style属性の中身
-                
-                // そのstyle属性内に画像名が含まれる場合
-                if (styleContent.toLowerCase().includes(imageName.toLowerCase())) {
-                    const wMatch = styleContent.match(/width\s*:\s*(\d+)px/i);
-                    const hMatch = styleContent.match(/height\s*:\s*(\d+)px/i);
-                    if (wMatch && hMatch) {
-                        results.push({ width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: 'HTML インラインスタイル' });
-                    }
+        function extractStringsFromJson(obj) {
+            let strings = [];
+            if (typeof obj === 'string') {
+                strings.push(obj);
+            } else if (Array.isArray(obj)) {
+                obj.forEach(item => {
+                    strings = strings.concat(extractStringsFromJson(item));
+                });
+            } else if (obj !== null && typeof obj === 'object') {
+                for (let key in obj) {
+                    strings = strings.concat(extractStringsFromJson(obj[key]));
                 }
             }
-            
-            return results;
+            return strings;
         }
 
-        // 事実検証レポートのレンダリング
-        function renderReport() {
-            const listContainer = document.getElementById('assetList');
-            const placeholder = document.getElementById('emptyPlaceholder');
-            
-            listContainer.innerHTML = "";
-            
-            if (detectedAssets.length === 0) {
-                listContainer.style.display = 'none';
-                placeholder.style.display = 'flex';
-                placeholder.innerHTML = `
-                    <div class="empty-icon">⚠️</div>
-                    <p>ファイル内に検出可能な画像・音声アセットの記述が<br>見つかりませんでした。</p>
-                `;
+        function splitCsvLine(text) {
+            let cells = [];
+            let cell = "";
+            let inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    cells.push(cell);
+                    cell = "";
+                } else {
+                    cell += char;
+                }
+            }
+            cells.push(cell);
+            return cells;
+        }
+        // 画像サイズデータを一時的にメモリ保持するキャッシュ機構
+        const imageSizeCache = new Map();
+
+        // 画像ファイルから物理解像度を取得するPromise (タイムアウト安全装置付き)
+        function getImageSizeFromFile(file) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const objectUrl = URL.createObjectURL(file);
+                const timer = setTimeout(() => {
+                    img.onload = null;
+                    img.onerror = null;
+                    URL.revokeObjectURL(objectUrl);
+                    reject(new Error("Timeout loading file"));
+                }, 3000);
+                
+                img.onload = function() {
+                    clearTimeout(timer);
+                    resolve({ w: img.naturalWidth, h: img.naturalHeight });
+                    URL.revokeObjectURL(objectUrl);
+                };
+                img.onerror = function(err) {
+                    clearTimeout(timer);
+                    reject(err);
+                    URL.revokeObjectURL(objectUrl);
+                };
+                img.src = objectUrl;
+            });
+        }
+
+        // 画像のURLから物理解像度を取得するPromise (タイムアウト安全装置・メモリキャッシュ付き)
+        function getImageSizeFromUrl(url) {
+            // すでに一度サイズを取得している画像の場合は、再ロードせずキャッシュから即座に返します
+            if (imageSizeCache.has(url)) {
+                return Promise.resolve(imageSizeCache.get(url));
+            }
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const timer = setTimeout(() => {
+                    img.onload = null;
+                    img.onerror = null;
+                    reject(new Error("Timeout loading image: " + url));
+                }, 3000);
+                
+                img.onload = function() {
+                    clearTimeout(timer);
+                    const size = { w: img.naturalWidth, h: img.naturalHeight };
+                    imageSizeCache.set(url, size); // キャッシュに記録
+                    resolve(size);
+                };
+                img.onerror = function(err) {
+                    clearTimeout(timer);
+                    reject(err);
+                };
+                img.src = url;
+            });
+        }
+
+        // AIコンテキストシートの生成・コピー
+        async function copyContextSheet() {
+            if (detectedAssets.length === 0 && !codeContent) {
+                showToast("プログラムコードが読み込まれていません。");
                 return;
             }
+
+            showToast("AIコンテキストシートを生成中...");
+
+            let sheet = `# AIコンテキストシート (プロジェクト)\n\n`;
+            sheet += `・生成日時: ${new Date().toLocaleString()}\n\n`;
+
+            if (currentFileName) {
+                sheet += `## 対象ファイル\n`;
+                sheet += `- ファイル: ${currentFileName}\n`;
+                sheet += `- ファイル形: ${currentMode === "diff" ? "Before/After検証" : "通常検証"}\n\n`;
+            }
+
+            const imageAssets = detectedAssets.filter(a => !/\.(?:mp3|wav|ogg)$/i.test(a.basename));
+            const audioAssets = detectedAssets.filter(a => /\.(?:mp3|wav|ogg)$/i.test(a.basename));
+
+            if (imageAssets.length > 0) {
+                sheet += `## 画像アセット一覧\n\n`;
+                sheet += `| ファイル | 物理イズ | ファイル容 | スタス |\n`;
+                sheet += `| --- | --- | --- | --- |\n`;
+
+                for (const asset of imageAssets) {
+                    const file = loadedAssetsMap.get(asset.basename.toLowerCase());
+                    let physSize = "取得失";
+                    let capacity = "不";
+                    let status = "検証征";
+
+                    if (file) {
+                        capacity = `${(file.size * 0.0009765625).toFixed(2)} KB`;
+                        if (file.type.startsWith("image/")) {
+                            try {
+                                const size = await getImageSizeFromFile(file);
+                                physSize = `${size.w} x ${size.h} px`;
+                                status = "存在ドロ";
+                            } catch { status = "解析エラー"; }
+                        } else {
+                            status = "存在音声/不";
+                        }
+                    } else if (isMonitorActive && allAssetsInFolder.length > 0) {
+                        const matchUrl = allAssetsInFolder.find(p => p.toLowerCase().endsWith(asset.basename.toLowerCase()));
+                        if (matchUrl) {
+                            status = "存在ロジェクト";
+                            try {
+                                const imgUrl = window.location.protocol === 'file:' ? `http://localhost:8080/${matchUrl}` : `/${matchUrl}`;
+                                const size = await getImageSizeFromUrl(imgUrl);
+                                physSize = `${size.w} x ${size.h} px`;
+                            } catch { physSize = "取得失"; }
+                        } else { status = "リンク切れ"; }
+                    } else if (assetsDropped) {
+                        status = "リンク切れ";
+                    }
+
+                    sheet += `| ${asset.basename} | ${physSize} | ${capacity} | ${status} |\n`;
+                }
+                sheet += `\n`;
+            }
+
+            if (audioAssets.length > 0) {
+                sheet += `## 音声アセット一覧\n\n`;
+                sheet += `| ファイル | ファイル容 | スタス |\n`;
+                sheet += `| --- | --- | --- |\n`;
+
+                for (const asset of audioAssets) {
+                    const file = loadedAssetsMap.get(asset.basename.toLowerCase());
+                    let capacity = "不";
+                    let status = "検証征";
+
+                    if (file) {
+                        capacity = `${(file.size * 0.0009765625).toFixed(2)} KB`;
+                        status = "存在ドロ";
+                    } else if (isMonitorActive && allAssetsInFolder.some(p => p.toLowerCase().endsWith(asset.basename.toLowerCase()))) {
+                        status = "存在ロジェクト";
+                    } else if (assetsDropped) {
+                        status = "リンク切れ";
+                    }
+
+                    sheet += `| ${asset.basename} | ${capacity} | ${status} |\n`;
+                }
+                sheet += `\n`;
+            }
+
+            if (codeContent && ["html", "js", "css"].includes(currentFileType)) {
+                const sizeSpecs = [];
+                detectedAssets.forEach(asset => {
+                    if (!/\.(?:mp3|wav|ogg)$/i.test(asset.basename)) {
+                        const sizes = parseAllRenderSizes(codeContent, asset.basename);
+                        if (sizes.length > 0) {
+                            sizeSpecs.push({ name: asset.basename, sizes });
+                        }
+                    }
+                });
+
+                if (sizeSpecs.length > 0) {
+                    sheet += `## コード上サイズ指定状況\n\n`;
+                    sizeSpecs.forEach(spec => {
+                        spec.sizes.forEach(s => {
+                            sheet += `- ${spec.name}: ${s.width} x ${s.height} px (指定箉: ${s.source})\n`;
+                        });
+                    });
+                    sheet += `\n`;
+                }
+            }
+
+            if (syntaxErrorDetail) {
+                sheet += `## 検出された構文エラー\n\n`;
+                sheet += `- エラー種: ${syntaxErrorDetail.message}\n`;
+                sheet += `- エラー詳細: ${syntaxErrorDetail.detail}\n\n`;
+            }
+
+            sheet += `## 注意事項\n\n`;
+            sheet += `- 表の中の「物理サイズ」は、実際の画像解像度（オリジナル）の大きさです。\n`;
+            sheet += `- 「リンク切れ」アセットは、パスの指定ミスやファイルの置き忘れの可能性があります。\n\n`;
+
+            if (audioAssets.length > 0) {
+                sheet += `## 音声アセット一覧\n\n`;
+                sheet += `| ファイル名 | ファイル容量 | ステータス |\n`;
+                sheet += `| --- | --- | --- |\n`;
+
+                for (const asset of audioAssets) {
+                    const file = loadedAssetsMap.get(asset.basename.toLowerCase());
+                    let capacity = "不";
+                    let status = "検証征";
+
+                    if (file) {
+                        capacity = `${(file.size * 0.0009765625).toFixed(2)} KB`;
+                        status = "存在ドロ";
+                    } else if (isMonitorActive && allAssetsInFolder.some(p => p.toLowerCase().endsWith(asset.basename.toLowerCase()))) {
+                        status = "存在ロジェクト";
+                    } else if (assetsDropped) {
+                        status = "リンク切れ";
+                    }
+
+                    sheet += `| ${asset.basename} | ${capacity} | ${status} |\\n`;
+                }
+                sheet += `\\n`;
+            }
+
+            if (codeContent && ["html", "js", "css"].includes(currentFileType)) {
+                const sizeSpecs = [];
+                detectedAssets.forEach(asset => {
+                    if (!/\\\\.(?:mp3|wav|ogg)$/i.test(asset.basename)) {
+                        const sizes = parseAllRenderSizes(codeContent, asset.basename);
+                        if (sizes.length > 0) {
+                            sizeSpecs.push({ name: asset.basename, sizes });
+                        }
+                    }
+                });
+
+                if (sizeSpecs.length > 0) {
+                    sheet += `## コード上サイズ指定状況\\n\\n`;
+                    sizeSpecs.forEach(spec => {
+                        spec.sizes.forEach(s => {
+                            sheet += `- ${spec.name}: ${s.width} x ${s.height} px (指定箉: ${s.source})\\n`;
+                        });
+                    });
+                    sheet += `\\n`;
+                }
+            }
+
+            if (syntaxErrorDetail) {
+                sheet += `## 検出された構文エラー\\n\\n`;
+                sheet += `- エラー種: ${syntaxErrorDetail.message}\\n`;
+                sheet += `- エラー詳細: ${syntaxErrorDetail.detail}\\n\\n`;
+            }
+
+            sheet += `## 注意事\n`;
+            sheet += `- 表 of 「物理イズ」実際の画像解像度オリジナルです\n`;
+            sheet += `- 「リンク切れ」アセットは、パスの指定ミスまたファイルの置き忘れの可能性があります\n`;
+
+            navigator.clipboard.writeText(sheet).then(() => {
+                showToast("AIコンヂストシートをクリボドにコピしました");
+            }).catch(err => {
+                console.error("シートコピ失:", err);
+            });
+        }
+
+        // コピユーヂリヂ
+
+        // AIへの指示用プロンプトをクリップボードにコピーする関数
+        function copyAiPrompt(filename, physW, physH, codeW, codeH, source) {
+            const promptText = `以下のプログラムコードにおいて、画像アセット「${filename}」の描画サイズに不整合バグがあります。\\n\\n【物理的な事実（ファクト情報）】\\n・実際の画像サイズ（オリジナル解像度）: ${physW} x ${physH} px\\n・コード上の描画指定サイズ: ${codeW} x ${codeH} px (検出元: ${source})\\n\\n【バグの状況】\\nコード上での描画サイズ指定が、画像の物理サイズ（${physW}x${physH}px）を超えているかズレているため、表示が見切れる、また画像が不自然に歪むバグが発生しています。\\n\\n【AIへの指示】\\nこの事実を元に、プログラムコード内の該当箇所を正しく修正したコードを提示してください。特に、画像範囲外の座標を指定している部分があれば、画像内に収まるように適切に縮小・調整してください。`;
+
+            navigator.clipboard.writeText(promptText).then(() => {
+                showToast("AIへの修正指示をコピーしました！");
+            }).catch(err => {
+                console.error("コピー失敗:", err);
+            });
+        }
+
+        function copyCustomPrompt(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("AIへの修正挤をコピしました");
+            }).catch(err => {
+                console.error("コピ失:", err);
+            });
+        }
+
+        // 検出されたすべての警告エラーのプロンプトを一括コピ
+        function copyAllAiPrompts() {
+            if (detectedAssets.length === 0) return;
             
-            placeholder.style.display = 'none';
-            listContainer.style.display = 'flex';
+            const reports = [];
+            detectedAssets.forEach(asset => {
+                const file = loadedAssetsMap.get(asset.basename.toLowerCase());
+                if (file) {
+                    const sizes = parseAllRenderSizes(codeContent, asset.basename);
+                    sizes.forEach(spec => {
+                        getImageSizeFromFile(file).then(size => {
+                            if (size.w < spec.width || size.h < spec.height) {
+                                reports.push(`アセット${asset.basename}」物理解像度(${size.w}x${size.h}px)に対し、コード上指定が(${spec.width}x${spec.height}px)となっており、表示サイズが物理イズを超えています。`);
+                            }
+                        }).catch(() => {});
+                    });
+                }
+            });
+            
+            setTimeout(() => {
+                if (reports.length === 0) {
+                    showToast("一括コピできる致命的乖離はありません");
+                    return;
+                }
+                const prompt = `以下バグを修正してください\\n\\n` + reports.map(r => `・ ${r}`).join("\\n");
+                copyCustomPrompt(prompt);
+            }, 100);
+        }
+
+        // レポトマクダウンコピ
+        function copyReportAsMarkdown() {
+            let md = `# ファクトスキャナ検証レポ\n\\n`;
+            md += `スキャン日: ${new Date().toLocaleString()}\\n`;
+            md += `スキャンファイル: ${currentFileName}\\n\\n`;
             
             detectedAssets.forEach(asset => {
-                const assetFile = loadedAssetsMap.get(asset.basename.toLowerCase());
-                const isAudio = /\.(?:mp3|wav|ogg)$/i.test(asset.basename);
+                md += `### ${asset.path}\\n`;
+                const file = loadedAssetsMap.get(asset.basename.toLowerCase());
+                if (file) {
+                    md += `- スタス: 存在あり (手動ドロ)\\n`;
+                    md += `- ファイルサイズ: ${(file.size * 0.0009765625).toFixed(2)} KB\\n`;
+                } else {
+                    md += `- スタス: 検証征\\n`;
+                }
+                md += `\\n`;
+            });
+            
+            navigator.clipboard.writeText(md).then(() => {
+                showToast("Markdownレポトをコピしました");
+            });
+        }
+
+        // 個別ドロ時未使用アセット検
+        function renderUnusedAssets() {
+            const existingUnused = document.getElementById("dynamicUnusedPanel");
+            if (existingUnused) existingUnused.remove();
+            
+            if (!assetsDropped || loadedAssetsMap.size === 0) return;
+            
+            const unusedList = [];
+            for (let [filename, file] of loadedAssetsMap.entries()) {
+                const isUsed = detectedAssets.some(asset => asset.basename.toLowerCase() === filename.toLowerCase());
+                if (!isUsed) {
+                    unusedList.push({ name: file.name, size: (file.size * 0.0009765625).toFixed(1) });
+                }
+            }
+            
+            if (unusedList.length === 0) return;
+            
+            const unusedPanel = document.createElement("div");
+            unusedPanel.id = "dynamicUnusedPanel";
+            unusedPanel.className = "design-panel";
+            unusedPanel.style.borderColor = "rgba(139, 92, 246, 0.2)";
+            unusedPanel.style.background = "rgba(139, 92, 246, 0.02)";
+            unusedPanel.style.marginTop = "1rem";
+            
+            const unusedItemsHtml = unusedList.map(function(item) {
+                return "・ " + item.name + " (" + item.size + " KB)";
+            }).join("<br>");
+
+            let html = `
+                <div class="design-section-title" style="color: var(--accent);"> 未使用アセットクリーンアップ推奨</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                    ドロされましたが、読み込まれたププログラムコードで一度も参照されてぁぃァイルです
+                </div>
+                <div class="font-list-card" style="border-color: rgba(139, 92, 246, 0.15);">
+                    ` + unusedItemsHtml + `
+                </div>
+            `;
+            
+            unusedPanel.innerHTML = html;
+            
+            const listContainer = document.getElementById("assetList");
+            if (listContainer) {
+                listContainer.parentNode.appendChild(unusedPanel);
+            }
+        }
+
+        // ヂイン詳細の自動描画 (色・フォン)
+        function renderDesignDetails() {
+            const existingPanel = document.getElementById("dynamicDesignPanel");
+            if (existingPanel) existingPanel.remove();
+            
+            if (!codeContent) return;
+            
+            const hexRegex = /#([a-fA-F0-9]{3,6})\b/g;
+            const rgbRegex = /rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)/gi;
+            const rgbaRegex = /rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d\.]+\s*\)/gi;
+            
+            let colors = [];
+            let match;
+            let lastIdxHex = -1;
+            while ((match = hexRegex.exec(codeContent)) !== null) {
+                if (hexRegex.lastIndex === lastIdxHex) break;
+                lastIdxHex = hexRegex.lastIndex;
+                colors.push(match[0]);
+            }
+            let lastIdxRgb = -1;
+            while ((match = rgbRegex.exec(codeContent)) !== null) {
+                if (rgbRegex.lastIndex === lastIdxRgb) break;
+                lastIdxRgb = rgbRegex.lastIndex;
+                colors.push(match[0]);
+            }
+            let lastIdxRgba = -1;
+            while ((match = rgbaRegex.exec(codeContent)) !== null) {
+                if (rgbaRegex.lastIndex === lastIdxRgba) break;
+                lastIdxRgba = rgbaRegex.lastIndex;
+                colors.push(match[0]);
+            }
+            colors = [...new Set(colors)].slice(0, 10);
+            
+            const fontRegex = /font-family\s*:\s*([^;}]+)/gi;
+            let fonts = [];
+            let lastIdxFont = -1;
+            while ((match = fontRegex.exec(codeContent)) !== null) {
+                if (fontRegex.lastIndex === lastIdxFont) break;
+                lastIdxFont = fontRegex.lastIndex;
+                const fontVal = match[1].replace(/['"]/g, "").trim();
+                fonts.push(fontVal);
+            }
+            fonts = [...new Set(fonts)].slice(0, 5);
+            
+            if (colors.length === 0 && fonts.length === 0) return;
+            
+            const designPanel = document.createElement("div");
+            designPanel.id = "dynamicDesignPanel";
+            designPanel.className = "design-panel";
+            
+            let html = `<div class="design-section-title"> 検出されたデザイン要</div>`;
+            
+            if (colors.length > 0) {
+                html += `
+                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem;">使用されてあカラーコー:</div>
+                    <div class="color-grid">
+                `;
+                colors.forEach(color => {
+                    html += `
+                        <div class="color-chip-card">
+                            <div class="color-chip" style="background-color: ${color};"></div>
+                            <span class="color-code">${color}</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+            
+            if (fonts.length > 0) {
+                html += `
+                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.5rem; margin-top: 0.75rem;">指定されてあフォン:</div>
+                    <div class="font-list-card">
+                        ${fonts.map(f => `・ ${f}`).join("<br>")}
+                    </div>
+                `;
+            }
+            
+            designPanel.innerHTML = html;
+            
+            const listContainer = document.getElementById("assetList");
+            if (listContainer) {
+                listContainer.parentNode.insertBefore(designPanel, listContainer.nextSibling);
+            }
+        }
+
+        // 個別ファイルの検証ロジック (ローカル・手動ドロ)
+        function verifyLocalFile(asset, file, card, onDone) {
+            const sizes = parseAllRenderSizes(codeContent, asset.basename);
+            
+            if (file.type.startsWith("image/")) {
+                const img = new Image();
+                const objectUrl = URL.createObjectURL(file);
                 
-                // カード要素の作成
-                const card = document.createElement('div');
-                card.className = 'asset-card';
-                
-                // コード上のすべての描画設定をスキャン（音声は対象外）
-                const renderSizes = isAudio ? [] : parseAllRenderSizes(codeContent, asset.basename);
-                
-                if (!assetFile) {
-                    // アセットファイルがドロップされていない状態
-                    let statusClass = 'unverified';
-                    let statusText = '検証待ち';
-                    let specsGridHtml = '';
+                img.onload = function() {
+                    URL.revokeObjectURL(objectUrl);
                     
-                    if (assetsDropped) {
-                        // アセットがドロップ済みで不足している場合は「リンク切れ」と判定
-                        statusClass = 'missing';
-                        statusText = isAudio ? 'リンク切れの疑い' : 'ファイル未検出（リンク切れ）';
-                        
-                        if (isAudio) {
-                            specsGridHtml = `
-                                <div class="spec-item">
-                                    <span class="spec-label">アセット種別</span>
-                                    <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">状態</span>
-                                    <span class="spec-value" style="color: var(--danger);">見つかりません（リンク切れ）</span>
-                                </div>
-                            `;
-                        } else {
-                            let sizesText = '検出なし';
-                            if (renderSizes.length > 0) {
-                                sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
-                            }
-                            specsGridHtml = `
-                                <div class="spec-item">
-                                    <span class="spec-label">状態</span>
-                                    <span class="spec-value" style="color: var(--danger);">見つかりません（リンク切れ）</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">コード上の設定</span>
-                                    <span class="spec-value">${sizesText}</span>
-                                </div>
-                            `;
-                        }
+                    const physW = img.naturalWidth;
+                    const physH = img.naturalHeight;
+                    
+                    let cardStatusClass = 'success';
+                    let cardStatusText = 'OK (検証)';
+                    let specsGridHtml = `
+                        <div class="spec-card">
+                            <div class="spec-label">実際の画像サイズ (物)</div>
+                            <div class="spec-val highlight">${physW} x ${physH} px</div>
+                        </div>
+                    `;
+                    
+                    let alertBlocksHtml = "";
+                    let hasDanger = false;
+                    let hasWarning = false;
+                    
+                    if (sizes.length === 0) {
+                        specsGridHtml += `
+                            <div class="spec-card">
+                                <div class="spec-label">コード上指定</div>
+                                <div class="spec-val">検な</div>
+                            </div>
+                        `;
                     } else {
-                        // 初期状態（アセット未投入）
-                        if (isAudio) {
-                            specsGridHtml = `
-                                <div class="spec-item">
-                                    <span class="spec-label">アセット種別</span>
-                                    <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">状態</span>
-                                    <span class="spec-value" style="color: var(--text-muted);">検証待ち（未投入）</span>
-                                </div>
-                            `;
-                        } else {
-                            let sizesText = '検出なし';
-                            if (renderSizes.length > 0) {
-                                sizesText = renderSizes.map(s => `${s.width}x${s.height}px (${s.source})`).join(', ');
+                        sizes.forEach(spec => {
+                            const isDanger = physW < spec.width || physH < spec.height;
+                            const isWarning = !isDanger && (physW !== spec.width || physH !== spec.height);
+                            
+                            let statusText = "整合性OK";
+                            let statusClass = "success";
+                            
+                            if (isDanger) {
+                                statusText = "画質ボケ・サイズ不足 (Danger)";
+                                statusClass = "danger";
+                                hasDanger = true;
+                                
+                                const promptText = `以下ププログラムコードにおいて、画像アセット${asset.basename}」描画サイズに不整合バグがあります\n\n【物理イズ: ${physW} x ${physH} px\n【コード指定: ${spec.width} x ${spec.height} px (検: ${spec.source})\n\nコード上での描画サイズ指定が画像物理イズを超えているため、表示が見れる、また画像が不自然に歪むバグが発生してぁすこの事実を元に、プログラムコードの該当箇所を正しく修正したコードを提示してください`;
+                                
+                                alertBlocksHtml += `
+                                    <div class="alert-block danger">
+                                        <strong> ${spec.source}: 物理イズを趁た拡大が検されました</strong><br>
+                                        コード指: ${spec.width} x ${spec.height} px (画像サイズを趁てぁ)<br>
+                                        <button class="btn-copy-prompt" onclick="copyCustomPrompt(\`${promptText}\`)"> こバグをAIに直しても</button>
+                                    </div>
+                                `;
+                            } else if (isWarning) {
+                                statusText = "注意（縮小表示";
+                                statusClass = "warning";
+                                hasWarning = true;
+                                
+                                alertBlocksHtml += `
+                                    <div class="alert-block warning">
+                                        <strong> ${spec.source}: 縮小表示されてぁす</strong><br>
+                                        コード指: ${spec.width} x ${spec.height} px (縦横比崩れに注意してください)
+                                    </div>
+                                `;
                             }
-                            specsGridHtml = `
-                                <div class="spec-item">
-                                    <span class="spec-label">状態</span>
-                                    <span class="spec-value" style="color: var(--text-muted);">検証待ち</span>
-                                </div>
-                                <div class="spec-item">
-                                    <span class="spec-label">コード上の設定</span>
-                                    <span class="spec-value">${sizesText}</span>
+                            
+                            specsGridHtml += `
+                                <div class="spec-card">
+                                    <div class="spec-label">指定サイズ (${spec.source})</div>
+                                    <div class="spec-val ${statusClass}">${spec.width} x ${spec.height} px</div>
                                 </div>
                             `;
+                        });
+                        
+                        if (hasDanger) {
+                            cardStatusClass = 'danger';
+                            cardStatusText = 'サイズ不足 (Danger)';
+                        } else if (hasWarning) {
+                            cardStatusClass = 'warning';
+                            cardStatusText = '注意（縮小表示';
                         }
                     }
                     
                     card.innerHTML = `
                         <div class="asset-meta">
                             <span class="asset-path">${asset.path}</span>
-                            <span class="status-pill ${statusClass}">${statusText}</span>
+                            <span class="status-pill ${cardStatusClass}">${cardStatusText}</span>
                         </div>
                         <div class="specs-grid">
                             ${specsGridHtml}
                         </div>
-                        <div class="drop-subtext" style="text-align: center; margin-top: 0.5rem; border: 1px dashed rgba(255,255,255,0.05); padding: 0.5rem; border-radius: 6px;">
-                            💡 左エリアに <strong>${asset.basename}</strong> をドロップすると、サイズ整合性のチェックを行います。
-                        </div>
+                        ${alertBlocksHtml}
                     `;
-                    listContainer.appendChild(card);
-                } else if (isAudio) {
-                    // 音声ファイルが投入され、実在が確認された状態
-                    const capacityKb = (assetFile.size / 1024).toFixed(2);
+                    onDone();
+                };
+                
+                img.onerror = function() {
+                    URL.revokeObjectURL(objectUrl);
                     card.innerHTML = `
                         <div class="asset-meta">
                             <span class="asset-path">${asset.path}</span>
-                            <span class="status-pill ok">OK (存在確認済)</span>
+                            <span class="status-pill missing">解析エラー</span>
                         </div>
-                        <div class="specs-grid">
-                            <div class="spec-item">
-                                <span class="spec-label">アセット種別</span>
-                                <span class="spec-value" style="color: var(--accent);">音声ファイル</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">ファイル容量</span>
-                                <span class="spec-value">${capacityKb} KB</span>
-                            </div>
-                            <div class="spec-item" style="grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem;">
-                                <span class="spec-label">検証結果</span>
-                                <span class="spec-value" style="color: var(--success);">音声ファイルがプロジェクト内に正常に存在しています。リンク切れはありません。</span>
-                            </div>
-                        </div>
+                        <p class="drop-subtext">画像ヘッダー惱が壊れてあか、読み込めませんでした</p>
                     `;
-                    listContainer.appendChild(card);
-                } else {
-                    // 画像ファイルがドロップされ、読み込み可能な状態
-                    const img = new Image();
-                    const objectUrl = URL.createObjectURL(assetFile);
-                    
-                    img.onload = function() {
-                        const physW = img.naturalWidth;
-                        const physH = img.naturalHeight;
-                        URL.revokeObjectURL(objectUrl);
-                        
-                        let cardStatusClass = 'ok';
-                        let cardStatusText = 'OK (検証済)';
-                        
-                        // 検出されたすべてのサイズ指定を評価して表示用の要素を組み立てる
-                        let alertBlocksHtml = '';
-                        let specsGridHtml = `
-                            <div class="spec-item">
-                                <span class="spec-label">実際の画像サイズ (物理)</span>
-                                <span class="spec-value" style="color: var(--primary);">${physW} x ${physH} px</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">ファイル容量</span>
-                                <span class="spec-value">${(assetFile.size / 1024).toFixed(2)} KB</span>
-                            </div>
-                        `;
-                        
-                        if (renderSizes.length === 0) {
-                            specsGridHtml += `
-                                <div class="spec-item">
-                                    <span class="spec-label">コード上の指定</span>
-                                    <span class="spec-value">検出なし</span>
-                                </div>
-                            `;
-                        } else {
-                            let hasDanger = false;
-                            let hasWarning = false;
-                            
-                            renderSizes.forEach((renderSize, idx) => {
-                                specsGridHtml += `
-                                    <div class="spec-item" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.5rem; grid-column: 1 / -1;">
-                                        <span class="spec-label">指定 ${idx + 1}: ${renderSize.source}</span>
-                                        <span class="spec-value">${renderSize.width} x ${renderSize.height} px</span>
-                                    </div>
-                                `;
-                                
-                                // 乖離チェック
-                                if (renderSize.width > physW || renderSize.height > physH) {
-                                    hasDanger = true;
-                                    alertBlocksHtml += `
-                                        <div class="alert-block" style="margin-top: 0.75rem;">
-                                            <span class="alert-icon">⚠️</span>
-                                            <div style="flex: 1; text-align: left;">
-                                                <strong>【警告】描画座標の範囲外指定エラーの危険！ (${renderSize.source})</strong><br>
-                                                コード上の指示（${renderSize.width}x${renderSize.height}px）は、
-                                                画像の物理サイズ（${physW}x${physH}px）をオーバーしています。
-                                                これにより画像の端が見切れるか、描画時に完全に切り落とされるバグが起きる可能性が極めて高いです。
-                                                <button onclick="copyAiPrompt('${asset.basename}', ${physW}, ${physH}, ${renderSize.width}, ${renderSize.height}, '${renderSize.source}')" style="margin-top: 0.75rem; background: var(--danger); color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; display: block; box-shadow: 0 4px 10px rgba(244, 63, 94, 0.3);">
-                                                    AIへの修正指示テキストをコピーする
-                                                </button>
-                                            </div>
-                                        </div>
-                                    `;
-                                } else if (renderSize.width !== physW || renderSize.height !== physH) {
-                                    hasWarning = true;
-                                    alertBlocksHtml += `
-                                        <div class="alert-block" style="margin-top: 0.75rem; background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.15); color: #fde047; box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);">
-                                            <span class="alert-icon" style="color: #f59e0b;">💡</span>
-                                            <div style="flex: 1; text-align: left;">
-                                                <strong>【注意】サイズ縮小またはアスペクト比変化 (${renderSize.source})</strong><br>
-                                                コード上で画像（物理 ${physW}x${physH}px）を ${renderSize.width}x${renderSize.height}px にリサイズして描画しています。
-                                                比率が崩れてキャラクターが横に伸びたりしていないか確認してください。
-                                                <button onclick="copyAiPrompt('${asset.basename}', ${physW}, ${physH}, ${renderSize.width}, ${renderSize.height}, '${renderSize.source}')" style="margin-top: 0.75rem; background: #d97706; color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; display: block; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
-                                                    AIへの修正指示テキストをコピーする
-                                                </button>
-                                            </div>
-                                        </div>
-                                    `;
-                                }
-                            });
-                            
-                            if (hasDanger) {
-                                cardStatusClass = 'missing';
-                                cardStatusText = '致命的乖離（バグの危険）';
-                            } else if (hasWarning) {
-                                cardStatusClass = 'warning';
-                                cardStatusText = '注意（縮小表示）';
-                            }
-                        }
-                        
-                        card.innerHTML = `
-                            <div class="asset-meta">
-                                <span class="asset-path">${asset.path}</span>
-                                <span class="status-pill ${cardStatusClass}">${cardStatusText}</span>
-                            </div>
-                            <div class="specs-grid">
-                                ${specsGridHtml}
-                            </div>
-                            ${alertBlocksHtml}
-                        `;
-                    };
-                    
-                    img.onerror = function() {
-                        URL.revokeObjectURL(objectUrl);
-                        card.innerHTML = `
-                            <div class="asset-meta">
-                                <span class="asset-path">${asset.path}</span>
-                                <span class="status-pill missing">解析エラー</span>
-                            </div>
-                            <p class="drop-subtext">画像のヘッダー情報が壊れているか、読み込めませんでした。</p>
-                        `;
-                    };
-                    
-                    img.src = objectUrl;
-                    listContainer.appendChild(card);
-                }
-            });
+                    onDone();
+                };
+                img.src = objectUrl;
+            } else {
+                card.innerHTML = `
+                    <div class="asset-meta">
+                        <span class="asset-path">${asset.path}</span>
+                        <span class="status-pill success">存在あり</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        音声アセットファイルを確認しました(${(file.size * 0.0009765625).toFixed(2)} KB)
+                    </div>
+                `;
+                onDone();
+            }
         }
 
-        // 監視サーバーとの連携・ポーリング処理
-        // file:/// で直接開いた場合でもローカルサーバー(localhost:8080)と連携できるよう接続先を自動切替
+        // 個別ファイルの検証ロジック (監視サーバ連携・プロジェクトアセット)
+        async function verifyServerFile(asset, card, onDone) {
+            const matchUrl = allAssetsInFolder.find(p => p.toLowerCase().endsWith(asset.basename.toLowerCase()));
+            
+            if (!matchUrl) {
+                card.classList.add("error-pulse");
+                const promptText = `アセット${asset.basename}」（指定パス: ${asset.path}が、プログラムファイル${currentFileName}」で参照されていますが、実在していません。正しいパスやファイル名に修正するか、ファイルの置き忘れを確認してください。`;
+                
+                card.innerHTML = `
+                    <div class="asset-meta">
+                        <span class="asset-path">${asset.path}</span>
+                        <span class="status-pill missing">ファイル未検 (リンク切れ)</span>
+                    </div>
+                    <div style="border-top: 1px solid rgba(244, 63, 94, 0.1); margin-top: 0.5rem; padding-top: 0.5rem;">
+                        <span style="color: var(--danger); font-size: 0.8rem; font-weight: bold;">【AIに渡すファイル ${currentFileName}</span>
+                    </div>
+                    <div class="specs-grid" style="margin-top: 0.5rem;">
+                        <div class="spec-card">
+                            <div class="spec-label">状</div>
+                            <div class="spec-val danger">見つかりません (リンク切れ)</div>
+                        </div>
+                        <div class="spec-card">
+                            <div class="spec-label">コード上設</div>
+                            <div class="spec-val">検な</div>
+                        </div>
+                    </div>
+                    <div class="alert-block danger" style="margin-top: 0.75rem;">
+                         <strong>AIが実在しなあセッを指定しましたリンク切れ</strong><br>
+                        パスが間違ってあか、ファイルがありません<br>
+                        <button class="btn-copy-prompt" onclick="copyCustomPrompt(\`${promptText}\`)"> こバグをAIに直してもら</button>
+                    </div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; padding-left: 0.2rem;">
+                         左エリアに <strong>${asset.basename}</strong> をドロすると、サイズ整合性のチェヂを行います
+                    </div>
+                `;
+                onDone();
+                return;
+            }
+
+            const sizes = parseAllRenderSizes(codeContent, asset.basename);
+            const isAudio = /\\\\.(?:mp3|wav|ogg)$/i.test(asset.basename);
+            
+            if (isAudio) {
+                card.innerHTML = `
+                    <div class="asset-meta">
+                        <span class="asset-path">${asset.path}</span>
+                        <span class="status-pill success">OK (検証)</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+                        プロジェクトに音声ファイルが存在します: ${matchUrl}
+                    </div>
+                `;
+                onDone();
+                return;
+            }
+
+            try {
+                const imgUrl = window.location.protocol === 'file:' ? `http://localhost:8080/${matchUrl}` : `/${matchUrl}`;
+                const size = await getImageSizeFromUrl(imgUrl);
+                const physW = size.w;
+                const physH = size.h;
+                
+                let cardStatusClass = 'success';
+                let cardStatusText = 'OK (検証)';
+                let specsGridHtml = `
+                    <div class="spec-card">
+                        <div class="spec-label">実際の画像サイズ (物)</div>
+                        <div class="spec-val highlight">${physW} x ${physH} px</div>
+                    </div>
+                `;
+                
+                let alertBlocksHtml = "";
+                let hasDanger = false;
+                let hasWarning = false;
+                
+                if (sizes.length === 0) {
+                    specsGridHtml += `
+                        <div class="spec-card">
+                            <div class="spec-label">コード上指定</div>
+                            <div class="spec-val">検な</div>
+                        </div>
+                    `;
+                } else {
+                    sizes.forEach(spec => {
+                        const isDanger = physW < spec.width || physH < spec.height;
+                        const isWarning = !isDanger && (physW !== spec.width || physH !== spec.height);
+                        
+                        let statusText = "整合性OK";
+                        let statusClass = "success";
+                        
+                        if (isDanger) {
+                            statusText = "画質ボケ・サイズ不足 (Danger)";
+                            statusClass = "danger";
+                            hasDanger = true;
+                            
+                            const promptText = `以下ププログラムコードにおいて、画像アセット${asset.basename}」描画サイズに不整合バグがあります\\\n\\\\n【物理イズ: ${physW} x ${physH} px\\\\n【コード指定: ${spec.width} x ${spec.height} px (指定箉: ${spec.source})\\\\n\\\\nコード上描画サイズが物理イズを超えているため、表示が見れる、また画像が不自然に歪むバグが発生してぁす。この事実を元に、プログラムコードの該当箇所を正しく修正したコードを提示してください。`;
+                            
+                            alertBlocksHtml += `
+                                <div class="alert-block danger">
+                                    <strong> ${spec.source}: 物理イズを趁た拡大が検されました</strong><br>
+                                    コード指: ${spec.width} x ${spec.height} px (画像サイズを趁てぁ)<br>
+                                    <button class="btn-copy-prompt" onclick="copyCustomPrompt(\`${promptText}\`)"> こバグをAIに直してもら</button>
+                                </div>
+                            `;
+                        } else if (isWarning) {
+                            statusText = "注意（縮小表示";
+                            statusClass = "warning";
+                            hasWarning = true;
+                            
+                            alertBlocksHtml += `
+                                <div class="alert-block warning">
+                                    <strong> ${spec.source}: 縮小表示されてぁす</strong><br>
+                                    コード指: ${spec.width} x ${spec.height} px (縦横 of 崩れに注意してください)
+                                </div>
+                            `;
+                        }
+                        
+                        specsGridHtml += `
+                            <div class="spec-card">
+                                <div class="spec-label">指定サイズ (${spec.source})</div>
+                                <div class="spec-val ${statusClass}">${spec.width} x ${spec.height} px</div>
+                            </div>
+                        `;
+                    });
+                    
+                    if (hasDanger) {
+                        cardStatusClass = 'danger';
+                        cardStatusText = 'サイズ不足 (Danger)';
+                    } else if (hasWarning) {
+                        cardStatusClass = 'warning';
+                        cardStatusText = '注意（縮小表示';
+                    }
+                }
+                
+                card.innerHTML = `
+                    <div class="asset-meta">
+                        <span class="asset-path">${asset.path}</span>
+                        <span class="status-pill ${cardStatusClass}">${cardStatusText}</span>
+                    </div>
+                    <div class="specs-grid">
+                        ${specsGridHtml}
+                    </div>
+                    ${alertBlocksHtml}
+                `;
+            } catch (err) {
+                card.innerHTML = `
+                    <div class="asset-meta">
+                        <span class="asset-path">${asset.path}</span>
+                        <span class="status-pill missing">画像サイズ解決失</span>
+                    </div>
+                    <p class="drop-subtext">サーバ上画像サイズを解決できませんでした。ファイル形式を確認してください</p>
+                `;
+            }
+            onDone();
+        }
+
+        // アセット未ドロップ時復中表示
+        function renderWaitingCard(asset, card) {
+            card.innerHTML = `
+                <div class="asset-meta">
+                    <span class="asset-path">${asset.path}</span>
+                    <span class="status-pill waiting">検証征</span>
+                </div>
+                <div class="specs-grid">
+                    <div class="spec-card">
+                        <div class="spec-label">実際の画像サイズ (物)</div>
+                        <div class="spec-val">アセット未投入入</div>
+                    </div>
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem; padding-left: 0.2rem;">
+                     左下エリアに <strong>${asset.basename}</strong> をドロするか、監視サーバを起動してください
+                </div>
+            `;
+        }
+
+        // ファイルごとの表示サイズ指定データをメモリ保持するキャッシュ機構
+        const fileRenderSizesCache = new Map();
+
+        // ファイルのソースコード全体を一回だけ走査して、全画像表示サイズ指定のMapを構築する高速ワンパスパーサー
+        function buildFileRenderSizesMap(codeText) {
+            const sizeMap = new Map();
+            if (!codeText) return sizeMap;
+            
+            function addSize(name, sizeObj) {
+                const key = name.toLowerCase();
+                if (!sizeMap.has(key)) {
+                    sizeMap.set(key, []);
+                }
+                sizeMap.get(key).push(sizeObj);
+            }
+            
+            // 1. imgタグの解析 (一括走査)
+            const imgTagRegex = /<img[^>]+>/gi;
+            let tagMatch;
+            let lastIdxImg = -1;
+            while ((tagMatch = imgTagRegex.exec(codeText)) !== null) {
+                if (imgTagRegex.lastIndex === lastIdxImg) break;
+                lastIdxImg = imgTagRegex.lastIndex;
+                
+                const tag = tagMatch[0];
+                const srcMatch = tag.match(/src=["']([^"']+)["']/i);
+                if (srcMatch) {
+                    const srcPath = srcMatch[1];
+                    const basename = srcPath.split('/').pop().split('\\').pop();
+                    
+                    const wMatch = tag.match(/width=["']?(\d+)["']?/i);
+                    const hMatch = tag.match(/height=["']?(\d+)["']?/i);
+                    if (wMatch && hMatch) {
+                        addSize(basename, { width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: 'HTML <img> 属性' });
+                    }
+                }
+            }
+            
+            // 2. JavaScriptの drawImage などの一括解析
+            const srcAssignRegex = /(\w+)\s*\.\s*src\s*=\s*["']([^"']+)["']/gi;
+            let assignMatch;
+            let lastIdxAssign = -1;
+            const varToBasename = new Map();
+            while ((assignMatch = srcAssignRegex.exec(codeText)) !== null) {
+                if (srcAssignRegex.lastIndex === lastIdxAssign) break;
+                lastIdxAssign = srcAssignRegex.lastIndex;
+                
+                const varName = assignMatch[1];
+                const srcPath = assignMatch[2];
+                const basename = srcPath.split('/').pop().split('\\').pop();
+                varToBasename.set(varName, basename);
+            }
+            
+            for (let [varName, basename] of varToBasename.entries()) {
+                const d5Regex = new RegExp(`drawImage\\(\\s*${varName}\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\\)`, 'g');
+                let d5Match;
+                let lastIdxD5 = -1;
+                while ((d5Match = d5Regex.exec(codeText)) !== null) {
+                    if (d5Regex.lastIndex === lastIdxD5) break;
+                    lastIdxD5 = d5Regex.lastIndex;
+                    addSize(basename, { width: parseInt(d5Match[1]), height: parseInt(d5Match[2]), source: `drawImage(${varName}, ...)` });
+                }
+                
+                const d9Regex = new RegExp(`drawImage\\(\\s*${varName}\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*[^,]+\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*\\)`, 'g');
+                let d9Match;
+                let lastIdxD9 = -1;
+                while ((d9Match = d9Regex.exec(codeText)) !== null) {
+                    if (d9Regex.lastIndex === lastIdxD9) break;
+                    lastIdxD9 = d9Regex.lastIndex;
+                    addSize(basename, { width: parseInt(d9Match[1]), height: parseInt(d9Match[2]), source: `drawImage(${varName}, ...)` });
+                }
+                
+                const wPropRegex = new RegExp(`${varName}\\s*\\.\\s*width\\s*=\\s*(\\d+)`, 'gi');
+                const hPropRegex = new RegExp(`${varName}\\s*\\.\\s*height\\s*=\\s*(\\d+)`, 'gi');
+                let wp, hp;
+                if ((wp = wPropRegex.exec(codeText)) && (hp = hPropRegex.exec(codeText))) {
+                    addSize(basename, { width: parseInt(wp[1]), height: parseInt(hp[1]), source: `${varName}.width / .height` });
+                }
+                
+                const wStyleRegex = new RegExp(`${varName}\\s*\\.\\s*style\\s*\\.\\s*width\\s*=\\s*["'](\\d+)px["']`, 'gi');
+                const hStyleRegex = new RegExp(`${varName}\\s*\\.\\s*style\\s*\\.\\s*height\\s*=\\s*["'](\\d+)px["']`, 'gi');
+                let ws, hs;
+                if ((ws = wStyleRegex.exec(codeText)) && (hs = hStyleRegex.exec(codeText))) {
+                    addSize(basename, { width: parseInt(ws[1]), height: parseInt(hs[1]), source: `${varName}.style.width / .style.height` });
+                }
+            }
+            
+            // 3. CSSブロックの一括解析
+            const cssBlockRegex = /([^{}]+)\{([^}]+)\}/g;
+            let blockMatch;
+            let lastIdxCss = -1;
+            while ((blockMatch = cssBlockRegex.exec(codeText)) !== null) {
+                if (cssBlockRegex.lastIndex === lastIdxCss) break;
+                lastIdxCss = cssBlockRegex.lastIndex;
+                
+                const body = blockMatch[2];
+                const urlMatch = body.match(/url\s*\(\s*["']?([^"')]+)["']?\s*\)/i);
+                if (urlMatch) {
+                    const srcPath = urlMatch[1];
+                    const basename = srcPath.split('/').pop().split('\\').pop();
+                    const wMatch = body.match(/[^a-zA-Z-]width\s*:\s*(\d+)px/i);
+                    const hMatch = body.match(/[^a-zA-Z-]height\s*:\s*(\d+)px/i);
+                    if (wMatch && hMatch) {
+                        addSize(basename, { width: parseInt(wMatch[1]), height: parseInt(hMatch[1]), source: `CSSセレクタ` });
+                    }
+                }
+            }
+            
+            return sizeMap;
+        }
+
+        // コードから特定画像指定サイズをすべて抽出するパサー (メモリキャッシュ対応高速版)
+        function parseAllRenderSizes(codeText, escapedName) {
+            let sizeMap;
+            if (fileRenderSizesCache.has(codeText)) {
+                sizeMap = fileRenderSizesCache.get(codeText);
+            } else {
+                sizeMap = buildFileRenderSizesMap(codeText);
+                fileRenderSizesCache.set(codeText, sizeMap);
+            }
+            
+            const key = escapedName.toLowerCase();
+            return sizeMap.has(key) ? sizeMap.get(key) : [];
+        }
+
+        // スキャナリセッ
+        function resetScanner() {
+            codeContent = "";
+            detectedAssets = [];
+            loadedAssetsMap.clear();
+            assetsDropped = false;
+            syntaxErrorDetail = null;
+            
+            document.getElementById('codeFileBadge').style.display = 'none';
+            document.getElementById('imageFileBadge').style.display = 'none';
+            document.getElementById('codeDropZone').classList.remove('success');
+            document.getElementById('imageDropZone').classList.remove('success');
+            document.getElementById('actionPanel').style.display = 'none';
+            
+            const exUnused = document.getElementById("dynamicUnusedPanel");
+            if (exUnused) exUnused.remove();
+            const exDesign = document.getElementById("dynamicDesignPanel");
+            if (exDesign) exDesign.remove();
+            
+            renderReport();
+        }
+
+        // 構文エラー用のプロンプトコピ
+        function copySyntaxFixPrompt() {
+            if (!syntaxErrorDetail) return;
+            const prompt = `プログラムファイルの読み込み中に、以下構文エラーが検されました\n\\n【エラーの種類: ${syntaxErrorDetail.message}\\n【エラーの詳細: ${syntaxErrorDetail.detail}\\n\\nこ構文エラーを修正した正しいコードを出力してください。`;
+            copyCustomPrompt(prompt);
+        }
+
+        // --- プロジェクトダッシュボード機能 ---
+
+        // プロジェクト一括スキャン
+        async function runProjectScan() {
+            const tableBody = document.getElementById("projectFileTableBody");
+            if (!tableBody) return;
+            
+            const progressContainer = document.getElementById("scanProgressContainer");
+            const progressBar = document.getElementById("scanProgressBar");
+            const progressText = document.getElementById("scanProgressText");
+            
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                        プロジェクトファイルをスキャン中...
+                    </td>
+                </tr>
+            `;
+            
+            try {
+                const scanUrl = window.location.protocol === 'file:' ? 'http://localhost:8080/api/project-scan' : '/api/project-scan';
+                const response = await fetch(scanUrl);
+                if (!response.ok) throw new Error("プロジェクト情報が取得できません");
+                
+                const data = await response.json();
+                projectFiles = data.files || [];
+                allAssetsInFolder = data.assets || [];
+                
+                // APIレスポンスから画像解像度キャッシュを一括初期化 (ブラウザ側での画像ロードを完全不要にする)
+                const assetsInfo = data.assets_info || {};
+                for (let [relPath, size] of Object.entries(assetsInfo)) {
+                    const imgUrl = window.location.protocol === 'file:' 
+                        ? `http://localhost:8080/${relPath}` 
+                        : `/${relPath}`;
+                    imageSizeCache.set(imgUrl, { w: size.w, h: size.h });
+                    
+                    const basename = relPath.split('/').pop().split('\\').pop();
+                    imageSizeCache.set(basename, { w: size.w, h: size.h });
+                }
+                
+                if (progressContainer) {
+                    progressContainer.style.display = "block";
+                    progressBar.style.width = "0%";
+                    progressText.innerText = `スキャン中... 0% (0/${projectFiles.length}ファイル)`;
+                }
+                
+                let totalDanger = 0;
+                let totalWarn = 0;
+                let totalLinkBreak = 0;
+                let totalSuccess = 0;
+                const fileReports = [];
+                
+                let scannedCount = 0;
+                for (let file of projectFiles) {
+                    scannedCount++;
+                    if (progressContainer) {
+                        const percent = Math.round((scannedCount / projectFiles.length) * 100);
+                        progressBar.style.width = percent + "%";
+                        progressText.innerText = `スキャン中... ${percent}% (${scannedCount}/${projectFiles.length}ファイル)`;
+                    }
+                    
+                    // ブラウザに描画スレッドに処理を回す権利を与え、進捗メーターをリアルタイム更新させます
+                    await new Promise(resolve => setTimeout(resolve, 0));
+
+                    // スキャナーツール自身やスクリプト、一時ファイルは除外します
+                    const filenameOnly = file.name.split('/').pop().split('\\').pop();
+                    if (filenameOnly === "ファクトスキャナー起動.html" || 
+                        filenameOnly === "rebuild_scanner.py" || 
+                        filenameOnly === "fact_monitor.py" || 
+                        filenameOnly.startsWith("temp_") || 
+                        file.name.includes("scratch/")) {
+                        continue;
+                    }
+                    
+                    let fileDanger = 0;
+                    let fileWarn = 0;
+                    let fileLinkBreak = 0;
+                    
+                    const fileExt = file.name.split('.').pop().toLowerCase();
+                    const isCode = ["html", "js", "css", "md", "json", "csv"].includes(fileExt);
+                    if (!isCode) continue;
+                    
+                    let fileAssets = [];
+                    
+                    if (fileExt === "json") {
+                        try {
+                            const obj = JSON.parse(file.content);
+                            const strings = extractStringsFromJson(obj);
+                            strings.forEach(str => {
+                                if (['.png', '.jpg', '.jpeg', '.gif', '.mp3', '.wav', '.ogg'].some(ext => str.toLowerCase().endsWith(ext))) {
+                                    fileAssets.push(str);
+                                }
+                            });
+                        } catch {
+                            fileDanger = fileDanger + 1;
+                        }
+                    } else if (fileExt === "csv") {
+                        const csvLines = file.content.split(/\\r?\\n/);
+                        csvLines.forEach(line => {
+                            const cells = splitCsvLine(line);
+                            cells.forEach(cell => {
+                                if (['.png', '.jpg', '.jpeg', '.gif', '.mp3', '.wav', '.ogg'].some(ext => cell.toLowerCase().endsWith(ext))) {
+                                    fileAssets.push(cell);
+                                }
+                            });
+                        });
+                    } else if (fileExt === "md") {
+                        const linkRegex = /\[[^\]]*\]\(([^)]+)\)/g;
+                        let match;
+                        let lastIdx = -1;
+                        while ((match = linkRegex.exec(file.content)) !== null) {
+                            if (linkRegex.lastIndex === lastIdx) break;
+                            lastIdx = linkRegex.lastIndex;
+                            const path = match[1].trim();
+                            if (['.png', '.jpg', '.jpeg', '.gif', '.mp3', '.wav', '.ogg'].some(ext => path.toLowerCase().endsWith(ext)) && !new RegExp('^(https?:|mailto:|#)', 'i').test(path)) {
+                                fileAssets.push(path);
+                            }
+                        }
+                    } else {
+                        const imgRegex = /["']([^"']+\.(?:png|jpg|jpeg|gif))["']/gi;
+                        let match;
+                        let lastIdxImg = -1;
+                        while ((match = imgRegex.exec(file.content)) !== null) {
+                            if (imgRegex.lastIndex === lastIdxImg) break;
+                            lastIdxImg = imgRegex.lastIndex;
+                            if (!new RegExp('^(https?:|mailto:|#)', 'i').test(match[1])) fileAssets.push(match[1]);
+                        }
+                        const audioRegex = /["']([^"']+\.(?:mp3|wav|ogg))["']/gi;
+                        let lastIdxAudio = -1;
+                        while ((match = audioRegex.exec(file.content)) !== null) {
+                            if (audioRegex.lastIndex === lastIdxAudio) break;
+                            lastIdxAudio = audioRegex.lastIndex;
+                            if (!new RegExp('^(https?:|mailto:|#)', 'i').test(match[1])) fileAssets.push(match[1]);
+                        }
+                    }
+                    
+                    fileAssets = [...new Set(fileAssets)];
+                    
+                    for (let path of fileAssets) {
+                        const basename = path.split('/').pop().split('\\\\').pop();
+                        const matchUrl = allAssetsInFolder.find(p => p.toLowerCase().endsWith(basename.toLowerCase()));
+                        
+                        if (!matchUrl) {
+                            fileLinkBreak = fileLinkBreak + 1;
+                            totalLinkBreak = totalLinkBreak + 1;
+                            continue;
+                        }
+                        
+                        const sizes = parseAllRenderSizes(file.content, basename);
+                        if (sizes.length > 0) {
+                            try {
+                                const imgUrl = window.location.protocol === 'file:' ? `http://localhost:8080/${matchUrl}` : `/${matchUrl}`;
+                                const size = await getImageSizeFromUrl(imgUrl);
+                                let assetDanger = false;
+                                let assetWarn = false;
+                                sizes.forEach(spec => {
+                                    if (size.w < spec.width || size.h < spec.height) {
+                                        assetDanger = true;
+                                    } else if (size.w !== spec.width || size.h !== spec.height) {
+                                        assetWarn = true;
+                                    }
+                                });
+                                
+                                if (assetDanger) {
+                                    fileDanger = fileDanger + 1;
+                                    totalDanger = totalDanger + 1;
+                                } else if (assetWarn) {
+                                    fileWarn = fileWarn + 1;
+                                    totalWarn = totalWarn + 1;
+                                } else {
+                                    totalSuccess = totalSuccess + 1;
+                                }
+                            } catch {
+                                fileLinkBreak = fileLinkBreak + 1;
+                                totalLinkBreak = totalLinkBreak + 1;
+                            }
+                        } else {
+                            totalSuccess = totalSuccess + 1;
+                        }
+                    }
+                    
+                    fileReports.push({
+                        path: file.path,
+                        name: file.name,
+                        danger: fileDanger,
+                        warn: fileWarn,
+                        linkBreak: fileLinkBreak
+                    });
+                }
+                
+                tableBody.innerHTML = "";
+                if (fileReports.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                                プロジェクトに検証可能なコードファイルがありません
+                            </td>
+                        </tr>
+                    `;
+                } else {
+                    fileReports.forEach(report => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td><strong style="color: var(--text-light);">${report.name}</strong><br><span style="font-size:0.7rem; color:var(--text-muted);">${report.path}</span></td>
+                            <td><span class="pill-badge ${report.danger > 0 ? 'danger' : 'zero'}">${report.danger}</span></td>
+                            <td><span class="pill-badge ${report.warn > 0 ? 'warn' : 'zero'}">${report.warn}</span></td>
+                            <td><span class="pill-badge ${report.linkBreak > 0 ? 'danger' : 'zero'}">${report.linkBreak}</span></td>
+                            <td>
+                                <button class="file-link-btn" onclick="openFileInScanner('${report.path}')">診断詳細</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(tr);
+                    });
+                }
+                
+                document.getElementById("statDangerCount").innerText = totalDanger;
+                document.getElementById("statWarnCount").innerText = totalWarn;
+                document.getElementById("statLinkBreakCount").innerText = totalLinkBreak;
+                document.getElementById("statSuccessCount").innerText = totalSuccess;
+                
+                let score = 100;
+                const totalIssues = totalDanger * 15 + totalLinkBreak * 10 + totalWarn * 5;
+                score = Math.max(0, 100 - totalIssues);
+                
+                document.getElementById("scoreValue").innerText = score;
+                
+                const circle = document.getElementById("scoreCircleBar");
+                if (circle) {
+                    const offset = 345.5 - (345.5 * score) * 0.01;
+                    circle.style.strokeDashoffset = offset;
+                    
+                    if (score >= 90) {
+                        circle.style.stroke = "var(--success)";
+                    } else if (score >= 70) {
+                        circle.style.stroke = "var(--primary)";
+                    } else {
+                        circle.style.stroke = "var(--danger)";
+                    }
+                }
+                
+                if (progressContainer) progressContainer.style.display = "none";
+                renderDashboardUnusedAssets(allAssetsInFolder, projectFiles);
+                
+            } catch (err) {
+                if (progressContainer) progressContainer.style.display = "none";
+                console.error("プロジェクトスキャンエラー:", err);
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: var(--danger); padding: 2rem;">
+                            スキャン実行中にエラーが発生しました: ${err.message}
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // ダッシュボード用の未使用アセット表示
+        function renderDashboardUnusedAssets(assets, files) {
+            const existingUnused = document.getElementById("dashboardUnusedPanel");
+            if (existingUnused) existingUnused.remove();
+            
+            const unusedList = [];
+            assets.forEach(assetPath => {
+                const basename = assetPath.split("/").pop().split("\\\\").pop();
+                let isUsed = false;
+                
+                for (let file of files) {
+                    if (file.content.toLowerCase().includes(basename.toLowerCase())) {
+                        isUsed = true;
+                        break;
+                    }
+                }
+                
+                if (!isUsed) {
+                    unusedList.push(assetPath);
+                }
+            });
+            
+            if (unusedList.length === 0) return;
+            
+            const dashboardContainer = document.querySelector(".dashboard-container");
+            if (!dashboardContainer) return;
+            
+            const unusedPanel = document.createElement("div");
+            unusedPanel.id = "dashboardUnusedPanel";
+            unusedPanel.className = "file-list-table-container";
+            unusedPanel.style.marginTop = "2rem";
+            
+            let html = `
+                <div class="table-title">
+                    <span style="color: var(--accent);"> プロジェクトの未使用アセット (クリーンアップ推奨: ${unusedList.length})</span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.4;">
+                    プロジェクトに存在しますが、いずれのプログラムファイル(HTML/CSS/JS)ef参照されていない画像や音声です<br>
+                    プロジェクト容量削減のため、削除またはは移動を推奨します
+                </div>
+                <div class="font-list-card" style="max-height: 250px; overflow-y: auto; border-color: rgba(139, 92, 246, 0.15); padding: 1rem;">
+                    ${unusedList.map(path => `・ ${path}`).join("<br>")}
+                </div>
+            `;
+            unusedPanel.innerHTML = html;
+            dashboardContainer.appendChild(unusedPanel);
+        }
+
+        // ダッシュボードから個別詳細へのジャン
+        function openFileInScanner(filePath) {
+            const file = projectFiles.find(f => f.path === filePath);
+            if (!file) return;
+            
+            codeContent = file.content;
+            currentFileName = file.name;
+            currentFileType = file.name.split('.').pop().toLowerCase();
+            
+            switchTab('drop');
+            
+            const badge = document.getElementById('codeFileBadge');
+            badge.innerText = `${file.name}`;
+            badge.style.display = 'inline-block';
+            document.getElementById('codeDropZone').classList.add('success');
+            
+            scanAssets(codeContent);
+            showToast(`ファイル ${file.name} を個別詳細検証で開きました`);
+        }
+
+        // 監視サーバとの連携・ポリング処
         const statusUrl = window.location.protocol === 'file:' 
             ? 'http://localhost:8080/api/status' 
             : '/api/status';
         let isMonitorActive = false;
-        let lastCheckTime = 0.0; // 最後に同期したファイル更新日時
+        let lastCheckTime = 0.0; 
 
         function checkServerStatus() {
+            const statusEl = document.getElementById('monitorStatus');
+            const textEl = document.getElementById('monitorStatusText');
+            
+            if (!statusEl || !textEl) {
+                console.error("スタス要が見つかりません");
+                return;
+            }
+
             fetch(`${statusUrl}?last_check=${lastCheckTime}`)
                 .then(response => {
-                    if (!response.ok) throw new Error("Server not responding");
+                    if (!response.ok) throw new Error("応答エラー");
                     return response.json();
                 })
                 .then(data => {
-                    updateMonitorUI(true, data.monitoring_path);
+                    if (!isMonitorActive) {
+                        statusEl.classList.add('connected');
+                        isMonitorActive = true;
+                        showToast("監視サーバと接続しました。フォルダの自動監視を開始します");
+                        syncProjectAssets();
+                    }
+                    textEl.innerText = `自動監視：接続完了 (${data.monitoring_path || 'ローカル'})`;
                     
-                    // サーバー側の最新タイムスタンプを記憶
                     if (data.last_check) {
                         lastCheckTime = data.last_check;
                     }
                     
-                    // ファイルが変更された場合
                     if (data.modified && data.code_content) {
                         codeContent = data.code_content;
+                        currentFileName = data.target_file_name;
+                        currentFileType = data.target_file_name.split('.').pop().toLowerCase();
                         
-                        // バッジ表示を「自動リロード」に更新
                         const badge = document.getElementById('codeFileBadge');
-                        badge.innerText = `${data.target_file_name} (自動監視中)`;
-                        badge.style.display = 'inline-block';
-                        document.getElementById('codeDropZone').classList.add('success');
+                        if (badge) {
+                            badge.innerText = `${data.target_file_name} (自動監視中)`;
+                            badge.style.display = 'inline-block';
+                        }
+                        const zone = document.getElementById('codeDropZone');
+                        if (zone) {
+                            zone.classList.add('success');
+                        }
                         
-                        // アセット抽出とスキャンを再実行
                         scanAssets(codeContent);
+                        showToast(`ファクトスキャナ${data.target_file_name} の変更を検して自動更新しました`);
                         
-                        showToast(`ファクトスキャナー：${data.target_file_name} の変更を検出して自動更新しました！`);
+                        const dbTab = document.getElementById("tabContentDashboard");
+                        if (dbTab && dbTab.style.display !== "none") {
+                            runProjectScan();
+                        }
                     }
                 })
                 .catch(err => {
-                    updateMonitorUI(false);
+                    statusEl.classList.remove('connected');
+                    textEl.innerText = `自動監視：未接続 (${err.message})`;
+                    isMonitorActive = false;
                 });
         }
 
-        function updateMonitorUI(connected, path) {
-            const statusEl = document.getElementById('monitorStatus');
-            const textEl = document.getElementById('monitorStatusText');
-            
-            if (connected) {
-                if (!isMonitorActive) {
-                    statusEl.classList.add('connected');
-                    isMonitorActive = true;
-                    showToast("監視サーバーと接続しました。フォルダの自動監視を開始します。");
+        // 監視サーバのアセット自動同期期
+        async function syncProjectAssets() {
+            if (!isMonitorActive) return;
+            try {
+                const scanUrl = window.location.protocol === 'file:' ? 'http://localhost:8080/api/project-scan' : '/api/project-scan';
+                const response = await fetch(scanUrl);
+                if (response.ok) {
+                    const data = await response.json();
+                    allAssetsInFolder = data.assets || [];
+                    if (codeContent) {
+                        scanAssets(codeContent);
+                    }
                 }
-                textEl.innerText = `自動監視：接続完了 (${path || 'ローカル'})`;
-            } else {
-                if (isMonitorActive || textEl.innerText.includes('未接続')) {
-                    statusEl.classList.remove('connected');
-                    textEl.innerText = "自動監視：オフライン";
-                    isMonitorActive = false;
-                }
+            } catch (err) {
+                console.error("アセット同期エラー:", err);
             }
         }
 
-        // 1秒ごとに監視サーバーへ問い合わせを実行
         setInterval(checkServerStatus, 1000);
     </script>
 </body>

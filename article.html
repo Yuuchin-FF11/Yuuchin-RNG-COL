@@ -342,9 +342,36 @@
                              }
                          }, 100);
                      }
+
+                     // ページ訪問時のアクセスログを非同期で送信
+                     logAccess();
  
                  })
                  .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
+         }
+
+         /**
+          * ページ訪問時のアクセスログを非同期で送信
+          */
+         async function logAccess() {
+             try {
+                 const params = new URLSearchParams({
+                     action: 'log',
+                     pageTitle: document.title,
+                     pageUrl: window.location.href,
+                     referrer: document.referrer || "直接入力/ブックマーク",
+                     userAgent: navigator.userAgent,
+                     language: navigator.language,
+                     screenResolution: `${window.screen.width}x${window.screen.height}`
+                 });
+
+                 await fetch(`${GAS_API_URL}?${params.toString()}`, {
+                     method: 'GET',
+                     mode: 'cors'
+                 });
+             } catch (error) {
+                 console.warn("Logger connection skipped:", error);
+             }
          }
 
          const backToTopBtn = document.getElementById('fixed-back-to-top');

@@ -39,18 +39,26 @@ let recognition = null;
 let isListening = false;
 let shouldBeListening = false;
 let isSpeechSynthesisActive = false;
+let isSpeechSynthesisActiveStartTime = 0; // isSpeechSynthesisActiveがtrueになった時刻を記録
 let lastErrorTime = 0;
 let lastErrorType = '';
 let isStarting = false;
 let lastStartAttemptTime = 0;
 let lastStartSuccessTime = 0;
 let consecutiveErrorCount = 0;
+let lastPreventiveRebuildTime = 0; // 定期予防リビルドの最終実行時刻
 
 // 音声合成（読み上げ）の状態を切り替えるセッター関数。
 // OFFになった際にマイクが意図せず停止していれば自動復帰させる🐾
 function setSpeechSynthesisActive(active) {
     isSpeechSynthesisActive = active;
-    if (!active) {
+    if (active) {
+        isSpeechSynthesisActiveStartTime = Date.now(); // ロック開始時刻を記録
+        if (window.micRestartTimeoutId) {
+            clearTimeout(window.micRestartTimeoutId);
+            window.micRestartTimeoutId = null;
+        }
+    } else {
         if (shouldBeListening && !isListening) {
             console.log('Speech recognition was stopped during SpeechSynthesis. Restarting now...🐾');
             if (typeof window.reconnectSpeechRecognition === 'function') {
@@ -116,18 +124,19 @@ class ReadAloudManager {
 
     speak(chat) {
         if (!this.enableCheckbox || !this.enableCheckbox.checked) {
-            return;
+            return false;
         }
 
         if (chat.isBroadcaster) {
-            return;
+            return false;
         }
 
         const textsToSpeak = this.prepareTexts(chat);
-        if (textsToSpeak.length === 0) return;
+        if (textsToSpeak.length === 0) return false;
 
         this.queue.push(...textsToSpeak);
         this.processQueue();
+        return true;
     }
 
     async speakVoiceVox(text, speakerId) {
@@ -724,20 +733,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // サイレントオーディオ再生によるバックグラウンドタブのスロットリング回避
+    // AudioContextで無音のオシレーターを常時再生し、ブラウザに「音声再生中のタブ」と認識させる。
+    // 音声再生中のタブはsetIntervalのスロットリングが免除されるため、
+    // ハートビートや予防リビルドが設計通りの間隔で動作する。
+    let silentOscillatorStarted = false;
+    function startSilentAudio() {
+        if (silentOscillatorStarted || !effectAudioCtx || effectAudioCtx.state !== 'running') return;
+        try {
+            const oscillator = effectAudioCtx.createOscillator();
+            const gainNode = effectAudioCtx.createGain();
+            gainNode.gain.value = 0; // 完全無音
+            oscillator.connect(gainNode);
+            gainNode.connect(effectAudioCtx.destination);
+            oscillator.start();
+            silentOscillatorStarted = true;
+            console.log('Silent audio started for background tab throttling prevention.');
+        } catch(e) {
+            console.warn('Failed to start silent audio:', e);
+        }
+    }
+
     function unlockEffectAudioCtx() {
         if (effectAudioCtx && effectAudioCtx.state === 'suspended') {
             effectAudioCtx.resume().catch(() => {});
-            console.log('AudioContext アンロック完了🐾');
+            console.log('AudioContext アンロック完了');
         }
+        startSilentAudio();
     }
     document.addEventListener('click', unlockEffectAudioCtx);
     document.addEventListener('keydown', unlockEffectAudioCtx);
 
-    // AudioContext のバックグラウンド・サスペンド復帰用🐾
+    // AudioContext のバックグラウンド・サスペンド復帰用
     setInterval(() => {
         if (effectAudioCtx && effectAudioCtx.state === 'suspended') {
             effectAudioCtx.resume().catch(() => {});
         }
+        startSilentAudio();
     }, 10000);
 
     function playEffectSound(soundNum, volume) {
@@ -1217,8 +1249,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const startSpeechFallback = () => {
                     if (!hasTriggeredSpeech) {
                         hasTriggeredSpeech = true;
+                        let queued = false;
                         if (readAloudManager) {
-                            readAloudManager.speak(chatObj);
+                            queued = readAloudManager.speak(chatObj);
+                        }
+                        // 読み上げがキューに入らなかった場合（読み上げ無効、配信者コメント等）、
+                        // isSpeechSynthesisActive を確実にfalseに戻してマイクのソフトミュートを解除する
+                        if (!queued) {
+                            setSpeechSynthesisActive(false);
                         }
                     }
                 };
@@ -1537,6 +1575,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         chatLogList.insertBefore(logItem, chatLogList.firstChild);
+
+        // DOM要素の無限蓄積によるパフォーマンス劣化を防止（最大150件に制限）
+        while (chatLogList.children.length > 150) {
+            chatLogList.removeChild(chatLogList.lastChild);
+        }
     }
 
     // 外部からの実チャットを受信
@@ -1910,35 +1953,134 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnMicToggle.addEventListener('click', () => {
             if (shouldBeListening) {
-                stopSpeechRecognition();
+                // OFF操作: UIを即座に更新し、recognitionが壊れていても見た目が反映されるようにする
+                shouldBeListening = false;
+                isStarting = false;
+                consecutiveErrorCount = 0;
+                if (micDot) micDot.classList.remove('active');
+                if (micBtnText) micBtnText.textContent = 'マイク音声認識: OFF';
+                if (micStatus) {
+                    micStatus.textContent = '音声認識は停止しています。';
+                    micStatus.style.color = 'var(--text-muted)';
+                }
+                // recognitionの状態が壊れている可能性があるため、リビルドしてから停止
+                try {
+                    if (recognition) {
+                        recognition.onstart = null;
+                        recognition.onend = null;
+                        recognition.onerror = null;
+                        recognition.onresult = null;
+                        try { recognition.abort(); } catch(e) {}
+                        recognition = null;
+                    }
+                } catch(e) { console.warn('Failed to clean up recognition on OFF:', e); }
             } else {
+                // ON操作: 常にクリーンな状態から開始するため強制リビルド
+                if (micDot) micDot.classList.add('active');
+                if (micBtnText) micBtnText.textContent = 'マイク音声認識: ON';
+                if (micStatus) {
+                    micStatus.textContent = 'マイク起動中...';
+                    micStatus.style.color = 'var(--accent-color)';
+                }
+                // 壊れたインスタンスが残っている可能性があるため、完全リビルドしてから開始
+                initSpeechRecognition();
                 startSpeechRecognition();
             }
         });
 
         // マイク稼働状態の自己修復・監視用ハートビートタイマー🐾
         setInterval(() => {
-            if (!shouldBeListening || isSpeechSynthesisActive) return;
             const now = Date.now();
 
+            // isSpeechSynthesisActive の最大ロック時間セーフティ（60秒）
+            // 読み上げ中のソフトミュートは維持するが、60秒以上trueのままなら異常としてフラグを強制解除する
+            if (isSpeechSynthesisActive && isSpeechSynthesisActiveStartTime > 0) {
+                const lockDuration = now - isSpeechSynthesisActiveStartTime;
+                if (lockDuration > 60000) {
+                    console.warn(`Heartbeat: isSpeechSynthesisActive has been locked for ${Math.round(lockDuration / 1000)}s. Force releasing.`);
+                    setSpeechSynthesisActive(false);
+                }
+            }
+
+            if (!shouldBeListening || isSpeechSynthesisActive) return;
+
+            // SpeechRecognition の定期予防リビルド（20分ごと）
+            // バックグラウンドで長時間動いているとGoogleサーバーとの接続が劣化するため、
+            // 壊れる前に予防的にインスタンスを作り直す
+            if (isListening && lastStartSuccessTime > 0 && (now - lastStartSuccessTime) > 20 * 60 * 1000) {
+                if ((now - lastPreventiveRebuildTime) > 20 * 60 * 1000) {
+                    console.log('Heartbeat: Preventive rebuild of SpeechRecognition (20min interval).');
+                    lastPreventiveRebuildTime = now;
+                    initSpeechRecognition();
+                    reconnectSpeechRecognition();
+                    return;
+                }
+            }
+
             if (!isListening) {
-                // 起動開始してから3秒経っても onstart が発火しない場合は膠着とみなして強制リビルド復帰🐾
+                // 起動開始してから3秒経っても onstart が発火しない場合は膠着とみなして強制リビルド復帰
                 if (isStarting && (now - lastStartAttemptTime) > 3000) {
-                    console.log('Heartbeat: Speech recognition start timed out. Rebuilding and recovering...🐾');
+                    console.log('Heartbeat: Speech recognition start timed out. Rebuilding and recovering...');
                     initSpeechRecognition();
                     reconnectSpeechRecognition();
                 } else if (!isStarting) {
-                    console.log('Heartbeat: Speech recognition should be running but is stopped. Recovering...🐾');
+                    console.log('Heartbeat: Speech recognition should be running but is stopped. Recovering...');
                     reconnectSpeechRecognition();
                 }
             }
-        }, 4000); // 4秒ごとに生存チェック🐾
+        }, 4000); // 4秒ごとに生存チェック
     } else if (btnMicToggle) {
         if (micStatus) {
             micStatus.textContent = 'お使いのブラウザは音声認識をサポートしていません。ChromeまたはEdgeをご使用ください🐾';
         }
         btnMicToggle.disabled = true;
     }
+
+    // ==========================================================================
+    // バックグラウンドタブ復帰時の強制リカバリー (visibilitychange)
+    // ==========================================================================
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            console.log('Tab became visible. Running recovery check...');
+
+            // isSpeechSynthesisActive フラグが長時間スタックしていたら強制解除
+            if (isSpeechSynthesisActive && isSpeechSynthesisActiveStartTime > 0) {
+                const lockDuration = Date.now() - isSpeechSynthesisActiveStartTime;
+                if (lockDuration > 30000) {
+                    console.warn(`Visibility recovery: isSpeechSynthesisActive stuck for ${Math.round(lockDuration / 1000)}s. Force releasing.`);
+                    setSpeechSynthesisActive(false);
+                }
+            }
+
+            // SpeechRecognition が動いているべきなのに停止していたら強制リビルド復帰
+            if (SpeechRecognition && shouldBeListening && !isListening) {
+                console.log('Visibility recovery: SpeechRecognition should be running but is stopped. Rebuilding...');
+                initSpeechRecognition();
+                reconnectSpeechRecognition();
+            }
+
+            // SpeechRecognition が「動いている」状態でも、内部状態が壊れている可能性がある。
+            // 最後にonstartが成功してから10分以上経っていたら予防的にリビルドする
+            if (SpeechRecognition && shouldBeListening && isListening && lastStartSuccessTime > 0) {
+                const sinceLastSuccess = Date.now() - lastStartSuccessTime;
+                if (sinceLastSuccess > 10 * 60 * 1000) {
+                    console.log(`Visibility recovery: Last successful start was ${Math.round(sinceLastSuccess / 60000)}min ago. Preventive rebuild.`);
+                    initSpeechRecognition();
+                    reconnectSpeechRecognition();
+                }
+            }
+
+            // AudioContext のサスペンド状態を解除
+            if (typeof effectAudioCtx !== 'undefined' && effectAudioCtx && effectAudioCtx.state === 'suspended') {
+                effectAudioCtx.resume().catch(() => {});
+            }
+
+            // SpeechSynthesis の resume
+            if (window.speechSynthesis) {
+                try { window.speechSynthesis.resume(); } catch(e) {}
+            }
+        }
+    });
 
     // ==========================================================================
     // クイックテキスト返答フォーム制御

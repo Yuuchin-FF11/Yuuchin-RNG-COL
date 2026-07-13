@@ -339,9 +339,37 @@
                              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                          }, 100);
                      }
+
+                     // Send access log asynchronously
+                     logAccess();
                  })
                  .catch(e => contentDiv.innerHTML = `<h2>Error</h2><p>${e}</p>`);
          }
+
+         /**
+          * Send access log asynchronously upon page visit
+          */
+         async function logAccess() {
+             try {
+                 const params = new URLSearchParams({
+                     action: 'log',
+                     pageTitle: document.title,
+                     pageUrl: window.location.href,
+                     referrer: document.referrer || "直接入力/ブックマーク",
+                     userAgent: navigator.userAgent,
+                     language: navigator.language,
+                     screenResolution: `${window.screen.width}x${window.screen.height}`
+                 });
+
+                 await fetch(`${GAS_API_URL}?${params.toString()}`, {
+                     method: 'GET',
+                     mode: 'cors'
+                 });
+             } catch (error) {
+                 console.warn("Logger connection skipped:", error);
+             }
+         }
+
          const backToTopBtn = document.getElementById('fixed-back-to-top');
          if (backToTopBtn) {
              window.addEventListener('scroll', () => {

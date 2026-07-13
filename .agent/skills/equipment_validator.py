@@ -2,7 +2,7 @@ import os
 import re
 import sys
 
-# FFXI 100%正確な公式裏付け装備データベース 🐾
+# FFXI 100%正確な公式裏付け装備データベース
 EQUIPMENT_DB = {
     # コルセアエンピリアン+3 (シャスー+3)
     "シャスーカバリア+3": {"dt": 10, "macc": 61, "meva": 99, "wsd": 0},
@@ -11,23 +11,23 @@ EQUIPMENT_DB = {
     "シャスーキュロット+3": {"dt": 12, "macc": 62, "meva": 125, "wsd": 0},
     "シャスーボティエ+3": {"dt": 0, "macc": 60, "meva": 112, "wsd": 0},
 
-    # ニャメ装束 Rank30 (Type B) 🐾
+    # ニャメ装束 Rank30 (Type B)
     "ニャメヘルム": {"dt": 7, "macc": 40, "meva": 86, "wsd": 11},
     "ニャメメイル": {"dt": 9, "macc": 40, "meva": 86, "wsd": 13},
     "ニャメガントレ": {"dt": 7, "macc": 40, "meva": 86, "wsd": 11},
     "ニャメフランチャ": {"dt": 8, "macc": 40, "meva": 86, "wsd": 12},
     "ニャメソルレット": {"dt": 7, "macc": 40, "meva": 86, "wsd": 11},
 
-    # 無シリーズ 🐾
+    # 無シリーズ
     "無の喉輪": {"dt": 0, "macc": 40, "meva": 0, "wsd": 10},
     "無の喉輪+1": {"dt": 0, "macc": 30, "meva": 0, "wsd": 7},
     "無の喉輪+2": {"dt": 0, "macc": 40, "meva": 0, "wsd": 10},
     "無の腰当": {"dt": 0, "macc": 15, "meva": 0, "wsd": 5},
 
-    # 盾 🐾
+    # 盾
     "ヌスクシールド": {"dt": 0, "macc": 0, "meva": 0, "wsd": 0},
 
-    # その他主要装備 🐾
+    # その他主要装備
     "王将の手袋": {"dt": 20, "macc": 40, "meva": 60, "wsd": 0},
     "カムラスマント": {"dt": 10, "macc": 0, "meva": 0, "wsd": 10},
     "エパミノダスリング": {"dt": 0, "macc": 0, "meva": 0, "wsd": 5},
@@ -43,7 +43,7 @@ def validate_file(filepath):
         print(f"Error: File not found: {filepath}")
         return
 
-    print(f"--- FFXI 装備ステータス自動検証を開始します: {os.path.basename(filepath)} 🐾 ---")
+    print(f"--- FFXI 装備ステータス自動検証を開始します: {os.path.basename(filepath)} ---")
     
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()

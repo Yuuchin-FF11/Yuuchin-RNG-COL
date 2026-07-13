@@ -9,7 +9,7 @@ WIKI_DOMAIN = "wiki.ffo.jp"
 
 def check_url(url, expected_title=None):
     try:
-        # 規制を避けるため、標準的なブラウザのUser-Agentを設定 🐾
+        # 規制を避けるため、標準的なブラウザのUser-Agentを設定
         req = urllib.request.Request(
             url, 
             headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
@@ -20,12 +20,12 @@ def check_url(url, expected_title=None):
             
             html = response.read().decode('utf-8', errors='ignore')
             
-            # タイトルタグの抽出 🐾
+            # タイトルタグの抽出
             title_match = re.search(r'<title>(.*?)</title>', html, re.IGNORECASE | re.DOTALL)
             if title_match:
                 title = title_match.group(1).strip()
                 if expected_title:
-                    # タイトルに期待されるキーワードが含まれているかチェック 🐾
+                    # タイトルに期待されるキーワードが含まれているかチェック
                     if expected_title in title:
                         return True, f"OK: {title}"
                     else:
@@ -40,12 +40,12 @@ def validate_links(filepath):
         print(f"Error: File not found: {filepath}")
         return
 
-    print(f"--- 用語辞典リンク自動検証を開始します: {os.path.basename(filepath)} 🐾 ---")
+    print(f"--- 用語辞典リンク自動検証を開始します: {os.path.basename(filepath)} ---")
     
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Markdownリンクの正規表現 [テキスト](URL) 🐾
+    # Markdownリンクの正規表現 [テキスト](URL)
     links = re.findall(r'\[([^\]]+)\]\((https?://[^\)]+)\)', content)
     
     total = len(links)
@@ -58,20 +58,20 @@ def validate_links(filepath):
             print(f"検証中: 【{text}】 -> {url}")
             ok, msg = check_url(url, text)
             if ok:
-                print(f"  └ ✅ {msg}")
+                print(f"  └ [OK] {msg}")
                 success += 1
             else:
-                print(f"  └ ❌ 検証失敗: {msg}")
+                print(f"  └ [FAIL] 検証失敗: {msg}")
         else:
             print(f"検証中 (外部リンク): {url}")
             ok, msg = check_url(url)
             if ok:
-                print(f"  └ ✅ {msg}")
+                print(f"  └ [OK] {msg}")
                 success += 1
             else:
-                print(f"  └ ❌ 疎通失敗: {msg}")
+                print(f"  └ [FAIL] 疎通失敗: {msg}")
 
-    print(f"\n--- 検証完了: 成功 {success} / 全体 {total} 件 🐾 ---")
+    print(f"\n--- 検証完了: 成功 {success} / 全体 {total} 件 ---")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

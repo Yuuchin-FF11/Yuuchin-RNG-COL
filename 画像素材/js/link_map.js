@@ -186,6 +186,15 @@ export const linkMap = {
     "オノワイヤリング+1": "http://wiki.ffo.jp/html/35440.html",
     "ガズブレスレット+1": "http://wiki.ffo.jp/html/35439.html",
     "シーリチリング+1": "http://wiki.ffo.jp/html/35694.html",
+    "ファントムロール": "https://wiki.ffo.jp/html/3347.html",
+    "クイックドロー": "https://wiki.ffo.jp/html/3349.html",
+    "ランダムディール": "https://wiki.ffo.jp/html/3350.html",
+    "バスト": "https://wiki.ffo.jp/html/8968.html",
+    "Bust": "https://wiki.ffo.jp/html/8968.html",
+    "スネークアイ": "https://wiki.ffo.jp/html/12109.html",
+    "フォールド": "https://wiki.ffo.jp/html/12125.html",
+    "ウィニングストリーク": "https://wiki.ffo.jp/html/12127.html",
+    "ローデッドデッキ": "https://wiki.ffo.jp/html/12126.html",
 
     // --- 英語キーワード ---
     "Rostam": "https://wiki.ffo.jp/html/37235.html",
@@ -334,7 +343,14 @@ export const linkMap = {
     "Loricate Torque +1": "http://wiki.ffo.jp/html/34789.html",
     "Onowai Earring +1": "http://wiki.ffo.jp/html/35440.html",
     "Gazu Bracelet +1": "http://wiki.ffo.jp/html/35439.html",
-    "Chirich Ring +1": "http://wiki.ffo.jp/html/35694.html"
+    "Chirich Ring +1": "http://wiki.ffo.jp/html/35694.html",
+    "Phantom Roll": "https://wiki.ffo.jp/html/3347.html",
+    "Quick Draw": "https://wiki.ffo.jp/html/3349.html",
+    "Random Deal": "https://wiki.ffo.jp/html/3350.html",
+    "Snake Eye": "https://wiki.ffo.jp/html/12109.html",
+    "Fold": "https://wiki.ffo.jp/html/12125.html",
+    "Winning Streak": "https://wiki.ffo.jp/html/12127.html",
+    "Loaded Deck": "https://wiki.ffo.jp/html/12126.html"
 };
 
 // 略称・接頭辞マッピング（日本語・英語両対応）

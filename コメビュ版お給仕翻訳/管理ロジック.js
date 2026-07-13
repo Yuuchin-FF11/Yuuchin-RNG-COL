@@ -1807,36 +1807,50 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             recognition.onresult = async (event) => {
-                consecutiveErrorCount = 0; // 正常に聞き取れたら連続エラーをリセット🐾
-                lastErrorType = ''; // エラー状態をクリア🐾
-                if (isSpeechSynthesisActive) {
-                    console.log('Speech recognition ignored: SpeechSynthesis is currently active (soft-mute)🐾');
-                    return;
-                }
-                const rawText = event.results[event.results.length - 1][0].transcript.trim();
-                if (!rawText) return;
+                try {
+                    consecutiveErrorCount = 0; // 正常に聞き取れたら連続エラーをリセット
+                    lastErrorType = ''; // エラー状態をクリア
+                    if (isSpeechSynthesisActive) {
+                        console.log('Speech recognition ignored: SpeechSynthesis is currently active (soft-mute)');
+                        return;
+                    }
+                    const rawText = event.results[event.results.length - 1][0].transcript.trim();
+                    if (!rawText) return;
 
-                const resultText = applySpeechCorrection(rawText);
+                    const resultText = applySpeechCorrection(rawText);
 
-                if (micStatus) {
-                    micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
-                    micStatus.style.color = 'var(--accent-color)';
-                }
+                    if (micStatus) {
+                        micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
+                        micStatus.style.color = 'var(--accent-color)';
+                    }
 
-                const translatedText = await translateTextToEn(resultText);
-                sendBroadcasterTranslation(resultText, translatedText);
+                    const translatedText = await translateTextToEn(resultText);
+                    sendBroadcasterTranslation(resultText, translatedText);
 
-                if (micStatus) {
-                    micStatus.textContent = `字幕送信完了: 「${translatedText}」🐾`;
-                    micStatus.style.color = 'var(--success-color)';
-                }
-
-                setTimeout(() => {
-                    if (isListening && micStatus) {
-                        micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                    if (micStatus) {
+                        micStatus.textContent = `字幕送信完了: 「${translatedText}」`;
                         micStatus.style.color = 'var(--success-color)';
                     }
-                }, 3000);
+
+                    setTimeout(() => {
+                        if (isListening && micStatus) {
+                            micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                            micStatus.style.color = 'var(--success-color)';
+                        }
+                    }, 3000);
+                } catch (err) {
+                    console.error('Error in onresult processing:', err);
+                    if (micStatus) {
+                        micStatus.textContent = '翻訳処理中にエラーが発生しました。';
+                        micStatus.style.color = 'var(--error-color)';
+                    }
+                    setTimeout(() => {
+                        if (isListening && micStatus) {
+                            micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                            micStatus.style.color = 'var(--success-color)';
+                        }
+                    }, 3000);
+                }
             };
         }
 

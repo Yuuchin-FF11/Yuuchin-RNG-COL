@@ -440,15 +440,20 @@
                      const safeNickname = comment.nickname.replace(/</g, '&lt;').replace(/>/g, '&gt;');
                      const safeContent = comment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
                      
-                     return `
-                         <div class="comment-card">
-                             <div class="comment-meta">
-                                 <span class="comment-author"><i class="fa-solid fa-user"></i> ${safeNickname}</span>
-                                 <span class="comment-date">${date}</span>
-                             </div>
-                             <div class="comment-body">${safeContent}</div>
-                         </div>
-                     `;
+                      return `
+                          <div class="comment-card">
+                              <div class="comment-meta">
+                                  <span class="comment-author"><i class="fa-solid fa-user"></i> ${safeNickname}</span>
+                                  <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                      <span class="comment-date">${date}</span>
+                                      <button class="reply-btn" data-nickname="${safeNickname}" style="background: none; border: none; color: var(--accent-color); cursor: pointer; font-size: 0.8rem; padding: 0; display: flex; align-items: center; gap: 0.2rem; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+                                          <i class="fa-solid fa-reply"></i> Reply
+                                      </button>
+                                  </div>
+                              </div>
+                              <div class="comment-body">${safeContent}</div>
+                          </div>
+                      `;
                  }).join('');
              } catch (err) {
                  console.error('Error loading comments:', err);
@@ -471,13 +476,13 @@
 
                  if (!content) return;
 
-                 // NSFW Check🐾
+                 // NSFW Check
                  if (checkNsfwWords(nickname) || checkNsfwWords(content)) {
-                     showMessage('Please use polite language🐾', 'red');
+                     showMessage('Please use polite language', 'red');
                      return;
                  }
 
-                 // Rate Limit (60 seconds)🐾
+                 // Rate Limit (60 seconds)
                  const lastPostTime = localStorage.getItem('last_comment_time_' + file);
                  if (lastPostTime && (Date.now() - parseInt(lastPostTime)) < 60000) {
                      const remain = Math.ceil((60000 - (Date.now() - parseInt(lastPostTime))) / 1000);
@@ -503,7 +508,7 @@
 
                      if (error) throw error;
 
-                     // Gmail通知用のGASリクエスト送信（バックグラウンドで実行し、描画を妨げない）🐾
+                     // Gmail通知用のGASリクエスト送信（バックグラウンドで実行し、描画を妨げない）
                      try {
                          const gasParams = new URLSearchParams({
                              action: 'comment_notification',
@@ -545,7 +550,32 @@
              }, 5000);
          }
 
-         // Initial Load🐾
+          // Prepare reply and scroll to comment form
+          function prepareReply(nickname) {
+              if (commentContent) {
+                  const mention = `@${nickname} \n`;
+                  if (!commentContent.value.startsWith(`@${nickname} `)) {
+                      commentContent.value = mention + commentContent.value;
+                  }
+                  commentContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  commentContent.focus();
+              }
+          }
+
+          // Event delegation for reply button clicks
+          if (commentsList) {
+              commentsList.addEventListener('click', (e) => {
+                  const replyBtn = e.target.closest('.reply-btn');
+                  if (replyBtn) {
+                      const nickname = replyBtn.getAttribute('data-nickname');
+                      if (nickname) {
+                          prepareReply(nickname);
+                      }
+                  }
+              });
+          }
+
+         // Initial Load
          setTimeout(loadComments, 500);
     </script>
 </body>

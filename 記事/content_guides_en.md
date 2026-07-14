@@ -22,7 +22,7 @@ Please refer to each guide according to your goals.
 
 
 ### Odyssey Gaol
-* **[Odyssey Gaol Strategies (Coming Soon)](article_en.html?file=記事/odyssey_gaol_en.md)**
+* **[Odyssey Gaol Strategies](article_en.html?file=記事/odyssey_gaol_en.md)**
   Explains Ranger/Corsair ranged tactics and boss-specific strategies for high-difficulty content such as Veng+25.
 
 ---

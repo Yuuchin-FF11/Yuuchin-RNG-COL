@@ -172,7 +172,7 @@
     <script type="module">
         import { linkMap, keywordsJa, normalizeEquipmentName } from './画像素材/js/link_map.js';
         import { SUPABASE_URL, SUPABASE_ANON_KEY } from './画像素材/js/supabase_config.js';
-        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbx3tcuuAdd0KlOq35qv1lPbqUx3kI064F2_VBohfRdg9OZUYUwT-q6tdqgiPfe-K3dCQw/exec";
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzVIwoOsi-U6Iw5A_KHoWhyRIVHfbO6C_UDzPXWhGHrNIeiVUSsn5md2I18iDPCe5U8qA/exec";
 
         const urlParams = new URLSearchParams(window.location.search);
         const file = urlParams.get('file');
@@ -355,7 +355,7 @@
           */
          async function logAccess() {
              try {
-                 const params = new URLSearchParams({
+                 const payload = {
                      action: 'log',
                      pageTitle: document.title,
                      pageUrl: window.location.href,
@@ -363,11 +363,13 @@
                      userAgent: navigator.userAgent,
                      language: navigator.language,
                      screenResolution: `${window.screen.width}x${window.screen.height}`
-                 });
+                 };
 
-                 await fetch(`${GAS_API_URL}?${params.toString()}`, {
-                     method: 'GET',
-                     mode: 'cors'
+                 await fetch(GAS_API_URL, {
+                     method: 'POST',
+                     mode: 'cors',
+                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                     body: JSON.stringify(payload)
                  });
              } catch (error) {
                  console.warn("Logger connection skipped:", error);

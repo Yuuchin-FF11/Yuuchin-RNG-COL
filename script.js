@@ -303,14 +303,14 @@ function initBackToTop() {
 }
 
 // --- 管理者専用・アクセス履歴閲覧システム ---
-const GAS_API_URL = "https://script.google.com/macros/s/AKfycbx3tcuuAdd0KlOq35qv1lPbqUx3kI064F2_VBohfRdg9OZUYUwT-q6tdqgiPfe-K3dCQw/exec";
+const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzVIwoOsi-U6Iw5A_KHoWhyRIVHfbO6C_UDzPXWhGHrNIeiVUSsn5md2I18iDPCe5U8qA/exec";
 
 /**
  * ページ訪問時のアクセスログを非同期で送信
  */
 async function logAccess() {
     try {
-        const params = new URLSearchParams({
+        const payload = {
             action: 'log',
             pageTitle: document.title,
             pageUrl: window.location.href,
@@ -318,12 +318,14 @@ async function logAccess() {
             userAgent: navigator.userAgent,
             language: navigator.language,
             screenResolution: `${window.screen.width}x${window.screen.height}`
-        });
+        };
 
-        // GETリクエストでログを送信（プレフライトを回避し、CORSエラーを完全に防ぐ）
-        await fetch(`${GAS_API_URL}?${params.toString()}`, {
-            method: 'GET',
-            mode: 'cors'
+        // POSTで送信し、URLやブラウザ履歴・アクセスログに訪問情報を残さない
+        await fetch(GAS_API_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
         });
     } catch (error) {
         // メインサイトの表示や機能に一切影響を与えないよう、エラーは静かに無視します
@@ -444,14 +446,11 @@ function initAdminSystem() {
      * GASから閲覧履歴データを取得
      */
     async function fetchHistory(password) {
-        const params = new URLSearchParams({
-            action: 'get_history',
-            password: password
-        });
-
-        const response = await fetch(`${GAS_API_URL}?${params.toString()}`, {
-            method: 'GET',
-            mode: 'cors'
+        const response = await fetch(GAS_API_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'get_history', password })
         });
 
         if (!response.ok) throw new Error('Network response was not ok');

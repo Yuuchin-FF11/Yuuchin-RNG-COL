@@ -1,58 +1,531 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="FFXI Bismarck V2 — 目的から最短で攻略へ進むための試作トップページ">
-  <title>FFXI Bismarck V2 | 攻略・装備・ツール</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="v2.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KD054RHKQ8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KD054RHKQ8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <title>FF11遠隔ジョブに全振りしたタルの日常 ～狩人・コルセアの攻略と金策～</title>
+    <meta name="description" content="FF11で狩人とコルセアを極めるタルタルの冒険記録。エンドコンテンツから日常まで、遠隔アタッカーの視点で綴ります。">
+    <!-- OGP Settings -->
+    <meta property="og:title" content="FF11遠隔ジョブに全振りしたタルの日常 ～狩人・コルセアの攻略と金策～">
+    <meta property="og:description" content="FF11で狩人とコルセアを極めるタルタルの冒険記録。エンドコンテンツから日常まで、遠隔アタッカーの視点で綴ります。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yuuchin-ff11.github.io/Yuuchin-RNG-COL/">
+    <meta property="og:image" content="https://yuuchin-ff11.github.io/Yuuchin-RNG-COL/画像素材/images/hunter_image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Import Map for Gemini SDK -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-  <a class="skip" href="#main">本文へ移動</a>
-  <header class="header">
-    <a class="brand" href="./">FFXI <span>Bismarck</span><small>V2 preview</small></a>
-    <nav aria-label="主要メニュー"><a href="#start">はじめる</a><a href="#jobs">装備</a><a href="#endgame">攻略</a><a href="#tools">ツール</a></nav>
-    <a class="original" href="../index.html">現行版を見る</a>
-  </header>
-  <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">FFXI RANGED JOB GUIDES</p>
-        <h1 id="hero-title">いま必要な攻略へ、<br><em>最短で。</em></h1>
-        <p>狩人・コルセア特化の装備、金策、エンドコンテンツ攻略。<br>新規から現役プレイヤーまで、次にやることを迷わせないFF11ガイド。</p>
-        <div class="hero-actions"><a class="button primary" href="#start">目的から探す</a><a class="button ghost" href="../連携シミュレーター/index.html">連携シミュレーター</a></div>
-      </div>
-      <img src="../画像素材/images/コルセア_イメージイラスト.png" alt="コルセアのタルタル" class="hero-image">
-    </section>
+    <div id="particle-canvas-container">
+        <canvas id="particle-canvas"></canvas>
+    </div>
 
-    <section id="start" class="section route" aria-labelledby="route-title">
-      <p class="eyebrow">START HERE</p><h2 id="route-title">いまのあなたに合う入口</h2>
-      <div class="route-grid">
-        <a href="../article.html?file=記事/starter_guide.md" class="route-card beginner"><span>01</span><h3>完全新規</h3><p>サポートジョブ取得までの最短ルート</p><b>スタートダッシュガイド →</b></a>
-        <a href="../article.html?file=記事/beginner_guide.md" class="route-card returner"><span>02</span><h3>復帰・中級者</h3><p>99以降の目標と装備の整え方</p><b>復帰者ガイド →</b></a>
-        <a href="../article.html?file=記事/farming.md" class="route-card farming"><span>03</span><h3>まず金策したい</h3><p>ソロで進められる現代の稼ぎ方</p><b>金策ガイド →</b></a>
-        <a href="../article.html?file=記事/content_guides.md" class="route-card end"><span>04</span><h3>高難度を攻略したい</h3><p>ジェール・ソーティ・オデシー</p><b>攻略一覧 →</b></a>
-      </div>
-    </section>
+    <div id="common-header"></div>
 
-    <section id="jobs" class="section split" aria-labelledby="jobs-title">
-      <div><p class="eyebrow">GEAR GUIDES</p><h2 id="jobs-title">狩人とコルセアの<br>装備を詰める。</h2><p class="muted">入門からハイエンドまで。目的別に装備セット、オグメ、立ち回りを確認できます。</p></div>
-      <div class="guide-links"><a href="../article.html?file=記事/hunter_equip.md"><small>RANGER</small><strong>狩人 装備紹介</strong><span>→</span></a><a href="../article.html?file=記事/corsair_equip_beginner.md"><small>CORSAIR / BEGINNER</small><strong>コルセア 入門装備</strong><span>→</span></a><a href="../article.html?file=記事/corsair_equip.md"><small>CORSAIR / HIGH-END</small><strong>コルセア 理想装備</strong><span>→</span></a><a href="../article.html?file=記事/ranged_weapons.md"><small>WEAPONS</small><strong>遠隔武器の紹介</strong><span>→</span></a></div>
-    </section>
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="anniversary-banner fade-in-up">
+                    <img src="画像素材/images/anniversary_moogle.png" alt="Happy 24th Anniversary FFXI!" style="max-width: 100%; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 2px solid rgba(255, 215, 0, 0.3);">
+                </div>
+                <p class="anniversary-message fade-in-up" style="font-size: 1.1rem; color: #fdf6e3; background: rgba(0, 0, 0, 0.6); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #ffd700; text-align: left; line-height: 1.8;">
+                    FF11も今年で24年目となりました！<br>
+                    運営は公式のYouTubeライブで「今のところ30周年までは大丈夫そうです」と言っていたので、<br>
+                    まだまだたくさん楽しめるゲームとなるのは間違いないでしょう。<br>
+                    <br>
+                    けれどこのゲームは運営陣、プレイヤーの平均年齢がとても高いので、<br>
+                    みなさん体調等に気を付けて、この先の30周年に向けて頑張りましょう！
+                </p>
+                <h1 class="fade-in-up delay-1">FF11遠隔ジョブに全振りした<br>タルの日常</h1>
+                <p class="hero-description fade-in-up delay-2">
+                    現役プレイヤー、ビスマルクサーバーで活動中のタルタル「Yuuchin」のページです。<br>
+                    <br>
+                    FF11は2026年で24周年を迎え、今でも多くのサイトが存在しますが、<br>
+                    中には情報が古いままのものも少なくありません。<br>
+                    「今」のヴァナ・ディールの最新情報を届けたい、<br>
+                    そんな思いでこのサイトを作りました。<br>
+                    他では見つからないニッチな攻略情報や、<br>
+                    妥協なき装備構成などをコツコツと更新していきます。<br>
+                    <br>
+                    最近は新規プレイヤーさんや復帰者の方もジワジワと増えています。<br>
+                    最初はどうしてもソロプレイが多くなると思うので、<br>
+                    ソロでもできる金策や立ち回りなど、<br>
+                    少しでも冒険の手助けになるようなガイドページも用意しました。<br>
+                    <br>
+                    もし装備や攻略でわからない部分があれば、<br>
+                    YouTube配信のときにチャットで直接気軽に聞いてくださいね！
 
-    <section id="endgame" class="section feature" aria-labelledby="endgame-title">
-      <img src="../画像素材/images/gaol_v25_clear.jpg" alt="ジェールV25のクリア記録">
-      <div><p class="eyebrow">ENDGAME</p><h2 id="endgame-title">実戦で使える<br>高難度コンテンツ攻略。</h2><p>編成、強化、立ち位置、マクロまでをひとつの流れとして解説。</p><a class="text-link" href="../article.html?file=記事/odyssey_gaol.md">オデシー ジェール攻略を見る →</a><a class="text-link" href="../article.html?file=記事/sortie_corsair.md">ソーティ攻略を見る →</a></div>
-    </section>
+<br>
 
-    <section id="tools" class="section tools" aria-labelledby="tools-title"><p class="eyebrow">TOOLS</p><h2 id="tools-title">調べる時間を、戦う時間へ。</h2><a class="tool-card" href="../連携シミュレーター/index.html"><span>⚔</span><div><small>INTERACTIVE TOOL</small><h3>FFXI 連携逆引きシミュレーター</h3><p>武器種と作りたい連携属性から、WSの組み合わせを探せます。</p></div><b>開く →</b></a></section>
+</p>
+                <div class="fade-in-up delay-2" style="max-width: 800px; margin: 0 auto; position: relative;">
+                    <div class="scatter-photo" style="top: 250px; right: -260px; transform: rotate(10deg); width: 220px;">
+                        <img src="画像素材/images/white_dragon.jpg" alt="White Dragon">
+                    </div>
+                    <img src="画像素材/images/ark_angels.jpg" id="aa-photo" class="game-screenshot" alt="Ark Angels" style="margin-top: 0;">
+                </div>
+                <div class="scroll-indicator fade-in-up delay-2">
+                    <span>Targeting...</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
 
-    <section class="section updates" aria-labelledby="updates-title"><div><p class="eyebrow">LATEST UPDATES</p><h2 id="updates-title">最新の更新</h2></div><ol><li><time datetime="2026-07-14">07.14</time><a href="../article.html?file=記事/odyssey_gaol.md">ジェール攻略にサベッジブレード装備・被ダメカットの解説を追加</a></li><li><time datetime="2026-07-14">07.14</time><a href="../article.html?file=記事/sortie_corsair.md">ソーティ用コルセア究極連携マクロを更新</a></li><li><time datetime="2026-07-13">07.13</time><a href="../article.html?file=記事/corsair_equip.md">コルセア装備紹介にメリットポイント設定を追記</a></li></ol></section>
-  </main>
-  <footer><strong>FFXI Bismarck</strong><span>V2 comparison prototype</span><a href="../index.html">現行版に戻る</a></footer>
+        <section id="updates" class="content-section">
+            <div class="container" style="position: relative;">
+                <h2 class="section-title">What's New (更新履歴)</h2>
+                <div class="scatter-photo" style="top: 0; right: -200px; transform: rotate(12deg);">
+                    <img src="画像素材/images/floating_rocks.jpg" alt="Memory 1">
+                </div>
+                <div class="card glass-card">
+                    <ul id="whats-new-list" style="list-style: none; padding: 1rem 0.5rem; margin: 0;">
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.07.14</span>
+                            <div style="flex: 1;">
+                                <a href="article.html?file=記事/odyssey_gaol.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">「オデシー ジェール攻略」ページに、サベッジブレードWS装備セットおよびWS時における被ダメカット50%キープの重要性の解説を追加しました。</a><span class="new-badge">New</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.07.14</span>
+                            <div style="flex: 1;">
+                                <a href="article.html?file=記事/sortie_corsair.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">ソーティ用コルセア究極連携「極光」用マクロの解説を、マクロ1と2の最新2ポチ自動完結構成にアップデートしました。</a><span class="new-badge">New</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.07.13</span>
+                            <div style="flex: 1;">
+                                <a href="article.html?file=記事/odyssey_gaol.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">「オデシー ジェール攻略」ページを新規作成し、コルセアのジェール用基本装備（通常殴り装備）の解説を追加しました。</a><span class="new-badge">New</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.07.13</span>
+                            <div style="flex: 1;">
+                                <a href="article.html?file=記事/corsair_equip.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">コルセア装備紹介ページに、実戦で最も安定する「おすすめメリットポイント設定」の解説を追記しました。</a>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.06.11</span>
+                            <div style="flex: 1;">
+                                <span>連携シミュレーターのスマホ対応PWA化およびお気に入り保存UI機能の実装、および各記事ページへのご意見ご要望コメント欄を追加しました。</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.06.08</span>
+                            <div style="flex: 1;">
+                                <a href="article.html?file=記事/keyboard_controls.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">「キーボード操作の方法」の解説記事を作成しました。（操作キーの強調表示付き）</a>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.06.07</span>
+                            <div style="flex: 1;">
+                                <a href="article.html?file=記事/eminence_records_peculiar_monsters.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">エミネンス・レコードクエスト4「珍妙なモンスターを討伐せよ！」全15種 最短効率周回ルートガイドを追加いたしました🐾</a>
+                            </div>
+                        </li>
+                                                <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: flex-start;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px; flex-shrink: 0;">2026.06.01</span>
+                            <div style="flex: 1;">
+                                <a href="article.html?file=記事/limit_break_guide.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">ソロでもできる限界突破ガイド（レベル50〜99編）を更新しました</a>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.06.01</span>
+                            <a href="article.html?file=記事/ranged_weapons.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">遠隔武器（RMEAP＋Su武器など）全11種の徹底解説ガイドを追加（各WSや専用矢弾の最新用語辞典自動リンク対応）</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.06.01</span>
+                            <a href="article.html?file=記事/sortie_corsair_aminon.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">ソーティ・アミノン戦におけるコルセアの役割と装備・立ち回り解説を追加（最新の魔力防御/アブゾタック検証に対応）</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.31</span>
+                            <a href="article.html?file=記事/sortie_corsair_aminon.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">Aminon (Hard Mode) 攻略ページに踊り子（サポ竜）のジャンプTP・FMステップ・RフラTP回収・スパジャンのヘイト管理などの詳細戦術を追加しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.31</span>
+                            <a href="article.html?file=記事/sortie_corsair_aminon.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">Aminon (Hard Mode) 攻略ページにアブゾタック絶対成功条件（フラズル・闇スレ・魔命装備）や、踊り子ステップの隠れた仕様、超多忙な赤魔道士の戦闘役割などを追加しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.31</span>
+                            <a href="article.html?file=記事/sortie_corsair_aminon.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">Aminon (Hard Mode) コルセア特化立ち回り攻略ページに前提パーティ構成（サポ暗アブゾタックTP管理）や扉の角を活用した実戦的ポジショニングの詳細を追加しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.31</span>
+                            <a href="article.html?file=記事/sortie_corsair_aminon.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">ソーティ強Aminon戦におけるコルセアの開幕ロール回しや赤魔道士との弱体連携を含む特化立ち回り攻略ページを公開しました</a>
+                        </li>
+
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.29</span>
+                            <a href="article.html?file=記事/farming.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">新規・復帰者向け金策ガイドに、モグチケット【緑】を活用した三国Festive Moogle爆速スタートダッシュ金策手順を追記しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.27</span>
+                            <a href="article.html?file=記事/farming.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">中級者・復帰者向け最強金策（オデシー箱開け＆オーメン黒の残魂集め）を追記し、新キーワードの用語辞典自動リンク登録も完了しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.27</span>
+                            <a href="article.html?file=記事/farming.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">新規・復帰者向け最強の金策＆クリスタル競売ガイドを公開し、文章中キーワードの用語辞典自動リンク機能（プレミアム拡張）も実装しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.27</span>
+                            <a href="article.html?file=記事/hunter_equip.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">狩人・コルセアの全装備紹介ページのステータス目安アコーディオンを『STP・WSD・被ダメカット』の3大指標へスリム化・統一しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.27</span>
+                            <a href="article.html?file=記事/hunter_equip.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">狩人の遠隔物理WS装備のWSD合計値を物理上限枠を除外して+81%に再計算し修正しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.27</span>
+                            <a href="article.html?file=記事/corsair_equip.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">狩人・コルセア装備のニャメ装束表記（タイプB Rank30）とWSD計算を正しい仕様に修正しました</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.27</span>
+                            <a href="article.html?file=記事/hunter_gastraphetes.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">狩人のガストラフェテス専用装備紹介ページ（スナップ・通常STP・魔法WS極限装備）を新規公開し、アコーディオンの美麗デザイン化も実装しました。</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.26</span>
+                            <a href="article.html?file=記事/hunter_equip.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">狩人スナップ（射撃準備）＆通常遠隔（着弾）装備を追記し、各種個別装備の用語辞典単品リンク直行システムを実装しました。</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.17</span>
+                            <a href="article.html?file=記事/starter_guide.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">完全新規向けスタートダッシュガイド（サポジョブ取得まで）を公開しました。</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.13</span>
+                            <span>サイト全体のリンク最適化と記載内容の細かな修正を行いました。</span>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.11</span>
+                            <a href="article.html?file=記事/sortie_corsair.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">ソーティ攻略ガイドに各ボスごとの連携マクロ解説へのリンクを追加しました。</a>
+                        </li>
+
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.09</span>
+                            <a href="article.html?file=記事/beginner_guide.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">新規・復帰者向けガイド「マリグナス装備取得への道」を公開しました。</a>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.05.09</span>
+                            <span>装備ガイド内のリンクを用語辞典の最新URLに修正しました。</span>
+                        </li>
+                        <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.04.29</span>
+                            <a href="article.html?file=記事/corsair_equip_beginner.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">コルセア装備（ビギナー編）のクイックドロー装備などを更新しました。</a>
+                        </li>
+                        <li style="display: flex; flex-wrap: wrap;">
+                            <span style="color: var(--accent-color); font-weight: bold; margin-right: 1rem; min-width: 100px;">2026.04.27</span>
+                            <a href="article.html?file=記事/corsair_equip.md" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='inherit'">コルセア装備（理想・ハイエンド編）を公開しました。</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="beginner-start" class="content-section" style="padding-top: 0; padding-bottom: 3rem;">
+            <div class="container" style="display: flex; flex-direction: column; gap: 1rem;">
+                <a href="article.html?file=記事/starter_guide.md" class="card glass-card beginner-banner-link" style="background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1)); border: 1px solid rgba(255, 215, 0, 0.3);">
+                    <div class="beginner-banner-content">
+                        <div class="beginner-banner-text">
+                            <h3>完全新規プレイヤーはまずこちら！</h3>
+                            <p>右も左も分からない人向け！サポジョブ取得までの「最強のスタートダッシュ」ガイド。</p>
+                        </div>
+                        <div class="beginner-banner-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="article.html?file=記事/beginner_guide.md" class="card glass-card beginner-banner-link">
+                    <div class="beginner-banner-content">
+                        <div class="beginner-banner-text">
+                            <h3>復帰勢・中級者の方はこちら！</h3>
+                            <p>現代のヴァナ・ディールでの効率的な進め方やマリグナス取得への道をガイドします。</p>
+                        </div>
+                        <div class="beginner-banner-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container" style="position: relative;">
+                <h2 class="section-title">プレイスタイル</h2>
+                <div class="scatter-photo" style="bottom: -80px; left: -220px; transform: rotate(-8deg); width: 200px;">
+                    <img src="画像素材/images/taru_bridge_full.jpg" alt="Tarutaru Party">
+                </div>
+                <div class="card glass-card achievement-card">
+                    <div class="achievement-content">
+                        <div class="card-text">
+                            <h3>ジェールV25 完全制覇</h3>
+                            <ul style="list-style: none;">
+                                <li style="margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: bold;">
+                                    <i class="fa-solid fa-trophy"
+                                        style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                                    ジェール Veng+25 オールクリアー
+                                </li>
+                                <li style="margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: bold;">
+                                    <i class="fa-solid fa-layer-group"
+                                        style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                                    狩人・コルセア装備 妥協なし
+                                </li>
+                                <li style="margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: bold;">
+                                    <i class="fa-solid fa-meteor"
+                                        style="color: var(--accent-color); margin-right: 0.5rem;"></i>
+                                    遠隔武器 RMEAP 全種類コンプ
+                                </li>
+                            </ul>
+                            <p style="margin-top: 1.5rem;">
+                                最強を目指す過程に終わりはありません。<br>
+                                レリック、ミシック、エンピリアン、イオニック、プライム……<br>
+                                全ての究極武器を手に、タルタルは今日も戦場を支配します。
+                            </p>
+                        </div>
+                        <div class="achievement-image">
+                            <img src="画像素材/images/gaol_v25_clear.jpg" alt="Gaol V25 Clear" class="clear-ss">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="jobs" class="content-section bg-alt">
+            <div class="container" style="position: relative;">
+                <h2 class="section-title">本気の狩人とコルセア</h2>
+                <div class="scatter-photo" style="top: 10%; right: -240px; transform: rotate(8deg); width: 160px;">
+                    <img src="画像素材/images/mission_lilith.jpg" alt="Memory 3">
+                </div>
+                <div class="scatter-photo" style="bottom: 10%; left: -200px; transform: rotate(-12deg); width: 160px;">
+                    <img src="画像素材/images/taru_chairs.jpg" alt="Memory 5">
+                </div>
+                <div class="grid-3">
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image">
+                            <img src="画像素材/images/hunter_image.jpg" alt="Hunter Tarutaru" class="hunter-zoom">
+                        </div>
+                        <h3>狩人 (Ranger)</h3>
+                        <p>出番は少ないですが「サベッジ狩人」も見直されており、近接・遠隔のどちらでもトップクラスの火力を出せるようになっています。</p>
+                        <a href="article.html?file=記事/hunter_equip.md" class="job-link">
+                            装備を見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image">
+                            <img src="画像素材/images/コルセア_イメージイラスト.png" alt="Corsair Tarutaru" class="corsair-style">
+                        </div>
+                        <h3>コルセア (Corsair)</h3>
+                        <p>純粋な遠隔火力は狩人に一歩譲るものの、近接・遠隔の双方をハイレベルにこなし、強力な支援も併せ持つ優れたジョブ。現代のFF11における、あらゆるコンテンツで席のある不動の人気ジョブです。</p>
+                        <a href="article.html?file=記事/corsair_equip.md" class="job-link">
+                            装備を見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image">
+                            <img src="画像素材/images/rmeap.png" alt="RMEAP Weapons" class="weapon-preview-img">
+                        </div>
+                        <h3>各種遠隔武器の紹介</h3>
+                        <p>RMEAPの作成、オグメの厳選、新装備の考察。最強を目指すための果てしない探求と、散財の記録。</p>
+                        <a href="article.html?file=記事/ranged_weapons.md" class="job-link">
+                            武器紹介を見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guides" class="content-section">
+            <div class="container" style="position: relative;">
+                <h2 class="section-title">コンテンツ攻略</h2>
+                <div class="scatter-photo" style="top: 0; left: -220px; transform: rotate(10deg); width: 180px;">
+                    <img src="画像素材/images/mission_climax.jpg" alt="Memory 4">
+                </div>
+                <div class="grid-3">
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="画像素材/images/farming_image.jpg" alt="金策と素材狩り" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>金策と素材狩り</h3>
+                        <p>遠隔アタッカーならではの強みを活かした、効率的なギル稼ぎと素材集めのルート紹介。</p>
+                        <a href="article.html?file=記事/farming.md" class="job-link">
+                            金策ガイドを見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="画像素材/images/content_image.jpg" alt="各コンテンツの攻略情報" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>各コンテンツの攻略情報</h3>
+                        <p>ジェール、ソーティ、オデシーなど、各種エンドコンテンツにおける立ち回りや攻略法へのリンク集です。</p>
+                        <a href="article.html?file=記事/content_guides.md" class="job-link">
+                            攻略記事一覧を見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="画像素材/images/floating_rocks.jpg" alt="連携逆引きシミュレーター" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>連携逆引きシミュレーター</h3>
+                        <p>使用する2つの武器種と作りたい連携属性を選択するだけで、発動可能なWSの組み合わせと順番、マジックバーストの対応属性を一瞬で逆引き探索する実戦ツールです🐾</p>
+                        <a href="連携シミュレーター/index.html" class="job-link">
+                            シミュレーターを開く <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="useful-guides" class="content-section">
+            <div class="container" style="position: relative;">
+                <h2 class="section-title">お役立ち情報</h2>
+                <div class="grid-3">
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="画像素材/images/keyboard_layout_highlighted_fixed.png" alt="キーボード操作" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>キーボード操作の方法</h3>
+                        <p>テンキーを使った移動やマクロの切り替え、ファンクションキーによるターゲット選択など、フルキーボードでの基本操作から便利なショートカットキーまでを網羅した解説記事です🐾</p>
+                        <a href="article.html?file=記事/keyboard_controls.md" class="job-link">
+                            ガイドを見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="画像素材/images/dragon_battle.jpg" alt="珍妙なモンスター" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>珍妙なモンスター討伐ルート</h3>
+                        <p>エミネンス・レコードクエスト4「珍妙なモンスターを討伐せよ！」全15箇所のNMを、最も無駄のないルートで一気に周回・討伐するための最短効率周回ルートガイドです🐾</p>
+                        <a href="article.html?file=記事/eminence_records_peculiar_monsters.md" class="job-link">
+                            ルートを見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="card glass-card hover-lift">
+                        <div class="card-image" style="aspect-ratio: 16 / 9;">
+                            <img src="画像素材/images/mission_scene.jpg" alt="限界突破ガイド" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <h3>限界突破ガイド（Lv50〜99）</h3>
+                        <p>レベル50から始まるFF11最大の試練「限界突破クエスト」を、現代の緩和ギミックやマウント移動テクニックを駆使してソロでスマートに突破するためのロードマップです🐾</p>
+                        <a href="article.html?file=記事/limit_break_guide.md" class="job-link">
+                            攻略法を見る <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="article.html?file=記事/content_guides.md" class="btn-primary" style="text-decoration: none; display: inline-block;">お役立ちガイド一覧を見る</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="stream" class="content-section bg-alt">
+            <div class="container" style="position: relative;">
+                <h2 class="section-title">YouTube ライブ配信</h2>
+                <div class="scatter-photo" style="bottom: -20px; right: -240px; transform: rotate(15deg); width: 200px;">
+                    <img src="画像素材/images/mission_scene.jpg" alt="Memory 6">
+                </div>
+                <div class="stream-container glass-card fade-in-up">
+                    <div class="stream-video">
+                        <div class="stream-preview-images">
+                            <div class="preview-box">
+                                <img src="画像素材/images/hunter_image.jpg" alt="Hunter Preview">
+                            </div>
+                            <div class="preview-box">
+                                <img src="画像素材/images/コルセア_イメージイラスト.png" alt="Corsair Preview">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stream-info">
+                        <h3>ヴァナ・ディール ライブ配信</h3>
+                        <p>YouTubeにて、ジェールの攻略やオデシー、日々の冒険をライブ配信しています。タルタル遠隔アタッカーの視点での攻略動画もアーカイブ中！</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="https://www.youtube.com/@リディル小川ーTheMan?sub_confirmation=1" target="_blank" class="btn-primary"
+                                style="background: linear-gradient(45deg, #ff0000, #cc0000);">
+                                <i class="fa-brands fa-youtube" style="margin-right: 0.5rem;"></i> チャンネル登録
+                            </a>
+                            <a href="https://x.com/TheManLei" target="_blank" class="btn-primary"
+                                style="background: linear-gradient(45deg, #000, #333);">
+                                <i class="fa-brands fa-x-twitter" style="margin-right: 0.5rem;"></i> X (Twitter)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="life" class="content-section">
+            <div class="container">
+                <h2 class="section-title">ヴァナ・ディール生活</h2>
+                <div class="split-layout">
+                    <div class="split-content">
+                        <h3>ウィンダスから世界へ</h3>
+                        <p>
+                            故郷ウィンダスの星の大樹の下で矢尻を研ぎ、
+                            ある時はソーティへ、ある時はオデシーへ。
+                            タルタルならではの小ささを活かした（？）回避と、
+                            どこへでも飛んでいくフットワークの軽さ。
+                        </p>
+                        <p>
+                            LSの仲間たちとの連携や、野良募集での一期一会。
+                            今日もどこかで、銃声と弦音が響きます。
+                        </p>
+                        <a href="#guides" class="btn-primary" style="text-decoration: none; display: inline-block;">装備ガイドを見る</a>
+                    </div>
+                    <div class="split-visual">
+                        <img src="画像素材/images/vanalife_image.jpg" alt="Yuuchin Vana'diel Life" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    </div>
+                </div>
+
+                <div class="memory-gallery" style="margin-top: 5rem;">
+                    <div class="memory-photo">
+                        <img src="画像素材/images/dragon_battle.jpg" alt="Dragon Battle">
+                    </div>
+                    <div class="memory-photo">
+                        <img src="画像素材/images/floating_rocks.jpg" alt="Sky View">
+                    </div>
+                    <div class="memory-photo">
+                        <img src="画像素材/images/party_bridge.jpg" alt="Party on Bridge">
+                    </div>
+                    <div class="memory-photo">
+                        <img src="画像素材/images/taru_chairs.jpg" alt="Taru Chairs">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="common-footer"></div>
+
+<a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> ページの一番上へ</a>
+ 
+    <div id="common-modals"></div>
+
+    <script src="画像素材/js/共通コンポーネント.js" type="module"></script>
+    <script src="script.js" type="module"></script>
+
 </body>
+
 </html>
 

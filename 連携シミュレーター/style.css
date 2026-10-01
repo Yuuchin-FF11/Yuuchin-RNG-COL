@@ -1,4 +1,4 @@
-/* FFXI Skillchain Simulator - Style Sheet */
+﻿/* FFXI Skillchain Simulator - Style Sheet */
 
 :root {
     --bg-color: #030611;
@@ -759,7 +759,7 @@ select:focus {
 }
 
 /* ==========================================================================
-   お気に入り連携リスト（Favorites）のスタイル🐾
+   お気に入り連携リスト（Favorites）のスタイル
    ========================================================================== */
 .favorite-chip {
     display: inline-flex;

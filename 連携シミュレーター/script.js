@@ -1,4 +1,4 @@
-// FFXI Skillchain Simulator Logic
+﻿// FFXI Skillchain Simulator Logic
 
 // 1. 各武器種とすべての実在するウェポンスキル (WS) の連携属性データ
 const weaponWSData = {
@@ -659,6 +659,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnSearch = document.getElementById("btn-search");
     
     const resultsList = document.getElementById("results-list");
+    let currentSearchResults = [];
+    let currentVisibleCount = 15;
     
     // 接続段数による初期AMグループの表示制御
     selectTargetSteps.addEventListener("change", () => {
@@ -713,31 +715,45 @@ document.addEventListener("DOMContentLoaded", () => {
             results = searchSkillchains(w1, w2, target, stepsCount, passAM);
         }
 
-        // UIのクリーンアップ
+        currentSearchResults = results;
+        currentVisibleCount = 15;
+        renderSearchResults(stepsCount, w1, w2);
+    });
+
+    const loadMoreContainer = document.getElementById("load-more-container");
+    const btnLoadMore = document.getElementById("btn-load-more");
+
+    if (btnLoadMore) {
+        btnLoadMore.addEventListener("click", () => {
+            currentVisibleCount += 15;
+            const stepsCount = parseInt(selectTargetSteps.value);
+            const w1 = selectWeapon1.value;
+            const w2 = selectWeapon2.value;
+            renderSearchResults(stepsCount, w1, w2);
+        });
+    }
+
+    function renderSearchResults(stepsCount, w1, w2) {
         resultsList.innerHTML = "";
         
-        // 件数の表示（上限100件の注意書きを付与してUI負荷を軽減）
-        if (results.length > 100) {
-            resultCount.textContent = `100件 (計${results.length}件中、上位100件を表示中🐾)`;
-        } else {
-            resultCount.textContent = `${results.length}件`;
-        }
+        // 件数の表示
+        resultCount.textContent = `${currentSearchResults.length}件`;
 
-        if (results.length === 0) {
+        if (currentSearchResults.length === 0) {
             noResults.style.display = "block";
+            if (loadMoreContainer) loadMoreContainer.style.display = "none";
             return;
         }
 
         noResults.style.display = "none";
 
-        // 表示件数を最大100件にスライスしてブラウザの描画フリーズを完璧に防止
-        const displayResults = results.slice(0, 100);
+        // ページング用に切り出してループ処理
+        const displayResults = currentSearchResults.slice(0, currentVisibleCount);
         displayResults.forEach((res, index) => {
             const card = document.createElement("div");
             
-            // --- パターン1：通常2WSモード（通常＆AM3ダブル併記） ---
+            // 通常2WSモード
             if (stepsCount === 2) {
-                // イオAM3時の連携に応じたカードクラスの決定
                 const mainChain = res.chainIonic || res.chainNormal;
                 let chainClass = "chain-level1";
                 if (mainChain.name === "光" || mainChain.name === "極光") chainClass = "chain-light";
@@ -748,7 +764,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 else if (mainChain.name === "分解") chainClass = "chain-fragmentation";
 
                 card.className = `sc-card ${chainClass}`;
-                card.style.animationDelay = `${index * 0.05}s`;
+                card.style.animationDelay = `${(index % 15) * 0.05}s`;
+
+                // おすすめ3件に特別クラスを適用
+                if (index < 3) {
+                    card.classList.add("recommended-card");
+                    card.style.border = "2px solid #fbbf24";
+                }
 
                 // MB要素の組み立て (通常時)
                 const mbListNormal = res.chainNormal ? (mbElements[res.chainNormal.name] || []) : [];
@@ -766,13 +788,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     mbIonicHTML += `<span class="mb-el ${elClass}">${el}</span>`;
                 });
 
-                // WS属性の文字列表記（AM3による新規追加属性には足跡マーク🐾を付与）
+                // WS属性の文字列表記
                 function getWSAttrsHTML(normalWS, ionicWS) {
                     let parts = [];
                     ionicWS.attrs.forEach(attr => {
                         const isAdded = !normalWS.attrs.includes(attr);
                         if (isAdded) {
-                            parts.push(`<span class="attr-added" title="イオAM3中の追加属性">${attr}🐾</span>`);
+                            parts.push(`<span class="attr-added" title="イオAM3中の追加属性">${attr}</span>`);
                         } else {
                             parts.push(attr);
                         }
@@ -798,7 +820,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="sc-header-divider"></div>
                         <div class="sc-header-side highlight-side">
-                            <span class="sc-mode-label label-ionic">イオAM3中 🐾</span>
+                            <span class="sc-mode-label label-ionic">イオAM3中 </span>
                             <span class="sc-name-big ${chainClass}">${ionicName}</span>
                             <span class="sc-level-big">${ionicLv}</span>
                         </div>
@@ -873,7 +895,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         else if (step.chain.name === "分解") stepChainClass = "chain-fragmentation";
                     }
 
-                    // 属性リスト（AM状態に応じて追加属性があれば🐾を自動付与）
+                    // 属性リスト（AM状態に応じて追加属性があればを自動付与）
                     let wsAttrsStr = step.toss.attrs.join('/');
                     if (step.amState) {
                         // 照破等でAM1が付加された後のトスWS属性を表示
@@ -884,7 +906,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             step.toss.attrs.forEach(attr => {
                                 const isAdded = !baseWS.attrs.includes(attr);
                                 if (isAdded) {
-                                    parts.push(`<span class="attr-added" title="イオニックAM追加属性">${attr}🐾</span>`);
+                                    parts.push(`<span class="attr-added" title="イオニックAM追加属性">${attr}</span>`);
                                 } else {
                                     parts.push(attr);
                                 }
@@ -906,7 +928,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <div class="timeline-chain-badge ${stepChainClass}" title="発生する連携">
                                     <span class="tl-chain-name">【${chainName === "黒闇" ? "極闇/黒闇" : chainName}】</span>
                                     <span class="tl-chain-level">${chainLevel}</span>
-                                    ${step.amState ? `<span class="tl-am-badge">AM1付加🐾</span>` : ''}
+                                    ${step.amState ? `<span class="tl-am-badge">AM1付加</span>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -922,7 +944,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             step.close.attrs.forEach(attr => {
                                 const isAdded = !baseWS.attrs.includes(attr);
                                 if (isAdded) {
-                                    parts.push(`<span class="attr-added" title="イオニックAM追加属性">${attr}🐾</span>`);
+                                    parts.push(`<span class="attr-added" title="イオニックAM追加属性">${attr}</span>`);
                                 } else {
                                     parts.push(attr);
                                 }
@@ -965,10 +987,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             resultsList.appendChild(card);
         });
-    });
+
+        // さらに読み込むボタンの表示制御
+        if (loadMoreContainer) {
+            if (currentVisibleCount < currentSearchResults.length) {
+                loadMoreContainer.style.display = "flex";
+            } else {
+                loadMoreContainer.style.display = "none";
+            }
+        }
+    }
 
     // ==========================================================================
-    // お気に入り機能のロジック 🐾
+    // お気に入り機能のロジック 
     // ==========================================================================
     const btnAddFav = document.getElementById("btn-add-fav");
     const favoritesSection = document.getElementById("favorites-section");
@@ -1013,7 +1044,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="btn-delete-fav" data-index="${idx}">×</button>
             `;
 
-            // チップクリックで条件を復元して再探索 🐾
+            // チップクリックで条件を復元して再探索 
             chip.addEventListener("click", (e) => {
                 if (e.target.classList.contains("btn-delete-fav")) return;
                 
@@ -1062,7 +1093,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (saved) favs = JSON.parse(saved);
         } catch (e) {}
 
-        // 重複チェック 🐾
+        // 重複チェック 
         const duplicate = favs.find(f => 
             f.w1 === w1 && f.w2 === w2 && f.target === target && 
             f.steps === steps && f.unordered === unordered &&
@@ -1070,7 +1101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         if (duplicate) {
-            alert("この検索条件はすでにお気に入りに登録されています🐾");
+            alert("この検索条件はすでにお気に入りに登録されています");
             return;
         }
 
@@ -1095,7 +1126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnAddFav.addEventListener("click", saveFavorite);
     }
 
-    // 初回お気に入り描画 🐾
+    // 初回お気に入り描画 
     renderFavorites();
 
     // 初回ロード時にも自動的に探索を実行する（親切設計）
@@ -1103,7 +1134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================================================
-// サービスワーカーの登録（PWA対応）🐾
+// サービスワーカーの登録（PWA対応）
 // ==========================================================================
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

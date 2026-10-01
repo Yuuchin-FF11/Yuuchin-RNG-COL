@@ -1,7 +1,7 @@
-{
+﻿{
   "name": "FFXI 連携逆引きシミュレーター",
   "short_name": "FF11連携検索",
-  "description": "FFXIのウェポンスキルから発生する連携ルートを一瞬で逆引き探索するシミュレーター🐾",
+  "description": "FFXIのウェポンスキルから発生する連携ルートを一瞬で逆引き探索するシミュレーター",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#06040d",

@@ -830,3 +830,112 @@ select:focus {
     filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
 }
 
+/* ==========================================================================
+   V2プレビュー版 追加・改善スタイル
+   ========================================================================== */
+
+/* 1. スマホ表示での1列レイアウト化 & 横スクロール防止 */
+@media (max-width: 768px) {
+    body {
+        padding: 1.5rem 1rem !important;
+    }
+
+    .glass-card {
+        padding: 1.5rem !important;
+        border-radius: 16px !important;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+
+    /* 選択ボックスのパディングと幅の最適化（文字切れ防止） */
+    select {
+        font-size: 0.95rem !important;
+        padding: 0.85rem 2.5rem 0.85rem 1rem !important;
+        border-radius: 12px !important;
+    }
+
+    /* 結果グリッドを100%幅の1列にする */
+    .results-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .sc-card {
+        padding: 1.25rem !important;
+        border-radius: 16px !important;
+    }
+
+    /* ダブルヘッダーの文字サイズ調整 */
+    .sc-mode-label {
+        font-size: 0.75rem !important;
+    }
+
+    .sc-name-big {
+        font-size: 1.1rem !important;
+    }
+
+    /* タイムラインの幅調整（横スクロール防止） */
+    .timeline-container {
+        padding-left: 0.5rem !important;
+    }
+
+    .timeline-ws-name {
+        font-size: 0.95rem !important;
+    }
+
+    .timeline-ws-type {
+        font-size: 0.8rem !important;
+    }
+
+    .tl-chain-name {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* 2. さらに表示ボタンのスタイル */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.btn-load-more {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--accent-color);
+    padding: 0.8rem 2.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-load-more:hover {
+    background: rgba(0, 210, 255, 0.1);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.25);
+}
+
+.btn-load-more:active {
+    transform: translateY(0);
+}
+
+/* 3. prefers-reduced-motion に対応 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+

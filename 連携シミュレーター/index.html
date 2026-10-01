@@ -18,15 +18,21 @@
 </head>
 <body>
     <div class="container">
+        <div style="margin-bottom: 1rem; text-align: left;">
+            <a href="../index.html" style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 0.95rem; font-weight: bold; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.8rem; background: rgba(255, 255, 255, 0.08); border-radius: 20px; transition: all 0.2s;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                ホームへ戻る
+            </a>
+        </div>
         <header class="header">
             <h1>FFXI 連携逆引きシミュレーター</h1>
-            <p>使用する「2つの武器種」と「狙いたい連携」を選ぶだけで、最適なWSの組み合わせを一瞬で逆引き探索します 🐾</p>
+            <p>使用する「2つの武器種」と「狙いたい連携」を選ぶだけで、最適なWSの組み合わせを一瞬で逆引き探索します </p>
             <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin-top: 0.5rem; line-height: 1.4;">
                 ※本シミュレーターはAIで作成したもので少しこちらで調整もしましたが、もしかしたら間違った連携があるかもしれませんのでご了承ください。
             </p>
         </header>
 
-        <!-- 保存されたお気に入り連携（お気に入りがある場合のみ表示されます） 🐾 -->
+        <!-- 保存されたお気に入り連携（お気に入りがある場合のみ表示されます）  -->
         <section id="favorites-section" class="glass-card" style="display: none; margin-bottom: 1.5rem; padding: 1.25rem;">
             <h2 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.5rem; border-bottom: none; padding-bottom: 0; display: flex; align-items: center; gap: 0.5rem;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color: var(--accent-color);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -117,14 +123,14 @@
                         <option value="NONE" selected>なし (通常スタート)</option>
                         <option value="IONIC_AM1">イオニック AM1 (4連以上で極光/黒闇)</option>
                         <option value="IONIC_AM2">イオニック AM2 (3連以上で極光/黒闇)</option>
-                        <option value="IONIC_AM3">イオニック AM3 (2連以上で極光/黒闇🐾)</option>
+                        <option value="IONIC_AM3">イオニック AM3 (2連以上で極光/黒闇)</option>
                     </select>
                 </div>
 
                 <!-- 順不同チェックボックス -->
                 <div class="form-group" style="display: flex; align-items: center; margin-top: 1.5rem; grid-column: span 2;">
                     <input type="checkbox" id="unordered-weapons" checked style="width: 20px; height: 20px; margin-right: 0.5rem; cursor: pointer; accent-color: var(--accent-color);">
-                    <label for="unordered-weapons" style="cursor: pointer; margin-bottom: 0; user-select: none; font-weight: bold; color: var(--accent-color);">武器の順序を問わない (順不同でトス・〆両方の可能性を同時検索) 🐾</label>
+                    <label for="unordered-weapons" style="cursor: pointer; margin-bottom: 0; user-select: none; font-weight: bold; color: var(--accent-color);">武器の順序を問わない (順不同でトス・〆両方の可能性を同時検索) </label>
                 </div>
 
             </div>
@@ -147,13 +153,16 @@
             <div id="results-list" class="results-grid">
                 <!-- 動的に結果カードが追加されます -->
             </div>
+            <div class="load-more-container" id="load-more-container" style="display: none;">
+                <button id="btn-load-more" class="btn-load-more">さらに結果を表示する</button>
+            </div>
             <div id="no-results" class="glass-card empty-state" style="display: none;">
-                選択された組み合わせで、狙った連携を発生させるルートは見つかりませんでした。別の連携属性や武器種をお試しください🐾
+                選択された組み合わせで、狙った連携を発生させるルートは見つかりませんでした。別の連携属性や武器種をお試しください
             </div>
         </section>
 
         <footer class="footer-info">
-            <p>&copy; Yuuchin FFXI Utility | Developed by Antigravity 🐾</p>
+            <p>&copy; Yuuchin FFXI Utility | Developed by Antigravity </p>
         </footer>
     </div>
 

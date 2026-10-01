@@ -1,5 +1,5 @@
 // FFXI Bismarck - 共通コンポーネント & システム統合スクリプト
-// ヘッダー、フッター、背景アニメーション、GAS閲覧ログ、管理者ダッシュボードを一括管理します🐾
+// ヘッダー、フッター、背景アニメーション、GAS閲覧ログ、管理者ダッシュボードを一括管理します
 
 document.addEventListener('DOMContentLoaded', () => {
     const isEnglish = document.documentElement.lang === 'en';
@@ -121,6 +121,7 @@ const footerHTMLJa = `
         </div>
         <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.<span id="admin-trigger" style="opacity: 0.15; cursor: default; margin-left: 4px; font-size: 1.2rem; padding: 10px; display: inline-block; line-height: 1;">.</span></p>
         <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
+        <p class="privacy-notice">このサイトでは、サイト改善とアクセス状況の把握のため、訪問時にURL・参照元・ブラウザ情報・言語・画面サイズをGoogle Apps Scriptへ送信します。管理者認証時のパスワードはURLに含めず、POSTで送信します。収集した情報はアクセスログ管理の目的に限って利用します。</p>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">※当サイトはAIアシスタントを活用して共同で作成しているため、情報に一部誤りや古い内容が含まれている可能性があります。最新の正確な仕様については、ゲーム内や公式用語辞典をあわせてご確認ください。</p>
         <div class="social-links">
             <a href="https://x.com/TheManLei" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
@@ -150,6 +151,7 @@ const footerHTMLEn = `
         </div>
         <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.<span id="admin-trigger" style="opacity: 0.15; cursor: default; margin-left: 4px; font-size: 1.2rem; padding: 10px; display: inline-block; line-height: 1;">.</span></p>
         <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
+        <p class="privacy-notice">For site improvement and traffic analysis, this site sends the page URL, referrer, browser information, language, and screen size to Google Apps Script. Administrator passwords are sent by POST and are never included in the URL. Collected data is used only for access-log management.</p>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">*This site is co-created with an AI assistant. Information may contain errors or outdated specs. Please cross-reference with official specs and the wiki.</p>
         <div class="social-links">
             <a href="https://x.com/TheManLei" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
@@ -372,11 +374,11 @@ function initBackToTop() {
 }
 
 // --- GAS 閲覧履歴送信 & 管理者システム ---
-const GAS_API_URL = "https://script.google.com/macros/s/AKfycbx3tcuuAdd0KlOq35qv1lPbqUx3kI064F2_VBohfRdg9OZUYUwT-q6tdqgiPfe-K3dCQw/exec";
+const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzVIwoOsi-U6Iw5A_KHoWhyRIVHfbO6C_UDzPXWhGHrNIeiVUSsn5md2I18iDPCe5U8qA/exec";
 
 async function logAccess() {
     try {
-        const params = new URLSearchParams({
+        const payload = {
             action: 'log',
             pageTitle: document.title,
             pageUrl: window.location.href,
@@ -384,11 +386,13 @@ async function logAccess() {
             userAgent: navigator.userAgent,
             language: navigator.language,
             screenResolution: `${window.screen.width}x${window.screen.height}`
-        });
+        };
 
-        await fetch(`${GAS_API_URL}?${params.toString()}`, {
-            method: 'GET',
-            mode: 'cors'
+        await fetch(GAS_API_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
         });
     } catch (error) {
         console.warn("Logger connection skipped:", error);
@@ -497,14 +501,11 @@ function initAdminSystem() {
     }
 
     async function fetchHistory(password) {
-        const params = new URLSearchParams({
-            action: 'get_history',
-            password: password
-        });
-
-        const response = await fetch(`${GAS_API_URL}?${params.toString()}`, {
-            method: 'GET',
-            mode: 'cors'
+        const response = await fetch(GAS_API_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'get_history', password })
         });
 
         if (!response.ok) throw new Error('Network response was not ok');

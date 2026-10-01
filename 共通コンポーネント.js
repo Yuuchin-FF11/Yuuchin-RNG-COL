@@ -1,5 +1,5 @@
 // FFXI Bismarck - 共通コンポーネント & システム統合スクリプト
-// ヘッダー、フッター、背景アニメーション、GAS閲覧ログ、管理者ダッシュボードを一括管理します🐾
+// ヘッダー、フッター、背景アニメーション、GAS閲覧ログ、管理者ダッシュボードを一括管理します
 
 document.addEventListener('DOMContentLoaded', () => {
     const isEnglish = document.documentElement.lang === 'en';

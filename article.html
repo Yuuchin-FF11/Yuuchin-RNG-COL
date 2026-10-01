@@ -72,7 +72,7 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             font-weight: 500;
         }
-        /* コメント欄のプレミアムスタイル🐾 */
+        /* コメント欄のプレミアムスタイル */
         .comments-section { width: 100%; text-align: left; }
         .comment-card {
             background: rgba(255, 255, 255, 0.03);
@@ -121,7 +121,7 @@
                         <div style="text-align: center; padding: 3rem 0;"><i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color);"></i><p>記事を読み込み中...</p></div>
                     </div>
                     
-                    <!-- コメントセクション🐾 -->
+                    <!-- コメントセクション -->
                     <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 3rem 0;">
                     <div id="comments-section" class="comments-section">
                         <h3 style="font-family: 'Zen Maru Gothic', sans-serif; color: var(--accent-color); margin-bottom: 1.5rem;"><i class="fa-solid fa-comments"></i> ご意見ご要望があったらコメントください！</h3>
@@ -141,7 +141,7 @@
                             </div>
                             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                                 <label for="comment-content" style="font-size: 0.9rem; font-weight: bold; opacity: 0.8;">コメント内容 (最大500文字)</label>
-                                <textarea id="comment-content" required maxlength="500" placeholder="温かいコメントをお待ちしております🐾" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.8rem; color: white; font-family: inherit; min-height: 100px; resize: vertical;"></textarea>
+                                <textarea id="comment-content" required maxlength="500" placeholder="温かいコメントをお待ちしております" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.8rem; color: white; font-family: inherit; min-height: 100px; resize: vertical;"></textarea>
                             </div>
                             <button type="submit" id="comment-submit-btn" style="align-self: flex-start; background: var(--primary-color); border: 1px solid var(--glass-border); color: white; padding: 0.7rem 2rem; border-radius: 30px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
                                 <i class="fa-solid fa-paper-plane"></i> コメントを送信
@@ -167,7 +167,7 @@
 
     <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> ページの一番上へ</a>
 
-    <!-- Supabase CDN の読み込み🐾 -->
+    <!-- Supabase CDN の読み込み -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module">
         import { linkMap, keywordsJa, normalizeEquipmentName } from './画像素材/js/link_map.js';
@@ -190,14 +190,14 @@
                     // 先にMarkdownをパースすることで**太字**を確定させ、生の**マークの露出を防ぎます！
                     let parsedHtml = marked.parse(text);
                     if (typeof parsedHtml === 'string') {
-                        // マークダウン内の画像相対パス「../画像素材/」を、HTML読み込み時の「画像素材/」に自動置換して画像切れを防止🐾
+                        // マークダウン内の画像相対パス「../画像素材/」を、HTML読み込み時の「画像素材/」に自動置換して画像切れを防止
                         parsedHtml = parsedHtml.replace(/\.\.\/画像素材\//g, '画像素材/');
                     }
                     // HTMLタグを破壊しないように配慮しながら「」『』のイエローゴールド強調置換を実行
                     const processedText = (typeof parsedHtml === 'string') ? parsedHtml.replace(/([「『])([^」』\n<>]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>') : parsedHtml;
                     contentDiv.innerHTML = processedText;
 
-                    // 記事のタイトル（最初の h1）をブラウザタイトルに動的設定🐾
+                    // 記事のタイトル（最初の h1）をブラウザタイトルに動的設定
                     const firstH1 = contentDiv.querySelector('h1');
                     if (firstH1) {
                         document.title = firstH1.textContent + ' | FFXI Bismarck';
@@ -398,7 +398,7 @@
              });
          }
 
-         // === コメント機能のJavaScriptロジック🐾 ===
+         // === コメント機能のJavaScriptロジック ===
          const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
          const commentsList = document.getElementById('comments-list');
          const commentForm = document.getElementById('comment-form');
@@ -440,7 +440,7 @@
                  if (error) throw error;
 
                  if (!data || data.length === 0) {
-                     commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">最初のコメントを投稿してみましょう！🐾</p>';
+                     commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">最初のコメントを投稿してみましょう！</p>';
                      return;
                  }
 

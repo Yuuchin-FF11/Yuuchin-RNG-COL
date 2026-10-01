@@ -62,7 +62,7 @@
         .markdown-body a { color: #a8e063; text-decoration: none; border-bottom: 1px dashed #a8e063; font-weight: 700; }
         .auto-link { color: #a8e063; font-weight: 700; text-decoration: none; border-bottom: 1px dashed #a8e063; }
         .highlight-bracket { color: #ffb700; font-weight: bold; text-shadow: 0 0 8px rgba(255, 183, 0, 0.2); }
-        /* Premium Comments Style🐾 */
+        /* Premium Comments Style */
         .comments-section { width: 100%; text-align: left; }
         .comment-card {
             background: rgba(255, 255, 255, 0.03);
@@ -111,7 +111,7 @@
                         <div style="text-align: center; padding: 3rem 0;"><i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--accent-color);"></i><p>Loading article...</p></div>
                     </div>
                     
-                    <!-- Comments Section🐾 -->
+                    <!-- Comments Section -->
                     <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 3rem 0;">
                     <div id="comments-section" class="comments-section">
                         <h3 style="font-family: 'Zen Maru Gothic', sans-serif; color: var(--accent-color); margin-bottom: 1.5rem;"><i class="fa-solid fa-comments"></i> Please leave a comment if you have any feedback or requests!</h3>
@@ -131,7 +131,7 @@
                             </div>
                             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                                 <label for="comment-content" style="font-size: 0.9rem; font-weight: bold; opacity: 0.8;">Comment (Max 500 characters)</label>
-                                <textarea id="comment-content" required maxlength="500" placeholder="Share your warm thoughts🐾" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.8rem; color: white; font-family: inherit; min-height: 100px; resize: vertical;"></textarea>
+                                <textarea id="comment-content" required maxlength="500" placeholder="Share your warm thoughts" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.8rem; color: white; font-family: inherit; min-height: 100px; resize: vertical;"></textarea>
                             </div>
                             <button type="submit" id="comment-submit-btn" style="align-self: flex-start; background: var(--primary-color); border: 1px solid var(--glass-border); color: white; padding: 0.7rem 2rem; border-radius: 30px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;">
                                 <i class="fa-solid fa-paper-plane"></i> Submit Comment
@@ -157,7 +157,7 @@
 
     <a href="#" id="fixed-back-to-top" class="footer-top-link"><i class="fa-solid fa-chevron-up"></i> Back to Top</a>
 
-    <!-- Supabase CDN🐾 -->
+    <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module">
         import { linkMap, keywordsEn, normalizeEquipmentName } from './画像素材/js/link_map.js';
@@ -181,14 +181,14 @@
                     // 先にMarkdownをパースすることで**太字**を確定させ、生の**マークの露出を防ぎます！
                     let parsedHtml = marked.parse(text);
                     if (typeof parsedHtml === 'string') {
-                        // マークダウン内の画像相対パス「../画像素材/」を、HTML読み込み時の「画像素材/」に自動置換して画像切れを防止🐾
+                        // マークダウン内の画像相対パス「../画像素材/」を、HTML読み込み時の「画像素材/」に自動置換して画像切れを防止
                         parsedHtml = parsedHtml.replace(/\.\.\/画像素材\//g, '画像素材/');
                     }
                     // HTMLタグを破壊しないように配慮しながら「」『』のイエローゴールド強調置換を実行
                     const processedText = (typeof parsedHtml === 'string') ? parsedHtml.replace(/([「『])([^」』\n<>]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>') : parsedHtml;
                     contentDiv.innerHTML = processedText;
 
-                    // Set browser title dynamically from the first h1 element🐾
+                    // Set browser title dynamically from the first h1 element
                     const firstH1 = contentDiv.querySelector('h1');
                     if (firstH1) {
                         document.title = firstH1.textContent + ' | FFXI Bismarck';
@@ -384,7 +384,7 @@
              });
          }
 
-         // === Comments Feature JS Logic🐾 ===
+         // === Comments Feature JS Logic ===
          const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
          const commentsList = document.getElementById('comments-list');
          const commentForm = document.getElementById('comment-form');
@@ -426,7 +426,7 @@
                  if (error) throw error;
 
                  if (!data || data.length === 0) {
-                     commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">Be the first to comment!🐾</p>';
+                     commentsList.innerHTML = '<p style="opacity: 0.6; font-size: 0.95rem;">Be the first to comment!</p>';
                      return;
                  }
 

@@ -276,13 +276,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 正方形アイキャッチ画像自動生成エンジン（1080x1080）
   // アスタリスク文字完全不使用ルールに準拠
-  function createPostThumbnail(post, industryName) {
+  function createPostThumbnail(post, industryName, customImg) {
     const canvas = document.createElement("canvas");
     canvas.width = 1080;
     canvas.height = 1080;
     const ctx = canvas.getContext("2d");
 
-    // カテゴリに応じた高級感のあるグラデーション背景
+    // カテゴリに応じた高級感のある配色
     let c1 = "#0f172a";
     let c2 = "#1e3a8a";
     let c3 = "#0284c7";
@@ -305,21 +305,49 @@ document.addEventListener("DOMContentLoaded", function () {
       badgeText = "特別コースのご案内";
     }
 
-    const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
-    grad.addColorStop(0, c1);
-    grad.addColorStop(0.5, c2);
-    grad.addColorStop(1, c3);
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 1080, 1080);
+    if (customImg) {
+      // ユーザー・店舗が用意したオリジナル写真の中央正方形トリミング描画
+      const iw = customImg.width;
+      const ih = customImg.height;
+      let sx = 0;
+      let sy = 0;
+      let sSize = iw;
 
-    // 幾何学的な装飾アクセント（半透明サークル）
-    ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
-    ctx.beginPath();
-    ctx.arc(950, 150, 300, 0, Math.PI + Math.PI);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(150, 950, 250, 0, Math.PI + Math.PI);
-    ctx.fill();
+      if (iw > ih) {
+        sSize = ih;
+        sx = (iw - ih) >> 1;
+      } else if (ih > iw) {
+        sSize = iw;
+        sy = (ih - iw) >> 1;
+      }
+
+      ctx.drawImage(customImg, sx, sy, sSize, sSize, 0, 0, 1080, 1080);
+
+      // 写真の上に暗めのグラデーションを重ねて文字の可読性を100%確保
+      const photoGrad = ctx.createLinearGradient(0, 0, 0, 1080);
+      photoGrad.addColorStop(0, "rgba(15, 23, 42, 0.75)");
+      photoGrad.addColorStop(0.5, "rgba(15, 23, 42, 0.65)");
+      photoGrad.addColorStop(1, "rgba(15, 23, 42, 0.85)");
+      ctx.fillStyle = photoGrad;
+      ctx.fillRect(0, 0, 1080, 1080);
+    } else {
+      // デフォルトのグラデーション背景
+      const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
+      grad.addColorStop(0, c1);
+      grad.addColorStop(0.5, c2);
+      grad.addColorStop(1, c3);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1080, 1080);
+
+      // 幾何学的な装飾アクセント（半透明サークル）
+      ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
+      ctx.beginPath();
+      ctx.arc(950, 150, 300, 0, Math.PI + Math.PI);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(150, 950, 250, 0, Math.PI + Math.PI);
+      ctx.fill();
+    }
 
     // 外枠の細線フレーム
     ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
@@ -421,8 +449,8 @@ document.addEventListener("DOMContentLoaded", function () {
         tagClass = "tag-sales";
       }
 
-      // 画像データURLの生成（1080x1080 正方形）
-      const imgDataUrl = createPostThumbnail(post, industryName);
+      // 画像データURLの初期生成（1080x1080 正方形）
+      let currentImgDataUrl = createPostThumbnail(post, industryName, null);
 
       card.innerHTML =
         '<div class="post-card-header">' +
@@ -439,7 +467,9 @@ document.addEventListener("DOMContentLoaded", function () {
             '</div>' +
           '</div>' +
           '<div class="post-thumb-col">' +
-            '<img class="post-thumb-img" src="' + imgDataUrl + '" alt="投稿画像プレビュー">' +
+            '<img class="post-thumb-img" src="' + currentImgDataUrl + '" alt="投稿画像プレビュー">' +
+            '<button type="button" class="btn-upload-img upload-img-btn">写真を選択・合成</button>' +
+            '<input type="file" accept="image/png, image/jpeg, image/webp" class="custom-file-input hidden">' +
             '<button type="button" class="btn-download-img download-img-btn">画像保存 (1080px)</button>' +
           '</div>' +
         '</div>' +
@@ -447,11 +477,39 @@ document.addEventListener("DOMContentLoaded", function () {
           '<button class="btn btn-secondary btn-sm copy-single-btn">この投稿文をコピー</button>' +
         '</div>';
 
+      const thumbImgEl = card.querySelector(".post-thumb-img");
+      const uploadImgBtn = card.querySelector(".upload-img-btn");
+      const fileInputEl = card.querySelector(".custom-file-input");
       const downloadImgBtn = card.querySelector(".download-img-btn");
+
+      uploadImgBtn.addEventListener("click", function () {
+        fileInputEl.click();
+      });
+
+      fileInputEl.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (readEvent) {
+          const userImg = new Image();
+          userImg.onload = function () {
+            currentImgDataUrl = createPostThumbnail(post, industryName, userImg);
+            thumbImgEl.src = currentImgDataUrl;
+            uploadImgBtn.textContent = "写真差替完了！";
+            setTimeout(function () {
+              uploadImgBtn.textContent = "写真を選択・合成";
+            }, 1500);
+          };
+          userImg.src = readEvent.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+
       downloadImgBtn.addEventListener("click", function () {
         const link = document.createElement("a");
         link.download = "AutoPost30_Day" + (post.day < 10 ? "0" + post.day : post.day) + ".png";
-        link.href = imgDataUrl;
+        link.href = currentImgDataUrl;
         link.click();
       });
 

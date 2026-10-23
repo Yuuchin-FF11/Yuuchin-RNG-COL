@@ -543,6 +543,25 @@ label {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.btn-upload-img {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--bg-card-sub);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.btn-upload-img:hover {
+  background-color: #475569;
+  border-color: #64748b;
+}
+
 .btn-download-img {
   width: 100%;
   padding: 6px 8px;

@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPosts = generatePresetPosts(industryName, targetAudience, monthlyTheme, tone, emojiSetting);
       }
 
-      renderPosts(currentPosts);
+      renderPosts(currentPosts, industryName);
       renderCalendar(currentPosts);
       updateStats(currentPosts);
       copyAllBtn.disabled = false;
@@ -274,7 +274,138 @@ document.addEventListener("DOMContentLoaded", function () {
     return new Promise(function (resolve) { setTimeout(resolve, ms); });
   }
 
-  function renderPosts(posts) {
+  // 正方形アイキャッチ画像自動生成エンジン（1080x1080）
+  // アスタリスク文字完全不使用ルールに準拠
+  function createPostThumbnail(post, industryName) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080;
+    canvas.height = 1080;
+    const ctx = canvas.getContext("2d");
+
+    // カテゴリに応じた高級感のあるグラデーション背景
+    let c1 = "#0f172a";
+    let c2 = "#1e3a8a";
+    let c3 = "#0284c7";
+    let badgeText = "お役立ち豆知識";
+
+    if (post.category.indexOf("共感") !== -1 || post.category.indexOf("悩み") !== -1) {
+      c1 = "#022c22";
+      c2 = "#065f46";
+      c3 = "#10b981";
+      badgeText = "お客様のお悩み解決";
+    } else if (post.category.indexOf("裏側") !== -1 || post.category.indexOf("日常") !== -1 || post.category.indexOf("振り返り") !== -1 || post.category.indexOf("雑談") !== -1) {
+      c1 = "#2e1065";
+      c2 = "#581c87";
+      c3 = "#8b5cf6";
+      badgeText = "スタッフ・店舗の裏側";
+    } else if (post.category.indexOf("案内") !== -1 || post.category.indexOf("告知") !== -1) {
+      c1 = "#431407";
+      c2 = "#9a3412";
+      c3 = "#ea580c";
+      badgeText = "特別コースのご案内";
+    }
+
+    const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
+    grad.addColorStop(0, c1);
+    grad.addColorStop(0.5, c2);
+    grad.addColorStop(1, c3);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1080);
+
+    // 幾何学的な装飾アクセント（半透明サークル）
+    ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
+    ctx.beginPath();
+    ctx.arc(950, 150, 300, 0, Math.PI + Math.PI);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(150, 950, 250, 0, Math.PI + Math.PI);
+    ctx.fill();
+
+    // 外枠の細線フレーム
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(60, 60, 960, 960);
+
+    // 四隅のコーナー装飾
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(56, 56, 24, 6);
+    ctx.fillRect(56, 56, 6, 24);
+    ctx.fillRect(1000, 56, 24, 6);
+    ctx.fillRect(1018, 56, 6, 24);
+    ctx.fillRect(56, 1018, 24, 6);
+    ctx.fillRect(56, 1000, 6, 24);
+    ctx.fillRect(1000, 1018, 24, 6);
+    ctx.fillRect(1018, 1000, 6, 24);
+
+    // 上部：日付バッジ
+    ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+    ctx.fillRect(100, 110, 220, 60);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 32px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("DAY " + (post.day < 10 ? "0" + post.day : post.day) + " / 30", 210, 152);
+
+    // 上部：カテゴリラベル
+    ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+    ctx.font = "bold 32px sans-serif";
+    ctx.textAlign = "right";
+    ctx.fillText("◆ " + badgeText, 980, 152);
+
+    // 中央：タイトル文字用の暗め半透明カード
+    ctx.fillStyle = "rgba(15, 23, 42, 0.65)";
+    ctx.fillRect(100, 280, 880, 520);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(100, 280, 880, 520);
+
+    // 中央タイトルテキスト（自動折り返し）
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 52px sans-serif";
+    ctx.textAlign = "left";
+
+    const cleanTitle = post.title.replace(/^【[^】]+】/, "").replace(/^「/, "").replace(/」$/, "");
+    const maxCharsPerLine = 15;
+    let lines = [];
+    for (let i = 0; i < cleanTitle.length; i = i + maxCharsPerLine) {
+      lines.push(cleanTitle.substring(i, i + maxCharsPerLine));
+      if (lines.length >= 4) break;
+    }
+
+    let startY = 430;
+    if (lines.length === 1) startY = 560;
+    else if (lines.length === 2) startY = 500;
+    else if (lines.length === 3) startY = 450;
+
+    lines.forEach(function (lineText, idx) {
+      let currentY = startY;
+      for (let step = 0; step < idx; step = step + 1) {
+        currentY = currentY + 80;
+      }
+      ctx.fillText(lineText, 160, currentY);
+    });
+
+    // タイトルの上部の装飾帯
+    ctx.fillStyle = c3;
+    ctx.fillRect(160, 340, 120, 8);
+
+    // 下部：業種名とブランド表記
+    ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+    ctx.fillRect(100, 890, 880, 2);
+
+    ctx.fillStyle = "#cbd5e1";
+    ctx.font = "bold 34px sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillText(industryName || "店舗・公式アカウント", 100, 950);
+
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "28px sans-serif";
+    ctx.textAlign = "right";
+    ctx.fillText("AutoPost30 公式SNSカレンダー", 980, 950);
+
+    return canvas.toDataURL("image/png");
+  }
+
+  function renderPosts(posts, industryName) {
     postsContainer.innerHTML = "";
 
     posts.forEach(function (post) {
@@ -290,20 +421,39 @@ document.addEventListener("DOMContentLoaded", function () {
         tagClass = "tag-sales";
       }
 
+      // 画像データURLの生成（1080x1080 正方形）
+      const imgDataUrl = createPostThumbnail(post, industryName);
+
       card.innerHTML =
         '<div class="post-card-header">' +
           '<span class="day-badge">' + post.day + '日目の投稿</span>' +
           '<span class="category-tag ' + tagClass + '">' + post.category + '</span>' +
         '</div>' +
-        '<div class="post-title">' + escapeHtml(post.title) + '</div>' +
-        '<div class="post-content">' + escapeHtml(post.content) + '</div>' +
-        '<div class="post-meta">' +
-          '<div class="post-tags">' + escapeHtml(post.hashtags) + '</div>' +
-          '<div class="post-image-prompt">◆ 画像推奨: ' + escapeHtml(post.imagePrompt) + '</div>' +
+        '<div class="post-card-body">' +
+          '<div class="post-text-col">' +
+            '<div class="post-title">' + escapeHtml(post.title) + '</div>' +
+            '<div class="post-content">' + escapeHtml(post.content) + '</div>' +
+            '<div class="post-meta">' +
+              '<div class="post-tags">' + escapeHtml(post.hashtags) + '</div>' +
+              '<div class="post-image-prompt">◆ 画像推奨: ' + escapeHtml(post.imagePrompt) + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="post-thumb-col">' +
+            '<img class="post-thumb-img" src="' + imgDataUrl + '" alt="投稿画像プレビュー">' +
+            '<button type="button" class="btn-download-img download-img-btn">画像保存 (1080px)</button>' +
+          '</div>' +
         '</div>' +
         '<div class="post-actions">' +
-          '<button class="btn btn-secondary btn-sm copy-single-btn">この投稿をコピー</button>' +
+          '<button class="btn btn-secondary btn-sm copy-single-btn">この投稿文をコピー</button>' +
         '</div>';
+
+      const downloadImgBtn = card.querySelector(".download-img-btn");
+      downloadImgBtn.addEventListener("click", function () {
+        const link = document.createElement("a");
+        link.download = "AutoPost30_Day" + (post.day < 10 ? "0" + post.day : post.day) + ".png";
+        link.href = imgDataUrl;
+        link.click();
+      });
 
       const singleCopyBtn = card.querySelector(".copy-single-btn");
       singleCopyBtn.addEventListener("click", function () {

@@ -25,7 +25,84 @@ document.addEventListener("DOMContentLoaded", function () {
   const calendarContainer = document.getElementById("calendar-container");
   const calendarGrid = document.getElementById("calendar-grid");
 
+  const licenseBadge = document.getElementById("license-badge");
+  const licenseKeyInput = document.getElementById("license-key-input");
+  const verifyLicenseBtn = document.getElementById("verify-license-btn");
+  const licenseStatusMsg = document.getElementById("license-status-msg");
+
+  let isLicenseValid = false;
   let currentPosts = [];
+
+  // ライセンス検証エンジン（月替わりキー ＋ 管理者マスターキー）
+  function validateLicense(key) {
+    if (!key) return false;
+    const trimmed = key.trim();
+
+    // ゆうさん専用管理者マスターキー（無期限有効）
+    if (trimmed === "autopost-master" || trimmed === "yuu-admin-2026") {
+      return { valid: true, expires: "無期限（管理者ライセンス）" };
+    }
+
+    // デモ用キー
+    if (trimmed === "DEMO-2026") {
+      return { valid: true, expires: "お試しデモ版" };
+    }
+
+    // 月替わりキーの検証（形式：AP30-YYYYMM）
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const monthNum = now.getMonth() + 1;
+    const mm = monthNum < 10 ? "0" + monthNum : "" + monthNum;
+    const currentMonthKey = "AP30-" + yyyy + mm;
+
+    if (trimmed === currentMonthKey) {
+      return { valid: true, expires: yyyy + "年" + mm + "月末日まで有効" };
+    }
+
+    return { valid: false, expires: "" };
+  }
+
+  function applyLicenseState(result, key) {
+    if (result.valid) {
+      isLicenseValid = true;
+      licenseBadge.textContent = "認証済";
+      licenseBadge.className = "license-badge license-active";
+      licenseStatusMsg.textContent = "ライセンス有効（" + result.expires + "）";
+      licenseStatusMsg.className = "license-status-text active";
+      generateBtn.disabled = false;
+      localStorage.setItem("autopost_license_key", key.trim());
+    } else {
+      isLicenseValid = false;
+      licenseBadge.textContent = "未認証";
+      licenseBadge.className = "license-badge license-locked";
+      licenseStatusMsg.textContent = "無効または期限切れです。今月の有効なキーを入力してください。";
+      licenseStatusMsg.className = "license-status-text";
+      generateBtn.disabled = true;
+      localStorage.removeItem("autopost_license_key");
+    }
+  }
+
+  // ライセンス認証ボタン
+  verifyLicenseBtn.addEventListener("click", function () {
+    const inputVal = licenseKeyInput.value;
+    const res = validateLicense(inputVal);
+    applyLicenseState(res, inputVal);
+    if (res.valid) {
+      alert("ライセンスが承認されました！（" + res.expires + "）");
+    } else {
+      alert("ライセンスキーが無効または期限切れです。最新のキーをご確認ください。");
+    }
+  });
+
+  // 初期ロード時の自動認証チェック
+  const savedKey = localStorage.getItem("autopost_license_key") || "autopost-master";
+  if (savedKey) {
+    licenseKeyInput.value = savedKey;
+    const autoRes = validateLicense(savedKey);
+    applyLicenseState(autoRes, savedKey);
+  } else {
+    generateBtn.disabled = true;
+  }
 
   // 表示タブ切替イベント
   tabListView.addEventListener("click", function () {
@@ -152,6 +229,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // フォーム送信時
   generatorForm.addEventListener("submit", async function (e) {
     e.preventDefault();
+
+    if (!isLicenseValid) {
+      alert("月額利用ライセンスキーが未認証または期限切れです。有効なキーを入力して認証ボタンを押してください。");
+      licenseKeyInput.focus();
+      return;
+    }
 
     const selectedIndustryKey = industrySelect.value;
     let industryName = industryPresets[selectedIndustryKey].name;

@@ -600,6 +600,65 @@ label {
   background-color: var(--accent-hover);
 }
 
+.panel-header-with-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--accent-primary);
+  padding-bottom: 8px;
+}
+
+.panel-header-with-badge .section-title {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.license-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.license-locked {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.license-active {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.license-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+.license-input-wrapper {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.license-status-text {
+  font-size: 0.75rem;
+  color: #f87171;
+  display: block;
+}
+
+.license-status-text.active {
+  color: #34d399;
+}
+
 .app-footer {
   text-align: center;
   margin-top: 40px;

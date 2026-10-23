@@ -17,7 +17,21 @@
     <main class="main-layout">
       <!-- 左カラム：設定・生成パネル -->
       <section class="card config-panel">
-        <h2 class="section-title">生成パラメーター設定</h2>
+        <div class="panel-header-with-badge">
+          <h2 class="section-title">生成パラメーター設定</h2>
+          <div id="license-badge" class="license-badge license-locked">未認証</div>
+        </div>
+
+        <!-- ライセンス認証入力エリア -->
+        <div class="license-box">
+          <label for="license-key-input">月額利用ライセンスキー</label>
+          <div class="license-input-wrapper">
+            <input type="password" id="license-key-input" class="form-control" placeholder="今月の利用キーを入力">
+            <button type="button" id="verify-license-btn" class="btn btn-secondary btn-sm">認証</button>
+          </div>
+          <span id="license-status-msg" class="license-status-text">未認証：有効なライセンスキーを入力してください。</span>
+        </div>
+
         <form id="generator-form">
           <div class="form-group">
             <label for="industry-select">業種カテゴリ（全13業種対応 ＋ 自由入力）</label>

@@ -365,6 +365,8 @@ label {
 .post-actions {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
   margin-top: 10px;
 }
 
@@ -560,6 +562,24 @@ label {
 .btn-upload-img:hover {
   background-color: #475569;
   border-color: #64748b;
+}
+
+.btn-copy-img {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.btn-copy-img:hover {
+  background-color: #0369a1;
 }
 
 .btn-download-img {

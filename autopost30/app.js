@@ -470,11 +470,13 @@ document.addEventListener("DOMContentLoaded", function () {
             '<img class="post-thumb-img" src="' + currentImgDataUrl + '" alt="投稿画像プレビュー">' +
             '<button type="button" class="btn-upload-img upload-img-btn">写真を選択・合成</button>' +
             '<input type="file" accept="image/png, image/jpeg, image/webp" class="custom-file-input hidden">' +
+            '<button type="button" class="btn-copy-img copy-img-btn">画像をコピー (直接貼付)</button>' +
             '<button type="button" class="btn-download-img download-img-btn">画像保存 (1080px)</button>' +
           '</div>' +
         '</div>' +
         '<div class="post-actions">' +
-          '<button class="btn btn-secondary btn-sm copy-single-btn">この投稿文をコピー</button>' +
+          '<button class="btn btn-secondary btn-sm copy-single-btn">SNS用テキストをコピー</button>' +
+          '<button class="btn btn-secondary btn-sm copy-html-btn">ブログ・HP用HTMLをコピー</button>' +
         '</div>';
 
       const thumbImgEl = card.querySelector(".post-thumb-img");
@@ -506,11 +508,53 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.readAsDataURL(file);
       });
 
+      const copyImgBtn = card.querySelector(".copy-img-btn");
+      const copyHtmlBtn = card.querySelector(".copy-html-btn");
+
+      // 画像のクリップボード直接コピー
+      copyImgBtn.addEventListener("click", async function () {
+        try {
+          const res = await fetch(currentImgDataUrl);
+          const blob = await res.blob();
+          await navigator.clipboard.write([
+            new ClipboardItem({ "image/png": blob })
+          ]);
+          copyImgBtn.textContent = "画像コピー完了！";
+          setTimeout(function () {
+            copyImgBtn.textContent = "画像をコピー (直接貼付)";
+          }, 1500);
+        } catch (err) {
+          alert("このブラウザ環境では画像の直接コピーに対応していません。「画像保存」をご利用ください。");
+        }
+      });
+
       downloadImgBtn.addEventListener("click", function () {
         const link = document.createElement("a");
         link.download = "AutoPost30_Day" + (post.day < 10 ? "0" + post.day : post.day) + ".png";
         link.href = currentImgDataUrl;
         link.click();
+      });
+
+      // ブログ・HP用HTMLコードの一発コピー
+      copyHtmlBtn.addEventListener("click", function () {
+        const paragraphs = post.content.split("\n\n");
+        let htmlBody = "";
+        paragraphs.forEach(function (p) {
+          const formattedP = p.replace(/\n/g, "<br>");
+          htmlBody = htmlBody + "<p>" + formattedP + "</p>\n";
+        });
+
+        const blogHtml =
+          "<h3>" + post.title + "</h3>\n" +
+          htmlBody +
+          '<p style="color:#2563eb;font-weight:bold;">' + post.hashtags + "</p>";
+
+        navigator.clipboard.writeText(blogHtml).then(function () {
+          copyHtmlBtn.textContent = "HTMLコピー完了！";
+          setTimeout(function () {
+            copyHtmlBtn.textContent = "ブログ・HP用HTMLをコピー";
+          }, 1500);
+        });
       });
 
       const singleCopyBtn = card.querySelector(".copy-single-btn");

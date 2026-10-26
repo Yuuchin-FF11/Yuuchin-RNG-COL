@@ -1,10 +1,52 @@
 [
   {
+    "date": "2026.10.26",
+    "file": "記事/keyboard_controls.md",
+    "msgJa": "キーボード操作ガイドの正式英語版（How to Play with Keyboard Controls）を公開し、サイト全体のリンクと表記を最適化しました。",
+    "msgEn": "Published the official English guide for Keyboard Controls and optimized site-wide navigation links.",
+    "isNew": true
+  },
+  {
+    "date": "2026.10.02",
+    "file": "記事/corsair_equip.md",
+    "msgJa": "コルセア装備紹介（理想編・ビギナー編）の解説フォーマットを整理・更新しました。",
+    "msgEn": "Updated and polished Corsair equipment guides (Ideal & Beginner setups).",
+    "isNew": false
+  },
+  {
+    "date": "2026.10.02",
+    "file": "記事/beginner_guide.md",
+    "msgJa": "新規・復帰者向けガイド「マリグナス装備取得への道」の解説をブラッシュアップしました。",
+    "msgEn": "Polished the guide 'Path to Obtaining Malignance Armor' for new and returning players.",
+    "isNew": false
+  },
+  {
+    "date": "2026.07.14",
+    "file": "記事/odyssey_gaol.md",
+    "msgJa": "「オデシー ジェール攻略」ページに、サベッジブレードWS装備セットおよびWS時における被ダメカット50%キープの重要性の解説を追加しました。",
+    "msgEn": "Added the Savage Blade WS gear set and survivability priority guidelines to the 'Odyssey Gaol Guide'.",
+    "isNew": false
+  },
+  {
+    "date": "2026.07.14",
+    "file": "記事/sortie_corsair.md",
+    "msgJa": "ソーティ用コルセア究極連携「極光」用マクロの解説を、マクロ1と2の最新2ポチ自動完結構成にアップデートしました。",
+    "msgEn": "Updated the Sortie Corsair guide with the optimized 2-step Aurora skillchain macro setup.",
+    "isNew": false
+  },
+  {
+    "date": "2026.07.13",
+    "file": "記事/odyssey_gaol.md",
+    "msgJa": "「オデシー ジェール攻略」ページを新規作成し、コルセアのジェール用基本装備（通常殴り装備）の解説を追加しました。",
+    "msgEn": "Created the 'Odyssey Gaol Guide' and added Corsair's basic melee gear set.",
+    "isNew": false
+  },
+  {
     "date": "2026.07.13",
     "file": "記事/corsair_equip.md",
     "msgJa": "コルセア装備紹介ページに、実戦で最も安定する「おすすめメリットポイント設定」の解説を追記しました。",
     "msgEn": "Added recommended Merit Point settings for Corsair to the equipment guide.",
-    "isNew": true
+    "isNew": false
   },
   {
     "date": "2026.06.01",
@@ -52,112 +94,70 @@
     "date": "2026.05.31",
     "file": "記事/sortie_corsair_aminon.md",
     "msgJa": "ソーティ強Aminon戦におけるコルセアの開幕ロール回しや赤魔道士との弱体連携を含む特化立ち回り攻略ページを公開しました",
-    "msgEn": "Published Sortie Hard Aminon COR guide",
+    "msgEn": "Published Sortie Hard Aminon Corsair dedicated tactical guide",
     "isNew": false
   },
   {
     "date": "2026.05.29",
     "file": "記事/farming.md",
-    "msgJa": "新規・復帰者向け金策ガイドに、モグチケット【緑】を活用した三国Festive Moogle爆速スタートダッシュ金策手順を追記しました",
-    "msgEn": "Updated farming guide with Festive Moogle ticket trick",
+    "msgJa": "新規・復帰者向け金策ガイドに、モグチケット【緑】を活用した三国Festive Moogleでの最短ダッシュ金策術を追記しました",
+    "msgEn": "Added starter-dash Gil-making strategy using Mog Pell (Green) at Festive Moogles in the three nations to the New Player Gil Guide",
     "isNew": false
   },
   {
     "date": "2026.05.27",
     "file": "記事/farming.md",
-    "msgJa": "中級者・復帰者向け最強金策（オデシー箱開け＆オーメン黒の残魂集め）を追記し、新キーワードの用語辞典自動リンク登録も完了しました",
-    "msgEn": "Added mid-level farming details",
+    "msgJa": "中級者・復帰者向け最強金策（オデシー箱開け＆オーメン黒の残魂集め）を追記し、新キーワードの自動リンク辞書を整備しました",
+    "msgEn": "Added intermediate/returning player guides for Odyssey chest opening & Omen Swart Astral Detritus farming, along with new auto-links",
     "isNew": false
   },
   {
     "date": "2026.05.27",
     "file": "記事/farming.md",
-    "msgJa": "新規・復帰者向け最強の金策＆クリスタル競売ガイドを公開し、文章中キーワードの用語辞典自動リンク機能（プレミアム拡張）も実装しました",
-    "msgEn": "Published beginner farming guide with auto wiki tooltips",
+    "msgJa": "新規・復帰者向け最強の金策＆クリスタル競売ガイドを公開し、文章中キーワードの用語辞典自動リンクに対応しました",
+    "msgEn": "Published the Ultimate Gil-Making & Crystal Auction Guide for new/returning players, and implemented the premium automatic vocabulary linking system",
     "isNew": false
   },
   {
     "date": "2026.05.27",
     "file": "記事/hunter_equip.md",
-    "msgJa": "狩人・コルセアの全装備紹介ページのステータス目安アコーディオンを『STP・WSD・被ダメカット』の3大指標へスリム化・統一しました",
-    "msgEn": "Streamlined stats layout for RNG/COR gear guides",
+    "msgJa": "狩人・コルセアの全装備紹介ページのステータス目安アコーディオンを『STP・WSD・カット』の3項目に統一・簡略化しました",
+    "msgEn": "Unified and simplified the estimated stats tables on all Ranger & Corsair gear pages to the 3 major metrics (STP, WSD, PDT/DT Cut)",
     "isNew": false
   },
   {
     "date": "2026.05.27",
     "file": "記事/hunter_equip.md",
     "msgJa": "狩人の遠隔物理WS装備のWSD合計値を物理上限枠を除外して+81%に再計算し修正しました",
-    "msgEn": "Recalculated RNG ranged WS WSD to +81%",
+    "msgEn": "Recalculated and updated physical WS total WSD for Ranger to +81% by excluding the physical damage limit slot",
     "isNew": false
   },
   {
     "date": "2026.05.27",
     "file": "記事/corsair_equip.md",
-    "msgJa": "狩人・コルセア装備のニャメ装束表記（タイプB Rank30）とWSD計算を正しい仕様に修正しました",
-    "msgEn": "Fixed Nyame Rank 30 WSD representation and calculation",
+    "msgJa": "狩人・コルセア装備のニャメ装束表記（タイプB Rank30）とWSD計算を正しい最新仕様に修正しました",
+    "msgEn": "Corrected the notation to 'Path B Rank 30' and recalculated WSD for Nyame gear in Ranger and Corsair equipment pages",
     "isNew": false
   },
   {
     "date": "2026.05.27",
     "file": "記事/hunter_gastraphetes.md",
-    "msgJa": "狩人のガストラフェテス専用装備紹介ページ（スナップ・通常STP・魔法WS極限装備）を新規公開し、アコーディオンの美麗デザイン化も実装しました。",
-    "msgEn": "Published RNG Gastraphetes dedicated gear guide",
+    "msgJa": "狩人のガストラフェテス専用装備紹介ページ（スナップ・通常STP・魔法WS極限装備）を公開しました",
+    "msgEn": "Newly published Gastraphetes strategy guide for Ranger (Snapshot, STP, and Magic WS)",
     "isNew": false
   },
   {
     "date": "2026.05.26",
     "file": "記事/hunter_equip.md",
-    "msgJa": "狩人スナップ（射撃準備）＆通常遠隔（着弾）装備を追記し、各種個別装備の用語辞典単品リンク直行システムを実装しました。",
-    "msgEn": "Added RNG Snap/STP gear sets with direct wiki links",
+    "msgJa": "狩人スナップ（射撃準備）＆通常遠隔（着弾）装備を追記し、各種個別装備の用語辞典単体リンクに対応しました",
+    "msgEn": "Added Hunter's Snapshot and Ranged (TP) equipment sets, with individual equipment auto-links",
     "isNew": false
   },
   {
     "date": "2026.05.17",
     "file": "記事/starter_guide.md",
     "msgJa": "完全新規向けスタートダッシュガイド（サポジョブ取得まで）を公開しました。",
-    "msgEn": "Published ultimate beginner start dash guide (up to support job)",
-    "isNew": false
-  },
-  {
-    "date": "2026.05.13",
-    "file": "",
-    "msgJa": "サイト全体のリンク最適化と記載内容の細かな修正を行いました。",
-    "msgEn": "Optimized site links and fixed typos",
-    "isNew": false
-  },
-  {
-    "date": "2026.05.11",
-    "file": "記事/sortie_corsair.md",
-    "msgJa": "ソーティ攻略ガイドに各ボスごとの連携マクロ解説へのリンクを追加しました。",
-    "msgEn": "Added Sortie boss macro guides",
-    "isNew": false
-  },
-  {
-    "date": "2026.05.09",
-    "file": "記事/beginner_guide.md",
-    "msgJa": "新規・復帰者向けガイド「マリグナス装備取得への道」を公開しました。",
-    "msgEn": "Published Malignance gear guide for beginners",
-    "isNew": false
-  },
-  {
-    "date": "2026.05.09",
-    "file": "",
-    "msgJa": "装備ガイド内のリンクを用語辞典の最新URLに修正しました。",
-    "msgEn": "Updated gear links to newer wiki pages",
-    "isNew": false
-  },
-  {
-    "date": "2026.04.29",
-    "file": "記事/corsair_equip_beginner.md",
-    "msgJa": "コルセア装備（ビギナー編）のクイックドロー装備などを更新しました。",
-    "msgEn": "Updated Corsair beginner quick draw sets",
-    "isNew": false
-  },
-  {
-    "date": "2026.04.27",
-    "file": "記事/corsair_equip.md",
-    "msgJa": "コルセア装備（理想・ハイエンド編）を公開しました。",
-    "msgEn": "Published Corsair high-end gear guide",
+    "msgEn": "Published 'FF11 From Scratch!', the ultimate start dash guide for complete beginners.",
     "isNew": false
   }
 ]

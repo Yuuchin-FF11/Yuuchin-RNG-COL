@@ -1947,7 +1947,7 @@ nav a:hover::after {
 }
 
 /* ======================================================== */
-/* 🛡️ 管理者専用・アクセス履歴閲覧モーダル (ガラスモーフィズムUI) */
+/* 【管理者専用】アクセス履歴閲覧モーダル (ガラスモーフィズムUI) */
 /* ======================================================== */
 
 /* モーダルの全体コンテナ */
@@ -2217,3 +2217,47 @@ nav a:hover::after {
 
 
 
+
+/* ======================================================== */
+/* What's New 折りたたみアコーディオン (Glassmorphism UI) */
+/* ======================================================== */
+.whats-new-accordion {
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.whats-new-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.2rem;
+    color: var(--accent-color, #4facfe);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    margin: 0.5rem 0.5rem 0 0.5rem;
+    transition: all 0.25s ease;
+    user-select: none;
+}
+.whats-new-summary::-webkit-details-marker {
+    display: none;
+}
+.whats-new-summary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.whats-new-summary .accordion-icon {
+    font-size: 0.85rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.whats-new-accordion[open] .whats-new-summary .accordion-icon {
+    transform: rotate(180deg);
+}
+.whats-new-accordion[open] .whats-new-summary {
+    margin-bottom: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+}

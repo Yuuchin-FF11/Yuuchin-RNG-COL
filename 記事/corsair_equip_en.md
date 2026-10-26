@@ -10,13 +10,13 @@ This guide details the recommended equipment for Corsair.
 
 The following settings are highly recommended for the most stable and effective setup:
 
-・Group 1
+- Group 1
 Phantom Roll Recast: 5 steps
 Quick Draw Recast: 5 steps
 
 For Group 1, these two options are without doubt the best choices. Other options such as Quick Draw Accuracy, Random Deal Recast, and Bust Duration Reduction do not yield significant benefits even with points invested. Thus, maximizing Phantom Roll Recast and Quick Draw Recast is the most stable choice.
 
-・Group 2
+- Group 2
 Snake Eye: 1 step
 Fold: 1 step
 Winning Streak: 3 steps

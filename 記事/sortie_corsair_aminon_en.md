@@ -4,26 +4,26 @@ This is a dedicated, highly practical guide detailing the exact role, rotation, 
 
 ---
 
-## 🛡️ Recommended Party Composition
+## Recommended Party Composition
 
 This Aminon (Hard Mode) strategy is built upon the following **Physical DPS & Absorb-TP Management Setup**:
 
 | Job | Primary Role | Recommended Support Job | Reason & Strategy |
 | :--- | :--- | :--- | :--- |
-| 🛡️ **Paladin (PLD)** | Main Tank (Fixed) | Any sub that can cast Stoneskin | Maximizes knockback prevention and self-defense. |
-| 💃 **Dancer (DNC)** | Main DPS / Steps & Debuffs | **Sub DRG (Dragoon)** | Boosts TP generation via jumps, maximizing physical DPS while managing enmity. |
-| 🎲 **Corsair (COR)** | Physical DPS / Roll Support | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
-| 🔴 **Red Mage (RDM)** | Enfeebling Spells / Healing | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
-| 🎵 **Bard (BRD)** | Song Support / Sub-DPS | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
-| 🌀 **Geomancer (GEO)** | Geo-Colure Support | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+| **Paladin (PLD)** | Main Tank (Fixed) | Any sub that can cast Stoneskin | Maximizes knockback prevention and self-defense. |
+| **Dancer (DNC)** | Main DPS / Steps & Debuffs | **Sub DRG (Dragoon)** | Boosts TP generation via jumps, maximizing physical DPS while managing enmity. |
+| **Corsair (COR)** | Physical DPS / Roll Support | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+| **Red Mage (RDM)** | Enfeebling Spells / Healing | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+| **Bard (BRD)** | Song Support / Sub-DPS | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
+| **Geomancer (GEO)** | Geo-Colure Support | **Sub DRK (Dark Knight)** | Constantly drains boss TP with **Absorb-TP** (Mandatory). |
 
-### ⚠️ Why COR, RDM, BRD, and GEO Must Sub Dark Knight (/DRK)
+### 【Important】 Why COR, RDM, BRD, and GEO Must Sub Dark Knight (/DRK)
 If Aminon is allowed to use even **one** special move (Weapon Skill), it will instantly lead to a party wipe.
 Therefore, all support and backline members (**COR, RDM, BRD, and GEO**) must sub Dark Knight to **rotate Absorb-TP continuously throughout the entire fight**, keeping Aminon's TP locked at absolute zero.
 
 ---
 
-## 📐 Positioning & Knockback Countermeasures
+## Positioning & Knockback Countermeasures
 
 Since Aminon frequently uses high-impact knockback moves, correct positioning is vital for survival.
 
@@ -42,7 +42,7 @@ Since Aminon frequently uses high-impact knockback moves, correct positioning is
 
 ---
 
-## 🔮 Absolute Prerequisites for Sub-DRK "Absorb-TP" Success
+## Absolute Prerequisites for Sub-DRK "Absorb-TP" Success
 
 While support and backline members rotate Absorb-TP, **Aminon's exceptionally high Magic Evasion means Absorb-TP is highly prone to resists (failures) under normal conditions.**
 
@@ -50,8 +50,8 @@ Since a single resist can lead to an immediate party wipe if Aminon executes a W
 
 ### 1. RDM and BRD "Magic Evasion Down" Support
 Absorb-TP will **not** land reliably unless these two key debuffs are permanently active:
-*   🔴 **Red Mage**: Maintain **Frazzle** on the boss at all times.
-*   🎵 **Bard**: Maintain **Dark Threnody** on the boss at all times.
+*   **Red Mage**: Maintain **Frazzle** on the boss at all times.
+*   **Bard**: Maintain **Dark Threnody** on the boss at all times.
 *   *※ Without Frazzle and Dark Threnody, Corsair's Absorb-TP will almost certainly resist.*
 
 ### 2. Corsair's Gear Specifications
@@ -59,12 +59,12 @@ Absorb-TP will **not** land reliably unless these two key debuffs are permanentl
 
 ---
 
-## 🔄 Battle Flow & Specific Job Roles
+## Battle Flow & Specific Job Roles
 
-### 🛡️ Paladin (Tank) Role
+### Paladin (Tank) Role
 *   Maintain and reapply **Stoneskin** constantly while assisting with self-healing, ensuring absolute control and enmity of the boss.
 
-### 💃 Dancer (Main DPS) Role
+### Dancer (Main DPS) Role
 *   **Fierce TP & FM Cycle for Unrivaled DPS**:
     *   Fully utilizing **Sub DRG (Dragoon)**, execute **Jump abilities** (Jump, High Jump, etc.) on cooldown to instantly secure massive TP.
     *   Constantly apply **Steps** to rapidly generate **FM (Finishing Moves)**.
@@ -74,13 +74,13 @@ Absorb-TP will **not** land reliably unless these two key debuffs are permanentl
     *   Since the Dancer puts out immense DPS, the risk of pulling enmity off the Tank (Paladin) increases heavily as the battle progresses.
     *   Therefore, after dealing a significant chunk of damage, the Dancer must execute **Super Jump** to shed their enmity, safely handing the boss's attention back to the Tank.
 
-### 🎲 Support/Backline Roles (COR, RDM, BRD, GEO)
-*   **⚠️ STRICT PROHIBITION of Auto-Attacks (Melee Attacks)!**:
+### Support/Backline Roles (COR, RDM, BRD, GEO)
+*   **【CRITICAL】 STRICT PROHIBITION of Auto-Attacks (Melee Attacks)!**:
     *   **Support and backline members (COR, RDM, BRD, GEO) must absolutely NEVER auto-attack (physically swing at) Aminon.** Auto-attacks generate immense TP for the boss, easily overwhelming your Absorb-TP rotation and triggering fatal party-wipe special moves.
 *   **TP Generation**: Rely on **Tactician's Roll** Regain + **Absorb-TP** (which returns the drained TP to you via Magic Acumen, etc.) + **Quick Draw** to safely accumulate TP without feeding the boss.
 *   **DPS**: As soon as TP is secured, step in for a split second, fire off a single Weapon Skill (Savage Blade, etc.), and immediately disengage (ensuring you do not land a single auto-attack by accident).
 
-### 🔴 【The MVP of this Battle】 The Overwhelming Red Mage Role
+### 【The MVP of this Battle】 The Overwhelming Red Mage Role
 In this physical / Absorb-TP setup, **the Red Mage holds by far the most challenging and high-pressure role in the entire run.** The RDM must execute an immense list of tasks solo:
 1.  **Non-stop Buff Management**: Maintain and cast **Haste II**, **Phalanx II**, and **Refresh III** on all 6 party members constantly.
 2.  **Flawless Debuff Maintenance**: Instantly re-apply Frazzle and other crucial enfeebling spells the second they wear off.
@@ -91,7 +91,7 @@ The Red Mage's god-tier multi-tasking is the absolute pillar of survival and the
 
 ---
 
-## 🧭 Opening: Pre-battle Roll Rotation
+## Opening: Pre-battle Roll Rotation
 
 Upon arriving in Aminon's chamber and before engaging in battle, there are **two main roll rotation patterns** depending on your party composition and strategy:
 
@@ -100,7 +100,7 @@ Upon arriving in Aminon's chamber and before engaging in battle, there are **two
 | **Pattern A** | **Chaos Roll ＋ Tactician's Roll** | Boosts physical attack power while ensuring high TP regen (Regain) for rapid WS execution. |
 | **Pattern B** | **Miser's Roll ＋ Tactician's Roll** | Minimizes TP consumption (Save TP) upon weapon skill usage, maximizing WS frequency in tandem with Tactician's Regain. |
 
-### 🔄 The Crooked Cards Rotation (Maximizing Roll Value)
+### The Crooked Cards Rotation (Maximizing Roll Value)
 
 1.  Activate **Crooked Cards** and roll your first roll (e.g., Chaos Roll or Miser's Roll).
 2.  Immediately execute **Random Deal**.
@@ -109,14 +109,14 @@ Upon arriving in Aminon's chamber and before engaging in battle, there are **two
 
 ---
 
-## ⚔️ Post-Engage: TP Generation & DPS Rotation
+## Post-Engage: TP Generation & DPS Rotation
 
 ### 1. High-Speed TP Generation via Regain & Quick Draw
 Once the battle begins, generate TP as quickly as possible using:
 *   The passive Regain effect from the pre-applied **Tactician's Roll**.
 *   Firing **Quick Draw** shots to actively and instantly generate TP.
 
-### 2. ⚠️ Same Weapon Skill Cumulative Resistance & Party WS Rotation
+### 2. 【Important】 Same Weapon Skill Cumulative Resistance & Party WS Rotation
 Aminon (Hard Mode) possesses an extremely punishing mechanic: **using the exact same Weapon Skill (WS) repeatedly builds a massive cumulative resistance, causing subsequent WS damage of that type to drop drastically.**
 Therefore, having the entire party spam only one WS (such as Savage Blade) is strictly forbidden! To maintain optimal damage output, the party must **rotate different types of WS to distribute and bypass the cumulative resistance.**
 
@@ -125,38 +125,38 @@ To safely mitigate Aminon's resistance while maintaining maximum DPS, the party 
 
 | Job | Recommended WS | Tactical Execution & Role |
 | :--- | :--- | :--- |
-| 🛡️ **Paladin (PLD)** | **Atonement** | The Tank's primary focus is maintaining enmity, Stoneskin, and self-healing. **The Tank does not need to use WS.** However, if there is a surplus of resources, using Atonement helps disperse the boss's WS resistance even further. |
-| 🎲 **Corsair (COR)** | **Savage Blade** | Firing single, heavy physical Savage Blade casts when safe, COR focuses on physical slashing damage. |
-| 💃 **Dancer (DNC)** | **Ruthless Stroke**<br>**Rudra's Storm** | As the primary DPS, the Dancer rotates between Ruthless Stroke and Rudra's Storm, beautifully dispersing their own cumulative resistance while keeping damage at absolute peak. |
-| 🔴 **Red Mage (RDM)** | **Black Halo** | Between high-pressure enfeebling and buffing duties, RDM gathers TP and strikes with the powerful club WS Black Halo. |
-| 🎵 **Bard (BRD)** | **Mordant Rime** | In between song maintenance, Dark Threnody, and Absorb-TP, the Bard uses their dedicated dagger WS Mordant Rime to assist in damage output. |
-| 🌀 **Geomancer (GEO)** | **Judgment**<br>**Flash Nova** | Between bubble maintenance and Absorb-TP, GEO casts the club WS Judgment or Flash Nova.<br>*※ While Flash Nova is a Light-elemental magic WS, as long as the Absorb-TP rotation perfectly locks the boss's TP at zero, Aminon's absorption aura will NEVER activate, allowing Flash Nova to land safely and deal immense damage! Rotation between physical Judgment and Flash Nova is highly effective.* |
+| **Paladin (PLD)** | **Atonement** | The Tank's primary focus is maintaining enmity, Stoneskin, and self-healing. **The Tank does not need to use WS.** However, if there is a surplus of resources, using Atonement helps disperse the boss's WS resistance even further. |
+| **Corsair (COR)** | **Savage Blade** | Firing single, heavy physical Savage Blade casts when safe, COR focuses on physical slashing damage. |
+| **Dancer (DNC)** | **Ruthless Stroke**<br>**Rudra's Storm** | As the primary DPS, the Dancer rotates between Ruthless Stroke and Rudra's Storm, beautifully dispersing their own cumulative resistance while keeping damage at absolute peak. |
+| **Red Mage (RDM)** | **Black Halo** | Between high-pressure enfeebling and buffing duties, RDM gathers TP and strikes with the powerful club WS Black Halo. |
+| **Bard (BRD)** | **Mordant Rime** | In between song maintenance, Dark Threnody, and Absorb-TP, the Bard uses their dedicated dagger WS Mordant Rime to assist in damage output. |
+| **Geomancer (GEO)** | **Judgment**<br>**Flash Nova** | Between bubble maintenance and Absorb-TP, GEO casts the club WS Judgment or Flash Nova.<br>*※ While Flash Nova is a Light-elemental magic WS, as long as the Absorb-TP rotation perfectly locks the boss's TP at zero, Aminon's absorption aura will NEVER activate, allowing Flash Nova to land safely and deal immense damage! Rotation between physical Judgment and Flash Nova is highly effective.* |
 
 By rotating these diverse Weapon Skills, the party completely neutralizes Aminon's cumulative resistance, maintaining maximum damage efficiency until the very end of the battle!
 
 ---
 
-## 🎯 Synergy with Red Mage: Debuff & Quick Draw Enhancements
+## Synergy with Red Mage: Debuff & Quick Draw Enhancements
 
 During the Aminon fight, enhancing the crucial debuff spells cast by your party's Red Mage (RDM) using Corsair's Quick Draw is of paramount importance. 
 
 Keep a close eye on the Red Mage's debuff casts and shoot the corresponding shots immediately to boost their effectiveness.
 
-### 🤝 Debuff and Quick Draw Correspondence List
+### Debuff and Quick Draw Correspondence List
 
 | RDM Debuff Spells | Corsair's Quick Draw Shot | Enhanced Debuff Effect |
 | :--- | :--- | :--- |
-| 🔴 **Dia** | ➡️ **Light Shot** | Further deepens the Physical Defense Down effect, significantly boosting the party's physical damage output. |
-| 🔵 **Paralyze** | ➡️ **Ice Shot** | Greatly increases the paralysis activation rate and depth, heavily restricting the boss's actions. |
+| **Dia** | ➔ **Light Shot** | Further deepens the Physical Defense Down effect, significantly boosting the party's physical damage output. |
+| **Paralyze** | ➔ **Ice Shot** | Greatly increases the paralysis activation rate and depth, heavily restricting the boss's actions. |
 
-### ⚠️ Absolute Gear Rule for Quick Draw Support
+### 【Important】 Absolute Gear Rule for Quick Draw Support
 *   When executing these debuff enhancement shots, **you MUST equip Empyrean Feet armor (CS Boots +3 / Chasseur's Boots +3, etc.)**!
 *   **Critical Specs of Empyrean Feet**:
     *   This gear piece houses the unique property "Enhances Quick Draw" (increases debuff effectiveness by +20% and extends duration). Paired with its exceptionally high Magic Accuracy (M.Acc), it ensures you bypass Aminon's extremely high Magic Evasion to successfully land and maximize the debuff enhancements.
 
 ---
 
-## 🛡️ Aminon (Hard Mode) Corsair Dedicated Real Combat Gear Sets
+## Aminon (Hard Mode) Corsair Dedicated Real Combat Gear Sets
 
 These are the ultra-high-end real combat gear sets designed to withstand Aminon's terrifying mechanics and heavy damage while maintaining reliable Absorb-TP rotations and physical DPS.
 
@@ -263,7 +263,7 @@ This is a highly optimized, specialized build dedicated entirely to pushing the 
     Filling the Neck, Back, and Waist slots with "Crepuscular Gorget", "Crepuscular Cape", and "Crepuscular Sash" grants unparalleled M.Acc additions. Boasting over +30 M.Acc per slot, this synergy leaves other gear combinations far behind.
 *   **Highly Effective Accessory Synergy with Stikini Rings & Custom Earrings**
     By pairing "Crepuscular Earring" and "Chasseur's Earring +2" in the ear slots and double-stacking "Stikini Ring +1" in the ring slots, the build gains M.Acc +22 and Magic Skill +16. Boosting Dark Magic skill directly increases the base success rate and absorption of Absorb-TP, making this a highly logical, elite choice.
-*   **⚠️ Crucial Party Coordination in Actual Combat**
+*   **【Important】 Crucial Party Coordination in Actual Combat**
     Even with this absolute best-in-slot M.Acc setup, landing Absorb-TP on Aminon's extremely high Magic Evasion is impossible for a Corsair acting alone. Reliable landing can only be achieved through perfect synergy with your party: specifically, the Red Mage's "Frazzle III" (for Magic Evasion down) and the Bard's "Dark Threnody II" (for Dark Resistance down) to allow the Absorb-TP rotation to succeed.
 
 ---

@@ -55,6 +55,7 @@ By clearing various objectives in the "Quests" menu, you will accumulate "Eminen
 
 ### Use of Eminence Points
 Accumulated points can be exchanged for equipment.
+
 - **Use as Your Own Gear**: Excellent as a bridge until you get proper IL gear.
 - **Sell to NPCs for Gil**: You can earn the funds (Gil) needed for your adventure by selling unnecessary equipment to NPCs.
 
@@ -84,16 +85,19 @@ After reaching Level 99, these jobs are particularly recommended for efficient s
 
 ### Thief (THF)
 **Primary use: Gil farming, equipment gathering**
+
 - **Treasure Hunter (TH)**: Thief's greatest weapon. It increases drop rates from enemies, dramatically improving the efficiency of gathering equipment (especially the [Malignance set](https://wiki.ffo.jp/html/39726.html)).
 - **Cornerstone of Gil Farming**: The strategy of gathering "Black Residue" in the Omen "Trash" route, which becomes accessible later, is extremely powerful.
 
 ### Blue Mage (BLU)
 **Primary use: AOE farming, versatile soloing**
+
 - **AOE Magic Annihilation**: BLU has powerful and MP-efficient AOE spells, ideal for earning Merit Points in a short time.
 - **The Learning Curve**: It's a bit tough until you learn (Learning) the spells, but once you have a decent repertoire, it becomes one of the strongest solo jobs capable of both physical and magical combat.
 
 ### Red Mage (RDM)
 **Primary use: High-difficulty soloing, BF Gil farming**
+
 - **Ultimate Versatility**: Multitalented like Blue Mage, but the hurdle for optimizing gear is slightly higher.
 - **Solo High-Tier BFs**: Once geared, RDM can solo High-Tier Mission Battlefields (HTMB) like "The Warrior's Path," enabling Gil farming through the rewards.
 
@@ -103,12 +107,14 @@ To obtain the [Malignance Armor set](https://wiki.ffo.jp/html/39726.html), one o
 
 ### Recommended: "Taeon Armor" First
 Gathering **"Taeon Armor"** is an efficient way to bridge the gap until you have Ambuscade gear.
+
 - **Source**: Albion Skirmish - Yorcia Weald [U]
 - **Features**: Relatively easy to obtain, and by adding "Augments," the performance becomes viable even in former front-line content.
 - **Note**: Albion Skirmish - Yorcia has unique rules, so it may take a little getting used to.
 
 ### Ambuscade Gear (Mummu & Ayamo)
 For steady solo progress, gear obtained from Ambuscade is also very powerful.
+
 - **Recommended**: **[Mummu Set](https://wiki.ffo.jp/html/36746.html)**, **[Ayamo Set](https://wiki.ffo.jp/html/36745.html)**
 - **Progression**: It's smooth to strengthen your combat power with Taeon gear while accumulating Ambuscade points for exchange. Of course, combining Taeon and Ambuscade is also an option!
 

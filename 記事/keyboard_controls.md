@@ -22,7 +22,7 @@ PADではできないような便利なショートカットキー等がある�
 
 <img src="../画像素材/images/keyboard_layout_highlighted_fixed.png?v=3" alt="キーボードの操作キー配置（テンキーと矢印キー）" style="max-width: 600px; width: 100%; height: auto; display: block; margin: 1.5rem 0; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
 
-> 💡 **操作の基本ルール**
+> 【操作の基本ルール】
 > FFXIのキーボード操作では、基本的にすべての行動やメニュー選択において、**Enterキー** で「決定」、**Escapeキー** で「キャンセル」となります。
 
 ---

@@ -2261,3 +2261,8 @@ nav a:hover::after {
     margin-bottom: 0.75rem;
     background: rgba(255, 255, 255, 0.05);
 }
+
+/* Ensure nested lists keep solid disc bullet markers in markdown body */
+.markdown-body ul ul {
+    list-style-type: disc !important;
+}

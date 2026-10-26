@@ -106,18 +106,18 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
   In physical ranged Weapon Skills, "Accuracy is paramount—if a shot doesn't hit, it's meaningless." Because missing a physical WS leads to a devastating loss (complete waste of TP and a massive drop in damage), this set is strategically configured to perfectly balance high Ranged Accuracy with high Weapon Skill Damage (WSD) to minimize any chance of missing.
 * **Complementary Accessory Pairing (Moonshade & Beyla, Epaminondas & Ifrimad)**:
   By pairing accessories that lack accuracy but offer massive specialized stats with pieces that heavily boost Ranged Accuracy and core stats, this set achieves an incredible equilibrium.
-  * **Ears (Moonshade Earring × Beyla Earring)**:
-    Since the left ear "Moonshade Earring" is dedicated entirely to "TP Bonus" and lacks Ranged Accuracy, the right ear features the "Beyla Earring" to aggressively boost Ranged Accuracy on the right side.
-  * **Rings (Epaminondas's Ring × Ifrimad Ring)**:
-    Since the left ring "Epaminondas's Ring" is a pure "WSD boost" that lacks Ranged Accuracy and even reduces AGI by 10, the right ring slot is equipped with the "Ifrimad Ring" to heavily compensate by pumping up core stats and Ranged Accuracy on the right side.
+* **Ears (Moonshade Earring × Beyla Earring)**:
+  Since the left ear "Moonshade Earring" is dedicated entirely to "TP Bonus" and lacks Ranged Accuracy, the right ear features the "Beyla Earring" to aggressively boost Ranged Accuracy on the right side.
+* **Rings (Epaminondas's Ring × Ifrimad Ring)**:
+  Since the left ring "Epaminondas's Ring" is a pure "WSD boost" that lacks Ranged Accuracy and even reduces AGI by 10, the right ring slot is equipped with the "Ifrimad Ring" to heavily compensate by pumping up core stats and Ranged Accuracy on the right side.
 * **Ranger's Advantage and Uncompromising Focus on Physical WS Stability**:
   Although Rangers naturally possess higher default Ranged Accuracy compared to Corsairs, missing a physical WS is still too costly to ignore. This hybrid golden ratio ensures that you never suffer the painful sting of a missed Last Stand.
 * **Solid Foundation with "Amini Bottillon +3" and "Nyame Gauntlets (Path B Rank 30)"**:
   While maximizing your Last Stand output with "Amini Bottillon +3" (WSD+12%), adopting top-tier "Nyame Gauntlets (Path B Rank 30)" establishes a formidable foundation that delivers top-class Ranged Accuracy, WSD, and Damage Taken Cut.
 
 <div style="background: rgba(255, 215, 0, 0.08); border-left: 4px solid #ffd700; border-radius: 6px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-<h4 style="margin: 0 0 0.8rem 0; color: #ffd700; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-<i class="fa-solid fa-circle-exclamation"></i> 【Latest Testing Note: AM Caban +3 Outperforms Nyame Mail for Body Slot】
+<h4 style="margin: 0 0 0.8rem 0; color: #ffd700; font-size: 1.1rem; font-weight: 700;">
+※ Important Note
 </h4>
 <p style="margin: 0; line-height: 1.7; font-size: 0.95rem;">
 Through recent in-game verification, it was discovered that equipping "AM Caban +3" (Amini Caban +3) actually produces higher physical WS damage than Nyame Mail.<br>

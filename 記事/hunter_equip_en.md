@@ -87,7 +87,7 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
 * Ranged Weapon: [与一の弓 (Rank 15)](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター (Rank 15)](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ (Rank 15)](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート (Rank 15)](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト (Rank 15)](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
 * Ammo: Chrono Arrow
 * Head: OR Beret +4 (Orion Beret +4)
-* Body: Nyame Mail (Path B Rank 30)
+* Body: AM Caban +3 (Amini Caban +3)
 * Hands: Nyame Gauntlets (Path B Rank 30)
 * Legs: AR Braccae +4 (Arcadian Braccae +4)
 * Feet: AM Bottillon +3 (Amini Bottillon +3)
@@ -99,7 +99,7 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
 * Back: Belenus's Cape (AGI+30, Ranged Accuracy+20, Ranged Attack+20, WSD+10%)
 * Waist: Fotia Belt
 
-<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+81%</strong></td><td>Head (+10%), Body Nyame (+13%), Hands Nyame (+11%), Legs (+10%), Feet AM (+12%), Back (+10%), Waist (+10%), Left Ring (+5%)</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-24%</strong></td><td>Body Nyame (-9%), Hands Nyame (-7%), Feet AM (-8%)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr></tbody></table></details>
+<details><summary>Estimated Total Stats (Click to expand)</summary><table><thead><tr><th>Item</th><th>Total Value</th><th>Details/Notes</th></tr></thead><tbody><tr><td><strong>Weapon Skill Damage (WSD) Total</strong></td><td><strong>+68%</strong></td><td>Head (+10%), Hands Nyame (+11%), Legs (+10%), Feet AM (+12%), Back (+10%), Waist (+10%), Left Ring (+5%)<br>* Note: While the on-paper WSD total decreases by switching to AM Caban +3, actual combat damage surpasses Nyame Mail as verified in testing.</td></tr><tr><td><strong>Damage Taken Cut Total</strong></td><td><strong>-15%</strong></td><td>Hands Nyame (-7%), Feet AM (-8%)</td></tr><tr><td><strong>Store TP Total</strong></td><td><strong>None</strong></td><td>Specifically for Weapon Skill hit (mid-shot only)</td></tr></tbody></table></details>
 
 #### Equipment Points & Commentary
 * **The Golden Balance of Ranged Accuracy and WSD in Physical WS**:
@@ -112,8 +112,19 @@ Optimized set to maximize physical ranged Weapon Skills like "Last Stand" and "J
     Since the left ring "Epaminondas's Ring" is a pure "WSD boost" that lacks Ranged Accuracy and even reduces AGI by 10, the right ring slot is equipped with the "Ifrimad Ring" to heavily compensate by pumping up core stats and Ranged Accuracy on the right side.
 * **Ranger's Advantage and Uncompromising Focus on Physical WS Stability**:
   Although Rangers naturally possess higher default Ranged Accuracy compared to Corsairs, missing a physical WS is still too costly to ignore. This hybrid golden ratio ensures that you never suffer the painful sting of a missed Last Stand.
-* **Solid Foundation with "Amini Bottillon +3" and "Nyame (Path B Rank 30)"**:
-  While maximizing your Last Stand output with "Amini Bottillon +3" (WSD+12%), adopting top-tier "Nyame Mail (Path B Rank 30)" and "Nyame Gauntlets (Path B Rank 30)" establishes a formidable foundation that delivers top-class Ranged Accuracy, WSD, and Damage Taken Cut.
+* **Solid Foundation with "Amini Bottillon +3" and "Nyame Gauntlets (Path B Rank 30)"**:
+  While maximizing your Last Stand output with "Amini Bottillon +3" (WSD+12%), adopting top-tier "Nyame Gauntlets (Path B Rank 30)" establishes a formidable foundation that delivers top-class Ranged Accuracy, WSD, and Damage Taken Cut.
+
+<div style="background: rgba(255, 215, 0, 0.08); border-left: 4px solid #ffd700; border-radius: 6px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+<h4 style="margin: 0 0 0.8rem 0; color: #ffd700; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+<i class="fa-solid fa-circle-exclamation"></i> 【Latest Testing Note: AM Caban +3 Outperforms Nyame Mail for Body Slot】
+</h4>
+<p style="margin: 0; line-height: 1.7; font-size: 0.95rem;">
+Through recent in-game verification, it was discovered that equipping "AM Caban +3" (Amini Caban +3) actually produces higher physical WS damage than Nyame Mail.<br>
+In testing against Mandragoras in West Sarutabaruta under capped pDIF (ignoring enemy defense) at 3,000 TP, comparing "AM Caban +3" against "Nyame Mail (Path B Rank 30)" revealed that AM Caban +3 consistently dealt slightly higher damage.<br>
+Therefore, the conclusion is that for the body slot during physical ranged WS, "AM Caban +3" is the definitive top choice in any combat situation.
+</p>
+</div>
 
 ---
 

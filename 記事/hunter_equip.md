@@ -85,7 +85,7 @@
 * 遠隔武器：[与一の弓（ランク15）](https://wiki.ffo.jp/html/3079.html) or [アナイアレイター（ランク15）](https://wiki.ffo.jp/html/3080.html) or [ガーンデーヴァ（ランク15）](https://wiki.ffo.jp/html/20383.html) or [アキヌフォート（ランク15）](https://wiki.ffo.jp/html/35357.html) or [フォーマルハウト（ランク15）](https://wiki.ffo.jp/html/35356.html) or [ピナカ](https://wiki.ffo.jp/html/38966.html) or [アープ](https://wiki.ffo.jp/html/38967.html)
 * 矢弾：クロノアロー
 * 頭：ＯＲベレー+4
-* 胴：ニャメメイル（タイプB Rank30）
+* 胴：ＡＭカバン+3
 * 両手：ニャメガントレ（タイプB Rank30）
 * 両脚：ＡＲブラッカエ+4
 * 両足：ＡＭボティヨン+3
@@ -97,7 +97,7 @@
 * 背：ベレナスケープ（AGI+30、飛命+20、飛攻+20、WSD+10%）
 * 腰：フォシャベルト
 
-<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+81%</strong></td><td>頭(+10%), 胴ニャメ(+13%), 手ニャメ(+11%), 脚(+10%), 足AM(+12%), 背(+10%), 腰(+10%), 左指(+5%)</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-24%</strong></td><td>胴ニャメ-9%, 手ニャメ-7%, 足AM-8%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
+<details><summary>合計ステータス目安（クリックで開閉）</summary><table><thead><tr><th>項目</th><th>合計値</th><th>内訳・備考</th></tr></thead><tbody><tr><td><strong>ウェポンスキルダメージ (WSD)合計</strong></td><td><strong>+68%</strong></td><td>頭(+10%), 手ニャメ(+11%), 脚(+10%), 足AM(+12%), 背(+10%), 腰(+10%), 左指(+5%)<br>※胴をＡＭカバン+3にしたことで額面のWSD合計値は下がりますが、実戦検証の通り実ダメージはニャメ胴を上回ります</td></tr><tr><td><strong>被ダメージカット合計</strong></td><td><strong>-15%</strong></td><td>手ニャメ-7%, 足AM-8%</td></tr><tr><td><strong>ストアTP合計</strong></td><td><strong>なし</strong></td><td>ウェポンスキル（着弾）のため</td></tr></tbody></table></details>
 
 #### 装備のポイント・解説
 * 「物理WS（ラストスタンド）における「飛命」と「WSD」の妥協なき黄金バランス」:
@@ -110,8 +110,19 @@
     左指の「エパミノダスリング」が飛命がなくAGIも下がる「WSD特化」であるため、右指には「イフラマドリング」を採用し、AGIをはじめとする全ステータスと飛命を右側で思いっきり盛るようにして補っています。
 * 「狩人の特性を活かしつつ、ミスを絶対に許さない設計」:
   狩人はデフォルトでコルセアよりも遠隔命中が高いジョブ特性を持っていますが、それでも物理WSで外してしまうのはあまりにももったいないため、安易なWSD一辺倒にせず、この飛命・WSDの黄金比率を採用しています。
-* 「「ＡＭボティヨン+3」と「ニャメ（タイプB Rank30）」による基盤の確立」:
-  足装備の「ＡＭボティヨン+3（WSD+12%）」でWS火力を極限まで高めつつ、胴・手にはオグメ最高峰である「ニャメメイル（タイプB Rank30）」「ニャメガントレ（タイプB Rank30）」を採用することで、高飛命・高WSD・高カットのすべてをハイレベルでクリアしています。
+* 「「ＡＭボティヨン+3」と「ニャメガントレ（タイプB Rank30）」による基盤の確立」:
+  足装備の「ＡＭボティヨン+3（WSD+12%）」でWS火力を極限まで高めつつ、手装備にはオグメ最高峰である「ニャメガントレ（タイプB Rank30）」を採用することで、高飛命・高WSD・高カットのすべてをハイレベルでクリアしています。
+
+<div style="background: rgba(255, 215, 0, 0.08); border-left: 4px solid #ffd700; border-radius: 6px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+<h4 style="margin: 0 0 0.8rem 0; color: #ffd700; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+<i class="fa-solid fa-circle-exclamation"></i> 【最新検証あとがき：胴装備はニャメよりＡＭカバン+3が優位】
+</h4>
+<p style="margin: 0; line-height: 1.7; font-size: 0.95rem;">
+これは最近の検証で判明したことなのですが、狩人の物理WSダメージについては、ニャメメイルよりも「ＡＭカバン+3」を装備したまま撃った方がダメージが伸びることがわかりました。<br>
+サルタバルタのマンドラゴラを対象に攻防比をキャップ（防御力の影響を受けない状態）させた上で、それぞれ「ＡＭカバン+3」と「ニャメ胴（タイプB Rank30）」でTP3000まで貯めて撃ち比べた結果、ＡＭカバン+3の方が若干ですが確実にダメージが高くなりました。<br>
+したがって、現在の結論として、遠隔物理WSの胴装備に関してはどんな状況でも「ＡＭカバン+3」一択で良いという結論に至りました。
+</p>
+</div>
 
 ---
 

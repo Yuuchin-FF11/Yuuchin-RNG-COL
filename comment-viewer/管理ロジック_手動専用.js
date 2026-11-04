@@ -98,60 +98,6 @@ class ReadAloudManager {
         }
     }
 
-    async speakVoiceVox(text, speakerId) {
-        try {
-            const queryUrl = `http://localhost:50021/audio_query?text=${encodeURIComponent(text)}&speaker=${speakerId}`;
-            const queryRes = await fetch(queryUrl, { method: 'POST' });
-            if (!queryRes.ok) throw new Error('VOICEVOX query failed');
-            const queryData = await queryRes.json();
-
-            if (this.rateSlider) {
-                queryData.speedScale = parseFloat(this.rateSlider.value);
-            }
-            if (this.pitchSlider) {
-                queryData.pitchScale = parseFloat(this.pitchSlider.value) - 0.5;
-            }
-
-            const synthUrl = `http://localhost:50021/synthesis?speaker=${speakerId}`;
-            const synthRes = await fetch(synthUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(queryData)
-            });
-            if (!synthRes.ok) throw new Error('VOICEVOX synthesis failed');
-            
-            const audioBlob = await synthRes.blob();
-            const audioUrl = URL.createObjectURL(audioBlob);
-            const audio = new Audio(audioUrl);
-            
-            if (this.volumeSlider) {
-                audio.volume = parseInt(this.volumeSlider.value) / 100;
-            } else {
-                audio.volume = 1.0;
-            }
-
-            return new Promise((resolve) => {
-                audio.onended = () => {
-                    URL.revokeObjectURL(audioUrl);
-                    resolve(true);
-                };
-                audio.onerror = (e) => {
-                    console.error('Audio playback error:', e);
-                    URL.revokeObjectURL(audioUrl);
-                    resolve(false);
-                };
-                audio.play().catch(err => {
-                    console.error('Audio play blocked:', err);
-                    URL.revokeObjectURL(audioUrl);
-                    resolve(false);
-                });
-            });
-        } catch (err) {
-            console.warn('VOICEVOX is not running or failed:', err);
-            return false;
-        }
-    }
-
     async processQueue() {
         if (this.speaking || this.queue.length === 0) {
             return;
@@ -166,29 +112,6 @@ class ReadAloudManager {
         }
 
         const item = this.queue.shift();
-        const charVal = this.characterSelect ? this.characterSelect.value : 'standard';
-
-        if (item.lang === 'ja-JP' && charVal.startsWith('vv_')) {
-            const speakerId = parseInt(charVal.replace('vv_', ''));
-            const success = await this.speakVoiceVox(item.text, speakerId);
-            
-            isSpeechSynthesisActive = false;
-            if (shouldBeListening && !isListening && recognition) {
-                try { recognition.start(); } catch(e) {}
-            }
-
-            if (success) {
-                this.speaking = false;
-                setTimeout(() => this.processQueue(), 250);
-                return;
-            }
-            console.log('VOICEVOX is unavailable, falling back to browser SpeechSynthesis...');
-            
-            isSpeechSynthesisActive = true;
-            if (isListening && recognition) {
-                try { recognition.stop(); } catch(e) {}
-            }
-        }
 
         const utterance = new SpeechSynthesisUtterance(item.text);
         utterance.lang = item.lang;

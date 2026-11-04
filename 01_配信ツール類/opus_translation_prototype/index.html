@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ローカルAI翻訳 プロトタイプ検証（Helsinki-NLP / Transformers.js）</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-tag">完全ローカル・APIキー不要・Apache-2.0</div>
+      <h1>ローカルAI翻訳 プロトタイプ検証</h1>
+      <p class="subtitle">Helsinki-NLP/opus-mt モデルをブラウザ上で直接実行（Transformers.js）する独立検証環境</p>
+    </header>
+
+    <!-- モデル読み込みステータス -->
+    <section class="card status-card">
+      <h2>【1】 モデル読み込みステータス</h2>
+      <div class="model-status-group">
+        <div class="status-item">
+          <div class="status-header">
+            <span class="model-name">日本語 → 英語 (Xenova/opus-mt-ja-en)</span>
+            <span id="status-ja-en" class="badge badge-pending">未ロード</span>
+          </div>
+          <div class="progress-bar-container">
+            <div id="progress-ja-en" class="progress-bar" style="width: 0%;"></div>
+          </div>
+          <div id="progress-text-ja-en" class="progress-text">待機中</div>
+        </div>
+
+        <div class="status-item">
+          <div class="status-header">
+            <span class="model-name">英語 → 日本語 (Xenova/opus-mt-en-jap)</span>
+            <span id="status-en-ja" class="badge badge-pending">未ロード</span>
+          </div>
+          <div class="progress-bar-container">
+            <div id="progress-en-ja" class="progress-bar" style="width: 0%;"></div>
+          </div>
+          <div id="progress-text-en-ja" class="progress-text">待機中</div>
+        </div>
+      </div>
+      <div class="button-group">
+        <button id="btn-load-models" class="btn btn-primary">両モデルを事前ダウンロード・初期化</button>
+      </div>
+    </section>
+
+    <!-- 翻訳テストパネル -->
+    <section class="card translation-card">
+      <h2>【2】 リアルタイム翻訳テスト</h2>
+      
+      <div class="direction-selector">
+        <label class="radio-label">
+          <input type="radio" name="direction" value="ja-en" checked>
+          <span>日本語 → 英語（配信者のマイク音声想定）</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="direction" value="en-ja">
+          <span>英語 → 日本語（海外リスナーのコメント想定）</span>
+        </label>
+      </div>
+
+      <div class="io-grid">
+        <div class="io-box">
+          <label for="input-text">入力テキスト：</label>
+          <textarea id="input-text" placeholder="翻訳したい文章を入力してください...">こんにちは！配信を見に来てくれてありがとうございます。</textarea>
+          <div class="quick-samples">
+            <span class="sample-title">テスト用プリセット：</span>
+            <button type="button" class="btn-sample" data-dir="ja-en" data-text="こんにちは！配信を見に来てくれてありがとうございます。">配信挨拶 (日)</button>
+            <button type="button" class="btn-sample" data-dir="ja-en" data-text="今日のボスはとても強力なので集中して戦います。">ゲーム実況 (日)</button>
+            <button type="button" class="btn-sample" data-dir="en-ja" data-text="Hello! Nice to meet you, great stream!">挨拶 (英)</button>
+            <button type="button" class="btn-sample" data-dir="en-ja" data-text="What weapon and equipment are you using right now?">装備の質問 (英)</button>
+          </div>
+        </div>
+
+        <div class="io-box">
+          <label for="output-text">ローカルAI翻訳結果：</label>
+          <textarea id="output-text" readonly placeholder="ここに翻訳結果が表示されます..."></textarea>
+          <div class="meta-info">
+            <span>推論時間：<strong id="time-elapsed">-</strong> ms</span>
+            <span>実行環境：<strong id="device-info">WebAssembly (WASM)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="btn-translate" class="btn btn-action">翻訳を実行する</button>
+      </div>
+    </section>
+
+    <!-- 技術検証＆免責事項 -->
+    <section class="card info-card">
+      <h2>【3】 商用販売に向けた検証仕様</h2>
+      <ul class="info-list">
+        <li><strong>完全無料・APIキー不要：</strong>ブラウザ内部の WebAssembly 上でモデルが直接動作するため、サーバー代やAPI課金が永続的に0円です。</li>
+        <li><strong>初回ダウンロードとキャッシュ：</strong>初回のみモデルファイル（量子化版）をダウンロードしますが、2回目以降はブラウザの Cache Storage に永続キャッシュされるため通信が発生しません。</li>
+        <li><strong>ライセンス明記：</strong>本モデル（Helsinki-NLP/opus-mt）は Apache License 2.0 に準拠しており、商用アプリへの組み込み・販売が許可されています。</li>
+        <li><strong>免責事項：</strong>販売アプリにおいては「AIによる自動翻訳のため、翻訳結果の正確性を保証しない」旨の免責文を記載します。</li>
+      </ul>
+    </section>
+  </div>
+
+  <script type="module" src="prototype.js"></script>
+</body>
+</html>

@@ -1,0 +1,1114 @@
+﻿// FFXI Skillchain Simulator Logic
+
+// 1. 各武器種とすべての実在するウェポンスキル (WS) の連携属性データ
+const weaponWSData = {
+    HandToHand: [
+        { name: "コンボ", attrs: ["衝撃"], type: "格闘 (初期)" },
+        { name: "タックル", attrs: ["振動", "衝撃"], type: "格闘 (習得)" },
+        { name: "短勁", attrs: ["収縮"], type: "格闘 (習得)" },
+        { name: "バックハンドブロー", attrs: ["炸裂"], type: "格闘 (習得)" },
+        { name: "乱撃", attrs: ["衝撃"], type: "格闘 (習得)" },
+        { name: "スピンアタック", attrs: ["溶解", "衝撃"], type: "格闘 (習得)" },
+        { name: "空鳴拳", attrs: ["貫通", "衝撃"], type: "格闘 (習得)" },
+        { name: "双竜脚", attrs: ["分解"], type: "格闘 (習得)" },
+        { name: "夢想阿修羅拳", attrs: ["重力", "溶解"], type: "格闘 (クエスト)" },
+        { name: "闘魂旋風脚", attrs: ["硬化", "炸裂", "衝撃"], type: "格闘 (習得)" },
+        { name: "ファイナルヘヴン", attrs: ["光", "核熱"], type: "格闘 (レリック)" },
+        { name: "アスケーテンツォルン", attrs: ["核熱", "貫通"], type: "格闘 (ミシック)" },
+        { name: "連環六合圏", attrs: ["重力", "溶解"], type: "格闘 (ミシック)" },
+        { name: "ビクトリースマイト", attrs: ["光", "分解"], type: "格闘 (エンピ)" },
+        { name: "四神円舞", attrs: ["核熱", "振動"], type: "格闘 (メリポ/イオニック)" },
+        { name: "マルカラ", attrs: ["炸裂", "収縮", "湾曲"], type: "格闘 (プライム)" }
+    ],
+    Dagger: [
+        { name: "ワスプスティング", attrs: ["切断"], type: "短剣 (初期)" },
+        { name: "ガストスラッシュ", attrs: ["炸裂"], type: "短剣 (習得)" },
+        { name: "シャドーステッチ", attrs: ["振動"], type: "短剣 (習得)" },
+        { name: "バイパーバイト", attrs: ["切断"], type: "短剣 (習得)" },
+        { name: "サイクロン", attrs: ["炸裂", "衝撃"], type: "短剣 (習得)" },
+        { name: "エナジースティール", attrs: [], type: "短剣 (習得)" },
+        { name: "エナジードレイン", attrs: [], type: "短剣 (習得)" },
+        { name: "ダンシングエッジ", attrs: ["切断", "炸裂"], type: "短剣 (習得)" },
+        { name: "シャークバイト", attrs: ["分解"], type: "短剣 (習得)" },
+        { name: "エヴィサレイション", attrs: ["重力", "貫通"], type: "短剣 (クエスト)" },
+        { name: "イオリアンエッジ", attrs: ["切断", "炸裂", "衝撃"], type: "短剣 (習得)" },
+        { name: "マーシーストローク", attrs: ["闇", "重力"], type: "短剣 (レリック)" },
+        { name: "マンダリクスタッブ", attrs: ["闇", "湾曲"], type: "短剣 (ミシック)" },
+        { name: "モーダントライム", attrs: ["重力", "貫通"], type: "短剣 (ミシック)" },
+        { name: "ピリッククレオス", attrs: ["湾曲", "切断"], type: "短剣 (ミシック)" },
+        { name: "ルドラストーム", attrs: ["闇", "湾曲"], type: "短剣 (エンピ)" },
+        { name: "エクゼンテレター", attrs: ["分解", "切断"], type: "短剣 (メリポ/イオニック)" },
+        { name: "ルースレスストローク", attrs: ["溶解", "衝撃", "分解"], type: "短剣 (プライム)" }
+    ],
+    Sword: [
+        { name: "ファストブレード", attrs: ["切断"], type: "片手剣 (初期)" },
+        { name: "バーニングブレード", attrs: ["溶解"], type: "片手剣 (習得)" },
+        { name: "レッドロータス", attrs: ["溶解", "炸裂"], type: "片手剣 (習得)" },
+        { name: "フラットブレード", attrs: ["衝撃"], type: "片手剣 (習得)" },
+        { name: "シャインブレード", attrs: ["切断"], type: "片手剣 (習得)" },
+        { name: "セラフブレード", attrs: ["切断"], type: "片手剣 (習得)" },
+        { name: "サークルブレード", attrs: ["振動", "衝撃"], type: "片手剣 (習得)" },
+        { name: "スピリッツウィズイン", attrs: [], type: "片手剣 (習得)" },
+        { name: "スウィフトブレード", attrs: ["重力"], type: "片手剣 (習得)" },
+        { name: "ボーパルブレード", attrs: ["切断", "衝撃"], type: "片手剣 (習得)" },
+        { name: "サベッジブレード", attrs: ["分解", "切断"], type: "片手剣 (クエスト)" },
+        { name: "サングインブレード", attrs: [], type: "片手剣 (習得)" },
+        { name: "ロズレーファタール", attrs: ["湾曲", "収縮"], type: "片手剣 (ミシック)" },
+        { name: "ロイエ", attrs: ["核熱", "振動"], type: "片手剣 (レリック)" },
+        { name: "エクスピアシオン", attrs: ["湾曲", "切断"], type: "片手剣 (ミシック)" },
+        { name: "シャンデュシニュ", attrs: ["光", "湾曲"], type: "片手剣 (エンピ)" },
+        { name: "レクイエスカット", attrs: ["重力", "切断"], type: "片手剣 (メリポ/イオニック)" },
+        { name: "インペラトル", attrs: ["炸裂", "収縮", "湾曲"], type: "片手剣 (プライム)" }
+    ],
+    GreatSword: [
+        { name: "ハードスラッシュ", attrs: ["切断"], type: "両手剣 (初期)" },
+        { name: "パワースラッシュ", attrs: ["貫通"], type: "両手剣 (習得)" },
+        { name: "フロストバイト", attrs: ["硬化"], type: "両手剣 (習得)" },
+        { name: "フリーズバイト", attrs: ["硬化", "炸裂"], type: "両手剣 (習得)" },
+        { name: "ショックウェーブ", attrs: ["振動"], type: "両手剣 (習得)" },
+        { name: "クレセントムーン", attrs: ["切断"], type: "両手剣 (習得)" },
+        { name: "シックルムーン", attrs: ["切断", "衝撃"], type: "両手剣 (習得)" },
+        { name: "スピンスラッシュ", attrs: ["分解"], type: "両手剣 (習得)" },
+        { name: "グラウンドストライク", attrs: ["分解", "湾曲"], type: "両手剣 (クエスト)" },
+        { name: "ヘラクレススラッシュ", attrs: ["硬化", "炸裂", "衝撃"], type: "両手剣 (習得)" },
+        { name: "スカージ", attrs: ["光", "核熱"], type: "両手剣 (レリック)" },
+        { name: "トアクリーバー", attrs: ["光", "湾曲"], type: "両手剣 (エンピ)" },
+        { name: "レゾルーション", attrs: ["分解", "切断"], type: "両手剣 (メリポ/イオニック)" },
+        { name: "デミディエーション", attrs: ["光", "分解"], type: "両手剣 (エルゴン)" },
+        { name: "フィンブルヴェト", attrs: ["炸裂", "収縮", "湾曲"], type: "両手剣 (プライム)" }
+    ],
+    Axe: [
+        { name: "レイジングアクス", attrs: ["炸裂", "衝撃"], type: "片手斧 (初期)" },
+        { name: "スマッシュ", attrs: ["硬化", "振動"], type: "片手斧 (習得)" },
+        { name: "ラファールアクス", attrs: ["炸裂"], type: "片手斧 (習得)" },
+        { name: "アバランチアクス", attrs: ["切断", "衝撃"], type: "片手斧 (習得)" },
+        { name: "スピニングアクス", attrs: ["溶解", "切断", "衝撃"], type: "片手斧 (習得)" },
+        { name: "ランページ", attrs: ["切断"], type: "片手斧 (習得)" },
+        { name: "カラミティ", attrs: ["切断", "衝撃"], type: "片手斧 (習得)" },
+        { name: "ミストラルアクス", attrs: ["核熱"], type: "片手斧 (習得)" },
+        { name: "デシメーション", attrs: ["核熱", "振動"], type: "片手斧 (クエスト)" },
+        { name: "ボーラアクス", attrs: ["炸裂", "切断"], type: "片手斧 (習得)" },
+        { name: "オンズロート", attrs: ["闇", "重力"], type: "片手斧 (レリック)" },
+        { name: "プライマルレンド", attrs: ["重力", "振動"], type: "片手斧 (ミシック)" },
+        { name: "クラウドスプリッタ", attrs: ["闇", "分解"], type: "片手斧 (エンピ)" },
+        { name: "ルイネーター", attrs: ["湾曲", "炸裂"], type: "片手斧 (メリポ/イオニック)" },
+        { name: "ブリッツ", attrs: ["溶解", "衝撃", "分解"], type: "片手斧 (プライム)" }
+    ],
+    GreatAxe: [
+        { name: "シールドブレイク", attrs: ["衝撃"], type: "両手斧 (初期)" },
+        { name: "アイアンテンペスト", attrs: ["切断"], type: "両手斧 (習得)" },
+        { name: "シュトルムヴィント", attrs: ["振動", "切断"], type: "両手斧 (習得)" },
+        { name: "アーマーブレイク", attrs: ["衝撃"], type: "両手斧 (習得)" },
+        { name: "キーンエッジ", attrs: ["収縮"], type: "両手斧 (習得)" },
+        { name: "ウェポンブレイク", attrs: ["衝撃"], type: "両手斧 (習得)" },
+        { name: "レイジングラッシュ", attrs: ["硬化", "振動"], type: "両手斧 (習得)" },
+        { name: "フルブレイク", attrs: ["湾曲"], type: "両手斧 (習得)" },
+        { name: "スチールサイクロン", attrs: ["湾曲", "炸裂"], type: "両手斧 (クエスト)" },
+        { name: "フェルクリーヴ", attrs: ["切断", "炸裂"], type: "両手斧 (習得)" },
+        { name: "メタトロントーメント", attrs: ["光", "核熱"], type: "両手斧 (レリック)" },
+        { name: "キングズジャスティス", attrs: ["分解", "切断"], type: "両手斧 (ミシック)" },
+        { name: "ウッコフューリー", attrs: ["光", "分解"], type: "両手斧 (エンピ)" },
+        { name: "アップヒーバル", attrs: ["核熱", "収縮"], type: "両手斧 (メリポ/イオニック)" },
+        { name: "ディザスター", attrs: ["貫通", "切断", "重力"], type: "両手斧 (プライム)" }
+    ],
+    Scythe: [
+        { name: "スライス", attrs: ["切断"], type: "両手鎌 (初期)" },
+        { name: "ダークハーベスト", attrs: ["振動"], type: "両手鎌 (習得)" },
+        { name: "シャドーオブデス", attrs: ["硬化", "振動"], type: "両手鎌 (習得)" },
+        { name: "ナイトメアサイス", attrs: ["収縮", "切断"], type: "両手鎌 (習得)" },
+        { name: "スピニングサイス", attrs: ["振動", "切断"], type: "両手鎌 (習得)" },
+        { name: "ボーパルサイス", attrs: ["貫通", "切断"], type: "両手鎌 (習得)" },
+        { name: "ギロティン", attrs: ["硬化"], type: "両手鎌 (習得)" },
+        { name: "クロスリーパー", attrs: ["湾曲"], type: "両手鎌 (習得)" },
+        { name: "スパイラルヘル", attrs: ["湾曲", "切断"], type: "両手鎌 (クエスト)" },
+        { name: "インファナルサイズ", attrs: ["収縮", "振動"], type: "両手鎌 (習得)" },
+        { name: "カタストロフィ", attrs: ["闇", "重力"], type: "両手鎌 (レリック)" },
+        { name: "インサージェンシー", attrs: ["核熱", "収縮"], type: "両手鎌 (メリポ/イオニック)" },
+        { name: "クワイタス", attrs: ["闇", "湾曲"], type: "両手鎌 (エンピ)" },
+        { name: "エントロピー", attrs: ["重力", "振動"], type: "両手鎌 (メリポ/イオニック)" },
+        { name: "ジ・オリジン", attrs: ["硬化", "振動", "核熱"], type: "両手鎌 (プライム)" }
+    ],
+    Polearm: [
+        { name: "ダブルスラスト", attrs: ["貫通"], type: "両手槍 (初期)" },
+        { name: "サンダースラスト", attrs: ["貫通", "衝撃"], type: "両手槍 (習得)" },
+        { name: "ライデンスラスト", attrs: ["貫通", "衝撃"], type: "両手槍 (習得)" },
+        { name: "足払い", attrs: ["衝撃"], type: "両手槍 (習得)" },
+        { name: "ペンタスラスト", attrs: ["収縮"], type: "両手槍 (習得)" },
+        { name: "ボーパルスラスト", attrs: ["振動", "貫通"], type: "両手槍 (習得)" },
+        { name: "スキュアー", attrs: ["貫通", "衝撃"], type: "両手槍 (習得)" },
+        { name: "大車輪", attrs: ["核熱"], type: "両手槍 (習得)" },
+        { name: "インパルスドライヴ", attrs: ["重力", "硬化"], type: "両手槍 (クエスト)" },
+        { name: "ソニックスラスト", attrs: ["貫通", "切断"], type: "両手槍 (習得)" },
+        { name: "ゲイルスコグル", attrs: ["光", "湾曲"], type: "両手槍 (レリック)" },
+        { name: "雲蒸竜変", attrs: ["核熱", "貫通"], type: "両手槍 (ミシック)" },
+        { name: "カムラン", attrs: ["光", "分解"], type: "両手槍 (エンピ)" },
+        { name: "スターダイバー", attrs: ["重力", "貫通"], type: "両手槍 (メリポ/イオニック)" },
+        { name: "ダーマット", attrs: ["貫通", "切断", "重力"], type: "両手槍 (プライム)" }
+    ],
+    Katana: [
+        { name: "臨", attrs: ["貫通"], type: "片手刀 (初期)" },
+        { name: "烈", attrs: ["切断"], type: "片手刀 (習得)" },
+        { name: "滴", attrs: ["振動"], type: "片手刀 (習得)" },
+        { name: "凍", attrs: ["硬化", "炸裂"], type: "片手刀 (習得)" },
+        { name: "地", attrs: ["貫通", "衝撃"], type: "片手刀 (習得)" },
+        { name: "影", attrs: ["収縮"], type: "片手刀 (習得)" },
+        { name: "迅", attrs: ["炸裂", "衝撃"], type: "片手刀 (習得)" },
+        { name: "天", attrs: ["重力"], type: "片手刀 (習得)" },
+        { name: "空", attrs: ["重力", "貫通"], type: "片手刀 (クエスト)" },
+        { name: "湧", attrs: ["振動", "切断"], type: "片手刀 (習得)" },
+        { name: "生者必滅", attrs: ["闇", "分解"], type: "片手刀 (レリック)" },
+        { name: "カムハブリ", attrs: ["分解", "収縮"], type: "片手刀 (ミシック)" },
+        { name: "秘", attrs: ["闇", "重力"], type: "片手刀 (エンピ)" },
+        { name: "瞬", attrs: ["核熱", "振動"], type: "片手刀 (メリポ/イオニック)" },
+        { name: "是生滅法", attrs: ["硬化", "振動", "核熱"], type: "片手刀 (プライム)" }
+    ],
+    GreatKatana: [
+        { name: "壱之太刀・燕飛", attrs: ["貫通", "切断"], type: "両手刀 (初期)" },
+        { name: "弐之太刀・鋒縛", attrs: ["硬化"], type: "両手刀 (習得)" },
+        { name: "参之太刀・轟天", attrs: ["貫通", "衝撃"], type: "両手刀 (習得)" },
+        { name: "四之太刀・陽炎", attrs: ["溶解"], type: "両手刀 (習得)" },
+        { name: "五之太刀・陣風", attrs: ["切断", "炸裂"], type: "両手刀 (習得)" },
+        { name: "六之太刀・光輝", attrs: ["振動", "衝撃"], type: "両手刀 (習得)" },
+        { name: "七之太刀・雪風", attrs: ["硬化", "炸裂"], type: "両手刀 (習得)" },
+        { name: "八之太刀・月光", attrs: ["湾曲", "振動"], type: "両手刀 (習得)" },
+        { name: "九之太刀・花車", attrs: ["核熱", "収縮"], type: "両手刀 (習得)" },
+        { name: "十之太刀・乱鴉", attrs: ["重力", "硬化"], type: "両手刀 (クエスト)" },
+        { name: "十一之太刀・鳳蝶", attrs: ["収縮", "切断"], type: "両手刀 (習得)" },
+        { name: "零之太刀・回天", attrs: ["光", "分解"], type: "両手刀 (レリック)" },
+        { name: "祖之太刀・不動", attrs: ["光", "湾曲"], type: "両手刀 (エンピ)" },
+        { name: "十二之太刀・照破", attrs: ["分解", "収縮"], type: "両手刀 (メリポ/イオニック)" },
+        { name: "絶之太刀・無名", attrs: ["炸裂", "収縮", "湾曲"], type: "両手刀 (プライム)" }
+    ],
+    Club: [
+        { name: "シャインストライク", attrs: ["衝撃"], type: "片手棍 (初期)" },
+        { name: "セラフストライク", attrs: ["衝撃"], type: "片手棍 (習得)" },
+        { name: "ブレインシェイカー", attrs: ["振動"], type: "片手棍 (習得)" },
+        { name: "スターライト", attrs: [], type: "片手棍 (習得)" },
+        { name: "ムーンライト", attrs: [], type: "片手棍 (習得)" },
+        { name: "スカルブレイカー", attrs: ["硬化", "振動"], type: "片手棍 (習得)" },
+        { name: "トゥルーストライク", attrs: ["炸裂", "衝撃"], type: "片手棍 (習得)" },
+        { name: "ジャッジメント", attrs: ["衝撃"], type: "片手棍 (習得)" },
+        { name: "ヘキサストライク", attrs: ["核熱"], type: "片手棍 (習得)" },
+        { name: "ブラックヘイロー", attrs: ["分解", "収縮"], type: "片手棍 (クエスト)" },
+        { name: "フラッシュノヴァ", attrs: ["硬化", "振動"], type: "片手棍 (習得)" },
+        { name: "ランドグリース", attrs: ["光", "分解"], type: "片手棍 (レリック)" },
+        { name: "ミスティックブーン", attrs: [], type: "片手棍 (ミシック)" },
+        { name: "ダガン", attrs: [], type: "片手棍 (エンピ)" },
+        { name: "レルムレイザー", attrs: ["核熱", "衝撃"], type: "片手棍 (メリポ/イオニック)" },
+        { name: "エクズデーション", attrs: ["闇", "分解"], type: "片手棍 (エルゴン)" },
+        { name: "ダグダ", attrs: ["貫通", "切断", "重力"], type: "片手棍 (プライム)" }
+    ],
+    Staff: [
+        { name: "ヘヴィスイング", attrs: ["衝撃"], type: "両手棍 (初期)" },
+        { name: "ロッククラッシャー", attrs: ["衝撃"], type: "両手棍 (習得)" },
+        { name: "アースクラッシャー", attrs: ["衝撃", "炸裂"], type: "両手棍 (習得)" },
+        { name: "スターバースト", attrs: ["収縮", "振動"], type: "両手棍 (習得)" },
+        { name: "サンバースト", attrs: ["収縮", "振動"], type: "両手棍 (習得)" },
+        { name: "シェルクラッシャー", attrs: ["炸裂"], type: "両手棍 (習得)" },
+        { name: "カタクリスム", attrs: ["収縮", "振動"], type: "両手棍 (習得)" },
+        { name: "スピリットテーカー", attrs: [], type: "両手棍 (習得)" },
+        { name: "レトリビューション", attrs: ["重力", "振動"], type: "両手棍 (クエスト)" },
+        { name: "シャッターソウル", attrs: ["重力", "硬化"], type: "両手棍 (メリポ/イオニック)" },
+        { name: "タルタロスベイン", attrs: ["炸裂", "溶解"], type: "両手棍 (ミシック)" },
+        { name: "ヴィゾフニル", attrs: ["貫通", "振動"], type: "両手棍 (エンピ)" },
+        { name: "オムニシエンス", attrs: ["重力", "貫通"], type: "両手棍 (ミシック)" },
+        { name: "ガーランドオブブリス", attrs: ["核熱", "溶解"], type: "両手棍 (習得)" },
+        { name: "オシャラ", attrs: ["硬化", "振動", "核熱"], type: "両手棍 (プライム)" }
+    ],
+    Bow: [
+        { name: "フレイミングアロー", attrs: ["溶解", "貫通"], type: "弓術 (初期)" },
+        { name: "ピアシングアロー", attrs: ["振動", "貫通"], type: "弓術 (習得)" },
+        { name: "ダリングアロー", attrs: ["溶解", "貫通"], type: "弓術 (習得)" },
+        { name: "サイドワインダー", attrs: ["振動", "貫通", "炸裂"], type: "弓術 (習得)" },
+        { name: "ブラストアロー", attrs: ["硬化", "貫通"], type: "弓術 (習得)" },
+        { name: "アーチングアロー", attrs: ["核熱"], type: "弓術 (習得)" },
+        { name: "エンピリアンアロー", attrs: ["核熱", "貫通"], type: "弓術 (クエスト)" },
+        { name: "リフルジェントアロー", attrs: ["振動", "貫通"], type: "弓術 (習得)" },
+        { name: "エイペクスアロー", attrs: ["分解", "貫通"], type: "弓術 (メリポ/イオニック)" },
+        { name: "南無八幡", attrs: ["光", "湾曲"], type: "弓術 (レリック)" },
+        { name: "ジシュヌの光輝", attrs: ["光", "核熱"], type: "弓術 (エンピ)" },
+        { name: "シャルヴ", attrs: ["貫通", "切断", "重力"], type: "弓術 (プライム)" }
+    ],
+    Marksmanship: [
+        { name: "ホットショット", attrs: ["溶解", "貫通"], type: "射撃 (初期)" },
+        { name: "スプリットショット", attrs: ["振動", "貫通"], type: "射撃 (習得)" },
+        { name: "スナイパーショット", attrs: ["溶解", "貫通"], type: "射撃 (習得)" },
+        { name: "スラッグショット", attrs: ["振動", "貫通", "炸裂"], type: "射撃 (習得)" },
+        { name: "ブラストショット", attrs: ["硬化", "貫通"], type: "射撃 (習得)" },
+        { name: "ヘヴィショット", attrs: ["核熱"], type: "射撃 (習得)" },
+        { name: "デトネーター", attrs: ["核熱", "貫通"], type: "射撃 (クエスト)" },
+        { name: "ナビングショット", attrs: ["硬化", "炸裂", "衝撃"], type: "射撃 (習得)" },
+        { name: "カラナック", attrs: ["闇", "分解"], type: "射撃 (レリック)" },
+        { name: "トゥルーフライト", attrs: ["分解", "切断"], type: "射撃 (ミシック)" },
+        { name: "レデンサリュート", attrs: ["重力", "貫通"], type: "射撃 (ミシック)" },
+        { name: "ワイルドファイア", attrs: ["闇", "重力"], type: "射撃 (エンピ)" },
+        { name: "ラストスタンド", attrs: ["核熱", "振動"], type: "射撃 (メリポ/イオニック)" },
+        { name: "ジ・エンド", attrs: ["硬化", "振動", "核熱"], type: "射撃 (プライム)" }
+    ]
+};
+
+// 2. 連携ルール判定マトリクス
+// [トス属性][〆属性] = 発生連携 (FFXI公式仕様に完全準拠した真のマトリクス)
+const chainMatrix = {
+    // === Lv1トス属性からの遷移 ===
+    "溶解": {
+        "溶解": "溶解",
+        "炸裂": "炸裂",
+        "切断": "切断",
+        "衝撃": "核熱",     // 溶解 ＞ 衝撃 ＝ 核熱
+        "核熱": "核熱"      // 溶解 ＞ 核熱 ＝ 核熱 (〆同調)
+    },
+    "硬化": {
+        "硬化": "硬化",
+        "炸裂": "炸裂",
+        "収縮": "収縮",
+        "振動": "分解",     // 硬化 ＞ 振動 ＝ 分解
+        "湾曲": "湾曲"      // 硬化 ＞ 湾曲 ＝ 湾曲 (〆同調)
+    },
+    "炸裂": {
+        "炸裂": "炸裂",
+        "溶解": "溶解",
+        "切断": "切断",
+        "硬化": "重力",     // 炸裂 ＞ 硬化 ＝ 重力
+        "分解": "分解"      // 炸裂 ＞ 分解 ＝ 分解 (〆同調)
+    },
+    "切断": {
+        "切断": "切断",
+        "溶解": "湾曲",     // 切断 ＞ 溶解 ＝ 湾曲
+        "炸裂": "炸裂",
+        "重力": "重力"      // 切断 ＞ 重力 ＝ 重力 (〆同調)
+    },
+    "貫通": {
+        "貫通": "貫通",
+        "硬化": "硬化",
+        "衝撃": "衝撃",
+        "切断": "湾曲",     // 貫通 ＞ 切断 ＝ 湾曲
+        "核熱": "核熱"      // 貫通 ＞ 核熱 ＝ 核熱 (〆同調)
+    },
+    "衝撃": {
+        "衝撃": "衝撃",
+        "硬化": "硬化",
+        "貫通": "貫通",
+        "溶解": "溶解",
+        "炸裂": "核熱",     // 衝撃 ＞ 炸裂 ＝ 核熱
+        "分解": "分解"      // 衝撃 ＞ 分解 ＝ 分解 (〆同調)
+    },
+    "振動": {
+        "振動": "振動",
+        "衝撃": "衝撃",
+        "貫通": "貫通",
+        "切断": "分解",     // 振動 ＞ 切断 ＝ 分解
+        "湾曲": "湾曲"      // 振動 ＞ 湾曲 ＝ 湾曲 (〆同調)
+    },
+    "収縮": {
+        "収縮": "収縮",
+        "衝撃": "衝撃",
+        "貫通": "重力",     // 収縮 ＞ 貫通 ＝ 重力
+        "重力": "重力"      // 収縮 ＞ 重力 ＝ 重力 (〆同調)
+    },
+    
+    // === Lv2トス属性からの遷移 ===
+    "重力": {
+        "湾曲": "闇",       // 重力 ＞ 湾曲 ＝ 闇 (Lv3)
+        "闇": "闇",         // 重力 ＞ 闇 ＝ 闇 (Lv3)
+        "収縮": "重力",     // 重力 ＞ 収縮 ＝ 重力 (トス同調)
+        "切断": "重力"      // 重力 ＞ 切断 ＝ 重力 (トス同調)
+    },
+    "分解": {
+        "核熱": "光",       // 分解 ＞ 核熱 ＝ 光 (Lv3)
+        "光": "光",         // 分解 ＞ 光 ＝ 光 (Lv3)
+        "炸裂": "分解",     // 分解 ＞ 炸裂 ＝ 分解 (トス同調)
+        "衝撃": "分解"      // 分解 ＞ 衝撃 ＝ 分解 (トス同調)
+    },
+    "核熱": {
+        "分解": "光",       // 核熱 ＞ 分解 ＝ 光 (Lv3)
+        "光": "光",         // 核熱 ＞ 光 ＝ 光 (Lv3)
+        "溶解": "核熱",     // 核熱 ＞ 溶解 ＝ 核熱 (トス同調)
+        "貫通": "核熱"      // 核熱 ＞ 貫通 ＝ 核熱 (トス同調)
+    },
+    "湾曲": {
+        "重力": "闇",       // 湾曲 ＞ 重力 ＝ 闇 (Lv3)
+        "闇": "闇",         // 湾曲 ＞ 闇 ＝ 闇 (Lv3)
+        "振動": "湾曲",     // 湾曲 ＞ 振動 ＝ 湾曲 (トス同調)
+        "硬化": "湾曲"      // 湾曲 ＞ 硬化 ＝ 湾曲 (トス同調)
+    }
+};
+
+// マジックバースト対応属性データ
+const mbElements = {
+    "光": ["火", "風", "雷", "光"],
+    "極光": ["火", "風", "雷", "光"],
+    "闇": ["土", "水", "氷", "闇"],
+    "黒闇": ["土", "水", "氷", "闇"],
+    "湾曲": ["水", "氷"],
+    "分解": ["風", "雷"],
+    "重力": ["土", "闇"],
+    "核熱": ["火", "光"],
+    "溶解": ["火"],
+    "硬化": ["氷"],
+    "炸裂": ["風"],
+    "切断": ["土"],
+    "貫通": ["水"],
+    "衝撃": ["雷"],
+    "振動": ["光"],
+    "収縮": ["闇"]
+};
+
+// 元素クラスの対応定義（CSS色表示用）
+const elementClasses = {
+    "火": "el-fire", "氷": "el-ice", "風": "el-wind", "土": "el-earth",
+    "雷": "el-thunder", "水": "el-water", "光": "el-light", "闇": "el-dark"
+};
+
+// 3. 連携計算コアエンジン
+function getSkillchainResult(tossAttrs, closeAttrs, ionicMode) {
+    const candidates = [];
+    
+    // 発生し得るすべての連携候補をリストアップ
+    for (const toss of tossAttrs) {
+        for (const close of closeAttrs) {
+            if (chainMatrix[toss] && chainMatrix[toss][close]) {
+                const chain = chainMatrix[toss][close];
+                
+                // 連携の強さ（レベル）を判定
+                let level = 1;
+                if (chain === "極光" || chain === "黒闇") level = 4;
+                else if (chain === "光" || chain === "闇") level = 3;
+                else if (["湾曲", "分解", "重力", "核熱"].includes(chain)) level = 2;
+
+                candidates.push({ name: chain, level: level, toss: toss, close: close });
+            }
+        }
+    }
+    
+    // イオニック究極連携 (レベル4) の動的判定
+    // イオニックAM3中かつ、トスに光があり、〆に光がある場合は「極光」、闇同士なら「黒闇」が発生する
+    if (ionicMode === "IONIC_AM3") {
+        if (tossAttrs.includes("光") && closeAttrs.includes("光")) {
+            candidates.push({ name: "極光", level: 4, toss: "光", close: "光" });
+        }
+        if (tossAttrs.includes("闇") && closeAttrs.includes("闇")) {
+            candidates.push({ name: "黒闇", level: 4, toss: "闇", close: "闇" });
+        }
+    }
+    
+    if (candidates.length === 0) return null;
+    
+    // FFXI公式仕様：発生する連携のうち、最もレベルの高い連携（Lv4 ＞ Lv3 ＞ Lv2 ＞ Lv1）を最優先する。
+    // レベルが同じ場合は、WSの属性優先度順（先に見つかった配列順）を優先する。
+    candidates.sort((a, b) => b.level - a.level);
+    return candidates[0];
+}
+
+// イオニックウェポン装備かつAM3中において、武神流秘奥義（メリポWS）に属性を追加する関数
+function getModifiedAttrs(ws, ionicMode) {
+    if (!ws) return [];
+    let attrs = [...ws.attrs];
+    if (ionicMode === "IONIC_AM3" && ws.type && ws.type.includes("メリポ/イオニック")) {
+        if (ws.attrs.includes("分解") || ws.attrs.includes("核熱")) {
+            if (!attrs.includes("光")) {
+                attrs.push("光");
+            }
+        }
+        if (ws.attrs.includes("湾曲") || ws.attrs.includes("重力")) {
+            if (!attrs.includes("闇")) {
+                attrs.push("闇");
+            }
+        }
+    }
+    return attrs;
+}
+
+// 4. 逆引き探索ロジック
+// (targetSteps === 2 の場合は通常時とイオAM3時の両方の結果を同時に計算・取得、それ以上の場合はDFS多段探索を実行)
+function searchSkillchains(weapon1, weapon2, targetChain, targetSteps, initialAM = null) {
+    const tossList = weaponWSData[weapon1] || [];
+    const closeList = weaponWSData[weapon2] || [];
+    const results = [];
+
+    // 通常の2手連携の場合
+    if (targetSteps === 2) {
+        for (const tossWS of tossList) {
+            for (const closeWS of closeList) {
+                // ① 通常時の属性と計算
+                const tossAttrsNormal = getModifiedAttrs(tossWS, "NORMAL");
+                const closeAttrsNormal = getModifiedAttrs(closeWS, "NORMAL");
+                const resultNormal = getSkillchainResult(tossAttrsNormal, closeAttrsNormal, "NORMAL");
+
+                // ② イオAM3中の属性と計算
+                const tossAttrsIonic = getModifiedAttrs(tossWS, "IONIC_AM3");
+                const closeAttrsIonic = getModifiedAttrs(closeWS, "IONIC_AM3");
+                const resultIonic = getSkillchainResult(tossAttrsIonic, closeAttrsIonic, "IONIC_AM3");
+
+                // どちらも連携が発生しない場合はスキップ
+                if (!resultNormal && !resultIonic) continue;
+
+                // ターゲット連携フィルター
+                let isMatch = false;
+                if (targetChain === "ANY") {
+                    isMatch = true;
+                } else if (targetChain === "Lv1") {
+                    isMatch = ((resultNormal && resultNormal.level === 1) || (resultIonic && resultIonic.level === 1));
+                } else if (targetChain === "極光" || targetChain === "黒闇") {
+                    isMatch = (resultIonic && resultIonic.name === targetChain);
+                } else {
+                    isMatch = ((resultNormal && resultNormal.name === targetChain) || (resultIonic && resultIonic.name === targetChain));
+                }
+
+                if (isMatch) {
+                    results.push({
+                        tossNormal: { ...tossWS, attrs: tossAttrsNormal },
+                        closeNormal: { ...closeWS, attrs: closeAttrsNormal },
+                        tossIonic: { ...tossWS, attrs: tossAttrsIonic },
+                        closeIonic: { ...closeWS, attrs: closeAttrsIonic },
+                        chainNormal: resultNormal,
+                        chainIonic: resultIonic
+                    });
+                }
+            }
+        }
+
+        // 連携レベルが高い順にソート（イオAM3時のレベルを優先）
+        return results.sort((a, b) => {
+            const lvA = a.chainIonic ? a.chainIonic.level : (a.chainNormal ? a.chainNormal.level : 0);
+            const lvB = b.chainIonic ? b.chainIonic.level : (b.chainNormal ? b.chainNormal.level : 0);
+            return lvB - lvA;
+        });
+    }
+
+    // 3段〜6段多段連携の場合 (DFSによる高速・事前枝刈り探索)
+    // 侍などの一人連携（ソロ）を想定し、2手目以降は〆側武器種（weapon2）の全WSから選択
+    const nextWSList = closeList;
+    let forceStop = false; // 強制終了フラグ
+
+    function dfs(currentWSList, currentChain, currentAM) {
+        if (forceStop) return; // すでに結果上限に達した場合は即時に帰る
+
+        const totalWSCount = currentWSList.length;
+
+        if (totalWSCount === targetSteps) {
+            const steps = calculateSkillchainSteps(currentWSList, initialAM);
+            const lastStep = steps[steps.length - 1];
+            if (!lastStep || lastStep.chain === null) return;
+
+            let isMatch = false;
+            if (targetChain === "ANY") {
+                isMatch = true;
+            } else if (targetChain === "Lv1") {
+                isMatch = (lastStep.chain.level === 1);
+            } else {
+                isMatch = (lastStep.chain.name === targetChain);
+            }
+
+            if (isMatch) {
+                results.push({
+                    wsList: [...currentWSList],
+                    steps: steps
+                });
+                
+                // 結果が100件に達したら、再帰DFS探索自体をその場で完全・即時強制終了する
+                if (results.length >= 100) {
+                    forceStop = true;
+                }
+            }
+            return;
+        }
+
+        const tossWS = currentWSList[totalWSCount - 1];
+
+        for (const nextWS of nextWSList) {
+            if (forceStop) break; // フラグが立った瞬間、ループも即座に脱出して強制終了する
+
+            // ※AMは「着弾後」に付与されるため、現在のステップでの属性追加判定には「直前までのcurrentAM」を使用する
+            const tossAttrs = getModifiedAttrs(tossWS, currentAM ? "IONIC_AM3" : "NORMAL");
+            const closeAttrs = getModifiedAttrs(nextWS, currentAM ? "IONIC_AM3" : "NORMAL");
+
+            let stepTossAttrs = currentChain ? [currentChain.name] : tossAttrs;
+            let stepResult = getSkillchainResult(stepTossAttrs, closeAttrs, "NORMAL");
+
+            // Ionic ultimate chain check (AMが「すでに」付与されている状態で、〆がメリポWSの場合に究極連携化)
+            let nextAM = currentAM;
+            if (nextAM && nextWS.type.includes("メリポ/イオニック")) {
+                if (stepResult && (stepResult.name === "光" || stepResult.name === "闇")) {
+                    let meetSteps = false;
+                    const totalCountWithNext = totalWSCount + 1;
+                    if (nextAM === "IONIC_AM3" && totalCountWithNext >= 2) meetSteps = true;
+                    else if (nextAM === "IONIC_AM2" && totalCountWithNext >= 3) meetSteps = true;
+                    else if (nextAM === "IONIC_AM1" && totalCountWithNext >= 4) meetSteps = true;
+
+                    if (meetSteps) {
+                        const name = stepResult.name === "光" ? "極光" : "黒闇";
+                        stepResult = { name: name, level: 4, toss: stepResult.toss, close: stepResult.close };
+                        nextAM = null; // 究極連携発生で消滅
+                    }
+                }
+            }
+
+            // Pruning
+            if (stepResult === null) {
+                continue;
+            }
+
+            // イオニックのアフターマス付加判定（時系列的に着弾後に付加され、次のステップの再帰呼び出しに引き渡す）
+            let passAM = nextAM;
+            if (nextWS.type.includes("メリポ/イオニック") && !passAM) {
+                passAM = "IONIC_AM1";
+            }
+
+            // Backtracking
+            currentWSList.push(nextWS);
+            dfs(currentWSList, stepResult, passAM);
+            currentWSList.pop();
+        }
+    }
+
+    // トス側武器種（weapon1）の全WSをスタート地点としてDFSを開始
+    for (const startWS of tossList) {
+        if (forceStop) break; // スタート地点のループも即座に脱出する
+        dfs([startWS], null, initialAM);
+    }
+
+    // 最終ステップの連携レベル順にソート
+    return results.sort((a, b) => {
+        const lvA = a.steps[a.steps.length - 1].chain.level;
+        const lvB = b.steps[b.steps.length - 1].chain.level;
+        return lvB - lvA;
+    });
+}
+
+// 多段連携の連鎖的計算を行う関数
+function calculateSkillchainSteps(wsList, initialAM = null) {
+    if (wsList.length < 2) return [];
+    
+    const steps = [];
+    let currentChain = null; // 直前に発生した連携（トス属性となる）
+    let currentAM = initialAM === "NONE" ? null : initialAM; // 現在のアフターマスレベル
+    let totalWSCount = 0; // 全体のWS着弾カウント
+
+    for (let i = 1; i < wsList.length; i++) {
+        const tossWS = wsList[i - 1];
+        const closeWS = wsList[i];
+        totalWSCount = i + 1; // 現在のWSインデックス
+
+        // --- 連携属性の取得 (AM状態に応じた属性追加を適用) ---
+        // ※AMは「着弾後」に付与されるため、現在のステップでの属性追加判定には「直前までのcurrentAM」を使用する
+        const tossAttrs = getModifiedAttrs(tossWS, currentAM ? "IONIC_AM3" : "NORMAL");
+        const closeAttrs = getModifiedAttrs(closeWS, currentAM ? "IONIC_AM3" : "NORMAL");
+
+        // --- 1ステップの連携判定 ---
+        let stepTossAttrs = [];
+        if (currentChain) {
+            // 直前に連携が発生している場合、その連携属性がトス属性になる！
+            stepTossAttrs = [currentChain.name];
+        } else {
+            // 連携が途切れている場合、トスWSの属性がトス属性になる！
+            stepTossAttrs = tossAttrs;
+        }
+
+        // 連携結果の試算 (同調ルールなどを完璧に適用)
+        let stepResult = getSkillchainResult(stepTossAttrs, closeAttrs, "NORMAL");
+
+        // --- 究極連携（極光・黒闇）への変化判定 ---
+        // 条件：AMが「すでに」付与されており、かつ【締めWSがイオニック対応の武神流秘奥義であること】！
+        if (currentAM && closeWS.type.includes("メリポ/イオニック")) {
+            if (stepResult && (stepResult.name === "光" || stepResult.name === "闇")) {
+                let meetSteps = false;
+                const activeAM = currentAM;
+
+                // 連携段数のチェック（全体のWS数で判定）
+                if (activeAM === "IONIC_AM3" && totalWSCount >= 2) meetSteps = true;
+                else if (activeAM === "IONIC_AM2" && totalWSCount >= 3) meetSteps = true;
+                else if (activeAM === "IONIC_AM1" && totalWSCount >= 4) meetSteps = true;
+
+                if (meetSteps) {
+                    const name = stepResult.name === "光" ? "極光" : "黒闇";
+                    stepResult = { name: name, level: 4, toss: stepResult.toss, close: stepResult.close };
+                    
+                    // 究極連携が発生した時点で、アフターマスは消滅
+                    currentAM = null;
+                }
+            }
+        }
+
+        steps.push({
+            toss: { ...tossWS, attrs: tossAttrs },
+            close: { ...closeWS, attrs: closeAttrs },
+            chain: stepResult, // 発生した連携 (null の場合は連携不成立)
+            amState: currentAM
+        });
+
+        // --- イオニックウェポンのアフターマス付加判定（時系列的に着弾後に付加） ---
+        if (closeWS.type.includes("メリポ/イオニック") && !currentAM) {
+            currentAM = "IONIC_AM1"; // このWSが着弾したことにより、次のステップからAM1効果が有効化
+        }
+
+        // 次のステップのために現在の連携を更新
+        currentChain = stepResult;
+    }
+
+    return steps;
+}
+
+// 5. DOM連携およびUI描画
+document.addEventListener("DOMContentLoaded", () => {
+    const selectWeapon1 = document.getElementById("weapon-1");
+    const selectWeapon2 = document.getElementById("weapon-2");
+    const selectTargetChain = document.getElementById("target-chain");
+    const selectTargetSteps = document.getElementById("target-steps");
+    const checkUnordered = document.getElementById("unordered-weapons");
+    const btnSearch = document.getElementById("btn-search");
+    
+    const resultsList = document.getElementById("results-list");
+    
+    // 接続段数による初期AMグループの表示制御
+    selectTargetSteps.addEventListener("change", () => {
+        const stepsCount = parseInt(selectTargetSteps.value);
+        const initialAMGroup = document.getElementById("initial-am-group");
+        if (initialAMGroup) {
+            if (stepsCount >= 3) {
+                initialAMGroup.style.display = "block";
+            } else {
+                initialAMGroup.style.display = "none";
+                const selectInitialAM = document.getElementById("initial-am");
+                if (selectInitialAM) selectInitialAM.value = "NONE";
+            }
+        }
+    });
+    const resultCount = document.getElementById("result-count");
+    const noResults = document.getElementById("no-results");
+
+    // 探索ボタンイベント
+    btnSearch.addEventListener("click", () => {
+        const w1 = selectWeapon1.value;
+        const w2 = selectWeapon2.value;
+        const target = selectTargetChain.value;
+        const stepsCount = parseInt(selectTargetSteps.value);
+        const unordered = checkUnordered ? checkUnordered.checked : false;
+        const selectInitialAM = document.getElementById("initial-am");
+        const initialAM = selectInitialAM ? selectInitialAM.value : "NONE";
+        const passAM = initialAM === "NONE" ? null : initialAM;
+
+        // 探索の実行 (順不同対応)
+        let results = [];
+        if (unordered && w1 !== w2) {
+            const resultsA = searchSkillchains(w1, w2, target, stepsCount, passAM);
+            const resultsB = searchSkillchains(w2, w1, target, stepsCount, passAM);
+            results = [...resultsA, ...resultsB];
+            
+            // ソート
+            if (stepsCount === 2) {
+                results.sort((a, b) => {
+                    const lvA = a.chainIonic ? a.chainIonic.level : (a.chainNormal ? a.chainNormal.level : 0);
+                    const lvB = b.chainIonic ? b.chainIonic.level : (b.chainNormal ? b.chainNormal.level : 0);
+                    return lvB - lvA;
+                });
+            } else {
+                results.sort((a, b) => {
+                    const lvA = a.steps[a.steps.length - 1].chain.level;
+                    const lvB = b.steps[b.steps.length - 1].chain.level;
+                    return lvB - lvA;
+                });
+            }
+        } else {
+            results = searchSkillchains(w1, w2, target, stepsCount, passAM);
+        }
+
+        // UIのクリーンアップ
+        resultsList.innerHTML = "";
+        
+        // 件数の表示（上限100件の注意書きを付与してUI負荷を軽減）
+        if (results.length > 100) {
+            resultCount.textContent = `100件 (計${results.length}件中、上位100件を表示中)`;
+        } else {
+            resultCount.textContent = `${results.length}件`;
+        }
+
+        if (results.length === 0) {
+            noResults.style.display = "block";
+            return;
+        }
+
+        noResults.style.display = "none";
+
+        // 表示件数を最大100件にスライスしてブラウザの描画フリーズを完璧に防止
+        const displayResults = results.slice(0, 100);
+        displayResults.forEach((res, index) => {
+            const card = document.createElement("div");
+            
+            // --- パターン1：通常2WSモード（通常＆AM3ダブル併記） ---
+            if (stepsCount === 2) {
+                // イオAM3時の連携に応じたカードクラスの決定
+                const mainChain = res.chainIonic || res.chainNormal;
+                let chainClass = "chain-level1";
+                if (mainChain.name === "光" || mainChain.name === "極光") chainClass = "chain-light";
+                else if (mainChain.name === "闇" || mainChain.name === "黒闇") chainClass = "chain-dark";
+                else if (mainChain.name === "核熱") chainClass = "chain-fusion";
+                else if (mainChain.name === "湾曲") chainClass = "chain-distortion";
+                else if (mainChain.name === "重力") chainClass = "chain-gravitation";
+                else if (mainChain.name === "分解") chainClass = "chain-fragmentation";
+
+                card.className = `sc-card ${chainClass}`;
+                card.style.animationDelay = `${index * 0.05}s`;
+
+                // MB要素の組み立て (通常時)
+                const mbListNormal = res.chainNormal ? (mbElements[res.chainNormal.name] || []) : [];
+                let mbNormalHTML = "";
+                mbListNormal.forEach(el => {
+                    const elClass = elementClasses[el] || "";
+                    mbNormalHTML += `<span class="mb-el ${elClass}">${el}</span>`;
+                });
+
+                // MB要素の組み立て (イオAM3時)
+                const mbListIonic = res.chainIonic ? (mbElements[res.chainIonic.name] || []) : [];
+                let mbIonicHTML = "";
+                mbListIonic.forEach(el => {
+                    const elClass = elementClasses[el] || "";
+                    mbIonicHTML += `<span class="mb-el ${elClass}">${el}</span>`;
+                });
+
+                // WS属性の文字列表記（AM3による新規追加属性には足跡マークを付与）
+                function getWSAttrsHTML(normalWS, ionicWS) {
+                    let parts = [];
+                    ionicWS.attrs.forEach(attr => {
+                        const isAdded = !normalWS.attrs.includes(attr);
+                        if (isAdded) {
+                            parts.push(`<span class="attr-added" title="イオAM3中の追加属性">${attr}</span>`);
+                        } else {
+                            parts.push(attr);
+                        }
+                    });
+                    return parts.join('/');
+                }
+
+                const tossAttrsStr = getWSAttrsHTML(res.tossNormal, res.tossIonic);
+                const closeAttrsStr = getWSAttrsHTML(res.closeNormal, res.closeIonic);
+
+                // 連携名・レベル表示文字列の決定
+                const normalName = res.chainNormal ? `【${res.chainNormal.name}連携】` : "なし";
+                const normalLv = res.chainNormal ? `Lv${res.chainNormal.level}` : "";
+                const ionicName = res.chainIonic ? `【${res.chainIonic.name === "黒闇" ? "極闇/黒闇" : res.chainIonic.name}連携】` : "なし";
+                const ionicLv = res.chainIonic ? `Lv${res.chainIonic.level}` : "";
+
+                card.innerHTML = `
+                    <div class="sc-badge-row sc-double-header">
+                        <div class="sc-header-side">
+                            <span class="sc-mode-label">通常武器</span>
+                            <span class="sc-name-small">${normalName}</span>
+                            <span class="sc-level-small">${normalLv}</span>
+                        </div>
+                        <div class="sc-header-divider"></div>
+                        <div class="sc-header-side highlight-side">
+                            <span class="sc-mode-label label-ionic">イオAM3中 </span>
+                            <span class="sc-name-big ${chainClass}">${ionicName}</span>
+                            <span class="sc-level-big">${ionicLv}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ws-steps">
+                        <div class="ws-step">
+                            <span class="ws-num">1</span>
+                            <div>
+                                <span class="ws-name">${res.tossNormal.name}</span>
+                                <span class="ws-type">（${res.tossNormal.type} ［${tossAttrsStr}］）</span>
+                            </div>
+                        </div>
+                        <div class="ws-step">
+                            <span class="ws-num">2</span>
+                            <div>
+                                <span class="ws-name">${res.closeNormal.name}</span>
+                                <span class="ws-type">（${res.closeNormal.type} ［${closeAttrsStr}］）</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-double-row">
+                        <div class="mb-half">
+                            <span class="mb-label-small">🔥 通常MB:</span>
+                            <div class="mb-elements-small">
+                                ${mbNormalHTML || '<span class="mb-el">なし</span>'}
+                            </div>
+                        </div>
+                        <div class="mb-half font-ionic-mb">
+                            <span class="mb-label-small">🔥 AM3中MB:</span>
+                            <div class="mb-elements-small">
+                                ${mbIonicHTML || '<span class="mb-el">なし</span>'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } 
+            // --- パターン2：多段（3手〜6手）タイムラインモード ---
+            else {
+                const finalStep = res.steps[res.steps.length - 1];
+                const finalChain = finalStep.chain;
+                
+                // 最終連携に応じたカードクラスの決定
+                let chainClass = "chain-level1";
+                if (finalChain) {
+                    if (finalChain.name === "光" || finalChain.name === "極光") chainClass = "chain-light";
+                    else if (finalChain.name === "闇" || finalChain.name === "黒闇") chainClass = "chain-dark";
+                    else if (finalChain.name === "核熱") chainClass = "chain-fusion";
+                    else if (finalChain.name === "湾曲") chainClass = "chain-distortion";
+                    else if (finalChain.name === "重力") chainClass = "chain-gravitation";
+                    else if (finalChain.name === "分解") chainClass = "chain-fragmentation";
+                }
+
+                card.className = `sc-card multi-step-card ${chainClass}`;
+                card.style.animationDelay = `${index * 0.05}s`;
+
+                // 縦型タイムラインHTMLの組み立て
+                let timelineHTML = "";
+                
+                res.steps.forEach((step, stepIdx) => {
+                    const chainName = step.chain ? step.chain.name : "不成立";
+                    const chainLevel = step.chain ? `Lv${step.chain.level}` : "";
+                    
+                    let stepChainClass = "chain-level1";
+                    if (step.chain) {
+                        if (step.chain.name === "光" || step.chain.name === "極光") stepChainClass = "chain-light";
+                        else if (step.chain.name === "闇" || step.chain.name === "黒闇") stepChainClass = "chain-dark";
+                        else if (step.chain.name === "核熱") stepChainClass = "chain-fusion";
+                        else if (step.chain.name === "湾曲") stepChainClass = "chain-distortion";
+                        else if (step.chain.name === "重力") stepChainClass = "chain-gravitation";
+                        else if (step.chain.name === "分解") stepChainClass = "chain-fragmentation";
+                    }
+
+                    // 属性リスト（AM状態に応じて追加属性があればを自動付与）
+                    let wsAttrsStr = step.toss.attrs.join('/');
+                    if (step.amState) {
+                        // 照破等でAM1が付加された後のトスWS属性を表示
+                        // AM3状態の拡張属性と比較
+                        const baseWS = weaponWSData[w1].find(w => w.name === step.toss.name);
+                        if (baseWS) {
+                            let parts = [];
+                            step.toss.attrs.forEach(attr => {
+                                const isAdded = !baseWS.attrs.includes(attr);
+                                if (isAdded) {
+                                    parts.push(`<span class="attr-added" title="イオニックAM追加属性">${attr}</span>`);
+                                } else {
+                                    parts.push(attr);
+                                }
+                            });
+                            wsAttrsStr = parts.join('/');
+                        }
+                    }
+
+                    timelineHTML += `
+                        <div class="timeline-step">
+                            <div class="timeline-ws-node">
+                                <span class="timeline-ws-num">${stepIdx + 1}</span>
+                                <div class="timeline-ws-info">
+                                    <span class="timeline-ws-name">${step.toss.name}</span>
+                                    <span class="timeline-ws-type">（${step.toss.type} ［${wsAttrsStr}］）</span>
+                                </div>
+                            </div>
+                            <div class="timeline-connector-line ${stepChainClass}">
+                                <div class="timeline-chain-badge ${stepChainClass}" title="発生する連携">
+                                    <span class="tl-chain-name">【${chainName === "黒闇" ? "極闇/黒闇" : chainName}】</span>
+                                    <span class="tl-chain-level">${chainLevel}</span>
+                                    ${step.amState ? `<span class="tl-am-badge">AM1付加</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    // 最後のステップの場合、最後の〆WSも表示
+                    if (stepIdx === res.steps.length - 1) {
+                        let lastWSAttrsStr = step.close.attrs.join('/');
+                        // 照破などのAM追加の比較
+                        const baseWS = weaponWSData[w2].find(w => w.name === step.close.name);
+                        if (baseWS) {
+                            let parts = [];
+                            step.close.attrs.forEach(attr => {
+                                const isAdded = !baseWS.attrs.includes(attr);
+                                if (isAdded) {
+                                    parts.push(`<span class="attr-added" title="イオニックAM追加属性">${attr}</span>`);
+                                } else {
+                                    parts.push(attr);
+                                }
+                            });
+                            lastWSAttrsStr = parts.join('/');
+                        }
+
+                        timelineHTML += `
+                            <div class="timeline-step last-ws-step">
+                                <div class="timeline-ws-node">
+                                    <span class="timeline-ws-num">${stepIdx + 2}</span>
+                                    <div class="timeline-ws-info">
+                                        <span class="timeline-ws-name">${step.close.name}</span>
+                                        <span class="timeline-ws-type">（${step.close.type} ［${lastWSAttrsStr}］）</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                // 最終連携名・レベル表示
+                const finalName = finalChain ? `【${finalChain.name === "黒闇" ? "極闇/黒闇" : finalChain.name}連携】` : "不成立";
+                const finalLv = finalChain ? `Lv${finalChain.level}` : "";
+
+                card.innerHTML = `
+                    <div class="sc-badge-row sc-multi-header">
+                        <div class="sc-multi-title-area">
+                            <span class="sc-multi-label">一人 ${stepsCount}手 連携ルート</span>
+                            <span class="sc-multi-name ${chainClass}">${finalName}</span>
+                        </div>
+                        <span class="sc-multi-level-badge ${chainClass}">${finalLv}</span>
+                    </div>
+                    
+                    <div class="timeline-container">
+                        ${timelineHTML}
+                    </div>
+                `;
+            }
+
+            resultsList.appendChild(card);
+        });
+    });
+
+    // ==========================================================================
+    // お気に入り機能のロジック 
+    // ==========================================================================
+    const btnAddFav = document.getElementById("btn-add-fav");
+    const favoritesSection = document.getElementById("favorites-section");
+    const favoritesList = document.getElementById("favorites-list");
+
+    const weaponNamesJp = {
+        HandToHand: "格闘", Dagger: "短剣", Sword: "片手剣", GreatSword: "両手剣",
+        Axe: "片手斧", GreatAxe: "両手斧", Scythe: "両手鎌", Polearm: "両手槍",
+        Katana: "片手刀", GreatKatana: "両手刀", Club: "片手棍", Staff: "両手棍",
+        Bow: "弓術", Marksmanship: "射撃"
+    };
+
+    function renderFavorites() {
+        if (!favoritesList || !favoritesSection) return;
+
+        let favs = [];
+        try {
+            const saved = localStorage.getItem("ff11_chain_favorites");
+            if (saved) favs = JSON.parse(saved);
+        } catch (e) {
+            console.error("Failed to load favorites:", e);
+        }
+
+        if (favs.length === 0) {
+            favoritesSection.style.display = "none";
+            return;
+        }
+
+        favoritesSection.style.display = "block";
+        favoritesList.innerHTML = "";
+
+        favs.forEach((fav, idx) => {
+            const chip = document.createElement("div");
+            chip.className = "favorite-chip";
+            
+            const w1Name = weaponNamesJp[fav.w1] || fav.w1;
+            const w2Name = weaponNamesJp[fav.w2] || fav.w2;
+            const label = `${w1Name} ➔ ${w2Name} (${fav.steps}手 / ${fav.target === "ANY" ? "すべて" : fav.target})`;
+            
+            chip.innerHTML = `
+                <span>${label}</span>
+                <button class="btn-delete-fav" data-index="${idx}">×</button>
+            `;
+
+            // チップクリックで条件を復元して再探索 
+            chip.addEventListener("click", (e) => {
+                if (e.target.classList.contains("btn-delete-fav")) return;
+                
+                selectWeapon1.value = fav.w1;
+                selectWeapon2.value = fav.w2;
+                selectTargetChain.value = fav.target;
+                selectTargetSteps.value = fav.steps.toString();
+                if (checkUnordered) checkUnordered.checked = fav.unordered;
+                
+                // 接続段数変更による表示制御をトリガーし、初期AM値を復元
+                const event = new Event('change');
+                selectTargetSteps.dispatchEvent(event);
+                
+                const selectInitialAM = document.getElementById("initial-am");
+                if (selectInitialAM) {
+                    selectInitialAM.value = fav.initialAM || "NONE";
+                }
+                
+                btnSearch.click();
+            });
+
+            // 削除ボタン
+            const btnDelete = chip.querySelector(".btn-delete-fav");
+            btnDelete.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const index = parseInt(btnDelete.getAttribute("data-index"));
+                deleteFavorite(index);
+            });
+
+            favoritesList.appendChild(chip);
+        });
+    }
+
+    function saveFavorite() {
+        const w1 = selectWeapon1.value;
+        const w2 = selectWeapon2.value;
+        const target = selectTargetChain.value;
+        const steps = parseInt(selectTargetSteps.value);
+        const unordered = checkUnordered ? checkUnordered.checked : false;
+        const selectInitialAM = document.getElementById("initial-am");
+        const initialAM = selectInitialAM ? selectInitialAM.value : "NONE";
+
+        let favs = [];
+        try {
+            const saved = localStorage.getItem("ff11_chain_favorites");
+            if (saved) favs = JSON.parse(saved);
+        } catch (e) {}
+
+        // 重複チェック 
+        const duplicate = favs.find(f => 
+            f.w1 === w1 && f.w2 === w2 && f.target === target && 
+            f.steps === steps && f.unordered === unordered &&
+            (f.initialAM === initialAM || (!f.initialAM && initialAM === "NONE"))
+        );
+
+        if (duplicate) {
+            alert("この検索条件はすでにお気に入りに登録されています");
+            return;
+        }
+
+        favs.push({ w1, w2, target, steps, unordered, initialAM });
+        localStorage.setItem("ff11_chain_favorites", JSON.stringify(favs));
+        renderFavorites();
+    }
+
+    function deleteFavorite(index) {
+        let favs = [];
+        try {
+            const saved = localStorage.getItem("ff11_chain_favorites");
+            if (saved) favs = JSON.parse(saved);
+        } catch (e) {}
+
+        favs.splice(index, 1);
+        localStorage.setItem("ff11_chain_favorites", JSON.stringify(favs));
+        renderFavorites();
+    }
+
+    if (btnAddFav) {
+        btnAddFav.addEventListener("click", saveFavorite);
+    }
+
+    // 初回お気に入り描画 
+    renderFavorites();
+
+    // 初回ロード時にも自動的に探索を実行する（親切設計）
+    btnSearch.click();
+});
+
+// ==========================================================================
+// サービスワーカーの登録（PWA対応）
+// ==========================================================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('ServiceWorker registered successfully:', reg.scope))
+            .catch(err => console.warn('ServiceWorker registration failed:', err));
+    });
+}

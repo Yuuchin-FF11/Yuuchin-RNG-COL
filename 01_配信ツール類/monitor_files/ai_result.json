@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "total_sales": 31000,
+  "details": [
+    {"date": "2026-07-01", "store": "渋谷店", "sales": 10000},
+    {"date": "2026-07-02", "store": "新宿店", "sales": 17000},
+    {"date": "2026-07-03", "store": "池袋店", "sales": 0},
+    {"date": "2026-07-32", "store": "渋谷店", "sales": 4000}
+  ]
+}

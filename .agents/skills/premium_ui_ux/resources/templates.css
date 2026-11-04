@@ -1,0 +1,25 @@
+/* Glassmorphism Premium Template */
+.glass-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient Mesh Background */
+.gradient-mesh {
+    background-color: #0b0f19;
+    background-image:
+        radial-gradient(at 0% 0%, hsla(253, 16%, 12%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(225, 39%, 20%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(339, 49%, 20%, 1) 0, transparent 50%);
+}

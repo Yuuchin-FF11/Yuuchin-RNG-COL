@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIデータ監査システム - AI Data Auditor</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a; /* ロイヤルブルー */
+            --primary-light: #3b82f6;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ヘッダーデザイン */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .status-badge {
+            background-color: #e2e8f0;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge.connected {
+            background-color: #d1fae5;
+            color: var(--success-color);
+        }
+
+        /* メインレイアウト */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* カードの共通スタイル */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        /* ドロップエリア */
+        .drop-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: 6px;
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #f1f5f9;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--primary-light);
+            background-color: #eff6ff;
+        }
+
+        .drop-zone-text {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .drop-zone-text b {
+            color: var(--primary-color);
+        }
+
+        .file-info {
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--success-color);
+            font-weight: bold;
+            display: none;
+        }
+
+        /* マッピングフォーム */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: var(--text-main);
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #fff;
+            color: var(--text-main);
+        }
+
+        /* 実行ボタン */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #1e40af;
+        }
+
+        .btn-secondary {
+            background-color: #64748b;
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
+        /* 診断結果表示 */
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .score-value {
+            font-size: 24px;
+        }
+
+        .score-label {
+            font-size: 10px;
+        }
+
+        .result-summary-text {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .result-summary-text h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .result-summary-text p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* エラーリスト */
+        .error-item {
+            border: 1px solid #fca5a5;
+            background-color: #fef2f2;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .error-item.warning {
+            border-color: #fde047;
+            background-color: #fef9c3;
+        }
+
+        .error-item-title {
+            font-weight: bold;
+            color: var(--danger-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .error-item.warning .error-item-title {
+            color: #b45309;
+        }
+
+        .error-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: var(--danger-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .error-item.warning .error-badge {
+            background-color: var(--warning-color);
+        }
+
+        .error-desc {
+            color: var(--text-main);
+        }
+
+        /* 全合格時の表示 */
+        .success-display {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            color: var(--success-color);
+            margin-bottom: 15px;
+        }
+
+        .success-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: 8px;
+        }
+
+        /* 印刷・レポート用スタイル */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .card {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin-bottom: 0;
+            }
+            header {
+                border-bottom: 2px solid #000;
+            }
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- システムヘッダー -->
+        <header>
+            <div class="logo-area">
+                <h1>AIデータ監査システム</h1>
+                <p>AI Data Auditor - Business Edition</p>
+            </div>
+            <div id="statusBadge" class="status-badge">
+                <span id="statusText">接続待機中</span>
+            </div>
+        </header>
+
+        <!-- メイン画面グリッド -->
+        <div class="main-grid">
+            <!-- 左側：ファイル入力 ＆ 設定パネル (非表示用NoPrint) -->
+            <div class="no-print">
+                <!-- ファイルドロップカード -->
+                <div class="card">
+                    <div class="card-title">監査対象ファイルの選択</div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label>１. オリジナルデータ（正常なマスターファイル）</label>
+                        <div id="dropZoneOrig" class="drop-zone">
+                            <span class="drop-zone-text">ExcelまたはCSVファイルをここにドラッグ＆ドロップ、または<b>ファイルを選択</b></span>
+                            <input type="file" id="fileOrig" style="display: none;" accept=".xlsx,.xls,.csv">
+                            <div id="infoOrig" class="file-info"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>２. AI集計結果データ（監査対象のレポートファイル）</label>
+                        <div id="dropZoneAi" class="drop-zone">
+                            <span class="drop-zone-text">ExcelまたはCSVファイルをここにドラッグ＆ドロップ、または<b>ファイルを選択</b></span>
+                            <input type="file" id="fileAi" style="display: none;" accept=".xlsx,.xls,.csv">
+                            <div id="infoAi" class="file-info"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 列紐付け設定カード -->
+                <div class="card" id="mappingCard" style="display: none;">
+                    <div class="card-title">データ項目の紐付け設定</div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">
+                        ドロップされたファイルの項目名から、検証に必要な項目を正しく選択してください。
+                    </p>
+
+                    <div class="form-group">
+                        <label for="mapDate">日付項目に相当する列</label>
+                        <select id="mapDate"><option value="">選択してください</option></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mapCategory">店舗名・カテゴリに相当する列</label>
+                        <select id="mapCategory"><option value="">選択してください</option></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mapValue">売上額・数値に相当する列</label>
+                        <select id="mapValue"><option value="">選択してください</option></select>
+                    </div>
+
+                    <button id="btnAudit" class="btn" style="margin-top: 20px;">データ整合性監査を実行</button>
+                </div>
+
+                <!-- オートスキャンカード -->
+                <div class="card">
+                    <div class="card-title">オートスキャン（フォルダ自動監視）</div>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+                        <input type="checkbox" id="checkAutoScan" style="width: 18px; height: 18px;">
+                        フォルダ監視を有効にする (monitor_files内の更新を自動スキャン)
+                    </label>
+                </div>
+            </div>
+
+            <!-- 右側：監査レポートパネル (印刷時はここが全画面になる) -->
+            <div>
+                <div class="card" id="reportCard" style="min-height: 400px;">
+                    <div class="card-title">監査結果報告書</div>
+
+                    <!-- 初期未実行時の表示 -->
+                    <div id="initReportDisplay" style="text-align: center; padding: 100px 20px; color: var(--text-muted);">
+                        <p style="font-size: 15px;">左側パネルからファイルを読み込んで監査を開始してください。</p>
+                        <p style="font-size: 12px; margin-top: 10px;">（Excel / CSV 両対応・完全オフライン動作）</p>
+                    </div>
+
+                    <!-- レポート詳細表示領域 (初期状態は非表示) -->
+                    <div id="reportDetailArea" style="display: none;">
+                        <div class="result-header">
+                            <div class="score-circle">
+                                <span class="score-value" id="scoreValue">-</span>
+                                <span class="score-label">監査スコア</span>
+                            </div>
+                            <div class="result-summary-text">
+                                <h3 id="reportTitle">監査結果レポート</h3>
+                                <p id="reportMeta">検証日時: - | ファイル名: -</p>
+                            </div>
+                        </div>
+
+                        <!-- 判定結果一覧 -->
+                        <div id="errorListArea"></div>
+
+                        <!-- 修正データダウンロード ＆ 印刷ボタン (非表示用NoPrint) -->
+                        <button id="btnDownloadCorrected" class="btn no-print" style="margin-bottom: 12px; background-color: var(--success-color); display: none;">修正済みデータをダウンロード</button>
+                        <button id="btnPrint" class="btn btn-secondary no-print">報告書を印刷・PDF保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:8082';
+        
+        // ファイル情報保持用
+        let fileDataOrig = null;
+        let fileDataAi = null;
+        let autoScanInterval = null;
+        let lastTimestamps = {};
+        let correctedFileData = null;
+        let correctedFileName = '';
+
+        // DOM要素
+        const statusBadge = document.getElementById('statusBadge');
+        const statusText = document.getElementById('statusText');
+        const dropZoneOrig = document.getElementById('dropZoneOrig');
+        const dropZoneAi = document.getElementById('dropZoneAi');
+        const fileOrig = document.getElementById('fileOrig');
+        const fileAi = document.getElementById('fileAi');
+        const infoOrig = document.getElementById('infoOrig');
+        const infoAi = document.getElementById('infoAi');
+        const mappingCard = document.getElementById('mappingCard');
+        const btnDownloadCorrected = document.getElementById('btnDownloadCorrected');
+        const mapDate = document.getElementById('mapDate');
+        const mapCategory = document.getElementById('mapCategory');
+        const mapValue = document.getElementById('mapValue');
+        const btnAudit = document.getElementById('btnAudit');
+        const reportCard = document.getElementById('reportCard');
+        const initReportDisplay = document.getElementById('initReportDisplay');
+        const reportDetailArea = document.getElementById('reportDetailArea');
+        const scoreValue = document.getElementById('scoreValue');
+        const reportTitle = document.getElementById('reportTitle');
+        const reportMeta = document.getElementById('reportMeta');
+        const errorListArea = document.getElementById('errorListArea');
+        const btnPrint = document.getElementById('btnPrint');
+        const checkAutoScan = document.getElementById('checkAutoScan');
+
+        // 接続確認
+        async function checkConnection() {
+            try {
+                const res = await fetch(`${API_BASE}/api/status`);
+                if (res.ok) {
+                    statusBadge.className = 'status-badge connected';
+                    statusText.innerText = '監査サーバー起動中';
+                }
+            } catch (e) {
+                statusBadge.className = 'status-badge';
+                statusText.innerText = 'サーバー未起動';
+            }
+        }
+
+        setInterval(checkConnection, 3000);
+        checkConnection();
+
+        // ドロップイベントの設定
+        function setupDragDrop(zone, input, infoElement, onFileLoaded) {
+            zone.addEventListener('click', () => input.click());
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('dragover');
+            });
+            zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    handleFile(e.dataTransfer.files[0], infoElement, onFileLoaded);
+                }
+            });
+            input.addEventListener('change', () => {
+                if (input.files.length > 0) {
+                    handleFile(input.files[0], infoElement, onFileLoaded);
+                }
+            });
+        }
+
+        setupDragDrop(dropZoneOrig, fileOrig, infoOrig, (fileObj) => {
+            fileDataOrig = fileObj;
+            parseHeaders(fileObj, true);
+        });
+
+        setupDragDrop(dropZoneAi, fileAi, infoAi, (fileObj) => {
+            fileDataAi = fileObj;
+            parseHeaders(fileObj, false);
+        });
+
+        function handleFile(file, infoElement, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64Data = e.target.result.split(',')[1];
+                infoElement.innerText = `選択済み: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+                infoElement.style.display = 'block';
+                callback({
+                    name: file.name,
+                    data: base64Data
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // カラム名（ヘッダー）の自動解析
+        async function parseHeaders(fileObj, isOriginal) {
+            try {
+                const res = await fetch(`${API_BASE}/api/parse-headers`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        filename: fileObj.name,
+                        filedata: fileObj.data
+                    })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.status === 'success') {
+                        updateMappingDropdowns(data.headers, isOriginal);
+                    }
+                }
+            } catch (e) {
+                alert('カラム名の取得に失敗しました。サーバーの接続状態を確認してください。');
+            }
+        }
+
+        function updateMappingDropdowns(headers, isOriginal) {
+            // オリジナルファイルのカラムを優先的にマッピングドロップダウンにセットする
+            if (isOriginal) {
+                mappingCard.style.display = 'block';
+                
+                // ドロップダウンを初期化
+                [mapDate, mapCategory, mapValue].forEach(select => {
+                    select.innerHTML = '<option value="">選択してください</option>';
+                    headers.forEach(h => {
+                        const opt = document.createElement('option');
+                        opt.value = h;
+                        opt.innerText = h;
+                        select.appendChild(opt);
+                    });
+                });
+
+                // 自動的な項目選択の試み (正規表現による簡易予測)
+                headers.forEach(h => {
+                    const low = h.toLowerCase();
+                    if (low.includes('日付') || low.includes('date') || low.includes('日')) {
+                        mapDate.value = h;
+                    }
+                    if (low.includes('店舗') || low.includes('カテゴリ') || low.includes('store') || low.includes('shop') || low.includes('部署')) {
+                        mapCategory.value = h;
+                    }
+                    if (low.includes('売上') || low.includes('金額') || low.includes('sales') || low.includes('amount') || low.includes('数値')) {
+                        mapValue.value = h;
+                    }
+                });
+            }
+        }
+
+        // 監査実行
+        btnAudit.addEventListener('click', async () => {
+            if (!fileDataOrig || !fileDataAi) {
+                alert('オリジナルデータとAI集計データの両方を指定してください。');
+                return;
+            }
+
+            const mapping = {
+                date: mapDate.value,
+                category: mapCategory.value,
+                value: mapValue.value
+            };
+
+            if (!mapping.date || !mapping.category || !mapping.value) {
+                alert('すべての紐付け項目を指定してください。');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/validate-excel`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orig_filename: fileDataOrig.name,
+                        orig_filedata: fileDataOrig.data,
+                        ai_filename: fileDataAi.name,
+                        ai_filedata: fileDataAi.data,
+                        mapping: mapping
+                    })
+                });
+
+                if (res.ok) {
+                    const result = await res.json();
+                    if (result.status === 'success') {
+                        renderReport(result, `${fileDataOrig.name} / ${fileDataAi.name}`);
+                    }
+                }
+            } catch (e) {
+                alert('データ監査の実行に失敗しました。');
+            }
+        });
+
+        // 報告書レンダリング
+        function renderReport(result, filenames) {
+            initReportDisplay.style.display = 'none';
+            reportDetailArea.style.display = 'block';
+
+            scoreValue.innerText = result.score;
+
+            // 修正済みデータの保持とダウンロードボタン表示制御
+            if (result.corrected_filedata) {
+                correctedFileData = result.corrected_filedata;
+                const nameBase = fileDataAi ? fileDataAi.name : 'ai_result.xlsx';
+                correctedFileName = 'corrected_' + nameBase;
+                btnDownloadCorrected.style.display = 'block';
+            } else {
+                correctedFileData = null;
+                btnDownloadCorrected.style.display = 'none';
+            }
+            
+            // スコア色調整
+            const circle = document.querySelector('.score-circle');
+            if (result.score >= 90) {
+                circle.style.backgroundColor = 'var(--success-color)';
+            } else if (result.score >= 60) {
+                circle.style.backgroundColor = 'var(--warning-color)';
+            } else {
+                circle.style.backgroundColor = 'var(--danger-color)';
+            }
+
+            const now = new Date();
+            reportMeta.innerText = `検証日時: ${now.toLocaleString()} | 対象: ${filenames}`;
+
+            errorListArea.innerHTML = '';
+
+            if (result.hallucinations.length === 0) {
+                errorListArea.innerHTML = `
+                    <div class="success-display">
+                        <div class="success-icon">✓</div>
+                        <div class="success-title">監査適合（完全合格）</div>
+                        <p style="font-size: 13px; color: var(--text-muted);">
+                            元のデータとAI集計データの間に、不一致や捏造は検出されませんでした。<br>報告書の整合率は100%です。
+                        </p>
+                    </div>
+                `;
+            } else {
+                result.hallucinations.forEach(item => {
+                    const div = document.createElement('div');
+                    const isWarning = item.type === 'missing_row'; // データの欠落は警告扱い
+                    div.className = `error-item ${isWarning ? 'warning' : ''}`;
+
+                    div.innerHTML = `
+                        <div class="error-item-title">
+                            <span class="error-badge">${isWarning ? '警告' : '不一致'}</span>
+                            ${item.title}
+                        </div>
+                        <div class="error-desc">${item.detail}</div>
+                    `;
+                    errorListArea.appendChild(div);
+                });
+            }
+        }
+
+        // 修正データのダウンロード処理
+        btnDownloadCorrected.addEventListener('click', () => {
+            if (!correctedFileData) return;
+            try {
+                const byteCharacters = atob(correctedFileData);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                
+                let mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                if (correctedFileName.endsWith('.csv')) {
+                    mimeType = 'text/csv;charset=utf-8;';
+                }
+                
+                const blob = new Blob([byteArray], {type: mimeType});
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = correctedFileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (e) {
+                alert('ダウンロード処理に失敗しました。');
+            }
+        });
+
+        // 印刷
+        btnPrint.addEventListener('click', () => {
+            window.print();
+        });
+
+        // オートスキャン
+        checkAutoScan.addEventListener('change', () => {
+            if (checkAutoScan.checked) {
+                startAutoScan();
+            } else {
+                stopAutoScan();
+            }
+        });
+
+        function startAutoScan() {
+            autoScanInterval = setInterval(async () => {
+                try {
+                    const res = await fetch(`${API_BASE}/api/check-file-updates`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ timestamps: lastTimestamps })
+                    });
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.status === 'success') {
+                            lastTimestamps = data.timestamps;
+                            if (data.updated) {
+                                // 自動リフレッシュ表示
+                                renderReport(data, 'monitor_files 監視フォルダ');
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.error('オートスキャン更新チェックに失敗しました', e);
+                }
+            }, 1500);
+        }
+
+        function stopAutoScan() {
+            if (autoScanInterval) {
+                clearInterval(autoScanInterval);
+                autoScanInterval = null;
+            }
+        }
+    </script>
+</body>
+</html>

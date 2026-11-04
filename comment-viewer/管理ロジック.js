@@ -1,3 +1,41 @@
+// リアルタイムデバッグログ出力システム
+(function() {
+    window.addEventListener('DOMContentLoaded', () => {
+        const logLines = document.getElementById('debug-log-lines');
+        if (!logLines) return;
+        const addLog = (msg, color = '#0f0') => {
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.style.marginBottom = '4px';
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            logLines.appendChild(div);
+            logLines.parentElement.scrollTop = logLines.parentElement.scrollHeight;
+        };
+        
+        // 既存のconsoleをフック
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLog(args.join(' '), '#0f0');
+        };
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addLog(args.join(' '), '#ff0');
+        };
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLog(args.join(' '), '#f00');
+        };
+        
+        window.addEventListener('error', (e) => {
+            addLog(`Runtime Error: ${e.message} at ${e.filename}:${e.lineno}`, '#f00');
+        });
+    });
+})();
+
 // YouTube Chat Translator - 管理画面ロジック (コメビュ版・APIキー不要)
 
 // お上品（NGワード）フィルターのロジック🐾
@@ -40,19 +78,29 @@ let isListening = false;
 let shouldBeListening = false;
 let isSpeechSynthesisActive = false;
 let isSpeechSynthesisActiveStartTime = 0; // isSpeechSynthesisActiveがtrueになった時刻を記録
+let lastSpeechSynthesisEndTime = 0; // 読み上げが終了した時刻を記録（マイクの遅延拾い込み防止用）
 let lastErrorTime = 0;
 let lastErrorType = '';
 let isStarting = false;
 let lastStartAttemptTime = 0;
+let startAttemptCount = 0;
 let lastStartSuccessTime = 0;
 let consecutiveErrorCount = 0;
 let lastPreventiveRebuildTime = 0; // 定期予防リビルドの最終実行時刻
+let lastInitTime = 0; // SpeechRecognitionインスタンスを生成（init）した時刻
+let lastResultTime = 0; // onresult が最後に発火した時刻（Edgeゾンビ状態検出用）
+let lastActivityTime = 0; // onresult または onerror が最後に発火した時刻（Edgeゾンビ状態検出用）
+let lastSentSpeechText = ''; // 直前に送信した認識テキスト（二重送信防止用）
+let lastSentSpeechTime = 0; // 直前に送信した時刻（二重送信防止用）
 
 // 音声合成（読み上げ）の状態を切り替えるセッター関数。
 // OFFになった際にマイクが意図せず停止していれば自動復帰させる🐾
 function setSpeechSynthesisActive(active) {
     isSpeechSynthesisActive = active;
     if (active) {
+        if (typeof window.flushSpeechBuffer === 'function') {
+            try { window.flushSpeechBuffer(); } catch(e) {}
+        }
         isSpeechSynthesisActiveStartTime = Date.now(); // ロック開始時刻を記録
         if (window.micRestartTimeoutId) {
             clearTimeout(window.micRestartTimeoutId);
@@ -74,18 +122,128 @@ function setSpeechSynthesisActive(active) {
     }
 }
 
-// マイク入力を無視する状態（ソフトミュート）を読み上げ終了後3秒間維持し、デバイス競合を防ぐデバウンス処理🐾
+// マイク入力を無視する状態（ソフトミュート）を読み上げ終了後1.0秒間維持し、デバイス競合を防ぐデバウンス処理
 function triggerDelayedMicRestart() {
+    lastSpeechSynthesisEndTime = Date.now();
     if (window.micRestartTimeoutId) {
         clearTimeout(window.micRestartTimeoutId);
+        window.micRestartTimeoutId = null;
     }
     
-    // 読み上げ自体は終わっているが、マイクのソフトミュート解除を3秒遅延させる🐾
+    // 読み上げ自体は終わっているが、マイクのソフトミュート解除を1.0秒遅延させる
     window.micRestartTimeoutId = setTimeout(() => {
+        window.micRestartTimeoutId = null;
+        lastSpeechSynthesisEndTime = Date.now();
         setSpeechSynthesisActive(false);
-        console.log('Mic soft-mute released (speech synthesis active flag cleared)🐾');
-    }, 3000); // 3秒待ってからソフトミュートを解除🐾
+        console.log('Mic soft-mute released (speech synthesis active flag cleared)');
+    }, 1000); // 1.0秒待ってからソフトミュートを解除
 }
+
+// --------------------------------------------------------------------------
+// 直前読み上げコメントの履歴管理と音声認識被り自動切除（ストリップ）機能
+// --------------------------------------------------------------------------
+let recentSpokenComments = [];
+
+// コメント読み上げ時に呼び出して履歴を蓄積
+function recordSpokenComment(originalMessage, spokenText, authorName) {
+    const now = Date.now();
+    // 30秒以上前の古い履歴を削除
+    recentSpokenComments = recentSpokenComments.filter(item => (now - item.timestamp) < 30000);
+    recentSpokenComments.push({
+        message: originalMessage || '',
+        spokenText: spokenText || '',
+        authorName: authorName || '',
+        timestamp: now
+    });
+    if (recentSpokenComments.length > 10) {
+        recentSpokenComments.shift();
+    }
+}
+window.recordSpokenComment = recordSpokenComment;
+
+// 音声認識テキストから直前の読み上げコメント被りを自動切除・破棄する関数
+function stripSpokenCommentsFromTranscript(rawTranscript) {
+    if (!rawTranscript || recentSpokenComments.length === 0) return rawTranscript;
+
+    const now = Date.now();
+    // 過去15秒以内の読み上げコメントのみを対象とする
+    const activeComments = recentSpokenComments.filter(item => (now - item.timestamp) <= 15000);
+    if (activeComments.length === 0) return rawTranscript;
+
+    let currentText = rawTranscript.trim();
+
+    for (const item of activeComments) {
+        // 照合候補（読み上げ本文、元メッセージ、メンション除去後メッセージ）
+        const candidates = [
+            item.spokenText,
+            item.message,
+            item.message ? item.message.replace(/[@＠][\w\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\-_.]+\s*/g, '').trim() : ''
+        ].filter(Boolean);
+
+        for (const candidate of candidates) {
+            const cleanCandidate = candidate.replace(/[@＠_＿\s\.,!！\?？、。]/g, '');
+            if (cleanCandidate.length < 3) continue;
+
+            const normCandidate = cleanCandidate.toLowerCase();
+            const normCurrent = currentText.replace(/[@＠_＿\s\.,!！\?？、。]/g, '').toLowerCase();
+
+            // 1. 全文一致判定（マイクが読み上げ音声だけを拾ったケース）
+            if (normCurrent.includes(normCandidate) || normCandidate.includes(normCurrent)) {
+                const diffLen = Math.abs(normCurrent.length - normCandidate.length);
+                if (diffLen < 4) {
+                    console.log(`[コメント被り遮断] 音声認識テキスト全体が直前の読み上げコメント「${candidate}」と一致したため破棄します。`);
+                    return '';
+                }
+            }
+
+            // 2. 先頭被り＋後半に肉声があるケースの切り落とし
+            const trimmedCandidate = candidate.trim().replace(/[wW笑\s]+$/, '');
+            const subPhrases = [];
+
+            if (trimmedCandidate.length >= 4) {
+                subPhrases.push(trimmedCandidate);
+            }
+            if (trimmedCandidate.length > 8) {
+                subPhrases.push(trimmedCandidate.slice(-8));
+                subPhrases.push(trimmedCandidate.slice(-12));
+            }
+            if (trimmedCandidate.length >= 6) {
+                subPhrases.push(trimmedCandidate.slice(-6));
+            }
+            if (trimmedCandidate.length >= 4) {
+                subPhrases.push(trimmedCandidate.slice(-4));
+            }
+
+            for (const phrase of subPhrases) {
+                if (!phrase || phrase.length < 4) continue;
+                const lowerCurrent = currentText.toLowerCase();
+                const lowerPhrase = phrase.toLowerCase();
+                const pos = lowerCurrent.indexOf(lowerPhrase);
+
+                // フレーズが見つかり、かつそれが文章の前半〜中盤（先頭から全体の85%以内）にある場合
+                if (pos !== -1 && pos < currentText.length * 0.85) {
+                    const cutEnd = pos + phrase.length;
+                    let remaining = currentText.slice(cutEnd);
+
+                    // 直後に残っている可能性のある草記号（w, W, 笑）、句読点、記号を除去
+                    remaining = remaining.replace(/^[wW笑\s、。,\.!\?！？]+/, '').trim();
+
+                    if (remaining.length > 0) {
+                        console.log(`[コメント被り切除] 直前読み上げフレーズ「${phrase}」との一致を検知。先頭の読み上げ部分を切除しました。残余テキスト:「${remaining}」`);
+                        currentText = remaining;
+                        break;
+                    } else {
+                        console.log(`[コメント被り遮断] 読み上げフレーズ切除後に発話が残らないため破棄します。`);
+                        return '';
+                    }
+                }
+            }
+        }
+    }
+
+    return currentText;
+}
+window.stripSpokenCommentsFromTranscript = stripSpokenCommentsFromTranscript;
 
 // ==========================================================================
 // ハイブリッド同時通訳・音声読み上げ制御クラス (SpeechSynthesisキュー管理)
@@ -134,63 +292,14 @@ class ReadAloudManager {
         const textsToSpeak = this.prepareTexts(chat);
         if (textsToSpeak.length === 0) return false;
 
+        // 直近の読み上げコメントとして記録（音声認識の被り切除用）
+        if (typeof recordSpokenComment === 'function') {
+            recordSpokenComment(chat.message, textsToSpeak.map(t => t.text).join(' '), chat.author ? chat.author.name : '');
+        }
+
         this.queue.push(...textsToSpeak);
         this.processQueue();
         return true;
-    }
-
-    async speakVoiceVox(text, speakerId) {
-        try {
-            const queryUrl = `http://localhost:50021/audio_query?text=${encodeURIComponent(text)}&speaker=${speakerId}`;
-            const queryRes = await fetch(queryUrl, { method: 'POST' });
-            if (!queryRes.ok) throw new Error('VOICEVOX query failed');
-            const queryData = await queryRes.json();
-
-            if (this.rateSlider) {
-                queryData.speedScale = parseFloat(this.rateSlider.value);
-            }
-            if (this.pitchSlider) {
-                queryData.pitchScale = parseFloat(this.pitchSlider.value) - 0.5;
-            }
-
-            const synthUrl = `http://localhost:50021/synthesis?speaker=${speakerId}`;
-            const synthRes = await fetch(synthUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(queryData)
-            });
-            if (!synthRes.ok) throw new Error('VOICEVOX synthesis failed');
-            
-            const audioBlob = await synthRes.blob();
-            const audioUrl = URL.createObjectURL(audioBlob);
-            const audio = new Audio(audioUrl);
-            
-            if (this.volumeSlider) {
-                audio.volume = parseInt(this.volumeSlider.value) / 100;
-            } else {
-                audio.volume = 1.0;
-            }
-
-            return new Promise((resolve) => {
-                audio.onended = () => {
-                    URL.revokeObjectURL(audioUrl);
-                    resolve(true);
-                };
-                audio.onerror = (e) => {
-                    console.error('Audio playback error:', e);
-                    URL.revokeObjectURL(audioUrl);
-                    resolve(false);
-                };
-                audio.play().catch(err => {
-                    console.error('Audio play blocked:', err);
-                    URL.revokeObjectURL(audioUrl);
-                    resolve(false);
-                });
-            });
-        } catch (err) {
-            console.warn('VOICEVOX is not running or failed:', err);
-            return false;
-        }
     }
 
     async processQueue() {
@@ -202,6 +311,7 @@ class ReadAloudManager {
             clearTimeout(window.micRestartTimeoutId);
             window.micRestartTimeoutId = null;
         }
+
         this.speaking = true;
         setSpeechSynthesisActive(true);
 
@@ -217,28 +327,6 @@ class ReadAloudManager {
             // 読み上げ用のテキストに変換辞書を適用🐾
             item.text = this.applyReadingDictionary(item.text);
             
-            const charVal = this.characterSelect ? this.characterSelect.value : 'standard';
-
-            // VOICEVOXでの読み上げ処理
-            if (item.lang === 'ja-JP' && charVal.startsWith('vv_')) {
-                const speakerId = parseInt(charVal.replace('vv_', ''));
-                const success = await this.speakVoiceVox(item.text, speakerId);
-                
-                // 読み上げ終了後のマイク再開処理を削除し、遅延ミュート解除（または即時解除）を実行🐾
-                setSpeechSynthesisActive(false);
-
-                if (success) {
-                    this.speaking = false;
-                    setTimeout(() => this.processQueue(), 250);
-                    return;
-                }
-                console.log('VOICEVOX is unavailable, falling back to browser SpeechSynthesis...');
-                
-                setSpeechSynthesisActive(true);
-                // フォールバックの際も、少し待ってからSpeechSynthesisを開始する🐾
-                await new Promise(r => setTimeout(r, 500));
-            }
-
             // Edge のオンライン音声は cancel()/getVoices()/ウェイトではリセットできないため、
             // ボリューム0の極短ウォームアップ発話で接続を事前に確立してから本番発話を行う🐾
             try {
@@ -294,7 +382,11 @@ class ReadAloudManager {
                 bestVoice = this.getBestVoice(item.lang);
             }
             if (bestVoice) {
-                utterance.voice = bestVoice;
+                if (bestVoice.name.includes('undefined')) {
+                    console.log('[音声選択] 選択された音声に undefined が含まれるため、utterance.voice には設定せず、lang 設定のみでブラウザの自動解決（ななみちゃん）に委ねます🐾');
+                } else {
+                    utterance.voice = bestVoice;
+                }
             }
 
             if (this.volumeSlider) {
@@ -320,6 +412,7 @@ class ReadAloudManager {
             window.activeUtterances.push(utterance);
 
             const resumeRecognition = () => {
+                lastSpeechSynthesisEndTime = Date.now();
                 triggerDelayedMicRestart();
             };
 
@@ -329,19 +422,23 @@ class ReadAloudManager {
                 }
             };
 
+            // 長文コメントも途中で途切れず読み切れるよう、文字数に応じた動的タイムアウトを最適化
+            // （1文字あたり350ms + 最低8秒、上限45秒）
+            const textLen = (item.text || '').length;
+            const calcTimeout = Math.min(45000, Math.max(8000, textLen * 350 + 8000));
             const watchdogId = setTimeout(() => {
-                console.warn('SpeechSynthesis output timed out. Forcing next queue...');
-                // タイムアウト時はイベントの競合を防ぐため、イベントハンドラを無効化してから cancel します🐾
+                console.warn(`SpeechSynthesis output timed out (${calcTimeout}ms). Forcing next queue...`);
+                // タイムアウト時はイベントの競合を防ぐため、イベントハンドラを無効化してから cancel します
                 utterance.onend = null;
                 utterance.onerror = null;
                 try {
-                    this.synth.cancel(); // タイムアウト時のみ、詰まりを解消するために cancel を実行🐾
+                    this.synth.cancel(); // タイムアウト時のみ、詰まりを解消するために cancel を実行
                 } catch(err) {}
                 cleanUtterance();
                 resumeRecognition();
                 this.speaking = false;
                 this.processQueue();
-            }, 30000); // 長いコメントの読み上げにも対応できるよう、タイムアウトを30秒へ延長🐾
+            }, calcTimeout);
 
             utterance.onend = () => {
                 clearTimeout(watchdogId);
@@ -422,34 +519,62 @@ class ReadAloudManager {
         if (!this.voices || this.voices.length === 0) {
             this.voices = this.synth.getVoices();
         }
+        console.log(`[音声選択] 音声取得試行. 全音声数: ${this.voices.length} 件`);
 
+        // 該当言語のすべての音声のプロパティをログ出力して調査🐾
         const langVoices = this.voices.filter(v => v.lang.toLowerCase().replace('_', '-').startsWith(lang.toLowerCase()));
-        if (langVoices.length === 0) return null;
+        langVoices.forEach(v => {
+            console.log(`[音声詳細] 名前: ${v.name} | URI: ${v.voiceURI} | ローカル: ${v.localService}`);
+        });
 
-        if (lang.toLowerCase().startsWith('ja')) {
-            const nanami = langVoices.find(v => v.name.includes('Nanami') || v.name.includes('Natural') || v.name.includes('Online'));
-            if (nanami) return nanami;
-            
-            const google = langVoices.find(v => v.name.includes('Google') || v.name.includes('日本語'));
-            if (google) return google;
-            
-            const ayumi = langVoices.find(v => v.name.includes('Ayumi'));
-            if (ayumi) return ayumi;
-            
-            const haruka = langVoices.find(v => v.name.includes('Haruka') || v.name.includes('Ichiro') === false);
-            if (haruka) return haruka;
-        } else if (lang.toLowerCase().startsWith('en')) {
-            const googleEn = langVoices.find(v => v.name.includes('Google') || v.name.includes('US English'));
-            if (googleEn) return googleEn;
-            
-            const zira = langVoices.find(v => v.name.includes('Zira') || v.name.includes('Hazel'));
-            if (zira) return zira;
-        } else if (lang.toLowerCase().startsWith('ko')) {
-            const heami = langVoices.find(v => v.name.includes('Heami') || v.name.includes('Google'));
-            if (heami) return heami;
+        if (langVoices.length === 0) {
+            console.warn(`[音声選択警告] ${lang} に一致する音声がブラウザで見つかりませんでした。デフォルト音声にフォールバックします。`);
+            return null;
         }
 
-        return langVoices[0];
+        let selected = null;
+        if (lang.toLowerCase().startsWith('ja')) {
+            // ななみちゃん（Nanami）の名前が含まれるものを最優先で厳密に探す🐾
+            const nanami = langVoices.find(v => v.name.includes('Nanami'));
+            if (nanami) {
+                selected = nanami;
+                console.log(`[音声選択] ななみちゃんを特定して選択しました: ${selected.name}`);
+            } else {
+                // もし名前が undefined に化けている場合（バグ発生時）の、Onlineかつ女性音声のフォールバック🐾
+                const onlineVoices = langVoices.filter(v => (v.name.includes('Natural') || v.name.includes('Online')) && !v.name.includes('Keita') && !v.name.includes('Ichiro'));
+                if (onlineVoices.length > 0) {
+                    selected = onlineVoices[0];
+                    console.log(`[音声選択] 化けたオンライン音声（女性）から特定しました: ${selected.name}`);
+                } else {
+                    const google = langVoices.find(v => v.name.includes('Google') || v.name.includes('日本語'));
+                    if (google) { selected = google; }
+                    else {
+                        const haruka = langVoices.find(v => v.name.includes('Haruka'));
+                        if (haruka) { selected = haruka; }
+                        else {
+                            const ayumi = langVoices.find(v => v.name.includes('Ayumi'));
+                            if (ayumi) { selected = ayumi; }
+                        }
+                    }
+                }
+            }
+        } else if (lang.toLowerCase().startsWith('en')) {
+            const googleEn = langVoices.find(v => v.name.includes('Google') || v.name.includes('US English'));
+            if (googleEn) { selected = googleEn; }
+            else {
+                const zira = langVoices.find(v => v.name.includes('Zira') || v.name.includes('Hazel'));
+                if (zira) { selected = zira; }
+            }
+        } else if (lang.toLowerCase().startsWith('ko')) {
+            const heami = langVoices.find(v => v.name.includes('Heami') || v.name.includes('Google'));
+            if (heami) { selected = heami; }
+        }
+
+        if (!selected) {
+            selected = langVoices[0];
+        }
+        console.log(`[音声選択] 選択された音声: ${selected ? selected.name : 'なし'} (lang: ${selected ? selected.lang : 'N/A'})`);
+        return selected;
     }
 
     getBestLocalVoice(lang) {
@@ -460,7 +585,8 @@ class ReadAloudManager {
         // localService === true の音声だけを対象にする（サーバー依存音声を完全に除外）🐾
         const langVoices = this.voices.filter(v =>
             v.localService === true &&
-            v.lang.toLowerCase().replace('_', '-').startsWith(lang.toLowerCase())
+            v.lang.toLowerCase().replace('_', '-').startsWith(lang.toLowerCase()) &&
+            !v.name.includes('undefined')
         );
 
         if (langVoices.length === 0) {
@@ -484,6 +610,9 @@ class ReadAloudManager {
     makeNaturalText(text) {
         if (!text) return '';
         let cleaned = text;
+        // YouTube等の返信メンション（@ユーザー名 / ＠ユーザー名）を除去して、
+        // 「アットマークゼータアンダーライン...」のような不快・長大な記号読み上げを防止
+        cleaned = cleaned.replace(/[@＠][\w\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\-_.]+\s*/g, '');
         cleaned = cleaned.replace(/楽しみ/g, 'たのしみ');
         cleaned = cleaned.replace(/楽しんで/g, 'たのしんで');
         cleaned = cleaned.replace(/楽しむ/g, 'たのしむ');
@@ -1068,6 +1197,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // YouTubeのガイドライン・ログイン警告ポップアップ非表示 ＋ 強制ダークモード化（黒背景・白文字）
+            try {
+                if (!iframeDoc.getElementById('custom-hide-overlay-style')) {
+                    const hideStyle = iframeDoc.createElement('style');
+                    hideStyle.id = 'custom-hide-overlay-style';
+                    hideStyle.textContent = `
+                        html, body, yt-live-chat-renderer, yt-live-chat-item-list-renderer {
+                            background-color: #0f172a !important;
+                            color: #ffffff !important;
+                        }
+                        yt-live-chat-text-message-renderer #message,
+                        yt-live-chat-text-message-renderer #author-name {
+                            color: #ffffff !important;
+                        }
+                        yt-live-chat-viewer-engagement-message-renderer,
+                        tp-yt-paper-dialog,
+                        yt-live-chat-dialog-renderer,
+                        yt-live-chat-restricted-participation-renderer,
+                        #action-panel,
+                        #input-panel,
+                        yt-live-chat-message-input-header-renderer,
+                        yt-live-chat-message-input-renderer,
+                        yt-button-renderer#signup-button,
+                        #picker-buttons,
+                        yt-live-chat-header-renderer {
+                            display: none !important;
+                        }
+                    `;
+                    (iframeDoc.head || iframeDoc.documentElement).appendChild(hideStyle);
+                }
+            } catch (styleErr) {
+                console.warn('Failed to inject hide style:', styleErr);
+            }
+
             const targetContainer = iframeDoc.querySelector('#chat-items') || iframeDoc.querySelector('yt-live-chat-item-list-renderer');
             
             if (targetContainer) {
@@ -1376,8 +1539,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const startSpeechFallback = () => {
                 if (!hasTriggeredSpeech) {
                     hasTriggeredSpeech = true;
+                    let queued = false;
                     if (readAloudManager) {
-                        readAloudManager.speak(testComment);
+                        queued = readAloudManager.speak(testComment);
+                    }
+                    if (!queued) {
+                        setSpeechSynthesisActive(false);
                     }
                 }
             };
@@ -1613,40 +1780,101 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 配信者用 日本語から英語への自動翻訳ロジック
     // ==========================================================================
+    // Google翻訳の異常出力（ハルシネーション・数値無限ループ）検知
+    function isTranslationAnomaly(translated) {
+        if (!translated) return false;
+        // 0の異常連続 (,000が3回以上、または0が8個以上連続)
+        if (/(?:,000){3,}/.test(translated) || /0{8,}/.test(translated)) return true;
+        // 英単語の不自然な4回以上の繰り返し
+        if (/\b([a-zA-Z]+)(?:\s+\1){3,}\b/i.test(translated)) return true;
+        return false;
+    }
+
+    async function fetchGoogleTranslate(targetText) {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&q=${encodeURIComponent(targetText)}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Translation to English failed');
+        
+        const data = await res.json();
+        if (data && data[0]) {
+            let translated = '';
+            for (let i = 0; i < data[0].length; i++) {
+                if (data[0][i]) {
+                    let transPart = data[0][i][0] || '';
+                    const origPart = data[0][i][1] || '';
+                    
+                    // 各セグメントが「え」「絵」等の聞き返しの場合は「Eh?」に置き換える
+                    const trimmedOrig = origPart.trim().replace(/[?？]/g, '');
+                    if (trimmedOrig === 'え' || trimmedOrig === '絵') {
+                        transPart = transPart.includes('?') || origPart.includes('?') ? 'Eh? ' : 'Eh ';
+                    }
+                    
+                    translated += transPart;
+                }
+            }
+            return translated.trim();
+        }
+        return '';
+    }
+
     async function translateTextToEn(text) {
         if (!text) return '';
         
-        // 「え？」「絵？」単体の特別ガードルール🐾
+        // 「え？」「絵？」単体の特別ガードルール
         const trimmedSimple = text.trim().replace(/[?？]/g, '');
         if (trimmedSimple === 'え' || trimmedSimple === '絵') {
             return 'Eh?';
         }
 
         try {
-            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&q=${encodeURIComponent(text)}`;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error('Translation to English failed');
-            
-            const data = await res.json();
-            if (data && data[0]) {
-                let translated = '';
-                for (let i = 0; i < data[0].length; i++) {
-                    if (data[0][i]) {
-                        let transPart = data[0][i][0] || '';
-                        const origPart = data[0][i][1] || '';
-                        
-                        // 各セグメントが「え」「絵」等の聞き返しの場合は「Eh?」に置き換える🐾
-                        const trimmedOrig = origPart.trim().replace(/[?？]/g, '');
-                        if (trimmedOrig === 'え' || trimmedOrig === '絵') {
-                            transPart = transPart.includes('?') || origPart.includes('?') ? 'Eh? ' : 'Eh ';
-                        }
-                        
-                        translated += transPart;
+            // 【1. 入力前サニタイズ】
+            // 末尾に句読点がない口語文の場合、Google翻訳の文末見失い・ループ暴走を防ぐため句点を補完
+            let queryText = text.trim();
+            if (!/[。！？.!?]$/.test(queryText)) {
+                queryText += '。';
+            }
+
+            let translated = await fetchGoogleTranslate(queryText);
+
+            // 【2. 異常検知ガード & 自動リカバリー】
+            if (!translated || isTranslationAnomaly(translated)) {
+                console.warn('[翻訳自己修復] 翻訳の異常ループを検知。リカバリーを実行します:', translated);
+
+                // 第1リトライ：文末の言い淀み・フィラー（なんか、とか、だけど等）を除去して再試行
+                let cleaned = text.trim().replace(/(?:なんか|なんて|とか|だけど|けれど|けど|し|だし|かも|かな|たり)+$/g, '').trim();
+                if (cleaned && cleaned !== text.trim()) {
+                    if (!/[。！？.!?]$/.test(cleaned)) cleaned += '。';
+                    const retryResult = await fetchGoogleTranslate(cleaned);
+                    if (retryResult && !isTranslationAnomaly(retryResult)) {
+                        return retryResult;
                     }
                 }
-                return translated.trim();
+
+                // 第2リトライ：文章が長い場合は中央で分割して個別に翻訳
+                const words = text.trim().split(/\s+/).filter(Boolean);
+                if (words.length >= 3) {
+                    const mid = Math.floor(words.length / 2);
+                    const p1 = words.slice(0, mid).join(' ') + '。';
+                    const p2 = words.slice(mid).join(' ') + '。';
+                    const r1 = await fetchGoogleTranslate(p1);
+                    const r2 = await fetchGoogleTranslate(p2);
+                    const splitResult = (r1 + ' ' + r2).trim();
+                    if (splitResult && !isTranslationAnomaly(splitResult)) {
+                        return splitResult;
+                    }
+                }
+
+                // 最終防衛：異常な数値重複・無限ループ部分のクランプ整形
+                if (translated) {
+                    translated = translated
+                        .replace(/\((?:about\s+)?[0-9,\s]+yen\)/gi, '')
+                        .replace(/(?:,\d{3}){3,}/g, ',000')
+                        .replace(/\b([a-zA-Z]+)(?:\s+\1){3,}\b/gi, '$1')
+                        .trim();
+                }
             }
-            return text;
+
+            return translated || text;
         } catch (err) {
             console.error('Translation error to English:', err);
             return text;
@@ -1685,8 +1913,84 @@ document.addEventListener('DOMContentLoaded', () => {
     // 配信者マイクリアルタイム音声認識 (Web Speech API)
     // ==========================================================================
     if (SpeechRecognition && btnMicToggle) {
+
+        // 確定バッファとデバウンスタイマー（息継ぎや短い間による分断を防ぎ、1文に結合する）
+        let speechBuffer = [];
+        let speechDebounceTimer = null;
+        const SPEECH_DEBOUNCE_DELAY_MS = 1200; // 確定後の待機時間（1.2秒）
+
+        async function flushSpeechBuffer() {
+            if (speechDebounceTimer) {
+                clearTimeout(speechDebounceTimer);
+                speechDebounceTimer = null;
+            }
+            if (speechBuffer.length === 0) return;
+
+            const rawText = speechBuffer.join(' ').replace(/\s+/g, ' ').trim();
+            speechBuffer = [];
+
+            if (!rawText) return;
+
+            // 直前読み上げコメントとの被り検知・自動切除（ストリップ）
+            const cleanedSpeechText = typeof stripSpokenCommentsFromTranscript === 'function'
+                ? stripSpokenCommentsFromTranscript(rawText)
+                : rawText;
+
+            if (!cleanedSpeechText) {
+                console.log(`Speech recognition dropped: entire text was spoken comment duplication ("${rawText}")`);
+                return;
+            }
+
+            // 直前送信との重複判定（3秒以内の同一文字列は二重送信として破棄）
+            const now = Date.now();
+            if (cleanedSpeechText === lastSentSpeechText && (now - lastSentSpeechTime) < 3000) {
+                console.log(`Speech recognition duplicate ignored: "${cleanedSpeechText}" within ${now - lastSentSpeechTime}ms`);
+                return;
+            }
+
+            lastSentSpeechText = cleanedSpeechText;
+            lastSentSpeechTime = now;
+
+            const resultText = applySpeechCorrection(cleanedSpeechText);
+
+            if (micStatus) {
+                micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
+                micStatus.style.color = 'var(--accent-color)';
+            }
+
+            try {
+                const translatedText = await translateTextToEn(resultText);
+                sendBroadcasterTranslation(resultText, translatedText);
+
+                if (micStatus) {
+                    micStatus.textContent = `字幕送信完了: 「${translatedText}」`;
+                    micStatus.style.color = 'var(--success-color)';
+                }
+
+                setTimeout(() => {
+                    if (isListening && micStatus) {
+                        micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます';
+                        micStatus.style.color = 'var(--success-color)';
+                    }
+                }, 3000);
+            } catch (err) {
+                console.error('Error in flushSpeechBuffer translation:', err);
+                if (micStatus) {
+                    micStatus.textContent = '翻訳処理中にエラーが発生しました。';
+                    micStatus.style.color = 'var(--error-color)';
+                }
+                setTimeout(() => {
+                    if (isListening && micStatus) {
+                        micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます';
+                        micStatus.style.color = 'var(--success-color)';
+                    }
+                }, 3000);
+            }
+        }
+
+        window.flushSpeechBuffer = flushSpeechBuffer;
         
-        // 音声認識インスタンスの初期化・再構築（リビルド）関数🐾
+        // 音声認識インスタンスの初期化・再構築（リビルド）関数
         function initSpeechRecognition() {
             if (recognition) {
                 // 既存のインスタンスのイベントハンドラを解除して破棄🐾
@@ -1699,20 +2003,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             recognition = new SpeechRecognition();
+            lastInitTime = Date.now(); // インスタンスを新規生成した時刻を記録（20分予防リビルド用）
             recognition.lang = 'ja-JP';
             recognition.continuous = true;
             recognition.interimResults = false;
 
             recognition.onstart = () => {
                 isListening = true;
-                isStarting = false; // 起動処理完了🐾
+                isStarting = false; // 起動処理完了
+                startAttemptCount = 0; // 起動試行回数をリセット
                 lastStartSuccessTime = Date.now();
-                consecutiveErrorCount = 0; // 正常に起動できたら連続エラーカウントをリセット🐾
-                lastErrorType = ''; // エラー状態をクリア🐾
+                consecutiveErrorCount = 0; // 正常に起動できたら連続エラーカウントをリセット
+                lastErrorType = ''; // エラー状態をクリア
+                lastActivityTime = Date.now(); // 新しいセッション開始時刻を記録（Edgeゾンビ状態検出の基点）
                 if (micDot) micDot.classList.add('active');
                 if (micBtnText) micBtnText.textContent = 'マイク音声認識: ON';
                 if (micStatus) {
-                    micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                    micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます';
                     micStatus.style.color = 'var(--success-color)';
                 }
             };
@@ -1778,12 +2085,13 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             recognition.onerror = (e) => {
-                // console.errorの代わりにconsole.warnを使用し、エラーの赤文字出力を防ぐ🐾
+                // console.errorの代わりにconsole.warnを使用し、エラーの赤文字出力を防ぐ
                 console.warn('Speech recognition warning:', e.error);
                 lastErrorTime = Date.now();
                 lastErrorType = e.error;
+                lastActivityTime = Date.now(); // エラーも「音声認識が生きている証拠」として記録（Edgeゾンビ状態検出用）
 
-                // no-speech（無音タイムアウト）や aborted（手動停止）は通信異常ではないので、連続エラーカウントから除外します🐾
+                // no-speech（無音タイムアウト）や aborted（手動停止）は通信異常ではないので、連続エラーカウントから除外します
                 if (e.error !== 'no-speech' && e.error !== 'aborted') {
                     consecutiveErrorCount++;
                 }
@@ -1810,34 +2118,76 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     consecutiveErrorCount = 0; // 正常に聞き取れたら連続エラーをリセット
                     lastErrorType = ''; // エラー状態をクリア
+                    lastResultTime = Date.now(); // 音声認識が正常に結果を返した時刻を記録
+                    lastActivityTime = Date.now(); // 活動時刻を更新（Edgeゾンビ状態検出用）
                     if (isSpeechSynthesisActive) {
-                        console.log('Speech recognition ignored: SpeechSynthesis is currently active (soft-mute)');
+                        const now = Date.now();
+                        const isReallySpeaking = window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending);
+                        const hasQueuedItems = typeof readAloudManager !== 'undefined' && readAloudManager && (readAloudManager.speaking || (readAloudManager.queue && readAloudManager.queue.length > 0));
+                        const isCoolingDown = (now - lastSpeechSynthesisEndTime) < 1000 || window.micRestartTimeoutId !== null;
+
+                        // 読み上げ中、または読み上げ終了直後のクールダウン期間（1.0秒）は、遅れて届いたマイク音声を完全に遮断
+                        if (isReallySpeaking || hasQueuedItems || isCoolingDown) {
+                            console.log('Speech recognition ignored: SpeechSynthesis is active or in cooldown (soft-mute)');
+                            return;
+                        }
+
+                        // 発話中ではなく、キューも空で、クールダウン期間もとっくに過ぎているのにフラグだけ残っている場合は自己修復
+                        if (isSpeechSynthesisActiveStartTime > 0 && (now - isSpeechSynthesisActiveStartTime) > 5000) {
+                            console.warn('Self-healing: isSpeechSynthesisActive was stuck without active speech or cooldown. Auto-clearing soft-mute.');
+                            setSpeechSynthesisActive(false);
+                        } else {
+                            return;
+                        }
+                    }
+                    // Web Speech API の標準仕様に基づき、確定テキストと中間テキストを抽出
+                    let finalTranscript = '';
+                    let interimTranscript = '';
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        const res = event.results[i];
+                        if (res && res[0]) {
+                            if (res.isFinal) {
+                                finalTranscript += res[0].transcript;
+                            } else {
+                                interimTranscript += res[0].transcript;
+                            }
+                        }
+                    }
+
+                    // 中間結果（発話途中）の場合はステータス表示のみ更新し、確定タイマーは一時解除（発話継続中）
+                    if (!finalTranscript && interimTranscript) {
+                        if (speechDebounceTimer) {
+                            clearTimeout(speechDebounceTimer);
+                            speechDebounceTimer = null;
+                        }
+                        if (micStatus) {
+                            const preview = [...speechBuffer, interimTranscript.trim()].filter(Boolean).join(' ');
+                            micStatus.textContent = `認識中: 「${preview}」...`;
+                            micStatus.style.color = 'var(--accent-color)';
+                        }
                         return;
                     }
-                    const rawText = event.results[event.results.length - 1][0].transcript.trim();
-                    if (!rawText) return;
 
-                    const resultText = applySpeechCorrection(rawText);
+                    const rawChunk = finalTranscript.trim();
+                    if (!rawChunk) return;
 
+                    // 確定テキストをバッファに追加し、1.2秒間の待機タイマーを再設定
+                    speechBuffer.push(rawChunk);
+                    const rawCombined = speechBuffer.join(' ').replace(/\s+/g, ' ').trim();
+                    const combinedPreview = typeof stripSpokenCommentsFromTranscript === 'function'
+                        ? (stripSpokenCommentsFromTranscript(rawCombined) || rawCombined)
+                        : rawCombined;
                     if (micStatus) {
-                        micStatus.textContent = `認識結果: 「${resultText}」を英訳中...`;
+                        micStatus.textContent = `認識中: 「${combinedPreview}」...`;
                         micStatus.style.color = 'var(--accent-color)';
                     }
 
-                    const translatedText = await translateTextToEn(resultText);
-                    sendBroadcasterTranslation(resultText, translatedText);
-
-                    if (micStatus) {
-                        micStatus.textContent = `字幕送信完了: 「${translatedText}」`;
-                        micStatus.style.color = 'var(--success-color)';
+                    if (speechDebounceTimer) {
+                        clearTimeout(speechDebounceTimer);
                     }
-
-                    setTimeout(() => {
-                        if (isListening && micStatus) {
-                            micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
-                            micStatus.style.color = 'var(--success-color)';
-                        }
-                    }, 3000);
+                    speechDebounceTimer = setTimeout(() => {
+                        flushSpeechBuffer();
+                    }, SPEECH_DEBOUNCE_DELAY_MS);
                 } catch (err) {
                     console.error('Error in onresult processing:', err);
                     if (micStatus) {
@@ -1846,7 +2196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     setTimeout(() => {
                         if (isListening && micStatus) {
-                            micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます 🎙️';
+                            micStatus.textContent = 'マイク入力中... 日本語で喋ると自動英訳されます';
                             micStatus.style.color = 'var(--success-color)';
                         }
                     }, 3000);
@@ -1920,9 +2270,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearTimeout(window.micRestartTimeoutId);
                 window.micRestartTimeoutId = null;
             }
+            if (speechDebounceTimer) {
+                clearTimeout(speechDebounceTimer);
+                speechDebounceTimer = null;
+            }
+            if (speechBuffer.length > 0) {
+                flushSpeechBuffer();
+            }
             shouldBeListening = false;
             isStarting = false;
             consecutiveErrorCount = 0;
+            lastResultTime = 0; // 停止時はリセット
+            lastActivityTime = 0; // 停止時はリセット
             try {
                 if (recognition) recognition.stop();
             } catch (e) {
@@ -1971,6 +2330,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 shouldBeListening = false;
                 isStarting = false;
                 consecutiveErrorCount = 0;
+                lastResultTime = 0; // マイクOFF時はリセット
+                lastActivityTime = 0; // マイクOFF時はリセット
                 if (micDot) micDot.classList.remove('active');
                 if (micBtnText) micBtnText.textContent = 'マイク音声認識: OFF';
                 if (micStatus) {
@@ -2006,12 +2367,16 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(() => {
             const now = Date.now();
 
-            // isSpeechSynthesisActive の最大ロック時間セーフティ（60秒）
-            // 読み上げ中のソフトミュートは維持するが、60秒以上trueのままなら異常としてフラグを強制解除する
+            // isSpeechSynthesisActive の最大ロック時間セーフティ
+            // 読み上げ中のソフトミュートは維持するが、実態として音声合成が停止・クールダウン完了済みでフラグだけ残っている場合は強制解除する
             if (isSpeechSynthesisActive && isSpeechSynthesisActiveStartTime > 0) {
                 const lockDuration = now - isSpeechSynthesisActiveStartTime;
-                if (lockDuration > 60000) {
-                    console.warn(`Heartbeat: isSpeechSynthesisActive has been locked for ${Math.round(lockDuration / 1000)}s. Force releasing.`);
+                const isReallySpeaking = window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending);
+                const hasQueuedItems = typeof readAloudManager !== 'undefined' && readAloudManager && (readAloudManager.speaking || (readAloudManager.queue && readAloudManager.queue.length > 0));
+                const isCoolingDown = (now - lastSpeechSynthesisEndTime) < 1000 || window.micRestartTimeoutId !== null;
+
+                if ((!isReallySpeaking && !hasQueuedItems && !isCoolingDown && lockDuration > 4000) || lockDuration > 50000) {
+                    console.warn(`Heartbeat: isSpeechSynthesisActive has been locked for ${Math.round(lockDuration / 1000)}s (speaking: ${isReallySpeaking}, queued: ${hasQueuedItems}, coolingDown: ${isCoolingDown}). Force releasing.`);
                     setSpeechSynthesisActive(false);
                 }
             }
@@ -2021,7 +2386,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // SpeechRecognition の定期予防リビルド（20分ごと）
             // バックグラウンドで長時間動いているとGoogleサーバーとの接続が劣化するため、
             // 壊れる前に予防的にインスタンスを作り直す
-            if (isListening && lastStartSuccessTime > 0 && (now - lastStartSuccessTime) > 20 * 60 * 1000) {
+            if (isListening && lastInitTime > 0 && (now - lastInitTime) > 20 * 60 * 1000) {
                 if ((now - lastPreventiveRebuildTime) > 20 * 60 * 1000) {
                     console.log('Heartbeat: Preventive rebuild of SpeechRecognition (20min interval).');
                     lastPreventiveRebuildTime = now;
@@ -2031,12 +2396,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Edgeゾンビ状態検出:
+            // isListening=true（動いているつもり）でも、onresult/onerrorが5分以上来ない場合は
+            // EdgeのAzureセッションが無音で切断された「ゾンビ状態」と判断して強制フルリビルドする
+            if (isListening && lastActivityTime > 0 && (now - lastActivityTime) > 5 * 60 * 1000) {
+                console.warn(`Heartbeat: Edge zombie state detected. No activity for ${Math.round((now - lastActivityTime) / 60000)}min while isListening=true. Force rebuilding...`);
+                lastActivityTime = now; // 無限ループ防止のため先にリセット
+                lastResultTime = now;
+                initSpeechRecognition();
+                reconnectSpeechRecognition();
+                return;
+            }
+
             if (!isListening) {
                 // 起動開始してから3秒経っても onstart が発火しない場合は膠着とみなして強制リビルド復帰
                 if (isStarting && (now - lastStartAttemptTime) > 3000) {
-                    console.log('Heartbeat: Speech recognition start timed out. Rebuilding and recovering...');
-                    initSpeechRecognition();
-                    reconnectSpeechRecognition();
+                    startAttemptCount++;
+                    console.warn(`Heartbeat: Speech recognition start timed out (${startAttemptCount}/3).`);
+
+                    if (startAttemptCount >= 3) {
+                        console.error('Heartbeat: Speech recognition start failed 3 consecutive times. Stopping retry loop.');
+                        shouldBeListening = false;
+                        isStarting = false;
+                        startAttemptCount = 0;
+                        if (micDot) micDot.classList.remove('active');
+                        if (micBtnText) micBtnText.textContent = 'マイク音声認識: OFF';
+                        if (micStatus) {
+                            micStatus.textContent = 'エラー: マイクの起動応答がありません。Edgeのアドレスバーでマイク許可を確認し、Ctrl+F5で再読み込みしてください。';
+                            micStatus.style.color = 'var(--error-color)';
+                        }
+                    } else {
+                        if (micStatus) {
+                            micStatus.textContent = `マイク起動再試行中 (${startAttemptCount}/3)...`;
+                            micStatus.style.color = 'var(--accent-color)';
+                        }
+                        initSpeechRecognition();
+                        reconnectSpeechRecognition();
+                    }
                 } else if (!isStarting) {
                     console.log('Heartbeat: Speech recognition should be running but is stopped. Recovering...');
                     reconnectSpeechRecognition();
@@ -2057,10 +2453,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.visibilityState === 'visible') {
             console.log('Tab became visible. Running recovery check...');
 
-            // isSpeechSynthesisActive フラグが長時間スタックしていたら強制解除
+            // isSpeechSynthesisActive フラグがスタックしていたら強制解除
             if (isSpeechSynthesisActive && isSpeechSynthesisActiveStartTime > 0) {
-                const lockDuration = Date.now() - isSpeechSynthesisActiveStartTime;
-                if (lockDuration > 30000) {
+                const now = Date.now();
+                const lockDuration = now - isSpeechSynthesisActiveStartTime;
+                const isReallySpeaking = window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending);
+                const isCoolingDown = (now - lastSpeechSynthesisEndTime) < 1000 || window.micRestartTimeoutId !== null;
+                if ((!isReallySpeaking && !isCoolingDown && lockDuration > 4000) || lockDuration > 50000) {
                     console.warn(`Visibility recovery: isSpeechSynthesisActive stuck for ${Math.round(lockDuration / 1000)}s. Force releasing.`);
                     setSpeechSynthesisActive(false);
                 }
@@ -2074,11 +2473,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // SpeechRecognition が「動いている」状態でも、内部状態が壊れている可能性がある。
-            // 最後にonstartが成功してから10分以上経っていたら予防的にリビルドする
-            if (SpeechRecognition && shouldBeListening && isListening && lastStartSuccessTime > 0) {
-                const sinceLastSuccess = Date.now() - lastStartSuccessTime;
-                if (sinceLastSuccess > 10 * 60 * 1000) {
-                    console.log(`Visibility recovery: Last successful start was ${Math.round(sinceLastSuccess / 60000)}min ago. Preventive rebuild.`);
+            // 最後にインスタンスを作成してから10分以上経っていたら予防的にリビルドする
+            if (SpeechRecognition && shouldBeListening && isListening && lastInitTime > 0) {
+                const sinceLastInit = Date.now() - lastInitTime;
+                if (sinceLastInit > 10 * 60 * 1000) {
+                    console.log(`Visibility recovery: Last initialization was ${Math.round(sinceLastInit / 60000)}min ago. Preventive rebuild.`);
                     initSpeechRecognition();
                     reconnectSpeechRecognition();
                 }

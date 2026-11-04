@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>読み上げ機 (日英・女性音声読み分け版)</title>
+    <style>
+        body {
+            background-color: #121214;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', Meiryo, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(8px);
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.5rem;
+            color: #38bdf8;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            margin-bottom: 20px;
+        }
+        .console {
+            background: #09090b;
+            border: 1px solid #27272a;
+            border-radius: 8px;
+            padding: 15px;
+            height: 180px;
+            overflow-y: auto;
+            text-align: left;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #a1a1aa;
+        }
+        .log-line {
+            margin-bottom: 4px;
+            border-bottom: 1px solid #18181b;
+            padding-bottom: 4px;
+        }
+        .log-time {
+            color: #71717a;
+            margin-right: 8px;
+        }
+        .log-text {
+            color: #e4e4e7;
+        }
+        .btn-test {
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 15px;
+        }
+        .btn-test:hover {
+            background: #0ea5e9;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>読み上げ機 (日英読み分け版)</h1>
+        <p>
+            日本語は「ななみちゃん」、英語は「英語の女性音声」で読み分ける画面です。<br>
+            コメビュ本体（Chrome側）の「読み上げ」チェックを外し、こちらを普通のEdgeで開いておくだけで動作します。
+        </p>
+        <div class="status-badge" id="status">音声エンジン初期化中...</div>
+        <div class="console" id="console">
+            <div class="log-line"><span class="log-time">[00:00:00]</span><span class="log-text">システムを起動しました。</span></div>
+        </div>
+        <button class="btn-test" id="btn-test">音声テスト</button>
+    </div>
+
+    <script>
+        const logConsole = document.getElementById('console');
+        const statusBadge = document.getElementById('status');
+        const btnTest = document.getElementById('btn-test');
+        
+        let speakQueue = [];
+        let isSpeaking = false;
+        let isVoicesLoaded = false;
+        let readIds = new Set();
+
+        function addLog(text) {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.innerHTML = `<span class="log-time">[${timeStr}]</span><span class="log-text">${text}</span>`;
+            logConsole.appendChild(line);
+            logConsole.scrollTop = logConsole.scrollHeight;
+        }
+
+        // 音声リストの取得
+        const synth = window.speechSynthesis;
+        let voices = [];
+
+        // 正常な日本語女性音声を取得する（undefinedは除外してDavidバグを防止）🐾
+        function getBestJpVoice() {
+            voices = synth.getVoices();
+            const validVoices = voices.filter(v => v.lang.startsWith('ja') && !v.name.includes('undefined'));
+            
+            // ななみちゃん（Online/Natural）を最優先🐾
+            const nanami = validVoices.find(v => v.name.includes('Nanami'));
+            if (nanami) return nanami;
+
+            const google = validVoices.find(v => v.name.includes('Google') || v.name.includes('日本語'));
+            if (google) return google;
+            
+            const haruka = validVoices.find(v => v.name.includes('Haruka'));
+            if (haruka) return haruka;
+            
+            return validVoices[0] || null;
+        }
+
+        // 正常な英語女性音声を取得する（Davidバグ防止）🐾
+        function getBestEnVoice() {
+            voices = synth.getVoices();
+            const validVoices = voices.filter(v => v.lang.startsWith('en') && !v.name.includes('undefined'));
+            
+            // アリアちゃん（Online女性）を最優先🐾
+            const aria = validVoices.find(v => v.name.includes('Aria') || v.name.includes('Natural') || v.name.includes('Online'));
+            if (aria) return aria;
+
+            // ローカルの女性音声 Zira または Hazel🐾
+            const zira = validVoices.find(v => v.name.includes('Zira') || v.name.includes('Hazel'));
+            if (zira) return zira;
+            
+            return validVoices.find(v => v.name.includes('David') === false) || validVoices[0] || null;
+        }
+
+        function initVoices() {
+            const jpVoice = getBestJpVoice();
+            const enVoice = getBestEnVoice();
+            if (jpVoice && enVoice) {
+                statusBadge.textContent = `日本語: ${jpVoice.name} | 英語: ${enVoice.name} (接続成功)`;
+                statusBadge.style.background = 'rgba(16, 185, 129, 0.2)';
+                statusBadge.style.color = '#34d399';
+                statusBadge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                if (!isVoicesLoaded) {
+                    addLog(`日本語音声に [${jpVoice.name}]、英語音声に [${enVoice.name}] を設定しました。`);
+                    isVoicesLoaded = true;
+                }
+            } else {
+                statusBadge.textContent = '音声エンジン準備中... (画面クリックでロードを促進できます)';
+                statusBadge.style.background = 'rgba(245, 158, 11, 0.2)';
+                statusBadge.style.color = '#fbbf24';
+                statusBadge.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+            }
+        }
+
+        if (synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = initVoices;
+        }
+        initVoices();
+        
+        // 音声リストが正常にロードされるまで、1秒おきにリトライし続けます🐾
+        const voiceInitInterval = setInterval(() => {
+            initVoices();
+            if (isVoicesLoaded) {
+                clearInterval(voiceInitInterval);
+            }
+        }, 1000);
+
+        // 画面をクリックした際にも強制ロードを走らせます🐾
+        document.body.addEventListener('click', () => {
+            if (!isVoicesLoaded) {
+                initVoices();
+            }
+        });
+
+        // 音声発話処理
+        function speak(item) {
+            if (!item || !item.text) return;
+            const utterance = new SpeechSynthesisUtterance(item.text);
+            
+            if (item.voice) {
+                utterance.voice = item.voice;
+            }
+            utterance.lang = item.lang || 'ja-JP';
+            utterance.pitch = item.lang.startsWith('ja') ? 1.2 : 1.0; // 日本語のみアニメ声風ピッチ
+            utterance.rate = 1.1;
+
+            utterance.onstart = () => {
+                isSpeaking = true;
+            };
+            utterance.onend = () => {
+                isSpeaking = false;
+                setTimeout(processQueue, 100);
+            };
+            utterance.onerror = (e) => {
+                console.error(e);
+                isSpeaking = false;
+                setTimeout(processQueue, 100);
+            };
+
+            synth.speak(utterance);
+        }
+
+        function processQueue() {
+            if (isSpeaking || speakQueue.length === 0) return;
+            const item = speakQueue.shift();
+            speak(item);
+        }
+
+        function pushQueue(text, lang, voice) {
+            speakQueue.push({ text, lang, voice });
+            processQueue();
+        }
+
+        // テストボタン
+        btnTest.addEventListener('click', () => {
+            const jpVoice = getBestJpVoice();
+            const enVoice = getBestEnVoice();
+            addLog(`テスト発話を開始します。`);
+            pushQueue('こんにちは！日本語の読み上げテストは正常です！', 'ja-JP', jpVoice);
+            pushQueue('Hello! This is English test speech.', 'en-US', enVoice);
+        });
+
+        // 定期ポーリングでAPIからチャットを取得
+        async function fetchChats() {
+            try {
+                const res = await fetch('/api/chat');
+                if (!res.ok) throw new Error('API接続失敗');
+                const chats = await res.json();
+                
+                // 初回ロード時はキューの最後を既読とし、それ以降の新規追加のみを読み上げる
+                if (readIds.size === 0) {
+                    chats.forEach(c => {
+                        if (c.id) readIds.add(c.id);
+                    });
+                    addLog('チャット同期を開始しました。新規コメントを待機しています...');
+                    return;
+                }
+
+                chats.forEach(c => {
+                    if (c.id && !readIds.has(c.id)) {
+                        readIds.add(c.id);
+                        
+                        // 配信者自身の発言判定（マイク音声の翻訳結果など）
+                        const isBroadcaster = c.author.isOwner || c.isBroadcaster || c.author.name === 'broadcaster' || c.author.name === 'owner' || c.isBroadcaster === true;
+                        
+                        if (isBroadcaster) {
+                            // 配信者自身のコメント（マイク入力）は読み上げを完全に除外
+                            return;
+                        }
+
+                        // リスナーのコメントを判定して読み分け
+                        const commentLang = c.lang || 'ja-JP';
+                        const isEnglish = commentLang.startsWith('en') || (c.needTranslation === true && !commentLang.startsWith('ja'));
+
+                        if (isEnglish) {
+                            // 英語のコメントの場合：英語用女性音声（Aria / Zira）
+                            const enVoice = getBestEnVoice();
+                            const readText = `${c.author.name}, ${c.message}`;
+                            addLog(`読込(英): ${c.author.name}: ${c.message}`);
+                            pushQueue(readText, 'en-US', enVoice);
+                        } else {
+                            // 日本語のコメントの場合：日本語用女性音声（Nanami / Haruka）
+                            const jpVoice = getBestJpVoice();
+                            let readText = `${c.author.name}さん、${c.message}`;
+                            if (c.isSuperChat) {
+                                readText = `プレミアムスーパーチャット！${c.author.name}さんより、${c.message}`;
+                            } else if (c.isMembership) {
+                                readText = `新規メンバー加入！${c.author.name}さん、${c.message}`;
+                            }
+                            
+                            addLog(`読込(日): ${c.author.name}: ${c.message}`);
+                            pushQueue(readText, 'ja-JP', jpVoice);
+                        }
+                    }
+                });
+
+            } catch (err) {
+                console.error('Fetch chats error:', err);
+            }
+        }
+
+        // 1秒周期でチャットを監視
+        setInterval(fetchChats, 1000);
+    </script>
+</body>
+</html>

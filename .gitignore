@@ -1,0 +1,28 @@
+# システム・OS一時ファイル
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# バックアップおよび一時作業フォルダ
+.agent_backup/
+07_システム開発・一時作業/
+画像素材/一時作業/
+
+# 大容量音声・動画ファイルおよびローカル専用BGMフォルダ
+last_number_bgm/
+latest_patch_bgm/
+sandoria_bgm/
+*.mp3
+*.wav
+*.bgw
+
+# YouTubeサムネイル等の大容量画像作業フォルダ
+アークエンジェル画像/
+
+# Python一時ファイル・キャッシュ
+__pycache__/
+*.py[cod]
+current_port.txt
+
+# 依存パッケージ
+node_modules/

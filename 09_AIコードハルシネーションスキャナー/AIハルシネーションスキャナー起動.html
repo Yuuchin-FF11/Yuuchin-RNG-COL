@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIハルシネーション・スキャナー [AI Hallucination Scanner]</title>
+    <!-- Google Fonts Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #09090b;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-light: #f4f4f5;
+            --text-muted: #a1a1aa;
+            
+            --accent: #8b5cf6;       /* バイオレット */
+            --accent-glow: rgba(139, 92, 246, 0.15);
+            --success: #10b981;      /* エメラルド */
+            --success-glow: rgba(16, 185, 129, 0.15);
+            --warning: #f59e0b;      /* アンバー */
+            --warning-glow: rgba(245, 158, 11, 0.15);
+            --danger: #ef4444;       /* レッド */
+            --danger-glow: rgba(239, 68, 68, 0.15);
+            
+            --font-outfit: 'Outfit', 'Inter', sans-serif;
+            --font-inter: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-inter);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+            padding: 2rem;
+        }
+
+        /* ヘッダーデザイン */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto 2rem auto;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .logo-area {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: var(--font-outfit);
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        .monitor-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .monitor-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #71717a; /* デフォルトグレー */
+            box-shadow: 0 0 8px rgba(113, 113, 122, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .monitor-badge.connected .monitor-dot {
+            background-color: var(--success);
+            box-shadow: 0 0 12px var(--success);
+        }
+
+        /* メインコンテナ */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ナビゲーションタブ */
+        .nav-tabs {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.4rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            width: fit-content;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: var(--font-inter);
+        }
+
+        .tab-btn:hover {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tab-btn.active {
+            color: var(--text-light);
+            background: var(--accent);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+        }
+
+        /* ２カラムレイアウト */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* カードの共通スタイル (ガラスモーフィズム) */
+        .glass-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        /* ドロップエリア */
+        .drop-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.01);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: var(--accent);
+            background: rgba(139, 92, 246, 0.02);
+            box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.05);
+        }
+
+        .drop-zone.success {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        .drop-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .drop-zone:hover .drop-icon {
+            color: var(--accent);
+        }
+
+        .drop-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+        }
+
+        .drop-subtext {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .file-info-badge {
+            margin-top: 0.8rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            display: none;
+            word-break: break-all;
+            max-width: 90%;
+        }
+
+        /* 警告注意書き */
+        .help-note {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-top: 1rem;
+            padding: 0 0.5rem;
+        }
+
+        /* レポートパネル */
+        .report-panel {
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 統計バッジグリッド */
+        .stats-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.danger {
+            border-color: rgba(239, 68, 68, 0.15);
+            background: rgba(239, 68, 68, 0.02);
+        }
+
+        .stat-card.success {
+            border-color: rgba(16, 185, 129, 0.15);
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        .stat-value {
+            font-family: var(--font-outfit);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card.danger .stat-value {
+            color: var(--danger);
+        }
+
+        .stat-card.success .stat-value {
+            color: var(--success);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* レポートコンテンツエリア */
+        .report-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 200px;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.05);
+            margin-bottom: 1rem;
+        }
+
+        .empty-text {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* プロンプト自動生成パネル */
+        .prompt-panel {
+            margin-top: 1.5rem;
+            background: rgba(139, 92, 246, 0.03);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .prompt-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #a78bfa;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #c084fc;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(139, 92, 246, 0.25);
+            color: #f3e8ff;
+        }
+
+        .prompt-textarea {
+            width: 100%;
+            height: 90px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 0.78rem;
+            padding: 0.75rem;
+            resize: none;
+            font-family: var(--font-inter);
+            line-height: 1.4;
+            outline: none;
+        }
+
+        /* やることナビゲーションパネル */
+        .navi-panel {
+            margin-top: 1.5rem;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .navi-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navi-steps {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            list-style: none;
+        }
+
+        .navi-steps li {
+            position: relative;
+            padding-left: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .navi-steps li::before {
+            content: "・";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* トースト通知 */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #18181b;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            font-size: 0.85rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        /* 非表示クラス */
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダーエリア -->
+    <div class="header">
+        <div class="logo-area">
+            <h1 class="logo-title">AI Hallucination Scanner</h1>
+            <div class="logo-desc">AIが出力したコードの嘘や計算数値のミスを自動で検知</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <!-- オートスキャン機能ON/OFFのスイッチ -->
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 99px; font-size: 0.8rem;">
+                <input type="checkbox" id="autoScanToggle" onchange="toggleAutoScan(this)" style="cursor: pointer; accent-color: var(--accent);">
+                <label for="autoScanToggle" style="cursor: pointer; user-select: none; color: var(--text-muted);">オートスキャン (フォルダ監視)</label>
+            </div>
+            
+            <button class="copy-btn" style="padding: 0.5rem 1rem; background: rgba(255,255,255,0.03); border-color: var(--border-color); color: var(--text-light);" onclick="openWhitelistModal()">⚙️ 除外リスト設定</button>
+            
+            <div class="monitor-badge" id="monitorStatus">
+                <div class="monitor-dot"></div>
+                <span id="monitorStatusText">自動監視：未接続</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- メイン領域 -->
+    <div class="main-container">
+        
+        <!-- モード切り替えタブ -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchMode('code')">コード検証モード</button>
+            <button class="tab-btn" onclick="switchMode('data')">データ数値検証モード</button>
+        </div>
+
+        <div class="grid-layout">
+            
+            <!-- 左側：ファイルドロップゾーン -->
+            <div class="glass-panel">
+                <div class="panel-title" id="dropPanelTitle">
+                    <span>検証するプログラムファイルをセット</span>
+                </div>
+                
+                <!-- 【モード別ドロップエリア】 -->
+                <div class="drop-grid">
+                    <!-- コード用 Before ドロップエリア -->
+                    <div id="codeBeforeContainer" class="drop-container">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 500;">
+                            修正前のプログラムファイル (Before)
+                        </div>
+                        <div class="drop-zone" id="codeBeforeDropZone" 
+                             ondragover="handleDragOver(event)" 
+                             ondragleave="handleDragLeave(event)" 
+                             ondrop="handleFileDrop(event, 'codeBefore')">
+                            <div class="drop-icon">📁</div>
+                            <div class="drop-text">ここに修正前のファイルをドロップ</div>
+                            <div class="drop-subtext">またはクリックしてファイルを選択 (HTML, JS, CSS, PY 等)</div>
+                            <div class="file-info-badge" id="codeBeforeBadge"></div>
+                        </div>
+                    </div>
+
+                    <!-- コード用 After ドロップエリア -->
+                    <div id="codeAfterContainer" class="drop-container">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 500;">
+                            AIが修正したプログラムファイル (After)
+                        </div>
+                        <div class="drop-zone" id="codeAfterDropZone" 
+                             ondragover="handleDragOver(event)" 
+                             ondragleave="handleDragLeave(event)" 
+                             ondrop="handleFileDrop(event, 'codeAfter')">
+                            <div class="drop-icon">📝</div>
+                            <div class="drop-text">ここにAIが修正したファイルをドロップ</div>
+                            <div class="drop-subtext">またはクリックしてファイルを選択</div>
+                            <div class="file-info-badge" id="codeAfterBadge"></div>
+                        </div>
+                    </div>
+
+                    <!-- データ用 元のデータ ドロップエリア -->
+                    <div id="dataOriginalContainer" class="drop-container hidden">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 500;">
+                            元の正しいデータファイル (CSV)
+                        </div>
+                        <div class="drop-zone" id="dataOriginalDropZone" 
+                             ondragover="handleDragOver(event)" 
+                             ondragleave="handleDragLeave(event)" 
+                             ondrop="handleFileDrop(event, 'dataOriginal')">
+                            <div class="drop-icon">📊</div>
+                            <div class="drop-text">ここに元のCSVファイルをドロップ</div>
+                            <div class="drop-subtext">またはクリックしてファイルを選択</div>
+                            <div class="file-info-badge" id="dataOriginalBadge"></div>
+                        </div>
+                    </div>
+
+                    <!-- データ用 AI集計結果 ドロップエリア -->
+                    <div id="dataAiResultContainer" class="drop-container hidden">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 500;">
+                            AIが作成した集計データ (JSON / CSV)
+                        </div>
+                        <div class="drop-zone" id="dataAiResultDropZone" 
+                             ondragover="handleDragOver(event)" 
+                             ondragleave="handleDragLeave(event)" 
+                             ondrop="handleFileDrop(event, 'dataAiResult')">
+                            <div class="drop-icon">📈</div>
+                            <div class="drop-text">ここにAIが作成した結果ファイルをドロップ</div>
+                            <div class="drop-subtext">またはクリックしてファイルを選択</div>
+                            <div class="file-info-badge" id="dataAiResultBadge"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-note" id="helpNoteText">
+                    ※ 修正前のファイルとAIの修正後ファイルをセットすることで、AIが勝手に定義していない関数を呼び出したり、コードを削ったりするミスを自動で見つけ出します。
+                </div>
+            </div>
+
+            <!-- 右側：ハルシネーション診断結果パネル -->
+            <div class="glass-panel report-panel">
+                <div class="panel-title">
+                    <span>検証レポート</span>
+                </div>
+
+                <!-- 統計サマリー -->
+                <div class="stats-summary">
+                    <div class="stat-card danger">
+                        <div class="stat-value" id="hallucinationCount">0</div>
+                        <div class="stat-label">発見されたAIの嘘（件数）</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-value" id="successRate">--</div>
+                        <div class="stat-label">データの整合率（スコア）</div>
+                    </div>
+                </div>
+
+                <!-- レポート内容 -->
+                <div class="report-content" id="reportContentArea">
+                    <div class="empty-icon">🔍</div>
+                    <div class="empty-text">
+                        左側のエリアに検証したいファイルをドロップするか、<br>
+                        「オートスキャン（フォルダ監視）」をONにして monitor_files フォルダ内のファイルを編集してください。<br>
+                        リアルタイムで嘘の調査を開始します。
+                    </div>
+                </div>
+
+                <!-- プロンプト自動生成エリア -->
+                <div class="prompt-panel" id="promptPanel">
+                    <div class="prompt-header">
+                        <div class="prompt-title">📋 AIへの再生成指示文（プロンプト）</div>
+                        <button class="copy-btn" onclick="copyPromptText()">指示文をコピー</button>
+                    </div>
+                    <textarea class="prompt-textarea" id="promptTextarea" readonly></textarea>
+                </div>
+
+                <!-- やることナビ -->
+                <div class="navi-panel">
+                    <div class="navi-title">🧭 次にあなたがすること</div>
+                    <ul class="navi-steps" id="naviStepsArea">
+                        <li>左側のエリアにファイルをセットしてください。</li>
+                        <li>自動的にAIの間違い探しがスタートします。</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 除外ホワイトリスト設定モーダル -->
+    <div id="whitelistModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; animation: fadeIn 0.3s ease;">
+        <div class="glass-panel" style="width: 500px; max-width: 90%; max-height: 85%; display: flex; flex-direction: column; padding: 2rem;">
+            <div class="panel-title" style="margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                <span>⚙️ 除外ホワイトリスト設定</span>
+                <span style="cursor: pointer; font-size: 1.2rem; color: var(--text-muted);" onclick="closeWhitelistModal()">✕</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+                安全とわかっている外部関数（外部ライブラリ等）を登録することで、AIが使用した際に「プログラムの嘘」と誤検知されるのを防ぎます。
+            </div>
+            
+            <div style="flex-grow: 1; overflow-y: auto; margin-bottom: 1.5rem; max-height: 250px; padding-right: 0.5rem; background: rgba(0,0,0,0.15); border-radius: 8px; padding: 0.75rem;" id="customTagsContainer">
+                <!-- カスタム除外タグ一覧がJSで入る -->
+            </div>
+            
+            <!-- 入力欄 -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                <input type="text" id="newWhitelistInput" placeholder="登録する関数名を入力 (例: customFunction)" style="flex-grow: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); font-size: 0.8rem; padding: 0.5rem 0.75rem; outline: none;">
+                <button class="copy-btn" onclick="addWhitelistTag()" style="padding: 0.5rem 1rem;">追加</button>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; gap: 0.75rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem;">
+                <button class="tab-btn" onclick="closeWhitelistModal()" style="font-size: 0.8rem; padding: 0.5rem 1.2rem; background: rgba(255,255,255,0.03); color: var(--text-muted); border-radius: 8px;">キャンセル</button>
+                <button class="tab-btn active" onclick="saveWhitelist()" style="font-size: 0.8rem; padding: 0.5rem 1.5rem; background: var(--accent); border-radius: 8px;">設定を保存して閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast" id="toastNotification">
+        <div class="toast-indicator"></div>
+        <span id="toastText">ファイルを読み込みました</span>
+    </div>
+
+    <!-- 隠しファイルインプット -->
+    <input type="file" id="hiddenFileInput" style="display: none;" onchange="handleFileSelect(event)">
+
+    <script>
+        // グローバル変数
+        let currentMode = 'code'; // 'code' または 'data'
+        let activeDropTargetId = null;
+        let tempCustomWhitelist = [];
+        
+        let autoScanIntervalId = null;
+        let lastFileTimes = {
+            code: { before: 0, after: 0 },
+            data: { original: 0, ai_result: 0 }
+        };
+
+        // 読み込んだファイルのデータを保持するオブジェクト
+        const loadedFiles = {
+            codeBefore: { name: "", content: "" },
+            codeAfter: { name: "", content: "" },
+            dataOriginal: { name: "", content: "" },
+            dataAiResult: { name: "", content: "" }
+        };
+
+        // モード切り替え処理
+        function switchMode(mode) {
+            if (currentMode === mode) return;
+            currentMode = mode;
+
+            // タブボタンのアクティブ状態の切り替え
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                if (btn.innerText.includes('コード') && mode === 'code') {
+                    btn.classList.add('active');
+                } else if (btn.innerText.includes('データ') && mode === 'data') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // コンテナの表示・非表示の切り替え
+            const codeBefore = document.getElementById('codeBeforeContainer');
+            const codeAfter = document.getElementById('codeAfterContainer');
+            const dataOriginal = document.getElementById('dataOriginalContainer');
+            const dataAiResult = document.getElementById('dataAiResultContainer');
+            
+            const dropPanelTitle = document.getElementById('dropPanelTitle').querySelector('span');
+            const helpNoteText = document.getElementById('helpNoteText');
+
+            if (mode === 'code') {
+                codeBefore.classList.remove('hidden');
+                codeAfter.classList.remove('hidden');
+                dataOriginal.classList.add('hidden');
+                dataAiResult.classList.add('hidden');
+                
+                dropPanelTitle.innerText = '検証するプログラムファイルをセット';
+                helpNoteText.innerText = '※ 修正前のファイルとAIの修正後ファイルをセットすることで、AIが勝手に定義していない関数を呼び出したり、コードを削ったりするミスを自動で見つけ出します。';
+            } else {
+                codeBefore.classList.add('hidden');
+                codeAfter.classList.add('hidden');
+                dataOriginal.classList.remove('hidden');
+                dataAiResult.classList.remove('hidden');
+                
+                dropPanelTitle.innerText = '検証するデータファイルをセット';
+                helpNoteText.innerText = '※ 元のCSVデータとAIが算出した集計データをセットすることで、集計数値の計算違いや、存在しない架空データの捏造を自動で見つけ出します。';
+            }
+
+            // レポートエリアの初期化
+            resetReport();
+            showToast(`${mode === 'code' ? 'コード検証' : 'データ数値検証'}モードに切り替えました`);
+            
+            // オートスキャンONの場合、モード切替時にタイムスタンプキャッシュをゼロリセットして初回再読み込みを誘発させる
+            if (document.getElementById('autoScanToggle').checked) {
+                if (mode === 'code') {
+                    lastFileTimes.code = { before: 0, after: 0 };
+                } else {
+                    lastFileTimes.data = { original: 0, ai_result: 0 };
+                }
+            }
+        }
+
+        // レポートの初期化
+        function resetReport() {
+            document.getElementById('hallucinationCount').innerText = '0';
+            document.getElementById('successRate').innerText = '--';
+            document.getElementById('promptPanel').style.display = 'none';
+            
+            const reportContentArea = document.getElementById('reportContentArea');
+            reportContentArea.innerHTML = `
+                <div class="empty-icon">🔍</div>
+                <div class="empty-text">
+                    左側のエリアに検証したいファイルをドロップするか、<br>
+                    「オートスキャン（フォルダ監視）」をONにして monitor_files フォルダ内のファイルを編集してください。<br>
+                    リアルタイムで嘘の調査を開始します。
+                </div>
+            `;
+
+            const naviStepsArea = document.getElementById('naviStepsArea');
+            naviStepsArea.innerHTML = `
+                <li>左側のエリアにファイルをセットしてください。</li>
+                <li>自動的にAIの間違い探しがスタートします。</li>
+            `;
+        }
+
+        // ドラッグ＆ドロップ用ハンドラー
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('dragover');
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+        }
+
+        // ファイルドロップ時の処理
+        function handleFileDrop(e, targetType) {
+            e.preventDefault();
+            const zone = e.currentTarget;
+            zone.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length === 0) return;
+            
+            processLoadedFile(files[0], targetType);
+        }
+
+        // ファイル選択用ダミー起動
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('click', function() {
+                const id = this.id;
+                if (id.includes('codeBefore')) activeDropTargetId = 'codeBefore';
+                else if (id.includes('codeAfter')) activeDropTargetId = 'codeAfter';
+                else if (id.includes('dataOriginal')) activeDropTargetId = 'dataOriginal';
+                else if (id.includes('dataAiResult')) activeDropTargetId = 'dataAiResult';
+                
+                document.getElementById('hiddenFileInput').click();
+            });
+        });
+
+        function handleFileSelect(e) {
+            const files = e.target.files;
+            if (files.length === 0 || !activeDropTargetId) return;
+            
+            processLoadedFile(files[0], activeDropTargetId);
+            e.target.value = ''; // リセット
+        }
+
+        // 読み込んだファイルの処理
+        function processLoadedFile(file, targetType) {
+            const badge = document.getElementById(`${targetType}Badge`);
+            const zone = document.getElementById(`${targetType}DropZone`);
+            
+            if (badge && zone) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    loadedFiles[targetType] = {
+                        name: file.name,
+                        content: e.target.result
+                    };
+                    
+                    badge.innerText = `読み込み完了: ${file.name} (${Math.round(file.size / 1024)} KB)`;
+                    badge.style.display = 'inline-block';
+                    zone.classList.add('success');
+                    
+                    showToast(`${file.name} をセットしました`);
+                    checkValidationTrigger();
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        // 両方セットされたかチェックして解析を動かす
+        function checkValidationTrigger() {
+            const codeBeforeActive = document.getElementById('codeBeforeDropZone').classList.contains('success');
+            const codeAfterActive = document.getElementById('codeAfterDropZone').classList.contains('success');
+            
+            const dataOriginalActive = document.getElementById('dataOriginalDropZone').classList.contains('success');
+            const dataAiResultActive = document.getElementById('dataAiResultDropZone').classList.contains('success');
+
+            if (currentMode === 'code' && codeBeforeActive && codeAfterActive) {
+                runAnalysis('code');
+            } else if (currentMode === 'data' && dataOriginalActive && dataAiResultActive) {
+                runAnalysis('data');
+            }
+        }
+
+        // 実際のPythonサーバー通信による解析処理
+        async function runAnalysis(type) {
+            const reportContentArea = document.getElementById('reportContentArea');
+            const promptPanel = document.getElementById('promptPanel');
+            const promptTextarea = document.getElementById('promptTextarea');
+            
+            reportContentArea.innerHTML = `
+                <div class="empty-icon" style="color: var(--accent); animation: pulse 1.5s infinite;">⏳</div>
+                <div class="empty-text" style="color: var(--text-light); font-weight: 500;">
+                    ハルシネーション（AIの嘘）を解析中...
+                </div>
+            `;
+            promptPanel.style.display = 'none';
+
+            if (type === 'code') {
+                try {
+                    const validateUrl = window.location.protocol === 'file:' 
+                        ? (window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:8081') + '/api/validate-code' 
+                        : '/api/validate-code';
+                    
+                    const response = await fetch(validateUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            before_code: loadedFiles.codeBefore.content,
+                            after_code: loadedFiles.codeAfter.content,
+                            filename: loadedFiles.codeAfter.name
+                        })
+                    });
+
+                    if (!response.ok) throw new Error("解析サーバーとの通信に失敗しました");
+                    const res = await response.json();
+                    
+                    renderCodeReport(res.hallucinations || [], res.score !== undefined ? res.score : 100);
+
+                } catch (err) {
+                    console.error(err);
+                    reportContentArea.innerHTML = `
+                        <div class="empty-icon" style="color: var(--danger);">✕</div>
+                        <div class="empty-text" style="color: var(--danger); font-weight: 600;">
+                            解析に失敗しました: ${err.message}<br>
+                            監視サーバーが起動しているか確認してください。
+                        </div>
+                    `;
+                }
+            } else {
+                try {
+                    const validateDataUrl = window.location.protocol === 'file:' 
+                        ? (window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:8081') + '/api/validate-data' 
+                        : '/api/validate-data';
+                    
+                    const response = await fetch(validateDataUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            original_data: loadedFiles.dataOriginal.content,
+                            ai_result_data: loadedFiles.dataAiResult.content,
+                            filename: loadedFiles.dataAiResult.name
+                        })
+                    });
+
+                    if (!response.ok) throw new Error("データ解析サーバーとの通信に失敗しました");
+                    const res = await response.json();
+                    
+                    renderDataReport(res.hallucinations || [], res.score !== undefined ? res.score : 100);
+
+                } catch (err) {
+                    console.error(err);
+                    reportContentArea.innerHTML = `
+                        <div class="empty-icon" style="color: var(--danger);">✕</div>
+                        <div class="empty-text" style="color: var(--danger); font-weight: 600;">
+                            データ解析に失敗しました: ${err.message}<br>
+                            監視サーバーが起動しているか確認してください。
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // コード解析結果のHTML描画
+        function renderCodeReport(list, score) {
+            const reportContentArea = document.getElementById('reportContentArea');
+            const promptPanel = document.getElementById('promptPanel');
+            const promptTextarea = document.getElementById('promptTextarea');
+            
+            document.getElementById('hallucinationCount').innerText = list.length;
+            document.getElementById('successRate').innerText = score + '%';
+
+            if (list.length === 0) {
+                reportContentArea.innerHTML = `
+                    <div class="empty-icon" style="color: var(--success);">✓</div>
+                    <div class="empty-text" style="color: var(--success); font-weight: 600;">
+                        ハルシネーションは検出されませんでした！<br>
+                        AIが勝手に追加した架空の関数呼び出しはありません。
+                    </div>
+                `;
+                const naviStepsArea = document.getElementById('naviStepsArea');
+                naviStepsArea.innerHTML = `
+                    <li>解析結果は完全合格です。プログラムの嘘（ハルシネーション）はありません。</li>
+                    <li>このコードは安心して次のテストや本番環境へ適用できます。</li>
+                `;
+                promptPanel.style.display = 'none';
+            } else {
+                let html = '<div style="width: 100%; text-align: left; max-height: 250px; overflow-y: auto; padding-right: 0.5rem;">';
+                let fakeNames = [];
+                list.forEach(item => {
+                    fakeNames.push(`・ ${item.name} (${item.line}行目)`);
+                    html += `
+                        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.15); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem;">
+                            <div style="color: var(--danger); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">⚠️ 架空の関数の呼び出し（ウソ）を検知</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light); line-height: 1.5;">
+                                AIが修正したファイルの ${item.line} 行目で、定義されていない関数「<code style="color: var(--warning); background: rgba(255,255,255,0.05); padding: 0.1rem 0.3rem; border-radius: 4px;">${item.name}()</code>」を呼び出しています。
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                reportContentArea.innerHTML = html;
+
+                // AIプロンプト指示文の自動生成
+                promptTextarea.value = `あなたはプログラムの修正において、定義されていない架空の関数を呼び出すハルシネーション（嘘のコード生成）を発生させました。\n\n【発生したエラー内容】\n${fakeNames.join('\n')}\n\nこの関数はプログラム内のどこにも定義されておらず、実行時に構文エラーとなります。この間違いを修正し、完全に動作する正しいプログラムコード全体を再出力してください。`;
+                promptPanel.style.display = 'block';
+
+                const naviStepsArea = document.getElementById('naviStepsArea');
+                naviStepsArea.innerHTML = `
+                    <li>AIが作ったコードの中に、実在しない関数が ${list.length} 件見つかりました。</li>
+                    <li>「指示文をコピー」ボタンを押して、そのままAIチャットに貼り付けて修正させてください。</li>
+                `;
+            }
+        }
+
+        // データ解析結果のHTML描画
+        function renderDataReport(list, score) {
+            const reportContentArea = document.getElementById('reportContentArea');
+            const promptPanel = document.getElementById('promptPanel');
+            const promptTextarea = document.getElementById('promptTextarea');
+            
+            document.getElementById('hallucinationCount').innerText = list.length;
+            document.getElementById('successRate').innerText = score + '%';
+
+            if (list.length === 0) {
+                reportContentArea.innerHTML = `
+                    <div class="empty-icon" style="color: var(--success);">✓</div>
+                    <div class="empty-text" style="color: var(--success); font-weight: 600;">
+                        集計データの矛盾は検出されませんでした！<br>
+                        AIの集計結果は、元の数値と完全に一致しています。
+                    </div>
+                `;
+                const naviStepsArea = document.getElementById('naviStepsArea');
+                naviStepsArea.innerHTML = `
+                    <li>解析結果は完全合格です。数値の不一致や架空の日付データはありません。</li>
+                    <li>この集計データは信頼できるため、そのままレポートや資料に使用できます。</li>
+                `;
+                promptPanel.style.display = 'none';
+            } else {
+                let html = '<div style="width: 100%; text-align: left; max-height: 250px; overflow-y: auto; padding-right: 0.5rem;">';
+                let errors = [];
+                list.forEach(item => {
+                    errors.push(`・ ${item.detail}`);
+                    html += `
+                        <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.15); border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem;">
+                            <div style="color: var(--danger); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">⚠️ ${item.title}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-light); line-height: 1.5;">
+                                ${item.detail}
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                reportContentArea.innerHTML = html;
+
+                // AIプロンプト指示文の自動生成
+                promptTextarea.value = `あなたはデータ集計において、元のデータと矛盾する以下のハルシネーション（計算ミス・データの捏造）を発生させました。\n\n【発生したエラー内容】\n${errors.join('\n')}\n\nこれらの間違いを修正し、正確に集計された正しい集計結果データを再出力してください。`;
+                promptPanel.style.display = 'block';
+
+                const naviStepsArea = document.getElementById('naviStepsArea');
+                naviStepsArea.innerHTML = `
+                    <li>AIの集計結果内に、数値の不一致や存在しない架空データが ${list.length} 件見つかりました。</li>
+                    <li>「指示文をコピー」ボタンを押して、AIチャットに貼り付けて再計算させてください。</li>
+                `;
+            }
+        }
+
+        // プロンプトのコピー処理
+        function copyPromptText() {
+            const promptTextarea = document.getElementById('promptTextarea');
+            promptTextarea.select();
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            showToast('指示文（プロンプト）をクリップボードにコピーしました！');
+        }
+
+        // オートスキャン(フォルダ監視)制御
+        function toggleAutoScan(checkbox) {
+            if (checkbox.checked) {
+                // OFFからON
+                showToast('自動ファイル監視を開始しました (1.5秒ごとにチェック)');
+                autoScanIntervalId = setInterval(checkFileUpdates, 1500);
+            } else {
+                // ONからOFF
+                showToast('自動ファイル監視を停止しました');
+                if (autoScanIntervalId) {
+                    clearInterval(autoScanIntervalId);
+                    autoScanIntervalId = null;
+                }
+            }
+        }
+
+        // サーバーへのファイル更新問い合わせポーリング
+        async function checkFileUpdates() {
+            try {
+                const checkUrl = window.location.protocol === 'file:' 
+                    ? (window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:8081') + '/api/check-file-updates' 
+                    : '/api/check-file-updates';
+                
+                const response = await fetch(checkUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        mode: currentMode,
+                        last_times: lastFileTimes[currentMode]
+                    })
+                });
+
+                if (!response.ok) return;
+                const res = await response.json();
+                
+                if (res.status === 'updated') {
+                    // 更新検知時の処理
+                    lastFileTimes[currentMode] = res.current_times;
+                    
+                    if (currentMode === 'code') {
+                        // ドロップエリアのUI状態をロード完了に見せる
+                        const badgeBefore = document.getElementById('codeBeforeBadge');
+                        const zoneBefore = document.getElementById('codeBeforeDropZone');
+                        badgeBefore.innerText = `自動ロード: before.js (更新検知)`;
+                        badgeBefore.style.display = 'inline-block';
+                        zoneBefore.classList.add('success');
+                        
+                        const badgeAfter = document.getElementById('codeAfterBadge');
+                        const zoneAfter = document.getElementById('codeAfterDropZone');
+                        badgeAfter.innerText = `自動ロード: after.js (更新検知)`;
+                        badgeAfter.style.display = 'inline-block';
+                        zoneAfter.classList.add('success');
+                        
+                        // レポート表示
+                        renderCodeReport(res.hallucinations || [], res.score !== undefined ? res.score : 100);
+                    } else {
+                        const badgeOrig = document.getElementById('dataOriginalBadge');
+                        const zoneOrig = document.getElementById('dataOriginalDropZone');
+                        badgeOrig.innerText = `自動ロード: original.csv (更新検知)`;
+                        badgeOrig.style.display = 'inline-block';
+                        zoneOrig.classList.add('success');
+                        
+                        const badgeAi = document.getElementById('dataAiResultBadge');
+                        const zoneAi = document.getElementById('dataAiResultDropZone');
+                        badgeAi.innerText = `自動ロード: ai_result.json (更新検知)`;
+                        badgeAi.style.display = 'inline-block';
+                        zoneAi.classList.add('success');
+                        
+                        // レポート表示
+                        renderDataReport(res.hallucinations || [], res.score !== undefined ? res.score : 100);
+                    }
+                    showToast('monitor_files フォルダ内のファイル更新を検知し、レポートを自動更新しました');
+                } else if (res.status === 'no_change') {
+                    // タイムスタンプ同期
+                    lastFileTimes[currentMode] = res.current_times;
+                }
+
+            } catch (err) {
+                console.error("更新チェック通信エラー: ", err);
+            }
+        }
+
+        // ホワイトリスト設定モーダル制御
+        async function openWhitelistModal() {
+            const modal = document.getElementById('whitelistModal');
+            const container = document.getElementById('customTagsContainer');
+            container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); text-align:center; padding:1rem 0;">ロード中...</div>';
+            modal.style.display = 'flex';
+
+            try {
+                const getUrl = window.location.protocol === 'file:' 
+                    ? (window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:8081') + '/api/get-whitelist' 
+                    : '/api/get-whitelist';
+                
+                const response = await fetch(getUrl);
+                if (!response.ok) throw new Error("ホワイトリストの取得に失敗しました");
+                
+                const res = await response.json();
+                tempCustomWhitelist = res.custom || [];
+                renderWhitelistTags();
+                
+            } catch (err) {
+                container.innerHTML = `<div style="font-size:0.8rem; color:var(--danger); text-align:center; padding:1rem 0;">接続エラー: ${err.message}</div>`;
+            }
+        }
+
+        function renderWhitelistTags() {
+            const container = document.getElementById('customTagsContainer');
+            if (tempCustomWhitelist.length === 0) {
+                container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); text-align:center; padding: 1.5rem 0;">カスタム除外関数はありません。</div>';
+                return;
+            }
+
+            let html = '<div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">';
+            tempCustomWhitelist.forEach((name, idx) => {
+                html += `
+                    <span style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 6px; padding: 0.25rem 0.55rem; font-size: 0.75rem; color: #c084fc; display: flex; align-items: center; gap: 0.4rem; font-family: monospace;">
+                        ${name}
+                        <span style="cursor: pointer; color: var(--danger); font-weight: bold; font-size: 0.85rem;" onclick="removeWhitelistTag(${idx})">✕</span>
+                    </span>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function addWhitelistTag() {
+            const input = document.getElementById('newWhitelistInput');
+            const val = input.value.trim();
+            if (!val) return;
+            
+            if (!/^[a-zA-Z0-9_$]+$/.test(val)) {
+                showToast('英数字および「_」「$」のみ使用できます');
+                return;
+            }
+            
+            if (tempCustomWhitelist.includes(val)) {
+                showToast('この関数はすでに登録されています');
+                return;
+            }
+            
+            tempCustomWhitelist.push(val);
+            renderWhitelistTags();
+            input.value = '';
+        }
+
+        function removeWhitelistTag(idx) {
+            tempCustomWhitelist.splice(idx, 1);
+            renderWhitelistTags();
+        }
+
+        async function saveWhitelist() {
+            try {
+                const saveUrl = window.location.protocol === 'file:' 
+                    ? (window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:8081') + '/api/save-whitelist' 
+                    : '/api/save-whitelist';
+                
+                const response = await fetch(saveUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        custom: tempCustomWhitelist
+                    })
+                });
+
+                if (!response.ok) throw new Error("設定の保存に失敗しました");
+                
+                showToast('カスタム除外リストを保存しました');
+                closeWhitelistModal();
+                
+                // オートスキャンOFF時のみ手動スキャンを再実行
+                if (!document.getElementById('autoScanToggle').checked) {
+                    checkValidationTrigger();
+                }
+                
+            } catch (err) {
+                showToast(`保存失敗: ${err.message}`);
+            }
+        }
+
+        function closeWhitelistModal() {
+            document.getElementById('whitelistModal').style.display = 'none';
+        }
+
+        // 監視サーバとの連携・ポーリング処理
+        const statusUrl = window.location.protocol === 'file:' 
+            ? (window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:8081') + '/api/status' 
+            : '/api/status';
+
+        async function checkServerStatus() {
+            const statusEl = document.getElementById('monitorStatus');
+            const textEl = document.getElementById('monitorStatusText');
+            
+            if (!statusEl || !textEl) return;
+
+            try {
+                const response = await fetch(statusUrl);
+                if (response.ok) {
+                    statusEl.classList.add('connected');
+                    textEl.innerText = '自動監視：接続完了';
+                } else {
+                    statusEl.classList.remove('connected');
+                    textEl.innerText = '自動監視：未接続';
+                }
+            } catch (err) {
+                statusEl.classList.remove('connected');
+                textEl.innerText = '自動監視：未接続';
+            }
+        }
+
+        // トースト表示処理
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const text = document.getElementById('toastText');
+            text.innerText = message;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // 初期起動処理
+        window.addEventListener('load', () => {
+            checkServerStatus();
+            setInterval(checkServerStatus, 3000);
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 // FFXI Bismarck - 共通コンポーネント & システム統合スクリプト
-// ヘッダー、フッター、背景アニメーション、GAS閲覧ログ、管理者ダッシュボードを一括管理します
+// ヘッダー、フッター、背景アニメーションを一括管理します
 
 document.addEventListener('DOMContentLoaded', () => {
     const isEnglish = document.documentElement.lang === 'en';
@@ -19,10 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. モバイルメニューとBack to Topボタンの初期化
     initMobileMenu();
     initBackToTop();
-
-    // 4. GAS 閲覧履歴送信 & 管理者認証システムの起動
-    logAccess();
-    initAdminSystem();
 });
 
 // --- 共通 HTML テンプレート定義 ---
@@ -119,7 +115,7 @@ const footerHTMLJa = `
                 </a>
             </div>
         </div>
-        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.<span id="admin-trigger" style="opacity: 0.15; cursor: default; margin-left: 4px; font-size: 1.2rem; padding: 10px; display: inline-block; line-height: 1;">.</span></p>
+        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p>
         <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">※当サイトはAIアシスタントを活用して共同で作成しているため、情報に一部誤りや古い内容が含まれている可能性があります。最新の正確な仕様については、ゲーム内や公式用語辞典をあわせてご確認ください。</p>
         <div class="social-links">
@@ -144,7 +140,7 @@ const footerHTMLEn = `
                 </a>
             </div>
         </div>
-        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.<span id="admin-trigger" style="opacity: 0.15; cursor: default; margin-left: 4px; font-size: 1.2rem; padding: 10px; display: inline-block; line-height: 1;">.</span></p>
+        <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.</p>
         <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">*This site is co-created with an AI assistant. Information may contain errors or outdated specs. Please cross-reference with official specs and the wiki.</p>
         <div class="social-links">
@@ -154,60 +150,10 @@ const footerHTMLEn = `
     </footer>
 `;
 
-const passwordModalHTML = `
-    <div id="admin-password-modal" class="admin-modal">
-        <div class="admin-modal-content">
-            <button class="admin-modal-close" id="password-modal-close">&times;</button>
-            <h3 class="admin-modal-title"><i class="fa-solid fa-lock"></i> 管理者認証</h3>
-            <p class="admin-modal-desc">閲覧履歴を表示するには、秘密のパスワードを入力してください。</p>
-            <form id="admin-password-form">
-                <input type="password" id="admin-password-input" class="admin-input" placeholder="パスワードを入力..." required autofocus>
-                <button type="submit" class="admin-btn">認証する</button>
-            </form>
-            <p id="password-error-msg" class="admin-error-text" style="display: none;"></p>
-        </div>
-    </div>
-`;
-
-const dashboardModalHTML = `
-    <div id="admin-dashboard-modal" class="admin-modal">
-        <div class="admin-modal-content dashboard-content">
-            <button class="admin-modal-close" id="dashboard-modal-close">&times;</button>
-            <div class="dashboard-header">
-                <h3 class="admin-modal-title"><i class="fa-solid fa-chart-line"></i> 閲覧履歴ダッシュボード</h3>
-                <button id="admin-refresh-btn" class="admin-btn-secondary"><i class="fa-solid fa-rotate"></i> 更新</button>
-            </div>
-            <p class="admin-modal-desc">直近100件のアクセスログを表示しています。</p>
-            <div class="dashboard-table-container">
-                <table class="dashboard-table">
-                    <thead>
-                        <tr>
-                            <th>日時</th>
-                            <th>アクセスしたページ</th>
-                            <th>リンク元 (リファラ)</th>
-                            <th>ブラウザ/OS</th>
-                            <th>言語</th>
-                            <th>画面サイズ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dashboard-table-body"></tbody>
-                </table>
-                <div id="dashboard-loading" class="dashboard-loading">
-                    <i class="fa-solid fa-circle-notch fa-spin"></i> データを取得中...
-                </div>
-                <div id="dashboard-empty" class="dashboard-empty" style="display: none;">
-                    閲覧履歴データがまだありません。
-                </div>
-            </div>
-        </div>
-    </div>
-`;
-
 // --- コンポーネント注入ロジック ---
 function injectComponents(isEnglish, isIndexPage) {
     const headerContainer = document.getElementById('common-header');
     const footerContainer = document.getElementById('common-footer');
-    const modalsContainer = document.getElementById('common-modals');
 
     // 1. ヘッダーのはめ込み & リンク自動解決 (ダブルクリック/記事ページ対応)
     if (headerContainer) {
@@ -226,11 +172,6 @@ function injectComponents(isEnglish, isIndexPage) {
     if (footerContainer) {
         const footerHTML = isEnglish ? footerHTMLEn : footerHTMLJa;
         footerContainer.innerHTML = footerHTML;
-    }
-
-    // 3. モーダルのはめ込み
-    if (modalsContainer) {
-        modalsContainer.innerHTML = passwordModalHTML + dashboardModalHTML;
     }
 }
 
@@ -364,178 +305,3 @@ function initBackToTop() {
 }
 
 // --- GAS 閲覧履歴送信 & 管理者システム ---
-const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzVIwoOsi-U6Iw5A_KHoWhyRIVHfbO6C_UDzPXWhGHrNIeiVUSsn5md2I18iDPCe5U8qA/exec";
-
-async function logAccess() {
-    try {
-        const payload = {
-            action: 'log',
-            pageTitle: document.title,
-            pageUrl: window.location.href,
-            referrer: document.referrer || "直接入力/ブックマーク",
-            userAgent: navigator.userAgent,
-            language: navigator.language,
-            screenResolution: `${window.screen.width}x${window.screen.height}`
-        };
-
-        await fetch(GAS_API_URL, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(payload)
-        });
-    } catch (error) {
-        console.warn("Logger connection skipped:", error);
-    }
-}
-
-function initAdminSystem() {
-    const trigger = document.getElementById('admin-trigger');
-    const passwordModal = document.getElementById('admin-password-modal');
-    const dashboardModal = document.getElementById('admin-dashboard-modal');
-    
-    const passwordClose = document.getElementById('password-modal-close');
-    const dashboardClose = document.getElementById('dashboard-modal-close');
-    
-    const passwordForm = document.getElementById('admin-password-form');
-    const passwordInput = document.getElementById('admin-password-input');
-    const errorMsg = document.getElementById('password-error-msg');
-    
-    const refreshBtn = document.getElementById('admin-refresh-btn');
-    const tableBody = document.getElementById('dashboard-table-body');
-    const loadingDiv = document.getElementById('dashboard-loading');
-    const emptyDiv = document.getElementById('dashboard-empty');
-
-    if (!trigger || !passwordModal || !dashboardModal) return;
-
-    let savedPassword = '';
-
-    trigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        passwordInput.value = '';
-        errorMsg.style.display = 'none';
-        passwordModal.classList.add('active');
-        passwordInput.focus();
-    });
-
-    passwordClose.addEventListener('click', () => {
-        passwordModal.classList.remove('active');
-    });
-
-    dashboardClose.addEventListener('click', () => {
-        dashboardModal.classList.remove('active');
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === passwordModal) {
-            passwordModal.classList.remove('active');
-        }
-        if (e.target === dashboardModal) {
-            dashboardModal.classList.remove('active');
-        }
-    });
-
-    passwordForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const password = passwordInput.value.trim();
-        if (!password) return;
-
-        errorMsg.style.display = 'none';
-        passwordInput.disabled = true;
-        const submitBtn = passwordForm.querySelector('button[type="submit"]');
-        const origBtnText = submitBtn.textContent;
-        submitBtn.textContent = '認証中...';
-        submitBtn.disabled = true;
-
-        try {
-            const result = await fetchHistory(password);
-            
-            if (result.status === 'success') {
-                savedPassword = password;
-                passwordModal.classList.remove('active');
-                dashboardModal.classList.add('active');
-                renderDashboard(result.data);
-            } else {
-                errorMsg.textContent = result.message || 'パスワードが正しくありません。';
-                errorMsg.style.display = 'block';
-            }
-        } catch (err) {
-            errorMsg.textContent = 'サーバーとの通信に失敗しました。';
-            errorMsg.style.display = 'block';
-        } finally {
-            passwordInput.disabled = false;
-            submitBtn.textContent = origBtnText;
-            submitBtn.disabled = false;
-        }
-    });
-
-    if (refreshBtn) {
-        refreshBtn.addEventListener('click', async () => {
-            if (!savedPassword) return;
-            tableBody.innerHTML = '';
-            loadingDiv.style.display = 'block';
-            emptyDiv.style.display = 'none';
-
-            try {
-                const result = await fetchHistory(savedPassword);
-                if (result.status === 'success') {
-                    renderDashboard(result.data);
-                } else {
-                    alert('セッションが切れました。再度パスワードを入力してください。');
-                    dashboardModal.classList.remove('active');
-                }
-            } catch (err) {
-                alert('データの取得に失敗しました。');
-            }
-        });
-    }
-
-    async function fetchHistory(password) {
-        const response = await fetch(GAS_API_URL, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify({ action: 'get_history', password })
-        });
-
-        if (!response.ok) throw new Error('Network response was not ok');
-        return await response.json();
-    }
-
-    function renderDashboard(data) {
-        loadingDiv.style.display = 'none';
-        tableBody.innerHTML = '';
-
-        if (!data || data.length === 0) {
-            emptyDiv.style.display = 'block';
-            return;
-        }
-
-        emptyDiv.style.display = 'none';
-        data.forEach(row => {
-            const tr = document.createElement('tr');
-            
-            const ua = row['使用ブラウザ/OS'] || '不明';
-            let simpleUA = 'その他';
-            if (ua.includes('iPhone')) simpleUA = 'iPhone';
-            else if (ua.includes('Android')) simpleUA = 'Android';
-            else if (ua.includes('Windows')) simpleUA = 'Windows';
-            else if (ua.includes('Macintosh')) simpleUA = 'Mac';
-            
-            if (ua.includes('Firefox')) simpleUA += ' (Firefox)';
-            else if (ua.includes('Chrome')) simpleUA += ' (Chrome)';
-            else if (ua.includes('Safari')) simpleUA += ' (Safari)';
-            else if (ua.includes('Edge')) simpleUA += ' (Edge)';
-
-            tr.innerHTML = `
-                <td><strong>${row['日時'] || '不明'}</strong></td>
-                <td><span style="color: var(--accent-color);">${row['アクセスしたページ'] || '不明'}</span></td>
-                <td><span style="font-size: 0.85rem; opacity: 0.8;">${row['リンク元 (リファラ)'] || '直接入力'}</span></td>
-                <td><span title="${ua}">${simpleUA}</span></td>
-                <td>${row['使用言語'] || '不明'}</td>
-                <td><span style="font-family: monospace;">${row['画面サイズ'] || '不明'}</span></td>
-            `;
-            tableBody.appendChild(tr);
-        });
-    }
-}

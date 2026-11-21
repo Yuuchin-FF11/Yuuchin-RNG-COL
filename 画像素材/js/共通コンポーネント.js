@@ -121,7 +121,6 @@ const footerHTMLJa = `
         </div>
         <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.<span id="admin-trigger" style="opacity: 0.15; cursor: default; margin-left: 4px; font-size: 1.2rem; padding: 10px; display: inline-block; line-height: 1;">.</span></p>
         <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
-        <p class="privacy-notice">このサイトでは、サイト改善とアクセス状況の把握のため、訪問時にURL・参照元・ブラウザ情報・言語・画面サイズをGoogle Apps Scriptへ送信します。管理者認証時のパスワードはURLに含めず、POSTで送信します。収集した情報はアクセスログ管理の目的に限って利用します。</p>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">※当サイトはAIアシスタントを活用して共同で作成しているため、情報に一部誤りや古い内容が含まれている可能性があります。最新の正確な仕様については、ゲーム内や公式用語辞典をあわせてご確認ください。</p>
         <div class="social-links">
             <a href="https://x.com/TheManLei" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
@@ -147,7 +146,6 @@ const footerHTMLEn = `
         </div>
         <p>&copy; 2026 Tarutaru Fan Site. Not affiliated with SQUARE ENIX.<span id="admin-trigger" style="opacity: 0.15; cursor: default; margin-left: 4px; font-size: 1.2rem; padding: 10px; display: inline-block; line-height: 1;">.</span></p>
         <p>FINAL FANTASY XI is a registered trademark of Square Enix Co., Ltd.</p>
-        <p class="privacy-notice">For site improvement and traffic analysis, this site sends the page URL, referrer, browser information, language, and screen size to Google Apps Script. Administrator passwords are sent by POST and are never included in the URL. Collected data is used only for access-log management.</p>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 0.5rem;">*This site is co-created with an AI assistant. Information may contain errors or outdated specs. Please cross-reference with official specs and the wiki.</p>
         <div class="social-links">
             <a href="https://x.com/TheManLei" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>

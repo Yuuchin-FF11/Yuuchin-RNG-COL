@@ -126,10 +126,6 @@ const footerHTMLJa = `
         <div class="social-links">
             <a href="https://x.com/TheManLei" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="https://github.com/Yuuchin-FF11/Yuuchin-RNG-COL" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <div style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center;">
-                <span class="visitor-label">累計訪問者数</span>
-                <img src="https://visitor-badge.laobi.icu/badge?page_id=Yuuchin-FF11.Yuuchin-RNG-COL" alt="Visitor Count">
-            </div>
         </div>
     </footer>
 `;
@@ -156,10 +152,6 @@ const footerHTMLEn = `
         <div class="social-links">
             <a href="https://x.com/TheManLei" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="https://github.com/Yuuchin-FF11/Yuuchin-RNG-COL" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <div style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center;">
-                <span class="visitor-label">Visitor Count</span>
-                <img src="https://visitor-badge.laobi.icu/badge?page_id=Yuuchin-FF11.Yuuchin-RNG-COL" alt="Visitor Count">
-            </div>
         </div>
     </footer>
 `;

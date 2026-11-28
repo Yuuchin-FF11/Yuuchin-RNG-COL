@@ -26,3 +26,40 @@ current_port.txt
 
 # 依存パッケージ
 node_modules/
+
+# 環境変数・機密情報・ログ・バックアップ
+.env
+.env.*
+*.log
+*.bak
+crash_log.txt
+
+# 実行ファイル・配布用アーカイブ
+*.exe
+*.zip
+
+# 非公開ツール・開発中プロジェクト・ローカル専用ファイル
+01_配信ツール類/
+02_AIデータ監査システム/
+03_ゲーミングPC作成ツール/
+04_サムネイル作成ツール/
+05_動画ダウンロードツール/
+06_アイデアとマニュアル/
+08_ホームページ検証ツール/
+09_AIコードハルシネーションスキャナー/
+10_SNS自動生成ツール_AutoPost30/
+11_請求書領収書一括整理ツール/
+12_AI画像一括後処理ツール/
+autopost30/
+comment-viewer/
+comment-viewer-v2/
+preview-v2/
+v2/
+docs/
+tools/
+KNOWLEDGE_FF11_BGM.md
+KNOWLEDGE_FF11_JOBS/
+promo_slides.html
+server.ps1
+.agents/
+.vscode/

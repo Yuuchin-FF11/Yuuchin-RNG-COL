@@ -1,3 +1,0 @@
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-AssertionError: Validation failed: [{'name': 'run', 'line': 1, 'detail': 'この関数はプログラム内のどこにも定義されていません。'}, {'name': 'this.log', 'line': 1, 'detail': 'この関数はプログラム内のどこにも定義されていません。'}, {'name': 'this.fake', 'line': 1, 'detail': 'この関数はプログラム内のどこにも定義されていません。'}, {'name': 'log', 'line': 1, 'detail': 'この関数はプログラム内のどこにも定義されていません。'}]

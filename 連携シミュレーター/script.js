@@ -845,13 +845,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     <div class="mb-double-row">
                         <div class="mb-half">
-                            <span class="mb-label-small">🔥 通常MB:</span>
+                            <span class="mb-label-small">通常MB:</span>
                             <div class="mb-elements-small">
                                 ${mbNormalHTML || '<span class="mb-el">なし</span>'}
                             </div>
                         </div>
                         <div class="mb-half font-ionic-mb">
-                            <span class="mb-label-small">🔥 AM3中MB:</span>
+                            <span class="mb-label-small">AM3中MB:</span>
                             <div class="mb-elements-small">
                                 ${mbIonicHTML || '<span class="mb-el">なし</span>'}
                             </div>

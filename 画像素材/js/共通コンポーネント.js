@@ -1,6 +1,7 @@
 // FFXI Bismarck - 共通コンポーネント & システム統合スクリプト
 // ヘッダー、フッター、背景アニメーションを一括管理します
 
+window.__commonComponentsLoaded = true;
 document.addEventListener('DOMContentLoaded', () => {
     const isEnglish = document.documentElement.lang === 'en';
     const isIndexPage = window.location.pathname.endsWith('index.html') || 

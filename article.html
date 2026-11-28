@@ -183,7 +183,32 @@
         const escapedKeys = sortedKeys.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
         const autoLinkRegex = new RegExp(`(${escapedKeys.join('|')})`, 'g');
 
-        if (file) {
+        const isValidArticlePath = (p) => {
+            if (!p || typeof p !== 'string') return false;
+            const normalized = p.replace(/\\/g, '/').trim();
+            if (normalized.includes('..') || /^https?:\/\//i.test(normalized) || normalized.startsWith('//') || normalized.startsWith('/')) {
+                return false;
+            }
+            return /^(\.\/)?記事\/[a-zA-Z0-9_\-\/]+\.md$/.test(normalized);
+        };
+
+        const sanitizeHtml = (html) => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            doc.querySelectorAll('script, iframe, object, embed, form').forEach(el => el.remove());
+            doc.querySelectorAll('*').forEach(el => {
+                for (const attr of Array.from(el.attributes)) {
+                    const name = attr.name.toLowerCase();
+                    const val = attr.value.trim().toLowerCase();
+                    if (name.startsWith('on') || ((name === 'href' || name === 'src') && val.startsWith('javascript:'))) {
+                        el.removeAttribute(attr.name);
+                    }
+                }
+            });
+            return doc.body.innerHTML;
+        };
+
+        if (file && isValidArticlePath(file)) {
             fetch(file + '?t=' + new Date().getTime())
                 .then(r => r.ok ? r.text() : Promise.reject('File not found'))
                 .then(text => {
@@ -195,7 +220,7 @@
                     }
                     // HTMLタグを破壊しないように配慮しながら「」『』のイエローゴールド強調置換を実行
                     const processedText = (typeof parsedHtml === 'string') ? parsedHtml.replace(/([「『])([^」』\n<>]+)([」』])/g, '<span class="highlight-bracket">$1$2$3</span>') : parsedHtml;
-                    contentDiv.innerHTML = processedText;
+                    contentDiv.innerHTML = sanitizeHtml(processedText);
 
                     // 記事のタイトル（最初の h1）をブラウザタイトルに動的設定
                     const firstH1 = contentDiv.querySelector('h1');
@@ -424,8 +449,9 @@
                          minute: '2-digit'
                      });
                      // XSS対策のサニタイズ
-                     const safeNickname = comment.nickname.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                     const safeContent = comment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                     const escapeHtml = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                     const safeNickname = escapeHtml(comment.nickname);
+                     const safeContent = escapeHtml(comment.content);
                      
                      return `
                          <div class="comment-card">

@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initBackToTop();
-    initParticles();
+    if (!window.__commonComponentsLoaded) {
+        initBackToTop();
+        initParticles();
+        initMobileMenu();
+    }
     initAIChat();
-
-    initMobileMenu();
 
 
     // Smooth scrolling for anchor links

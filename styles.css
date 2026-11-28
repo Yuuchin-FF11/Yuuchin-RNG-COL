@@ -99,6 +99,8 @@ strong {
     align-items: center;
     gap: 0.8rem;
     letter-spacing: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .header-actions {
@@ -124,13 +126,16 @@ strong {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 3rem;
+    gap: clamp(1rem, 2vw, 2.2rem);
+    flex-wrap: nowrap;
 }
 
 nav a {
     text-decoration: none;
     color: var(--text-light);
     font-weight: 500;
+    font-size: 0.95rem;
+    white-space: nowrap;
     transition: color 0.3s;
     position: relative;
 }
@@ -552,7 +557,7 @@ nav a:hover::after {
 
 /* Footer */
 .glass-footer {
-    padding: 3rem 5%;
+    padding: 3rem 5% 4.5rem;
     text-align: center;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
@@ -1446,7 +1451,8 @@ nav a:hover::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    gap: 1.5rem;
+    padding: 1rem 3%;
 }
 
 .desktop-nav {

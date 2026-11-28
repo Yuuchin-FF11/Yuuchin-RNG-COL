@@ -112,6 +112,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    min-width: 0;
 }
 
 label {
@@ -135,13 +136,6 @@ select {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.25s ease;
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 1.25rem center;
-    background-size: 1.25rem;
-    padding-right: 3rem;
 }
 
 select:focus {
@@ -850,10 +844,16 @@ select:focus {
         gap: 1.25rem !important;
     }
 
+    .full-width {
+        grid-column: span 1 !important;
+    }
+
     /* 選択ボックスのパディングと幅の最適化（文字切れ防止） */
     select {
+        min-width: 0;
+        max-width: 100%;
         font-size: 0.95rem !important;
-        padding: 0.85rem 2.5rem 0.85rem 1rem !important;
+        padding: 0.85rem 1rem !important;
         border-radius: 12px !important;
     }
 
